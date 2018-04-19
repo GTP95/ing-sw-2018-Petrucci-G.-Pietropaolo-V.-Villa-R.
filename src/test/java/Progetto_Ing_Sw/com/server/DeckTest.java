@@ -27,8 +27,7 @@ private Deck deckTest;
     }
 
 @Test
-   public Card drawTest(){
+   public void drawTest(){
         deckTest.draw();
-        return card2;
      }
 }
