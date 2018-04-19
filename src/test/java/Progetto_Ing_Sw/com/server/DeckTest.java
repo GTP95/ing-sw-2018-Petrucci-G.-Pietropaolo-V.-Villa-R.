@@ -29,6 +29,6 @@ private Deck deckTest;
 @Test
    public Card drawTest(){
         deckTest.draw();
-
-}
+        return card1;
+     }
 }
