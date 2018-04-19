@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.SplittableRandom;
 
 public abstract class Deck {
-    ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public Card draw(){
         Card card=null;
