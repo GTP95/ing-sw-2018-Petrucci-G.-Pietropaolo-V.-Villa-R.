@@ -5,14 +5,16 @@ import java.util.SplittableRandom;
 
 public class PublicObjectiveCardDeck extends Deck {
     private ArrayList<PublicObjectiveCard> cards;
+    private SplittableRandom splittableRandom;
 
     public PublicObjectiveCardDeck(ArrayList<PublicObjectiveCard> cards){
+
         this.cards=cards;
+        splittableRandom=new SplittableRandom();
     }
 
     public PublicObjectiveCard draw(){
         PublicObjectiveCard card=null;
-        SplittableRandom splittableRandom = new SplittableRandom();
         int index=0;
 
         while(card==null){  //isEmpty?
