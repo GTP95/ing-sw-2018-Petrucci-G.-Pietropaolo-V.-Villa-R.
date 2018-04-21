@@ -1,8 +1,7 @@
-package Progetto_Ing_Sw.com.server.model;
+package Progetto_Ing_Sw.com.server;
 
-import Progetto_Ing_Sw.com.server.model.PublicObjectiveCard;
-import Progetto_Ing_Sw.com.server.model.PublicObjectiveCardDeck;
 import org.junit.*;
+import org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 
