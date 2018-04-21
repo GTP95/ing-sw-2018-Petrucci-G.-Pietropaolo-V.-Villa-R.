@@ -1,4 +1,4 @@
-package Progetto_Ing_Sw.com.server;
+package Progetto_Ing_Sw.com.server.model;
 
 import java.util.ArrayList;
 import java.util.SplittableRandom;
