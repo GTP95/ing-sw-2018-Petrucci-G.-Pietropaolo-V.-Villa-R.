@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server;
 
-public abstract class Card {    //TODO: ask about implementation
+public abstract class Card {
+        //TODO: ask about implementation
 
 }

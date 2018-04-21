@@ -35,12 +35,27 @@ private PublicObjectiveCard card1, card2, card3, card4;
     }
 
 @Test
-   public void drawTest(){
-            Card card;
-        for(int counter=0;counter<=4;counter++){
+   public void drawAllTest(){
+            PublicObjectiveCard card;
+            System.out.println("drawAllTest:");
+        for(int counter=0;counter<4;counter++){
             card=publicObjectiveCardDeckTest.draw();
-            card.getTitle();
+            System.out.println(card.getTitle());
         }
+        Assert.assertEquals(0,cardArrayList.size());
+        System.out.println();
+
 
      }
+@Test
+    public void draw3Test(){
+        PublicObjectiveCard card;
+        System.out.println("draw3Test:");
+        for(int counter=0;counter<3;counter++){
+            card=publicObjectiveCardDeckTest.draw();
+            System.out.println(card.getTitle());
+        }
+        Assert.assertEquals(1,cardArrayList.size());
+        System.out.println();
+    }
 }
