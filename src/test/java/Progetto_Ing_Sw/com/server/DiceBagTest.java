@@ -31,10 +31,13 @@ public class DiceBagTest {
                 break;
             case 2:
                 Assert.assertEquals(17, diceBag.getNumDicePurple());
+                break;
             case 3:
                 Assert.assertEquals(17, diceBag.getNumDiceYellow());
+                break;
             case 4:
                 Assert.assertEquals(17, diceBag.getNumDiceGreen());
+                break;
     }
     System.out.println(" Value: " + dice.getValue());
 }
