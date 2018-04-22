@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
-import static org.mockito.Mockito.mock;
-
 public class DiceBagTest {
     private DiceBag diceBag;
     @Before

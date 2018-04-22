@@ -13,6 +13,7 @@ public class PublicObjectiveCardDeck extends Deck {
         splittableRandom=new SplittableRandom();
     }
 
+    @Override
     public PublicObjectiveCard draw(){
         PublicObjectiveCard card=null;
         int index=0;
@@ -24,6 +25,8 @@ public class PublicObjectiveCardDeck extends Deck {
         cards.remove(index);
         return card;
     }
+
+    @Override
     public ArrayList<Card> draw(int cards){
         ArrayList<Card> cardsArrayList=new ArrayList<>();
         for(int counter=0;counter<cards;counter++){
