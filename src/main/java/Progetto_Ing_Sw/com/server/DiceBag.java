@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server;
 
+import java.util.ArrayList;
 import java.util.SplittableRandom;
 
 public class DiceBag {  //può essere una classe statica a meno che non si voglia implementare un server che gestisce più partite
@@ -24,7 +25,6 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
 
 
     public Dice diceDraw(){
-        Dice dice;
         int color;
         while(true) {
             color = splittableRandom.nextInt(5);
@@ -51,5 +51,35 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
         }
 
         return new Dice(splittableRandom.nextInt(1,7), color);  //nextInt(x,y) ritorna valori interi n nell'intervallo x<=n<7
+    }
+
+public ArrayList<Dice> diceDraw(int numDiceToDraw){
+        ArrayList<Dice> drawnDice=new ArrayList<>();
+        for(;numDiceToDraw>0;numDiceToDraw--){
+            drawnDice.add(diceDraw());
+        }
+        return drawnDice;
+}
+
+    //NOTA: i seguenti getter sono utili solo per i test
+
+    public int getNumDiceRed() {
+        return numDiceRed;
+    }
+
+    public int getNumDiceBlue() {
+        return numDiceBlue;
+    }
+
+    public int getNumDicePurple() {
+        return numDicePurple;
+    }
+
+    public int getNumDiceYellow() {
+        return numDiceYellow;
+    }
+
+    public int getNumDiceGreen() {
+        return numDiceGreen;
     }
 }
