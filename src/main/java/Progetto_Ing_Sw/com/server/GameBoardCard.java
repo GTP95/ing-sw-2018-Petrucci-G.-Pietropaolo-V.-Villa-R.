@@ -16,25 +16,15 @@ public class GameBoardCard extends Card {
         this.otherSideCode = otherSideCode;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title;  }
 
-    public int getGameBoardCode() {
-        return gameBoardCode;
-    }
+    public int getGameBoardCode() { return gameBoardCode; }
 
-    public int getDifficulty() {
-        return difficulty;
-    }
+    public int getDifficulty() { return difficulty; }
 
-    public String getOtherSide() {
-        return otherSide;
-    }
+    public String getOtherSide() { return otherSide; }
 
-    public int getOtherSideCode() {
-        return otherSideCode;
-    }
+    public int getOtherSideCode() { return otherSideCode; }
 
     //TODO change otherSide type using not int
 }
