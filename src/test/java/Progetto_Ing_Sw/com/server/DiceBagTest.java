@@ -73,4 +73,43 @@ public class DiceBagTest {
         Assert.assertEquals(18-numDiceGreen, diceBag.getNumDiceGreen());
     }
 
+    @Test
+    public void drawAllTest() {  //testa l'estrazione di tutti i dadi dal sacchetto
+        int numDiceRed = 0, numDiceBlue = 0, numDicePurple = 0, numDiceYellow = 0, numDiceGreen = 0;
+        ArrayList<Dice> diceDrawn = diceBag.diceDraw(90);
+        Assert.assertEquals(90, diceDrawn.size());    //L'ArrayList deve contenere tutti i dadi
+        for (Dice dice : diceDrawn) {     //conta i dadi estratti divisi per colore
+            switch (dice.getColor()) {
+                case 0:
+                    numDiceRed++;
+                    break;
+                case 1:
+                    numDiceBlue++;
+                    break;
+                case 2:
+                    numDicePurple++;
+                    break;
+                case 3:
+                    numDiceYellow++;
+                    break;
+                case 4:
+                    numDiceGreen++;
+                    break;
+            }
+
+        }
+
+        Assert.assertEquals(18, numDiceBlue);   //Controlla che siano stati estratti tutti i dadi
+        Assert.assertEquals(18, numDiceGreen);  //divisi per colore
+        Assert.assertEquals(18, numDicePurple);
+        Assert.assertEquals(18, numDiceRed);
+        Assert.assertEquals(18, numDiceYellow);
+
+        Assert.assertEquals(0, diceBag.getNumDiceRed());    //controlla che non siano
+        Assert.assertEquals(0, diceBag.getNumDiceBlue());  //rimasti dadi nel sacchetto
+        Assert.assertEquals(0, diceBag.getNumDicePurple());
+        Assert.assertEquals(0, diceBag.getNumDiceYellow());
+        Assert.assertEquals(0, diceBag.getNumDiceGreen());
+    }
+
 }
