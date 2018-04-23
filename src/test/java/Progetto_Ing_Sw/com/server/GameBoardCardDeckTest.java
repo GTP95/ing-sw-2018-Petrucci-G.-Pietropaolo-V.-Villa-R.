@@ -109,4 +109,27 @@ public class GameBoardCardDeckTest {
         System.out.println("*******************");
         System.out.println();
     }
+    @Test
+    public void cardsRemained(){
+        GameBoardCard card;
+        card=gameBoardCardDeckTest.draw();
+
+        System.out.println("Card drawn");
+        System.out.println("-------------");
+        System.out.println(card.getTitle());
+        System.out.println();
+
+        System.out.println("Cards remained in the deck");
+        System.out.println("---------------------------");
+
+        for(int counter=0; counter<cardArrayList.size(); counter++){
+            System.out.println(cardArrayList.get(counter).getTitle());
+            Assert.assertFalse((card.getGameBoardCode())==(cardArrayList.get(counter).getGameBoardCode()));
+            Assert.assertTrue(cardArrayList.size()>4);
+        }
+
+
+
+
+    }
 }

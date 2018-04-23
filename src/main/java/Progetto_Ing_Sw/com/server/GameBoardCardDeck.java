@@ -12,6 +12,8 @@ public class GameBoardCardDeck extends Deck{
         splittableRandom=new SplittableRandom();
     }
 
+    //TODO implementare il fatto che se pesco una carta sparisce anche il suo opposto
+
     @Override
     public GameBoardCard draw(){
         GameBoardCard card=null;
