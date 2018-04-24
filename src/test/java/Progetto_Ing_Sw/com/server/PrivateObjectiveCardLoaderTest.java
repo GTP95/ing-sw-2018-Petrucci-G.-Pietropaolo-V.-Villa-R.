@@ -17,7 +17,7 @@ public class PrivateObjectiveCardLoaderTest {
 
     @Test
     public void checkColor(){
-        PrivateObjectiveCard card=privateObjectiveCardLoader.cardLoader("/home/giacomo/Sviluppo/Java/ing-sw-2018-Petrucci-G.-Pietropaolo-V.-Villa-R./src/main/Resources/Cards/Cards/PrivateObjectiveCards/PrivateObjectiveCardRed.json");
+        PrivateObjectiveCard card=privateObjectiveCardLoader.cardLoader("/home/giacomo/Sviluppo/Java/ing-sw-2018-Petrucci-G.-Pietropaolo-V.-Villa-R./src/main/Resources/Cards/Cards/PrivateObjectiveCards/PrivateObjectiveCardRed.json");   //TODO: use relative path
         System.out.println(card.getColor());
     }
 
