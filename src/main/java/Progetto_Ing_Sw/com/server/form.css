@@ -1,0 +1,8 @@
+#pane{
+    -fx-background-image: url("file:///E:/Vincenzo%20Pietropaolo/Polimi/Ingegneria%20del%20Software/Prova%20Finale/GUI/ToolCardDefaultV2.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 505 711;
+
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
