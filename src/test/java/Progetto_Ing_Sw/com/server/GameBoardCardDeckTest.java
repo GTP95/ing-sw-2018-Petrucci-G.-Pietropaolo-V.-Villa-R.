@@ -86,7 +86,7 @@ public class GameBoardCardDeckTest {
     }
 
     @Test
-    public void backNotInTheDeck() {
+    public void verifyThatIfIDrawTheFrontTheBackIsNotinTheDeck() {
         GameBoardCard card;
         card=gameBoardCardDeckTest.draw();
         for(int counter=0;counter<cardArrayList.size();counter++){
@@ -95,7 +95,7 @@ public class GameBoardCardDeckTest {
     }
 
     @Test
-    public void notOdd(){
+    public void verifyThatTheNumbersOfCardsInTheDeckIsAlwaysEven(){
         GameBoardCard card;
         for(int counter=0;counter<cardArrayList.size();counter++){
             card=gameBoardCardDeckTest.draw();
@@ -103,7 +103,7 @@ public class GameBoardCardDeckTest {
         }
     }
     @Test
-    public void drawRoundCards(){
+    public void drawTheCorrectNumberOfRoundCards(){
         ArrayList roundCards;
         GameBoardCard card;
         roundCards=gameBoardCardDeckTest.draw(3);

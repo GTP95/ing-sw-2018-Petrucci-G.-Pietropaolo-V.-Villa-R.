@@ -26,7 +26,7 @@ public class GameBoardCardDeck extends Deck{
 
         card=cards.remove(index);
         cardCode=card.getOtherSideCode();
-        for (int counter=0;counter<cards.size();counter++){//deve essere = in quanto ragiona sugli indici
+        for (int counter=0;counter<cards.size();counter++){
             if (cards.get(counter).getGameBoardCode()==cardCode) {
                 cards.remove(counter);//qui si potrà aggiungere la parte che permetta al giocatore di scegliere quale delle due della coppia
             }
