@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server;
 
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +17,10 @@ public class PrivateObjectiveCardLoaderTest {
 
     @Test
     public void checkColor(){
-        PrivateObjectiveCard card=privateObjectiveCardLoader.cardLoader("../java/Resources/Cards.Cards.PrivateObjectiveCards");
+        PrivateObjectiveCard card=privateObjectiveCardLoader.cardLoader("/home/giacomo/Sviluppo/Java/ing-sw-2018-Petrucci-G.-Pietropaolo-V.-Villa-R./src/main/Resources/Cards/Cards/PrivateObjectiveCards/PrivateObjectiveCardRed.json");
         System.out.println(card.getColor());
     }
+
+
 
 }
