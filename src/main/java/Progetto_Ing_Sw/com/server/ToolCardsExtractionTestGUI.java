@@ -12,8 +12,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.text.StyledEditorKit;
-import java.awt.*;
+//import javax.swing.text.StyledEditorKit;
+//import java.awt.*;
+
+
 
 public class ToolCardsExtractionTestGUI extends Application {
 
