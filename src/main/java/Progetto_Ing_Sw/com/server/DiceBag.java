@@ -11,6 +11,11 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
     private int numDiceYellow;
     private int numDiceGreen;
     private SplittableRandom splittableRandom;
+    public static final int red=0;
+    public static final int blue=1;
+    public static final int purple=2;
+    public static final int yellow=3;
+    public static final int green=4;
 
 
     public DiceBag(){
@@ -28,23 +33,23 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
         int color;
         while(true) {
             color = splittableRandom.nextInt(5);
-            if(color==0 && numDiceRed!=0){
+            if(color==red && numDiceRed!=0){
                 numDiceRed--;
                 break;
             }
-            if(color==1 && numDiceBlue!=0){
+            if(color==blue && numDiceBlue!=0){
                 numDiceBlue--;
                 break;
             }
-            if(color==2 && numDicePurple!=0){
+            if(color==purple && numDicePurple!=0){
                 numDicePurple--;
                 break;
             }
-            if(color==3 && numDiceYellow!=0){
+            if(color==yellow && numDiceYellow!=0){
                 numDiceYellow--;
                 break;
             }
-            if(color==4 && numDiceGreen!=0){
+            if(color==green && numDiceGreen!=0){
                 numDiceGreen--;
                 break;
             }
