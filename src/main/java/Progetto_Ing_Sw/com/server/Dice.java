@@ -4,7 +4,7 @@ public class Dice {
     private int value;
     private int color;
 
-    public Dice(int value, int color) { //TODO: chiedere per enumerazione
+    public Dice(int value, int color) {
         if(value<1) value=1;    //rendo totale
         if(value>6) value=6;    //la funzione
         this.value = value;

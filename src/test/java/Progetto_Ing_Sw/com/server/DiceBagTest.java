@@ -24,7 +24,7 @@ public class DiceBagTest {
         System.out.print("Color: " + dice.getColor());  //lasciare qui altrimenti se il test fallisce non si sa quale colore ha generato l'errore
         switch (color){
             case 0:
-                Assert.assertEquals(17, diceBag.getNumDiceRed());
+                Assert.assertEquals(17, diceBag.getNumDiceRed());   //controlla il decremento dell'attributo relativo al colore del dado
                 break;
             case 1:
                 Assert.assertEquals(17, diceBag.getNumDiceBlue());
