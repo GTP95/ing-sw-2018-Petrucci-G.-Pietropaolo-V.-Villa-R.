@@ -26,8 +26,8 @@ public class StartMenuGUI extends Application {
         startscreen.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm()); //dico alla startscreen di comportarsi come indicato nel file CSS form.css
 
         //Bottone Start Game
-        Button startBTN = new Button("Start Game");                                                         //Creo e do un testo da mostrare
-        startBTN.setPrefSize(300,30);                                                         // Dimensione del bottone
+        Button startBTN = new Button();                                                                             //Creo un bottone
+        startBTN.setPrefSize(1280,720);                                                         // Dimensione del bottone
         startBTN.setId("startBTN");                                                                            //assegno un ID al bottone in modo che sia riconoscibile dal CSS
         startBTN.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());     //importo le impostazioni di stile dal file CSS
 
@@ -38,9 +38,13 @@ public class StartMenuGUI extends Application {
 
         // Game Mode Selection Screen
         HBox gamemode= new HBox(80);                                                                   // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
-        gamemode.setId("GamemodeSelectionScreen");                                                           //assegno un ID al bottone in modo che sia riconoscibile dal CSS
+        gamemode.setId("GamemodeSelectionScreen");                                                             //assegno un ID al bottone in modo che sia riconoscibile dal CSS
+        gamemode.setPrefSize(1280,720);
         gamemode.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());    //importo le impostazioni di stile dal file CSS
         gamemode.setAlignment(Pos.CENTER);                                                                  //posiziono il punto di partenza della HBox al centro
+
+
+
 
 
         //Bottone per il Single Player
@@ -57,14 +61,20 @@ public class StartMenuGUI extends Application {
         //TODO setOnAction per passare alla scena del multiplayer (presubilmente una scelta della lobby)
 
         //Tasto goBack per tornare alla schermata principale
-        Button goBack = new Button("BACK");
-        
+        Button goBack = new Button();
+        goBack.setId("BackButton");
+        goBack.setPrefSize(125,125);
+
+
+
         goBack.setOnAction(event -> primaryStage.setScene(TitleScreen)); //azione su click che permette di passare alla scene TitleScreen
 
         gamemode.getChildren().addAll(singlePlayer,multiPlayer,goBack); //assegno i bottoni creati alla HBox gamemode
 
 
-        SelectGameMode = new Scene(gamemode,1280,720); //creo la scena impostandone le dimensioni
+
+        SelectGameMode = new Scene(gamemode, 1280,720); //creo la scena impostandone le dimensioni
+
 
 
 

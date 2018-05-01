@@ -1,6 +1,7 @@
 #startScreen{
     -fx-background-image: url("../../../../../GUI/StartMenu.png");
-    -fx-background-repeat: stretch;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
     -fx-background-size: 1280 720;
 
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
@@ -8,9 +9,9 @@
 
 #GamemodeSelectionScreen{
     -fx-background-image: url("../../../../../GUI/Backgroud1.png");
-    -fx-background-repeat: stretch;
+    -fx-background-repeat: no-repeat;
     -fx-background-size: 1280 720;
-
+    -fx-background-position: center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
@@ -21,23 +22,14 @@
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
-    -fx-text-fill: #828282;
+    -fx-background-image: url("../../../../../GUI/StartGameButton.png");
+    -fx-background-size: 1280 50;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center bottom;
+
 }
 
-#startBTN:hover{
-    -fx-border-color: transparent, black;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid;
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
 
-#startBTN:pressed{
-    -fx-background-color: black;
-    -fx-text-fill: white;
-}
 
 #SinglePlayerButton{
     -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
@@ -52,8 +44,6 @@
             #d86e3a,
             radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
 }
 
 #SinglePlayerButton:hover{
@@ -69,8 +59,6 @@
             #9d4024,
             radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
 }
 
 
@@ -87,8 +75,6 @@
             #d86e3a,
             radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
 }
 
 #MultiPlayerButton:hover {
@@ -103,6 +89,36 @@
     #9d4024,
     radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
+}
+
+#BackButton{
+    -fx-background-image: url("../../../../../GUI/BackIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 120 120;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #4283a3 0%, #154290 100%),
+            #36629d,
+            #4283a3,
+            radial-gradient(center 50% 50%, radius 100%, #4283a3, #154290);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+
+#BackButton:hover{
+    -fx-background-image: url("../../../../../GUI/BackIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 120 120;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #2a65a3 0%, #154290 100%),
+            #36629d,
+            #36629d,
+            radial-gradient(center 50% 50%, radius 100%, #36629d, #154290);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
 }
