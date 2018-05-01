@@ -1,8 +1,108 @@
-#pane{
-    -fx-background-image: url("file:///E:/Vincenzo%20Pietropaolo/Polimi/Ingegneria%20del%20Software/Prova%20Finale/GUI/ToolCardDefaultV2.png");
+#startScreen{
+    -fx-background-image: url("../../../../../GUI/StartMenu.png");
     -fx-background-repeat: stretch;
-    -fx-background-size: 505 711;
+    -fx-background-size: 1280 720;
 
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
+#GamemodeSelectionScreen{
+    -fx-background-image: url("../../../../../GUI/Backgroud1.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1280 720;
+
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+
+
+#startBTN{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1em; /* 12 */
+    -fx-text-fill: #828282;
+}
+
+#startBTN:hover{
+    -fx-border-color: transparent, black;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+#startBTN:pressed{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+#SinglePlayerButton{
+    -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 250 250;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+#SinglePlayerButton:hover{
+    -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 250 250;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #9d4024,
+            radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+
+#MultiPlayerButton{
+    -fx-background-image: url("../../../../../GUI/MultiPlayerIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 250 250;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+#MultiPlayerButton:hover {
+    -fx-background-image: url("../../../../../GUI/MultiPlayerIcon.png");
+    -fx-background-position: center;
+    -fx-background-size: 250 250;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #9d4024,
+    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
