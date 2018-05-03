@@ -1,11 +1,8 @@
 package Progetto_Ing_Sw.com.tools;
 import com.google.gson.Gson;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
+import java.io.*;
+
 
 public class JSONCreator {
     private Gson gson;
@@ -33,4 +30,6 @@ public class JSONCreator {
         }
 
     }
+
+
 }
