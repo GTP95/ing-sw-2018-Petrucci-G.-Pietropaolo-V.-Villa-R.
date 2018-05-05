@@ -108,8 +108,8 @@ public class TableTest {
         testToolCardArrayList=gameTable.getDrawnToolCards();
 
         /*Verifico di avere effettivamente pescato 3 carte per tipo*/
-        Assert.assertEquals(testPublicObjectiveArrayList.size(), 3);
-        Assert.assertEquals(testToolCardArrayList.size(), 3);
+        Assert.assertEquals(3, testPublicObjectiveArrayList.size());
+        Assert.assertEquals(3, testToolCardArrayList.size());
 
         System.out.println("Le PublicObjectiveCards della partita sono: ");
         System.out.println("********************************************");
