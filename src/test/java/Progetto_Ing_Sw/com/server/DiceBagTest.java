@@ -21,6 +21,7 @@ public class DiceBagTest {
         dice=diceBag.diceDraw();
         Assert.assertNotEquals(null,dice);
         color=dice.getColor();
+        System.out.println("drawTest:");
         System.out.print("Color: " + dice.getColor());  //lasciare qui altrimenti se il test fallisce non si sa quale colore ha generato l'errore
         switch (color){
             case 0:
