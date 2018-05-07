@@ -1,13 +1,8 @@
 package Progetto_Ing_Sw.com.tools;
 
-import Progetto_Ing_Sw.com.server.Card;
 import Progetto_Ing_Sw.com.server.Color;
 import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
-import Progetto_Ing_Sw.com.server.PublicObjectiveCard;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -15,14 +10,6 @@ import java.io.*;
 import static Progetto_Ing_Sw.com.tools.JSONCreator.*;
 
 public class JSONCreatorTest {
-    private Gson gson;
-    private JSONCreator JSONCreator;
-
-  /*  @Before
-    public void testInit(){
-        gson=new Gson();
-        JSONCreator=new JSONCreator(gson);
-    }*/
 
     @Test
     public void generateJSONTest(){
