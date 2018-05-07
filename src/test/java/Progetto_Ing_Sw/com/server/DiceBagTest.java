@@ -52,19 +52,19 @@ public class DiceBagTest {
         Assert.assertEquals(numDiceToDraw,diceDrawn.size());    //L'ArrayList deve contenere il numero di dadi richiesti
         for(Dice dice : diceDrawn){     //conta i dadi estratti divisi per colore
             switch(dice.getColor()){
-                case 0:
+                case Color.RED:
                     numDiceRed++;
                     break;
-                case 1:
+                case Color.BLUE:
                     numDiceBlue++;
                     break;
-                case 2:
+                case Color.PURPLE:
                     numDicePurple++;
                     break;
-                case 3:
+                case Color.YELLOW:
                     numDiceYellow++;
                     break;
-                case 4:
+                case Color.GREEN:
                     numDiceGreen++;
                     break;
             }
@@ -84,19 +84,19 @@ public class DiceBagTest {
         Assert.assertEquals(90, diceDrawn.size());    //L'ArrayList deve contenere tutti i dadi
         for (Dice dice : diceDrawn) {     //conta i dadi estratti divisi per colore
             switch (dice.getColor()) {
-                case 0:
+                case Color.RED:
                     numDiceRed++;
                     break;
-                case 1:
+                case Color.BLUE:
                     numDiceBlue++;
                     break;
-                case 2:
+                case Color.PURPLE:
                     numDicePurple++;
                     break;
-                case 3:
+                case Color.YELLOW:
                     numDiceYellow++;
                     break;
-                case 4:
+                case Color.GREEN:
                     numDiceGreen++;
                     break;
             }

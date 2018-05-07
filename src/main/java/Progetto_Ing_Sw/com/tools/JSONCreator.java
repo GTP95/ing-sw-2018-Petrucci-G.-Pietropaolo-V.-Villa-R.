@@ -1,35 +1,54 @@
 package Progetto_Ing_Sw.com.tools;
+import Progetto_Ing_Sw.com.server.Card;
+import Progetto_Ing_Sw.com.server.GameBoardCard;
+import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
+import Progetto_Ing_Sw.com.server.PublicObjectiveCard;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.*;
 
 
-public class JSONCreator {
-    private Gson gson;
+public final class JSONCreator {
+    private static final Gson gson=new GsonBuilder().create();
 
-    public JSONCreator(Gson gson) {
-        this.gson = gson;
-    }
+    private JSONCreator() {};
 
-    public String generateJSON(Object object){
+    public static String generateJSON(Object object){   //utile per debug
         String JSON=gson.toJson(object);
         return JSON;
     }
 
-    public void printJSON(Object object){
+    public static void printJSON(Object object){        //utile per debug
         System.out.println(generateJSON(object));
     }
 
-    public void saveJSON(Object object, String path){ //path deve includere il nome del file
-        File file=new File(path);
-        try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(file));
-            out.write(generateJSON(object));
-        } catch (IOException e) {
-            e.printStackTrace();    //TODO: controllare alternative
-        }
+    public static void saveJSON(Object object, String path) throws IOException{ //path deve includere il nome del file
+            FileWriter writer = new FileWriter(path);
+            writer.write(gson.toJson(object));
+            writer.close();
+
 
     }
 
+    public static PrivateObjectiveCard privateObjectiveCardLoader(String path) throws FileNotFoundException{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+
+        PrivateObjectiveCard card = gson.fromJson(bufferedReader, PrivateObjectiveCard.class);
+        return card;
+
+    }
+
+    public static PublicObjectiveCard publicObjectiveCardLoader(String path) throws FileNotFoundException{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        PublicObjectiveCard card = gson.fromJson(bufferedReader, PublicObjectiveCard.class);
+        return card;
+    }
+
+    public static GameBoardCard gameBoardCardLoader(String path) throws FileNotFoundException{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        GameBoardCard card = gson.fromJson(bufferedReader, GameBoardCard.class);
+        return card;
+    }
 
 }

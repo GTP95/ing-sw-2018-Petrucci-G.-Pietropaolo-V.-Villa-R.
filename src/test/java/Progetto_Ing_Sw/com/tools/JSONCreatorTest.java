@@ -1,47 +1,71 @@
 package Progetto_Ing_Sw.com.tools;
 
+import Progetto_Ing_Sw.com.server.Card;
+import Progetto_Ing_Sw.com.server.Color;
 import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
+import Progetto_Ing_Sw.com.server.PublicObjectiveCard;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+
+import static Progetto_Ing_Sw.com.tools.JSONCreator.*;
 
 public class JSONCreatorTest {
     private Gson gson;
-    private JSONCreator jsonCreator;
+    private JSONCreator JSONCreator;
 
-    @Before
+  /*  @Before
     public void testInit(){
         gson=new Gson();
-        jsonCreator=new JSONCreator(gson);
+        JSONCreator=new JSONCreator(gson);
+    }*/
+
+    @Test
+    public void generateJSONTest(){
+        PrivateObjectiveCard card=new PrivateObjectiveCard(Color.RED);
+        printJSON(card);
     }
 
     @Test
-    public void genJSON(){
-        PrivateObjectiveCard card=new PrivateObjectiveCard(0);
-        jsonCreator.printJSON(card);
-    }
-
-    @Test
-    public void saveJSONtoFile(){   //java.io.FileNotFoundException
-        PrivateObjectiveCard card=new PrivateObjectiveCard(0);
-        jsonCreator.saveJSON(card, "PrivateObjectiveCardRed.json");
-    }
-
-    @Test
-    public void readJSONfromFile(){
-        saveJSONtoFile();
+    public void saveJSONtest(){   //java.io.FileNotFoundException
+        PrivateObjectiveCard card=new PrivateObjectiveCard(Color.RED);
         try {
-            BufferedReader bufferedReader=new BufferedReader(new FileReader("PrivateObjectiveCardRed.json"));
-            PrivateObjectiveCard privateObjectiveCardRed=gson.fromJson(bufferedReader, PrivateObjectiveCard.class);
-            Assert.assertEquals(0, privateObjectiveCardRed.getColor());
-        } catch (FileNotFoundException e) {
-            Assert.fail("The file was not created");
+            saveJSON(card, "PrivateObjectiveCardRed.json");
+        }
+        catch (IOException e){
+            e.printStackTrace();    //TODO: controllare alternative
+            Assert.fail();
         }
 
     }
+
+    @Test
+    public void privateObjectiveCardLoaderTest() {
+        String privateObjectiveCardsPath="Resources/Cards/PrivateObjectiveCards/";
+
+        try {
+            PrivateObjectiveCard privateObjectiveCardYellow=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardYellow.json");
+            Assert.assertEquals(Color.YELLOW, privateObjectiveCardYellow.getColor());
+
+            PrivateObjectiveCard privateObjectiveCardRed=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardRed.json");
+            Assert.assertEquals(Color.RED, privateObjectiveCardRed.getColor());
+        }  catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+
+/*@Test
+    public void publicObjectiveCardLoaderTest(){
+        try{
+
+        }
+}*/
+
 }
+
