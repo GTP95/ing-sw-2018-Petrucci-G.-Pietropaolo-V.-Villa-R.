@@ -53,6 +53,15 @@ public class JSONCreatorTest {
 
             PrivateObjectiveCard privateObjectiveCardRed=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardRed.json");
             Assert.assertEquals(Color.RED, privateObjectiveCardRed.getColor());
+
+            PrivateObjectiveCard privateObjectiveCardGreen=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardGreen.json");
+            Assert.assertEquals(Color.GREEN, privateObjectiveCardGreen.getColor());
+
+            PrivateObjectiveCard privateObjectiveCardPurple=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardPurple.json");
+            Assert.assertEquals(Color.PURPLE, privateObjectiveCardPurple.getColor());
+
+            PrivateObjectiveCard privateObjectiveCardBlue=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardBlue.json");
+            Assert.assertEquals(Color.BLUE, privateObjectiveCardBlue.getColor());
         }  catch (FileNotFoundException e) {
             e.printStackTrace();
             Assert.fail();
