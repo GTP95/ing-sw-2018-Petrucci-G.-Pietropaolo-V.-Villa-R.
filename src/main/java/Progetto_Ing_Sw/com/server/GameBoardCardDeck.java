@@ -1,12 +1,29 @@
 package Progetto_Ing_Sw.com.server;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+import static Progetto_Ing_Sw.com.tools.JSONCreator.*;
+
 public class GameBoardCardDeck extends Deck{
     private ArrayList<GameBoardCard> cards;
     private SplittableRandom splittableRandom;
+
+    public GameBoardCardDeck(File folder){
+        ArrayList<GameBoardCard> cards=new ArrayList<>();
+        for(File file : folder.listFiles()){
+            try {
+                cards.add(gameBoardCardLoader(file.getPath()));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        this.cards=cards;
+        splittableRandom=new SplittableRandom();
+    }
 
     public GameBoardCardDeck(ArrayList<GameBoardCard> cards) {
         this.cards = cards;

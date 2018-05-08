@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
@@ -108,5 +109,18 @@ public class GameBoardCardDeckTest {
         GameBoardCard card;
         roundCards=gameBoardCardDeckTest.draw(3);
         Assert.assertTrue(roundCards.size()==3);//verifico di aver pescato effettivamente 3 carte
+    }
+
+    @Test
+    public void loadDeckFromJSONTest(){
+        GameBoardCardDeck deck=new GameBoardCardDeck(new File("Resources/Cards/GameBoardCards"));
+        GameBoardCard card=deck.draw();
+        Assert.assertNotNull("È stata caricata una carta \"null\"!",card);
+        System.out.println("La carta pescata è:");
+        System.out.println(card.getTitle());
+        System.out.println(card.getGameBoardCode());
+        System.out.println(card.getOtherSide());
+        System.out.println(card.getOtherSideCode());
+
     }
 }
