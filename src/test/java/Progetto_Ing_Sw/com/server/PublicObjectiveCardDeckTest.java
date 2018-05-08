@@ -3,6 +3,7 @@ package Progetto_Ing_Sw.com.server;
 import org.junit.*;
 import org.mockito.Mockito.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
@@ -57,5 +58,13 @@ private PublicObjectiveCard card1, card2, card3, card4;
         }
         Assert.assertEquals(1,cardArrayList.size());
         System.out.println();
+    }
+
+    @Test
+    public void loadDeckFromJSONTest(){
+        PublicObjectiveCardDeck deck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
+        PublicObjectiveCard card=deck.draw();
+        Assert.assertNotNull("È stata caricata una carta \"null\"!",card);
+        System.out.println(card.getTitle());
     }
 }
