@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.tools;
 
 import Progetto_Ing_Sw.com.server.Color;
 import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
+import Progetto_Ing_Sw.com.server.ToolCard;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,6 +29,16 @@ public class JSONCreatorTest {
             Assert.fail();
         }
 
+    }
+
+    @Test
+    public void createToolcardTest(){
+        ToolCard card=new ToolCard("Grozing Pilers", "After drafting, increase or decrease the value of the drafted die by 1", "1 may not change to 6, or 6 to 1",1,false,"Purple");
+        try {
+            saveJSON(card, "Resources/Cards/ToolCards/GrozingPliers.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
