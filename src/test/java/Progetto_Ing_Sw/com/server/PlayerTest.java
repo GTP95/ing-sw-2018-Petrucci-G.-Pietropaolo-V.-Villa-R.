@@ -16,7 +16,7 @@ public class PlayerTest {
     private PrivateObjectiveCard privateObjective;
     private ArrayList<GameBoardCard> drawnGameBoardCards;
 
-    @Before
+/*    @Before
     public void testInit(){ //costruisce un oggetto player con alcuni parametri casuali
         privateObjective=mock(PrivateObjectiveCard.class);
         when(privateObjective.getColor()).thenReturn(splittableRandom.nextInt(0,5));
@@ -95,6 +95,6 @@ public class PlayerTest {
         catch(NotEnoughFavorTokensExeption e){
             Assert.assertTrue(true);    //Non esiste Assert.pass...
         }
-    }
+    } */
 }
 

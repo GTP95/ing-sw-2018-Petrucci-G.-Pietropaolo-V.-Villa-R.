@@ -4,28 +4,32 @@ import java.util.ArrayList;
 
 public class Player {
    private String name;
-   private int color;
    private int favorTokens;
    private PrivateObjectiveCard privateObjective;
    private int victoryPoints;
-   private int playerNumber;
-   private boolean isFirst;
+   private boolean isActive;
    private GameBoardCard choosenGameBoard;
    private ArrayList<GameBoardCard> drawnGameBoardCard;
 
-    public Player(String name, int color, int favorTokens, PrivateObjectiveCard privateObjective, int playerNumber, boolean isFirst, ArrayList<GameBoardCard> drawnGameBoardCard) {
+    public Player(String name, PrivateObjectiveCard privateObjective) {
         this.name = name;
-        this.color = color;
+
         this.favorTokens = favorTokens;
         this.privateObjective = privateObjective;
         this.victoryPoints = 0;
-        this.playerNumber = playerNumber;
-        this.isFirst = isFirst;
+        this.isActive=true;
         this.drawnGameBoardCard = drawnGameBoardCard;
     }
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {
         this.choosenGameBoard = choosenGameBoard;
+    }
+    public void setFavorTokens(){
+        favorTokens=choosenGameBoard.getDifficulty();
+    }
+
+    public void setDrawnGameBoardCard(ArrayList<GameBoardCard> drawnGameBoardCard) {
+        this.drawnGameBoardCard = drawnGameBoardCard;
     }
 
     public String getName() {
@@ -33,7 +37,7 @@ public class Player {
     }
 
     public int getColor() {
-        return color;
+        return privateObjective.getColor();
     }
 
     public int getFavorTokens() {
@@ -46,14 +50,6 @@ public class Player {
 
     public int getVictoryPoints() {
         return victoryPoints;
-    }
-
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-
-    public boolean isFirst() {
-        return isFirst;
     }
 
     public GameBoardCard getChoosenGameBoard() {
