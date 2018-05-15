@@ -20,10 +20,11 @@ public class Lobby {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
             Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw());
             connectedPlayers.add(player);
-            System.out.println("Player " + player.getName() + " joined the game");    //TODO: test per verificare aggiunta giocatori nell'arraylist
+            System.out.println("Player " + player.getName() + " joined the game!");    //TODO: test per verificare aggiunta giocatori nell'arraylist
         }
 
         else{
+            System.out.println("User " + playerName + "Tried to connect, but 4 players are already connected.");
             throw new TooManyPlayersExeption();
         }
     }
