@@ -1,8 +1,5 @@
 package Progetto_Ing_Sw.com.tools;
-import Progetto_Ing_Sw.com.server.Card;
-import Progetto_Ing_Sw.com.server.GameBoardCard;
-import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
-import Progetto_Ing_Sw.com.server.PublicObjectiveCard;
+import Progetto_Ing_Sw.com.server.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -48,6 +45,12 @@ public final class JSONCreator {
     public static GameBoardCard gameBoardCardLoader(String path) throws FileNotFoundException{
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
         GameBoardCard card = gson.fromJson(bufferedReader, GameBoardCard.class);
+        return card;
+    }
+
+    public static ToolCard toolCardLoader(String path) throws FileNotFoundException{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        ToolCard card = gson.fromJson(bufferedReader, ToolCard.class);
         return card;
     }
 

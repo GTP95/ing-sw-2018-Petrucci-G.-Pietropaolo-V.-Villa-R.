@@ -1,21 +1,23 @@
 package Progetto_Ing_Sw.com.server;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Table {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
     private ArrayList<ToolCard> drawnToolCards;
-    private ToolCardDeck toolCardDeck;
-    private PublicObjectiveCardDeck publicObjectiveCardDeck;
+    private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("/Resources/Cards/ToolCards"));
+    private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("/Resources/Cards/PublicObjectiveCards"));
     private ArrayList<Dice> drawnDice;
     private static Table ourInstance=new Table();
+    private static DiceBag diceBag=new DiceBag();
     
     private Table(){
-    	int numPlayers=Lobby.getInstance.getNumOfPlayers();
-	drawnDice=diceBag.drawDice(2*numPlayers+1);
-	drawnPublicObjectiveCards=publicObjectiveCardDeck.draw(3);
-	DrawnToolCards=toolCardsDeck.draw(3);
+    	int numPlayers=Lobby.getInstance().getNumOfPlayers();
+	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
+	drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
+	drawnToolCards=toolCardDeck.drawToolCards(3);
     }
 
     public ToolCardDeck getToolCardDeck() {
@@ -31,9 +33,9 @@ public class Table {
 
         for (int counter=0; counter<4; counter ++){
             card=publicObjectiveCardDeck.draw();
-            DrawnPublicObjectiveCards.add(card);
+            drawnPublicObjectiveCards.add(card);
         }
-        return DrawnPublicObjectiveCards;
+        return drawnPublicObjectiveCards;
     }
 
     public ArrayList<ToolCard> getDrawnToolCards() {
@@ -41,13 +43,13 @@ public class Table {
 
         for (int counter=0; counter<4; counter ++){
             card=toolCardDeck.draw();
-            DrawnToolCards.add(card);
+            drawnToolCards.add(card);
         }
-        return DrawnToolCards;
+        return drawnToolCards;
     }
     
     public ArrayList<Dice> getDrawnDice(){
-    	ArrayList<Dice> clone=new ArrayList()<>;
+    	ArrayList<Dice> clone=new ArrayList();
     	for(Dice dice : drawnDice) clone.add(dice);
     	return clone;
     }

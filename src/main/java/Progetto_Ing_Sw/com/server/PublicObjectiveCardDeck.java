@@ -51,5 +51,13 @@ public class PublicObjectiveCardDeck extends Deck {
         return cardsArrayList;
     }
 
+    public ArrayList<PublicObjectiveCard> drawPublicObjectiveCards(int cards){
+        ArrayList<PublicObjectiveCard> cardsArrayList=new ArrayList<>();
+        for(int counter=0;counter<cards;counter++){
+            cardsArrayList.add(draw());
+        }
+        return cardsArrayList;
+    }
+
 
 }
