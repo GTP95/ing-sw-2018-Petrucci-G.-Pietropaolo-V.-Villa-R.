@@ -16,7 +16,7 @@ public class Lobby {
         connectedPlayers=new ArrayList<>();
     }
 
-    public void addPlayer(String playerName) throws TooManyPlayersExeption{
+    public void addPlayer(String playerName) throws TooManyPlayersException {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
             Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw());
             connectedPlayers.add(player);
@@ -24,8 +24,8 @@ public class Lobby {
         }
 
         else{
-            System.out.println("User " + playerName + "Tried to connect, but 4 players are already connected.");
-            throw new TooManyPlayersExeption();
+            System.out.println("User " + playerName + " Tried to connect, but 4 players are already connected.");
+            throw new TooManyPlayersException();
         }
     }
     public ArrayList<Player> getConnctedPlayers(){  //Ritorna l'arraylist per copia e non per riferimento per evitare modifiche all'esterno della classe

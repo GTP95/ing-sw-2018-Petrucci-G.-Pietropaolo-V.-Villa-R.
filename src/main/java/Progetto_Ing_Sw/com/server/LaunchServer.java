@@ -13,7 +13,7 @@ public class LaunchServer {
                 Socket clientSocket = serverSocket.accept();
 
                 new Thread(new ClientHandler(clientSocket)).start();
-             //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
+
             }
         }
         catch (NumberFormatException e) {

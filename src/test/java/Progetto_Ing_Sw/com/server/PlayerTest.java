@@ -40,7 +40,7 @@ public class PlayerTest {
             player.useToolCard(neverUsedToolCard);
             Assert.assertEquals(favorTokens - 1, player.getFavorTokens());
         }
-        catch (NotEnoughFavorTokensExeption e){
+        catch (NotEnoughFavorTokensException e){
             Assert.assertEquals(0,player.getFavorTokens()); //In questo caso l'eccezione viene lanciata se il giocatore non ha più segnalini favore
             Assert.assertEquals(favorTokens, player.getFavorTokens());  //se viene lanciata l'eccezione il numero di segnalini favore non viene modificato
         }
@@ -50,7 +50,7 @@ public class PlayerTest {
             player.useToolCard(alreadyUsedToolCard);
             Assert.assertEquals(favorTokens-2, player.getFavorTokens());
         }
-        catch (NotEnoughFavorTokensExeption e){
+        catch (NotEnoughFavorTokensException e){
             Assert.assertTrue(player.getFavorTokens()<2);   //In questo caso l'eccezione viene lanciata se il giocatore non ha almeno 2 segnalini favore
             Assert.assertEquals(favorTokens, player.getFavorTokens());  //Se viene lanciata l'eccezione il numero di segnalini favore non viene cambiato
         }
@@ -72,7 +72,7 @@ public class PlayerTest {
             player.useToolCard(neverUsedToolCard);
             Assert.fail("Il metodo useToolCard non ha lanciato l'eccezione notEnoughFavorTokens nonostante il giocatore abbia 0 segnalini favore");
         }
-        catch(NotEnoughFavorTokensExeption e){
+        catch(NotEnoughFavorTokensException e){
             Assert.assertTrue(true);    //Non esiste Assert.pass...
         }
 
@@ -81,7 +81,7 @@ public class PlayerTest {
             player.useToolCard(alreadyUsedToolCard);
             Assert.fail("Il metodo useToolCard non ha lanciato l'eccezione notEnoughFavorTokens nonostante il giocatore abbia 0 segnalini favore");
             }
-            catch(NotEnoughFavorTokensExeption e){
+            catch(NotEnoughFavorTokensException e){
                 Assert.assertTrue(true);    //Non esiste Assert.pass...
             }
 
@@ -92,7 +92,7 @@ public class PlayerTest {
             player.useToolCard(alreadyUsedToolCard);
             Assert.fail("Il metodo useToolCard non ha lanciato l'eccezione notEnoughFavorTokens nonostante il giocatore abbia solo 1 segnalino favore");
         }
-        catch(NotEnoughFavorTokensExeption e){
+        catch(NotEnoughFavorTokensException e){
             Assert.assertTrue(true);    //Non esiste Assert.pass...
         }
     }

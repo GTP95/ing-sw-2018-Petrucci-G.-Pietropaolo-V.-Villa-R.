@@ -22,10 +22,10 @@ public class ClientHandler implements Runnable{ //TODO: controllare che non ci s
 
                     Lobby.getInstance().addPlayer(in.readLine());
                     out.println("Connected");
-
+                //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
 
             }
-            catch(TooManyPlayersExeption e){
+            catch(TooManyPlayersException e){
                 out.println("Max number of players exceeded");
             }
         }
