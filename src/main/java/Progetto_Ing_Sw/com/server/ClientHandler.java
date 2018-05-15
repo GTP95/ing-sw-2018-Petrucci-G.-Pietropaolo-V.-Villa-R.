@@ -28,6 +28,9 @@ public class ClientHandler implements Runnable{ //TODO: controllare che non ci s
             catch(TooManyPlayersException e){
                 out.println("Max number of players exceeded");
             }
+            catch(InvalidUsernameException e){
+                out.println("Username already in use");
+            }
         }
         catch (IOException e){
             e.getStackTrace();
