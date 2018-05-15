@@ -13,7 +13,6 @@ public class Player {
 
     public Player(String name, PrivateObjectiveCard privateObjective) {
         this.name = name;
-
         this.favorTokens = favorTokens;
         this.privateObjective = privateObjective;
         this.victoryPoints = 0;
@@ -27,7 +26,6 @@ public class Player {
     public void setFavorTokens(){
         favorTokens=choosenGameBoard.getDifficulty();
     }
-
     public void setDrawnGameBoardCard(ArrayList<GameBoardCard> drawnGameBoardCard) {
         this.drawnGameBoardCard = drawnGameBoardCard;
     }

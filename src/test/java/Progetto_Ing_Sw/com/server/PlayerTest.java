@@ -16,7 +16,7 @@ public class PlayerTest {
     private PrivateObjectiveCard privateObjective;
     private ArrayList<GameBoardCard> drawnGameBoardCards;
 
-/*    @Before
+    @Before
     public void testInit(){ //costruisce un oggetto player con alcuni parametri casuali
         privateObjective=mock(PrivateObjectiveCard.class);
         when(privateObjective.getColor()).thenReturn(splittableRandom.nextInt(0,5));
@@ -24,7 +24,7 @@ public class PlayerTest {
         drawnGameBoardCards=new ArrayList<>();
         drawnGameBoardCards.add(mock(GameBoardCard.class));
         drawnGameBoardCards.add(mock(GameBoardCard.class));
-        player=new Player("John", splittableRandom.nextInt(0,5), splittableRandom.nextInt(3,7), privateObjective, splittableRandom.nextInt(0,4), true, drawnGameBoardCards);
+        player=new Player("John", privateObjective);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PlayerTest {
         ToolCard alreadyUsedToolCard=mock(ToolCard.class);
         when(alreadyUsedToolCard.isFirstUsage()).thenReturn(false);
 
-        Player player=new Player("John", splittableRandom.nextInt(0,5), 0, privateObjective, splittableRandom.nextInt(0,4), true, drawnGameBoardCards);
+        Player player=new Player("John", privateObjective);
 
         try {
             System.out.println("Testo l'utilizzo di una ToolCard mai usata prima");
@@ -86,7 +86,7 @@ public class PlayerTest {
             }
 
 
-        player=  new Player("John", splittableRandom.nextInt(0,5), 1, privateObjective, splittableRandom.nextInt(0,4), true, drawnGameBoardCards);
+        player=  new Player("John", privateObjective);
         try{
             System.out.println("Testo l'utilizzo di una ToolCard già usata in precedenza");
             player.useToolCard(alreadyUsedToolCard);
@@ -95,6 +95,6 @@ public class PlayerTest {
         catch(NotEnoughFavorTokensExeption e){
             Assert.assertTrue(true);    //Non esiste Assert.pass...
         }
-    } */
+    }
 }
 
