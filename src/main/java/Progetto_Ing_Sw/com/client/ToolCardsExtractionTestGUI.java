@@ -1,4 +1,4 @@
-package Progetto_Ing_Sw.com.server;
+package Progetto_Ing_Sw.com.client;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
