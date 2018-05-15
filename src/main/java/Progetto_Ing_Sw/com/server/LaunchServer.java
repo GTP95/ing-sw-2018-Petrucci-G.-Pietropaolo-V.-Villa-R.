@@ -9,6 +9,7 @@ public class LaunchServer {
         try {
             int portNumber = Integer.parseInt(args[0]);
             ServerSocket serverSocket=new ServerSocket(portNumber);
+            System.out.println("Server started on port " + portNumber);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
 
