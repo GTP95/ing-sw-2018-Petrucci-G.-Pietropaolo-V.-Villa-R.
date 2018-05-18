@@ -20,8 +20,9 @@ public class ToolCardDeck extends Deck{
             }
         }
         this.cards=cards;
-
     }
+
+    //TODO aggiungere/modificare il costruttore al fine di poter eseguire tutte le classi di test
 
     public ToolCard draw(){
         ToolCard card=null;
