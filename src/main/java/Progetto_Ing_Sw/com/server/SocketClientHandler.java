@@ -5,19 +5,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 
-public class SocketClientHandler implements Runnable{ //TODO: controllare che non ci siano nomi utente duplicati
+public class SocketClientHandler implements Runnable{
     private Socket clientSocket;
-
+    private PrintWriter out;
+    private BufferedReader in;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
+        try {
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        }
+        catch (IOException e){
+            e.printStackTrace();    //TODO: timeout?
+        }
     }
 
     public void run(){
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter out=new PrintWriter(clientSocket.getOutputStream(), true);
+
             try {
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
@@ -31,9 +38,15 @@ public class SocketClientHandler implements Runnable{ //TODO: controllare che no
             catch(InvalidUsernameException e){
                 out.println("Username already in use");
             }
+            catch (IOException e){
+                e.printStackTrace();    //TODO: timeout?
+            }
         }
-        catch (IOException e){
-            e.getStackTrace();
-        }
+
+
+
+    public void sendCard(Card card){
+        String json=JSONCreator.generateJSON(card);
+        out.println(json);
     }
 }

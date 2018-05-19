@@ -11,7 +11,7 @@ public final class JSONCreator {
 
     private JSONCreator() {};
 
-    public static String generateJSON(Object object){   //utile per debug
+    public static String generateJSON(Object object){
         String JSON=gson.toJson(object);
         return JSON;
     }
