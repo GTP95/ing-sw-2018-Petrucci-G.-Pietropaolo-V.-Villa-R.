@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientHandler implements Runnable{ //TODO: controllare che non ci siano nomi utente duplicati
-    Socket clientSocket;
+public class SocketClientHandler implements Runnable{ //TODO: controllare che non ci siano nomi utente duplicati
+    private Socket clientSocket;
 
 
-    public ClientHandler(Socket clientSocket){
+    public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
     }
 
@@ -20,7 +20,7 @@ public class ClientHandler implements Runnable{ //TODO: controllare che non ci s
             PrintWriter out=new PrintWriter(clientSocket.getOutputStream(), true);
             try {
 
-                    Lobby.getInstance().addPlayer(in.readLine());
+                    Lobby.getInstance().addPlayer(in.readLine(), this);
                     out.println("Connected");
                 //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
 

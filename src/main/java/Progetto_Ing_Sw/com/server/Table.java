@@ -12,6 +12,7 @@ public class Table {
     private ArrayList<Dice> drawnDice;
     private static Table ourInstance=new Table();
     private static DiceBag diceBag=new DiceBag();
+    private static ArrayList<Player> players;
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();

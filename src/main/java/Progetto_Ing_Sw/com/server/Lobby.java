@@ -16,12 +16,12 @@ public class Lobby {
         connectedPlayers=new ArrayList<>();
     }
 
-    public void addPlayer(String playerName) throws TooManyPlayersException, InvalidUsernameException {
+    public void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
             for(Player alreadyConnected : connectedPlayers){
                 if (alreadyConnected.getName().equals(playerName)) throw new InvalidUsernameException();
             }
-            Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw());
+            Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw(), socketClientHandler);
             connectedPlayers.add(player);
             System.out.println("Player " + player.getName() + " joined the game!");    //TODO: test per verificare aggiunta giocatori nell'arraylist
         }
@@ -40,4 +40,6 @@ public class Lobby {
     public int getNumOfPlayers(){
         return connectedPlayers.size();
     }
+
+    public void startTimer(){};
 }

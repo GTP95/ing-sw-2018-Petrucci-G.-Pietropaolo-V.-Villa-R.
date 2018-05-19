@@ -22,6 +22,10 @@ public class ToolCardDeck extends Deck{
         this.cards=cards;
     }
 
+    public ToolCardDeck(ArrayList<ToolCard> toolCardArrayList){
+        cards=toolCardArrayList;
+    }
+
     //TODO aggiungere/modificare il costruttore al fine di poter eseguire tutte le classi di test
 
     public ToolCard draw(){

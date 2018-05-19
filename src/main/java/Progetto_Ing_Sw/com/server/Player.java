@@ -10,8 +10,9 @@ public class Player {
    private boolean isActive;
    private GameBoardCard choosenGameBoard;
    private ArrayList<GameBoardCard> drawnGameBoardCard;
+   private SocketClientHandler socketClientHandler;
 
-    public Player(String name, PrivateObjectiveCard privateObjective) {
+    public Player(String name, PrivateObjectiveCard privateObjective, SocketClientHandler socketClientHandler) {
         this.name = name;
         this.favorTokens = favorTokens;
         this.privateObjective = privateObjective;

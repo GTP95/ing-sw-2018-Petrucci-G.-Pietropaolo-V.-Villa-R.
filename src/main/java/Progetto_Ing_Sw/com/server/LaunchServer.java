@@ -13,7 +13,7 @@ public class LaunchServer {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
 
-                new Thread(new ClientHandler(clientSocket)).start();
+                new Thread(new SocketClientHandler(clientSocket)).start();
 
             }
         }
