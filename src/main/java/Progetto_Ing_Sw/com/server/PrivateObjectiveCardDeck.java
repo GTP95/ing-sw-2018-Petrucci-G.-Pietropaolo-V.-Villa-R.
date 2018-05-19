@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
-import static Progetto_Ing_Sw.com.tools.JSONCreator.privateObjectiveCardLoader;
+import static Progetto_Ing_Sw.com.tools.JSONCreator.privateObjectiveCardLoaderFromFile;
 
 
 public class PrivateObjectiveCardDeck extends Deck{
@@ -23,7 +23,7 @@ public class PrivateObjectiveCardDeck extends Deck{
         ArrayList<PrivateObjectiveCard> cards=new ArrayList<>();
         for(File file : folder.listFiles()){
             try {
-                cards.add(privateObjectiveCardLoader(file.getPath()));
+                cards.add(privateObjectiveCardLoaderFromFile(file.getPath()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();    //TODO: controllare alternative
             }

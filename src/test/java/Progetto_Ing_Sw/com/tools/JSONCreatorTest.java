@@ -46,19 +46,19 @@ public class JSONCreatorTest {
         String privateObjectiveCardsPath="Resources/Cards/PrivateObjectiveCards/";
 
         try {
-            PrivateObjectiveCard privateObjectiveCardYellow=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardYellow.json");
+            PrivateObjectiveCard privateObjectiveCardYellow= privateObjectiveCardLoaderFromFile(privateObjectiveCardsPath + "PrivateObjectiveCardYellow.json");
             Assert.assertEquals(Color.YELLOW, privateObjectiveCardYellow.getColor());
 
-            PrivateObjectiveCard privateObjectiveCardRed=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardRed.json");
+            PrivateObjectiveCard privateObjectiveCardRed= privateObjectiveCardLoaderFromFile(privateObjectiveCardsPath + "PrivateObjectiveCardRed.json");
             Assert.assertEquals(Color.RED, privateObjectiveCardRed.getColor());
 
-            PrivateObjectiveCard privateObjectiveCardGreen=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardGreen.json");
+            PrivateObjectiveCard privateObjectiveCardGreen= privateObjectiveCardLoaderFromFile(privateObjectiveCardsPath + "PrivateObjectiveCardGreen.json");
             Assert.assertEquals(Color.GREEN, privateObjectiveCardGreen.getColor());
 
-            PrivateObjectiveCard privateObjectiveCardPurple=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardPurple.json");
+            PrivateObjectiveCard privateObjectiveCardPurple= privateObjectiveCardLoaderFromFile(privateObjectiveCardsPath + "PrivateObjectiveCardPurple.json");
             Assert.assertEquals(Color.PURPLE, privateObjectiveCardPurple.getColor());
 
-            PrivateObjectiveCard privateObjectiveCardBlue=privateObjectiveCardLoader(privateObjectiveCardsPath + "PrivateObjectiveCardBlue.json");
+            PrivateObjectiveCard privateObjectiveCardBlue= privateObjectiveCardLoaderFromFile(privateObjectiveCardsPath + "PrivateObjectiveCardBlue.json");
             Assert.assertEquals(Color.BLUE, privateObjectiveCardBlue.getColor());
         }  catch (FileNotFoundException e) {
             e.printStackTrace();

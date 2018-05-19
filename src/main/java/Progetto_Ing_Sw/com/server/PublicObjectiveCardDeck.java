@@ -14,7 +14,7 @@ public class PublicObjectiveCardDeck extends Deck {
         ArrayList<PublicObjectiveCard> cards=new ArrayList<>();
         for(File file : folder.listFiles()){
             try {
-                cards.add(publicObjectiveCardLoader(file.getPath()));
+                cards.add(publicObjectiveCardLoaderFromFile(file.getPath()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();    //TODO: controllare alternative
             }

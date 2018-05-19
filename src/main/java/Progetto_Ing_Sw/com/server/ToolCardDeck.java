@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
-import static Progetto_Ing_Sw.com.tools.JSONCreator.toolCardLoader;
+import static Progetto_Ing_Sw.com.tools.JSONCreator.toolCardLoaderFromFile;
 
 public class ToolCardDeck extends Deck{
     private ArrayList<ToolCard> cards;
@@ -14,7 +14,7 @@ public class ToolCardDeck extends Deck{
         ArrayList<ToolCard> cards=new ArrayList<>();
         for(File file : folder.listFiles()){
             try {
-                cards.add(toolCardLoader(file.getPath()));
+                cards.add(toolCardLoaderFromFile(file.getPath()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();    //TODO: controllare alternative
             }
