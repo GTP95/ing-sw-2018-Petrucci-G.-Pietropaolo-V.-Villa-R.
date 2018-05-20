@@ -14,6 +14,7 @@ public class PlayerTest {
     private Player player;
     private final SplittableRandom splittableRandom=new SplittableRandom();
     private PrivateObjectiveCard privateObjective;
+    private SocketClientHandler socketClientHandler;
     private ArrayList<GameBoardCard> drawnGameBoardCards;
 
     @Before
@@ -24,7 +25,7 @@ public class PlayerTest {
         drawnGameBoardCards=new ArrayList<>();
         drawnGameBoardCards.add(mock(GameBoardCard.class));
         drawnGameBoardCards.add(mock(GameBoardCard.class));
-        player=new Player("John", privateObjective);
+        player=new Player("John", privateObjective, socketClientHandler );
     }
 
     @Test
@@ -65,7 +66,7 @@ public class PlayerTest {
         ToolCard alreadyUsedToolCard=mock(ToolCard.class);
         when(alreadyUsedToolCard.isFirstUsage()).thenReturn(false);
 
-        Player player=new Player("John", privateObjective);
+        Player player=new Player("John", privateObjective, socketClientHandler);
 
         try {
             System.out.println("Testo l'utilizzo di una ToolCard mai usata prima");
@@ -86,7 +87,7 @@ public class PlayerTest {
             }
 
 
-        player=  new Player("John", privateObjective);
+        player=  new Player("John", privateObjective, socketClientHandler);
         try{
             System.out.println("Testo l'utilizzo di una ToolCard già usata in precedenza");
             player.useToolCard(alreadyUsedToolCard);
