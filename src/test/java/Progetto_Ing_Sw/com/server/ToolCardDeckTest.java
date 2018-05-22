@@ -79,4 +79,14 @@ public class ToolCardDeckTest {
         Assert.assertEquals(1, cardArrayList.size());
         System.out.println();
     }
+
+    @Test
+    public void multipleDrawTest(){
+        System.out.println("multipleDrawTest");
+        ArrayList<Card> arrayList;
+        arrayList=toolCardDeckTest.draw(3);
+        Assert.assertEquals(3,arrayList.size());
+    }
+
+
 }

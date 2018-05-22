@@ -1,13 +1,22 @@
 package Progetto_Ing_Sw.com.server;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class LaunchServer {
+    static int portNumber;
     public static void main(String[] args) {
         try {
-            int portNumber = Integer.parseInt(args[0]);
+            if(args.length>0) portNumber = Integer.parseInt(args[0]);
+            else
+                try{portNumber=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","port");}
+                catch (FileNotFoundException e){
+                    portNumber=1024;
+                    System.out.println("File \"ServerSetting.json\" not found, falling back to default port 1024");
+                }
             ServerSocket serverSocket=new ServerSocket(portNumber);
             System.out.println("Server started on port " + portNumber);
             while (true) {

@@ -1,11 +1,18 @@
 package Progetto_Ing_Sw.com.server;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class Lobby {
     private static Lobby ourInstance = new Lobby();
     private ArrayList<Player> connectedPlayers;
-    private int timer;
+    private Timer timer;
+    private long timerValue;
+
 
 
     public static Lobby getInstance() {
@@ -13,7 +20,27 @@ public class Lobby {
     }
 
     private Lobby() {
-        connectedPlayers=new ArrayList<>();
+        connectedPlayers = new ArrayList<>();
+        timer = new Timer();
+        try {
+            timerValue = JSONCreator.parseLongFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerValue");
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Table.getOurInstance().startGame();
+                }
+            }, timerValue);
+        } catch (FileNotFoundException e) {
+            System.out.println("File \"ServerSetting.json\" not found, falling back to default timerValue of 30 seconds");
+            timerValue = 30000;
+
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Table.getOurInstance().startGame();
+                }
+            }, timerValue);
+        }
     }
 
     public void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {

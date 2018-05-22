@@ -77,7 +77,7 @@ public class TableTest {
         toolCardDeckTest=new ToolCardDeck(toolCardArrayList);
 
         /*Mock del tavolo da gioco*/
-        gameTable=mock(Table.class);
+        gameTable=mock(Table.class);    //TODO: possibile errore! da controllare!! Si rischia di testare il mock anzichè la classe!!!
         when(gameTable.getToolCardDeck()).thenReturn(toolCardDeckTest);
         when(gameTable.getPublicObjectiveCardDeck()).thenReturn(publicObjectiveCardDeckTest);
 
