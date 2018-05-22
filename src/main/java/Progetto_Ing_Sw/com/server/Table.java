@@ -17,8 +17,12 @@ public class Table {
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
 	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
-	drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
-	drawnToolCards=toolCardDeck.drawToolCards(3);
+	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
+	    drawnToolCards=toolCardDeck.drawToolCards(3);
+    }
+
+    public static Table getOurInstance(){
+        return ourInstance;
     }
 
     public ToolCardDeck getToolCardDeck() {
@@ -54,6 +58,9 @@ public class Table {
     	for(Dice dice : drawnDice) clone.add(dice);
     	return clone;
     }
-    
+
+    public void startGame(){
+        System.out.println("Game started!");    //TODO: completare
+    }
 }
 

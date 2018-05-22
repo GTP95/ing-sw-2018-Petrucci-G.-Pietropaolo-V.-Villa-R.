@@ -1,7 +1,6 @@
 package Progetto_Ing_Sw.com.tools;
 import Progetto_Ing_Sw.com.server.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
 import java.io.*;
 
@@ -75,5 +74,25 @@ public final class JSONCreator {
         return card;
     }
 
+    public static int parseIntFieldFromFile(String path, String fieldName) throws FileNotFoundException {
+        JsonElement jelement = new JsonParser().parse(new FileReader(path));
+        JsonObject jobject = jelement.getAsJsonObject();
+        int number=jobject.get(fieldName).getAsInt();
+        return number;
+    }
+
+    public static String parseStringFieldFromFile(String path, String fieldName) throws FileNotFoundException{
+        JsonElement jelement = new JsonParser().parse(new FileReader(path));
+        JsonObject jobject = jelement.getAsJsonObject();
+        String string=jobject.get(fieldName).getAsString();
+        return string;
+    }
+
+    public static long parseLongFieldFromFile(String path, String fieldName) throws FileNotFoundException{
+        JsonElement jelement = new JsonParser().parse(new FileReader(path));
+        JsonObject jobject = jelement.getAsJsonObject();
+        long number=jobject.get(fieldName).getAsLong();
+        return number;
+    }
 
 }
