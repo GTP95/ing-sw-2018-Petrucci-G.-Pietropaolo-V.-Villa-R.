@@ -50,7 +50,7 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
             }
         }
 
-        return new Dice(splittableRandom.nextInt(1,7), color);  //nextInt(x,y) ritorna valori interi n nell'intervallo x<=n<7
+        return new Dice(splittableRandom.nextInt(1,7), color);  //nextInt(x,y) ritorna valori interi n nell'intervallo x<=n<y, serve per avere il valore numerico del dado
     }
 
 public ArrayList<Dice> diceDraw(int numDiceToDraw){

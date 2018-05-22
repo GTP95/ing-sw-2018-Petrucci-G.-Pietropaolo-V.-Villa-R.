@@ -20,29 +20,28 @@ public class Lobby {
     }
 
     private Lobby() {
-        connectedPlayers=new ArrayList<>();
-        timer=new Timer();
-        try{
-            timerValue=JSONCreator.parseLongFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timerValue");
+        connectedPlayers = new ArrayList<>();
+        timer = new Timer();
+        try {
+            timerValue = JSONCreator.parseLongFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerValue");
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     Table.getOurInstance().startGame();
                 }
-            },timerValue);
-        }
-        catch (FileNotFoundException e) {
+            }, timerValue);
+        } catch (FileNotFoundException e) {
             System.out.println("File \"ServerSetting.json\" not found, falling back to default timerValue of 30 seconds");
             timerValue = 30000;
-        }
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Table.getOurInstance().startGame();
-            }
-        },timerValue);
-    }
 
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Table.getOurInstance().startGame();
+                }
+            }, timerValue);
+        }
+    }
 
     public void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita

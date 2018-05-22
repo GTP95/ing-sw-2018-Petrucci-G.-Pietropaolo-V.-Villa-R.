@@ -7,8 +7,8 @@ public class Table implements TableObserver {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
     private ArrayList<ToolCard> drawnToolCards;
-    private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("/Resources/Cards/ToolCards"));
-    private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("/Resources/Cards/PublicObjectiveCards"));
+    private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("Resources/Cards/ToolCards"));
+    private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
     private ArrayList<Dice> drawnDice;
     private static Table ourInstance=new Table();
     private static DiceBag diceBag=new DiceBag();
@@ -16,9 +16,10 @@ public class Table implements TableObserver {
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
-	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
+	    drawnDice=diceBag.diceDraw(2*numPlayers+1); //NULLPOINTEREXCEPTION!!!
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
+	    players=Lobby.getInstance().getConnctedPlayers();
     }
 
     public static Table getOurInstance(){
@@ -62,5 +63,6 @@ public class Table implements TableObserver {
     public void startGame(){
         System.out.println("Game started!");    //TODO: completare
     }
+
 }
 

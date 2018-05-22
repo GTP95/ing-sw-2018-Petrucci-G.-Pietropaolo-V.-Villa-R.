@@ -3,6 +3,7 @@ package Progetto_Ing_Sw.com.server;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.SplittableRandom;
 
 import static Progetto_Ing_Sw.com.tools.JSONCreator.toolCardLoaderFromFile;
@@ -12,7 +13,7 @@ public class ToolCardDeck extends Deck{
 
     public ToolCardDeck(File folder){    //folder è il percorso alla cartella con i JSON da caricare
         ArrayList<ToolCard> cards=new ArrayList<>();
-        for(File file : folder.listFiles()){
+        for(File file :Objects.requireNonNull(folder.listFiles())){
             try {
                 cards.add(toolCardLoaderFromFile(file.getPath()));
             } catch (FileNotFoundException e) {
