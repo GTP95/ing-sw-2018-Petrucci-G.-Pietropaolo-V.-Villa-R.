@@ -2,10 +2,7 @@ package Progetto_Ing_Sw.com.client;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -13,23 +10,31 @@ import java.util.Scanner;
 public class ClientController {
 
     private final View view;
-    private Client client;
+   // private Client client;
     private Socket clientSocket;
     private PrintWriter socketOut;
     private BufferedReader socketIn;
 
-    public ClientController(Client socketClient){
-        this.client = socketClient;
+    public ClientController(Socket clientSocket){
+        //this.client = socketClient;
         this.view=new View(this);
+        this.clientSocket=clientSocket;
+        try {
+            socketOut = new PrintWriter(clientSocket.getOutputStream());
+            socketIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     //qui ci vanno i metodi che andranno a comunicare con il server controller
 
     public void startGame() throws IOException{
         Scanner scanner=new Scanner(System.in);
-        socketOut.println("Inserisci il tuo nome utente");
-        socketOut.println(scanner.nextLine());
-        socketOut.println(socketIn.readLine());
+        System.out.println("Inserisci il tuo nome utente");
+        socketOut.write(scanner.nextLine());
+        System.out.println(socketIn.readLine());
     }
     /*      Scanner scanner=new Scanner(System.in);
             out.println(scanner.nextLine());

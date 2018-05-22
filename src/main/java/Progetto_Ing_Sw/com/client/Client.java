@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.client;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Client {
 
@@ -12,7 +13,19 @@ public class Client {
     public Client(String host, int port) {//importo i dati dal file di configurazione
         this.host = host;
         this.port = port;
+        try{clientSocket=new Socket(host,port);}
+        catch (UnknownHostException e){
+            System.out.println("Unknown host, are you sure to have typed it correctly?");
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
+
     public void startSocket() throws IOException{//creo la socket con i dati da configurazione e inserisco il nome utente
         clientSocket = new Socket(host, port);
     }

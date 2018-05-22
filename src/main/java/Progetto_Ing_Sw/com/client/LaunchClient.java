@@ -11,7 +11,7 @@ public class LaunchClient {
 
     //creazione del client
     Client client=new Client(host,port);
-    ClientController clientController= new ClientController(client);
+    ClientController clientController= new ClientController(client.getClientSocket());
 
     try {
         client.startSocket();
