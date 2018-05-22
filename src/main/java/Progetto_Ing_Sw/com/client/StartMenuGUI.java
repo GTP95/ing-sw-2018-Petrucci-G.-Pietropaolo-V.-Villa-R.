@@ -1,23 +1,24 @@
 package Progetto_Ing_Sw.com.client;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class StartMenuGUI extends Application {
     Scene TitleScreen, SelectGameMode;  //Specifico prima tutte le scene di cui avrò bisogno
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
+
+        primaryStage.setResizable(false);
 
         //Start Menu Screen
         HBox startscreen= new HBox(80);
@@ -58,6 +59,14 @@ public class StartMenuGUI extends Application {
         Button multiPlayer = new Button();
         multiPlayer.setId("MultiPlayerButton");
         multiPlayer.setPrefSize(250,250);
+        multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new MultiplayerGUI();
+                primaryStage.close();
+
+            }
+        });
         //TODO setOnAction per passare alla scena del multiplayer (presubilmente una scelta della lobby)
 
         //Tasto goBack per tornare alla schermata principale

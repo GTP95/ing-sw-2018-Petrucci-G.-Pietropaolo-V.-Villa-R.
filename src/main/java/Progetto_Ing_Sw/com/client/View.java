@@ -18,5 +18,6 @@ public class View implements PlayerObserver, TableObserver, RoundTrackObserver, 
 
 
 
+
     //TODO implementare le tipologie di messaggio che possono arrivare dalla view
 }
