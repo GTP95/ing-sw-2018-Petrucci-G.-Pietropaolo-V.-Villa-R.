@@ -2,7 +2,7 @@ package Progetto_Ing_Sw.com.server;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements PlayerObserver{
    private String name;
    private int favorTokens;
    private PrivateObjectiveCard privateObjective;
