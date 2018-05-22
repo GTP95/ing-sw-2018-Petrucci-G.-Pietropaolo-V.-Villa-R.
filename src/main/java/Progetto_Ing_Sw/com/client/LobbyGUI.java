@@ -5,9 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/* commentata perchè contiene errori che impediscono la compilazione
 
-
-public class LobbyGUI{ public HBox Players (Player)
+public class LobbyGUI{
+        public HBox Players (Player)
         Button Player1 = new Button("READY!");
         Button Player2 = new Button("READY!");
         Button Player3 = new Button("READY!");
@@ -19,3 +20,4 @@ public class LobbyGUI{ public HBox Players (Player)
 
     }
 }
+*/
