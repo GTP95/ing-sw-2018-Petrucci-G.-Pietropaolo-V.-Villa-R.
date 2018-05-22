@@ -16,7 +16,7 @@ public class Table implements TableObserver {
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
-	    drawnDice=diceBag.diceDraw(2*numPlayers+1); //NULLPOINTEREXCEPTION!!!
+	    drawnDice=diceBag.diceDraw(2*numPlayers+1); //TODO: NULLPOINTEREXCEPTION!!!
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
 	    players=Lobby.getInstance().getConnctedPlayers();

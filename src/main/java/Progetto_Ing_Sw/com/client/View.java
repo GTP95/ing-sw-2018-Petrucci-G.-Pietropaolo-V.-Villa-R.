@@ -11,13 +11,16 @@ public class View implements PlayerObserver, TableObserver, RoundTrackObserver, 
     private Scanner inputKeyboard;
     private final ClientController controller;
 
-    public View(Scanner inputKeyboard, ClientController controller) {
-        this.inputKeyboard = inputKeyboard;
+    public View(ClientController controller) {
         this.controller = controller;
+        this.inputKeyboard = new Scanner(System.in);
+    }
+    private String userInput() {
+        return inputKeyboard.nextLine();
     }
 
-
-
-
+    private void userAction(){
+        //inserire il metodo del client controller che invia il messaggio che gestisce l'azione
+    }
     //TODO implementare le tipologie di messaggio che possono arrivare dalla view
 }
