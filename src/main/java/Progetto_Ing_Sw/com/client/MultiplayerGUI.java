@@ -25,7 +25,7 @@ public class MultiplayerGUI extends Stage {
         socketBTN.setId("SocketBTN");
         socketBTN.setPrefSize(250,250);
         //TODO configurare la parte socket all'attivazione
-      //  socketBTN.setOnAction(event -> this.setScene(LobbyGUI.create(stage)));    commentato perchè contiene errori che impediscono la compilazione
+        //socketBTN.setOnAction(event -> this.setScene(LobbyGUI.create(stage)));    commentato perchè contiene errori che impediscono la compilazione
 
 
         Button RMIBTN = new Button("RMI");
@@ -44,3 +44,5 @@ public class MultiplayerGUI extends Stage {
 
     }
 }
+
+//da sincronizzare con view

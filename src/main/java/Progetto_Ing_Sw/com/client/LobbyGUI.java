@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /* commentata perchè contiene errori che impediscono la compilazione
+   da lasciare commentata per l'esecuzione dei test
 
 public class LobbyGUI{
         public HBox Players (Player)
