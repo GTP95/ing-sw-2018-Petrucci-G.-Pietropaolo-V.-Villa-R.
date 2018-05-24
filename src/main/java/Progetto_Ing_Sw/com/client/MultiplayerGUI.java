@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,7 +40,14 @@ public class MultiplayerGUI extends Stage {
         socketBTN.setId("SocketBTN");
         socketBTN.setPrefSize(250,250);
         //TODO configurare la parte socket all'attivazione
-        socketBTN.setOnAction(event -> this.setScene(LobbyScene));
+        socketBTN.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new LoginStage();
+                socketBTN.setDisable(true);
+
+            }
+        });
 
 
         Button RMIBTN = new Button("RMI");
@@ -53,9 +61,8 @@ public class MultiplayerGUI extends Stage {
         //FINE Choose Connection Scene
 
 
+
         //INIZIO Lobby Scene
-
-
 
         //Finestre
         ImageView Player1Window = new ImageView("file:///../GUI/LobbyPlayer1.png");
@@ -108,10 +115,8 @@ public class MultiplayerGUI extends Stage {
         HBox TimerBox = new HBox();
         TimerBox.setAlignment(Pos.TOP_CENTER);
         TimerBox.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Label TimerLabel = new Label("00:30"); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);
+        Label TimerLabel = new Label("  00:30"); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);
         TimerBox.getChildren().addAll(TimerLabel);
-
-
 
 
         //Un Borderpane per domarli, un BorderPane per trovarli,

@@ -194,7 +194,7 @@
 #ReadyBTN{
     /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
     -fx-text-fill: grey;
-    -fx-font-size: 50;
+    -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 250 250;
@@ -212,7 +212,7 @@
     /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
 
     -fx-text-fill: white ;
-    -fx-font-size: 50;
+    -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 250 250;
@@ -238,7 +238,7 @@
     /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
 
     -fx-text-fill: white;
-    -fx-font-size: 50;
+    -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 250 250;
@@ -254,6 +254,7 @@
 
 #PlayerLobbyLabel{
     -fx-text-fill: white;
+    -fx-font: 16px "Castellar";
     /*-fx-font-size: 50;*/
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -267,4 +268,52 @@
     radial-gradient(center 50% 50%, radius 100%, #1d1d1d, #1d1d1d);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
+
+#MenuText{
+    -fx-text-fill: white;
+    -fx-font: 40 "Castellar";
+}
+
+
+#DefaultButton{
+    -fx-text-fill: white;
+    -fx-font: 25 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 200 230;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+
+#DefaultButton:hover{
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 200 230;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #9d4024,
+    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#TextField{
+    -fx-border-color: Black;
+    -fx-border-width: 0 0 3 0 ;
+    -fx-padding: 0 0 -15 0;
+    -fx-font: 60 "Edwardian Script ITC";
+    -fx-background-color: transparent;
+}
+
+
 
