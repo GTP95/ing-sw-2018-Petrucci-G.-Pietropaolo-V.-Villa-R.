@@ -315,5 +315,46 @@
     -fx-background-color: transparent;
 }
 
+#TheGrid{
 
+}
+
+#Block{
+    -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: white;
+}
+
+#TopBorder {
+
+}
+
+#LeftBorder{
+
+}
+
+#BottomBorder{
+
+
+}
+
+#RightBorder{
+
+}
+
+#primo_blocco{
+    -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("file:///E:/Vincenzo%20Pietropaolo/Polimi/Ingegneria%20del%20Software/Prova%20Finale/Utili/Numero6.png");
+    -fx-background-size: 75 75;
+
+}
+
+#secondo_blocco{
+    -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: red;
+    -fx-background-size: 75 75;
+
+}
 
