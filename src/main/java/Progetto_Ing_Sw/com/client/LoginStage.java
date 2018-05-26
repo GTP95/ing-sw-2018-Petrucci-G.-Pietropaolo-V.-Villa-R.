@@ -53,7 +53,7 @@ public class LoginStage extends Stage {
         ImageView frame2 = new ImageView("file:///../GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50);HostField.setText(JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","port");//TODO Caricamento da JSON
+        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50);//HostField.setText(JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","port"));//TODO Caricamento da JSON
 
 
         //Accept Button
