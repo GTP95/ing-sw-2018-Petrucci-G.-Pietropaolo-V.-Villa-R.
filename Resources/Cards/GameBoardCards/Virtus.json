@@ -3,5 +3,9 @@
   "gameBoardCode": 14,
   "difficulty": 5,
   "otherSide": "Symphony Of Lights",
-  "otherSideCode": 13
+  "otherSideCode": 13,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

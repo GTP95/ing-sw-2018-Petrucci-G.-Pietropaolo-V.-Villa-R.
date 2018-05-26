@@ -81,6 +81,23 @@ public final class JSONCreator {
         return number;
     }
 
+    public static int[][] parseMatrixFieldFromFile(String path, String fieldName, int rows, int columns) throws FileNotFoundException {
+
+        JsonElement jelement = new JsonParser().parse(new FileReader(path));
+        JsonObject jobject = jelement.getAsJsonObject();
+        JsonArray matrixTexture=jobject.getAsJsonArray(fieldName);
+        int [][] matrix = new int [rows][columns];
+
+        for(int r=0;r<matrixTexture.size();r++){
+            JsonArray row=matrixTexture.get(r).getAsJsonArray();
+            for(int c=0; c<row.size();c++){
+                matrix[r][c]=row.get(c).getAsInt();
+            }
+        }
+        return matrix;
+    }
+
+
     public static String parseStringFieldFromFile(String path, String fieldName) throws FileNotFoundException{
         JsonElement jelement = new JsonParser().parse(new FileReader(path));
         JsonObject jobject = jelement.getAsJsonObject();

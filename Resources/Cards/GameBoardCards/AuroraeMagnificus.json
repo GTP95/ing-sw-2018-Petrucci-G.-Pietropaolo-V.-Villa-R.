@@ -3,5 +3,9 @@
   "gameBoardCode": 11,
   "difficulty": 5,
   "otherSide": "Aurora Sagradis",
-  "otherSideCode": 12
+  "otherSideCode": 12,
+  "matrixScheme":[[9,9,9,9,9],
+                  [9,9,9,9,9],
+                  [9,9,9,9,9],
+                  [9,9,9,9,9]]
 }

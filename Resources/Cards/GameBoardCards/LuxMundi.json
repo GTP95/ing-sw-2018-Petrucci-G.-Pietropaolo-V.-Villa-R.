@@ -3,5 +3,9 @@
   "gameBoardCode":5,
   "difficulty": 6,
   "otherSide": "Lux Astram",
-  "otherSideCode":6
+  "otherSideCode":6,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

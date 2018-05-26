@@ -3,5 +3,9 @@
   "gameBoardCode": 10,
   "difficulty": 5,
   "otherSide": "Sun Catcher",
-  "otherSideCode": 9
+  "otherSideCode": 9,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

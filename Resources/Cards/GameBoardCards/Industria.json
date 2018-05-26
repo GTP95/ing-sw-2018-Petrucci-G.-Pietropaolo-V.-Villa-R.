@@ -3,5 +3,9 @@
   "gameBoardCode": 24,
   "difficulty": 5,
   "otherSide": "Via Lux",
-  "otherSideCode": 23
+  "otherSideCode": 23,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

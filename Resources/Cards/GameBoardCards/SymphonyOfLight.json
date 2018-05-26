@@ -3,5 +3,9 @@
   "gameBoardCode": 13,
   "difficulty": 6,
   "otherSide": "Virtus",
-  "otherSideCode": 14
+  "otherSideCode": 14,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

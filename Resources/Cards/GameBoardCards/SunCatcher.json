@@ -3,5 +3,9 @@
   "gameBoardCode":9,
   "difficulty": 3,
   "otherSide": "Shadow Thief",
-  "otherSideCode": 10
+  "otherSideCode": 10,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

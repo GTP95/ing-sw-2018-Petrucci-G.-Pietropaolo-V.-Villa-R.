@@ -3,5 +3,9 @@
   "gameBoardCode":6,
   "difficulty": 5,
   "otherSide": "Lux Mundi",
-  "otherSideCode":5
+  "otherSideCode":5,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

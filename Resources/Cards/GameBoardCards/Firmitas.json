@@ -3,5 +3,9 @@
   "gameBoardCode": 2,
   "difficulty": 5,
   "otherSide": "Kaleidoscopic Dream",
-  "otherSideCode": 1
+  "otherSideCode": 1,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

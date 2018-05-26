@@ -3,5 +3,9 @@
   "gameBoardCode": 22,
   "difficulty": 5,
   "otherSide": "Chromatic Splendor",
-  "otherSideCode": 21
+  "otherSideCode": 21,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

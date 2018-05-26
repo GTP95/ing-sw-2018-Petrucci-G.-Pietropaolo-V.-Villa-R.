@@ -3,5 +3,9 @@
   "gameBoardCode": 18,
   "difficulty": 3,
   "otherSide": "Battlo",
-  "otherSideCode": 17
+  "otherSideCode": 17,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

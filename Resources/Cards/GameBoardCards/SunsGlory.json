@@ -3,5 +3,9 @@
   "gameBoardCode": 16,
   "difficulty": 6,
   "otherSide": "Firelight",
-  "otherSideCode": 15
+  "otherSideCode": 15,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

@@ -3,5 +3,9 @@
   "gameBoardCode": 12,
   "difficulty": 4,
   "otherSide": "Aurorae Magnificus",
-  "otherSideCode": 11
+  "otherSideCode": 11,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }
