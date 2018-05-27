@@ -3,5 +3,9 @@
   "gameBoardCode":8,
   "difficulty": 6,
   "otherSide": "Gravitas",
-  "otherSideCode":7
+  "otherSideCode":7,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

@@ -2,6 +2,10 @@
   "title": "Fractal Drops",
   "gameBoardCode": 3,
   "difficulty": 3,
-  "otherSide": "Ripple of Light",
-  "otherSideCode": 4
+  "otherSide": "Ripples of Light",
+  "otherSideCode": 4,
+  "matrixScheme":[[9,9,9,9,9],
+  [9,9,9,9,9],
+  [9,9,9,9,9],
+  [9,9,9,9,9]]
 }

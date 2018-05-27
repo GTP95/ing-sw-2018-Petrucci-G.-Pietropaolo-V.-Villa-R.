@@ -3,5 +3,9 @@
   "gameBoardCode": 19,
   "difficulty": 5,
   "otherSide": "Luz Celestial",
-  "otherSideCode": 20
+  "otherSideCode": 20,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

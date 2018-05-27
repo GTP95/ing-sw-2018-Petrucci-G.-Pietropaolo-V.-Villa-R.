@@ -3,5 +3,9 @@
   "gameBoardCode": 20,
   "difficulty": 3,
   "otherSide": "Fulgor del Cielo",
-  "otherSideCode": 19
+  "otherSideCode": 19,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

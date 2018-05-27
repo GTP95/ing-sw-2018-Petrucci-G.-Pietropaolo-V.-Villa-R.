@@ -3,5 +3,9 @@
   "gameBoardCode": 17,
   "difficulty": 5,
   "otherSide": "Bellesguard",
-  "otherSideCode": 18
+  "otherSideCode": 18,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

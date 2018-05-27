@@ -19,6 +19,7 @@ public class Sagrada {
 
     public static void main(String[] args) {
         Application.launch(StartMenuGUI.class,args);
+
     }
 
     //@Override

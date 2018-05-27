@@ -7,10 +7,13 @@ import static org.mockito.Mockito.mock;
 
 public class WindowBoardTest {
     private WindowBoard windowBoard;
-    private final int raws=4;       //colonne e righe rimangono costanti
+    private final int rows=4;       //colonne e righe rimangono costanti
     private final int columns=5;
     private int dice;
     private int cell;
+    private String field;
+    private String path;
+    int cardCode;
 
     @Before
     public void before(){
@@ -18,18 +21,21 @@ public class WindowBoardTest {
     }
     @Test
     public void simplePrint() {
-        WindowBoard windowBoard1 = new WindowBoard(raws, columns); //costruisce la matrice con le dimensioni date da me
-        WindowBoard windowBoard2 = new WindowBoard(raws, columns); //costruisce la matrice con le dimensioni date da me
-        int[][] testMatrix1 = windowBoard1.buildEmptyMatrix(raws, columns);//crea una oggetto matrice di 0
-        int[][] testMatrix2 = windowBoard2.buildEmptyMatrix(raws, columns);//crea una oggetto matrice di 0
+
+        //TODO sistemare il concetto della doppia matrice sulla stessa WindowBoard
+
+        WindowBoard windowBoard1 = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard1.importFromFile(rows, columns,1);
+        windowBoard1.printMatrix(testMatrix,rows,columns);
+
+        WindowBoard windowBoard2 = new WindowBoard(rows, columns);
+        int[][] testMatrix2 = windowBoard1.buildEmptyMatrix(rows, columns);
+        windowBoard1.printMatrix(testMatrix,rows,columns);
 
         //NB l'inserimento avviene correttamente su due matrici separate
-        // solo se le due matrici sono su due oggetti windowBoard differenti
+        // solo se le due matrici sono su due oggetti windowBoard2 differenti
 
-        windowBoard1.insertDice(testMatrix1,raws,columns,23,5);
-        windowBoard1.printMatrix(testMatrix1,raws,columns);
-        windowBoard2.insertDice(testMatrix2,raws,columns,45,5);
-        windowBoard2.printMatrix(testMatrix2,raws,columns);
+
     }
 
 }

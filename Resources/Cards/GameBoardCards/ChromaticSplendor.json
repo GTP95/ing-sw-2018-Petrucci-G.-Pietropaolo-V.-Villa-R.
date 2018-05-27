@@ -3,5 +3,9 @@
   "gameBoardCode": 21,
   "difficulty": 4,
   "otherSide": "Comitas",
-  "otherSideCode": 22
+  "otherSideCode": 22,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

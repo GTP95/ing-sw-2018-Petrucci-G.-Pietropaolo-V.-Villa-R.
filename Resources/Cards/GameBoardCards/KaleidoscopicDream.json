@@ -3,5 +3,9 @@
   "gameBoardCode": 1,
   "difficulty": 4,
   "otherSide": "Firmitas",
-  "otherSideCode": 2
+  "otherSideCode": 2,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }

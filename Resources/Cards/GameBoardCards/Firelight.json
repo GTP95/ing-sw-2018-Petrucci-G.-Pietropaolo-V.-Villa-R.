@@ -3,5 +3,9 @@
   "gameBoardCode": 15,
   "difficulty": 5,
   "otherSide": "Sun's Glory",
-  "otherSideCode": 16
+  "otherSideCode": 16,
+  "matrixScheme":[[9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9],
+    [9,9,9,9,9]]
 }
