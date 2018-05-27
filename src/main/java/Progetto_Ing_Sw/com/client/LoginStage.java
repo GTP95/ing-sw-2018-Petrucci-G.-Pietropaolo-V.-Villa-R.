@@ -15,6 +15,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
 
@@ -53,7 +55,10 @@ public class LoginStage extends Stage {
         ImageView frame2 = new ImageView("file:///../GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50);//HostField.setText(JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","port"));//TODO Caricamento da JSON
+        String host;
+        try{host=JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","host");}
+        catch(FileNotFoundException e){host="localhost";}
+        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50); HostField.setText(host);
 
 
         //Accept Button
