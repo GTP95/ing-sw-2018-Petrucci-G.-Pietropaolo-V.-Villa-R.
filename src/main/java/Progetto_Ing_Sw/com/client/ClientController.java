@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 
-public class ClientController {
+public class ClientController implements Runnable{
 
     private final View view;
    // private Client client;
@@ -28,6 +28,15 @@ public class ClientController {
         }
     }
 
+    @Override
+    public void run() {
+        try {
+            startGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //qui ci vanno i metodi che andranno a comunicare con il server controller
 
     public void startGame() throws IOException{
@@ -36,6 +45,7 @@ public class ClientController {
         socketOut.write(scanner.nextLine());
         System.out.println(socketIn.readLine());
     }
+
     /*      Scanner scanner=new Scanner(System.in);
             out.println(scanner.nextLine());
             out.println(in.readLine());

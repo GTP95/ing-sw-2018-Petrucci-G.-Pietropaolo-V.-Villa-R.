@@ -5,12 +5,14 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class LaunchSocketClient {
     public static void main(String args[]) {
         String host;
-        final int port = 1024;
+        final int port = 1025;
 
         if (args.length == 1) host = args[0];
 
@@ -46,10 +48,23 @@ public class LaunchSocketClient {
 
         //creazione del client
 
-            Client client = new Client(host, port);
-            ClientController clientController = new ClientController(client.getClientSocket());
 
-            try {
+        Thread clientController;
+        try  {
+            Socket clientSocket = new Socket(host, port);
+            clientController = new Thread(new ClientController(clientSocket));
+            clientController.start();
+        }
+        catch (UnknownHostException e){
+            e.getCause();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
+           /* try {
                 client.startSocket();
                 clientController.startGame();
 
@@ -62,7 +77,7 @@ public class LaunchSocketClient {
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
         }
 

@@ -13,7 +13,10 @@ public class Client {
     public Client(String host, int port) {//importo i dati dal file di configurazione
         this.host = host;
         this.port = port;
-        try{clientSocket=new Socket(host,port);}
+        try{
+            System.out.println("Connecting to" + host + ":" + port);
+            startSocket();
+        }
         catch (UnknownHostException e){
             System.out.println("Unknown host, are you sure to have typed it correctly?");
         }
@@ -26,7 +29,7 @@ public class Client {
         return clientSocket;
     }
 
-    public void startSocket() throws IOException{//creo la socket con i dati da configurazione e inserisco il nome utente
+    public void startSocket() throws IOException{//creo la socket con i dati da configurazione
         clientSocket = new Socket(host, port);
     }
     public void closeSocket() throws IOException{
