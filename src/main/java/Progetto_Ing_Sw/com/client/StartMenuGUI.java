@@ -63,8 +63,8 @@ public class StartMenuGUI extends Application {
         multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                new TableGUI();
-                //new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
+                //new TableGUI();
+                new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
                 primaryStage.close();
 
             }

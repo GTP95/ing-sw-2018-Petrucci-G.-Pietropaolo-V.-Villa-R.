@@ -48,16 +48,20 @@ public class TableGUI extends Stage {
                     block.setId("Block");
                     griglia.add(block, i, j);
 
-                    if (i == 0 && j == 0) {
+                    /*if (i == 0 && j == 0) {
                         block.setId("primo_blocco");
                         //block.setStyle("-fx-background-image: none");
                     }
 
                     if (i == 1 && j == 0) {
                         block.setStyle("-fx-background-color: red");
-                    }
+                    }*/
                 }
             }
+
+
+
+
 
 
             //HBox Tabs per gli altri giocatori

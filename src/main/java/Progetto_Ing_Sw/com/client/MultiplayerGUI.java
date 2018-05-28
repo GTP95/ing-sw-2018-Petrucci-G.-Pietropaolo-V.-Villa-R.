@@ -28,9 +28,9 @@ public class MultiplayerGUI extends Stage {
 
         //INIZIO Choose Connection Scene
         HBox RMISocket = new HBox(80);
-       // RMISocket.setId("GamemodeSelectionScreen");
+        RMISocket.setId("GamemodeSelectionScreen");
         RMISocket.setPrefSize(1280,720);
-        //RMISocket.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+        RMISocket.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         RMISocket.setAlignment(Pos.CENTER);
 
         Button socketBTN = new Button("SOCKET");socketBTN.setId("SocketBTN");socketBTN.setPrefSize(250,250);
@@ -50,20 +50,14 @@ public class MultiplayerGUI extends Stage {
         RMIBTN.setPrefSize(250,250);
         //TODO: Configurare la parte RMI all'attivazione
 
-        ToggleButton Porta = new ToggleButton("1024");Porta.setId("ReadyBTN");
-        ToggleButton Porta2 = new ToggleButton("1337");Porta2.setId("ReadyBTN");
 
-        HBox PortBox = new HBox(80);PortBox.setAlignment(Pos.CENTER);
-        PortBox.getChildren().addAll(Porta,Porta2);
 
         RMISocket.getChildren().addAll(socketBTN,RMIBTN);
 
-        BorderPane LayoutMultiplayer = new BorderPane();LayoutMultiplayer.setId("GamemodeSelectionScreen");LayoutMultiplayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        //LayoutMultiplayer.getChildren().addAll(RMISocket,PortBox);
-        LayoutMultiplayer.setCenter(RMISocket);
-        LayoutMultiplayer.setBottom(PortBox);
 
-        ChooseConnectionScene= new Scene(LayoutMultiplayer, 1280,720);
+
+
+        ChooseConnectionScene= new Scene(RMISocket, 1280,720);
         //FINE Choose Connection Scene
 
 

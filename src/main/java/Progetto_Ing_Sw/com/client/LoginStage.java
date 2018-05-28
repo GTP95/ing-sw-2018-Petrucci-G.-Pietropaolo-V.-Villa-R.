@@ -36,9 +36,11 @@ public class LoginStage extends Stage {
         TextField UsernameField = new TextField();UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
 
 
+
         //Accept Button
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
-        AcceptBTN.setOnAction(event -> this.setScene(ServerScene));
+        AcceptBTN.setOnAction(event -> {this.setScene(ServerScene);Model.getInstance().setUsername(UsernameField.getText());});
+
 
 
         //Title Text
@@ -57,15 +59,14 @@ public class LoginStage extends Stage {
         ImageView frame2 = new ImageView("file:///../GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        String host;
-        try{host=JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","host");}
-        catch(FileNotFoundException e){host="localhost";}
+        String host = Model.getInstance().getHost();
+
         TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50); HostField.setText(host);
 
 
         //Accept Button
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
-        //AcceptBTN2.setOnAction(addEventHandler(ActionEvent));//TODO
+        //AcceptBTN2.setOnAction();//TODO
 
 
         //Title Text
