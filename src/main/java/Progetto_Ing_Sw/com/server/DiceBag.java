@@ -27,7 +27,7 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
     public Dice diceDraw(){
         int color;
         while(true) {
-            color = splittableRandom.nextInt(5);
+            color = splittableRandom.nextInt(1,6);
             if(color==Color.RED && numDiceRed!=0){
                 numDiceRed--;
                 break;

@@ -4,8 +4,8 @@
   "difficulty": 4,
   "otherSide": "Firmitas",
   "otherSideCode": 2,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[4,2,0,0,6],
+    [5,0,10,0,9],
+    [8,0,1,0,5],
+    [7,0,0,10,4]]
 }
