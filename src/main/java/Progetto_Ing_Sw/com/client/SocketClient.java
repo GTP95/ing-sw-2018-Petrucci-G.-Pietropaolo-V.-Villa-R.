@@ -17,7 +17,7 @@ public class SocketClient implements Runnable{
         try{
             socket=new Socket(host, port);
             System.out.println("Connected to "+host+":"+port);
-            out=new PrintWriter(socket.getOutputStream());
+            out=new PrintWriter(socket.getOutputStream(),true);
             in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
         catch (UnknownHostException e){
@@ -35,7 +35,7 @@ public class SocketClient implements Runnable{
         }
         System.out.println("Pronto all'invio dello username");
         out.println(username);
-        out.flush();
+
         System.out.println("Inviato "+username+" come username");
         try {
             System.out.println(in.readLine());
