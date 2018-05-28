@@ -40,8 +40,9 @@ public class Lobby {
 
     public void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
+            if (playerName.isEmpty()) throw new InvalidUsernameException("Empty username not allowed");
             for(Player alreadyConnected : connectedPlayers){
-                if (alreadyConnected.getName().equals(playerName)) throw new InvalidUsernameException();
+                if (alreadyConnected.getName().equals(playerName)) throw new InvalidUsernameException("Username already in use");
             }
             Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw(), socketClientHandler);
             connectedPlayers.add(player);

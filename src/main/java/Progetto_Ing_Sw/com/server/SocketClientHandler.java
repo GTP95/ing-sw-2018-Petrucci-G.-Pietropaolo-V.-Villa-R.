@@ -42,7 +42,7 @@ public class SocketClientHandler implements Runnable{
                 out.println("Max number of players exceeded");
             }
             catch(InvalidUsernameException e){
-                out.println("Username already in use");
+                out.println(e.getMessage());
             }
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
