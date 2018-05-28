@@ -12,7 +12,7 @@ public class SocketClientTest {
     public void SocketClientTester(){
         Model model=Model.getInstance();
         try{
-            Thread client=new Thread(new SocketClient("localhost",1024));
+            Thread client=new Thread(new SocketClient("localhost",1025));
             client.start();
             model.setUsername("Giacomo");
         }

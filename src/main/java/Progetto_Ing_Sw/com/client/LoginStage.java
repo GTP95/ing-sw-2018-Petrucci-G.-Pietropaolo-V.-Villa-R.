@@ -59,7 +59,7 @@ public class LoginStage extends Stage {
         ImageView frame2 = new ImageView("file:///../GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        String host = Model.getInstance().getHost();
+        String host = Model.getInstance().getHostname();
 
         TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50); HostField.setText(host);
 

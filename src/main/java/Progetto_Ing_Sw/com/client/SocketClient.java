@@ -40,6 +40,7 @@ public class SocketClient implements Runnable{
 
         try {
             System.out.println("Provo a leggere");
+            while (!in.ready())System.out.print(".");
             System.out.println(in.readLine());
             System.out.println("letto");
         } catch (IOException e) {
