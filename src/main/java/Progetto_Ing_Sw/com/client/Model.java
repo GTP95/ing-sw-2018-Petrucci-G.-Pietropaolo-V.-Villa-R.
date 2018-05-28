@@ -55,6 +55,8 @@ public  class Model {
         return socketPort;
     }
 
+    public int getRmiRegistryPort() { return rmiRegistryPort; }
+
     public void setHostname(String hostname) {  //TODO: write to JSON
         this.hostname = hostname;
     }
@@ -62,6 +64,8 @@ public  class Model {
     public void setSocketPort(int socketPort) {
         this.socketPort = socketPort;
     }
+
+    public void setRmiRegistryPort(int rmiRegistryPort) { this.rmiRegistryPort = rmiRegistryPort; }
 
     public void writeSettingsToJSON(){
         try {

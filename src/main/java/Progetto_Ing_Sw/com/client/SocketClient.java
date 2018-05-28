@@ -47,7 +47,8 @@ public class SocketClient implements Runnable{
                 serverResponse=in.readLine();
             }
             System.out.println(serverResponse); //non viene stampato!!
-            } catch(IOException e){
+            }
+            catch(IOException e){
                 e.printStackTrace();
             }
 
