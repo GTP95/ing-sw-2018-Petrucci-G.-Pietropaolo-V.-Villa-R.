@@ -15,7 +15,7 @@ public  class Model {
 
 
     private Model(){
-        username=null;
+        username="";
         ourInstance=this;
         try {
             hostname = JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "host");
