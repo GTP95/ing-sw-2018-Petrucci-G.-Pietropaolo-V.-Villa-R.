@@ -61,7 +61,7 @@ public class LoginStage extends Stage {
         //Text Fields da riempire
         String host = Model.getInstance().getHostname();
 
-        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50); HostField.setText(host);
+        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50);HostField.setText(host);
 
 
         //Accept Button
