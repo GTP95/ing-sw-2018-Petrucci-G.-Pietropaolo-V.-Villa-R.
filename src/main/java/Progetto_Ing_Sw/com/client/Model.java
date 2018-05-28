@@ -11,7 +11,8 @@ public  class Model {
     private  String username;
     private static Model ourInstance=new Model();
     private String hostname;
-    private int port;
+    private int socketPort;
+    private int rmiRegistryPort;
 
 
     private Model(){
@@ -19,14 +20,16 @@ public  class Model {
         ourInstance=this;
         try {
             hostname = JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "host");
-            port=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","port");
+            socketPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","socketPort");
             username=JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "username");
+            rmiRegistryPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","rmiRegistryPort");
         }
         catch (FileNotFoundException e){
             System.err.println("File ClientSettings.json not found, falling back to defaults");
             hostname="localhost";
-            port=1024;
+            socketPort =1024;
             username="";
+            rmiRegistryPort =1099;
         }
     }
 
@@ -48,23 +51,27 @@ public  class Model {
         return hostname;
     }
 
-    public int getPort() {
-        return port;
+    public int getSocketPort() {
+        return socketPort;
     }
+
+    public int getRmiRegistryPort() { return rmiRegistryPort; }
 
     public void setHostname(String hostname) {  //TODO: write to JSON
         this.hostname = hostname;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public void setSocketPort(int socketPort) {
+        this.socketPort = socketPort;
     }
+
+    public void setRmiRegistryPort(int rmiRegistryPort) { this.rmiRegistryPort = rmiRegistryPort; }
 
     public void writeSettingsToJSON(){
         try {
             FileWriter fileWriter = new FileWriter("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"port\"" + ":" + port + "," + "\"username\"" + ":\"" + username+"\""+"}");
+            bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"socketPort\"" + ":" + socketPort + "," + "\"username\"" + ":\"" + username+"\""+","+"\"rmiRegistryPort\""+":"+ rmiRegistryPort +"}");
             bufferedWriter.flush();
         }
         catch (IOException e){

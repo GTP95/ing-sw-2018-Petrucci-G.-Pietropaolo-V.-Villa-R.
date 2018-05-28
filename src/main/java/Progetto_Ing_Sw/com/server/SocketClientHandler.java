@@ -17,7 +17,7 @@ public class SocketClientHandler implements Runnable{
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/server/Settings/ServerSettings.json","timeout");
+            timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timeout");
             clientSocket.setSoTimeout(timeout);
         }
         catch (FileNotFoundException e){
