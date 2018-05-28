@@ -1,4 +1,5 @@
 {"host":"localhost",
-"port":1024,
+"socketPort":1024,
+ "rmiRegistryPort":1099,
  "username":""
 }
