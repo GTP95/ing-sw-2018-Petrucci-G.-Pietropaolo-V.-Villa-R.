@@ -60,11 +60,12 @@ public class StartMenuGUI extends Application {
         Button multiPlayer = new Button();
         multiPlayer.setId("MultiPlayerButton");
         multiPlayer.setPrefSize(250,250);
+
         multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                //new TableGUI();
-                new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
+                new TableGUI();
+                //new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
                 primaryStage.close();
 
             }

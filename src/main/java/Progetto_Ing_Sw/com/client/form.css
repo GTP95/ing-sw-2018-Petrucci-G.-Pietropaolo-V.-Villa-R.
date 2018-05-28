@@ -327,24 +327,49 @@
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
     -fx-background-color: white;
+
 }
 
-#primo_blocco{
+#Shade1{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
     -fx-background-image: url("../../../../../GUI/Shade1.png") ;
     -fx-background-size: 75 75;
-
-
-
 }
 
-#secondo_blocco{
+#Shade2{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-color: red;
+    -fx-background-image: url("../../../../../GUI/Shade2.png") ;
     -fx-background-size: 75 75;
+}
 
+#Shade3{
+     -fx-border-color: black;
+     -fx-border-width:  4 4 4 4;
+     -fx-background-image: url("../../../../../GUI/Shade3.png") ;
+     -fx-background-size: 75 75;
+ }
+
+#Shade4{
+      -fx-border-color: black;
+      -fx-border-width:  4 4 4 4;
+      -fx-background-image: url("../../../../../GUI/Shade4.png") ;
+      -fx-background-size: 75 75;
+}
+
+#Shade5{
+    -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("../../../../../GUI/Shade5.png") ;
+    -fx-background-size: 75 75;
+}
+
+#Shade6{
+    -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("../../../../../GUI/Shade6.png") ;
+    -fx-background-size: 75 75;
 }
 
 #CardMenu{
