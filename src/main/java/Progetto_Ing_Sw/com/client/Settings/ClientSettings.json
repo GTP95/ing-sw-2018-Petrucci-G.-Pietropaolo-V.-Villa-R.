@@ -1,1 +1,3 @@
-{"host":"localhost"}
+{"host":"localhost",
+"port":1024
+}

@@ -37,15 +37,14 @@ public class SocketClient implements Runnable{
         out.println(username);
 
         System.out.println("Inviato "+username+" come username");
+
         try {
+            System.out.println("Provo a leggere");
             System.out.println(in.readLine());
+            System.out.println("letto");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
- /*   public void setUsername(String username) {
-        this.username = username;
-        System.out.println("Username set to "+username);
-    }*/
 }
