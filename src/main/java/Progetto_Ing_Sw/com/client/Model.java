@@ -34,7 +34,7 @@ public  class Model {
         return ourInstance;
     }
 
-    public synchronized void setUsername(String username) { 
+    public synchronized void setUsername(String username) {
         this.username = username;
         System.out.println("Username set to "+username);
         notifyAll();
@@ -65,6 +65,7 @@ public  class Model {
             FileWriter fileWriter = new FileWriter("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"port\"" + ":" + port + "," + "\"username\"" + ":\"" + username+"\""+"}");
+            bufferedWriter.flush();
         }
         catch (IOException e){
             System.err.println("Failed to save current settings into JSON file \"ClientSettings.json\"");
