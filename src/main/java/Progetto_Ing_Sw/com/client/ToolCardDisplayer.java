@@ -16,19 +16,24 @@ public class ToolCardDisplayer extends Stage {
         this.setTitle("Tool Card");
         this.setResizable(false);
 
+
         //ImageView della tool card
         ImageView ToolCardSample = new ImageView("file:///../GUI/BaseToolCard.png");
 
+
         //I Label che contengono le varie descrizioni della Carta
-        Label ToolCardTitle = new Label("Grozing Pliers");ToolCardTitle.setTranslateX(50);ToolCardTitle.setTranslateY(-320);ToolCardTitle.setStyle("-fx-font-size:25");
-        Label ToolCardNumber = new Label("1");ToolCardNumber.setTranslateX(50);ToolCardNumber.setTranslateY(-275);ToolCardNumber.setStyle("-fx-font-size:25");
-        Label ToolCardDescription = new Label("After drafting increse or decrease the value of the drafted die by 1");ToolCardDescription.setTranslateY(240);ToolCardDescription.setStyle("-fx-font-size:25");ToolCardDescription.setMaxWidth(490);
-        Label ToolCardColor = new Label();ToolCardColor.setStyle("-fx-background-color: #d600d6");ToolCardColor.setPrefSize(130,100);ToolCardColor.setTranslateY(-280);ToolCardColor.setTranslateX(-180);
+        Label ToolCardTitle = new Label("Cork-backed Straightedge");ToolCardTitle.setTranslateX(50);ToolCardTitle.setTranslateY(-320);ToolCardTitle.setId("ToolCardDsiplayer");
+        Label ToolCardNumber = new Label("1");ToolCardNumber.setTranslateX(50);ToolCardNumber.setTranslateY(-275);ToolCardNumber.setId("ToolCardDsiplayer");
+        Label ToolCardDescription = new Label("After drafting, \r\n increase or decrease the value \r\n of the drafted die by 1");ToolCardDescription.setTranslateY(240);ToolCardDescription.setId("ToolCardDsiplayer");;ToolCardDescription.setTextAlignment(TextAlignment.CENTER);
+        Label ToolCardColor = new Label();ToolCardColor.setStyle("-fx-background-color: #d6150c");ToolCardColor.setPrefSize(130,100);ToolCardColor.setTranslateY(-280);ToolCardColor.setTranslateX(-180);
 
         StackPane ToolCardD = new StackPane();ToolCardD.setId("ToolCardDisplayer");
         ToolCardD.getChildren().addAll(ToolCardColor,ToolCardSample,ToolCardTitle,ToolCardNumber,ToolCardDescription);
 
         ToolCardDisplay = new Scene(ToolCardD,500,711);
+        ToolCardDisplay.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+
+        ToolCardTitle.setStyle("-fx-font-weight: bold;");
 
         this.setScene(ToolCardDisplay);
         this.show();

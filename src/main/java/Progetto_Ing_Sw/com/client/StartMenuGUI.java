@@ -17,7 +17,8 @@ public class StartMenuGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
-
+        primaryStage.setMaxWidth(1280);
+        primaryStage.setMaxHeight(720);
         primaryStage.setResizable(false);
 
         //Start Menu Screen
