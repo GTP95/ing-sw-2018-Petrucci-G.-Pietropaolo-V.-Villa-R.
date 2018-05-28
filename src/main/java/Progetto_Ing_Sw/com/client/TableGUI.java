@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
@@ -16,7 +17,11 @@ public class TableGUI extends Stage {
 
     TableGUI(){
         this.setTitle("Sagrada Game");
+        this.setWidth(1280);
+        this.setHeight(720);
         this.setResizable(false);
+
+
 
         //INIZIO Gameplay Scene
             int rows = 4;
@@ -67,25 +72,112 @@ public class TableGUI extends Stage {
                 OtherPlayerBox.getChildren().addAll(OtherPlayer);
             }
 
+        //INIZIO MENU TOOL CARD
 
         //Contenuto del menu ToolCard
-        Label ToolCardMenuTitle = new Label("Tool Cards");ToolCardMenuTitle.setId("ToolCardBTN");
-        Button ToolCard1 = new Button("1. Tool Card");ToolCard1.setId("ToolCardBTN");ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
+        Label ToolCardMenuTitle = new Label("           Tool Cards");ToolCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: white;" + "-fx-font: 25 \"Centaur\";");
+
+        //Bottoni che riferiscono alle Tool Cards
+        Button ToolCard1 = new Button("9. Cork-backed \r\n Straightedge");ToolCard1.setId("ToolCardBTN");
+        ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
                 new ToolCardDisplayer();
-                ToolCard1.setDisable(true);
+                //ToolCard1.setDisable(true);
 
             }
         });
+
+
         Button ToolCard2 = new Button("2. Tool Card");ToolCard2.setId("ToolCardBTN");
+        ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new ToolCardDisplayer();
+                //ToolCard1.setDisable(true);
+
+            }
+        });
+
+
         Button ToolCard3 = new Button("3. Tool Card");ToolCard3.setId("ToolCardBTN");
+        ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new ToolCardDisplayer();
+                //ToolCard1.setDisable(true);
+
+            }
+        });
+
+
         Label emptyspace = new Label();emptyspace.setId("ToolCardBTN");
 
         //VBox per contenere le carte
-        VBox ToolCardList = new VBox(80);ToolCardList.setId("ToolCardMenu");ToolCardList.setAlignment(Pos.BOTTOM_LEFT);ToolCardList.setMaxHeight(280);ToolCardList.setPrefWidth(240);
-        ToolCardList.setTranslateY(390);
-        ToolCardList.getChildren().addAll(ToolCardMenuTitle,ToolCard1,ToolCard2,ToolCard3,emptyspace);
+        VBox ToolCardList = new VBox(20);ToolCardList.setAlignment(Pos.BOTTOM_LEFT);ToolCardList.setMaxHeight(280);ToolCardList.setPrefWidth(240);
+        ToolCardList.setTranslateY(-100);
+        ToolCardList.getChildren().addAll(ToolCard1,ToolCard2,ToolCard3);
+
+        //VBox del Menu Tool Card
+        VBox ToolCardMenu = new VBox(120);ToolCardMenu.setId("CardMenu");ToolCardMenu.setAlignment(Pos.BOTTOM_LEFT);ToolCardMenu.setMaxHeight(280);ToolCardMenu.setPrefWidth(240);
+        ToolCardMenu.setTranslateY(450);
+        ToolCardMenu.getChildren().addAll(ToolCardMenuTitle,ToolCardList);
+        //FINE MENU TOOL CARD
+
+        //INIZIO  PUBLIC OBJECTIVE MENU
+
+        //Contenuto del menu Public Objetives
+        Label PublicObjectiveCardMenuTitle = new Label("      Public Objectives");PublicObjectiveCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: white;" + "-fx-font: 25 \"Centaur\";");
+
+        //Bottoni che riferiscono alle Public Objective Cards
+        Button PublicObjectiveCard1 = new Button("Public Objective 1");PublicObjectiveCard1.setId("ToolCardBTN");
+        ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new ToolCardDisplayer();
+                //ToolCard1.setDisable(true);
+
+            }
+        });
+
+
+        Button PublicObjectiveCard2 = new Button("Public Objective 2");PublicObjectiveCard2.setId("ToolCardBTN");
+        ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new ToolCardDisplayer();
+                //ToolCard1.setDisable(true);
+
+            }
+        });
+
+
+        Button PublicObjectiveCard3 = new Button("Public Objective 3");PublicObjectiveCard3.setId("ToolCardBTN");
+        ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                new ToolCardDisplayer();
+                //ToolCard1.setDisable(true);
+
+            }
+        });
+
+
+        Label emptyspace2 = new Label();emptyspace2.setId("ToolCardBTN");
+
+        //VBox per contenere le carte
+        VBox PublicObjectiveCardList = new VBox(20);PublicObjectiveCardList.setAlignment(Pos.BOTTOM_LEFT);PublicObjectiveCardList.setMaxHeight(280);PublicObjectiveCardList.setPrefWidth(240);
+        PublicObjectiveCardList.setTranslateY(-100);
+        PublicObjectiveCardList.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3);
+
+        //VBox del Menu Public Objective Card
+        VBox PublicObjectiveMenu = new VBox(120);PublicObjectiveMenu.setId("CardMenu");PublicObjectiveMenu.setAlignment(Pos.BOTTOM_LEFT);PublicObjectiveMenu.setMaxHeight(280);PublicObjectiveMenu.setPrefWidth(240);
+        PublicObjectiveMenu.setTranslateY(450);
+        PublicObjectiveMenu.getChildren().addAll(PublicObjectiveCardMenuTitle,PublicObjectiveCardList);
+
+        //FINE PUBLIC OBJECTIVE MENU
+
+
 
 
         //BorderPane per contenere tutti gli altri
@@ -93,15 +185,14 @@ public class TableGUI extends Stage {
         GameplayArea.setId("GamemodeSelectionScreen");
         GameplayArea.setBottom(OtherPlayerBox);
         GameplayArea.setCenter(griglia);
-        GameplayArea.setRight(ToolCardList);
+        GameplayArea.setRight(ToolCardMenu);
+        GameplayArea.setLeft(PublicObjectiveMenu);
 
 
 
 
-            GameplayScene = new Scene(GameplayArea, 1280, 720);
-            GameplayScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-
-
+        GameplayScene = new Scene(GameplayArea, 1280, 720);
+        GameplayScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
 
         //FINE Gameplay Scene
 

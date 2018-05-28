@@ -20,6 +20,8 @@ public class LoginStage extends Stage {
 
     LoginStage(){
         this.setTitle("Sagrada - Login");
+        this.setMaxHeight(630);
+        this.setMaxWidth(430);
         this.setResizable(false);
         this.setAlwaysOnTop(true);
 

@@ -347,18 +347,25 @@
 
 }
 
-#ToolCardMenu{
+#CardMenu{
     -fx-background-color: black;
-    -fx-opacity: 0.5;
+
 
 }
 
 #ToolCardBTN{
     -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-font: 25 "Centaur";
+}
+
+#ToolCardBTN:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffd600;
+    -fx-font: 25 "Centaur";
 }
 
 #ToolCardDisplayer{
-    -fx-font-size: 25;
+    -fx-font: 33 "Centaur";
 }
 
