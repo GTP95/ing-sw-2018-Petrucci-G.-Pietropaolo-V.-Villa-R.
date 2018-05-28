@@ -30,7 +30,8 @@ public class SocketClient implements Runnable{
 
     @Override
     public void run() {
-        while (username==null) {    //In questo caso essendo il metodo getUsername synchronyzed, non solo non è necessario utilizzare wait() all'interno del while, ma addirittura causerebbe una IllegalMonitorStateException
+        String serverResponse="";
+        while (username==null) {    //In questo caso essendo il metodo getUsername synchronized, non solo non è necessario utilizzare wait() all'interno del while, ma addirittura causerebbe una IllegalMonitorStateException
             username=model.getUsername();
         }
         System.out.println("Pronto all'invio dello username");
@@ -40,12 +41,16 @@ public class SocketClient implements Runnable{
 
         try {
             System.out.println("Provo a leggere");
-            while (!in.ready())System.out.print(".");
-            System.out.println(in.readLine());
-            System.out.println("letto");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            while (!serverResponse.equals("connected")) {
+               // System.out.println(in.readLine());
+               // System.out.println("letto");
+                serverResponse=in.readLine();
+            }
+            System.out.println(serverResponse); //non viene stampato!!
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+
     }
 
 }
