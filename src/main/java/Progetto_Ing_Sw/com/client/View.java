@@ -1,4 +1,4 @@
-package Progetto_Ing_Sw.com.client;
+/*package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.PlayerObserver;
 import Progetto_Ing_Sw.com.server.RoundTrackObserver;
@@ -24,3 +24,4 @@ public class View implements PlayerObserver, TableObserver, RoundTrackObserver, 
     }
     //TODO implementare le tipologie di messaggio che possono arrivare dalla view
 }
+*/
