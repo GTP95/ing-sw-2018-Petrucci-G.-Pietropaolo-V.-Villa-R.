@@ -1,8 +1,8 @@
 package Progetto_Ing_Sw.com.tools;
 
-import Progetto_Ing_Sw.com.server.Color;
-import Progetto_Ing_Sw.com.server.PrivateObjectiveCard;
-import Progetto_Ing_Sw.com.server.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.Color;
+import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
 import org.junit.Assert;
 import org.junit.Test;
 

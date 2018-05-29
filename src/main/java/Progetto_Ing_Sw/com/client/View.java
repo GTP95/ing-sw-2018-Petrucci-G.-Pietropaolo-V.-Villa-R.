@@ -1,9 +1,9 @@
 /*package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.PlayerObserver;
-import Progetto_Ing_Sw.com.server.RoundTrackObserver;
-import Progetto_Ing_Sw.com.server.TableObserver;
-import Progetto_Ing_Sw.com.server.WindowBoardObserver;
+import Progetto_Ing_Sw.com.server.Model.PlayerObserver;
+import Progetto_Ing_Sw.com.server.Model.RoundTrackObserver;
+import Progetto_Ing_Sw.com.server.Model.TableObserver;
+import Progetto_Ing_Sw.com.server.Model.WindowBoardObserver;
 
 import java.util.Scanner;
 

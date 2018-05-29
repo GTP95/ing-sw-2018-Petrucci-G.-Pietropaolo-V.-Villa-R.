@@ -1,7 +1,5 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.WindowBoard;
-import Progetto_Ing_Sw.com.tools.JSONCreator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,8 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;

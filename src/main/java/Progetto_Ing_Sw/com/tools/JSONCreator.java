@@ -1,5 +1,8 @@
 package Progetto_Ing_Sw.com.tools;
-import Progetto_Ing_Sw.com.server.*;
+import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
+import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
+import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
 import com.google.gson.*;
 
 import java.io.*;
