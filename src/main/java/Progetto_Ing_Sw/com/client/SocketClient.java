@@ -23,7 +23,7 @@ public class SocketClient implements Runnable{
             in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
         catch (UnknownHostException e){
-            throw e;    //TODO: IOException è più generale della UnknownHostException, chiedere se c'è un modo più elegante per non perdere la seconda.
+            throw e;    // dato che IOException è più generale della UnknownHostException, è necessario catturare quest'ultima separatamente e rilanciarla per farla ricevere al chiamante
         }
         catch (IOException e){
             e.printStackTrace();
@@ -36,23 +36,16 @@ public class SocketClient implements Runnable{
         while (username==null || username.equals("")) {    //In questo caso essendo il metodo getUsername synchronized, non solo non è necessario utilizzare wait() all'interno del while, ma addirittura causerebbe una IllegalMonitorStateException
             username=model.getUsername();
         }
+
         System.out.println("Pronto all'invio dello username");
         out.println(username);
-
         System.out.println("Inviato "+username+" come username");
 
         try {
             System.out.println("Provo a leggere");
             serverResponse=in.readLine();
-            while (!serverResponse.equals("connected")) {
-               // System.out.println(in.readLine());
-               // System.out.println("letto");
-                System.out.println("Entrato nel while");
-                out.println(username);
-                serverResponse=in.readLine();
-                System.out.println(serverResponse);
-            }
-            System.out.println("uscito da while"); //non viene stampato!!
+            System.out.println(serverResponse);
+
             }
             catch(IOException e){
                 e.printStackTrace();
