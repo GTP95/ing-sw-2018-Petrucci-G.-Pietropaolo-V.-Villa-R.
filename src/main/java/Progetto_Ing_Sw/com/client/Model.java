@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public  class Model {
     private  String username;
@@ -13,7 +14,7 @@ public  class Model {
     private String hostname;
     private int socketPort;
     private int rmiRegistryPort;
-
+    private ArrayList <Player> playerArrayList;
 
     private Model(){
         username="";
@@ -57,6 +58,10 @@ public  class Model {
 
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
+    public ArrayList<Player> getPlayerArrayList() {
+        return playerArrayList;
+    }
+
     public void setHostname(String hostname) {  //TODO: write to JSON
         this.hostname = hostname;
         System.out.println("Hostmane set to "+hostname);
@@ -71,6 +76,10 @@ public  class Model {
     public void setRmiRegistryPort(int rmiRegistryPort) {
         this.rmiRegistryPort = rmiRegistryPort;
         System.out.println("rmiRegistryPort set to "+rmiRegistryPort);
+    }
+
+    public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
+        this.playerArrayList = playerArrayList;
     }
 
     public void writeSettingsToJSON(){

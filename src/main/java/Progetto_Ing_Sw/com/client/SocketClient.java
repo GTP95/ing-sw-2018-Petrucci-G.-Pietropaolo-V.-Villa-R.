@@ -50,8 +50,9 @@ public class SocketClient implements Runnable{
                 System.out.println("Entrato nel while");
                 out.println(username);
                 serverResponse=in.readLine();
+                System.out.println(serverResponse);
             }
-            System.out.println(serverResponse); //non viene stampato!!
+            System.out.println("uscito da while"); //non viene stampato!!
             }
             catch(IOException e){
                 e.printStackTrace();
