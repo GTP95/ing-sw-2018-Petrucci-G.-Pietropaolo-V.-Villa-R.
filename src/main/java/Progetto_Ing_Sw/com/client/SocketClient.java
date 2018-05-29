@@ -11,9 +11,11 @@ public class SocketClient implements Runnable{
     BufferedReader in;
     Model model;
 
-    public SocketClient(String host, int port) throws UnknownHostException {
+    public SocketClient() throws UnknownHostException {
         username=null;
         model=Model.getInstance();
+        String host=model.getHostname();
+        int port=model.getSocketPort();
         try{
             socket=new Socket(host, port);
             System.out.println("Connected to "+host+":"+port);
