@@ -59,13 +59,19 @@ public  class Model {
 
     public void setHostname(String hostname) {  //TODO: write to JSON
         this.hostname = hostname;
+        System.out.println("Hostmane set to "+hostname);
     }
 
     public void setSocketPort(int socketPort) {
+
         this.socketPort = socketPort;
+        System.out.println("SocketPort set to "+socketPort);
     }
 
-    public void setRmiRegistryPort(int rmiRegistryPort) { this.rmiRegistryPort = rmiRegistryPort; }
+    public void setRmiRegistryPort(int rmiRegistryPort) {
+        this.rmiRegistryPort = rmiRegistryPort;
+        System.out.println("rmiRegistryPort set to "+rmiRegistryPort);
+    }
 
     public void writeSettingsToJSON(){
         try {
@@ -73,6 +79,7 @@ public  class Model {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"socketPort\"" + ":" + socketPort + "," + "\"username\"" + ":\"" + username+"\""+","+"\"rmiRegistryPort\""+":"+ rmiRegistryPort +"}");
             bufferedWriter.flush();
+            System.out.println("Current settings saved to ClientSettings.json");
         }
         catch (IOException e){
             System.err.println("Failed to save current settings into JSON file \"ClientSettings.json\"");
