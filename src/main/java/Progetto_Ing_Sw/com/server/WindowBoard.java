@@ -7,6 +7,8 @@ package Progetto_Ing_Sw.com.server;
 
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*REGOLA PIAZZAMENTO: Quando piazzate un dado nella Vetrata:
@@ -33,7 +35,50 @@ import java.util.Scanner;
         }
         return Matrix;
     }
+
+    /*MAIN DI PROVA CON INSERIMENTI (non si può fare l'inserimento nei test, da de-commentare per usarlo)
+    public static void main(String args[]) {
+        int rows=4;       //colonne e righe rimangono costanti
+        int columns=5;
+        int dice;
+        int cell;
+        Scanner keyboard= new Scanner(System.in);
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns); //costruisce la matrice con le dimensioni date da me
+        int[][] fileMatrix = windowBoard.importFromFile(rows,columns);
+        windowBoard.printMatrix(fileMatrix,rows,columns);
+        int[][] testMatrix = windowBoard.buildEmptyMatrix(rows, columns);//crea una oggetto matrice di 0
+
+        System.out.println("WELCOME TO TEST LAB. PLAY FORZA QUATTRO WITH A FRIEND!");
+        System.out.println("****************************************");
+        System.out.println("Inserisci il tuo numero nelle caselle osservando questo schema, vince chi ne mette per primo 4 in fila:");
+
+
+            for (int i = 1; i < 21; i++) {
+                if (i % 2 != 0) {
+                    System.out.println("GIOCATORE 1:");
+                    windowBoard.printMatrix(testMatrix,rows,columns);
+                    System.out.println("POSIZIONE:");
+                    cell = keyboard.nextInt();
+                    System.out.println("DADO:");
+                    dice = keyboard.nextInt();
+                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
+                    System.out.println("****************************************");
+                } else {
+                    System.out.println("GIOCATORE 2:");
+                    windowBoard.printMatrix(testMatrix,rows,columns);
+                    System.out.println("POSIZIONE:");
+                    cell = keyboard.nextInt();
+                    System.out.println("DADO:");
+                    dice = keyboard.nextInt();
+                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
+                    System.out.println("****************************************");
+                }
+            }
+        System.out.println("END MINIGAME");
+        }
 */
+
 public class WindowBoard implements WindowBoardObserver{
 
     private GameBoardCard gameBoardCard;
@@ -65,7 +110,7 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     //inserisce il dado nella cella richiesta
-    public int [][] insertDice(int Matrix[][], int rows, int columns, int cell, int dice){
+    public int [][] insertDiceINT(int Matrix[][], int rows, int columns, int cell, int dice){
 
         int [][] tmpMatrix=Matrix;
         int position = 1;
@@ -168,47 +213,67 @@ public class WindowBoard implements WindowBoardObserver{
         return Matrix;
     }
 
-    /*MAIN DI PROVA CON INSERIMENTI (non si può fare l'inserimento nei test, da de-commentare per usarlo)
-    public static void main(String args[]) {
-        int rows=4;       //colonne e righe rimangono costanti
-        int columns=5;
-        int dice;
-        int cell;
-        Scanner keyboard= new Scanner(System.in);
+    //trasforma la matrice da interi a dadi, per poter ragionare sulle mosse
+    public ArrayList<ArrayList<MatrixCell>> fromIntToDice(int Matrix[][], int rows, int columns){
 
-        WindowBoard windowBoard = new WindowBoard(rows, columns); //costruisce la matrice con le dimensioni date da me
-        int[][] fileMatrix = windowBoard.importFromFile(rows,columns);
-        windowBoard.printMatrix(fileMatrix,rows,columns);
-        int[][] testMatrix = windowBoard.buildEmptyMatrix(rows, columns);//crea una oggetto matrice di 0
+        ArrayList<ArrayList<MatrixCell>> matrixArrays = new ArrayList<>();
 
-        System.out.println("WELCOME TO TEST LAB. PLAY FORZA QUATTRO WITH A FRIEND!");
-        System.out.println("****************************************");
-        System.out.println("Inserisci il tuo numero nelle caselle osservando questo schema, vince chi ne mette per primo 4 in fila:");
-
-
-            for (int i = 1; i < 21; i++) {
-                if (i % 2 != 0) {
-                    System.out.println("GIOCATORE 1:");
-                    windowBoard.printMatrix(testMatrix,rows,columns);
-                    System.out.println("POSIZIONE:");
-                    cell = keyboard.nextInt();
-                    System.out.println("DADO:");
-                    dice = keyboard.nextInt();
-                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
-                    System.out.println("****************************************");
-                } else {
-                    System.out.println("GIOCATORE 2:");
-                    windowBoard.printMatrix(testMatrix,rows,columns);
-                    System.out.println("POSIZIONE:");
-                    cell = keyboard.nextInt();
-                    System.out.println("DADO:");
-                    dice = keyboard.nextInt();
-                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
-                    System.out.println("****************************************");
+        for (int r=0; r<rows; r++){
+            ArrayList<MatrixCell> arrayRow = new ArrayList<>();
+            for(int c=0; c<columns; c++){
+                MatrixCell cell = new MatrixCell();
+                switch (Matrix[r][c]) {
+                    case (0): arrayRow.add(cell);
+                        break;
+                    case (1):
+                        cell.setColor(Color.RED);
+                        arrayRow.add(cell);
+                        break;
+                    case (2):
+                        cell.setColor(Color.BLUE);
+                        arrayRow.add(cell);
+                        break;
+                    case (3):
+                        cell.setColor(Color.PURPLE);
+                        arrayRow.add(cell);
+                        break;
+                    case (4):
+                        cell.setColor(Color.YELLOW);
+                        arrayRow.add(cell);
+                        break;
+                    case (5):
+                        cell.setColor(Color.GREEN);
+                        arrayRow.add(cell);
+                        break;
+                    case (6):
+                        cell.setShade(Shade.ONE);
+                        arrayRow.add(cell);
+                        break;
+                    case (7):
+                        cell.setShade(Shade.TWO);
+                        arrayRow.add(cell);
+                        break;
+                    case (8):
+                        cell.setShade(Shade.THREE);
+                        arrayRow.add(cell);
+                        break;
+                    case (9):
+                        cell.setShade(Shade.FOUR);
+                        arrayRow.add(cell);
+                        break;
+                    case (10):
+                        cell.setShade(Shade.FIVE);
+                        arrayRow.add(cell);
+                        break;
+                    case (11):
+                        cell.setShade(Shade.SIX);
+                        arrayRow.add(cell);
+                        break;
                 }
             }
-        System.out.println("END MINIGAME");
+            matrixArrays.add(arrayRow);
         }
-     */
+        return matrixArrays;
+    }
 }
 

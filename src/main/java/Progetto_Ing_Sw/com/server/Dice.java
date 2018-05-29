@@ -3,14 +3,12 @@ package Progetto_Ing_Sw.com.server;
 public class Dice {
     private int value;
     private int color;
-    private int shade;
 
     public Dice(int value, int color) {
         if(value<1) value=1;    //rendo totale
         if(value>6) value=6;    //la funzione
         this.value = value;
         this.color = color;
-        this.shade = shade;
     }
 
     public int getValue() {
@@ -20,6 +18,4 @@ public class Dice {
     public int getColor() {
         return color;
     }
-
-    public int getShade() { return shade; }
 }
