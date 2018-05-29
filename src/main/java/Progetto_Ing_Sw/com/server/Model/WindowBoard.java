@@ -107,7 +107,7 @@ public class WindowBoard implements WindowBoardObserver{
         System.out.println("---------------------");
     }
 
-    //inserisce il dado nella cella richiesta
+    //inserisce il dado nella cella richiesta, passando però tutte le celle, POCO EFFICIENTE
     public int [][] insertDiceINT(int Matrix[][], int rows, int columns, int cell, int dice){
 
         int [][] tmpMatrix=Matrix;
@@ -273,5 +273,31 @@ public class WindowBoard implements WindowBoardObserver{
         }
         return matrixArrays;
     }
+
+    //******************************REGOLE DI INSERIMENTO*************************************************************//
+
+    //verifica che la matrice non sia vuota, restituendo TRUE in tal caso
+    public boolean matrixNotEmpty(ArrayList<ArrayList<MatrixCell>> Matrix){
+        boolean cellState=false;
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(Matrix.get(r).get(c).isUsed()!=false){
+                    cellState=true;
+                    break;}
+            }
+        }
+        return cellState;
+    }
+
+    public boolean checkAdjacency(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        //da completare
+        return true;
+    }
+
+    public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        //da completare
+        return Matrix;
+    }
+
 }
 

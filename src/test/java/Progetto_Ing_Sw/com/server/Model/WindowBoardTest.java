@@ -25,10 +25,6 @@ public class WindowBoardTest {
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,1);
         windowBoard.printMatrix(testMatrix,rows,columns);
-        //NB l'inserimento avviene correttamente su due matrici separate
-        // solo se le due matrici sono su due oggetti windowBoard2 differenti
-
-
     }
 
     @Test
@@ -57,6 +53,15 @@ public class WindowBoardTest {
             System.out.println("ARRAYLIST-MATRIX ROW ("+(r+1)+") NUM OF COLUMN : "+martrixArray.get(r).size());
             Assert.assertEquals(columns,martrixArray.get(r).size());
         }
+    }
+
+    @Test
+    public void checkThatTheMatrixIsEmpty(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,1);
+        ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
+        Assert.assertFalse(windowBoard.matrixNotEmpty(martrixArray));
     }
 
 }
