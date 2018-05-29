@@ -17,6 +17,11 @@ public class SocketClientTest {
             Thread client=new Thread(new SocketClient());
             client.start();
             model.setUsername("Giacomo");
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         catch (UnknownHostException e){Assert.fail(e.getMessage());}
 
