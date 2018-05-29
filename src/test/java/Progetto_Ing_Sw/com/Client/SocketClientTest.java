@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 public class SocketClientTest {
     @Test
-    public void SocketClientTester(){
+    public void socketClientTester(){
         Model model=Model.getInstance();
         try{
             Thread client=new Thread(new SocketClient("localhost",1025));

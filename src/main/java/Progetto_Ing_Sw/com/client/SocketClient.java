@@ -41,9 +41,12 @@ public class SocketClient implements Runnable{
 
         try {
             System.out.println("Provo a leggere");
+            serverResponse=in.readLine();
             while (!serverResponse.equals("connected")) {
                // System.out.println(in.readLine());
                // System.out.println("letto");
+                System.out.println("Entrato nel while");
+                out.println(username);
                 serverResponse=in.readLine();
             }
             System.out.println(serverResponse); //non viene stampato!!
