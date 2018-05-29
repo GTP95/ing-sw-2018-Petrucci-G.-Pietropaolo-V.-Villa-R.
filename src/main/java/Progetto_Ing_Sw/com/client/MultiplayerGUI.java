@@ -35,14 +35,7 @@ public class MultiplayerGUI extends Stage {
 
         Button socketBTN = new Button("SOCKET");socketBTN.setId("SocketBTN");socketBTN.setPrefSize(250,250);
         //TODO configurare la parte socket all'attivazione
-        socketBTN.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event){
-                new LoginStage();
-                socketBTN.setDisable(true);
-
-            }
-        });
+        socketBTN.setOnAction(event -> {LoginStage Login = new LoginStage(); Login.showAndWait(); this.setScene(LobbyScene);});
 
 
         Button RMIBTN = new Button("RMI");

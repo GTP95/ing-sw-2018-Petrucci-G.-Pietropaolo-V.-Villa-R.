@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.Axis;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.net.UnknownHostException;
 
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
@@ -60,23 +62,41 @@ public class LoginStage extends Stage {
 
         //Text Fields da riempire
         String host = Model.getInstance().getHostname();
+        int Port = Model.getInstance().getSocketPort();
 
-        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(50);HostField.setText(host);
+        TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(10);HostField.setText(host);
+        TextField PortField = new TextField();PortField.setId("TextField"); PortField.setMaxWidth(150);PortField.setTranslateY(110);PortField.setText(Integer.toString(Port));PortField.setTranslateX(-50);
+
+
 
 
         //Accept Button
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
-        //AcceptBTN2.setOnAction();//TODO
+        AcceptBTN2.setOnAction(event ->
+        {Model.getInstance().setHostname(HostField.getText());Model.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));this.close();
+            try{new Thread (new SocketClient()).start();}
+
+            catch(UnknownHostException e){
+                Alert UnknownHostAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                UnknownHostAlert.showAndWait();
+            }
+
+
+
+        });
+
 
 
         //Title Text
-        Text ChooseHostText = new Text("Choose\r\nHost\r\nAddress");ChooseHostText.setTextAlignment(TextAlignment.CENTER);ChooseHostText.setId("MenuText");ChooseHostText.setTranslateY(-100);
+        Text ChooseHostText = new Text("Choose\r\nHost");ChooseHostText.setTextAlignment(TextAlignment.CENTER);ChooseHostText.setId("MenuText");ChooseHostText.setTranslateY(-120);
+
+
 
         //StackPane
         StackPane HostFrame= new StackPane();
         HostFrame.setId("GamemodeSelectionScreen");
         HostFrame.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        HostFrame.getChildren().addAll(HostField,ChooseHostText,AcceptBTN2,frame2);
+        HostFrame.getChildren().addAll(HostField,PortField,ChooseHostText,AcceptBTN2,frame2);
 
         ServerScene = new Scene(HostFrame,420,590);
 
@@ -84,6 +104,7 @@ public class LoginStage extends Stage {
 
         this.setScene(UserNameSelectionScene);
 
-        this.show();
+
+        this.showAndWait();
     }
 }

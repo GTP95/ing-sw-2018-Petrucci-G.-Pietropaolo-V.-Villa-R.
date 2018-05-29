@@ -54,7 +54,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/KaleidoscopicDream.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/Industria.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -183,7 +183,7 @@ public class TableGUI extends Stage{
             ToolCardMenu.setAlignment(Pos.BOTTOM_LEFT);
             ToolCardMenu.setMaxHeight(280);
             ToolCardMenu.setPrefWidth(240);
-            ToolCardMenu.setTranslateY(450);
+            ToolCardMenu.setTranslateY(430);
             ToolCardMenu.getChildren().addAll(ToolCardMenuTitle, ToolCardList);
             //FINE MENU TOOL CARD
 
