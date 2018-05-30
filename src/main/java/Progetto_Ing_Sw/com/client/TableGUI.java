@@ -224,14 +224,13 @@ public class TableGUI extends Stage{
 
             Button PublicObjectiveCard3 = new Button("Public Objective 3");
             PublicObjectiveCard3.setId("ToolCardBTN");
-            PublicObjectiveCard3.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            PublicObjectiveCard3.setOnAction(event -> {
+                PublicObjectiveCard3.setDisable(true);
+                PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer();
+                PublicDisplay3.showAndWait();
+                PublicObjectiveCard3.setDisable(false);
             });
+
 
 
             Label emptyspace2 = new Label();

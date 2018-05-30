@@ -409,4 +409,22 @@
 }
 
 
+#PublicObjectiveCardTitle{
+    -fx-font: 33 "Centaur";
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+#PublicObjectiveCardDescription{
+    -fx-font: 27 "Centaur";
+}
+
+#PublicObjectiveCardNumber{
+    -fx-font: 90 "Centaur";
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+
+
 

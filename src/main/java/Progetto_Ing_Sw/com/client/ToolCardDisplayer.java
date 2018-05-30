@@ -13,12 +13,13 @@ public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
 
     ToolCardDisplayer(){
-        this.setTitle("Tool Card");
+        this.setTitle("Tool Card"); //TODO Get Title from current Tool Card
         this.setResizable(false);
 
 
         //ImageView della tool card
         ImageView ToolCardSample = new ImageView("file:///../GUI/BaseToolCard.png");
+        ImageView ToolCardImage = new ImageView("file:///../GUI/1ToolCard.png");
 
 
         //I Label che contengono le varie descrizioni della Carta
@@ -28,7 +29,7 @@ public class ToolCardDisplayer extends Stage {
         Label ToolCardColor = new Label();ToolCardColor.setStyle("-fx-background-color: #d6150c");ToolCardColor.setPrefSize(130,100);ToolCardColor.setTranslateY(-280);ToolCardColor.setTranslateX(-180);
 
         StackPane ToolCardD = new StackPane();ToolCardD.setId("ToolCardDisplayer");
-        ToolCardD.getChildren().addAll(ToolCardColor,ToolCardSample,ToolCardTitle,ToolCardNumber,ToolCardDescription);
+        ToolCardD.getChildren().addAll(ToolCardColor,ToolCardSample,ToolCardTitle,ToolCardNumber,ToolCardDescription,ToolCardImage);
 
         ToolCardDisplay = new Scene(ToolCardD,500,711);
         ToolCardDisplay.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
@@ -36,8 +37,6 @@ public class ToolCardDisplayer extends Stage {
         ToolCardTitle.setStyle("-fx-font-weight: bold;");
 
         this.setScene(ToolCardDisplay);
-        this.show();
-
 
     }
 }

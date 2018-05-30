@@ -102,7 +102,5 @@ public class LoginStage extends Stage {
 
         this.setScene(UserNameSelectionScene);
 
-
-        this.showAndWait();
     }
 }
