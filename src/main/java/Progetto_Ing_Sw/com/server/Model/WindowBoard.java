@@ -183,7 +183,7 @@ public class WindowBoard implements WindowBoardObserver{
             case (16):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/SunsGlory.json", "matrixScheme",rows,columns);}
             catch(FileNotFoundException e){e.printStackTrace();}
                 break;
-            case (17):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Battlo.json", "matrixScheme",rows,columns);}
+            case (17):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Batllo.json", "matrixScheme",rows,columns);}
             catch(FileNotFoundException e){e.printStackTrace();}
                 break;
             case (18):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Bellesguard.json", "matrixScheme",rows,columns);}
