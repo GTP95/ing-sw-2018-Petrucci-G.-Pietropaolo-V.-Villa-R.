@@ -11,6 +11,14 @@
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
+#startScreen:hover{
+    -fx-background-image: url("../../../../../GUI/StartMenuHover.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 1280 720;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
 #GamemodeSelectionScreen{
     -fx-background-image: url("../../../../../GUI/Backgroud1.png");
     -fx-background-repeat: no-repeat;
@@ -18,8 +26,6 @@
     -fx-background-position: center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
-
-
 
 #startBTN{
     -fx-border-color: transparent;
@@ -38,67 +44,60 @@
 #SinglePlayerButton{
     -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
     -fx-background-position: center;
-    -fx-background-size: 250 250;
+    -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-            #9d4024,
-            #d86e3a,
-            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-background-color: transparent;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-text-fill: transparent;
 }
 
 #SinglePlayerButton:hover{
-    -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
+    -fx-background-image: url("../../../../../GUI/SinglePlayerIconHover.png");
     -fx-background-position: center;
-    -fx-background-size: 250 250;
+    -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-            #9d4024,
-            #9d4024,
-            radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: transparent;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-content-display: bottom;
+    -fx-font: 50 "Centaur";
+    -fx-text-fill: white;
 }
 
 
 #MultiPlayerButton{
     -fx-background-image: url("../../../../../GUI/MultiPlayerIcon.png");
     -fx-background-position: center;
-    -fx-background-size: 250 250;
+    -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-            #9d4024,
-            #d86e3a,
-            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-background-color: transparent;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-text-fill: transparent;
 }
 
 #MultiPlayerButton:hover {
-    -fx-background-image: url("../../../../../GUI/MultiPlayerIcon.png");
+    -fx-background-image: url("../../../../../GUI/MultiPlayerIconHover.png");
     -fx-background-position: center;
-    -fx-background-size: 250 250;
+    -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-    #9d4024,
-    #9d4024,
-    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+    -fx-text-fill: white;
+    -fx-font: 50 "Centaur";
+
 }
 
 #BackButton{
     -fx-background-image: url("../../../../../GUI/BackIcon.png");
     -fx-background-position: center;
-    -fx-background-size: 120 120;
+    -fx-background-size: 120 80;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
@@ -114,7 +113,7 @@
 #BackButton:hover{
     -fx-background-image: url("../../../../../GUI/BackIcon.png");
     -fx-background-position: center;
-    -fx-background-size: 120 120;
+    -fx-background-size: 120 80;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
@@ -372,6 +371,21 @@
     -fx-background-size: 75 75;
 }
 
+#WindowBoard{
+    -fx-background-color: black;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-border-width: 10 10 10 10;
+    -fx-text-fill: white;
+}
+#WindowInfo{
+    -fx-font: 25 "Centaur";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+}
+
 #CardMenu{
     -fx-background-color: black;
 
@@ -393,4 +407,6 @@
 #ToolCardDisplayer{
     -fx-font: 33 "Centaur";
 }
+
+
 

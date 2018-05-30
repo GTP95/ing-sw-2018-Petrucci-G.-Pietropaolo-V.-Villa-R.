@@ -16,12 +16,13 @@ public class StartMenuGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
         primaryStage.setMaxWidth(1280);
         primaryStage.setMaxHeight(720);
         primaryStage.setResizable(false);
 
-        //Start Menu Screen
+        //INIZIO Start Screen
         HBox startscreen= new HBox(80);
         startscreen.setAlignment(Pos.BOTTOM_LEFT);
         startscreen.setId("startScreen");                                                                             //assegno un ID alla startscreen in modo che sia riconoscibile dal CSS
@@ -37,29 +38,22 @@ public class StartMenuGUI extends Application {
         startBTN.setOnAction(event -> primaryStage.setScene(SelectGameMode)); //al click del bottone si passa alla scena successiva
 
         TitleScreen =new Scene(startscreen,1280,720);   // imposto la scena attuale specificando dimensione e richiamando
-
-        // Game Mode Selection Screen
-        HBox gamemode= new HBox(80);                                                                   // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
-        gamemode.setId("GamemodeSelectionScreen");                                                             //assegno un ID al bottone in modo che sia riconoscibile dal CSS
-        gamemode.setPrefSize(1280,720);
-        gamemode.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());    //importo le impostazioni di stile dal file CSS
-        gamemode.setAlignment(Pos.CENTER);                                                                  //posiziono il punto di partenza della HBox al centro
+        //FINE Start Screen
 
 
-
-
+        //INIZIO Scena Selezione Modalità
 
         //Bottone per il Single Player
-        Button singlePlayer =new Button();                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
+        Button singlePlayer =new Button("Single Player");                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
         singlePlayer.setId("SinglePlayerButton");                               //assegno un ID al bottone in modo che sia riconoscibile dal CSS
-        singlePlayer.setPrefSize(250,250);                    //imposto le dimensioni del bottone
+        singlePlayer.setPrefSize(350,350);                    //imposto le dimensioni del bottone
         //TODO setOnAction per passare alla scena del Single Player
 
 
         //Bottone per il Multiplayer come quello per il single player
-        Button multiPlayer = new Button();
+        Button multiPlayer = new Button("Multiplayer");
         multiPlayer.setId("MultiPlayerButton");
-        multiPlayer.setPrefSize(250,250);
+        multiPlayer.setPrefSize(350,350);
 
         multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -70,22 +64,30 @@ public class StartMenuGUI extends Application {
 
             }
         });
-        //TODO setOnAction per passare alla scena del multiplayer (presubilmente una scelta della lobby)
+
+        // HBox per la selezione della modalità
+        HBox gamemode= new HBox(80);                                                                   // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
+        gamemode.setPrefSize(1280,720);
+        gamemode.setAlignment(Pos.CENTER);                                                                  //posiziono il punto di partenza della HBox al centro
+        gamemode.getChildren().addAll(singlePlayer,multiPlayer); //assegno i bottoni creati alla HBox gamemode
 
         //Tasto goBack per tornare alla schermata principale
         Button goBack = new Button();
         goBack.setId("BackButton");
-        goBack.setPrefSize(125,125);
-
-
-
+        goBack.setPrefSize(125,80);
         goBack.setOnAction(event -> primaryStage.setScene(TitleScreen)); //azione su click che permette di passare alla scene TitleScreen
 
-        gamemode.getChildren().addAll(singlePlayer,multiPlayer,goBack); //assegno i bottoni creati alla HBox gamemode
+
+        //BorderPane che contiene tutto
+        BorderPane SelectionScreenPane= new BorderPane();
+        SelectionScreenPane.setId("GamemodeSelectionScreen");
+        SelectionScreenPane.setCenter(gamemode);
+        SelectionScreenPane.setRight(goBack);
+        SelectionScreenPane.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());    //importo le impostazioni di stile dal file CSS
 
 
 
-        SelectGameMode = new Scene(gamemode, 1280,720); //creo la scena impostandone le dimensioni
+        SelectGameMode = new Scene(SelectionScreenPane, 1280,720); //creo la scena impostandone le dimensioni
 
 
 

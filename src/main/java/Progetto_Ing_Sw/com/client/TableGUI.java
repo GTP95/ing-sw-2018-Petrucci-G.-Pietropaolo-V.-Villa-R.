@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,7 +38,7 @@ public class TableGUI extends Stage{
         int NumPlayers = 4; //TODO mettere il get number of players
 
         //GridPane per la griglia 5x4
-        GridPane griglia = new GridPane();
+        GridPane griglia = new GridPane();griglia.setTranslateY(-20);
         griglia.setAlignment(Pos.CENTER);
         griglia.setId("TheGrid");
         for (int i = 0; i < columns; i++) {
@@ -105,6 +110,18 @@ public class TableGUI extends Stage{
 
                 }
             }
+
+            //HBox che contiene le informazioni sulla carta
+            HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
+            Text VictoryPoints = new Text("VP: 10");VictoryPoints.setFill(Paint.valueOf("white"));
+            Text WindowTitle = new Text("Via Lux");WindowTitle.setFill(Paint.valueOf("white"));//TODO WindowTitle.setText da file
+            Text DifficultyTokens = new Text("Tokens: 4");DifficultyTokens.setFill(Paint.valueOf("white"));//TODO Difficulty.setText da file
+            WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
+            WindowInfo.getChildren().addAll(VictoryPoints,WindowTitle,DifficultyTokens);
+
+            //StackPane che fa da cornice alla griglia
+            StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
+            WindowBoard.getChildren().addAll(griglia,WindowInfo);
 
 
             //HBox Tabs per gli altri giocatori
@@ -244,7 +261,7 @@ public class TableGUI extends Stage{
             BorderPane GameplayArea = new BorderPane();
             GameplayArea.setId("GamemodeSelectionScreen");
             GameplayArea.setBottom(OtherPlayerBox);
-            GameplayArea.setCenter(griglia);
+            GameplayArea.setCenter(WindowBoard);
             GameplayArea.setRight(ToolCardMenu);
             GameplayArea.setLeft(PublicObjectiveMenu);
 
