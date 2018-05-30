@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class ChooseAWindow extends Stage {
-    Scene Window1,Window2,Window3,Window3;
+    Scene Window1,Window2,Window3,Window4;
 
     ChooseAWindow(){
         this.setTitle("Choose a Window");
