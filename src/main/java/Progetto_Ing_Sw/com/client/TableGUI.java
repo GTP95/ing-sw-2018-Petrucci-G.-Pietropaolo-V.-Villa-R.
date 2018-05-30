@@ -50,7 +50,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/Industria.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/ViaLux.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -74,13 +74,13 @@ public class TableGUI extends Stage{
                             block.setStyle("-fx-background-color: #46ddff;");
                             break;
                         case (3):
-                            block.setStyle("-fx-background-color: Purple;");
+                            block.setStyle("-fx-background-color: #a800a8;");
                             break;
                         case (4):
                             block.setStyle("-fx-background-color: Yellow;");
                             break;
                         case (5):
-                            block.setStyle("-fx-background-color: #00d700;");
+                            block.setStyle("-fx-background-color: #009d1d;");
                             break;
                         case (6):
                             block.setId("Shade1");
@@ -128,37 +128,29 @@ public class TableGUI extends Stage{
             //Bottoni che riferiscono alle Tool Cards
             Button ToolCard1 = new Button("9. Cork-backed \r\n Straightedge");
             ToolCard1.setId("ToolCardBTN");
-            ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
-            });
+            ToolCard1.setOnAction(event -> {
+                ToolCard1.setDisable(true);
+                ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer();
+                ToolCard1Stage.showAndWait();
+                ToolCard1.setDisable(false);
+                    });
 
 
             Button ToolCard2 = new Button("2. Tool Card");
             ToolCard2.setId("ToolCardBTN");
-            ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            ToolCard2.setOnAction(event -> {
+                ToolCard2.setDisable(true);
+                ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer();
+                ToolCard2Stage.showAndWait();//ToolCard2.setDisable(false);
             });
 
 
             Button ToolCard3 = new Button("3. Tool Card");
             ToolCard3.setId("ToolCardBTN");
-            ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            ToolCard3.setOnAction(event -> {
+                ToolCard3.setDisable(true);
+                ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer();
+                ToolCard3Stage.showAndWait();//ToolCard3.setDisable(false);
             });
 
 
@@ -192,11 +184,10 @@ public class TableGUI extends Stage{
             //Bottoni che riferiscono alle Public Objective Cards
             Button PublicObjectiveCard1 = new Button("Public Objective 1");
             PublicObjectiveCard1.setId("ToolCardBTN");
-            ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard1.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
+
 
                 }
             });
@@ -204,7 +195,7 @@ public class TableGUI extends Stage{
 
             Button PublicObjectiveCard2 = new Button("Public Objective 2");
             PublicObjectiveCard2.setId("ToolCardBTN");
-            ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     new ToolCardDisplayer();
@@ -216,7 +207,7 @@ public class TableGUI extends Stage{
 
             Button PublicObjectiveCard3 = new Button("Public Objective 3");
             PublicObjectiveCard3.setId("ToolCardBTN");
-            ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard3.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     new ToolCardDisplayer();

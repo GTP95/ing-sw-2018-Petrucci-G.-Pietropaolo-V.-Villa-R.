@@ -4,8 +4,8 @@
   "difficulty": 3,
   "otherSide": "Shadow Thief",
   "otherSideCode": 10,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[0,2,7,0,4],
+    [0,9,0,1,0],
+    [0,0,10,4,0],
+    [5,8,0,0,3]]
 }

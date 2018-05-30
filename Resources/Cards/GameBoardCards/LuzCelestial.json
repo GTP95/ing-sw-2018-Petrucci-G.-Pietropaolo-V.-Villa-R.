@@ -4,8 +4,8 @@
   "difficulty": 3,
   "otherSide": "Fulgor del Cielo",
   "otherSideCode": 19,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[0,0,1,10,0],
+    [3,9,0,5,8],
+    [11,0,0,2,0],
+    [0,4,7,0,0]]
 }

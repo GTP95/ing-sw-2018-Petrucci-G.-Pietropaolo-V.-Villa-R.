@@ -73,16 +73,14 @@ public class LoginStage extends Stage {
         //Accept Button
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
         AcceptBTN2.setOnAction(event ->
-        {Model.getInstance().setHostname(HostField.getText());Model.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));this.close();
+        {Model.getInstance().setHostname(HostField.getText());Model.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
             try{new Thread (new SocketClient()).start();}
 
             catch(UnknownHostException e){
                 Alert UnknownHostAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 UnknownHostAlert.showAndWait();
             }
-
-
-
+            this.close();
         });
 
 
