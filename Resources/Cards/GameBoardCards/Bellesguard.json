@@ -2,7 +2,7 @@
   "title": "Bellesguard",
   "gameBoardCode": 18,
   "difficulty": 3,
-  "otherSide": "Battlo",
+  "otherSide": "Batllo",
   "otherSideCode": 17,
   "matrixScheme":[[2,11,0,0,4],
     [0,8,2,0,0],
