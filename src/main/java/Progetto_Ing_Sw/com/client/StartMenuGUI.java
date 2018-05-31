@@ -18,8 +18,6 @@ public class StartMenuGUI extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
-        primaryStage.setMaxWidth(1280);
-        primaryStage.setMaxHeight(720);
         primaryStage.setResizable(false);
 
         //INIZIO Start Screen
@@ -58,7 +56,8 @@ public class StartMenuGUI extends Application {
         multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                new TableGUI();
+                new ChooseAWindow();
+                //new TableGUI();
                 //new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
                 primaryStage.close();
 
