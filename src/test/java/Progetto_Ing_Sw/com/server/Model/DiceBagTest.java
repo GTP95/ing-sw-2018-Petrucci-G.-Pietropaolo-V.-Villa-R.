@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+import static Progetto_Ing_Sw.com.server.Model.Color.*;
+
 public class DiceBagTest {
     private DiceBag diceBag;
     @Before
@@ -27,19 +29,19 @@ public class DiceBagTest {
         System.out.println("drawTest:");
         System.out.print("Color: " + dice.getColor());  //lasciare qui altrimenti se il test fallisce non si sa quale colore ha generato l'errore
         switch (color){
-            case 0:
+            case RED:
                 Assert.assertEquals(17, diceBag.getNumDiceRed());   //controlla il decremento dell'attributo relativo al colore del dado
                 break;
-            case 1:
+            case BLUE:
                 Assert.assertEquals(17, diceBag.getNumDiceBlue());
                 break;
-            case 2:
+            case PURPLE:
                 Assert.assertEquals(17, diceBag.getNumDicePurple());
                 break;
-            case 3:
+            case YELLOW:
                 Assert.assertEquals(17, diceBag.getNumDiceYellow());
                 break;
-            case 4:
+            case GREEN:
                 Assert.assertEquals(17, diceBag.getNumDiceGreen());
                 break;
     }
@@ -55,7 +57,7 @@ public class DiceBagTest {
         Assert.assertEquals(numDiceToDraw,diceDrawn.size());    //L'ArrayList deve contenere il numero di dadi richiesti
         for(Dice dice : diceDrawn){     //conta i dadi estratti divisi per colore
             switch(dice.getColor()){
-                case Color.RED:
+                case RED:
                     numDiceRed++;
                     break;
                 case Color.BLUE:
@@ -87,7 +89,7 @@ public class DiceBagTest {
         Assert.assertEquals(90, diceDrawn.size());    //L'ArrayList deve contenere tutti i dadi
         for (Dice dice : diceDrawn) {     //conta i dadi estratti divisi per colore
             switch (dice.getColor()) {
-                case Color.RED:
+                case RED:
                     numDiceRed++;
                     break;
                 case Color.BLUE:
