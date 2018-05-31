@@ -3,13 +3,19 @@ import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.Player;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public final class JSONCreator {
     private static final Gson gson=new GsonBuilder().create();
+    private static final Type arrayListOfPlayers=new TypeToken<ArrayList<Player>>(){}.getType();
 
     private JSONCreator() {};
 
@@ -113,6 +119,21 @@ public final class JSONCreator {
         JsonObject jobject = jelement.getAsJsonObject();
         long number=jobject.get(fieldName).getAsLong();
         return number;
+    }
+
+    public static ArrayList<Player> playerArrayListLoaderFromString(String json){
+        ArrayList<Player> playerArrayList=gson.fromJson(json, arrayListOfPlayers);
+        return playerArrayList;
+    }
+
+    public static String playerArrayListToJSON(ArrayList<Player> arrayList){
+        String json=gson.toJson(arrayList, arrayListOfPlayers);
+        return json;
+    }
+
+    public static Player playerLoaderFromString(String json){
+        Player player=gson.fromJson(json, Player.class);
+        return player;
     }
 
 }

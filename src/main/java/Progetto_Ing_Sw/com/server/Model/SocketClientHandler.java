@@ -49,9 +49,25 @@ public class SocketClientHandler implements Runnable{
         }
 
 
-
-    public void sendCard(Card card){
+    @Deprecated
+    private void sendCard(Card card){
         String json=JSONCreator.generateJSON(card);
         out.println(json);
     }
+
+    private void sendControlMessage(String message){    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
+        String messageToSend="Control%"+message;
+        out.println(messageToSend);
+    }
+
+    private void sendJSONmessage(String json, String nameOfClass){
+        String messageToSend="JSON%"+json+"%"+nameOfClass;
+        out.println(messageToSend);
+    }
+
+    private void sendActionMessage(String actionDescription){   //TODO: stabilire formato actionDescription
+        String messageToSend="Action%"+actionDescription;
+        out.println(messageToSend);
+    }
+
 }
