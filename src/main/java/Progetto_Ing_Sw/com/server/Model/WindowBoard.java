@@ -289,9 +289,47 @@ public class WindowBoard implements WindowBoardObserver{
         return cellState;
     }
 
-    public boolean checkAdjacency(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
-        //da completare
-        return true;
+    //setta le caselle che sonp sui bordi, restituiendo la matrice settata correttaement
+    public ArrayList<ArrayList<MatrixCell>> setBorders(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        int rows=Matrix.size(); //4
+        int columns=Matrix.get(row).size();//5
+
+        //CONTROLLO BORDO SUP******************************************************************************
+        if(row==0){//controllo sul bordo superiore
+            for (int c=0;c<columns;c++){
+                    if (column==c){
+                        Matrix.get(row).get(c).setOnBorder(true);
+                    }
+            }
+        }else if(row==rows-1){//controllo sul bordo inferiore
+            for (int c=0;c<columns;c++){
+                if(column==c){
+                    Matrix.get(row).get(c).setOnBorder(true);
+                }
+            }
+        }
+        //CONTROLLO BORDO INF******************************************************************************
+        if(column==0){
+            for(int r=0;r<rows;r++){
+                    Matrix.get(r).get(column).setOnBorder(true);
+                }
+        }else if(column==columns-1){
+            for(int r=0;r<rows;r++){
+                Matrix.get(r).get(column).setOnBorder(true);
+            }
+        }
+        return Matrix;
+    }
+
+    //metodo di TEST per verificare che le caselle sono sui bordi
+    public void areOnBorders(ArrayList<ArrayList<MatrixCell>> Matrix){
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(Matrix.get(r).get(c).isOnBorder()==true){
+                    System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is on border");
+                }
+            }
+        }
     }
 
     public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
