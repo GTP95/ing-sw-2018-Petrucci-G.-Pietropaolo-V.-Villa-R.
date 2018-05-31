@@ -1,14 +1,19 @@
 package Progetto_Ing_Sw.com.tools;
 
 import Progetto_Ing_Sw.com.server.Model.Color;
+import Progetto_Ing_Sw.com.server.Model.Player;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import static Progetto_Ing_Sw.com.tools.JSONCreator.*;
+import static org.mockito.Mockito.mock;
 
 public class JSONCreatorTest {
 
@@ -67,12 +72,23 @@ public class JSONCreatorTest {
     }
 
 
-/*@Test
-    public void publicObjectiveCardLoaderTest(){
-        try{
+@Test
+    public void playerArrayListLoaderFromStringOnlyOneElementTest() {
+        Player readyPlayerOne=mock(Player.class);
+        ArrayList<Player> playerArrayList = new ArrayList<>();
+        playerArrayList.add(readyPlayerOne);
+        String json=playerArrayListToJSON(playerArrayList);
+        ArrayList<Player> playerArrayList2=playerArrayListLoaderFromString(json);
+        Assert.assertTrue(playerArrayList.equals(playerArrayList2));    //controlla che la lista caricata dal json sia uguale a quella di partenza
+}
 
-        }
-}*/
+@Test
+    public void serializeAndDeserializePlayerTest(){
+        Player readyPlayerOne=mock(Player.class);
+        String json=generateJSON(readyPlayerOne);
+        Player playerTwo=playerLoaderFromString(json);
+        Assert.assertTrue(readyPlayerOne.equals(playerTwo));
+    }
 
 }
 

@@ -43,7 +43,7 @@ public class SocketClient implements Runnable{
 
         try {
             System.out.println("Provo a leggere");
-            while (!in.ready());
+            while (!in.ready());    //aspetta il messaggio dal server
             serverResponse=in.readLine();
             System.out.println(serverResponse);
 
@@ -53,5 +53,34 @@ public class SocketClient implements Runnable{
             }
 
     }
+
+    private void receiveMessage() {
+        try {
+            while (!in.ready()) ;    //aspetta il messaggio dal server
+            String message = in.readLine();
+            String messageFields[]=message.split("%");  //Salva nell'array i campi del messaggio separati da %
+            String messageType=messageFields[0];    //il primo campo del messaggio contiene il tipo del messaggio
+            switch (messageType){
+                case "Control":
+                    String messageContnent=messageFields[1];    //Nel caso di messaggi di controllo il messaggio è contenuto nel secondo campo della stringa
+                    break;
+                case "JSON":
+                    String json=messageFields[1];       //nel caso dell'invio di JSON il JSON è contenuto nel secondo campo della stringa
+                    String nameOfClass=messageFields[2];    //mentre il terzo campo contiene il nome della classe
+                    break;
+                case "Action":
+                    String actionDescription=messageFields[1];  //La descrizione dell'azione dovrà poi essere ulteriormente "parsata" da un apposito metodo
+                    break;
+            }
+        }
+        catch (IOException e){
+            e.getMessage();
+        }
+    }
+
+ /*   private void receiveUserArrayList(){
+        while (!in.ready());    //aspetta il messaggio dal server
+
+    }*/
 
 }
