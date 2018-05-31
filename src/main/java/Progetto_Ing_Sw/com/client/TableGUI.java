@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,7 +38,7 @@ public class TableGUI extends Stage{
         int NumPlayers = 4; //TODO mettere il get number of players
 
         //GridPane per la griglia 5x4
-        GridPane griglia = new GridPane();
+        GridPane griglia = new GridPane();griglia.setTranslateY(-20);
         griglia.setAlignment(Pos.CENTER);
         griglia.setId("TheGrid");
         for (int i = 0; i < columns; i++) {
@@ -50,7 +55,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/Industria.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/ViaLux.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -74,13 +79,13 @@ public class TableGUI extends Stage{
                             block.setStyle("-fx-background-color: #46ddff;");
                             break;
                         case (3):
-                            block.setStyle("-fx-background-color: Purple;");
+                            block.setStyle("-fx-background-color: #a800a8;");
                             break;
                         case (4):
                             block.setStyle("-fx-background-color: Yellow;");
                             break;
                         case (5):
-                            block.setStyle("-fx-background-color: #00d700;");
+                            block.setStyle("-fx-background-color: #009d1d;");
                             break;
                         case (6):
                             block.setId("Shade1");
@@ -106,6 +111,18 @@ public class TableGUI extends Stage{
                 }
             }
 
+            //HBox che contiene le informazioni sulla carta
+            HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
+            Text VictoryPoints = new Text("VP: 10");VictoryPoints.setFill(Paint.valueOf("white"));
+            Text WindowTitle = new Text("Via Lux");WindowTitle.setFill(Paint.valueOf("white"));//TODO WindowTitle.setText da file
+            Text DifficultyTokens = new Text("Tokens: 4");DifficultyTokens.setFill(Paint.valueOf("white"));//TODO Difficulty.setText da file
+            WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
+            WindowInfo.getChildren().addAll(VictoryPoints,WindowTitle,DifficultyTokens);
+
+            //StackPane che fa da cornice alla griglia
+            StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
+            WindowBoard.getChildren().addAll(griglia,WindowInfo);
+
 
             //HBox Tabs per gli altri giocatori
             HBox OtherPlayerBox = new HBox(80);
@@ -128,37 +145,29 @@ public class TableGUI extends Stage{
             //Bottoni che riferiscono alle Tool Cards
             Button ToolCard1 = new Button("9. Cork-backed \r\n Straightedge");
             ToolCard1.setId("ToolCardBTN");
-            ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
-            });
+            ToolCard1.setOnAction(event -> {
+                ToolCard1.setDisable(true);
+                ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer();
+                ToolCard1Stage.showAndWait();
+                ToolCard1.setDisable(false);
+                    });
 
 
             Button ToolCard2 = new Button("2. Tool Card");
             ToolCard2.setId("ToolCardBTN");
-            ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            ToolCard2.setOnAction(event -> {
+                ToolCard2.setDisable(true);
+                ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer();
+                ToolCard2Stage.showAndWait();//ToolCard2.setDisable(false);
             });
 
 
             Button ToolCard3 = new Button("3. Tool Card");
             ToolCard3.setId("ToolCardBTN");
-            ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            ToolCard3.setOnAction(event -> {
+                ToolCard3.setDisable(true);
+                ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer();
+                ToolCard3Stage.showAndWait();//ToolCard3.setDisable(false);
             });
 
 
@@ -192,11 +201,10 @@ public class TableGUI extends Stage{
             //Bottoni che riferiscono alle Public Objective Cards
             Button PublicObjectiveCard1 = new Button("Public Objective 1");
             PublicObjectiveCard1.setId("ToolCardBTN");
-            ToolCard1.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard1.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
+
 
                 }
             });
@@ -204,7 +212,7 @@ public class TableGUI extends Stage{
 
             Button PublicObjectiveCard2 = new Button("Public Objective 2");
             PublicObjectiveCard2.setId("ToolCardBTN");
-            ToolCard2.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     new ToolCardDisplayer();
@@ -216,14 +224,13 @@ public class TableGUI extends Stage{
 
             Button PublicObjectiveCard3 = new Button("Public Objective 3");
             PublicObjectiveCard3.setId("ToolCardBTN");
-            ToolCard3.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
-
-                }
+            PublicObjectiveCard3.setOnAction(event -> {
+                PublicObjectiveCard3.setDisable(true);
+                PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer();
+                PublicDisplay3.showAndWait();
+                PublicObjectiveCard3.setDisable(false);
             });
+
 
 
             Label emptyspace2 = new Label();
@@ -253,7 +260,7 @@ public class TableGUI extends Stage{
             BorderPane GameplayArea = new BorderPane();
             GameplayArea.setId("GamemodeSelectionScreen");
             GameplayArea.setBottom(OtherPlayerBox);
-            GameplayArea.setCenter(griglia);
+            GameplayArea.setCenter(WindowBoard);
             GameplayArea.setRight(ToolCardMenu);
             GameplayArea.setLeft(PublicObjectiveMenu);
 

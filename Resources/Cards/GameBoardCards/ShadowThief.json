@@ -4,8 +4,8 @@
   "difficulty": 5,
   "otherSide": "Sun Catcher",
   "otherSideCode": 9,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[11,3,0,0,10],
+    [10,0,3,0,0],
+    [1,11,0,3,0],
+    [4,1,10,9,8]]
 }

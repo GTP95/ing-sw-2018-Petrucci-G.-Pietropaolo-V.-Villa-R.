@@ -4,8 +4,8 @@
   "difficulty": 5,
   "otherSide": "Kaleidoscopic Dream",
   "otherSideCode": 1,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[3,11,0,0,8],
+    [10,3,8,0,0],
+    [0,7,3,6,0],
+    [0,6,10,3,9]]
 }

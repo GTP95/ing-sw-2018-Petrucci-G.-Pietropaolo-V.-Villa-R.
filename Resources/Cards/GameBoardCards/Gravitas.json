@@ -4,8 +4,8 @@
   "difficulty": 5,
   "otherSide": "Water Of Life",
   "otherSideCode":8,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[6,0,8,2,0],
+    [0,7,2,0,0],
+    [11,2,0,9,0],
+    [2,10,7,0,6]]
 }

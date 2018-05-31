@@ -4,8 +4,8 @@
   "difficulty": 5,
   "otherSide": "Sun's Glory",
   "otherSideCode": 16,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[8,9,6,10,0],
+    [0,11,7,0,4],
+    [0,0,0,4,1],
+    [10,0,4,1,11]]
 }

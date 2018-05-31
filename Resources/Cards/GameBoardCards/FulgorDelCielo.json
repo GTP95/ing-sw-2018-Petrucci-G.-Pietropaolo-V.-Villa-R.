@@ -4,8 +4,8 @@
   "difficulty": 5,
   "otherSide": "Luz Celestial",
   "otherSideCode": 20,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[0,2,1,0,0],
+    [0,9,10,0,2],
+    [2,7,0,1,10],
+    [11,1,8,6,0]]
 }

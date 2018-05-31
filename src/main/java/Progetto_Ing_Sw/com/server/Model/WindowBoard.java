@@ -107,7 +107,7 @@ public class WindowBoard implements WindowBoardObserver{
         System.out.println("---------------------");
     }
 
-    //inserisce il dado nella cella richiesta
+    //inserisce il dado nella cella richiesta, passando però tutte le celle, POCO EFFICIENTE
     public int [][] insertDiceINT(int Matrix[][], int rows, int columns, int cell, int dice){
 
         int [][] tmpMatrix=Matrix;
@@ -183,7 +183,7 @@ public class WindowBoard implements WindowBoardObserver{
             case (16):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/SunsGlory.json", "matrixScheme",rows,columns);}
             catch(FileNotFoundException e){e.printStackTrace();}
                 break;
-            case (17):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Battlo.json", "matrixScheme",rows,columns);}
+            case (17):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Batllo.json", "matrixScheme",rows,columns);}
             catch(FileNotFoundException e){e.printStackTrace();}
                 break;
             case (18):try { Matrix= JSONCreator.parseMatrixFieldFromFile("Resources/Cards/GameBoardCards/Bellesguard.json", "matrixScheme",rows,columns);}
@@ -273,5 +273,69 @@ public class WindowBoard implements WindowBoardObserver{
         }
         return matrixArrays;
     }
+
+    //******************************REGOLE DI INSERIMENTO*************************************************************//
+
+    //verifica che la matrice non sia vuota, restituendo TRUE in tal caso
+    public boolean matrixNotEmpty(ArrayList<ArrayList<MatrixCell>> Matrix){
+        boolean cellState=false;
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(Matrix.get(r).get(c).isUsed()!=false){
+                    cellState=true;
+                    break;}
+            }
+        }
+        return cellState;
+    }
+
+    //setta le caselle che sonp sui bordi, restituiendo la matrice settata correttaement
+    public ArrayList<ArrayList<MatrixCell>> setBorders(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        int rows=Matrix.size(); //4
+        int columns=Matrix.get(row).size();//5
+
+        //CONTROLLO BORDO SUP******************************************************************************
+        if(row==0){//controllo sul bordo superiore
+            for (int c=0;c<columns;c++){
+                    if (column==c){
+                        Matrix.get(row).get(c).setOnBorder(true);
+                    }
+            }
+        }else if(row==rows-1){//controllo sul bordo inferiore
+            for (int c=0;c<columns;c++){
+                if(column==c){
+                    Matrix.get(row).get(c).setOnBorder(true);
+                }
+            }
+        }
+        //CONTROLLO BORDO INF******************************************************************************
+        if(column==0){
+            for(int r=0;r<rows;r++){
+                    Matrix.get(r).get(column).setOnBorder(true);
+                }
+        }else if(column==columns-1){
+            for(int r=0;r<rows;r++){
+                Matrix.get(r).get(column).setOnBorder(true);
+            }
+        }
+        return Matrix;
+    }
+
+    //metodo di TEST per verificare che le caselle sono sui bordi
+    public void areOnBorders(ArrayList<ArrayList<MatrixCell>> Matrix){
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(Matrix.get(r).get(c).isOnBorder()==true){
+                    System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is on border");
+                }
+            }
+        }
+    }
+
+    public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        //da completare
+        return Matrix;
+    }
+
 }
 

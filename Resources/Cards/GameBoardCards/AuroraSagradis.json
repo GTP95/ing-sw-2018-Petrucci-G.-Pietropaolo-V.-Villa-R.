@@ -4,8 +4,8 @@
   "difficulty": 4,
   "otherSide": "Aurorae Magnificus",
   "otherSideCode": 11,
-  "matrixScheme":[[9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9],
-    [9,9,9,9,9]]
+  "matrixScheme":[[1,0,2,0,4],
+    [9,3,8,5,7],
+    [0,6,0,10,0],
+    [0,0,11,0,0]]
 }
