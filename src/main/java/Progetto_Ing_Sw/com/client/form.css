@@ -3,16 +3,15 @@
 }
 
 #startScreen{
-    -fx-background-image: url("../../../../../GUI/StartMenu.png");
+    -fx-background-image: url("GUI/StartMenu.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 1280 720;
-
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
 #startScreen:hover{
-    -fx-background-image: url("../../../../../GUI/StartMenuHover.png");
+    -fx-background-image: url("GUI/StartMenuHover.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 1280 720;
@@ -20,7 +19,7 @@
 }
 
 #GamemodeSelectionScreen{
-    -fx-background-image: url("../../../../../GUI/Backgroud1.png");
+    -fx-background-image: url("GUI/Backgroud1.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 1280 720;
     -fx-background-position: center;
@@ -32,7 +31,7 @@
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-background-image: url("../../../../../GUI/StartGameButton.png");
+    -fx-background-image: url("GUI/StartGameButton.png");
     -fx-background-size: 1280 50;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center bottom;
@@ -42,7 +41,7 @@
 
 
 #SinglePlayerButton{
-    -fx-background-image: url("../../../../../GUI/SinglePlayerIcon.png");
+    -fx-background-image: url("GUI/SinglePlayerIcon.png");
     -fx-background-position: center;
     -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
@@ -54,7 +53,7 @@
 }
 
 #SinglePlayerButton:hover{
-    -fx-background-image: url("../../../../../GUI/SinglePlayerIconHover.png");
+    -fx-background-image: url("GUI/SinglePlayerIconHover.png");
     -fx-background-position: center;
     -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
@@ -69,7 +68,7 @@
 
 
 #MultiPlayerButton{
-    -fx-background-image: url("../../../../../GUI/MultiPlayerIcon.png");
+    -fx-background-image: url("GUI/MultiPlayerIcon.png");
     -fx-background-position: center;
     -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
@@ -81,7 +80,7 @@
 }
 
 #MultiPlayerButton:hover {
-    -fx-background-image: url("../../../../../GUI/MultiPlayerIconHover.png");
+    -fx-background-image: url("GUI/MultiPlayerIconHover.png");
     -fx-background-position: center;
     -fx-background-size: 350 350;
     -fx-padding: 8 15 15 15;
@@ -95,7 +94,7 @@
 }
 
 #BackButton{
-    -fx-background-image: url("../../../../../GUI/BackIcon.png");
+    -fx-background-image: url("GUI/BackIcon.png");
     -fx-background-position: center;
     -fx-background-size: 120 80;
     -fx-padding: 8 15 15 15;
@@ -111,7 +110,7 @@
 }
 
 #BackButton:hover{
-    -fx-background-image: url("../../../../../GUI/BackIcon.png");
+    -fx-background-image: url("GUI/BackIcon.png");
     -fx-background-position: center;
     -fx-background-size: 120 80;
     -fx-padding: 8 15 15 15;
@@ -127,7 +126,7 @@
 }
 
 #SocketBTN{
-    -fx-background-image: url("../../../../../GUI/socketBTNIcon.png");
+    -fx-background-image: url("GUI/socketBTNIcon.png");
     -fx-text-fill: transparent;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -144,7 +143,7 @@
 }
 
 #SocketBTN:hover {
-    -fx-background-image: url("../../../../../GUI/SocketBTNIcon.png");
+    -fx-background-image: url("GUI/SocketBTNIcon.png");
     -fx-text-fill: white ;
     -fx-font-size: 50;
     -fx-background-position: center;
@@ -161,7 +160,7 @@
 }
 
 #RMIBTN{
-    -fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");
+    -fx-background-image: url("GUI/RMIBTNIcons.png");
     -fx-text-fill: transparent;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -178,7 +177,7 @@
 }
 
 #RMIBTN:hover {
-    -fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");
+    -fx-background-image: url("GUI/RMIBTNIcons.png");
     -fx-text-fill: white ;
     -fx-font-size: 100;
     -fx-background-position: center;
@@ -195,7 +194,7 @@
 }
 
 #ReadyBTN{
-    /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
+    /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
     -fx-text-fill: grey;
     -fx-font: 40 "Castellar";
     -fx-background-position: center;
@@ -212,7 +211,7 @@
 }
 
 #ReadyBTN:selected{
-    /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
+    /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
 
     -fx-text-fill: white ;
     -fx-font: 40 "Castellar";
@@ -230,7 +229,7 @@
 }
 
 #Player1WindowLabel{
-    -fx-background-image: url("../../../../../GUI/RedWindowBlown.png");
+    -fx-background-image: url("GUI/RedWindowBlown.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 240 560;
@@ -238,7 +237,7 @@
 }
 
 #Timer {
-    /*-fx-background-image: url("../../../../../GUI/RMIBTNIcons.png");*/
+    /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
 
     -fx-text-fill: white;
     -fx-font: 40 "Castellar";
@@ -332,42 +331,42 @@
 #Shade1{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("../../../../../GUI/Shade1.png") ;
+    -fx-background-image: url("GUI/Shade1.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade2{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("../../../../../GUI/Shade2.png") ;
+    -fx-background-image: url("GUI/Shade2.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade3{
      -fx-border-color: black;
      -fx-border-width:  4 4 4 4;
-     -fx-background-image: url("../../../../../GUI/Shade3.png") ;
+     -fx-background-image: url("GUI/Shade3.png") ;
      -fx-background-size: 75 75;
  }
 
 #Shade4{
       -fx-border-color: black;
       -fx-border-width:  4 4 4 4;
-      -fx-background-image: url("../../../../../GUI/Shade4.png") ;
+      -fx-background-image: url("GUI/Shade4.png") ;
       -fx-background-size: 75 75;
 }
 
 #Shade5{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("../../../../../GUI/Shade5.png") ;
+    -fx-background-image: url("GUI/Shade5.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade6{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("../../../../../GUI/Shade6.png") ;
+    -fx-background-image: url("GUI/Shade6.png") ;
     -fx-background-size: 75 75;
 }
 
