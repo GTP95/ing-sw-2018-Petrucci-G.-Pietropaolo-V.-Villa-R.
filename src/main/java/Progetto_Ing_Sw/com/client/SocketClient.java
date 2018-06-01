@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -11,7 +12,7 @@ public class SocketClient implements Runnable{
     BufferedReader in;
     Model model;
 
-    public SocketClient() throws UnknownHostException {
+    public SocketClient() throws UnknownHostException, ConnectException {
         username=null;
         model=Model.getInstance();
         String host=model.getHostname();
@@ -24,6 +25,10 @@ public class SocketClient implements Runnable{
         }
         catch (UnknownHostException e){
             throw e;    // dato che IOException è più generale della UnknownHostException, è necessario catturare quest'ultima separatamente e rilanciarla per farla ricevere al chiamante
+        }
+
+        catch (ConnectException e){
+            throw e;
         }
         catch (IOException e){
             e.printStackTrace();
