@@ -16,7 +16,7 @@ public class Table implements TableObserver {
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
-	    drawnDice=diceBag.diceDraw(2*numPlayers+1); 
+	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
 	    players=Lobby.getInstance().getConnctedPlayers();
@@ -26,32 +26,24 @@ public class Table implements TableObserver {
         return ourInstance;
     }
 
-    public ToolCardDeck getToolCardDeck() {
-        return toolCardDeck;
-    }
+    public ArrayList<PublicObjectiveCard> getDrawnPublicObjectiveCards() {  //restituisce una copia dell'ArrayList per evitare modifiche all'esterno della classe
+        ArrayList<PublicObjectiveCard> cloneArrayList=new ArrayList<>();
 
-    public PublicObjectiveCardDeck getPublicObjectiveCardDeck() {
-        return publicObjectiveCardDeck;
-    }
-
-    public ArrayList<PublicObjectiveCard> getDrawnPublicObjectiveCards() {
-        PublicObjectiveCard card;
-
-        for (int counter=0; counter<4; counter ++){
-            card=publicObjectiveCardDeck.draw();
-            drawnPublicObjectiveCards.add(card);
+        for(PublicObjectiveCard card : drawnPublicObjectiveCards){
+            cloneArrayList.add(card);
         }
-        return drawnPublicObjectiveCards;
+
+        return cloneArrayList;
     }
 
-    public ArrayList<ToolCard> getDrawnToolCards() {
-        ToolCard card;
+    public ArrayList<ToolCard> getDrawnToolCards() {    //restituisce una copia dell'ArrayList per evitare modifiche all'esterno della classe
+        ArrayList<ToolCard> cloneArrayList=new ArrayList<>();
 
-        for (int counter=0; counter<4; counter ++){
-            card=toolCardDeck.draw();
-            drawnToolCards.add(card);
+        for(ToolCard card : drawnToolCards){
+            cloneArrayList.add(card);
         }
-        return drawnToolCards;
+
+        return cloneArrayList;
     }
     
     public ArrayList<Dice> getDrawnDice(){
