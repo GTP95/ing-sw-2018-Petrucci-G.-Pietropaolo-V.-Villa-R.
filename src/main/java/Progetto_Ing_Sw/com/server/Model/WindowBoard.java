@@ -1,9 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
-//TODO --> assegnare un tag ai dadi posizionati n modo tale che vengano controllati solo quelli del turno corrente
 //TODO --> controllare effetti delle carte e applicare modifiche alla struttura
-//TODO --> sistemare raws,columns
-//TODO --> usare la classe color come costante (0,4 colori(nel Json) / 5,11 ==> 12 dado generico)
 
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
@@ -413,6 +410,168 @@ public class WindowBoard implements WindowBoardObserver{
                         }
                     }
         return Matrix;
+    }
+
+    //controlla la regola di adiacenza dei dadi
+    public boolean chechAdjacency(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        boolean adjacencyState=false;
+
+        System.out.println(">>> CELL to analyze ["+(row)+"]["+(column)+"]");
+
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(c==column-1 && r==row-1){
+                    if(Matrix.get(r).get(c).isUsed()==true){//controllo che effettivamente la cella selezionata sia occupata, non necessario ma per sicurezza
+
+                        if((r-1)<0 && (c-1)<0){} //r-1,c-1
+                        else if( ((r-1>0)||(r-1==0)) && ((c-1>0)||(c-1==0)) && Matrix.get(r-1).get(c-1).isUsed()){
+
+                            int row_adj=r-1;
+                            int col_adj=c-1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((r-1)<0){} //r-1,c
+                        else if( ((r-1>0)||(r-1==0)) && Matrix.get(r-1).get(c).isUsed()){
+                            int row_adj=r-1;
+                            int col_adj=c;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((r-1)<0 && (c+1)>Matrix.get(r).size()){} //r-1,c+1
+                        else if( ((r-1>0)||(r-1==0)) && (c+1)<Matrix.get(r).size() && Matrix.get(r-1).get(c+1).isUsed()){
+                            int row_adj=r-1;
+                            int col_adj=c+1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((c-1)<0){} //r,c-1
+                        else if(((c-1>0)||(c-1==0)) && Matrix.get(r).get(c-1).isUsed()){
+                            int row_adj=r;
+                            int col_adj=c-1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((c+1)>Matrix.get(r).size()){} //r,c+1
+                        else if(((c+1)<Matrix.get(r).size()) && Matrix.get(r).get(c+1).isUsed()){
+                            int row_adj=r;
+                            int col_adj=c+1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((r+1)>Matrix.size() && (c-1)<0){} //r+1,c-1
+                        else if(((r+1)<Matrix.size()) && ((c-1>0)||(c-1==0)) && Matrix.get(r+1).get(c-1).isUsed() ){
+                            int row_adj=r+1;
+                            int col_adj=c-1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((r+1)>Matrix.size()){} //r+1,c
+                        else if(((r+1)<Matrix.get(r).size()) && Matrix.get(r+1).get(c).isUsed()){
+                            int row_adj=r+1;
+                            int col_adj=c;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                        if((r+1)>Matrix.size() && (c+1)>Matrix.get(r).size()){} //r+1,c+1
+                        else if(((r+1)<Matrix.get(r).size()) && ((c+1)<Matrix.get(r).size()) && Matrix.get(r+1).get(c+1).isUsed()){
+                            int row_adj=r+1;
+                            int col_adj=c+1;
+
+                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            adjacencyState=true;
+                            break;
+                        }
+                    }else{
+                        System.out.println("La cella ["+(r+1)+"]["+(c+1)+"] non ha nessun dado al suo interno, non posso controllare se ha dadi adiacenti");
+                    }
+                }
+            }
+        }
+        return adjacencyState;
+    }
+
+    //controlla la regola di ortogonalità dei colori
+    public boolean checkOrtogonalColor(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+        boolean correctColor=false;
+
+        System.out.println(">>> CELL to analyze ["+(row)+"]["+(column)+"]");
+
+        for(int r=0;r<Matrix.size();r++){
+            for (int c=0;c<Matrix.get(r).size();c++){
+                if(c==column-1 && r==row-1){
+                    if(Matrix.get(r).get(c).isUsed()==true){//controllo che effettivamente la cella selezionata sia occupata, non necessario ma per sicurezza
+
+                        if((r-1)<0){} //r-1,c
+                        else if( ((r-1>0)||(r-1==0)) && Matrix.get(r-1).get(c).isUsed()){
+
+                            if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r-1).get(c).getDiceContained().getColor()){
+                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                break;
+                            }
+                            else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r-1).get(c).getDiceContained().getColor())){
+                                correctColor=true;
+                            break;
+                            }
+                        }
+
+                        if((c-1)<0){} //r,c-1
+                        else if(((c-1>0)||(c-1==0)) && Matrix.get(r).get(c-1).isUsed()){
+
+                            if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r).get(c-1).getDiceContained().getColor()){
+                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                break;
+                            }
+                            else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r).get(c-1).getDiceContained().getColor())){
+                                correctColor=true;
+                                break;
+                            }
+                        }
+                        if((c+1)>Matrix.get(r).size()){} //r,c+1
+                        else if(((c+1)<Matrix.get(r).size()) && Matrix.get(r).get(c+1).isUsed()){
+
+                            if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r).get(c+1).getDiceContained().getColor()){
+                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                break;
+                            }
+                            else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r).get(c+1).getDiceContained().getColor())){
+                                correctColor=true;
+                                break;
+                            }
+                        }
+                        if((r+1)>Matrix.size()){} //r+1,c
+                        else if(((r+1)<Matrix.get(r).size()) && Matrix.get(r+1).get(c).isUsed()){
+
+                            if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r+1).get(c).getDiceContained().getColor()){
+                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                break;
+                            }
+                            else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r+1).get(c).getDiceContained().getColor())){
+                                correctColor=true;
+                                break;
+                            }
+                        }
+                    }else{
+                        System.out.println("La cella ["+(r+1)+"]["+(c+1)+"] non ha nessun dado al suo interno, non posso controllare se ha dadi con colori uguali");
+                    }
+                }
+            }
+        }
+        return correctColor;
     }
 
 }

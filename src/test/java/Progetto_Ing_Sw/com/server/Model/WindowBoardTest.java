@@ -15,6 +15,7 @@ public class WindowBoardTest {
     private WindowBoard windowBoard;
     private DiceBag diceBag;
     private Dice dice;
+    private Dice dice2;
     private final int rows = 4;       //colonne e righe rimangono costanti
     private final int columns = 5;
 
@@ -23,9 +24,13 @@ public class WindowBoardTest {
         windowBoard = mock(WindowBoard.class);
         diceBag=mock(DiceBag.class);
         dice=mock(Dice.class);
+        dice2=mock(Dice.class);
 
         when(dice.getColor()).thenReturn(Color.RED);
         when(dice.getValue()).thenReturn(3);
+
+        when(dice2.getColor()).thenReturn(Color.RED);
+        when(dice2.getValue()).thenReturn(5);
     }
 
     @Test//Test utile solo al controllo delle variabili, da eliminare
@@ -146,16 +151,71 @@ public class WindowBoardTest {
         System.out.println("DICE VALUE ="+dice.getValue()); //3
 
         //Set di inserimenti;
-        windowBoard.insertDiceARRLIST(martrixArray,4,3,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,2,2,dice);
         windowBoard.insertDiceARRLIST(martrixArray,1,4,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,1,5,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,3,5,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,3,1,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,4,3,dice);
-        windowBoard.insertDiceARRLIST(martrixArray,3,3,dice);
 
 
+
+
+
+    }
+
+    @Test
+    public void checkUsedCellAdjacent(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        System.out.println("Matrice prima dell'inserimento");
+        windowBoard.printMatrix(testMatrix,rows,columns);
+
+        //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
+        ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
+        for (int row = 0; row < martrixArray.size(); row++) {
+            for (int column = 0; column < martrixArray.get(row).size(); column++){
+                windowBoard.setBorders(martrixArray, row, column);
+            }
+        }
+        System.out.println("DICE COLOR ="+dice.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice.getValue()); //3
+        System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice2.getValue()); //5
+
+        //Set di inserimenti;
+        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,4,dice2);
+
+
+        //Parte di controllo adiacenza
+        if(windowBoard.chechAdjacency(martrixArray,4,5)==true){
+            System.out.println("Ho trovato un dado adiacente!!!");
+        }
+    }
+
+    @Test
+    public void checkOrtogonalColor(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        System.out.println("Matrice prima dell'inserimento");
+        windowBoard.printMatrix(testMatrix,rows,columns);
+
+        //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
+        ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
+        for (int row = 0; row < martrixArray.size(); row++) {
+            for (int column = 0; column < martrixArray.get(row).size(); column++){
+                windowBoard.setBorders(martrixArray, row, column);
+            }
+        }
+
+        System.out.println("DICE COLOR ="+dice.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice.getValue()); //3
+        System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice2.getValue()); //5
+
+        //Set di inserimenti;
+        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,4,dice2);
+
+        windowBoard.checkOrtogonalColor(martrixArray,4,5);
 
 
 
