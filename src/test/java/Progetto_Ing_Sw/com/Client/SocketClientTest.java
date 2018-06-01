@@ -5,6 +5,7 @@ import Progetto_Ing_Sw.com.client.SocketClient;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.net.ConnectException;
 import java.net.UnknownHostException;
 
 public class SocketClientTest {
@@ -23,7 +24,7 @@ public class SocketClientTest {
                 e.printStackTrace();
             }
         }
-        catch (UnknownHostException e){Assert.fail(e.getMessage());}
+        catch (UnknownHostException | ConnectException e){Assert.fail(e.getMessage());}
 
     }
 }

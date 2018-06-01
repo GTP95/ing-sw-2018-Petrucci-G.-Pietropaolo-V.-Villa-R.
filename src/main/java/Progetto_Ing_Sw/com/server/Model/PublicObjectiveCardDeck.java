@@ -30,7 +30,7 @@ public class PublicObjectiveCardDeck extends Deck {
     }
 
     @Override
-    public PublicObjectiveCard draw(){
+    public PublicObjectiveCard draw(){  //restituisce un acarta pesacata dal mazzo
         PublicObjectiveCard card=null;
         int index=0;
 
@@ -43,7 +43,7 @@ public class PublicObjectiveCardDeck extends Deck {
     }
 
     @Override
-    public ArrayList<Card> draw(int cards){
+    public ArrayList<Card> draw(int cards){                 //restituisce un ArrayList contenente il numero di carte specificato
         ArrayList<Card> cardsArrayList=new ArrayList<>();
         for(int counter=0;counter<cards;counter++){
             cardsArrayList.add(draw());
@@ -51,7 +51,7 @@ public class PublicObjectiveCardDeck extends Deck {
         return cardsArrayList;
     }
 
-    public ArrayList<PublicObjectiveCard> drawPublicObjectiveCards(int cards){
+    public ArrayList<PublicObjectiveCard> drawPublicObjectiveCards(int cards){  //restituisce un ArrayList contenente il numero di carte specificato
         ArrayList<PublicObjectiveCard> cardsArrayList=new ArrayList<>();
         for(int counter=0;counter<cards;counter++){
             cardsArrayList.add(draw());
