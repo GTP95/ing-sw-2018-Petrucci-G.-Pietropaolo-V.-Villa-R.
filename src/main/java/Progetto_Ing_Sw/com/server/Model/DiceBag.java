@@ -11,6 +11,7 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
     private int numDiceYellow;
     private int numDiceGreen;
     private SplittableRandom splittableRandom;
+    private static DiceBag diceBag=new DiceBag();
 
 
     public DiceBag(){
@@ -22,6 +23,9 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
         splittableRandom = new SplittableRandom();
     }
 
+  /*  public DiceBag getInstance(){
+        return diceBag;
+    }*/
 
 
     public Dice diceDraw(){

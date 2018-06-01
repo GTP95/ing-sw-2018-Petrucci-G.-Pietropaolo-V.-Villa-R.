@@ -10,13 +10,13 @@ public class Table implements TableObserver {
     private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("Resources/Cards/ToolCards"));
     private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
     private ArrayList<Dice> drawnDice;
-    private static Table ourInstance=new Table();
     private static DiceBag diceBag=new DiceBag();
+    private static Table ourInstance=new Table();
     private static ArrayList<Player> players;
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
-	    drawnDice=diceBag.diceDraw(2*numPlayers+1); //TODO: NULLPOINTEREXCEPTION!!!
+	    drawnDice=diceBag.diceDraw(2*numPlayers+1); 
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
 	    players=Lobby.getInstance().getConnctedPlayers();
