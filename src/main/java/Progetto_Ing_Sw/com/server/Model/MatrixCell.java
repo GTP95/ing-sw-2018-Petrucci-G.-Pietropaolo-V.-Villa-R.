@@ -9,7 +9,7 @@ public class MatrixCell {
     private boolean respectful; //variabile usata per visualizzare se la cella rispetta le condizioni
     private boolean onBorder;//variabile usata per dire se la cella è sul bordo
 
-    //costruttore di default= inizializza la cella a blank
+    //costruttore di default= inizializza la cella a blank, dice che la cella non è usata, dice che non si trova sul bordo
     public MatrixCell() {
         this.color = Color.BLANK;
         this.used=false;
@@ -20,8 +20,12 @@ public class MatrixCell {
     public int getShade() {return shade;}
     public boolean isUsed() {return used;}
     public boolean isOnBorder() {return onBorder;}
+    public Dice getDiceContained() {return diceContained;}
 
     public void setColor(int color) {this.color = color;}
     public void setShade(int shade) {this.shade = shade;}
     public void setOnBorder(boolean onBorder) {this.onBorder = onBorder;}
+    public void setUsed(boolean used) {this.used = used;}
+
+    public void setDiceContained(Dice diceContained) {this.diceContained = diceContained;}
 }

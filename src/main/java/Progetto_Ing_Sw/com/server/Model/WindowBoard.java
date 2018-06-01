@@ -20,61 +20,6 @@ import java.util.ArrayList;
 <>   I dadi non possono essere piazzati ortogonalmente adiacenti a un dado dello stesso colore o valore.
      Esempio - 2 dadi rossi o 2 dadi che mostrano 3 non possono essere piazzati adiacenti l’un l’altro.
      I Giocatori possono scegliere di non prendere dadi.
-
-     [Algoritmo che assegna alle celle il loro codice]
-    public int[][] cellNumbersLegend(int raws, int columns){
-        int position=1;
-        for (int r = 0; r < raws; r++) {
-            position = position + 10;
-            for (int c = 0; c < columns; c++, position++) {
-                Matrix[r][c] = position;
-            }
-            position=position-5;
-        }
-        return Matrix;
-    }
-
-    /*MAIN DI PROVA CON INSERIMENTI (non si può fare l'inserimento nei test, da de-commentare per usarlo)
-    public static void main(String args[]) {
-        int rows=4;       //colonne e righe rimangono costanti
-        int columns=5;
-        int dice;
-        int cell;
-        Scanner keyboard= new Scanner(System.in);
-
-        WindowBoard windowBoard = new WindowBoard(rows, columns); //costruisce la matrice con le dimensioni date da me
-        int[][] fileMatrix = windowBoard.importFromFile(rows,columns);
-        windowBoard.printMatrix(fileMatrix,rows,columns);
-        int[][] testMatrix = windowBoard.buildEmptyMatrix(rows, columns);//crea una oggetto matrice di 0
-
-        System.out.println("WELCOME TO TEST LAB. PLAY FORZA QUATTRO WITH A FRIEND!");
-        System.out.println("****************************************");
-        System.out.println("Inserisci il tuo numero nelle caselle osservando questo schema, vince chi ne mette per primo 4 in fila:");
-
-
-            for (int i = 1; i < 21; i++) {
-                if (i % 2 != 0) {
-                    System.out.println("GIOCATORE 1:");
-                    windowBoard.printMatrix(testMatrix,rows,columns);
-                    System.out.println("POSIZIONE:");
-                    cell = keyboard.nextInt();
-                    System.out.println("DADO:");
-                    dice = keyboard.nextInt();
-                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
-                    System.out.println("****************************************");
-                } else {
-                    System.out.println("GIOCATORE 2:");
-                    windowBoard.printMatrix(testMatrix,rows,columns);
-                    System.out.println("POSIZIONE:");
-                    cell = keyboard.nextInt();
-                    System.out.println("DADO:");
-                    dice = keyboard.nextInt();
-                    windowBoard.insertDice(testMatrix, rows, columns, cell, dice);
-                    System.out.println("****************************************");
-                }
-            }
-        System.out.println("END MINIGAME");
-        }
 */
 
 public class WindowBoard implements WindowBoardObserver{
@@ -245,26 +190,32 @@ public class WindowBoard implements WindowBoardObserver{
                         break;
                     case (6):
                         cell.setShade(Shade.ONE);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                     case (7):
                         cell.setShade(Shade.TWO);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                     case (8):
                         cell.setShade(Shade.THREE);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                     case (9):
                         cell.setShade(Shade.FOUR);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                     case (10):
                         cell.setShade(Shade.FIVE);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                     case (11):
                         cell.setShade(Shade.SIX);
+                        cell.setColor(Color.SHADE);
                         arrayRow.add(cell);
                         break;
                 }
@@ -289,7 +240,8 @@ public class WindowBoard implements WindowBoardObserver{
         return cellState;
     }
 
-    //setta le caselle che sonp sui bordi, restituiendo la matrice settata correttaement
+    //setta le caselle che sono sui bordi, restituiendo la matrice settata correttaemente
+    //TODO da sistemare senza avere in entrate le cooridinate della casella, non serve sto solo modificando la tabella
     public ArrayList<ArrayList<MatrixCell>> setBorders(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
         int rows=Matrix.size(); //4
         int columns=Matrix.get(row).size();//5
@@ -321,19 +273,145 @@ public class WindowBoard implements WindowBoardObserver{
         return Matrix;
     }
 
-    //metodo di TEST per verificare che le caselle sono sui bordi
+    //**TEST METHOD** per verificare che le caselle sono sui bordi
     public void areOnBorders(ArrayList<ArrayList<MatrixCell>> Matrix){
         for(int r=0;r<Matrix.size();r++){
             for (int c=0;c<Matrix.get(r).size();c++){
                 if(Matrix.get(r).get(c).isOnBorder()==true){
                     System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is on border");
+                }else{
+                    System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is NOT on border");
                 }
             }
         }
     }
 
-    public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
-        //da completare
+    //controlla che un dato abbia la stessa numerazione della cella, da TRUE se vero
+    public boolean checkShade(MatrixCell matrixCell, Dice dice){
+
+        boolean shadeState=false;
+        switch (matrixCell.getShade()){
+            case (6):
+                if (dice.getValue() == 1) {
+                    shadeState = true;
+                }
+                break;
+            case (7):
+                if (dice.getValue() == 2) {
+                    shadeState = true;
+                }
+                break;
+            case (8):
+                if (dice.getValue() == 3) {
+                    shadeState = true;
+                }
+                break;
+            case (9):
+                if (dice.getValue() == 4) {
+                    shadeState = true;
+                }
+                break;
+            case (10):
+                if (dice.getValue() == 5) {
+                    shadeState = true;
+                }
+                break;
+            case (11):
+                if (dice.getValue() == 6) {
+                    shadeState = true;
+                }
+                break;
+        }
+        return shadeState;
+    }
+
+    //metodo di inserimento di oggetti di tipo dato nella matrice di arraylist
+    public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column, Dice dice){
+
+                if(matrixNotEmpty(Matrix)==false){ //CONTROLLO PRIMO TURNP
+
+                    for(int r=0;r<row;r++) {
+                        for (int c = 0; c < column; c++) {
+
+                            if (Matrix.get(r).get(c).isOnBorder() == true && c == column - 1 && r == row - 1) { //CONTROLLO BORDI, CELLA CORRETTA
+
+                                if (Matrix.get(r).get(c).getColor() == Color.BLANK) { //CONROLLO BIANCO
+                                    Matrix.get(r).get(c).setDiceContained(dice);
+                                    Matrix.get(r).get(c).setUsed(true);
+                                    System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA -  white -)");
+                                    break;
+                                }
+
+                                else if (Matrix.get(r).get(c).getColor() != Color.BLANK){ //CONTROLLO NON BIANCO
+
+                                    if(checkShade(Matrix.get(r).get(c), dice) == true && Matrix.get(r).get(c).getColor() == Color.SHADE){//CONTROLLO SFUMATURA
+                                        Matrix.get(r).get(c).setDiceContained(dice);
+                                        Matrix.get(r).get(c).setUsed(true);
+                                        System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade ON -)");
+                                        break;
+                                    }else if(checkShade(Matrix.get(r).get(c), dice) == false && Matrix.get(r).get(c).getColor() == Color.SHADE){
+                                        System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                        break;
+                                    }
+                                    if(Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() == dice.getColor()){//CONTROLLO COLORE
+                                        Matrix.get(r).get(c).setDiceContained(dice);
+                                        Matrix.get(r).get(c).setUsed(true);
+                                        System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade OFF/color ON -)");
+                                        break;
+                                    }else if(Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() != dice.getColor()){
+                                        System.out.println("Il dado inserito non rispetta il colore della cella");
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else if (Matrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1) {
+                            System.out.println("Prima mossa illegale, non stai partendo dai bordi");
+                            break;
+                            }
+                        }
+                    }
+                }
+                else if (matrixNotEmpty(Matrix)==true) {
+                    for (int r = 0; r < row; r++) {
+                        for (int c = 0; c < column; c++) {
+
+                            if (Matrix.get(r).get(c).isUsed() == false && c == column - 1 && r == row - 1) {
+
+                                if (Matrix.get(r).get(c).getColor() == Color.BLANK) {
+                                    Matrix.get(r).get(c).setDiceContained(dice);
+                                    Matrix.get(r).get(c).setUsed(true);
+                                    System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA-  white -)");
+                                    break;
+
+                                } else if (Matrix.get(r).get(c).getColor() != Color.BLANK) {
+
+                                    if (checkShade(Matrix.get(r).get(c), dice) == true && Matrix.get(r).get(c).getColor() == Color.SHADE) {//CONTROLLO SFUMATURA
+                                        Matrix.get(r).get(c).setDiceContained(dice);
+                                        Matrix.get(r).get(c).setUsed(true);
+                                        System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA - not white/shade ON -)");
+                                        break;
+                                    } else if (checkShade(Matrix.get(r).get(c), dice) == false && Matrix.get(r).get(c).getColor() == Color.SHADE) {
+                                        System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                        break;
+                                    }
+                                    if (Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() == dice.getColor()) {//CONTROLLO COLORE
+                                        Matrix.get(r).get(c).setDiceContained(dice);
+                                        Matrix.get(r).get(c).setUsed(true);
+                                        System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
+                                        break;
+                                    } else if (Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() != dice.getColor()) {
+                                        System.out.println("Il dado inserito non rispetta il colore della cella");
+                                        break;
+                                    }
+                                }
+                            }else if (Matrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1) {
+                                    System.out.println("La casella è già occupata! Salti il turno");
+                                    break;
+                                }
+                            }
+                        }
+                    }
         return Matrix;
     }
 
