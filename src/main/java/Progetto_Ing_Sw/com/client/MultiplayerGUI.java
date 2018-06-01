@@ -59,10 +59,10 @@ public class MultiplayerGUI extends Stage {
         //INIZIO Lobby Scene
 
         //Finestre
-        ImageView Player1Window = new ImageView("file:///../GUI/LobbyPlayer1.png");
-        ImageView Player2Window = new ImageView("file:///../GUI/LobbyPlayer2.png");
-        ImageView Player3Window = new ImageView("file:///../GUI/LobbyPlayer3.png");
-        ImageView Player4Window = new ImageView("file:///../GUI/LobbyPlayer4.png");
+        ImageView Player1Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer1.png");
+        ImageView Player2Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer2.png");
+        ImageView Player3Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer3.png");
+        ImageView Player4Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer4.png");
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
