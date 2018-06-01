@@ -55,7 +55,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/Firmitas.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/SunsGlory.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -18,8 +18,8 @@ public class ToolCardDisplayer extends Stage {
 
 
         //ImageView della tool card
-        ImageView ToolCardSample = new ImageView("file:///../GUI/BaseToolCard.png");
-        ImageView ToolCardImage = new ImageView("file:///../GUI/1ToolCard.png");
+        ImageView ToolCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/BaseToolCard.png");
+        ImageView ToolCardImage = new ImageView("Progetto_Ing_Sw/com/client/GUI/1ToolCard.png");
 
 
         //I Label che contengono le varie descrizioni della Carta

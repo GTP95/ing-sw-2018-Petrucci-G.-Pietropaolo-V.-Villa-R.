@@ -32,7 +32,7 @@ public class LoginStage extends Stage {
         //INIZIO Username Selection Scene
 
         //Finestra Frame
-        ImageView frame = new ImageView("file:///../GUI/LoginScreenFrame.png");
+        ImageView frame = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
         TextField UsernameField = new TextField();UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
@@ -58,7 +58,7 @@ public class LoginStage extends Stage {
         
         //Scena Tecnica
 
-        ImageView frame2 = new ImageView("file:///../GUI/LoginScreenFrame.png");
+        ImageView frame2 = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
         String host = Model.getInstance().getHostname();

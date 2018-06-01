@@ -21,16 +21,16 @@ public class ChooseAWindow extends Stage {
         //this.setMaxWidth(500);
         this.setResizable(false);
 
-        BackgroundImage Board1 = new BackgroundImage( new Image("file:///../GUI/Board1.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage Board1 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board1.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board1BG = new Background(Board1);
 
-        BackgroundImage Board2 = new BackgroundImage( new Image("file:///../GUI/Board2.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage Board2 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board2.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board2BG = new Background(Board2);
 
-        BackgroundImage Board3 = new BackgroundImage( new Image("file:///../GUI/Board3.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage Board3 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board3.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board3BG = new Background(Board3);
 
-        BackgroundImage Board4 = new BackgroundImage( new Image("file:///../GUI/Board4.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage Board4 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board4.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board4BG = new Background(Board4);
 
 
