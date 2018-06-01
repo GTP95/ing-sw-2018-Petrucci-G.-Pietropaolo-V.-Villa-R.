@@ -1,5 +1,1 @@
-{"host":"localhost",
-"socketPort":1024,
- "rmiRegistryPort":1099,
- "username":""
-}
+{"host":"localhost","socketPort":1025,"username":"Vincenzo","rmiRegistryPort":1099}

@@ -6,10 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.Axis;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -17,7 +14,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.util.Optional;
 
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
@@ -27,7 +26,7 @@ public class LoginStage extends Stage {
         this.setMaxHeight(630);
         this.setMaxWidth(430);
         this.setResizable(false);
-        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(false);
 
         //INIZIO Username Selection Scene
 
@@ -35,7 +34,7 @@ public class LoginStage extends Stage {
         ImageView frame = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        TextField UsernameField = new TextField();UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
+        TextField UsernameField = new TextField(Model.getInstance().getUsername());UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
 
 
 
@@ -74,13 +73,30 @@ public class LoginStage extends Stage {
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
         AcceptBTN2.setOnAction(event ->
         {Model.getInstance().setHostname(HostField.getText());Model.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
-            try{new Thread (new SocketClient()).start();}
+            try{
+                new Thread (new SocketClient()).start();
+                this.close();
+                Model.getInstance().writeSettingsToJSON();
+            }
+
+            catch(ConnectException e){
+                Alert ConnectExpetionAlert = new Alert(Alert.AlertType.ERROR);
+                ConnectExpetionAlert.setTitle("Incorrect Port");
+                ConnectExpetionAlert.setHeaderText("The port you entered is not valid");
+                ConnectExpetionAlert.setContentText("Press OK and enter another Port Number");
+
+                ConnectExpetionAlert.showAndWait();
+            }
 
             catch(UnknownHostException e){
-                Alert UnknownHostAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert UnknownHostAlert = new Alert(Alert.AlertType.ERROR);
+                UnknownHostAlert.setTitle("Incorrect Host");
+                UnknownHostAlert.setHeaderText("The Host you entered does not exist");
+                UnknownHostAlert.setContentText("Press OK and enter another Host Name");
                 UnknownHostAlert.showAndWait();
             }
-            this.close();
+
+
         });
 
 

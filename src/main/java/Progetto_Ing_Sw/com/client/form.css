@@ -2,15 +2,8 @@
 
 }
 
-#startScreen{
-    -fx-background-image: url("GUI/StartMenu.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: 1280 720;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
-}
 
-#startScreen:hover{
+#startScreen{
     -fx-background-image: url("GUI/StartMenuHover.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -425,5 +418,21 @@
 }
 
 
+#ChooseAWindow{
+    -fx-background-image: url("GUI/ChooseAWindow.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 1280 750;
+    -fx-background-position: right;
+}
 
-
+#NextBTN{
+    -fx-background-image: url("GUI/NextBTN.png");
+    -fx-background-position: center;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-text-fill: transparent;
+}

@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -107,11 +108,12 @@ public class ChooseAWindow extends Stage {
         pathTransition.setCycleCount(Timeline.INDEFINITE);
         pathTransition.setAutoReverse(true);*/
 
+        Text ChooseAWindow = new Text("Choose a Window");ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");ChooseAWindow.setTranslateY(-250);
 
-        Button Play = new Button("Next");Play.setTranslateY(250);
-        Button Play2 = new Button("Next");Play2.setTranslateY(250);Play2.setVisible(false);
-        Button Play3 = new Button("Next");Play3.setTranslateY(250);Play3.setVisible(false);
-        Button Play4 = new Button("Next");Play4.setTranslateY(250);Play4.setVisible(false);
+        Button Play = new Button("Next");Play.setTranslateY(250);Play.setId("NextBTN");Play.setPrefSize(150,150);
+        Button Play2 = new Button("Next");Play2.setTranslateY(250);Play2.setVisible(false);Play2.setId("NextBTN");Play2.setPrefSize(150,150);
+        Button Play3 = new Button("Next");Play3.setTranslateY(250);Play3.setVisible(false);Play3.setId("NextBTN");Play3.setPrefSize(150,150);
+        Button Play4 = new Button("Next");Play4.setTranslateY(250);Play4.setVisible(false);Play4.setId("NextBTN");Play4.setPrefSize(150,150);
 
         Play.setOnAction(event -> {Exit1.play();Enter2.play();Play.setVisible(false);Play2.setVisible(true);});
         Play2.setOnAction(event -> {Exit2.play();Enter3.play();Play2.setVisible(false);Play3.setVisible(true);});
@@ -123,7 +125,9 @@ public class ChooseAWindow extends Stage {
 
 
         StackPane Animation = new StackPane();
-        Animation.getChildren().addAll(Window4BTN,Window3BTN,Window2BTN,Window1BTN,Play,Play2,Play3,Play4);
+        Animation.setId("ChooseAWindow");
+        Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+        Animation.getChildren().addAll(ChooseAWindow,Window4BTN,Window3BTN,Window2BTN,Window1BTN,Play,Play2,Play3,Play4);
 
         Window = new Scene(Animation,720,720);
 
