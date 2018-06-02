@@ -13,6 +13,7 @@ public class MatrixCell {
         this.color = Color.BLANK;
         this.used=false;
         this.onBorder=false;
+        this.diceContained=null;
     }
 
     public int getColor() {return color;}
