@@ -25,7 +25,7 @@ public class WindowBoard implements WindowBoardObserver{
     private int [][] Matrix; //righe - colonne
 
     //crea una matrice di vuota delle dimensioni volute
-    public WindowBoard(int rows, int columns) {//TODO fronte/retro
+    public WindowBoard(int rows, int columns) {
         Matrix = new int[rows][columns];
     }
 
@@ -238,33 +238,35 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     //setta le caselle che sono sui bordi, restituiendo la matrice settata correttaemente
-    //TODO da sistemare senza avere in entrate le cooridinate della casella, non serve sto solo modificando la tabella
-    public ArrayList<ArrayList<MatrixCell>> setBorders(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
-        int rows=Matrix.size(); //4
-        int columns=Matrix.get(row).size();//5
+    public ArrayList<ArrayList<MatrixCell>> setBorders(ArrayList<ArrayList<MatrixCell>> Matrix){
 
-        //CONTROLLO BORDO SUP******************************************************************************
-        if(row==0){//controllo sul bordo superiore
-            for (int c=0;c<columns;c++){
-                    if (column==c){
-                        Matrix.get(row).get(c).setOnBorder(true);
+        for(int row=0;row<Matrix.size();row++){
+            for (int column =0;column<Matrix.get(row).size();column++){
+
+                //CONTROLLO BORDO SUP******************************************************************************
+                if(row==0){//controllo sul bordo superiore
+                    for (int c=0;c<Matrix.get(row).size();c++){
+                        if (column==c){
+                            Matrix.get(row).get(c).setOnBorder(true);
+                        }
                     }
-            }
-        }else if(row==rows-1){//controllo sul bordo inferiore
-            for (int c=0;c<columns;c++){
-                if(column==c){
-                    Matrix.get(row).get(c).setOnBorder(true);
+                }else if(row==Matrix.size()-1){//controllo sul bordo inferiore
+                    for (int c=0;c<Matrix.get(row).size();c++){
+                        if(column==c){
+                            Matrix.get(row).get(c).setOnBorder(true);
+                        }
+                    }
                 }
-            }
-        }
-        //CONTROLLO BORDO INF******************************************************************************
-        if(column==0){
-            for(int r=0;r<rows;r++){
-                    Matrix.get(r).get(column).setOnBorder(true);
+                //CONTROLLO BORDO INF******************************************************************************
+                if(column==0){
+                    for(int r=0;r<Matrix.size();r++){
+                        Matrix.get(r).get(column).setOnBorder(true);
+                    }
+                }else if(column==Matrix.get(row).size()-1){
+                    for(int r=0;r<Matrix.size();r++){
+                        Matrix.get(r).get(column).setOnBorder(true);
+                    }
                 }
-        }else if(column==columns-1){
-            for(int r=0;r<rows;r++){
-                Matrix.get(r).get(column).setOnBorder(true);
             }
         }
         return Matrix;
@@ -325,7 +327,7 @@ public class WindowBoard implements WindowBoardObserver{
     //metodo di inserimento di oggetti di tipo dato nella matrice di arraylist
     public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column, Dice dice){
 
-                if(matrixNotEmpty(Matrix)==false){ //CONTROLLO PRIMO TURNP
+                if(matrixNotEmpty(Matrix)==false){ //CONTROLLO PRIMO TURNO
 
                     for(int r=0;r<row;r++) {
                         for (int c = 0; c < column; c++) {
@@ -412,11 +414,11 @@ public class WindowBoard implements WindowBoardObserver{
         return Matrix;
     }
 
-    //controlla la regola di adiacenza dei dadi
-    public boolean chechAdjacency(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
+    //controlla la regola di adiacenza dei dadi, restituisce TRUE se il dado inserito nella posizione immessa ha almeno un dado adiacente
+    public boolean checkAdjacency(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
         boolean adjacencyState=false;
 
-        System.out.println(">>> CELL to analyze ["+(row)+"]["+(column)+"]");
+        System.out.println(">>> CELL INPUT (adjacency) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<Matrix.size();r++){
             for (int c=0;c<Matrix.get(r).size();c++){
@@ -505,11 +507,11 @@ public class WindowBoard implements WindowBoardObserver{
         return adjacencyState;
     }
 
-    //controlla la regola di ortogonalità dei colori
+    //controlla la regola di ortogonalità dei colori, restituisce TRUE se il dado inserito nella posizione immessa non ha dadi ortogonali dello stesso colore
     public boolean checkOrtogonalColor(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column){
         boolean correctColor=false;
 
-        System.out.println(">>> CELL to analyze ["+(row)+"]["+(column)+"]");
+        System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<Matrix.size();r++){
             for (int c=0;c<Matrix.get(r).size();c++){
@@ -520,7 +522,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if( ((r-1>0)||(r-1==0)) && Matrix.get(r-1).get(c).isUsed()){
 
                             if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r-1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOPRA");
                                 break;
                             }
                             else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r-1).get(c).getDiceContained().getColor())){
@@ -533,7 +535,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c-1>0)||(c-1==0)) && Matrix.get(r).get(c-1).isUsed()){
 
                             if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r).get(c-1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A SINISTRA");
                                 break;
                             }
                             else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r).get(c-1).getDiceContained().getColor())){
@@ -545,7 +547,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c+1)<Matrix.get(r).size()) && Matrix.get(r).get(c+1).isUsed()){
 
                             if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r).get(c+1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A DESTRA");
                                 break;
                             }
                             else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r).get(c+1).getDiceContained().getColor())){
@@ -557,7 +559,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((r+1)<Matrix.get(r).size()) && Matrix.get(r+1).get(c).isUsed()){
 
                             if(Matrix.get(r).get(c).getDiceContained().getColor()==Matrix.get(r+1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho due dadi ortogonali con lo stesso colore");
+                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
                                 break;
                             }
                             else if((Matrix.get(r).get(c).getDiceContained().getColor()!=Matrix.get(r+1).get(c).getDiceContained().getColor())){
@@ -572,6 +574,178 @@ public class WindowBoard implements WindowBoardObserver{
             }
         }
         return correctColor;
+    }
+
+    //******************************REAL GAMEPLAY*************************************************************//
+
+    //metodo finale di inserimento dei dadi
+    public ArrayList<ArrayList<MatrixCell>> insertDice(ArrayList<ArrayList<MatrixCell>> Matrix, int row, int column, Dice dice){
+
+        if(matrixNotEmpty(Matrix)==false){ //CONTROLLO PRIMO TURNO
+
+            for(int r=0;r<row;r++) {
+                for (int c = 0; c < column; c++) {
+
+                    if (Matrix.get(r).get(c).isOnBorder() == true && c == column - 1 && r == row - 1) { //CONTROLLO BORDI, CELLA CORRETTA
+
+                        if (Matrix.get(r).get(c).getColor() == Color.BLANK) { //CONROLLO BIANCO
+                            Matrix.get(r).get(c).setDiceContained(dice);
+                            Matrix.get(r).get(c).setUsed(true);
+                            System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA -  white -)");
+                            break;
+                        }
+
+                        else if (Matrix.get(r).get(c).getColor() != Color.BLANK){ //CONTROLLO NON BIANCO
+
+                            if(checkShade(Matrix.get(r).get(c), dice) == true && Matrix.get(r).get(c).getColor() == Color.SHADE){//CONTROLLO SFUMATURA
+                                Matrix.get(r).get(c).setDiceContained(dice);
+                                Matrix.get(r).get(c).setUsed(true);
+                                System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade ON -)");
+                                break;
+                            }else if(checkShade(Matrix.get(r).get(c), dice) == false && Matrix.get(r).get(c).getColor() == Color.SHADE){
+                                System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                break;
+                            }
+                            if(Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() == dice.getColor()){//CONTROLLO COLORE
+                                Matrix.get(r).get(c).setDiceContained(dice);
+                                Matrix.get(r).get(c).setUsed(true);
+                                System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade OFF/color ON -)");
+                                break;
+                            }else if(Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() != dice.getColor()){
+                                System.out.println("Il dado inserito non rispetta il colore della cella");
+                                break;
+                            }
+
+                        }
+                    }
+                    else if (Matrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1) {
+                        System.out.println("Prima mossa illegale, non stai partendo dai bordi");
+                        break;
+                    }
+                }
+            }
+        }
+        else if (matrixNotEmpty(Matrix)==true)
+        { //Mosse successive alla prima
+
+            for (int r = 0; r < row; r++) {
+                for (int c = 0; c < column; c++) {
+
+                    if (Matrix.get(r).get(c).isUsed() == false && c == column - 1 && r == row - 1)
+                    { //CASO CELLA LIBERA
+
+                            if (Matrix.get(r).get(c).getColor() == Color.BLANK)
+                            {//CASO CELLA BIANCA
+
+                                Matrix.get(r).get(c).setDiceContained(dice);
+                                Matrix.get(r).get(c).setUsed(true);
+
+                                if(checkAdjacency(Matrix,r+1,c+1))
+                                {//CONTROLLO ADIACENZA OK
+
+                                    if (checkOrtogonalColor(Matrix, r + 1, c + 1))
+                                    {//CONTROLLO COLORE OK
+
+                                        System.out.println("DADO INSERITO CORRETTAMENTE (after  adj+color control (MOSSA SUCCESSIVA-  white -)");
+                                        break;
+
+                                    }
+                                    else if (checkOrtogonalColor(Matrix, r + 1, c + 1) == false)
+                                    { // NO COLORE
+
+                                        System.out.println("Non stai rispettando le regole di ortogonalità dei colori");
+                                        break;
+                                    }
+                                }
+                                else if(checkAdjacency(Matrix,r+1,c+1)==false)
+                                { // NO ADIACENZA
+                                    System.out.println("Non stai rispettando le regole di adiacenza");
+                                    break;
+                                }
+
+                            } else if (Matrix.get(r).get(c).getColor() != Color.BLANK)
+                            {//CASO CELLA NON BIANCA
+
+                                if (checkShade(Matrix.get(r).get(c), dice) == true && Matrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//CONTROLLO SFUMATURA
+
+                                    Matrix.get(r).get(c).setDiceContained(dice);
+                                    Matrix.get(r).get(c).setUsed(true);
+
+                                    if(checkAdjacency(Matrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA
+
+                                        if (checkOrtogonalColor(Matrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE
+
+                                            System.out.println("DADO INSERITO CORRETTAMENTE after  adj+color control (MOSSA SUCCESSIVA - not white/shade ON -)");
+                                            break;
+                                        }
+                                        else if (checkOrtogonalColor(Matrix, r + 1, c + 1) == false)
+                                        {// COLORE NO
+
+                                            System.out.println("Non stai rispettando le regole di ortogonalità dei colori");
+                                            break;
+                                        }
+                                    }
+                                    else if(checkAdjacency(Matrix,r+1,c+1)==false)
+                                    { // ADIACENZA NO
+                                        System.out.println("Non stai rispettando le regole di adiacenza");
+                                        break;
+                                    }
+                                }
+                                else if (checkShade(Matrix.get(r).get(c), dice) == false && Matrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//NO SFUMATURA
+                                    System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                    break;
+                                }
+
+                                //-------
+
+                                if (Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() == dice.getColor())
+                                {//CONTROLLO COLORE CELLA
+                                    Matrix.get(r).get(c).setDiceContained(dice);
+                                    Matrix.get(r).get(c).setUsed(true);
+
+                                    if(checkAdjacency(Matrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA
+
+                                        if (checkOrtogonalColor(Matrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE
+
+                                            System.out.println("DADO INSERITO CORRETTAMENTE after  adj+color control (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
+                                            break;
+
+                                        }
+                                        else if (checkOrtogonalColor(Matrix, r + 1, c + 1) == false)
+                                        {//NO COLORE
+
+                                            System.out.println("Non stai rispettando le regole di ortogonalità dei colori");
+                                            break;
+                                        }
+                                    }else if(checkAdjacency(Matrix,r+1,c+1)==false)
+                                    {// NO ADIACENZA
+                                        System.out.println("Non stai rispettando le regole di adiacenza");
+                                        break;
+                                    }
+                                }
+                                else if (Matrix.get(r).get(c).getColor() != Color.SHADE && Matrix.get(r).get(c).getColor() != dice.getColor())
+                                {//NO COLORE CELLA
+                                System.out.println("Il dado inserito non rispetta il colore della cella");
+                                break;
+                                }
+                            }
+
+                    }
+                    else if (Matrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1)
+                    {//CASO CELLA OCCUPATA
+                        System.out.println("La casella è già occupata! Salti il turno");
+                        break;
+                    }
+                }
+            }
+        }
+        return Matrix;
     }
 
 }

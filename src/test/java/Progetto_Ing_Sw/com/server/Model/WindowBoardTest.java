@@ -83,11 +83,8 @@ public class WindowBoardTest {
         int[][] testMatrix = windowBoard.importFromFile(rows, columns, 22);
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
 
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++){
-                windowBoard.setBorders(martrixArray, row, column);
-            }
-        }
+
+        windowBoard.setBorders(martrixArray);
         windowBoard.areOnBorders(martrixArray);
     }
 
@@ -105,7 +102,7 @@ public class WindowBoardTest {
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
         for (int row = 0; row < martrixArray.size(); row++) {
             for (int column = 0; column < martrixArray.get(row).size(); column++) {
-                if (windowBoard.checkShade(martrixArray.get(row).get(column), dice) == true) {
+                if (windowBoard.checkShade(martrixArray.get(row).get(column), dice)) {
                     System.out.println("CELL ["+(row+1)+"]["+(column+1)+"] SHADE IS "+martrixArray.get(row).get(column).getShade());
                 }
             }
@@ -142,21 +139,57 @@ public class WindowBoardTest {
 
         //parte dell'algoritmo per settare i bordi
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++){
-                windowBoard.setBorders(martrixArray, row, column);
-            }
-        }
+        windowBoard.setBorders(martrixArray);
+
         System.out.println("DICE COLOR ="+dice.getColor()); //rosso
         System.out.println("DICE VALUE ="+dice.getValue()); //3
 
-        //Set di inserimenti;
+        //testo le caselle valide
+        windowBoard.insertDiceARRLIST(martrixArray,1,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,2,dice);
         windowBoard.insertDiceARRLIST(martrixArray,1,4,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,5,dice);
+        System.out.println();
 
+        //testo le sfumature valide
+        windowBoard.insertDiceARRLIST(martrixArray,3,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
+        System.out.println();
 
+        //testo i colori validi
+        windowBoard.insertDiceARRLIST(martrixArray,4,3,dice);
+        System.out.println();
 
+        //testo i colori NON validi
+        windowBoard.insertDiceARRLIST(martrixArray,2,3,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,3,2,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,3,2,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,3,4,dice);
+        System.out.println();
 
+        //testo le sfumature non valide
+        windowBoard.insertDiceARRLIST(martrixArray,1,3,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,4,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,3,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,2,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,4,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,1,dice);
+        System.out.println();
 
+        //testo le caselle occupate
+
+        windowBoard.insertDiceARRLIST(martrixArray,1,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,2,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,4,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,3,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,4,3,dice);
+        System.out.println();
     }
 
     @Test
@@ -169,29 +202,31 @@ public class WindowBoardTest {
 
         //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++){
-                windowBoard.setBorders(martrixArray, row, column);
-            }
-        }
+        windowBoard.setBorders(martrixArray);
         System.out.println("DICE COLOR ="+dice.getColor()); //rosso
         System.out.println("DICE VALUE ="+dice.getValue()); //3
         System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
         System.out.println("DICE VALUE ="+dice2.getValue()); //5
 
         //Set di inserimenti;
+        windowBoard.insertDiceARRLIST(martrixArray,1,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,2,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,4,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,1,5,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,1,dice);
+        windowBoard.insertDiceARRLIST(martrixArray,2,5,dice);
         windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
         windowBoard.insertDiceARRLIST(martrixArray,4,4,dice2);
 
 
         //Parte di controllo adiacenza
-        if(windowBoard.chechAdjacency(martrixArray,4,5)==true){
+        if(windowBoard.checkAdjacency(martrixArray,1,5)){
             System.out.println("Ho trovato un dado adiacente!!!");
         }
     }
 
     @Test
-    public void checkOrtogonalColor(){
+    public void checkAdjacencyAndOrtogonalColor(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
@@ -200,11 +235,7 @@ public class WindowBoardTest {
 
         //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++){
-                windowBoard.setBorders(martrixArray, row, column);
-            }
-        }
+        windowBoard.setBorders(martrixArray);
 
         System.out.println("DICE COLOR ="+dice.getColor()); //rosso
         System.out.println("DICE VALUE ="+dice.getValue()); //3
@@ -212,12 +243,39 @@ public class WindowBoardTest {
         System.out.println("DICE VALUE ="+dice2.getValue()); //5
 
         //Set di inserimenti;
-        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
         windowBoard.insertDiceARRLIST(martrixArray,4,4,dice2);
+        windowBoard.insertDiceARRLIST(martrixArray,4,5,dice);
 
+        windowBoard.insertDiceARRLIST(martrixArray,1,4,dice2);
+        windowBoard.insertDiceARRLIST(martrixArray,1,5,dice);
+
+        //EXPECTED: mossa non valida, ho due rossi vicini
+        windowBoard.checkAdjacency(martrixArray,4,5);
         windowBoard.checkOrtogonalColor(martrixArray,4,5);
 
+        windowBoard.checkAdjacency(martrixArray,1,4);
+        windowBoard.checkOrtogonalColor(martrixArray,1,4);
+    }
 
+    @Test
+    public void testInsertDiceGamePlay(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        System.out.println("Matrice prima dell'inserimento");
+        windowBoard.printMatrix(testMatrix,rows,columns);
+
+        //parte dell'algoritmo per settare i bordi
+        ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
+        windowBoard.setBorders(martrixArray);
+
+        System.out.println("DICE COLOR ="+dice.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice.getValue()); //3
+        System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
+        System.out.println("DICE VALUE ="+dice2.getValue()); //5
+        System.out.println();
+
+        //Test da finire
 
     }
 
