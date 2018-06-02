@@ -258,7 +258,7 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void testInsertDiceGamePlay(){
+    public void TEST_INSERT_DICE_GAMEPLAY(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
