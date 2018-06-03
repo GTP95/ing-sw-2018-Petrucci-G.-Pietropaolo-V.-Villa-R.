@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public  class Model {
     private  String username;
     private static Model ourInstance=new Model();
@@ -15,10 +16,13 @@ public  class Model {
     private int socketPort;
     private int rmiRegistryPort;
     private ArrayList <Player> playerArrayList;
+    private Object lockUsername, lockPlayerArrayList;
 
     private Model(){
         username="";
         ourInstance=this;
+        lockUsername=new Object();
+        lockPlayerArrayList=new Object();
         try {
             hostname = JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "host");
             socketPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","socketPort");
@@ -38,14 +42,18 @@ public  class Model {
         return ourInstance;
     }
 
-    public synchronized void setUsername(String username) {
-        this.username = username;
-        System.out.println("Username set to "+username);
-        notifyAll();
+    public void setUsername(String username) {
+        synchronized (lockUsername) {
+            this.username = username;
+            System.out.println("Username set to " + username);
+            notifyAll();
+        }
     }
 
-    public synchronized String getUsername() {
-        return username;
+    public String getUsername() {
+        synchronized (lockUsername){
+            return username;
+        }
     }
 
     public String getHostname() {
@@ -59,11 +67,14 @@ public  class Model {
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
     public ArrayList<Player> getPlayerArrayList() {
-        while(playerArrayList==null);   //aspetta che l'ArrayList venga inizializzato, serve ad evitare NullPointerException
+
+        System.out.println("Getting playerArrayList");
+        while (playerArrayList == null); //non posso usare wait() perchè non ho il lock su playerArrayList (IllegalMonitorStateException)
         return playerArrayList;
+
     }
 
-    public void setHostname(String hostname) {  //TODO: write to JSON
+    public void setHostname(String hostname) {
         this.hostname = hostname;
         System.out.println("Hostmane set to "+hostname);
     }
@@ -80,12 +91,21 @@ public  class Model {
     }
 
     public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
-        this.playerArrayList = playerArrayList;
+                 synchronized (lockPlayerArrayList) {
+                this.playerArrayList = playerArrayList;
+                System.out.println("playerArrayList set to"+playerArrayList.toString());
+                notifyAll();    //IllegalMonitorStateException
+            }
+
+
     }
 
-    public void addPlayerToPlayerArrayList(Player player){
-        if(playerArrayList==null) playerArrayList=new ArrayList<>();
-        playerArrayList.add(player);
+    public void addPlayerToPlayerArrayList(Player player) {
+
+        synchronized (lockPlayerArrayList) {
+            if (playerArrayList == null) playerArrayList = new ArrayList<>();
+            playerArrayList.add(player);
+        }
     }
 
     public void writeSettingsToJSON(){

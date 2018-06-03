@@ -121,8 +121,8 @@ public final class JSONCreator {
         return number;
     }
 
-    public static ArrayList<Player> playerArrayListLoaderFromString(String json){
-        ArrayList<Player> playerArrayList=gson.fromJson(json, arrayListOfPlayers);
+    public static ArrayList<Progetto_Ing_Sw.com.client.Player> playerArrayListLoaderFromString(String json){
+        ArrayList<Progetto_Ing_Sw.com.client.Player> playerArrayList=gson.fromJson(json, arrayListOfPlayers);
         return playerArrayList;
     }
 

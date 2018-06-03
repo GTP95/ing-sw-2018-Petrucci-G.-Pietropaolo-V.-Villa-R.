@@ -78,7 +78,7 @@ public class JSONCreatorTest {
         ArrayList<Player> playerArrayList = new ArrayList<>();
         playerArrayList.add(readyPlayerOne);
         String json=playerArrayListToJSON(playerArrayList);
-        ArrayList<Player> playerArrayList2=playerArrayListLoaderFromString(json);
+        ArrayList<Progetto_Ing_Sw.com.client.Player> playerArrayList2=playerArrayListLoaderFromString(json);
         Assert.assertTrue(playerArrayList.equals(playerArrayList2));    //controlla che la lista caricata dal json sia uguale a quella di partenza
 }
 

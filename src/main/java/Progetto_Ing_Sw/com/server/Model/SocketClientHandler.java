@@ -34,7 +34,7 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
-                    sendJSONmessage(JSONCreator.generateJSON(Lobby.getInstance().getConnctedPlayers().get(0)),"Player");
+                    sendJSONmessage(JSONCreator.generateJSON(Lobby.getInstance().getConnctedPlayers()),"arrayListOfPlayers");
                 //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
 
             }

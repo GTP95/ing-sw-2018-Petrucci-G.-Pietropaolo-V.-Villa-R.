@@ -97,9 +97,14 @@ public class SocketClient implements Runnable{
     }
 
     private void handleJSONmessage(String json, String nameOfClass){
+        System.out.println("handling JSON message");
         switch (nameOfClass){
+            case "arrayListOfPlayers":
+                model.setPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
+                break;
             case "Player":
                 model.addPlayerToPlayerArrayList(JSONCreator.playerLoaderFromString(json));
+                break;
         }
     }
 
