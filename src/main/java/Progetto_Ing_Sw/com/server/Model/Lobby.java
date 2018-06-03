@@ -40,8 +40,8 @@ public class Lobby {
 
     public void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {
         if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
-            if(playerName==null) throw new InvalidUsernameException("Username cannot be null");
-            if (playerName.isEmpty()) throw new InvalidUsernameException("Empty username not allowed");
+            if(playerName==null) throw new InvalidUsernameException("Invalid username: username cannot be null");
+            if (playerName.isEmpty()) throw new InvalidUsernameException("Invalid username: empty username not allowed");
             for(Player alreadyConnected : connectedPlayers){
                 if (alreadyConnected.getName().equals(playerName)) throw new InvalidUsernameException("Username already in use");
             }
@@ -65,7 +65,8 @@ public class Lobby {
     }
     public ArrayList<Player> getConnctedPlayers(){  //Ritorna l'arraylist per copia e non per riferimento per evitare modifiche all'esterno della classe
         ArrayList<Player> arrayList=new ArrayList<>();
-        for(Player player : arrayList) arrayList.add(player);
+     //   while(connectedPlayers.size()==0);              //aspetta finchè viene aggiunto almeno un giocatore, evita NullPointerException
+        for(Player player : connectedPlayers) arrayList.add(player);
         return arrayList;
     }
 

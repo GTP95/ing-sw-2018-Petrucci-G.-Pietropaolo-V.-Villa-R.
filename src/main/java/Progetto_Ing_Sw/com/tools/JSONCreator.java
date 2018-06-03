@@ -131,8 +131,8 @@ public final class JSONCreator {
         return json;
     }
 
-    public static Player playerLoaderFromString(String json){
-        Player player=gson.fromJson(json, Player.class);
+    public static Progetto_Ing_Sw.com.client.Player playerLoaderFromString(String json){
+        Progetto_Ing_Sw.com.client.Player player=gson.fromJson(json, Progetto_Ing_Sw.com.client.Player.class);
         return player;
     }
 

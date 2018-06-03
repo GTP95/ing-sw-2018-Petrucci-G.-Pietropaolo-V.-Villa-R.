@@ -59,6 +59,7 @@ public  class Model {
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
     public ArrayList<Player> getPlayerArrayList() {
+        while(playerArrayList==null);   //aspetta che l'ArrayList venga inizializzato, serve ad evitare NullPointerException
         return playerArrayList;
     }
 
@@ -80,6 +81,11 @@ public  class Model {
 
     public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
         this.playerArrayList = playerArrayList;
+    }
+
+    public void addPlayerToPlayerArrayList(Player player){
+        if(playerArrayList==null) playerArrayList=new ArrayList<>();
+        playerArrayList.add(player);
     }
 
     public void writeSettingsToJSON(){

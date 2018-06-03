@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Player implements PlayerObserver{
    private String name;
@@ -68,7 +69,6 @@ public class Player implements PlayerObserver{
     public void chooseAction(){
 
 }
-
 
 
 }

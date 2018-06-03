@@ -33,15 +33,16 @@ public class SocketClientHandler implements Runnable{
             try {
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
-                    out.println("Connected");
+                    sendControlMessage("Connected");
+                    sendJSONmessage(JSONCreator.generateJSON(Lobby.getInstance().getConnctedPlayers().get(0)),"Player");
                 //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
 
             }
             catch(TooManyPlayersException e){
-                out.println("Max number of players exceeded");
+                sendControlMessage("Max number of players exceeded");
             }
             catch(InvalidUsernameException e){
-                out.println(e.getMessage());
+                sendControlMessage(e.getMessage());
             }
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
@@ -63,6 +64,7 @@ public class SocketClientHandler implements Runnable{
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
+        System.out.println("JSON message sent");
     }
 
     private void sendActionMessage(String actionDescription){   //TODO: stabilire formato actionDescription
