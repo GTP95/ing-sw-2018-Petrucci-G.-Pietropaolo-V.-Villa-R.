@@ -15,7 +15,7 @@ public class SocketClientTest {
         try{
             model.setHostname("localhost");
             model.setSocketPort(1025);
-            Thread client=new Thread(new SocketClient());
+            Thread client=new Thread(new SocketClient(), "SocketClient");
             client.start();
             model.setUsername("Giacomo");
             System.out.println("User: "+model.getPlayerArrayList().get(0).getName());

@@ -46,7 +46,7 @@ public  class Model {
         synchronized (lockUsername) {
             this.username = username;
             System.out.println("Username set to " + username);
-            notifyAll();
+
         }
     }
 
@@ -69,7 +69,7 @@ public  class Model {
     public ArrayList<Player> getPlayerArrayList() {
 
         System.out.println("Getting playerArrayList");
-        while (playerArrayList == null); //non posso usare wait() perchè non ho il lock su playerArrayList (IllegalMonitorStateException)
+        while (playerArrayList == null);
         return playerArrayList;
 
     }
@@ -91,11 +91,11 @@ public  class Model {
     }
 
     public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
-                 synchronized (lockPlayerArrayList) {
+
                 this.playerArrayList = playerArrayList;
                 System.out.println("playerArrayList set to"+playerArrayList.toString());
-                notifyAll();    //IllegalMonitorStateException
-            }
+                System.out.println("First player is: "+playerArrayList.get(0).getName());
+
 
 
     }
