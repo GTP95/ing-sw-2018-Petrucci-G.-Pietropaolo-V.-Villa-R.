@@ -27,20 +27,22 @@ public class WindowBoardTest {
     public void before() {
         windowBoard = mock(WindowBoard.class);
         diceBag=mock(DiceBag.class);
-        dice3=mock(Dice.class);
-        dice2=mock(Dice.class);
+
         dice1=mock(Dice.class);
+        dice2=mock(Dice.class);
+        dice3=mock(Dice.class);
         dice4=mock(Dice.class);
         dice5=mock(Dice.class);
 
-        when(dice3.getColor()).thenReturn(Color.RED);
-        when(dice3.getValue()).thenReturn(3);
 
         when(dice1.getColor()).thenReturn(Color.BLUE);
-        when(dice1.getValue()).thenReturn(3);
+        when(dice1.getValue()).thenReturn(1);
 
         when(dice2.getColor()).thenReturn(Color.PURPLE);
         when(dice2.getValue()).thenReturn(2);
+
+        when(dice3.getColor()).thenReturn(Color.RED);
+        when(dice3.getValue()).thenReturn(3);
 
         when(dice4.getColor()).thenReturn(Color.YELLOW);
         when(dice4.getValue()).thenReturn(4);
@@ -108,7 +110,7 @@ public class WindowBoardTest {
     public void checkShadeOfAMatrixCell() {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,23);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);
         System.out.println("Matrice prima dell'inserimento");
 
         windowBoard.printMatrix(testMatrix,rows,columns);
@@ -293,7 +295,7 @@ public class WindowBoardTest {
     public void TEST_INSERT_DICE_GAMEPLAY(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);//Industria
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
 
@@ -301,28 +303,22 @@ public class WindowBoardTest {
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
         windowBoard.setBorders(martrixArray);
 
-        System.out.println("DICE COLOR ="+dice3.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice3.getValue()); //3
-        System.out.println("DICE COLOR ="+dice2.getColor()); //viola
-        System.out.println("DICE VALUE ="+dice2.getValue()); //2
-        System.out.println("DICE COLOR ="+dice1.getColor()); //blu
-        System.out.println("DICE VALUE ="+dice1.getValue()); //3
-        System.out.println("DICE COLOR ="+dice4.getColor()); //giallo
-        System.out.println("DICE VALUE ="+dice4.getValue()); //4
-        System.out.println("DICE COLOR ="+dice5.getColor()); //verde
-        System.out.println("DICE VALUE ="+dice5.getValue()); //5
-        System.out.println();
+        // dice3 = rosso,3
+        // dice2 = viola,2
+        // dice1 = blu, 1
+        // dice4 = giallo, 4
+        // dice5 = verde, 5
 
-        System.out.println("I dadi dentro la matrice ora sono :");
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++) {
-                System.out.println(" DICE in CELL ["+(row+1)+"]["+(column+1)+"] VALUE ="+martrixArray.get(row).get(column).getDiceContained());
-            }
-        }
+        //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
 
-        //Test da effettuare
-        windowBoard.insertDice(martrixArray,1,5,dice3);
-        windowBoard.insertDice(martrixArray,1,4,dice3);
+        windowBoard.insertDice(martrixArray,1,4,dice1);
+        System.out.println("DADO COLORE "+dice2.getColor());
+        System.out.println("DADO VALORE "+dice2.getValue());
+        windowBoard.insertDice(martrixArray,2,4,dice2);
+        windowBoard.insertDice(martrixArray,2,5,dice3);
+        windowBoard.insertDice(martrixArray,2,1,dice5);
+        System.out.println(martrixArray.get(1).get(0).getDiceContained());//null
+
 
     }
 
