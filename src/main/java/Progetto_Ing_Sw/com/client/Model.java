@@ -15,7 +15,7 @@ public  class Model {
     private String hostname;
     private int socketPort;
     private int rmiRegistryPort;
-    private ArrayList <Player> playerArrayList;
+    private ArrayList <ClientPlayer> clientPlayerArrayList;
     private Object lockUsername, lockPlayerArrayList;
 
     private Model(){
@@ -42,18 +42,18 @@ public  class Model {
         return ourInstance;
     }
 
-    public void setUsername(String username) {
-        synchronized (lockUsername) {
+    public synchronized void setUsername(String username) {
+
             this.username = username;
             System.out.println("Username set to " + username);
 
-        }
+
     }
 
-    public String getUsername() {
-        synchronized (lockUsername){
+    public synchronized String getUsername() {
+
             return username;
-        }
+
     }
 
     public String getHostname() {
@@ -66,11 +66,17 @@ public  class Model {
 
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
-    public ArrayList<Player> getPlayerArrayList() {
+    public synchronized ArrayList<ClientPlayer> getClientPlayerArrayList() {
 
-        System.out.println("Getting playerArrayList");
-        while (playerArrayList == null);
-        return playerArrayList;
+        System.out.println("Getting clientPlayerArrayList");
+        while (clientPlayerArrayList ==null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return clientPlayerArrayList;
 
     }
 
@@ -90,22 +96,20 @@ public  class Model {
         System.out.println("rmiRegistryPort set to "+rmiRegistryPort);
     }
 
-    public void setPlayerArrayList(ArrayList<Player> playerArrayList) {
+    public synchronized void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
 
-                this.playerArrayList = playerArrayList;
-                System.out.println("playerArrayList set to"+playerArrayList.toString());
-
-
-
-
+                this.clientPlayerArrayList = clientPlayerArrayList;
+                System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
+                notifyAll();
     }
 
-    public void addPlayerToPlayerArrayList(Player player) {
+    public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
 
-        synchronized (lockPlayerArrayList) {
-            if (playerArrayList == null) playerArrayList = new ArrayList<>();
-            playerArrayList.add(player);
-        }
+
+            if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
+            clientPlayerArrayList.add(clientPlayer);
+            notifyAll();
+
     }
 
     public void writeSettingsToJSON(){

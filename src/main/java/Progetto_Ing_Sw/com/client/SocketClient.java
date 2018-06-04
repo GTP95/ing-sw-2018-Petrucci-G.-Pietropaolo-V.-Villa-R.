@@ -1,6 +1,5 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Model.InvalidUsernameException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.*;
@@ -76,6 +75,10 @@ public class SocketClient implements Runnable{
                 case "Action":
                     String actionDescription=messageFields[1];  //La descrizione dell'azione dovrà poi essere ulteriormente "parsata" da un apposito metodo
                     break;
+                case "Player":
+                    String playerName=messageFields[1];
+                    handlePlayerMessage(playerName);
+                    break;
                 default: System.err.println("Unable to understand the following message received from server: "+message);
             }
         }
@@ -100,12 +103,17 @@ public class SocketClient implements Runnable{
         System.out.println("handling JSON message");
         switch (nameOfClass){
             case "arrayListOfPlayers":
-                model.setPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
+                model.setClientPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
                 break;
-            case "Player":
-                model.addPlayerToPlayerArrayList(JSONCreator.playerLoaderFromString(json));
-                break;
+            /*case "ClientPlayer":
+                model.addPlayerToPlayerArrayList(JSONCreator.clientPlayerLoaderFromString(json));
+                break;*/
         }
+    }
+
+    private void handlePlayerMessage(String playerName){
+        System.out.println("Handling player message");
+        model.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
     }
 
     public Boolean exceptioneTrown(){

@@ -19,11 +19,11 @@ public class LobbyTest {    //TODO: chiedere come testare i singleton! È diffic
 
   /* @Test
     public void maxFourPlayersTest(){
-        Player player1=mock(Player.class);
-        Player player2=mock(Player.class);
-        Player player3=mock(Player.class);
-        Player player4=mock(Player.class);
-        Player player5=mock(Player.class);
+        ClientPlayer player1=mock(ClientPlayer.class);
+        ClientPlayer player2=mock(ClientPlayer.class);
+        ClientPlayer player3=mock(ClientPlayer.class);
+        ClientPlayer player4=mock(ClientPlayer.class);
+        ClientPlayer player5=mock(ClientPlayer.class);
 
         lobby.addPlayer("");
    } */

@@ -18,7 +18,7 @@ public class SocketClientTest {
             Thread client=new Thread(new SocketClient(), "SocketClient");
             client.start();
             model.setUsername("Giacomo");
-            System.out.println("User: "+model.getPlayerArrayList().get(0).getName());
+            System.out.println("User: "+model.getClientPlayerArrayList().get(0).getName());
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

@@ -7,7 +7,7 @@ public class ToolCard extends Card {
     private String info;
     private int ID;
     private boolean firstUsage;
-    private String color; //Single Player Only
+    private String color; //Single ClientPlayer Only
     //TODO EFFECT
 
     public ToolCard(String title, String description, String info, int ID, boolean firstUsage, String color) {

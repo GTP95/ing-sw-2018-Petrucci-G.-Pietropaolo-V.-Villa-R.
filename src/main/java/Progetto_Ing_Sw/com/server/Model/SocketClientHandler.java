@@ -2,7 +2,9 @@ package Progetto_Ing_Sw.com.server.Model;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import Progetto_Ing_Sw.com.client.Model;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class SocketClientHandler implements Runnable{
@@ -34,7 +36,7 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
-                    sendJSONmessage(JSONCreator.generateJSON(Lobby.getInstance().getConnctedPlayers()),"arrayListOfPlayers");
+                    sendPlayerMessage(Lobby.getInstance().getConnctedPlayers().get(0).getName());
                 //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
 
             }
@@ -71,5 +73,13 @@ public class SocketClientHandler implements Runnable{
         String messageToSend="Action%"+actionDescription;
         out.println(messageToSend);
     }
+
+    private void sendPlayerMessage(String name){
+        ArrayList<Player> playerArrayList=Lobby.getInstance().getConnctedPlayers();
+        String messageToSend="Player%"+name;
+        out.println(messageToSend);
+
+        }
+
 
 }

@@ -1,4 +1,5 @@
 package Progetto_Ing_Sw.com.tools;
+import Progetto_Ing_Sw.com.client.ClientPlayer;
 import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
@@ -10,7 +11,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public final class JSONCreator {
@@ -121,19 +121,18 @@ public final class JSONCreator {
         return number;
     }
 
-    public static ArrayList<Progetto_Ing_Sw.com.client.Player> playerArrayListLoaderFromString(String json){
-        ArrayList<Progetto_Ing_Sw.com.client.Player> playerArrayList=gson.fromJson(json, arrayListOfPlayers);
-        return playerArrayList;
+    public static ArrayList<ClientPlayer> playerArrayListLoaderFromString(String json){
+        ArrayList<ClientPlayer> clientPlayerArrayList =gson.fromJson(json, arrayListOfPlayers);
+        return clientPlayerArrayList;
     }
 
-    public static String playerArrayListToJSON(ArrayList<Player> arrayList){
-        String json=gson.toJson(arrayList, arrayListOfPlayers);
-        return json;
-    }
 
-    public static Progetto_Ing_Sw.com.client.Player playerLoaderFromString(String json){
-        Progetto_Ing_Sw.com.client.Player player=gson.fromJson(json, Progetto_Ing_Sw.com.client.Player.class);
-        return player;
-    }
+
+   /* public static ClientPlayer clientPlayerLoaderFromString(String json){
+        JsonElement jsonElement=new JsonParser().parse(json);
+        JsonObject jsonObject=jsonElement.getAsJsonObject();
+        json
+        return clientPlayer;
+    }*/
 
 }

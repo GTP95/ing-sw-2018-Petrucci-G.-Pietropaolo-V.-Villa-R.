@@ -41,11 +41,11 @@ public class StartMenuGUI extends Application {
 
         //INIZIO Scena Selezione Modalità
 
-        //Bottone per il Single Player
-        Button singlePlayer =new Button("Single Player");                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
+        //Bottone per il Single ClientPlayer
+        Button singlePlayer =new Button("Single ClientPlayer");                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
         singlePlayer.setId("SinglePlayerButton");                               //assegno un ID al bottone in modo che sia riconoscibile dal CSS
         singlePlayer.setPrefSize(350,350);                    //imposto le dimensioni del bottone
-        //TODO setOnAction per passare alla scena del Single Player
+        //TODO setOnAction per passare alla scena del Single ClientPlayer
 
 
         //Bottone per il Multiplayer come quello per il single player

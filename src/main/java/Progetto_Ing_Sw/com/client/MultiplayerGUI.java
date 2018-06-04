@@ -73,11 +73,11 @@ public class MultiplayerGUI extends Stage {
 
 
         //Labels con i nomi dei giocatori
-        Label Player1Label = new Label("Player 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
-        //Player1Label.setText(Model.getInstance().getPlayerArrayList().get(0).getName());
-        Label Player2Label = new Label("Player 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
-        Label Player3Label = new Label("Player 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
-        Label Player4Label = new Label("Player 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+        Label Player1Label = new Label("ClientPlayer 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
+        //Player1Label.setText(Model.getInstance().getClientPlayerArrayList().get(0).getName());
+        Label Player2Label = new Label("ClientPlayer 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
+        Label Player3Label = new Label("ClientPlayer 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
+        Label Player4Label = new Label("ClientPlayer 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
 
 
         //StackPane Player1
