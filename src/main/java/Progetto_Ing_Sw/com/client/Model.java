@@ -94,7 +94,7 @@ public  class Model {
 
                 this.playerArrayList = playerArrayList;
                 System.out.println("playerArrayList set to"+playerArrayList.toString());
-                System.out.println("First player is: "+playerArrayList.get(0).getName());
+
 
 
 
