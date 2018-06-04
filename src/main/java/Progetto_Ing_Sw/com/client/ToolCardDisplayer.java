@@ -24,7 +24,7 @@ public class ToolCardDisplayer extends Stage {
 
         //I Label che contengono le varie descrizioni della Carta
         Label ToolCardTitle = new Label("Cork-backed Straightedge");ToolCardTitle.setTranslateX(50);ToolCardTitle.setTranslateY(-320);ToolCardTitle.setId("ToolCardDsiplayer");
-        Label ToolCardNumber = new Label("1");ToolCardNumber.setTranslateX(50);ToolCardNumber.setTranslateY(-275);ToolCardNumber.setId("ToolCardDsiplayer");
+        Label ToolCardNumber = new Label("1");ToolCardNumber.setTranslateX(55);ToolCardNumber.setTranslateY(-270);ToolCardNumber.setId("ToolCardDsiplayer");
         Label ToolCardDescription = new Label("After drafting, \r\n increase or decrease the value \r\n of the drafted die by 1");ToolCardDescription.setTranslateY(240);ToolCardDescription.setId("ToolCardDsiplayer");;ToolCardDescription.setTextAlignment(TextAlignment.CENTER);
         Label ToolCardColor = new Label();ToolCardColor.setStyle("-fx-background-color: #d6150c");ToolCardColor.setPrefSize(130,100);ToolCardColor.setTranslateY(-280);ToolCardColor.setTranslateX(-180);
 

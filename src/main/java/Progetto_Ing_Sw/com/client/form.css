@@ -321,6 +321,16 @@
 
 }
 
+#Block:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: white;
+
+
+}
+
+
+
 #Shade1{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;

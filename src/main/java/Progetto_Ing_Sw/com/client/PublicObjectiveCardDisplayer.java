@@ -14,7 +14,7 @@ public class PublicObjectiveCardDisplayer extends Stage {
         this.setResizable(false);
 
         //ImageView della Public Objective Card
-        ImageView PublicObjectiveCardSample = new ImageView("file:///../GUI/PublicObjectiveDefault.png");
+        ImageView PublicObjectiveCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/PublicObjectiveDefault.png");
         ImageView PublicObjectiveCardImage = new ImageView();
 
 
