@@ -11,6 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -55,7 +57,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/SunsGlory.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/ViaLux.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -110,6 +112,56 @@ public class TableGUI extends Stage{
 
                 }
             }
+
+
+            //Stampa due interi che indicano su che casella sto cliccando
+            griglia.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+                if (e.getX()<71 && e.getX()>4){
+                    final int Xindex=1;
+                    System.out.println("Colonna: "+Xindex);
+                }
+
+                if (e.getX()<146 && e.getX()>79){
+                    final int Xindex=2;
+                    System.out.println("Colonna: "+Xindex);
+                }
+
+                if (e.getX()<221 && e.getX()>154){
+                    final int Xindex=3;
+                    System.out.println("Colonna: "+Xindex);
+                }
+
+                if (e.getX()<296 && e.getX()>229){
+                    final int Xindex=4;
+                    System.out.println("Colonna: "+Xindex);
+                }
+
+                if (e.getX()<371 && e.getX()>304){
+                    final int Xindex=5;
+                    System.out.println("Colonna: "+Xindex);
+                }
+
+                if (e.getY()>23 && e.getY()<91){
+                    final int Yindex=1;
+                    System.out.println("Riga: "+Yindex);
+                }
+
+                if (e.getY()>98 && e.getY()<166){
+                    final int Yindex=2;
+                    System.out.println("Riga: "+Yindex);
+                }
+
+                if (e.getY()>173 && e.getY()<241){
+                    final int Yindex=3;
+                    System.out.println("Riga: "+Yindex);
+                }
+
+                if (e.getY()>248 && e.getY()<316){
+                    final int Yindex=4;
+                    System.out.println("Riga: "+Yindex);
+                }
+
+            });
 
             //HBox che contiene le informazioni sulla carta
             HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
@@ -254,6 +306,15 @@ public class TableGUI extends Stage{
             PublicObjectiveMenu.getChildren().addAll(PublicObjectiveCardMenuTitle, PublicObjectiveCardList);
 
             //FINE PUBLIC OBJECTIVE MENU
+
+
+            //INIZIO Draft Area
+
+            for (int i = 0; i < NumPlayers*2+1; i++){
+                ToggleButton Die = new ToggleButton();
+                }
+
+            //FINE Draft Area
 
 
             //BorderPane per contenere tutti gli altri
