@@ -338,8 +338,22 @@
     -fx-background-size: 75 75;
 }
 
+#Shade1:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade1.png") ;
+    -fx-background-size: 75 75;
+}
+
 #Shade2{
     -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade2.png") ;
+    -fx-background-size: 75 75;
+}
+
+#Shade2:hover{
+    -fx-border-color: blue;
     -fx-border-width:  4 4 4 4;
     -fx-background-image: url("GUI/Shade2.png") ;
     -fx-background-size: 75 75;
@@ -352,11 +366,25 @@
      -fx-background-size: 75 75;
  }
 
+#Shade3:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade3.png") ;
+    -fx-background-size: 75 75;
+}
+
 #Shade4{
       -fx-border-color: black;
       -fx-border-width:  4 4 4 4;
       -fx-background-image: url("GUI/Shade4.png") ;
       -fx-background-size: 75 75;
+}
+
+#Shade4:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade4.png") ;
+    -fx-background-size: 75 75;
 }
 
 #Shade5{
@@ -366,8 +394,22 @@
     -fx-background-size: 75 75;
 }
 
+#Shade5:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade5.png") ;
+    -fx-background-size: 75 75;
+}
+
 #Shade6{
     -fx-border-color: black;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-image: url("GUI/Shade6.png") ;
+    -fx-background-size: 75 75;
+}
+
+#Shade6:hover{
+    -fx-border-color: blue;
     -fx-border-width:  4 4 4 4;
     -fx-background-image: url("GUI/Shade6.png") ;
     -fx-background-size: 75 75;
@@ -445,4 +487,45 @@
     -fx-background-color: transparent;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-text-fill: transparent;
+}
+
+#DraftPool{
+    -fx-background-image: url("GUI/DraftRoom.jpg");
+    -fx-background-radius: 50 50 50 50;
+    -fx-border-color: black;
+    -fx-border-width: 10 10 10 10;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#Die{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#Die:hover{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: grey;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#Die:selected{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: green;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
 }

@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class ChooseAWindow extends Stage {
@@ -21,6 +22,7 @@ public class ChooseAWindow extends Stage {
         //this.setMaxHeight(500);
         //this.setMaxWidth(500);
         this.setResizable(false);
+        this.initStyle(StageStyle.UNDECORATED);
 
         BackgroundImage Board1 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board1.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board1BG = new Background(Board1);

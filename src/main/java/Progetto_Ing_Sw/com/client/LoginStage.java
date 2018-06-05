@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -20,6 +21,8 @@ public class LoginStage extends Stage {
         this.setMaxWidth(430);
         this.setResizable(false);
         this.setAlwaysOnTop(false);
+        this.initStyle(StageStyle.UNDECORATED);
+
 
         //INIZIO Username Selection Scene
 
