@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.client.TableGUI;
 import Progetto_Ing_Sw.com.server.Model.MatrixCell;
 import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.when;
 public class WindowBoardTest {
     private WindowBoard windowBoard;
     private DiceBag diceBag;
+    private TableGUI tableGUI;
     private Dice dice3;
     private Dice dice2;
     private Dice dice1;
@@ -102,10 +104,33 @@ public class WindowBoardTest {
         ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToDice(testMatrix, rows, columns);
 
 
-        windowBoard.setBorders(martrixArray);
-        windowBoard.areOnBorders(martrixArray);
+        windowBoard.setBorders(martrixArray); //set de bordi
+
+        //controllo dei bordi
+        for(int r=0;r<martrixArray.size();r++){
+            for (int c=0;c<martrixArray.get(r).size();c++){
+
+                if(c==0){
+                    Assert.assertEquals(martrixArray.get(r).get(c).isOnBorder(),true);
+                }
+                if(c==martrixArray.get(r).size()-1){
+                    Assert.assertEquals(martrixArray.get(r).get(c).isOnBorder(),true);
+                }
+                if(r==0){
+                    Assert.assertEquals(martrixArray.get(r).get(c).isOnBorder(),true);
+                }
+                if(r==martrixArray.size()-1){
+                    Assert.assertEquals(martrixArray.get(r).get(c).isOnBorder(),true);
+                }
+                if((r!=0)&&(c!=0)&&(c!=martrixArray.get(r).size()-1)&&(r!=martrixArray.size()-1)){
+                    Assert.assertNotEquals(martrixArray.get(r).get(c).isOnBorder(),true);
+                }
+            }
+        }
+        windowBoard.areOnBorders(martrixArray); //visual test method
     }
 
+    //TEST COMPLETI FINO A QUI
     @Test
     public void checkShadeOfAMatrixCell() {
 

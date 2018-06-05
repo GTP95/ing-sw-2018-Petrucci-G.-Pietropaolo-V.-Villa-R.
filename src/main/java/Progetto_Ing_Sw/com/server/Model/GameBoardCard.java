@@ -5,8 +5,8 @@ public class GameBoardCard extends Card {
     private String title;
     private int gameBoardCode;
     private int difficulty;
-    private String otherSide; //GameBoardCard
-    private int otherSideCode; //Not to implement?
+    private String otherSide;
+    private int otherSideCode;
 
     public GameBoardCard(String title, int gameBoardCode, int difficulty, String otherSide, int otherSideCode) {
         this.title = title;
@@ -25,6 +25,4 @@ public class GameBoardCard extends Card {
     public String getOtherSide() { return otherSide; }
 
     public int getOtherSideCode() { return otherSideCode; }
-
-    //TODO change otherSide type using not int
 }
