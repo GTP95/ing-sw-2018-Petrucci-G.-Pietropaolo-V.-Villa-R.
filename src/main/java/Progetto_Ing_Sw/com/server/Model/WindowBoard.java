@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class WindowBoard implements WindowBoardObserver{
 
-    private GameBoardCard gameBoardCard;
     private int [][] Matrix; //righe - colonne
 
     //crea una matrice di vuota delle dimensioni volute
