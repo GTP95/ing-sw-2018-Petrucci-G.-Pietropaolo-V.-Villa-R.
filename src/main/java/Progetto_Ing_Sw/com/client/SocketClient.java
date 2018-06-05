@@ -116,6 +116,25 @@ public class SocketClient implements Runnable{
         model.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
     }
 
+    private  void handleActionMessage(String actionDescription){
+        String actionFields[]=actionDescription.split("&");
+        String username=actionFields[1];
+        switch (actionFields[0]){
+            case "UseToolCard":
+                String title=actionFields[2];   //Title è il nome della carta (titolo), non ricevo un JSON perchè è già stato inviato in una fase precedente
+                break;
+            case "PlaceDice":
+                /*ci metto un JSON o no? sì, così creo il dice da piazzare*/
+                String json=actionFields[2];
+                int x=Integer.parseInt(actionFields[3]);
+                int y=Integer.parseInt(actionFields[4]);
+                ClientDice dice=JSONCreator.diceLoaderFromString(json);
+                model.getPlayerFromName(username).placeDice(dice, x, y);
+                break;
+
+        }
+    }
+
     public Boolean exceptioneTrown(){
         if(trownException!=null) return true;
         return false;

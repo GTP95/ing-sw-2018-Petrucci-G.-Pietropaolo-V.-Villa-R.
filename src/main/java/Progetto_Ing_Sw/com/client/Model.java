@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.Player;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.BufferedWriter;
@@ -78,6 +79,19 @@ public  class Model {
         }
         return clientPlayerArrayList;
 
+    }
+
+    public ClientPlayer getPlayerFromName(String name){
+        ClientPlayer player=null;
+
+        for(ClientPlayer playerCandidate : clientPlayerArrayList){
+            if(playerCandidate.getName().equals(name)) {
+                player = playerCandidate;
+                break;
+            }
+        }
+
+        return player;
     }
 
     public void setHostname(String hostname) {

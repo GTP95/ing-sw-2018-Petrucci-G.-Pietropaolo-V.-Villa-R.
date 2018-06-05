@@ -52,6 +52,16 @@ public class Table implements TableObserver {
     	return clone;
     }
 
+    public Dice getChoosenDice(Dice dice) throws IllegalDiceException{
+        for(Dice die : drawnDice){
+            if(die.equals(dice)){
+                drawnDice.remove(die);
+                return die;
+            }
+        }
+        throw new IllegalDiceException();
+    }
+
     public void startGame(){
         System.out.println("Game started!");    //TODO: completare
     }

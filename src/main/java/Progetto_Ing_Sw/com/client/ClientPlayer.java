@@ -20,7 +20,7 @@ public class ClientPlayer implements PlayerObserver{
 
     }
 
-    public void setChoosenGameBoardandFavourTokens(GameBoardCard choosenGameBoard) {
+    public void setChoosenGameBoardAndFavourTokens(GameBoardCard choosenGameBoard) {
         this.choosenGameBoard = choosenGameBoard;
         this.favorTokens=choosenGameBoard.getDifficulty();
     }
@@ -43,6 +43,10 @@ public class ClientPlayer implements PlayerObserver{
 
     public GameBoardCard getChoosenGameBoard() {
         return choosenGameBoard;
+    }
+
+    public void placeDice(ClientDice dice, int x, int y){
+        
     }
 
 

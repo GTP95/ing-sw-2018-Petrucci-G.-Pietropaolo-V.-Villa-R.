@@ -37,4 +37,25 @@ public class RoundTrack implements RoundTrackObserver {   //Implementata come si
     public void incrementRound(){
         if(roundNumber<10) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
     }
+
+    public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard
+        Boolean diceToPlaceExists=false;
+        for (Dice dice : Table.getOurInstance().getDrawnDice()){    //controlla che il dado che si vuole piazzare sulla roundTrack sia tra quelli pescati
+            if(dice.equals(diceToPlace)){
+                diceToPlaceExists=true;
+                break;
+            }
+        }
+        if(!diceToPlaceExists) throw new IllegalDiceException();
+
+        for(int index=0;index<getRoundNumber();index++){    //controlla che il dado che si vuole togliere dalla roundTrack sia effettivamente presente sulla roundTrack
+            for(Dice dice : diceRemained.get(index)){
+                if(dice.equals(diceToGet)){
+                    diceRemained.remove(diceToGet);
+                    return diceToGet;
+                }
+            }
+        }
+        throw new IllegalDiceException();
+    }
 }

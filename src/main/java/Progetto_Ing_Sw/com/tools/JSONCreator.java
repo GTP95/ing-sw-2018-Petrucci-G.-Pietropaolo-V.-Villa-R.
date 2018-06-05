@@ -1,4 +1,5 @@
 package Progetto_Ing_Sw.com.tools;
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientPlayer;
 import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
@@ -124,6 +125,11 @@ public final class JSONCreator {
     public static ArrayList<ClientPlayer> playerArrayListLoaderFromString(String json){
         ArrayList<ClientPlayer> clientPlayerArrayList =gson.fromJson(json, arrayListOfPlayers);
         return clientPlayerArrayList;
+    }
+
+    public static ClientDice diceLoaderFromString(String json){
+        ClientDice dice=gson.fromJson(json, ClientDice.class);
+        return dice;
     }
 
 
