@@ -1,29 +1,25 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Model.Player;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
-
-public  class Model {
+public class ClientSettings {
+    private static ClientSettings ourInstance = new ClientSettings();
     private  String username;
-    private static Model ourInstance=new Model();
     private String hostname;
     private int socketPort;
     private int rmiRegistryPort;
-    private ArrayList <ClientPlayer> clientPlayerArrayList;
-    private Object lockUsername, lockPlayerArrayList;
 
-    private Model(){
+    public static ClientSettings getInstance() {
+        return ourInstance;
+    }
+
+    private ClientSettings() {
         username="";
-        ourInstance=this;
-        lockUsername=new Object();
-        lockPlayerArrayList=new Object();
         try {
             hostname = JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "host");
             socketPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","socketPort");
@@ -39,21 +35,17 @@ public  class Model {
         }
     }
 
-    public static Model getInstance(){
-        return ourInstance;
-    }
-
     public synchronized void setUsername(String username) {
 
-            this.username = username;
-            System.out.println("Username set to " + username);
+        this.username = username;
+        System.out.println("Username set to " + username);
 
 
     }
 
     public synchronized String getUsername() {
 
-            return username;
+        return username;
 
     }
 
@@ -67,40 +59,12 @@ public  class Model {
 
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
-    public synchronized ArrayList<ClientPlayer> getClientPlayerArrayList() {
-
-        System.out.println("Getting clientPlayerArrayList");
-        while (clientPlayerArrayList ==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return clientPlayerArrayList;
-
-    }
-
-    public ClientPlayer getPlayerFromName(String name){
-        ClientPlayer player=null;
-
-        for(ClientPlayer playerCandidate : clientPlayerArrayList){
-            if(playerCandidate.getName().equals(name)) {
-                player = playerCandidate;
-                break;
-            }
-        }
-
-        return player;
-    }
-
     public void setHostname(String hostname) {
         this.hostname = hostname;
         System.out.println("Hostmane set to "+hostname);
     }
 
     public void setSocketPort(int socketPort) {
-
         this.socketPort = socketPort;
         System.out.println("SocketPort set to "+socketPort);
     }
@@ -110,23 +74,7 @@ public  class Model {
         System.out.println("rmiRegistryPort set to "+rmiRegistryPort);
     }
 
-    public synchronized void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
-
-                this.clientPlayerArrayList = clientPlayerArrayList;
-                System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
-                notifyAll();
-    }
-
-    public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
-
-
-            if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
-            clientPlayerArrayList.add(clientPlayer);
-            notifyAll();
-
-    }
-
-    public void writeSettingsToJSON(){
+    public void writeSettingsToJSON(){          //Salva i valori correnti nel file ServerSettings.json
         try {
             FileWriter fileWriter = new FileWriter("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
