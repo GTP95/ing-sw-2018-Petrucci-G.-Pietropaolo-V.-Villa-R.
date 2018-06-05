@@ -10,7 +10,8 @@ public class ClientPlayer implements PlayerObserver{
    private int favorTokens;
    private int victoryPoints;
    private boolean isActive;
-   private GameBoardCard choosenGameBoard;
+   private ClientGameBoardCard choosenGameBoard;
+   private ClientWindowBoard windowBoard;
 
 
     public ClientPlayer(String name) {
@@ -20,11 +21,11 @@ public class ClientPlayer implements PlayerObserver{
 
     }
 
-    public void setChoosenGameBoardAndFavourTokens(GameBoardCard choosenGameBoard) {
+    public void setChoosenGameBoardAndFavourTokens(ClientGameBoardCard choosenGameBoard) {
         this.choosenGameBoard = choosenGameBoard;
         this.favorTokens=choosenGameBoard.getDifficulty();
     }
-    public void setDrawnGameBoardCard(ArrayList<GameBoardCard> drawnGameBoardCard) {
+    public void setDrawnGameBoardCard(ArrayList<ClientGameBoardCard> drawnGameBoardCard) {
     }
 
     public String getName() {
@@ -41,14 +42,20 @@ public class ClientPlayer implements PlayerObserver{
         return victoryPoints;
     }
 
-    public GameBoardCard getChoosenGameBoard() {
+    public ClientGameBoardCard getChoosenGameBoard() {
         return choosenGameBoard;
     }
 
-    public void placeDice(ClientDice dice, int x, int y){
-        
+    public ClientWindowBoard getWindowBoard() {
+        return windowBoard;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
 
+    public void updateWindowBoard(ClientWindowBoard windowBoard){
+        this.windowBoard=windowBoard;
+    }
 }
 
