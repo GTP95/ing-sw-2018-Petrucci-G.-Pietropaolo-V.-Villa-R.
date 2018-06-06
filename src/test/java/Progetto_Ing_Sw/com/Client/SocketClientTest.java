@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.Client;
 
-import Progetto_Ing_Sw.com.client.Model;
+import Progetto_Ing_Sw.com.client.ClientSettings;
+import Progetto_Ing_Sw.com.client.LocalModel;
 import Progetto_Ing_Sw.com.client.SocketClient;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,14 +12,14 @@ import java.net.UnknownHostException;
 public class SocketClientTest {
     @Test
     public void socketClientTester(){
-        Model model=Model.getInstance();
+        LocalModel localModel =LocalModel.getInstance();
         try{
-            model.setHostname("localhost");
-            model.setSocketPort(1025);
+            ClientSettings.getInstance().setHostname("localhost");
+            ClientSettings.getInstance().setSocketPort(1025);
             Thread client=new Thread(new SocketClient(), "SocketClient");
             client.start();
-            model.setUsername("Giacomo");
-            System.out.println("User: "+model.getClientPlayerArrayList().get(0).getName());
+            ClientSettings.getInstance().setUsername("Giacomo");
+            System.out.println("User: "+ localModel.getClientPlayerArrayList().get(0).getName());
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

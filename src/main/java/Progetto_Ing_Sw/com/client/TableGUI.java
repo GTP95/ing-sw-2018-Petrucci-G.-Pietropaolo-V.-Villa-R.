@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -57,7 +58,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/ViaLux.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/SymphonyOfLight.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -115,53 +116,57 @@ public class TableGUI extends Stage{
 
 
             //Stampa due interi che indicano su che casella sto cliccando
-            griglia.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-                if (e.getX()<71 && e.getX()>4){
-                    final int Xindex=1;
-                    System.out.println("Colonna: "+Xindex);
+            griglia.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                if (e.getX() < 71 && e.getX() > 4) {
+                    final int Xindex = 1;
+
+                    System.out.println("Colonna: " + Xindex);
                 }
 
-                if (e.getX()<146 && e.getX()>79){
-                    final int Xindex=2;
-                    System.out.println("Colonna: "+Xindex);
+                if (e.getX() < 146 && e.getX() > 79) {
+                    final int Xindex = 2;
+                    System.out.println("Colonna: " + Xindex);
                 }
 
-                if (e.getX()<221 && e.getX()>154){
-                    final int Xindex=3;
-                    System.out.println("Colonna: "+Xindex);
+                if (e.getX() < 221 && e.getX() > 154) {
+                    final int Xindex = 3;
+                    System.out.println("Colonna: " + Xindex);
                 }
 
-                if (e.getX()<296 && e.getX()>229){
-                    final int Xindex=4;
-                    System.out.println("Colonna: "+Xindex);
+                if (e.getX() < 296 && e.getX() > 229) {
+                    final int Xindex = 4;
+                    System.out.println("Colonna: " + Xindex);
                 }
 
-                if (e.getX()<371 && e.getX()>304){
-                    final int Xindex=5;
-                    System.out.println("Colonna: "+Xindex);
+                if (e.getX() < 371 && e.getX() > 304) {
+                    final int Xindex = 5;
+                    System.out.println("Colonna: " + Xindex);
                 }
 
-                if (e.getY()>23 && e.getY()<91){
-                    final int Yindex=1;
-                    System.out.println("Riga: "+Yindex);
+                if (e.getY() > 23 && e.getY() < 91) {
+                    final int Yindex = 1;
+                    System.out.println("Riga: " + Yindex);
                 }
 
-                if (e.getY()>98 && e.getY()<166){
-                    final int Yindex=2;
-                    System.out.println("Riga: "+Yindex);
+                if (e.getY() > 98 && e.getY() < 166) {
+                    final int Yindex = 2;
+                    System.out.println("Riga: " + Yindex);
                 }
 
-                if (e.getY()>173 && e.getY()<241){
-                    final int Yindex=3;
-                    System.out.println("Riga: "+Yindex);
+                if (e.getY() > 173 && e.getY() < 241) {
+                    final int Yindex = 3;
+                    System.out.println("Riga: " + Yindex);
                 }
 
-                if (e.getY()>248 && e.getY()<316){
-                    final int Yindex=4;
-                    System.out.println("Riga: "+Yindex);
+                if (e.getY() > 248 && e.getY() < 316) {
+                    final int Yindex = 4;
+                    System.out.println("Riga: " + Yindex);
                 }
+
+
 
             });
+
 
             //HBox che contiene le informazioni sulla carta
             HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
@@ -310,9 +315,19 @@ public class TableGUI extends Stage{
 
             //INIZIO Draft Area
 
-            for (int i = 0; i < NumPlayers*2+1; i++){
-                ToggleButton Die = new ToggleButton();
-                }
+        HBox DraftPool = new HBox(40);
+        DraftPool.setId("DraftPool");
+        DraftPool.setPadding(new Insets(4,4,4,4));
+        DraftPool.setAlignment(Pos.CENTER);
+        DraftPool.setMaxSize(5000,300);
+
+
+
+        for (int i = 0; i < NumPlayers*2+1; i++){
+            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");
+            DraftPool.getChildren().addAll(Die);
+        }
+
 
             //FINE Draft Area
 
@@ -324,6 +339,7 @@ public class TableGUI extends Stage{
             GameplayArea.setCenter(WindowBoard);
             GameplayArea.setRight(ToolCardMenu);
             GameplayArea.setLeft(PublicObjectiveMenu);
+            GameplayArea.setTop(DraftPool);
 
 
             GameplayScene = new Scene(GameplayArea, 1280, 720);

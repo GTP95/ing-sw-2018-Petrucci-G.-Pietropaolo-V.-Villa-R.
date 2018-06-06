@@ -1,22 +1,16 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.tools.JSONCreator;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.Axis;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.io.FileNotFoundException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
-import java.util.Optional;
 
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
@@ -27,6 +21,8 @@ public class LoginStage extends Stage {
         this.setMaxWidth(430);
         this.setResizable(false);
         this.setAlwaysOnTop(false);
+        this.initStyle(StageStyle.UNDECORATED);
+
 
         //INIZIO Username Selection Scene
 
@@ -34,13 +30,13 @@ public class LoginStage extends Stage {
         ImageView frame = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        TextField UsernameField = new TextField(Model.getInstance().getUsername());UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
+        TextField UsernameField = new TextField(ClientSettings.getInstance().getUsername());UsernameField.setId("TextField"); UsernameField.setMaxWidth(250);UsernameField.setTranslateY(50);
 
 
 
         //Accept Button
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
-        AcceptBTN.setOnAction(event -> {this.setScene(ServerScene);Model.getInstance().setUsername(UsernameField.getText());});
+        AcceptBTN.setOnAction(event -> {this.setScene(ServerScene);ClientSettings.getInstance().setUsername(UsernameField.getText());});
 
 
 
@@ -60,8 +56,8 @@ public class LoginStage extends Stage {
         ImageView frame2 = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
 
         //Text Fields da riempire
-        String host = Model.getInstance().getHostname();
-        int Port = Model.getInstance().getSocketPort();
+        String host = ClientSettings.getInstance().getHostname();
+        int Port = ClientSettings.getInstance().getSocketPort();
 
         TextField HostField = new TextField();HostField.setId("TextField"); HostField.setMaxWidth(250);HostField.setTranslateY(10);HostField.setText(host);
         TextField PortField = new TextField();PortField.setId("TextField"); PortField.setMaxWidth(150);PortField.setTranslateY(110);PortField.setText(Integer.toString(Port));PortField.setTranslateX(-50);
@@ -72,11 +68,11 @@ public class LoginStage extends Stage {
         //Accept Button
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
         AcceptBTN2.setOnAction(event ->
-        {Model.getInstance().setHostname(HostField.getText());Model.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
+        {ClientSettings.getInstance().setHostname(HostField.getText());ClientSettings.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
             try{
                 new Thread (new SocketClient()).start();
                 this.close();
-                Model.getInstance().writeSettingsToJSON();
+                ClientSettings.getInstance().writeSettingsToJSON();
             }
 
             catch(ConnectException e){

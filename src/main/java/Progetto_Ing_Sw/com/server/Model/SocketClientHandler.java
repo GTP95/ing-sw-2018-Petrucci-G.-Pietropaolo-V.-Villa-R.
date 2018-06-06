@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Progetto_Ing_Sw.com.client.Model;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class SocketClientHandler implements Runnable{

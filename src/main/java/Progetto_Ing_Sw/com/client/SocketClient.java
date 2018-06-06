@@ -12,14 +12,14 @@ public class SocketClient implements Runnable{
     private String username;
     PrintWriter out;
     BufferedReader in;
-    Model model;
+    LocalModel localModel;
     Exception trownException;
 
     public SocketClient() throws UnknownHostException, ConnectException {
         username=null;
-        model=Model.getInstance();
-        String host=model.getHostname();
-        int port=model.getSocketPort();
+        localModel =LocalModel.getInstance();
+        String host= ClientSettings.getInstance().getHostname();
+        int port= ClientSettings.getInstance().getSocketPort();
         try{
             socket=new Socket(host, port);
             System.out.println("Connected to "+host+":"+port);
@@ -42,7 +42,7 @@ public class SocketClient implements Runnable{
     public void run() {
         String serverResponse="";
         while (username==null || username.equals("")) {    //In questo caso essendo il metodo getUsername synchronized, non solo non è necessario utilizzare wait() all'interno del while, ma addirittura causerebbe una IllegalMonitorStateException
-            username=model.getUsername();
+            username= ClientSettings.getInstance().getUsername();
         }
         out.println(username);
         System.out.println("Inviato "+username+" come username");
@@ -103,17 +103,17 @@ public class SocketClient implements Runnable{
         System.out.println("handling JSON message");
         switch (nameOfClass){
             case "arrayListOfPlayers":
-                model.setClientPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
+                localModel.setClientPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
                 break;
             /*case "ClientPlayer":
-                model.addPlayerToPlayerArrayList(JSONCreator.clientPlayerLoaderFromString(json));
+                localModel.addPlayerToPlayerArrayList(JSONCreator.clientPlayerLoaderFromString(json));
                 break;*/
         }
     }
 
     private void handlePlayerMessage(String playerName){
         System.out.println("Handling player message");
-        model.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
+        localModel.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
     }
 
     private  void handleActionMessage(String actionDescription){
@@ -129,7 +129,7 @@ public class SocketClient implements Runnable{
                 int x=Integer.parseInt(actionFields[3]);
                 int y=Integer.parseInt(actionFields[4]);
                 ClientDice dice=JSONCreator.diceLoaderFromString(json);
-                model.getPlayerFromName(username).placeDice(dice, x, y);
+                localModel.getPlayerFromName(username).placeDice(dice, x, y);
                 break;
 
         }
