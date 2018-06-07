@@ -91,6 +91,13 @@ public final class JSONCreator {
         return number;
     }
 
+    public static boolean parseBooleanFieldFromFile(String path, String fieldName) throws FileNotFoundException {
+        JsonElement jelement = new JsonParser().parse(new FileReader(path));
+        JsonObject jobject = jelement.getAsJsonObject();
+        boolean variable=jobject.get(fieldName).getAsBoolean();
+        return variable;
+    }
+
     public static int[][] parseMatrixFieldFromFile(String path, String fieldName, int rows, int columns) throws FileNotFoundException {
 
         JsonElement jelement = new JsonParser().parse(new FileReader(path));

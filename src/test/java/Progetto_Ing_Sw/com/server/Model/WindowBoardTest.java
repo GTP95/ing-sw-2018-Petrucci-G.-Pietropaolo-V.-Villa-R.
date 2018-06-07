@@ -341,6 +341,7 @@ public class WindowBoardTest {
         windowBoard.insertDice(martrixArray,2,4,dice2);
         windowBoard.insertDice(martrixArray,2,5,dice3);
         windowBoard.insertDice(martrixArray,2,1,dice5);
+        windowBoard.printMatrixArrayList(martrixArray);
         System.out.println(martrixArray.get(1).get(0).getDiceContained());//null
 
 

@@ -61,20 +61,27 @@ public class GrozingPliersTest {
         boardPlayerOne.printMatrix(testMatrix,rows,columns);
         boardPlayerOne.setUsedMatrix(boardPlayerOne.fromIntToArrayList(testMatrix,rows,columns));
         boardPlayerOne.setBorders(boardPlayerOne.getUsedMatrix());
-        System.out.println("***MATRICE di ArrayList creata correttamente***");
+        System.out.println("***MATRICE di ArrayList creata+settata correttamente***");
         System.out.println();
 
-        boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,1,dice1);
-        System.out.println("DICE VALUE :"+boardPlayerOne.getUsedMatrix().get(3).get(0).getDiceContained().getValue());//1
-        System.out.println("DICE COLOR :"+boardPlayerOne.getUsedMatrix().get(3).get(0).getDiceContained().getColor());//2
+        boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,3,dice1);
+        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
         System.out.println("***INSERIMENTO avvenuto correttamente***");
         System.out.println();
 
-
-        grozingPliers.applyEffect(boardPlayerOne,"UP",dice1,3,2); //da uno deve diventare 2
+        grozingPliers.applyEffect(boardPlayerOne,"UP",dice1,3,2, 1); //da uno deve diventare 2
+        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
         System.out.println("***GROZING PLIERS usata correttamente***");
-        System.out.println("DICE VALUE (grozingPliers modified) :"+boardPlayerOne.getUsedMatrix().get(2).get(1).getDiceContained().getValue());//1
-        System.out.println("DICE COLOR (grozingPliers modified) :"+boardPlayerOne.getUsedMatrix().get(2).get(1).getDiceContained().getColor());//2
+        System.out.println();
 
-        }
+        grozingPliers.applyEffect(boardPlayerOne,"UP",dice2,4,2, 2);
+        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        System.out.println("***GROZING PLIERS usata correttamente***");
+        System.out.println();
+
+        grozingPliers.applyEffect(boardPlayerOne,"DOWN",dice3,4,1, 2);
+        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        System.out.println("***GROZING PLIERS usata correttamente***");
+        System.out.println();
+    }
 }
