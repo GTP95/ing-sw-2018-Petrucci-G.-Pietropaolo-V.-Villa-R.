@@ -57,7 +57,7 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
     }
 
     @Test
-    public void returnDiceTest(){       //Controlla che togliendo e reinserendo lo stesso dado l'arrayList DrawnDice non cambi
+    public void returnDiceTest(){       //Controlla che togliendo e reinserendo lo stesso dado l'arrayList DrawnDice non cambi TODO: in realtà questo twest lavora con un solo dado...
         ArrayList<Dice> diceArray=gameTable.getDrawnDice();
         SplittableRandom splittableRandom=new SplittableRandom();
 
