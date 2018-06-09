@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -70,4 +71,28 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
         }
         System.out.println();
     }
-}
+
+    @Test
+    public void returnDiceTest(){       //Controlla che togliendo e reinserendo lo stesso dado l'arrayList DrawnDice non cambi
+        ArrayList<Dice> diceArray=gameTable.getDrawnDice();
+        SplittableRandom splittableRandom=new SplittableRandom();
+
+        try {
+            Dice dice=gameTable.getChoosenDice(diceArray.get(splittableRandom.nextInt(0,diceArray.size())));    //Pesca un dado a caso nell'arraylist
+            gameTable.returnDice(dice);     //reinserisce il dado pescato nell'arrayList
+        } catch (IllegalDiceException e) {
+            Assert.fail(e.getMessage());
+        }
+        ArrayList<Dice> diceArrayListAfterDraftingAndReinserting=gameTable.getDrawnDice();
+        for(Dice dice : diceArray) {   //Controllo che i due ArrayList siano uguali eliminando i dadi di diceArrayListAfterDraftingAndReinserting che hanno una corrispondenza in diceArray, se alla fine la dimansione di diceArrayListAfterDraftingAndReinserting è 0 allora i due arrayList contenevano esattamente gli stessi dadi
+            for(Dice dice2 : diceArrayListAfterDraftingAndReinserting){
+                if(dice.equals(dice2)){
+                    diceArrayListAfterDraftingAndReinserting.remove(dice2);
+                    break;      //dopo aver rimosso il dado deve uscire dal ciclo più interno per passare al dado successivo, altrimenti se sono presenti più dadi uguali verrebbero subito rimossi tutti alla prima occorrenza e risolve anche la ConcurrentModificationException
+                }
+            }
+        }
+        if(!diceArrayListAfterDraftingAndReinserting.isEmpty()) Assert.fail("Size is "+diceArrayListAfterDraftingAndReinserting.size());
+    }
+
+    }

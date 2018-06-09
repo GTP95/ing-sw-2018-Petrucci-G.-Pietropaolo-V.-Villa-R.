@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import java.util.Objects;
+
 public class Dice {
     private int value;
     private int color;
@@ -41,5 +43,20 @@ public class Dice {
         if(value==1){
         }else{value--;}
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {       //usata per i test
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dice dice = (Dice) o;
+        return value == dice.value &&
+                color == dice.color;
+    }
+
+    @Override
+    public int hashCode() {     //generata automaticamente da inetllij TODO: chiedere se è da togliere
+
+        return Objects.hash(value, color);
     }
 }
