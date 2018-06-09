@@ -13,27 +13,11 @@ import static org.mockito.Mockito.when;
 
 public class TableTest {    //Questa classe, data la sua natura, fa integration testing anzichè unit testing
 
-    private ArrayList<PublicObjectiveCard> publicObjectiveCardArrayList;
-    private ArrayList<ToolCard> toolCardArrayList;
-
-    private PublicObjectiveCardDeck publicObjectiveCardDeckTest;
-    private ToolCardDeck toolCardDeckTest;
-
     private Table gameTable;
-    private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
-    private ArrayList<ToolCard> drawnToolCards;
-
-    private PublicObjectiveCard cardP1, cardP2, cardP3, cardP4;
-    private ToolCard cardT1, cardT2, cardT3, cardT4;
-    private DiceBag diceBag;
 
     @Before
     public void before(){
-        /*Mock del tavolo da gioco*/
         gameTable=Table.getOurInstance();
-
-        /*Costruzione dei mazzi che vengono pescati*/
-
     }
 
     @Test
