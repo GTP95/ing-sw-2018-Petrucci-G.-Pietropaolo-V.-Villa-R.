@@ -7,11 +7,10 @@ aggiungere manualmente dei giocatori nella lobby. Dato che questo è necessario 
 
 package Progetto_Ing_Sw.com.server.Model;
 
-import javafx.scene.control.Tab;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+
 
 import java.util.ArrayList;
 import java.util.SplittableRandom;
@@ -21,7 +20,7 @@ public class TableTestWithRandomizedNumOfPlayers {
     private Table gameTable;
     private int numOfPlayersToTest;
     private SplittableRandom splittableRandom;
-    private ArrayList<Player> playerArrayList;
+
 
     @Before
     public void testInit(){
@@ -33,10 +32,11 @@ public class TableTestWithRandomizedNumOfPlayers {
            switch(counter){
                case 0:
                    try {
-                       lobby.addPlayer("ReadyPlayerOne",null);
+                       lobby.addPlayer("ReadyPlayerOne",null);  //SocketClientHandler è impostato a null per tutti i giocatori perchè tanto non viene usato
                        break;
                    } catch (TooManyPlayersException e) {
                        e.printStackTrace();
+                       Assert.fail();
                    } catch (InvalidUsernameException e) {
                        Assert.fail(e.getMessage());
                    }
@@ -46,6 +46,7 @@ public class TableTestWithRandomizedNumOfPlayers {
                        break;
                    } catch (TooManyPlayersException e) {
                        e.printStackTrace();
+                       Assert.fail();
                    } catch (InvalidUsernameException e) {
                        Assert.fail(e.getMessage());
                    }
@@ -55,6 +56,7 @@ public class TableTestWithRandomizedNumOfPlayers {
                        break;
                    } catch (TooManyPlayersException e) {
                        e.printStackTrace();
+                       Assert.fail();
                    } catch (InvalidUsernameException e) {
                        Assert.fail(e.getMessage());
                    }
