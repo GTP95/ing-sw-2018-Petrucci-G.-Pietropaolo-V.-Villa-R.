@@ -414,7 +414,7 @@ public class WindowBoard implements WindowBoardObserver{
     public boolean checkAdjacency(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column){
         boolean adjacencyState=false;
 
-        System.out.println(">>> CELL INPUT (adjacency) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (adjacency) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -427,7 +427,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -436,7 +436,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -445,7 +445,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -454,7 +454,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -463,7 +463,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -472,7 +472,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -481,7 +481,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -490,7 +490,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -507,7 +507,7 @@ public class WindowBoard implements WindowBoardObserver{
     public boolean checkOrtogonalColor(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column){
         boolean correctColor=false;
 
-        System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -519,7 +519,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if( ((r-1>0)||(r-1==0)) && usedMatrix.get(r-1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r-1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOPRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOPRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getColor()!=usedMatrix.get(r-1).get(c).getDiceContained().getColor())){
@@ -532,7 +532,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c-1>0)||(c-1==0)) && usedMatrix.get(r).get(c-1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r).get(c-1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A SINISTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A SINISTRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getColor()!=usedMatrix.get(r).get(c-1).getDiceContained().getColor())){
@@ -544,7 +544,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r).get(c+1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r).get(c+1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A DESTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A DESTRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getColor()!=usedMatrix.get(r).get(c+1).getDiceContained().getColor())){
@@ -556,7 +556,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((r+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r+1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getColor()!=usedMatrix.get(r+1).get(c).getDiceContained().getColor())){
@@ -572,7 +572,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             correctColor=true;
                             break;
                         }
@@ -581,7 +581,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             correctColor=true;
                             break;
                         }
@@ -590,7 +590,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             correctColor=true;
                             break;
                         }
@@ -599,7 +599,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL IRRILEVANT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             correctColor=true;
                             break;
                         }
@@ -616,7 +616,7 @@ public class WindowBoard implements WindowBoardObserver{
     public boolean checkOrtogonalValue(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column){
         boolean correctNumber=false;
 
-        System.out.println(">>> CELL INPUT (ortogonal value) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (ortogonal value) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -627,7 +627,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if( ((r-1>0)||(r-1==0)) && usedMatrix.get(r-1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r-1).get(c).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore SOPRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore SOPRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getValue()!=usedMatrix.get(r-1).get(c).getDiceContained().getValue())){
@@ -640,7 +640,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c-1>0)||(c-1==0)) && usedMatrix.get(r).get(c-1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r).get(c-1).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A SINISTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A SINISTRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getValue()!=usedMatrix.get(r).get(c-1).getDiceContained().getValue())){
@@ -652,7 +652,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r).get(c+1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r).get(c+1).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A DESTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A DESTRA");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getValue()!=usedMatrix.get(r).get(c+1).getDiceContained().getValue())){
@@ -664,7 +664,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((r+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r+1).get(c).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
                                 break;
                             }
                             else if((usedMatrix.get(r).get(c).getDiceContained().getValue()!=usedMatrix.get(r+1).get(c).getDiceContained().getValue())){
@@ -692,7 +692,7 @@ public class WindowBoard implements WindowBoardObserver{
 
     //******************************REAL GAMEPLAY*************************************************************//
 
-    //metodo finale di inserimento dei dadi
+    //***TEST*** metodo finale di inserimento dei dadi, con Commenti per vedere in che ramo sono finito--------------------------------------------------
     public ArrayList<ArrayList<MatrixCell>> insertDiceWithText(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column, Dice dice){
 
         if(matrixNotEmpty(usedMatrix)==false){ //CONTROLLO PRIMO TURNO
@@ -925,9 +925,7 @@ public class WindowBoard implements WindowBoardObserver{
         }
         return usedMatrix;
     }
-
-    //metodo finale di inserimento dei dadi
-    public ArrayList<ArrayList<MatrixCell>> insertDice(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column, Dice dice){
+    public ArrayList<ArrayList<MatrixCell>> insertDiceWithoutExlusions(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column, Dice dice){
 
         if(matrixNotEmpty(usedMatrix)==false){ //CONTROLLO PRIMO TURNO
 
@@ -1018,7 +1016,7 @@ public class WindowBoard implements WindowBoardObserver{
                             else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
                             { // NO ADIACENZA
                                 System.out.println("Non stai rispettando le regole di adiacenza");
-                                usedMatrix.get(r).get(c).setDiceContained(dice);
+                                usedMatrix.get(r).get(c).setDiceContained(null);
                                 break;
                             }
 
@@ -1132,6 +1130,544 @@ public class WindowBoard implements WindowBoardObserver{
                     }
                     else if (usedMatrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1)
                     {//CASO CELLA OCCUPATA
+                        System.out.println("La casella è già occupata! Salti il turno");
+                        break;
+                    }
+                }
+            }
+        }
+        return usedMatrix;
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public ArrayList<ArrayList<MatrixCell>> insertDice(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column, Dice dice){
+
+        if(matrixNotEmpty(usedMatrix)==false)
+        { //CONTROLLO PRIMO TURNO
+
+            for(int r=0;r<row;r++)
+            {
+                for (int c = 0; c < column; c++)
+                {
+
+                    if (usedMatrix.get(r).get(c).isOnBorder() == true && c == column - 1 && r == row - 1)
+                    {//CONTROLLO BORDI, CELLA CORRETTA
+
+                        if (usedMatrix.get(r).get(c).getColor() == Color.BLANK) { //CONROLLO BIANCO
+                            usedMatrix.get(r).get(c).setDiceContained(dice);
+                            usedMatrix.get(r).get(c).setUsed(true);
+                            break;
+                        }
+                        else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK)
+                        { //CONTROLLO NON BIANCO
+
+                            ///++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+                            if(dice.isColorBreaker())
+                            {
+                                if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//CONTROLLO SFUMATURA
+                                    usedMatrix.get(r).get(c).setDiceContained(dice);
+                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    break;
+                                }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                {   //TODO eccezione + GUI
+                                    break;
+                                }
+                                //CASO LIMITE COLOR BREAKER - CONTROLLO COLORE
+                                if(usedMatrix.get(r).get(c).getColor() != Color.SHADE)
+                                { //se è una cella colorata inserisco comunque il dado
+                                    usedMatrix.get(r).get(c).setDiceContained(dice);
+                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    break;
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+
+                            ///++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+                            if(dice.isNumberBreaker())
+                            {
+                                if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
+                                {//CONTROLLO COLORE
+                                    usedMatrix.get(r).get(c).setDiceContained(dice);
+                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    break;
+                                }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
+                                {   //TODO eccezione + GUI
+                                    break;
+                                }
+                                //CASO LIMITE NUMBER BREAKER + CONTROLLO SFUMATURA
+                                if(usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                { //se è una sfumatura inserisco comunque il dado
+                                    usedMatrix.get(r).get(c).setDiceContained(dice);
+                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    break;
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+
+                            //CONTROLLI NORMALI
+
+                            if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                            {//CONTROLLO SFUMATURA
+                                usedMatrix.get(r).get(c).setDiceContained(dice);
+                                usedMatrix.get(r).get(c).setUsed(true);
+                                break;
+                            }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                            {
+                                //TODO eccezione + GUI
+                                break;
+                            }
+                            if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
+                            {//CONTROLLO COLORE
+                                usedMatrix.get(r).get(c).setDiceContained(dice);
+                                usedMatrix.get(r).get(c).setUsed(true);
+                                break;
+                            }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor()){
+                                //TODO eccezione + GUI
+                                break;
+                            }
+
+                        }
+                    }
+                    else if (usedMatrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1) {
+                        System.out.println("Prima mossa illegale, non stai partendo dai bordi");
+                        //TODO eccezione + GUI
+                        break;
+                    }
+                }
+            }
+        }
+        else if (matrixNotEmpty(usedMatrix)==true)
+        { //Mosse successive alla prima
+
+            for (int r = 0; r < row; r++) {
+                for (int c = 0; c < column; c++) {
+
+                    if (usedMatrix.get(r).get(c).isUsed() == false && c == column - 1 && r == row - 1)
+                    { //CASO CELLA LIBERA
+
+                        if (usedMatrix.get(r).get(c).getColor() == Color.BLANK)
+                        {//CASO CELLA BIANCA
+
+                            usedMatrix.get(r).get(c).setDiceContained(dice);
+                            usedMatrix.get(r).get(c).setUsed(true);
+
+                            //++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
+                            if(dice.isAdjacencyBreaker())
+                            {
+                                System.out.println("ADIACENCY - BREAKER (white)");
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1)==false){
+                                    //non ho alcun effetto, infatti in questo caso ho una cella bianca staccata da tutto il resto
+                                    break;
+                                }
+                                else if (checkAdjacency(usedMatrix,r+1,c+1)){
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
+
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+                            if(dice.isColorBreaker())
+                            {
+                                System.out.println("COLOR - BREAKER (white)");
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1))
+                                {//CONTROLLO ADIACENZA OK
+                                    if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    {//CONTROLLO NUMERO OK
+                                        break;
+                                    }else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    {   //CONTROLLO COLORE NO
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                { // NO ADIACENZA
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+                            if(dice.isNumberBreaker())
+                            {
+                                System.out.println("NUMBER - BREAKER (white)");
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1))
+                                {//CONTROLLO ADIACENZA OK
+                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                    {//CONTROLLO COLORE OK
+                                        break;
+                                    }
+                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                    { // NO COLORE
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                                else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                { // NO ADIACENZA
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+
+                            //CONTROLLI NORMALI
+                            if(checkAdjacency(usedMatrix,r+1,c+1))
+                            {//CONTROLLO ADIACENZA OK
+
+                                if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                {//CONTROLLO COLORE/NUMERO OK
+
+                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                    {//CONTROLLO COLORE OK
+                                        break;
+                                    }
+                                    else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    {//CONTROLLO NUMERO OK
+                                        break;
+                                    }
+                                }
+                                else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                { // NO COLORE/NUMERO
+
+                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                    {//CONTROLLO COLORE NO
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                    else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    {//CONTROLLO NUMERO NO
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                            }
+                            else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                            { // NO ADIACENZA
+                                //TODO eccezione + GUI
+                                usedMatrix.get(r).get(c).setDiceContained(null);
+                                usedMatrix.get(r).get(c).setUsed(false);
+                                break;
+                            }
+
+                        }
+                        else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK)
+                        {//CASO CELLA NON BIANCA
+
+                            usedMatrix.get(r).get(c).setDiceContained(dice);
+                            usedMatrix.get(r).get(c).setUsed(true);
+
+                            //++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+                            if(dice.isNumberBreaker())
+                            {
+                                System.out.println("NUMBER - BREAKER (NOT white)");
+
+                                if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
+                                {//CONTROLLO COLORE
+                                    if(checkAdjacency(usedMatrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA OK
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE ORTOGONALE OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        { // NO COLORE ORTOGONALE
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                    else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                    { // NO ADIACENZA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                                else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
+                                {//NO COLORE CELLA
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+
+                                if(usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//CONTROLLO SFUMATURA (caso limite)
+
+                                    System.out.println("NUMBER - BREAKER (NOT white) --> SPECIAL CASE");
+
+                                    if(checkAdjacency(usedMatrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA OK
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE ORTOGONALE OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        { // NO COLORE ORTOGONALE
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                    else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                    { // NO ADIACENZA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                            }
+                            //++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
+
+                            //+++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+                            if(dice.isColorBreaker())
+                            {
+                                System.out.println("COLOR - BREAKER (NOT white)");
+
+                                if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//CONTROLLO SFUMATURA
+                                    if(checkAdjacency(usedMatrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA OK
+                                        if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO NUMERO ORTOGONALE OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        {   //CONTROLLO COLORE ORTOGONALE NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                    else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                    { // NO ADIACENZA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                {//NO SFUMATURA
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+
+                                if(usedMatrix.get(r).get(c).getColor() != Color.SHADE)
+                                {//CONTROLLO COLORE (caso limite)
+
+                                    System.out.println("COLOR - BREAKER (NOT white) --> SPECIAL CASE");
+
+                                    if(checkAdjacency(usedMatrix,r+1,c+1))
+                                    {//CONTROLLO ADIACENZA OK
+                                        if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO NUMERO OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        {   //CONTROLLO COLORE NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                    else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                    { // NO ADIACENZA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                            }
+                            //+++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
+
+                            ///++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
+                            if(dice.isAdjacencyBreaker())
+                            {
+                                System.out.println("ADJACENCY - BREAKER (NOT white)");
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                {//EFFETTIVAMENTE NON ADIACENTE A NULLA
+
+                                    if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                    {//CONTROLLO SFUMATURA
+                                        break;
+                                    }
+                                    else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                                    {//NO SFUMATURA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                        break;
+                                    }
+
+                                    if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
+                                    {//CONTROLLO COLORE
+                                        break;
+                                    }
+                                    else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
+                                    {//NO COLORE CELLA
+                                        //TODO eccezione + GUI
+                                        usedMatrix.get(r).get(c).setDiceContained(null);
+                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        break;
+                                    }
+                                }
+                                else if (checkAdjacency(usedMatrix,r+1,c+1))
+                                {
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            ///++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
+
+                            //CONTROLLI NORMALI
+                            if (checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                            {//CONTROLLO SFUMATURA OK
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1))
+                                {//CONTROLLO ADIACENZA
+
+                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    {///CONTROLLO COLORE/NUMERO OK
+
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO NUMERO OK
+                                            break;
+                                        }
+                                    }
+                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false )
+                                    {// COLORE/NUMERO NO
+
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        {//CONTROLLO COLORE NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        {//CONTROLLO NUMERO NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                { // ADIACENZA NO
+                                    //TODO eccezione + GUI
+                                    System.out.println("Non stai rispettando le regole di adiacenza");
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
+                            {//NO SFUMATURA
+                                //TODO eccezione + GUI
+                                usedMatrix.get(r).get(c).setDiceContained(null);
+                                usedMatrix.get(r).get(c).setUsed(false);
+                                System.out.println("Il dado inserito non rispetta la sfumatura data");
+                                break;
+                            }
+
+                            //-------
+
+                            if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
+                            {//CONTROLLO COLORE CELLA
+
+                                if(checkAdjacency(usedMatrix,r+1,c+1))
+                                {//CONTROLLO ADIACENZA
+
+                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1) )
+                                    {//CONTROLLO COLORE/NUMERO
+
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO COLORE OK
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        {//CONTROLLO NUMERO OK
+                                            break;
+                                        }
+
+                                    }
+                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    {//NO COLORE/NUMERO
+
+                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        {//CONTROLLO COLORE NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        {//CONTROLLO NUMERO NO
+                                            //TODO eccezione + GUI
+                                            usedMatrix.get(r).get(c).setDiceContained(null);
+                                            usedMatrix.get(r).get(c).setUsed(false);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if(checkAdjacency(usedMatrix,r+1,c+1)==false)
+                                {// NO ADIACENZA
+                                    //TODO eccezione + GUI
+                                    usedMatrix.get(r).get(c).setDiceContained(null);
+                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    break;
+                                }
+                            }
+                            else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
+                            {//NO COLORE CELLA
+                                //TODO eccezione + GUI
+                                usedMatrix.get(r).get(c).setDiceContained(null);
+                                usedMatrix.get(r).get(c).setUsed(false);
+                                break;
+                            }
+                        }
+                    }
+                    else if (usedMatrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1)
+                    {//CASO CELLA OCCUPATA
+                        //TODO EXCEPTION + GUI
                         System.out.println("La casella è già occupata! Salti il turno");
                         break;
                     }

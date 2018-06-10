@@ -1,6 +1,5 @@
 package Progetto_Ing_Sw.com.server.Model;
 
-import Progetto_Ing_Sw.com.client.TableGUI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import static org.mockito.Mockito.when;
 
 public class WindowBoardTest {
     private WindowBoard windowBoard;
-    private DiceBag diceBag;
     private Dice dice3;
     private Dice dice2;
     private Dice dice1;
@@ -25,8 +23,6 @@ public class WindowBoardTest {
     @Before
     public void before() {
         windowBoard = mock(WindowBoard.class);
-        diceBag=mock(DiceBag.class);
-
         dice1=mock(Dice.class);
         dice2=mock(Dice.class);
         dice3=mock(Dice.class);
@@ -168,6 +164,7 @@ public class WindowBoardTest {
                 }
             }
         }
+        windowBoard.printMatrixArrayList(martrixArray);
     }
 
     @Test
@@ -231,6 +228,8 @@ public class WindowBoardTest {
         windowBoard.insertDiceARRLIST(martrixArray,4,5,dice3);
         windowBoard.insertDiceARRLIST(martrixArray,4,3,dice3);
         System.out.println();
+
+        windowBoard.printMatrixArrayList(martrixArray);
     }
 
     @Test
@@ -258,6 +257,8 @@ public class WindowBoardTest {
         windowBoard.insertDiceARRLIST(martrixArray,2,5,dice3);
         windowBoard.insertDiceARRLIST(martrixArray,4,5,dice3);
         windowBoard.insertDiceARRLIST(martrixArray,4,4,dice2);
+
+        windowBoard.printMatrixArrayList(martrixArray);
 
 
         //Parte di controllo adiacenza
@@ -334,16 +335,25 @@ public class WindowBoardTest {
 
         //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
 
-        windowBoard.insertDice(martrixArray,1,4,dice1);
-        System.out.println("COLOR "+martrixArray.get(0).get(3).getColor());
-        System.out.println("DADO COLORE "+dice2.getColor());
-        System.out.println("DADO VALORE "+dice2.getValue());
+        System.out.println(" 1° INSERIMENTO");
+        windowBoard.insertDice(martrixArray,1,2,dice3);
+        windowBoard.printMatrixArrayList(martrixArray);
+        System.out.println();
+
+        System.out.println(" 2° INSERIMENTO");
         windowBoard.insertDice(martrixArray,2,4,dice2);
+        windowBoard.printMatrixArrayList(martrixArray);
+        System.out.println();
+
+        System.out.println(" 3° INSERIMENTO");
         windowBoard.insertDice(martrixArray,2,5,dice3);
+        windowBoard.printMatrixArrayList(martrixArray);
+        System.out.println();
+
+        System.out.println(" 4° INSERIMENTO");
         windowBoard.insertDice(martrixArray,2,1,dice5);
         windowBoard.printMatrixArrayList(martrixArray);
-        System.out.println(martrixArray.get(1).get(0).getDiceContained());//null
-
+        System.out.println();
 
     }
 }

@@ -66,7 +66,6 @@ public class GrozingPliersTest {
 
         boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,3,dice1);
         boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
-        System.out.println("***INSERIMENTO avvenuto correttamente***");
         System.out.println();
 
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice1,3,2, 1); //da uno deve diventare 2

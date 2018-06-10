@@ -25,12 +25,16 @@ public class Dice {
     public int getColor() {
         return color;
     }
+    public boolean isAdjacencyBreaker() {return adjacencyBreaker;}
+    public boolean isColorBreaker() {return colorBreaker;}
+    public boolean isNumberBreaker() {return numberBreaker;}
 
     public void setValue(int value) {this.value = value;}
     public void setColor(int color) {this.color = color;}
     public void setAdjacencyBreaker(boolean adjacencyBreaker) {this.adjacencyBreaker = adjacencyBreaker;}
     public void setColorBreaker(boolean colorBreaker) {this.colorBreaker = colorBreaker;}
     public void setNumberBreaker(boolean numberBreaker) {this.numberBreaker = numberBreaker;}
+
 
     public int increaseValue(int value){
 
