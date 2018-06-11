@@ -9,13 +9,20 @@ import static org.mockito.Mockito.when;
 
 public class GamePlayTest {
     private WindowBoard windowBoard;
+    private RoundTrack roundTrack;
+
     private GrozingPliers grozingPliers;
     private EglomiseBrush eglomiseBrush;
     private CopperFoilBurnisher copperFoilBurnisher;
+    private LensCutter lensCutter;
     private Lathekin lathekin;
+
     private Dice dice1;
     private Dice dice2;
     private Dice dice3;
+    private Dice dice4;
+    private Dice dice5;
+    private Dice dice6;
     private Dice dice1Copper;
 
     private final int rows = 4;
@@ -24,13 +31,19 @@ public class GamePlayTest {
     @Before
     public void before() {
         windowBoard = mock(WindowBoard.class);
+
         grozingPliers=mock(GrozingPliers.class);
         eglomiseBrush=mock(EglomiseBrush.class);
         copperFoilBurnisher=mock(CopperFoilBurnisher.class);
         lathekin =mock(Lathekin.class);
+        lensCutter=mock(LensCutter.class);
+
         dice1=mock(Dice.class);
         dice2=mock(Dice.class);
         dice3=mock(Dice.class);
+        dice4=mock(Dice.class);
+        dice5=mock(Dice.class);
+        dice6=mock(Dice.class);
         dice1Copper=mock(Dice.class);
 
         when(dice1.getColor()).thenReturn(Color.RED);
@@ -45,7 +58,14 @@ public class GamePlayTest {
         when(dice1Copper.getColor()).thenReturn(Color.GREEN);
         when(dice1Copper.getValue()).thenReturn(1);
 
+        when(dice4.getColor()).thenReturn(Color.PURPLE);
+        when(dice4.getValue()).thenReturn(4);
 
+        when(dice5.getColor()).thenReturn(Color.YELLOW);
+        when(dice5.getValue()).thenReturn(5);
+
+        when(dice6.getColor()).thenReturn(Color.YELLOW);
+        when(dice6.getValue()).thenReturn(6);
     }
 
     @Test
@@ -87,6 +107,12 @@ public class GamePlayTest {
         System.out.println("Dice2 value :"+dice2.getValue());
         System.out.println("Dice3 color (BLUE):"+dice3.getColor());
         System.out.println("Dice3 value :"+dice3.getValue());
+        System.out.println("Dice4 color (PURPLE):"+dice4.getColor());
+        System.out.println("Dice4 value :"+dice4.getValue());
+        System.out.println("Dice5 color (YELLOW):"+dice5.getColor());
+        System.out.println("Dice5 value :"+dice5.getValue());
+        System.out.println("Dice6 color (YELLOW):"+dice6.getColor());
+        System.out.println("Dice6 value :"+dice6.getValue());
         System.out.println();
 
         //Inizio partita vera e propria
@@ -106,12 +132,12 @@ public class GamePlayTest {
         System.out.println();
         /*
 
-        System.out.println("3° Inserimento - Grozing Pliers");
+        System.out.println("Grozing Pliers");
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice2,3,1,1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
-        System.out.println("4° Inserimento - Eglomise Brush");
+        System.out.println("Eglomise Brush");
         eglomiseBrush.applyEffect(boardPlayerOne,dice3,3,1,3,2,1);
         boardPlayerOne.printMatrixArrayList();
         //Test per il controllo della Eglomise Brush
@@ -119,7 +145,7 @@ public class GamePlayTest {
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(1).getDiceContained().getColor(),2);
         System.out.println();
 
-        System.out.println("5° Inserimento - Copper Foil Burnisher");
+        System.out.println("Copper Foil Burnisher");
         copperFoilBurnisher.applyEffect(boardPlayerOne,dice1Copper,4,2,3,1,1);
         boardPlayerOne.printMatrixArrayList();
         //Test per il controllo della Copper Foil Burnisher
@@ -128,14 +154,11 @@ public class GamePlayTest {
         System.out.println();
         */
 
-        System.out.println("8° Inserimento - Lathekin");
-        lathekin.applyEffect(boardPlayerOne,4,1,4,2,4,1,4,3,dice1,dice2,1);
+        System.out.println("Lathekin");
+        lathekin.applyEffect(boardPlayerOne,4,1,4,2,3,1,3,2,dice1,dice2,1);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(0).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(1).isUsed(),true);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
-
-
-
-
-
     }
 }
