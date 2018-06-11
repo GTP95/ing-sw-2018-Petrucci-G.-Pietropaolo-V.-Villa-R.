@@ -198,8 +198,8 @@ public class TableGUI extends Stage{
             //INIZIO MENU TOOL CARD
 
             //Contenuto del menu ToolCard
-            Label ToolCardMenuTitle = new Label("           Tool Cards");
-            ToolCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: white;" + "-fx-font: 25 \"Centaur\";");
+            Label ToolCardMenuTitle = new Label("            Tool Cards");
+            ToolCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: black;" + "-fx-font: 25 \"Centaur\";");
 
             Label ToolCard1Label= new Label();ToolCard1Label.setMinSize(268,131);ToolCard1Label.setId("ToolCardLabel");
             Label ToolCard2Label= new Label();ToolCard2Label.setMinSize(268,131);ToolCard2Label.setId("ToolCardLabel");
@@ -246,48 +246,49 @@ public class TableGUI extends Stage{
                 Hover1.play();
             });
 
-        ToolCard1.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard1);
-            Hover2.setFromY(-10);
-            Hover2.setToY(0);
-            Hover2.setAutoReverse(true);
-            Hover2.play();
-        });
+            ToolCard1.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard1);
+                Hover2.setFromY(-10);
+                Hover2.setToY(0);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
 
             StackPane ToolCard2 = new StackPane();ToolCard2.setTranslateY(75);
             ToolCard2.getChildren().addAll(ToolCard2Label,ToolCard2BTN);
-        ToolCard2.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
-            Hover2.setFromY(75);
-            Hover2.setToY(65);
-            Hover2.setAutoReverse(true);
-            Hover2.play();
-        });
-        ToolCard2.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
-            Hover2.setFromY(65);
-            Hover2.setToY(75);
-            Hover2.setAutoReverse(true);
-            Hover2.play();
-        });
+            ToolCard2.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
+                Hover2.setFromY(75);
+                Hover2.setToY(65);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            ToolCard2.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
+                Hover2.setFromY(65);
+                Hover2.setToY(75);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
 
             StackPane ToolCard3 = new StackPane();ToolCard3.setTranslateY(150);
             ToolCard3.getChildren().addAll(ToolCard3Label,ToolCard3BTN);
-        ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
-            Hover2.setFromY(150);
-            Hover2.setToY(140);
-            Hover2.setAutoReverse(true);
-            Hover2.play();
-        });
+            ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+                Hover2.setFromY(150);
+                Hover2.setToY(140);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
 
-        ToolCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
-            Hover2.setFromY(140);
-            Hover2.setToY(150);
-            Hover2.setAutoReverse(true);
-            Hover2.play();
-        });
+            ToolCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+                Hover2.setFromY(140);
+                Hover2.setToY(150);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
 
 
             //StackPane per contenere le carte

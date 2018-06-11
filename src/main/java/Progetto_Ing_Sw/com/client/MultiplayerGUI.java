@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.sql.Time;
 import java.util.*;
 
@@ -29,6 +30,7 @@ public class MultiplayerGUI extends Stage {
     Label Player1Label,Player2Label,Player3Label,Player4Label;
 
     private ArrayList<ClientPlayer> PlayersList;
+    private Timer timer;
 
     public void update(){
         for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size(); i++ ){
@@ -39,6 +41,8 @@ public class MultiplayerGUI extends Stage {
         Player3Label.setText(PlayersList.get(2).getName());
         Player4Label.setText(PlayersList.get(3).getName());
     }
+
+
 
 
     MultiplayerGUI(){
@@ -97,11 +101,14 @@ public class MultiplayerGUI extends Stage {
         PlayersList.add(3, new ClientPlayer("Player4"));
 
 
+
         //Labels con i nomi dei giocatori
         Player1Label = new Label(PlayersList.get(0).getName()); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
         Player2Label = new Label(PlayersList.get(1).getName()); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
         Player3Label = new Label(PlayersList.get(2).getName()); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
         Player4Label = new Label(PlayersList.get(3).getName()); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+
+
 
         LocalModel.getInstance().registerAsObserver(this);
 
@@ -117,6 +124,7 @@ public class MultiplayerGUI extends Stage {
         StackPane Player2V = new StackPane();
         Player2V.setAlignment(Pos.CENTER);
         Player2V.getChildren().addAll(Player2BTN,Player2Label,Player2Window);
+
 
         //StackPane Player3
         StackPane Player3V = new StackPane();

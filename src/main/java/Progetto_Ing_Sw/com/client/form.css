@@ -451,7 +451,6 @@
             #d8b134,
             radial-gradient(center 50% 50%, radius 100%, #ffc518, #c54e2c);*/
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
-
 }
 
 #ToolCardLabel{
@@ -464,9 +463,6 @@
 
 }
 
-#Test{
-    -fx-background-color: black;
-}
 
 #ToolCardBTN{
     -fx-background-color: transparent;
@@ -476,7 +472,7 @@
 
 #ToolCardBTN:hover{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffd600;
+    -fx-text-fill: #903b12;
     -fx-font: 25 "Centaur";
 }
 
