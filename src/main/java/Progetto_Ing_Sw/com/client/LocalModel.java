@@ -68,7 +68,7 @@ public  class LocalModel {
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
             for(ClientPlayer clientPlayerInArray : clientPlayerArrayList)
                 if(!clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=true;
-      //  if (addPlayer) {
+        if (addPlayer) {
             clientPlayerArrayList.add(clientPlayer);
         System.out.println("PlayerArrayList:");
             for(ClientPlayer player : clientPlayerArrayList){
@@ -76,7 +76,7 @@ public  class LocalModel {
             }
             observer.update();
             notifyAll();
-      //  }
+        }
     }
 
    /* private void notifyObserver(){

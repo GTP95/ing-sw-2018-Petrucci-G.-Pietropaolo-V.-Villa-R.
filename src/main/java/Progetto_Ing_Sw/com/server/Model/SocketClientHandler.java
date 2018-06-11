@@ -14,9 +14,11 @@ public class SocketClientHandler implements Runnable{
     private PrintWriter out;
     private BufferedReader in;
     private static int timeout;
+    public final Thread ourThread;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
+        ourThread=Thread.currentThread();
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -38,17 +40,17 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
+                        while(true) {
+                            if(ourThread.isInterrupted()) {
+                                sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
+                            }
+                        }
 
-                        sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
-
-                while (Lobby.isRunning){
-                    sendPlayerMessage();
-                }
 
                 /* while(Table.gameRunning){
                         listenForNotificationFromModel();   //TODO: implementare observer
                  }*/
-                Thread.sleep(30000);
+
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -58,9 +60,11 @@ public class SocketClientHandler implements Runnable{
             }
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+           }
+           /*catch (InterruptedException e) {
+                sendPlayerMessage();
+            }*/
+
     }
 
 

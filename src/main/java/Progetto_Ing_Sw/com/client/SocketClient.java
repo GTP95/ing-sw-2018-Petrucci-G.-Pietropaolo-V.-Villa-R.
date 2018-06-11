@@ -1,6 +1,5 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Model.Lobby;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.*;
