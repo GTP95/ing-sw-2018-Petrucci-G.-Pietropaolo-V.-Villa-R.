@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Progetto_Ing_Sw.com.client.ClientPlayer;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class Lobby {
@@ -48,6 +49,9 @@ public class Lobby {
             Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw(), socketClientHandler);   //se vengono passati tutti i controlli, viene generato il nuovo utente ed inserito nell'arraylist
             connectedPlayers.add(player);
             System.out.println("ClientPlayer " + player.getName() + " joined the game!");    //TODO: test per verificare aggiunta giocatori nell'arraylist
+            for(Player connectedPlayer : connectedPlayers){
+                connectedPlayer.getSocketClientHandler().getNotificationNewPlayerConnected(playerName);
+            }
             if(connectedPlayers.size()==2){ //fa partire il conto alla rovescia per l'inizio della partita. ==2 per non far partire più timer se si connettono più di due giocatori
                 timer.schedule(new TimerTask() {
                     @Override

@@ -65,6 +65,10 @@ public class Player{
         return choosenWindowBoard;
     }
 
+    public SocketClientHandler getSocketClientHandler() {
+        return socketClientHandler;
+    }
+
     public void useToolCard(ToolCard card) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore
         if(card.isFirstUsage() && favorTokens>=1) favorTokens--;
         else if(favorTokens>=2) favorTokens-=2; //ramo else, si finisce qui se non è il primo utilizzo della carta. Dunque il costo della carta è di due segnalini favore e bisogna controllare che il giocatore ce li abbia
