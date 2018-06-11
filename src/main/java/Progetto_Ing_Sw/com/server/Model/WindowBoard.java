@@ -689,7 +689,7 @@ public class WindowBoard implements WindowBoardObserver{
 
     //******************************REAL GAMEPLAY*************************************************************//
 
-    public ArrayList<ArrayList<MatrixCell>> insertDice(ArrayList<ArrayList<MatrixCell>> usedMatrix, int row, int column, Dice dice){
+    public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice){
 
         if(matrixNotEmpty()==false)
         { //CONTROLLO PRIMO TURNO

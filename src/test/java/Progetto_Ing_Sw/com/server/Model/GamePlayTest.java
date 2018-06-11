@@ -96,14 +96,15 @@ public class GamePlayTest {
 
         //Inizio inserimento/uso carte
         System.out.println("1° Inserimento");
-        boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,1,dice1);
+        boardPlayerOne.insertDice(4,1,dice1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("2° Inserimento");
-        boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,2,dice2);
+        boardPlayerOne.insertDice(4,2,dice2);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
+        /*
 
         System.out.println("3° Inserimento - Grozing Pliers");
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice2,3,1,1);
@@ -125,11 +126,14 @@ public class GamePlayTest {
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(0).getDiceContained().getValue(),1);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(0).getDiceContained().getColor(),5);
         System.out.println();
+        */
 
         System.out.println("8° Inserimento - Lathekin");
         lathekin.applyEffect(boardPlayerOne,4,1,4,2,4,1,4,3,dice1,dice2,1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
+
+
 
 
 

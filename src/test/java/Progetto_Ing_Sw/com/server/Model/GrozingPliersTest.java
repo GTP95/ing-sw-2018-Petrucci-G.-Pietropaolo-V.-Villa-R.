@@ -64,7 +64,7 @@ public class GrozingPliersTest {
         System.out.println("***MATRICE di ArrayList creata+settata correttamente***");
         System.out.println();
 
-        boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,3,dice1);
+        boardPlayerOne.insertDice(4,3,dice1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 

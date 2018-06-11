@@ -336,22 +336,22 @@ public class WindowBoardTest {
         //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
 
         System.out.println(" 1° INSERIMENTO");
-        windowBoard.insertDice(martrixArray,1,2,dice3);
+        windowBoard.insertDice(1,2,dice3);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
         System.out.println(" 2° INSERIMENTO");
-        windowBoard.insertDice(martrixArray,2,4,dice2);
+        windowBoard.insertDice(2,4,dice2);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
         System.out.println(" 3° INSERIMENTO");
-        windowBoard.insertDice(martrixArray,2,5,dice3);
+        windowBoard.insertDice(2,5,dice3);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
         System.out.println(" 4° INSERIMENTO");
-        windowBoard.insertDice(martrixArray,2,1,dice5);
+        windowBoard.insertDice(2,1,dice5);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
