@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class StartMenuGUI extends Application {
     Scene TitleScreen, SelectGameMode;  //Specifico prima tutte le scene di cui avrò bisogno
@@ -19,6 +20,7 @@ public class StartMenuGUI extends Application {
 
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
         primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
         //INIZIO Start Screen
         HBox startscreen= new HBox(80);
