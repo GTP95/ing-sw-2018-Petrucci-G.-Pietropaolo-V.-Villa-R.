@@ -95,6 +95,7 @@ public class SocketClient implements Runnable{
             case "Max number of players exceeded":
                 throw new TooManyPlayersException();
                 //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione edunque il break non verrebbe mai eseguito
+
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
     }
@@ -124,12 +125,9 @@ public class SocketClient implements Runnable{
                 String title=actionFields[2];   //Title è il nome della carta (titolo), non ricevo un JSON perchè è già stato inviato in una fase precedente
                 break;
             case "PlaceDice":
-                /*ci metto un JSON o no? sì, così creo il dice da piazzare*/
                 String json=actionFields[2];
-                int x=Integer.parseInt(actionFields[3]);
-                int y=Integer.parseInt(actionFields[4]);
-                ClientDice dice=JSONCreator.diceLoaderFromString(json);
-                localModel.getPlayerFromName(username).placeDice(dice, x, y);
+                ClientWindowBoard windowBoard=JSONCreator.clientWindowBoardLoaderFromString(json);
+                localModel.getPlayerFromName(username).updateWindowBoard(windowBoard);
                 break;
 
         }

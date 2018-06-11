@@ -9,6 +9,7 @@ public  class LocalModel {
 
     private ArrayList <ClientPlayer> clientPlayerArrayList;
     private Object lockUsername, lockPlayerArrayList;
+    private MultiplayerGUI observer;
 
     private LocalModel(){
 
@@ -58,16 +59,24 @@ public  class LocalModel {
 
                 this.clientPlayerArrayList = clientPlayerArrayList;
                 System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
+                notifyObserver();
                 notifyAll();
     }
 
     public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
-
-
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
             clientPlayerArrayList.add(clientPlayer);
+            notifyObserver();
             notifyAll();
 
+    }
+
+    private void notifyObserver(){
+        observer.notify();
+    }
+
+    public void registerAsObserver(MultiplayerGUI multiplayerGUI){
+            this.observer=multiplayerGUI;
     }
 
 

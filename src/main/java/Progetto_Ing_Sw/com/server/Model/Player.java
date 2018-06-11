@@ -12,6 +12,7 @@ public class Player implements PlayerObserver{
    private GameBoardCard choosenGameBoard;
    private ArrayList<GameBoardCard> drawnGameBoardCard;
    private SocketClientHandler socketClientHandler;
+   private WindowBoard choosenWindowBoard;
 
     public Player(String name, PrivateObjectiveCard privateObjective, SocketClientHandler socketClientHandler) {
         this.name = name;
@@ -58,6 +59,10 @@ public class Player implements PlayerObserver{
 
     public ArrayList<GameBoardCard> getDrawnGameBoardCard() {
         return drawnGameBoardCard;
+    }
+
+    public WindowBoard getChoosenWindowBoard() {
+        return choosenWindowBoard;
     }
 
     public void useToolCard(ToolCard card) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore

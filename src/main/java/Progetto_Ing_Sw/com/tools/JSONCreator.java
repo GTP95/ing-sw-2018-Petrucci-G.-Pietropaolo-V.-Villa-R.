@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.tools;
 import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientPlayer;
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
 import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
@@ -139,6 +140,10 @@ public final class JSONCreator {
         return dice;
     }
 
+    public static ClientWindowBoard clientWindowBoardLoaderFromString(String json){
+        ClientWindowBoard windowBoard=gson.fromJson(json, ClientWindowBoard.class);
+        return windowBoard;
+    }
 
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){

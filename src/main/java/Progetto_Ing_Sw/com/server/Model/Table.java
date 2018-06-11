@@ -3,7 +3,7 @@ package Progetto_Ing_Sw.com.server.Model;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Table implements TableObserver {
+public class Table {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
     private ArrayList<ToolCard> drawnToolCards;
