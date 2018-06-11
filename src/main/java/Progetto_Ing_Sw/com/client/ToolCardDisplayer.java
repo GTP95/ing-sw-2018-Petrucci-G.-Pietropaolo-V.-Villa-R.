@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
@@ -15,11 +16,12 @@ public class ToolCardDisplayer extends Stage {
     ToolCardDisplayer(){
         this.setTitle("Tool Card"); //TODO Get Title from current Tool Card
         this.setResizable(false);
+        this.initStyle(StageStyle.UNDECORATED);
 
 
         //ImageView della tool card
         ImageView ToolCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/BaseToolCard.png");
-        ImageView ToolCardImage = new ImageView("Progetto_Ing_Sw/com/client/GUI/1ToolCard.png");
+        ImageView ToolCardImage = new ImageView("Progetto_Ing_Sw/com/client/GUI/ToolCards/1ToolCard.png");
 
 
         //I Label che contengono le varie descrizioni della Carta

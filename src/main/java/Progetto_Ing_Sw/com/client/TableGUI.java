@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -199,39 +201,97 @@ public class TableGUI extends Stage{
             Label ToolCardMenuTitle = new Label("           Tool Cards");
             ToolCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: white;" + "-fx-font: 25 \"Centaur\";");
 
+            Label ToolCard1Label= new Label();ToolCard1Label.setMinSize(268,131);ToolCard1Label.setId("ToolCardLabel");
+            Label ToolCard2Label= new Label();ToolCard2Label.setMinSize(268,131);ToolCard2Label.setId("ToolCardLabel");
+            Label ToolCard3Label= new Label();ToolCard3Label.setMinSize(268,131);ToolCard3Label.setId("ToolCardLabel");
+
             //Bottoni che riferiscono alle Tool Cards
-            Button ToolCard1 = new Button("9. Cork-backed \r\n Straightedge");
-            ToolCard1.setId("ToolCardBTN");
-            ToolCard1.setOnAction(event -> {
-                ToolCard1.setDisable(true);
+            Button ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(10);
+            ToolCard1BTN.setId("ToolCardBTN");
+            ToolCard1BTN.setOnAction(event -> {
+                ToolCard1BTN.setDisable(true);
                 ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer();
                 ToolCard1Stage.showAndWait();
-                ToolCard1.setDisable(false);
+                ToolCard1BTN.setDisable(false);
                     });
 
 
-            Button ToolCard2 = new Button("2. Tool Card");
-            ToolCard2.setId("ToolCardBTN");
-            ToolCard2.setOnAction(event -> {
-                ToolCard2.setDisable(true);
+            Button ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(10);
+            ToolCard2BTN.setId("ToolCardBTN");
+            ToolCard2BTN.setOnAction(event -> {
+                ToolCard2BTN.setDisable(true);
                 ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer();
-                ToolCard2Stage.showAndWait();//ToolCard2.setDisable(false);
+                ToolCard2Stage.showAndWait();
+                ToolCard2BTN.setDisable(false);
             });
 
 
-            Button ToolCard3 = new Button("3. Tool Card");
-            ToolCard3.setId("ToolCardBTN");
-            ToolCard3.setOnAction(event -> {
-                ToolCard3.setDisable(true);
+            Button ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(10);
+            ToolCard3BTN.setId("ToolCardBTN");
+            ToolCard3BTN.setOnAction(event -> {
+                ToolCard3BTN.setDisable(true);
                 ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer();
-                ToolCard3Stage.showAndWait();//ToolCard3.setDisable(false);
+                ToolCard3Stage.showAndWait();
+                ToolCard3BTN.setDisable(false);
             });
 
+            //StackPane Bottoni su Label
+            StackPane ToolCard1 = new StackPane();
+            ToolCard1.getChildren().addAll(ToolCard1Label,ToolCard1BTN);
+            ToolCard1.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover1 = new TranslateTransition(Duration.millis(500), ToolCard1);
+                Hover1.setFromY(0);
+                Hover1.setToY(-10);
+                Hover1.setAutoReverse(true);
+                Hover1.play();
+            });
+
+        ToolCard1.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard1);
+            Hover2.setFromY(-10);
+            Hover2.setToY(0);
+            Hover2.setAutoReverse(true);
+            Hover2.play();
+        });
+
+            StackPane ToolCard2 = new StackPane();ToolCard2.setTranslateY(75);
+            ToolCard2.getChildren().addAll(ToolCard2Label,ToolCard2BTN);
+        ToolCard2.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
+            Hover2.setFromY(75);
+            Hover2.setToY(65);
+            Hover2.setAutoReverse(true);
+            Hover2.play();
+        });
+        ToolCard2.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
+            Hover2.setFromY(65);
+            Hover2.setToY(75);
+            Hover2.setAutoReverse(true);
+            Hover2.play();
+        });
+
+            StackPane ToolCard3 = new StackPane();ToolCard3.setTranslateY(150);
+            ToolCard3.getChildren().addAll(ToolCard3Label,ToolCard3BTN);
+        ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+            Hover2.setFromY(150);
+            Hover2.setToY(140);
+            Hover2.setAutoReverse(true);
+            Hover2.play();
+        });
+
+        ToolCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+            Hover2.setFromY(140);
+            Hover2.setToY(150);
+            Hover2.setAutoReverse(true);
+            Hover2.play();
+        });
 
 
-
-            //VBox per contenere le carte
-            VBox ToolCardList = new VBox(20);
+            //StackPane per contenere le carte
+            StackPane ToolCardList = new StackPane();
             ToolCardList.setAlignment(Pos.BOTTOM_LEFT);
             ToolCardList.setMaxHeight(280);
             ToolCardList.setPrefWidth(240);
@@ -239,8 +299,8 @@ public class TableGUI extends Stage{
             ToolCardList.getChildren().addAll(ToolCard1, ToolCard2, ToolCard3);
 
             //VBox del Menu Tool Card
-            VBox ToolCardMenu = new VBox(120);
-            ToolCardMenu.setId("CardMenu");
+            VBox ToolCardMenu = new VBox(100);
+            ToolCardMenu.setId("ToolCardMenu");
             ToolCardMenu.setMaxHeight(280);
             ToolCardMenu.setMaxWidth(240);
             ToolCardMenu.getChildren().addAll(ToolCardMenuTitle, ToolCardList);
@@ -270,7 +330,7 @@ public class TableGUI extends Stage{
                 @Override
                 public void handle(ActionEvent event) {
                     new ToolCardDisplayer();
-                    //ToolCard1.setDisable(true);
+                    //ToolCard1BTN.setDisable(true);
 
                 }
             });

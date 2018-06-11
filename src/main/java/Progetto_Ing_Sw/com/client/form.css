@@ -430,15 +430,47 @@
 
 }
 
+
+
 #CardMenu{
     -fx-background-color: black;
 
 
 }
+#ToolCardMenu{
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 240 230;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    /*-fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #ffc518 0%, #903b12 100%),
+            #9d4024,
+            #d8b134,
+            radial-gradient(center 50% 50%, radius 100%, #ffc518, #c54e2c);*/
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+
+#ToolCardLabel{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font: 25 "Centaur";
+    -fx-background-image: url("GUI/ToolCardTile.png");
+    -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+
+#Test{
+    -fx-background-color: black;
+}
 
 #ToolCardBTN{
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font: 25 "Centaur";
 }
 
