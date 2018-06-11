@@ -73,5 +73,10 @@ public class Table {
         System.out.println("Game started!");    //TODO: completare
     }
 
+    public void addDiceFluxBrush(Dice diceRejectedByInsert){
+        Dice cloneDice=new Dice(diceRejectedByInsert.getValue(),diceRejectedByInsert.getColor());
+        drawnDice.add(cloneDice);
+    }
+
 }
 
