@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.awt.event.MouseEvent;
 import java.sql.Time;
@@ -48,6 +49,7 @@ public class MultiplayerGUI extends Stage {
     MultiplayerGUI(){
         this.setTitle("Sagrada - Multiplayer");
         this.setResizable(false);
+        this.initStyle(StageStyle.UNDECORATED);
 
         //INIZIO Choose Connection Scene
         HBox RMISocket = new HBox(80);

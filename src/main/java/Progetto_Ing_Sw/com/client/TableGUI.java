@@ -20,6 +20,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
@@ -35,6 +36,7 @@ public class TableGUI extends Stage{
         this.setWidth(1280);
         this.setHeight(720);
         this.setResizable(false);
+        this.initStyle(StageStyle.UNDECORATED);
 
 
         //INIZIO Gameplay Scene
