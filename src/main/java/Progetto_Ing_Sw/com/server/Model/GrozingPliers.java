@@ -39,24 +39,24 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
 
                 if (command.equals("UP")) {
                     if (localDice.getValue() == 6) {
-                        localBoard.insertDice(localBoard.getUsedMatrix(), row, column, localDice);
+                        localBoard.insertDice(row, column, localDice);
                         setFirstUsage(true);
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     } else {
                         localDice.setValue(localDice.increaseValue(localDice.getValue()));
-                        localBoard.insertDice(localBoard.getUsedMatrix(), row, column, localDice);
+                        localBoard.insertDice(row, column, localDice);
                         setFirstUsage(true);
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     }
 
                 } else if (command.equals("DOWN")) {
                     if (localDice.getValue() == 1) {
-                        localBoard.insertDice(localBoard.getUsedMatrix(), row, column, localDice);
+                        localBoard.insertDice(row, column, localDice);
                         setFirstUsage(true);
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     } else {
                         localDice.setValue(localDice.decreaseValue(localDice.getValue()));
-                        localBoard.insertDice(localBoard.getUsedMatrix(), row, column, localDice);
+                        localBoard.insertDice(row, column, localDice);
                         setFirstUsage(true);
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     }
@@ -75,26 +75,26 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
                 if(command.equals("UP")){
                 if(localDice.getValue()==6)
                 {
-                    localBoard.insertDice(localBoard.getUsedMatrix(),row,column,localDice);
+                    localBoard.insertDice(row,column,localDice);
                     //System.out.println(">>> OTHER USAGE "+isFirstUsage());
                 }
                 else
                 {
                     localDice.setValue(localDice.increaseValue(localDice.getValue()));
-                    localBoard.insertDice(localBoard.getUsedMatrix(),row,column,localDice);
+                    localBoard.insertDice(row,column,localDice);
                     //System.out.println(">>> OTHER USAGE "+isFirstUsage());
                 }
 
             }else if(command.equals("DOWN")){
                 if(localDice.getValue()==1)
                 {
-                    localBoard.insertDice(localBoard.getUsedMatrix(),row,column,localDice);
+                    localBoard.insertDice(row,column,localDice);
                     //System.out.println(">>> OTHER USAGE "+isFirstUsage());
                 }
                 else
                 {
                     localDice.setValue(localDice.decreaseValue(localDice.getValue()));
-                    localBoard.insertDice(localBoard.getUsedMatrix(),row,column,localDice);
+                    localBoard.insertDice(row,column,localDice);
                     //System.out.println(">>> OTHER USAGE "+isFirstUsage());
                 }
             }

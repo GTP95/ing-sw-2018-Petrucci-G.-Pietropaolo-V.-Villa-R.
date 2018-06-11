@@ -41,7 +41,7 @@ public class CopperFoilBurnisher {
                 localBoard.getUsedMatrix().get(rowBefore-1).get(columnBefore-1).setDiceContained(null); //rimuove il dado dalla vecchia posizione
                 localBoard.getUsedMatrix().get(rowBefore-1).get(columnBefore-1).setUsed(false); //sistema il flag di rimozione del dado, rimettendo la casella "libera"
                 //Nuovo Posizionamento
-                localBoard.insertDice(localBoard.getUsedMatrix(),rowAfter,columnAfter,localDice);
+                localBoard.insertDice(rowAfter,columnAfter,localDice);
 
             }else{
                 //System.out.println("ERRORE DI PAGAMENTO DELLA CARTA - FIRST USAGE -");
@@ -56,7 +56,7 @@ public class CopperFoilBurnisher {
                 localBoard.getUsedMatrix().get(rowBefore-1).get(columnBefore-1).setDiceContained(null); //rimuove il dado dalla vecchia posizione
                 localBoard.getUsedMatrix().get(rowBefore-1).get(columnBefore-1).setUsed(false); //sistema il flag di rimozione del dado, rimettendo la casella "libera"
                 //Nuovo Posizionamento
-                localBoard.insertDice(localBoard.getUsedMatrix(),rowAfter,columnAfter,localDice);
+                localBoard.insertDice(rowAfter,columnAfter,localDice);
             }else{
                 //System.out.println("ERRORE DI PAGAMENTO DELLA CARTA - OTHER USAGE -");
             }
