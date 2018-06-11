@@ -86,5 +86,8 @@ public class SocketClientHandler implements Runnable{
 
     }
 
+    public void getNotificationNewPlayerConnected(String playerName){
+        sendPlayerMessage(playerName);
+    }
 
 }
