@@ -5,7 +5,7 @@ import Progetto_Ing_Sw.com.server.Model.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ClientPlayer implements PlayerObserver{
+public class ClientPlayer{
    private String name;
    private int favorTokens;
    private int victoryPoints;
