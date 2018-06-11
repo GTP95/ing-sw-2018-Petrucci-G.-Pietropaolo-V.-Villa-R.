@@ -1,5 +1,9 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.IllegalDiceException;
+import Progetto_Ing_Sw.com.server.Model.RoundTrack;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -20,7 +24,7 @@ public class LensCutter {
     }
     //-----------------
 
-    //Costruttore della classe GrozingPliers
+
     private boolean firstUsage;
     public LensCutter() {this.firstUsage = localFirstUsage;}
 

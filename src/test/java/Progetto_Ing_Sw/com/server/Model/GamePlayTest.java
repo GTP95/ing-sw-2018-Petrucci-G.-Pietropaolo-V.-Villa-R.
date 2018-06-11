@@ -1,5 +1,9 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Model.ToolCards.CopperFoilBurnisher;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.EglomiseBrush;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.GrozingPliers;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.LensCutter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

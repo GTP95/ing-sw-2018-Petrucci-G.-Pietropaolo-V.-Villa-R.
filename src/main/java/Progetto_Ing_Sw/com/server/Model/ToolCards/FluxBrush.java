@@ -1,5 +1,8 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.Table;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -20,14 +23,13 @@ public class FluxBrush {
     }
     //-----------------
 
-    //Costruttore della classe GrozingPliers
     private boolean firstUsage;
     public FluxBrush() {this.firstUsage = localFirstUsage;}
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice diceDrawn,int row, int column, int favorTokensUsed){
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice diceDrawn, int row, int column, int favorTokensUsed){
 
         Dice localdice = new Dice(diceDrawn.getValue(),diceDrawn.getColor());
         System.out.println("Valor del dado prima della nuova pescata :"+localdice.getValue());

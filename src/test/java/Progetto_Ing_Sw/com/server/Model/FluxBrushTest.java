@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Model.ToolCards.FluxBrush;
 import org.junit.Before;
 import org.junit.Test;
 
