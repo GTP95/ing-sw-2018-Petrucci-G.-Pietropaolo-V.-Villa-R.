@@ -35,9 +35,12 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
-                    sendPlayerMessage(Lobby.getInstance().getConnctedPlayers().get(0).getName());
-                //   if(Lobby.getInstance().getNumOfPlayers()==4) startGame();
-
+                    for(Player player : Lobby.getInstance().getConnctedPlayers()) { //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
+                        sendPlayerMessage(player.getName());
+                    }
+                 while(Table.gameRunning){
+                        listenForNotificationFromModel();   //TODO: implementare observer
+                 }
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -77,8 +80,11 @@ public class SocketClientHandler implements Runnable{
         ArrayList<Player> playerArrayList=Lobby.getInstance().getConnctedPlayers();
         String messageToSend="Player%"+name;
         out.println(messageToSend);
+    }
 
-        }
+    private void listenForNotificationFromModel(){
+
+    }
 
 
 }

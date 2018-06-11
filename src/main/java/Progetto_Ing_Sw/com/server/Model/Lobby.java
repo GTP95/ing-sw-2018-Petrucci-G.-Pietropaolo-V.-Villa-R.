@@ -56,6 +56,7 @@ public class Lobby {
                     }
                 }, timerValue);
             }
+            if(getNumOfPlayers()==4) Table.getOurInstance().startGame();    //La parita comincia automaticamente se ci sono connessi 4 giocatori
         }
 
         else{

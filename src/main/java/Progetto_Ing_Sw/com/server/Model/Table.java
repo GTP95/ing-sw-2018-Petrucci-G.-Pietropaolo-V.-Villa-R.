@@ -13,6 +13,7 @@ public class Table implements TableObserver {
     private static DiceBag diceBag=new DiceBag();
     private static Table ourInstance=new Table();
     private static ArrayList<Player> players;
+    public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
@@ -68,6 +69,7 @@ public class Table implements TableObserver {
     }
 
     public void startGame(){
+        gameRunning=true;
         System.out.println("Game started!");    //TODO: completare
     }
 
