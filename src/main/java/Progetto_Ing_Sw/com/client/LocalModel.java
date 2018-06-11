@@ -70,6 +70,10 @@ public  class LocalModel {
                 if(!clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=true;
       //  if (addPlayer) {
             clientPlayerArrayList.add(clientPlayer);
+        System.out.println("PlayerArrayList:");
+            for(ClientPlayer player : clientPlayerArrayList){
+                System.out.println(player.getName());
+            }
             observer.update();
             notifyAll();
       //  }
