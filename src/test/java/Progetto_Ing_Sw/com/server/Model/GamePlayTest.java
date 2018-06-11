@@ -4,10 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 public class GamePlayTest {
@@ -15,6 +12,7 @@ public class GamePlayTest {
     private GrozingPliers grozingPliers;
     private EglomiseBrush eglomiseBrush;
     private CopperFoilBurnisher copperFoilBurnisher;
+    private Lathekin lathekin;
     private Dice dice1;
     private Dice dice2;
     private Dice dice3;
@@ -29,6 +27,7 @@ public class GamePlayTest {
         grozingPliers=mock(GrozingPliers.class);
         eglomiseBrush=mock(EglomiseBrush.class);
         copperFoilBurnisher=mock(CopperFoilBurnisher.class);
+        lathekin =mock(Lathekin.class);
         dice1=mock(Dice.class);
         dice2=mock(Dice.class);
         dice3=mock(Dice.class);
@@ -68,6 +67,7 @@ public class GamePlayTest {
         GrozingPliers grozingPliers = new GrozingPliers();
         EglomiseBrush eglomiseBrush = new EglomiseBrush();
         CopperFoilBurnisher copperFoilBurnisher = new CopperFoilBurnisher();
+        Lathekin lathekin = new Lathekin();
 
         //Importing da file
         int[][] testMatrix = boardPlayerOne.importFromFile(rows, columns,24);//Industria
@@ -76,7 +76,7 @@ public class GamePlayTest {
 
         //Creazione dell'oggetto WindowBoard su cui andremo a lavorare
         boardPlayerOne.setUsedMatrix(boardPlayerOne.fromIntToArrayList(testMatrix,rows,columns));
-        boardPlayerOne.setBorders(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.setBorders();
         System.out.println();
 
         //Dadi da usare
@@ -91,39 +91,44 @@ public class GamePlayTest {
 
         //Inizio partita vera e propria
         System.out.println("***START GAME***");
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         //Inizio inserimento/uso carte
         System.out.println("1° Inserimento");
         boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,1,dice1);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("2° Inserimento");
         boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,2,dice2);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("3° Inserimento - Grozing Pliers");
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice2,3,1,1);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
-        System.out.println("3° Inserimento - Eglomise Brush");
+        System.out.println("4° Inserimento - Eglomise Brush");
         eglomiseBrush.applyEffect(boardPlayerOne,dice3,3,1,3,2,1);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         //Test per il controllo della Eglomise Brush
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(1).getDiceContained().getValue(),3);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(1).getDiceContained().getColor(),2);
         System.out.println();
 
-        System.out.println("3° Inserimento - Copper Foil Burnisher");
+        System.out.println("5° Inserimento - Copper Foil Burnisher");
         copperFoilBurnisher.applyEffect(boardPlayerOne,dice1Copper,4,2,3,1,1);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         //Test per il controllo della Copper Foil Burnisher
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(0).getDiceContained().getValue(),1);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(0).getDiceContained().getColor(),5);
+        System.out.println();
+
+        System.out.println("8° Inserimento - Lathekin");
+        lathekin.applyEffect(boardPlayerOne,4,1,4,2,4,1,4,3,dice1,dice2,1);
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
 

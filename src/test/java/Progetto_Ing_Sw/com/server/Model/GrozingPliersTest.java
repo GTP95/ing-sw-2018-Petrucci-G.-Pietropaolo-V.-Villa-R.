@@ -60,26 +60,26 @@ public class GrozingPliersTest {
         System.out.println("Matrice prima dell'inserimento");
         boardPlayerOne.printMatrix(testMatrix,rows,columns);
         boardPlayerOne.setUsedMatrix(boardPlayerOne.fromIntToArrayList(testMatrix,rows,columns));
-        boardPlayerOne.setBorders(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.setBorders();
         System.out.println("***MATRICE di ArrayList creata+settata correttamente***");
         System.out.println();
 
         boardPlayerOne.insertDice(boardPlayerOne.getUsedMatrix(),4,3,dice1);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice1,3,2, 1); //da uno deve diventare 2
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println("***GROZING PLIERS usata correttamente***");
         System.out.println();
 
         grozingPliers.applyEffect(boardPlayerOne,"UP",dice2,4,2, 2);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println("***GROZING PLIERS usata correttamente***");
         System.out.println();
 
         grozingPliers.applyEffect(boardPlayerOne,"DOWN",dice3,4,1, 2);
-        boardPlayerOne.printMatrixArrayList(boardPlayerOne.getUsedMatrix());
+        boardPlayerOne.printMatrixArrayList();
         System.out.println("***GROZING PLIERS usata correttamente***");
         System.out.println();
     }
