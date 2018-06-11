@@ -72,7 +72,7 @@ public  class LocalModel {
     }
 
     private void notifyObserver(){
-        observer.notify();
+        observer.update();
     }
 
     public void registerAsObserver(MultiplayerGUI multiplayerGUI){
