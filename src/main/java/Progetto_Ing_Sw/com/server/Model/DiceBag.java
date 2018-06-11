@@ -65,6 +65,33 @@ public ArrayList<Dice> diceDraw(int numDiceToDraw){
         return drawnDice;
 }
 
+public void returnDice(Dice dice) throws IllegalDiceException{      //"Restituisce" il dado specificato nel senso che viene reinserito nel sacchetto
+        switch(dice.getColor()){
+            case Color.RED:
+                if(numDiceRed<18) numDiceRed++; //Controllo il numero di dadi prima del reinserimento per evitare inconsistenze
+                else throw new IllegalDiceException("The specified dice is not a valid dice (wrong color number)");
+                break;
+            case Color.BLUE:
+                if(numDiceBlue<18) numDiceBlue++;
+                else throw new IllegalDiceException("The specified dice is not a valid dice (wrong color number)");
+                break;
+            case Color.PURPLE:
+                if(numDicePurple<18) numDicePurple++;
+                else throw new IllegalDiceException("The specified dice is not a valid dice (wrong color number)");
+                break;
+            case Color.YELLOW:
+                if(numDiceYellow<18) numDiceYellow++;
+                else throw new IllegalDiceException("The specified dice is not a valid dice (wrong color number)");
+                break;
+            case Color.GREEN:
+                if (numDiceGreen<18) numDiceGreen++;
+                else throw new IllegalDiceException("The specified dice is not a valid dice (wrong color number)");
+                break;
+            default:
+                throw new IllegalDiceException("The specified dice is not a valid dice (invalid color number)");
+        }
+}
+
     //NOTA: i seguenti getter sono utili solo per i test
 
     public int getNumDiceRed() {

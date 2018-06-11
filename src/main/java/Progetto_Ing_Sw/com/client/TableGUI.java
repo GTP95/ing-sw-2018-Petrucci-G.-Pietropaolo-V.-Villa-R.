@@ -228,8 +228,7 @@ public class TableGUI extends Stage{
             });
 
 
-            Label emptyspace = new Label();
-            emptyspace.setId("ToolCardBTN");
+
 
             //VBox per contenere le carte
             VBox ToolCardList = new VBox(20);
@@ -242,10 +241,8 @@ public class TableGUI extends Stage{
             //VBox del Menu Tool Card
             VBox ToolCardMenu = new VBox(120);
             ToolCardMenu.setId("CardMenu");
-            ToolCardMenu.setAlignment(Pos.BOTTOM_LEFT);
             ToolCardMenu.setMaxHeight(280);
-            ToolCardMenu.setPrefWidth(240);
-            ToolCardMenu.setTranslateY(430);
+            ToolCardMenu.setMaxWidth(240);
             ToolCardMenu.getChildren().addAll(ToolCardMenuTitle, ToolCardList);
             //FINE MENU TOOL CARD
 
@@ -290,8 +287,7 @@ public class TableGUI extends Stage{
 
 
 
-            Label emptyspace2 = new Label();
-            emptyspace2.setId("ToolCardBTN");
+
 
             //VBox per contenere le carte
             VBox PublicObjectiveCardList = new VBox(20);
@@ -304,22 +300,22 @@ public class TableGUI extends Stage{
             //VBox del Menu Public Objective Card
             VBox PublicObjectiveMenu = new VBox(120);
             PublicObjectiveMenu.setId("CardMenu");
-            PublicObjectiveMenu.setAlignment(Pos.BOTTOM_LEFT);
             PublicObjectiveMenu.setMaxHeight(280);
-            PublicObjectiveMenu.setPrefWidth(240);
-            PublicObjectiveMenu.setTranslateY(450);
+            PublicObjectiveMenu.setMaxWidth(240);
             PublicObjectiveMenu.getChildren().addAll(PublicObjectiveCardMenuTitle, PublicObjectiveCardList);
 
             //FINE PUBLIC OBJECTIVE MENU
 
 
-            //INIZIO Draft Area
+        //INIZIO Draft Area
 
-        HBox DraftPool = new HBox(40);
+        FlowPane DraftPool = new FlowPane();
         DraftPool.setId("DraftPool");
+        DraftPool.setHgap(5);
+        DraftPool.setVgap(5);
         DraftPool.setPadding(new Insets(4,4,4,4));
         DraftPool.setAlignment(Pos.CENTER);
-        DraftPool.setMaxSize(5000,300);
+        DraftPool.setMaxSize(200,200);
 
 
 
@@ -329,17 +325,27 @@ public class TableGUI extends Stage{
         }
 
 
-            //FINE Draft Area
+        //FINE Draft Area
+
+        //INIZIO Round Track
+
+        Button RoundTrack = new Button();RoundTrack.setId("Round4");RoundTrack.setMinSize(150,150);RoundTrack.setTranslateY(10);RoundTrack.setTranslateX(-10);
+        RoundTrack.setOnAction(event -> RoundTrack.setId("Round5"));
+        //TODO Observer del round
+
+        //FINE Round Track
 
 
             //BorderPane per contenere tutti gli altri
-            BorderPane GameplayArea = new BorderPane();
+            StackPane GameplayArea = new StackPane();
             GameplayArea.setId("GamemodeSelectionScreen");
-            GameplayArea.setBottom(OtherPlayerBox);
-            GameplayArea.setCenter(WindowBoard);
-            GameplayArea.setRight(ToolCardMenu);
-            GameplayArea.setLeft(PublicObjectiveMenu);
-            GameplayArea.setTop(DraftPool);
+            GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
+            GameplayArea.setAlignment(PublicObjectiveMenu,Pos.BOTTOM_LEFT);
+            GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
+            GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+            GameplayArea.setAlignment(RoundTrack,Pos.TOP_RIGHT);
+            GameplayArea.getChildren().addAll(WindowBoard,PublicObjectiveMenu,ToolCardMenu,DraftPool,RoundTrack);
+
 
 
             GameplayScene = new Scene(GameplayArea, 1280, 720);

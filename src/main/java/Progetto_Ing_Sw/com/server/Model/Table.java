@@ -13,6 +13,7 @@ public class Table implements TableObserver {
     private static DiceBag diceBag=new DiceBag();
     private static Table ourInstance=new Table();
     private static ArrayList<Player> players;
+    public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
@@ -52,7 +53,7 @@ public class Table implements TableObserver {
     	return clone;
     }
 
-    public Dice getChoosenDice(Dice dice) throws IllegalDiceException{
+    public Dice getChoosenDice(Dice dice) throws IllegalDiceException{      //Estrae il dado specificato prendendolo tra quelli disponibili. Se il dado indicato non è disponibile lancia eccezione
         for(Dice die : drawnDice){
             if(die.equals(dice)){
                 drawnDice.remove(die);
@@ -62,7 +63,13 @@ public class Table implements TableObserver {
         throw new IllegalDiceException();
     }
 
+    public void returnDice(Dice dice){  //"Restituisce" il dado, nel senso che viene riposto nuovamente sul tavolo di gioco a disposizione dei giocatori
+        Dice cloneDice=new Dice(dice.getValue(),dice.getColor());   //fa una copia del dado per evitare modifiche del dado al di fuori di questa classe
+        drawnDice.add(cloneDice);
+    }
+
     public void startGame(){
+        gameRunning=true;
         System.out.println("Game started!");    //TODO: completare
     }
 
