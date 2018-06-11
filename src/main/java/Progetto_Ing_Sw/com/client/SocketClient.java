@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.Lobby;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.*;
@@ -113,8 +114,8 @@ public class SocketClient implements Runnable{
     }
 
     private void handlePlayerMessage(String playerName){
-        System.out.println("Handling player message");
-        localModel.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
+            System.out.println("Handling player message");
+            localModel.addPlayerToPlayerArrayList(new ClientPlayer(playerName));
     }
 
     private  void handleActionMessage(String actionDescription){

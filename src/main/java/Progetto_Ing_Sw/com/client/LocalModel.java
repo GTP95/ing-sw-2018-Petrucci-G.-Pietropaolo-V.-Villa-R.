@@ -59,21 +59,25 @@ public  class LocalModel {
 
                 this.clientPlayerArrayList = clientPlayerArrayList;
                 System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
-                notifyObserver();
+                observer.update();
                 notifyAll();
     }
 
     public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
+        boolean addPlayer=false;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
+            for(ClientPlayer clientPlayerInArray : clientPlayerArrayList)
+                if(!clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=true;
+      //  if (addPlayer) {
             clientPlayerArrayList.add(clientPlayer);
-            notifyObserver();
+            observer.update();
             notifyAll();
-
+      //  }
     }
 
-    private void notifyObserver(){
+   /* private void notifyObserver(){
         observer.update();
-    }
+    }*/
 
     public void registerAsObserver(MultiplayerGUI multiplayerGUI){
             this.observer=multiplayerGUI;

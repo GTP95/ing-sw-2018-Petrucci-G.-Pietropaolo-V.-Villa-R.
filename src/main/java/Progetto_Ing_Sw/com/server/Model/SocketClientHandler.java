@@ -5,6 +5,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import Progetto_Ing_Sw.com.tools.JSONCreator;
+import sun.applet.Main;
+
+import static jdk.nashorn.internal.objects.NativeArray.join;
 
 public class SocketClientHandler implements Runnable{
     private Socket clientSocket;
@@ -35,12 +38,17 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
-                    for(Player player : Lobby.getInstance().getConnctedPlayers()) { //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
-                        sendPlayerMessage(player.getName());
-                    }
-                 while(Table.gameRunning){
+
+                        sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
+
+                while (Lobby.isRunning){
+                    sendPlayerMessage();
+                }
+
+                /* while(Table.gameRunning){
                         listenForNotificationFromModel();   //TODO: implementare observer
-                 }
+                 }*/
+                Thread.sleep(30000);
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -50,8 +58,10 @@ public class SocketClientHandler implements Runnable{
             }
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }
+    }
 
 
     @Deprecated
@@ -76,10 +86,11 @@ public class SocketClientHandler implements Runnable{
         out.println(messageToSend);
     }
 
-    private void sendPlayerMessage(String name){
-        ArrayList<Player> playerArrayList=Lobby.getInstance().getConnctedPlayers();
-        String messageToSend="Player%"+name;
-        out.println(messageToSend);
+    private void sendPlayerMessage() {
+        for (Player player : Lobby.getInstance().getConnctedPlayers()) {
+            String messageToSend = "Player%" + player.getName();
+            out.println(messageToSend);
+        }
     }
 
     private void listenForNotificationFromModel(){
@@ -87,7 +98,10 @@ public class SocketClientHandler implements Runnable{
     }
 
     public void getNotificationNewPlayerConnected(String playerName){
-        sendPlayerMessage(playerName);
+            System.out.println("Sending newly connected player name to player");
+            String messageToSend = "Player%" + playerName;
+            out.println(messageToSend);
+
     }
 
 }
