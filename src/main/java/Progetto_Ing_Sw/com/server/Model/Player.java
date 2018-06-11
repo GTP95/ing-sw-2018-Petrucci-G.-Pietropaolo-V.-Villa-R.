@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Player{
    private String name;
    private int favorTokens;
+   private int roundNumber;  //TODO funzione che lo decrementa ad ogni turno
    private PrivateObjectiveCard privateObjective;
    private int victoryPoints;
    private boolean isActive;
@@ -17,6 +18,7 @@ public class Player{
     public Player(String name, PrivateObjectiveCard privateObjective, SocketClientHandler socketClientHandler) {
         this.name = name;
         this.favorTokens = favorTokens;
+        this.roundNumber=2;
         this.privateObjective = privateObjective;
         this.victoryPoints = 0;
         this.isActive=true;
@@ -40,6 +42,8 @@ public class Player{
     public int getColor() {
         return privateObjective.getColor();
     }
+
+    public int getRoundNumber() {return roundNumber;}
 
     public int getFavorTokens() {
         return favorTokens;

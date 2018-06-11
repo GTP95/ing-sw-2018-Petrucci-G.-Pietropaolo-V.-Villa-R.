@@ -1,0 +1,71 @@
+package Progetto_Ing_Sw.com.server.Model.ToolCards;
+
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.IllegalDiceException;
+import Progetto_Ing_Sw.com.server.Model.RoundTrack;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.tools.JSONCreator;
+
+import java.io.FileNotFoundException;
+
+//TODO FARE TEST DI QUESTA CARTA
+
+public class LensCutter {
+
+    private RoundTrack roundTrack = RoundTrack.getInstance();
+
+    //-------import del costo di primo uso
+    private boolean localFirstUsage;
+    {try {
+        localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/LensCutter.json","firstUsage" );
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    }
+    //-----------------
+
+
+    private boolean firstUsage;
+    public LensCutter() {this.firstUsage = localFirstUsage;}
+
+    public boolean isFirstUsage() {return firstUsage;}
+    public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
+
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, Dice roundTrackDice, int row, int column, int favorTokensUsed){
+
+        Dice localDice = new Dice(dice.getValue(),dice.getColor());
+        Dice localRoundTrackDice = new Dice(roundTrackDice.getValue(),roundTrackDice.getColor());
+
+
+        if(firstUsage==false)
+        {
+            if (favorTokensUsed == 1)
+            {
+                try {
+                    localBoard.insertDice(row,column,roundTrack.swapDice(localRoundTrackDice,localDice));
+                } catch (IllegalDiceException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                System.out.println("ERRORE DI PAGAMENTO DELLA CARTA, stai pagando troppo! - FIRST USAGE -");
+                //TODO GUI EXCEPTION
+            }
+        }else if (firstUsage==true)
+        {
+            if (favorTokensUsed == 1)
+            {
+                try {
+                    localBoard.insertDice(row,column,roundTrack.swapDice(localRoundTrackDice,localDice));
+                } catch (IllegalDiceException e) {
+                        e.printStackTrace();
+                    }
+            }else
+                {
+                    System.out.println("ERRORE DI PAGAMENTO DELLA CARTA,- OTHER USAGE -");
+                    //TODO GUI EXCEPTION
+                }
+            }
+        return localBoard;
+    }
+}
