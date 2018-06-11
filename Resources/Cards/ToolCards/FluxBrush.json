@@ -1,1 +1,6 @@
-{"title":"Flux Brusher","description":"After drefting, re-roll the drafted die","info":"If it cannot be placed return it to the Draft Pool","ID":6,"firstUsage":false,"color":"Purple"}
+{"title":"Flux Brusher",
+  "description":"After drefting, re-roll the drafted die",
+  "info":"If it cannot be placed return it to the Draft Pool",
+  "ID":6,
+  "firstUsage":false,
+  "color":"Purple"}

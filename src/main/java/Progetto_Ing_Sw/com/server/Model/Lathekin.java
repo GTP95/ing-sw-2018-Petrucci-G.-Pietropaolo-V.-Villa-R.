@@ -4,6 +4,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+//TESTING fatto direttamente sulla classe GamePlayTest
 public class Lathekin {
 
     //-------import del costo di primo uso
@@ -37,6 +38,9 @@ public class Lathekin {
                 localBoard.getUsedMatrix().get(rowBefore2-1).get(columnBefore2-1).setDiceContained(null);
                 localBoard.getUsedMatrix().get(rowBefore2-1).get(columnBefore2-1).setUsed(false);
 
+                localBoard.insertDice(rowAfter1,columnAfter1,localdice1);
+                localBoard.insertDice(rowAfter2,columnAfter2,localdice2);
+
             }
             else{
                 System.out.println("ERRORE DI PAGAMENTO DELLA CARTA, stai pagando troppo! - FIRST USAGE -");
@@ -52,7 +56,8 @@ public class Lathekin {
                 localBoard.getUsedMatrix().get(rowBefore2-1).get(columnBefore2-1).setDiceContained(null);
                 localBoard.getUsedMatrix().get(rowBefore2-1).get(columnBefore2-1).setUsed(false);
 
-
+                localBoard.insertDice(rowAfter1,columnAfter1,localdice1);
+                localBoard.insertDice(rowAfter2,columnAfter2,localdice2);
             }
             else{
                 System.out.println("ERRORE DI PAGAMENTO DELLA CARTA - SECOND USAGE -");

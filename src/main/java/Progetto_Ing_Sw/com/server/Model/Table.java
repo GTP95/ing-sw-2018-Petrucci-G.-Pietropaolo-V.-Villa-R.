@@ -13,6 +13,7 @@ public class Table {
     private static DiceBag diceBag=new DiceBag();
     private static Table ourInstance=new Table();
     private static ArrayList<Player> players;
+    private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     
     private Table(){
@@ -21,6 +22,14 @@ public class Table {
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
 	    players=Lobby.getInstance().getConnctedPlayers();
+    }
+
+    public static ArrayList<Player> getPlayers() {return players;}
+
+    public Player getAcivePlayer(){
+        ArrayList<Player> clonePlayers=getPlayers();
+        Player selectedPlayer = clonePlayers.get(currentPlayer);
+        return selectedPlayer;
     }
 
     public static Table getOurInstance(){
@@ -71,6 +80,11 @@ public class Table {
     public void startGame(){
         gameRunning=true;
         System.out.println("Game started!");    //TODO: completare
+    }
+
+    public void addDiceFluxBrush(Dice diceRejectedByInsert){
+        Dice cloneDice=new Dice(diceRejectedByInsert.getValue(),diceRejectedByInsert.getColor());
+        drawnDice.add(cloneDice);
     }
 
 }
