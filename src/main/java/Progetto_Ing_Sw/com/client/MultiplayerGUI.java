@@ -1,6 +1,10 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Lobby;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,10 +21,24 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.sql.Time;
+import java.util.*;
 
 
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
+    Label Player1Label,Player2Label,Player3Label,Player4Label;
+
+    private ArrayList<ClientPlayer> PlayersList;
+
+    public void update(){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size(); i++ ){
+            PlayersList.set(i,LocalModel.getInstance().getClientPlayerArrayList().get(i));
+        }
+        Player1Label.setText(PlayersList.get(0).getName());
+        Player2Label.setText(PlayersList.get(1).getName());
+        Player3Label.setText(PlayersList.get(2).getName());
+        Player4Label.setText(PlayersList.get(3).getName());
+    }
 
 
     MultiplayerGUI(){
@@ -71,13 +89,22 @@ public class MultiplayerGUI extends Stage {
         ToggleButton Player3BTN = new ToggleButton("READY!"); Player3BTN.setId("ReadyBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefHeight(139);
         ToggleButton Player4BTN = new ToggleButton("READY!"); Player4BTN.setId("ReadyBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefHeight(139);
 
+        //Player Placeholder
+        PlayersList= new ArrayList<>();
+        PlayersList.add(0, new ClientPlayer("Player1"));
+        PlayersList.add(1, new ClientPlayer("Player2"));
+        PlayersList.add(2, new ClientPlayer("Player3"));
+        PlayersList.add(3, new ClientPlayer("Player4"));
+
 
         //Labels con i nomi dei giocatori
-        Label Player1Label = new Label("ClientPlayer 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
-        //Player1Label.setText(Model.getInstance().getClientPlayerArrayList().get(0).getName());
-        Label Player2Label = new Label("ClientPlayer 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
-        Label Player3Label = new Label("ClientPlayer 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
-        Label Player4Label = new Label("ClientPlayer 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+        Player1Label = new Label(PlayersList.get(0).getName()); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
+        Player2Label = new Label(PlayersList.get(1).getName()); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
+        Player3Label = new Label(PlayersList.get(2).getName()); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
+        Player4Label = new Label(PlayersList.get(3).getName()); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+
+        LocalModel.getInstance().registerAsObserver(this);
+
 
 
         //StackPane Player1
