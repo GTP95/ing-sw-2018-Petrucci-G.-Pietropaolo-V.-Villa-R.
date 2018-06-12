@@ -46,6 +46,7 @@ public class FluxBrush {
                 if(localBoard.getUsedMatrix().get(row-1).get(column-1).isUsed()==false)//ossia mancato inserimento
                 {
                     table.addDiceFluxBrush(localdice);
+                    firstUsage=true;
                 }
             }
         }

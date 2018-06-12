@@ -42,24 +42,24 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
                 if (command.equals("UP")) {
                     if (localDice.getValue() == 6) {
                         localBoard.insertDice(row, column, localDice);
-                        setFirstUsage(true);
+                        firstUsage=true;
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     } else {
                         localDice.setValue(localDice.increaseValue(localDice.getValue()));
                         localBoard.insertDice(row, column, localDice);
-                        setFirstUsage(true);
+                        firstUsage=true;
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     }
 
                 } else if (command.equals("DOWN")) {
                     if (localDice.getValue() == 1) {
                         localBoard.insertDice(row, column, localDice);
-                        setFirstUsage(true);
+                        firstUsage=true;
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     } else {
                         localDice.setValue(localDice.decreaseValue(localDice.getValue()));
                         localBoard.insertDice(row, column, localDice);
-                        setFirstUsage(true);
+                        firstUsage=true;
                         //System.out.println(">>> FIRST USAGE "+isFirstUsage());
                     }
                 }

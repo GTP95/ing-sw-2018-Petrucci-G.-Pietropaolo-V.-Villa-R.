@@ -47,6 +47,8 @@ public class EglomiseBrush {
                 localBoard.getUsedMatrix().get(rowBefore-1).get(columnBefore-1).setUsed(false); //sistema il flag di rimozione del dado, rimettendo la casella "libera"
                 //Nuovo Posizionamento
                 localBoard.insertDice(rowAfter,columnAfter,localDice);
+                firstUsage=true;
+
 
             }else{
                 System.out.println("ERRORE DI PAGAMENTO DELLA CARTA - FIRST USAGE -");

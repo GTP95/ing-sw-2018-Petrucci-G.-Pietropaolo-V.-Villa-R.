@@ -415,8 +415,11 @@ public class WindowBoard implements WindowBoardObserver{
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
-                if(c==column-1 && r==row-1){
-                    if(usedMatrix.get(r).get(c).isUsed()==true){//controllo che effettivamente la cella selezionata sia occupata, non necessario ma per sicurezza
+
+                if(c==column-1 && r==row-1) //analizzo le caselle adiacenti a quella cercata
+                {
+                    if(usedMatrix.get(r).get(c).isUsed()==true)
+                    {//controllo che effettivamente la cella selezionata sia occupata, non necessario ma per sicurezza
 
                         if((r-1)<0 && (c-1)<0){} //r-1,c-1
                         else if( ((r-1>0)||(r-1==0)) && ((c-1>0)||(c-1==0)) && usedMatrix.get(r-1).get(c-1).isUsed()){
@@ -474,7 +477,7 @@ public class WindowBoard implements WindowBoardObserver{
                             break;
                         }
                         if((r+1)>usedMatrix.size()){} //r+1,c
-                        else if(((r+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c).isUsed()){
+                        else if(((r+1)<usedMatrix.size()) && usedMatrix.get(r+1).get(c).isUsed()){
                             int row_adj=r+1;
                             int col_adj=c;
 
@@ -483,7 +486,7 @@ public class WindowBoard implements WindowBoardObserver{
                             break;
                         }
                         if((r+1)>usedMatrix.size() && (c+1)>usedMatrix.get(r).size()){} //r+1,c+1
-                        else if(((r+1)<usedMatrix.get(r).size()) && ((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c+1).isUsed()){
+                        else if(((r+1)<usedMatrix.size()) && ((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c+1).isUsed()){
                             int row_adj=r+1;
                             int col_adj=c+1;
 
@@ -491,7 +494,8 @@ public class WindowBoard implements WindowBoardObserver{
                             adjacencyState=true;
                             break;
                         }
-                    }else{
+                    }
+                    else{
                         System.out.println("La cella ["+(r+1)+"]["+(c+1)+"] non ha nessun dado al suo interno, non posso controllare se ha dadi adiacenti");
                     }
                 }
@@ -550,7 +554,7 @@ public class WindowBoard implements WindowBoardObserver{
                             }
                         }
                         if((r+1)>usedMatrix.size()){} //r+1,c
-                        else if(((r+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c).isUsed()){
+                        else if(((r+1)<usedMatrix.size()) && usedMatrix.get(r+1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r+1).get(c).getDiceContained().getColor()){
                                 //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
@@ -592,7 +596,7 @@ public class WindowBoard implements WindowBoardObserver{
                             break;
                         }
                         if((r+1)>usedMatrix.size() && (c+1)>usedMatrix.get(r).size()){} //r+1,c+1
-                        else if(((r+1)<usedMatrix.get(r).size()) && ((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c+1).isUsed()){
+                        else if(((r+1)<usedMatrix.size()) && ((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r+1).get(c+1).isUsed()){
                             int row_adj=r+1;
                             int col_adj=c+1;
 
@@ -1065,7 +1069,6 @@ public class WindowBoard implements WindowBoardObserver{
 
                                 if(checkAdjacency(r+1,c+1)==false)
                                 {//EFFETTIVAMENTE NON ADIACENTE A NULLA
-
                                     if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                     {//CONTROLLO SFUMATURA
                                         break;
@@ -1093,6 +1096,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 }
                                 else if (checkAdjacency(r+1,c+1))
                                 {
+
                                     //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);

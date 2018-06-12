@@ -44,6 +44,7 @@ public class Player{
     }
 
     public int getRoundNumber() {return roundNumber;}
+    public void setRoundNumber(int roundNumber) {this.roundNumber = roundNumber;}
 
     public int getFavorTokens() {
         return favorTokens;
