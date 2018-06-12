@@ -66,8 +66,9 @@ public  class LocalModel {
     public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
         boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
-            for(ClientPlayer clientPlayerInArray : clientPlayerArrayList)
-                if(clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=false;
+            for(ClientPlayer clientPlayerInArray : clientPlayerArrayList){
+                if(clientPlayerInArray.getName().equals(clientPlayer.getName())) addPlayer=false;
+            }
         if (addPlayer) {
             clientPlayerArrayList.add(clientPlayer);
              System.out.println("PlayerArrayList:");
