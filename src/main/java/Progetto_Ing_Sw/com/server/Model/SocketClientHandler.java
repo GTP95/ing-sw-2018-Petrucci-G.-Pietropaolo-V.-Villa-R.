@@ -42,8 +42,7 @@ public class SocketClientHandler implements Runnable{
                     sendControlMessage("Connected");
                         while(Lobby.isRunning) {
                             if(ourThread.isInterrupted()) {
-                                sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
-
+                                sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da conferma della sua validità
                             }
                         }
                 sendPlayerMessage();

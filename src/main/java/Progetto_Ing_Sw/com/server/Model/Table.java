@@ -80,6 +80,25 @@ public class Table {
     public void startGame(){
         gameRunning=true;
         System.out.println("Game started!");    //TODO: completare
+        System.out.println("Connected players:");
+        for(Player player : players){
+            System.out.println(player.getName());
+        }
+        System.out.println();
+        System.out.println("Cards:");
+        for (PublicObjectiveCard card : drawnPublicObjectiveCards){
+            System.out.println(card.getTitle());
+        }
+        System.out.println();
+        System.out.println("ToolCards:");
+        for (ToolCard card : drawnToolCards){
+            System.out.println(card.getTitle());
+        }
+        System.out.println();
+        System.out.println("Dice:");
+        for(Dice dice : drawnDice){
+            System.out.println("Color: "+dice.getColor()+" value: "+dice.getValue());
+        }
     }
 
     public void addDiceFluxBrush(Dice diceRejectedByInsert){
