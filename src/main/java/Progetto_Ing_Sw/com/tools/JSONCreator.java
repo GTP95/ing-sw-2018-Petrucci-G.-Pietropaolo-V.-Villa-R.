@@ -1,7 +1,5 @@
 package Progetto_Ing_Sw.com.tools;
-import Progetto_Ing_Sw.com.client.ClientDice;
-import Progetto_Ing_Sw.com.client.ClientPlayer;
-import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.*;
 import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
@@ -19,6 +17,8 @@ public final class JSONCreator {
     private static final Gson gson=new GsonBuilder().create();
     private static final Type arrayListOfPlayers=new TypeToken<ArrayList<ClientPlayer>>(){}.getType();
     private static final Type arrayListOfDice=new TypeToken<ArrayList<ClientDice>>(){}.getType();
+    private static final Type arrayListOfPublicObjectiveCards=new TypeToken<ArrayList<ClientPublicObjectiveCard>>(){}.getType();
+    private static final Type arrayListOfToolCards=new TypeToken<ArrayList<ClientToolCard>>(){}.getType();
 
     private JSONCreator() {};
 
@@ -139,6 +139,16 @@ public final class JSONCreator {
     public static ArrayList<ClientDice> diceArrayListLoaderFromString(String json){
         ArrayList<ClientDice> clientDiceArrayList=gson.fromJson(json, arrayListOfDice);
         return clientDiceArrayList;
+    }
+
+    public static ArrayList<ClientPublicObjectiveCard> publicObjectiveCardArrayListLoaderFromString(String json){
+        ArrayList<ClientPublicObjectiveCard> clientPublicObjectiveCards=gson.fromJson(json, arrayListOfPublicObjectiveCards);
+        return clientPublicObjectiveCards;
+    }
+
+    public static ArrayList<ClientToolCard> toolCardArrayListloaderFromString(String json){
+        ArrayList<ClientToolCard> clientToolCards=gson.fromJson(json, arrayListOfToolCards);
+        return clientToolCards;
     }
 
     public static ClientDice diceLoaderFromString(String json){

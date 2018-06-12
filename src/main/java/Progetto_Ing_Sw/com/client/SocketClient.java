@@ -109,6 +109,12 @@ public class SocketClient implements Runnable{
             case "arrayListOfDice":
                 localModel.setDrawnDice(JSONCreator.diceArrayListLoaderFromString(json));
                 break;
+            case "arrayListOfPublicObjectiveCards":
+                localModel.setDrawnPublicObjectiveCards(JSONCreator.publicObjectiveCardArrayListLoaderFromString(json));
+                break;
+            case "arrayListOfToolCards":
+                localModel.setDrawnToolCards(JSONCreator.toolCardArrayListloaderFromString(json));
+                break;
             /*case "ClientPlayer":
                 localModel.addPlayerToPlayerArrayList(JSONCreator.clientPlayerLoaderFromString(json));
                 break;*/

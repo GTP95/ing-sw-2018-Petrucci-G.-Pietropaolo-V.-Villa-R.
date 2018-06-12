@@ -16,6 +16,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
     private static int timeout;
     public final Thread ourThread;
     boolean updateFromTable, updateFromRoundtrack;  //necessario per observer su thread
+    private Table table;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
@@ -47,7 +48,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
                             }
                         }
                 sendPlayerMessage();
-
+                this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 sendGameInitializationData();
 
                 while(Table.gameRunning){
@@ -124,7 +125,8 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
     }
 
     private void sendGameInitializationData(){
-        sendJSONmessage(JSONCreator.generateJSON(Table.getOurInstance().getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
-       // sendJSONmessage(JSONCreator.generateJSON());
+        sendJSONmessage(JSONCreator.generateJSON(table.getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
+        sendJSONmessage(JSONCreator.generateJSON(table.getDrawnPublicObjectiveCards()),"arrayListOfPublicObjectiveCards");
+        sendJSONmessage(JSONCreator.generateJSON(table.getDrawnToolCards()),"arrayListOfToolCards");
     }
 }
