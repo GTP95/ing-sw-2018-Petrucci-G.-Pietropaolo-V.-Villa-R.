@@ -75,6 +75,7 @@ public  class LocalModel {
                 System.out.println(player.getName());
             }
             observer.update();
+            System.out.println("Observer was just notified");
             notifyAll();
         }
     }

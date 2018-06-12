@@ -15,6 +15,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
     private BufferedReader in;
     private static int timeout;
     public final Thread ourThread;
+    boolean updateFromTable, updateFromRoundtrack;  //necessario per observer su thread
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
@@ -100,7 +101,9 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
     }
 
     private void listenForNotificationFromModel(){
+        if(updateFromTable){
 
+        }
     }
 
     public void getNotificationNewPlayerConnected(String playerName){
@@ -112,11 +115,11 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
 
     @Override
     public void notifyRoundTrackUpdate() {
-
+        updateFromRoundtrack=true;
     }
 
     @Override
     public void NotifyTableUpdate() {
-
+        updateFromTable=true;
     }
 }
