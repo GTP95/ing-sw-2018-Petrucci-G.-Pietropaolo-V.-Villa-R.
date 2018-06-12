@@ -9,7 +9,7 @@ import sun.applet.Main;
 
 import static jdk.nashorn.internal.objects.NativeArray.join;
 
-public class SocketClientHandler implements Runnable{
+public class SocketClientHandler implements Runnable, TableObserver, RoundTrackObserver{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -48,9 +48,10 @@ public class SocketClientHandler implements Runnable{
                 sendPlayerMessage();
 
 
-                /* while(Table.gameRunning){
+
+                while(Table.gameRunning){
                         listenForNotificationFromModel();   //TODO: implementare observer
-                 }*/
+                 }
 
             }
             catch(TooManyPlayersException e){
@@ -109,4 +110,13 @@ public class SocketClientHandler implements Runnable{
 
     }
 
+    @Override
+    public void notifyRoundTrackUpdate() {
+
+    }
+
+    @Override
+    public void NotifyTableUpdate() {
+
+    }
 }

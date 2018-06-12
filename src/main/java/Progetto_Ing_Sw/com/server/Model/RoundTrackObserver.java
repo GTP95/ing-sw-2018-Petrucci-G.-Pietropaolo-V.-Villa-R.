@@ -4,6 +4,6 @@ public interface RoundTrackObserver {
 
     RoundTrack subject=RoundTrack.getInstance();
 
-    public void update();
+    public void notifyRoundTrackUpdate();
 
 }
