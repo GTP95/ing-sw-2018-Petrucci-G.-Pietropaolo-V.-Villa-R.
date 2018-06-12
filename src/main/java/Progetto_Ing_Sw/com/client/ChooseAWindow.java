@@ -23,6 +23,7 @@ public class ChooseAWindow extends Stage {
         //this.setMaxWidth(500);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.alwaysOnTopProperty();
 
         BackgroundImage Board1 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board1.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background Board1BG = new Background(Board1);
