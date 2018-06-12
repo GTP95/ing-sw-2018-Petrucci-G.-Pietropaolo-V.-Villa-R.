@@ -40,11 +40,13 @@ public class SocketClientHandler implements Runnable{
 
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
-                        while(true) {
+                        while(Lobby.isRunning) {
                             if(ourThread.isInterrupted()) {
                                 sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da ack
+
                             }
                         }
+                sendPlayerMessage();
 
 
                 /* while(Table.gameRunning){

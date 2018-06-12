@@ -13,7 +13,7 @@ public class Lobby {
     private ArrayList<Player> connectedPlayers;
     private Timer timer;
     private long timerValue;
-    public static boolean isRunning=false;
+    public static boolean isRunning;
 
 
     public static Lobby getInstance() {
@@ -59,11 +59,17 @@ public class Lobby {
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
+                        isRunning=false;
+                        if(Table.gameRunning) return;
                         Table.getOurInstance().startGame();
+                        return;     //Di vitale importanza per non far partire il gioco due volte!!
                     }
                 }, timerValue);
             }
-            if(getNumOfPlayers()==4) Table.getOurInstance().startGame();    //La parita comincia automaticamente se ci sono connessi 4 giocatori
+            if(getNumOfPlayers()==4) {
+                Table.getOurInstance().startGame();    //La parita comincia automaticamente se ci sono connessi 4 giocatori
+                isRunning=false;
+            }
         }
 
         else{
