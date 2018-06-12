@@ -10,6 +10,7 @@ package Progetto_Ing_Sw.com.server.Model;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 
 import java.util.ArrayList;
@@ -24,51 +25,24 @@ public class TableTestWithRandomizedNumOfPlayers {
 
     @Before
     public void testInit(){
-        lobby=Lobby.getInstance();
+        lobby=Mockito.mock(Lobby.class);
         splittableRandom=new SplittableRandom();
         numOfPlayersToTest=splittableRandom.nextInt(2,5);   //al solito, il 2 è incluso nell'intervallo mentre il 5 è escluso
 
        for(int counter=0;counter<numOfPlayersToTest;counter++){     //aggiungo i giocatori alla lobby in base al numero pseudocasuale generato
            switch(counter){
                case 0:
-                   try {
-                       lobby.addPlayer("ReadyPlayerOne",null);  //SocketClientHandler è impostato a null per tutti i giocatori perchè tanto non viene usato
-                       break;
-                   } catch (TooManyPlayersException e) {
-                       e.printStackTrace();
-                       Assert.fail();
-                   } catch (InvalidUsernameException e) {
-                       Assert.fail(e.getMessage());
-                   }
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(1);
+                   break;
                case 1:
-                   try {
-                       lobby.addPlayer("ReadyPlayerTwo", null);
-                       break;
-                   } catch (TooManyPlayersException e) {
-                       e.printStackTrace();
-                       Assert.fail();
-                   } catch (InvalidUsernameException e) {
-                       Assert.fail(e.getMessage());
-                   }
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(2);
+                   break;
                case 2:
-                   try {
-                       lobby.addPlayer("ReadyPlayerThree",null);
-                       break;
-                   } catch (TooManyPlayersException e) {
-                       e.printStackTrace();
-                       Assert.fail();
-                   } catch (InvalidUsernameException e) {
-                       Assert.fail(e.getMessage());
-                   }
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(3);
+                   break;
                case 3:
-                   try {
-                       lobby.addPlayer("ReadyPlayerFour",null);
-                       break;
-                   } catch (TooManyPlayersException e) {
-                       e.printStackTrace();
-                   } catch (InvalidUsernameException e) {
-                       Assert.fail(e.getMessage());
-                   }
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(4);
+                   break;
 
            }
 

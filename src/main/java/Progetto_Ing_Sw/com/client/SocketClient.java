@@ -103,12 +103,17 @@ public class SocketClient implements Runnable{
     private void handleJSONmessage(String json, String nameOfClass){
         System.out.println("handling JSON message");
         switch (nameOfClass){
-            case "arrayListOfPlayers":
+            case "arrayListOfPlayers":  //al momento non usato
                 localModel.setClientPlayerArrayList(JSONCreator.playerArrayListLoaderFromString(json));
+                break;
+            case "arrayListOfDice":
+                localModel.setDrawnDice(JSONCreator.diceArrayListLoaderFromString(json));
                 break;
             /*case "ClientPlayer":
                 localModel.addPlayerToPlayerArrayList(JSONCreator.clientPlayerLoaderFromString(json));
                 break;*/
+            default:
+                System.err.println("Can't understand class " + nameOfClass);
         }
     }
 

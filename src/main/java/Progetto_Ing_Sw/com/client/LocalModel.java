@@ -8,15 +8,21 @@ public  class LocalModel {
     private static LocalModel ourInstance=new LocalModel();
 
     private ArrayList <ClientPlayer> clientPlayerArrayList;
-    private Object lockUsername, lockPlayerArrayList;
+    private Object lockUsername, lockPlayerArrayList, lockDrawnDice, lockDrawnToolCards, lockDrawnPublicObjectiveCards, lockDrawnWindowBoards;  //TODO: pulizia
     private MultiplayerGUI observer;
+    private ArrayList<ClientDice> drawnDice;
+    private ArrayList<ClientToolCard> drawnToolCards;
+    private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
 
     private LocalModel(){
 
         ourInstance=this;
         lockUsername=new Object();
         lockPlayerArrayList=new Object();
-
+        lockDrawnDice=new Object();
+        lockDrawnToolCards=new Object();
+        lockDrawnPublicObjectiveCards=new Object();
+        lockDrawnWindowBoards=new Object();
     }
 
     public static LocalModel getInstance(){
@@ -54,6 +60,31 @@ public  class LocalModel {
         return player;
     }
 
+    public ArrayList<ClientDice> getDrawnDice() {
+        while(drawnDice==null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return drawnDice;
+    }
+
+    public ArrayList<ClientToolCard> getDrawnToolCards() {
+        while(drawnToolCards==null){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return drawnToolCards;
+    }
+
+    public ArrayList<ClientPublicObjectiveCard> getDrawnPublicObjectiveCards() {    //provo a non sincronizzare perchè la sincronizzazione è implicita nell'observer
+        return drawnPublicObjectiveCards;
+    }
 
     public synchronized void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
 
@@ -89,5 +120,17 @@ public  class LocalModel {
             this.observer=multiplayerGUI;
     }
 
+    public void setDrawnDice(ArrayList<ClientDice> drawnDice) {
+        this.drawnDice=drawnDice;
+        notifyAll();
+    }
 
+    public void setDrawnToolCards(ArrayList<ClientToolCard> drawnToolCards) {
+        this.drawnToolCards = drawnToolCards;
+        notifyAll();
+    }
+
+    public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
+        this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
+    }
 }

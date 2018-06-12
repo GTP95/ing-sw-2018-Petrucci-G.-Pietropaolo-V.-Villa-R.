@@ -6,6 +6,10 @@ import Progetto_Ing_Sw.com.server.Model.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.net.Socket;
+
 import static org.mockito.Mockito.mock;
 
 
@@ -30,12 +34,19 @@ public class LobbyTest {    //TODO: chiedere come testare i singleton! È diffic
 
    @Test
     public void getNumOfPlayersTest(){
-       Player player1=mock(Player.class);
-       Player player2=mock(Player.class);
-       Player player3=mock(Player.class);
-       Player player4=mock(Player.class);
-
-       Assert.assertEquals(4, lobby.getNumOfPlayers());
+       try {
+           lobby.addPlayer("ReadyPlayerOne", new SocketClientHandler(new Socket()));    //socketClientHandler impostato a null perchè tanto non viene usato per il test
+           lobby.addPlayer("ReadyPlayerTwo", new SocketClientHandler(new Socket()));    //socketClientHandler impostato a null perchè tanto non viene usato per il test
+           lobby.addPlayer("ReadyPlayerThree", new SocketClientHandler(new Socket()));    //socketClientHandler impostato a null perchè tanto non viene usato per il test
+           lobby.addPlayer("ReadyPlayerFour", new SocketClientHandler(new Socket()));    //socketClientHandler impostato a null perchè tanto non viene usato per il test
+           Assert.assertEquals(4, lobby.getNumOfPlayers());
+       }
+       catch (TooManyPlayersException e){
+           Assert.fail("TooManyPlayersException");
+       }
+       catch(InvalidUsernameException e){
+           Assert.fail(e.getMessage());
+       }
    }
 
 }

@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public final class JSONCreator {
     private static final Gson gson=new GsonBuilder().create();
-    private static final Type arrayListOfPlayers=new TypeToken<ArrayList<Player>>(){}.getType();
+    private static final Type arrayListOfPlayers=new TypeToken<ArrayList<ClientPlayer>>(){}.getType();
+    private static final Type arrayListOfDice=new TypeToken<ArrayList<ClientDice>>(){}.getType();
 
     private JSONCreator() {};
 
@@ -133,6 +134,11 @@ public final class JSONCreator {
     public static ArrayList<ClientPlayer> playerArrayListLoaderFromString(String json){
         ArrayList<ClientPlayer> clientPlayerArrayList =gson.fromJson(json, arrayListOfPlayers);
         return clientPlayerArrayList;
+    }
+
+    public static ArrayList<ClientDice> diceArrayListLoaderFromString(String json){
+        ArrayList<ClientDice> clientDiceArrayList=gson.fromJson(json, arrayListOfDice);
+        return clientDiceArrayList;
     }
 
     public static ClientDice diceLoaderFromString(String json){

@@ -48,7 +48,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
                         }
                 sendPlayerMessage();
 
-
+                sendGameInitializationData();
 
                 while(Table.gameRunning){
                         listenForNotificationFromModel();   //TODO: implementare observer
@@ -121,5 +121,10 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
     @Override
     public void NotifyTableUpdate() {
         updateFromTable=true;
+    }
+
+    private void sendGameInitializationData(){
+        sendJSONmessage(JSONCreator.generateJSON(Table.getOurInstance().getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
+       // sendJSONmessage(JSONCreator.generateJSON());
     }
 }
