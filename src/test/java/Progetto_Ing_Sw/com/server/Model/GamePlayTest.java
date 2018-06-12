@@ -17,6 +17,7 @@ public class GamePlayTest {
     private CopperFoilBurnisher copperFoilBurnisher;
     private Lathekin lathekin;
     private CorkBackedStraightedge corkBackedStraightedge;
+    private GrindingStone grindingStone;
 
     private Dice dice1;
     private Dice dice2;
@@ -38,6 +39,7 @@ public class GamePlayTest {
         copperFoilBurnisher=mock(CopperFoilBurnisher.class);
         lathekin =mock(Lathekin.class);
         corkBackedStraightedge=mock(CorkBackedStraightedge.class);
+        grindingStone=mock(GrindingStone.class);
 
         dice1=mock(Dice.class);
         dice2=mock(Dice.class);
@@ -90,6 +92,7 @@ public class GamePlayTest {
         CopperFoilBurnisher copperFoilBurnisher = new CopperFoilBurnisher();
         Lathekin lathekin = new Lathekin();
         CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        GrindingStone grindingStone = new GrindingStone();
 
         //Importing da file
         int[][] testMatrix = boardPlayerOne.importFromFile(rows, columns,24);//Industria
@@ -180,6 +183,20 @@ public class GamePlayTest {
         System.out.println("CorkBackedStraightedge 2° uso");
         corkBackedStraightedge.applyEffect(boardPlayerOne,dice1,4,5,2);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println("Grinding Stone");
+        grindingStone.applyEffect(boardPlayerOne,dice6,3,5,1);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).getDiceContained().getValue(),1);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println("Grinding Stone 2° uso");
+        grindingStone.applyEffect(boardPlayerOne,dice1,1,5,2);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).getDiceContained().getValue(),6);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
