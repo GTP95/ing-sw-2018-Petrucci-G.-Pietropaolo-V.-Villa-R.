@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Lobby;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableArray;
@@ -29,19 +30,12 @@ import java.util.*;
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
     Label Player1Label,Player2Label,Player3Label,Player4Label;
+    ToggleButton Player1BTN, Player2BTN, Player3BTN,Player4BTN;
 
     private ArrayList<ClientPlayer> PlayersList;
     private Timer timer;
 
-    public void update(){
-        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size(); i++ ){
-            PlayersList.set(i,LocalModel.getInstance().getClientPlayerArrayList().get(i));
-        }
-        Player1Label.setText(PlayersList.get(0).getName());
-        Player2Label.setText(PlayersList.get(1).getName());
-        Player3Label.setText(PlayersList.get(2).getName());
-        Player4Label.setText(PlayersList.get(3).getName());
-    }
+
 
 
 
@@ -50,6 +44,8 @@ public class MultiplayerGUI extends Stage {
         this.setTitle("Sagrada - Multiplayer");
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+
+        LocalModel.getInstance().registerAsObserver(this);
 
         //INIZIO Choose Connection Scene
         HBox RMISocket = new HBox(80);
@@ -90,10 +86,10 @@ public class MultiplayerGUI extends Stage {
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
-        ToggleButton Player1BTN = new ToggleButton("READY!"); Player1BTN.setId("ReadyBTN");Player1BTN.setTranslateY(155);Player1BTN.setPrefHeight(139);
-        ToggleButton Player2BTN = new ToggleButton("READY!"); Player2BTN.setId("ReadyBTN");Player2BTN.setTranslateY(155);Player2BTN.setPrefHeight(139);
-        ToggleButton Player3BTN = new ToggleButton("READY!"); Player3BTN.setId("ReadyBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefHeight(139);
-        ToggleButton Player4BTN = new ToggleButton("READY!"); Player4BTN.setId("ReadyBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefHeight(139);
+        Player1BTN = new ToggleButton("READY!"); Player1BTN.setId("ReadyBTN");Player1BTN.setTranslateY(155);Player1BTN.setPrefHeight(139);Player1BTN.setDisable(true);
+        Player2BTN = new ToggleButton("READY!"); Player2BTN.setId("ReadyBTN");Player2BTN.setTranslateY(155);Player2BTN.setPrefHeight(139);Player2BTN.setDisable(true);
+        Player3BTN = new ToggleButton("READY!"); Player3BTN.setId("ReadyBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefHeight(139);Player3BTN.setDisable(true);
+        Player4BTN = new ToggleButton("READY!"); Player4BTN.setId("ReadyBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefHeight(139);Player4BTN.setDisable(true);
 
         //Player Placeholder
         PlayersList= new ArrayList<>();
@@ -105,14 +101,14 @@ public class MultiplayerGUI extends Stage {
 
 
         //Labels con i nomi dei giocatori
-        Player1Label = new Label(PlayersList.get(0).getName()); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
-        Player2Label = new Label(PlayersList.get(1).getName()); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
-        Player3Label = new Label(PlayersList.get(2).getName()); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
-        Player4Label = new Label(PlayersList.get(3).getName()); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+        Player1Label = new Label("Player 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
+        Player2Label = new Label("Player 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
+        Player3Label = new Label("Player 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
+        Player4Label = new Label("Player 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
 
 
 
-        LocalModel.getInstance().registerAsObserver(this);
+        //LocalModel.getInstance().registerAsObserver(this);
 
 
 
@@ -168,4 +164,17 @@ public class MultiplayerGUI extends Stage {
         this.show();
 
     }
+
+    public void update(){
+        Platform.runLater(() ->{
+            Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
+            Player1BTN.setSelected(true);
+            Player2Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(1).getName());
+            Player2BTN.setSelected(true);
+            Player3Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(2).getName());
+            Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
+        });
+    }
+
+    
 }
