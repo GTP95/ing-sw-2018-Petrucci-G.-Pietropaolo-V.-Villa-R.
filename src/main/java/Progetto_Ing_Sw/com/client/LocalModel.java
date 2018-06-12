@@ -64,13 +64,13 @@ public  class LocalModel {
     }
 
     public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
-        boolean addPlayer=false;
+        boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
             for(ClientPlayer clientPlayerInArray : clientPlayerArrayList)
-                if(!clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=true;
+                if(clientPlayerInArray.getName().equals(clientPlayer)) addPlayer=false;
         if (addPlayer) {
             clientPlayerArrayList.add(clientPlayer);
-        System.out.println("PlayerArrayList:");
+             System.out.println("PlayerArrayList:");
             for(ClientPlayer player : clientPlayerArrayList){
                 System.out.println(player.getName());
             }
