@@ -40,6 +40,7 @@ public class GlazingHammer {
                         int newDiceValue =new SplittableRandom().nextInt(1,7);
                         localDice.setValue(newDiceValue);
                         table.getDrawnDice().get(d).setValue(localDice.getValue());
+                        firstUsage=true;
                     }
 
                 }else if(table.getAcivePlayer().getRoundNumber()==2){

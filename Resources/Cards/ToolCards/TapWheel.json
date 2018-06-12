@@ -1,1 +1,6 @@
-{"title":"Tap Wheel","description":"Move up to two dice of the same color that match the color of die on the Round Track","info":"You must obey all placement restrictions","ID":12,"firstUsage":false,"color":"Blue"}
+{"title":"Tap Wheel",
+  "description":"Move up to two dice of the same color that match the color of die on the Round Track",
+  "info":"You must obey all placement restrictions",
+  "ID":12,
+  "firstUsage":false,
+  "color":"Blue"}

@@ -43,6 +43,8 @@ public class LensCutter {
             {
                 try {
                     localBoard.insertDice(row,column,roundTrack.swapDice(localRoundTrackDice,localDice));
+                    firstUsage=true;
+
                 } catch (IllegalDiceException e) {
                     e.printStackTrace();
                 }
@@ -53,7 +55,7 @@ public class LensCutter {
             }
         }else if (firstUsage==true)
         {
-            if (favorTokensUsed == 1)
+            if (favorTokensUsed == 2)
             {
                 try {
                     localBoard.insertDice(row,column,roundTrack.swapDice(localRoundTrackDice,localDice));

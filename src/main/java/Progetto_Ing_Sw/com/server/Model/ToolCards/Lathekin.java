@@ -1,5 +1,7 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -40,6 +42,7 @@ public class Lathekin {
 
                 localBoard.insertDice(rowAfter1,columnAfter1,localdice1);
                 localBoard.insertDice(rowAfter2,columnAfter2,localdice2);
+                firstUsage=true;
 
             }
             else{

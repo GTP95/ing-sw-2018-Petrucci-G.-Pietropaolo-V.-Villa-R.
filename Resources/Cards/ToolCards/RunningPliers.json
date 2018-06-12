@@ -1,1 +1,6 @@
-{"title":"Running Pliers","description":"After your first turn immediately draft a die","info":"Skip your next turn this roud","ID":8,"firstUsage":false,"color":"Red"}
+{"title":"Running Pliers",
+  "description":"After your first turn immediately draft a die",
+  "info":"Skip your next turn this round",
+  "ID":8,
+  "firstUsage":false,
+  "color":"Red"}

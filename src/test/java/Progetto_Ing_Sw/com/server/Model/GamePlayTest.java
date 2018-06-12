@@ -1,9 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
-import Progetto_Ing_Sw.com.server.Model.ToolCards.CopperFoilBurnisher;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.EglomiseBrush;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.GrozingPliers;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.LensCutter;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +15,9 @@ public class GamePlayTest {
     private GrozingPliers grozingPliers;
     private EglomiseBrush eglomiseBrush;
     private CopperFoilBurnisher copperFoilBurnisher;
-    private LensCutter lensCutter;
     private Lathekin lathekin;
+    private CorkBackedStraightedge corkBackedStraightedge;
+    private GrindingStone grindingStone;
 
     private Dice dice1;
     private Dice dice2;
@@ -40,7 +38,8 @@ public class GamePlayTest {
         eglomiseBrush=mock(EglomiseBrush.class);
         copperFoilBurnisher=mock(CopperFoilBurnisher.class);
         lathekin =mock(Lathekin.class);
-        lensCutter=mock(LensCutter.class);
+        corkBackedStraightedge=mock(CorkBackedStraightedge.class);
+        grindingStone=mock(GrindingStone.class);
 
         dice1=mock(Dice.class);
         dice2=mock(Dice.class);
@@ -92,6 +91,8 @@ public class GamePlayTest {
         EglomiseBrush eglomiseBrush = new EglomiseBrush();
         CopperFoilBurnisher copperFoilBurnisher = new CopperFoilBurnisher();
         Lathekin lathekin = new Lathekin();
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        GrindingStone grindingStone = new GrindingStone();
 
         //Importing da file
         int[][] testMatrix = boardPlayerOne.importFromFile(rows, columns,24);//Industria
@@ -164,5 +165,40 @@ public class GamePlayTest {
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(2).get(1).isUsed(),true);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
+
+        System.out.println("Lathekin 2° uso ");
+        lathekin.applyEffect(boardPlayerOne,3,1,3,2,4,1,4,2,dice1,dice2,2);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(0).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(1).isUsed(),true);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println("CorkBackedStraightedge");
+        corkBackedStraightedge.applyEffect(boardPlayerOne,dice5,2,5,1);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(1).get(4).isUsed(),true);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+
+        System.out.println("CorkBackedStraightedge 2° uso");
+        corkBackedStraightedge.applyEffect(boardPlayerOne,dice1,4,5,2);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println("Grinding Stone");
+        grindingStone.applyEffect(boardPlayerOne,dice6,3,5,1);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).getDiceContained().getValue(),1);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println("Grinding Stone 2° uso");
+        grindingStone.applyEffect(boardPlayerOne,dice1,1,5,2);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).getDiceContained().getValue(),6);
+        boardPlayerOne.printMatrixArrayList();
+        System.out.println();
+
     }
 }
