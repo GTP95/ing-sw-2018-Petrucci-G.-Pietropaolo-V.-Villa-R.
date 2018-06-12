@@ -2,7 +2,7 @@ package Progetto_Ing_Sw.com.server.Model;
 
 import java.util.ArrayList;
 
-public class RoundTrack implements RoundTrackObserver {   //Implementata come singleton
+public class RoundTrack {   //Implementata come singleton
     private static RoundTrack ourInstance = new RoundTrack();
     private int roundNumber;    //Il primo turno è il numero 0 per avere corrispondenza tra turni ed indici di diceRemained
     private ArrayList<ArrayList<Dice>> diceRemained;    //ciascun indice contiene un ArrayList con dentro i dadi avanzati in quel turno
