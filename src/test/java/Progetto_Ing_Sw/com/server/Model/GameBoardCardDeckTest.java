@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
@@ -50,8 +51,8 @@ public class GameBoardCardDeckTest {
         when(card2.getOtherSide()).thenReturn("KalidoscopicDream");
         when(card3.getOtherSide()).thenReturn("RippleOfLight");
         when(card4.getOtherSide()).thenReturn("FractalDrops");
-        when(card3.getOtherSide()).thenReturn("LuxAstras");
-        when(card4.getOtherSide()).thenReturn("LuxMundi");
+        when(card5.getOtherSide()).thenReturn("LuxAstras");
+        when(card6.getOtherSide()).thenReturn("LuxMundi");
 
         when(card1.getOtherSideCode()).thenReturn(2);
         when(card2.getOtherSideCode()).thenReturn(1);
