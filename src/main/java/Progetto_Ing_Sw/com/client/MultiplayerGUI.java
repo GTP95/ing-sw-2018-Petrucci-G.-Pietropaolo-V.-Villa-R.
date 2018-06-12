@@ -176,5 +176,10 @@ public class MultiplayerGUI extends Stage {
         });
     }
 
-    
+    public void StartGame(){
+        Platform.runLater(() ->{
+            close();
+            new TableGUI();
+        });
+    }
 }

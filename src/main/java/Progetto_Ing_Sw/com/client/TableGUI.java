@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -419,6 +420,12 @@ public class TableGUI extends Stage{
 
             this.setScene(GameplayScene);
             this.show();
+        }
+
+        public void updateToolCards(){
+            Platform.runLater(()->{
+
+            });
         }
 
 
