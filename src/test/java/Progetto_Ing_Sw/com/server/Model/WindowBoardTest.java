@@ -104,16 +104,16 @@ public class WindowBoardTest {
             for (int c=0;c<windowBoard.getUsedMatrix().get(r).size();c++){
 
                 if(c==0){
-                    Assert.assertEquals(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder(),true);
+                    Assert.assertTrue(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder());
                 }
                 if(c==windowBoard.getUsedMatrix().get(r).size()-1){
-                    Assert.assertEquals(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder(),true);
+                    Assert.assertTrue(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder());
                 }
                 if(r==0){
-                    Assert.assertEquals(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder(),true);
+                    Assert.assertTrue(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder());
                 }
                 if(r==windowBoard.getUsedMatrix().size()-1){
-                    Assert.assertEquals(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder(),true);
+                    Assert.assertTrue(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder());
                 }
                 if((r!=0)&&(c!=0)&&(c!=windowBoard.getUsedMatrix().get(r).size()-1)&&(r!=windowBoard.getUsedMatrix().size()-1)){
                     Assert.assertNotEquals(windowBoard.getUsedMatrix().get(r).get(c).isOnBorder(),true);
