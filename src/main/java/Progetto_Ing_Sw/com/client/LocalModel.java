@@ -9,10 +9,11 @@ public  class LocalModel {
 
     private ArrayList <ClientPlayer> clientPlayerArrayList;
     private Object lockUsername, lockPlayerArrayList, lockDrawnDice, lockDrawnToolCards, lockDrawnPublicObjectiveCards, lockDrawnWindowBoards;  //TODO: pulizia
-    private MultiplayerGUI observer;
+    private MultiplayerGUI multiplayerGUIobserver;
     private ArrayList<ClientDice> drawnDice;
     private ArrayList<ClientToolCard> drawnToolCards;
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
+    private TableGUI tableGUIobserver;
 
     private LocalModel(){
 
@@ -90,7 +91,7 @@ public  class LocalModel {
 
                 this.clientPlayerArrayList = clientPlayerArrayList;
                 System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
-                observer.update();
+                multiplayerGUIobserver.update();
 
     }
 
@@ -106,7 +107,7 @@ public  class LocalModel {
             for(ClientPlayer player : clientPlayerArrayList){
                 System.out.println(player.getName());
             }
-            observer.update();
+            multiplayerGUIobserver.update();
             System.out.println("Observer was just notified");
 
         }
@@ -116,9 +117,17 @@ public  class LocalModel {
         observer.update();
     }*/
 
-    public void registerAsObserver(MultiplayerGUI multiplayerGUI){
-            this.observer=multiplayerGUI;
+    public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
+            if(currentObject instanceof MultiplayerGUI) {
+                this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
+                return;
+            }
+            if (currentObject instanceof TableGUI){
+                this.tableGUIobserver=(TableGUI)currentObject;
+                return;
+            }
     }
+
 
     public void setDrawnDice(ArrayList<ClientDice> drawnDice) {
         this.drawnDice=drawnDice;
@@ -127,11 +136,12 @@ public  class LocalModel {
 
     public void setDrawnToolCards(ArrayList<ClientToolCard> drawnToolCards) {
         this.drawnToolCards = drawnToolCards;
-
+        tableGUIobserver.updateToolCards();
     }
 
     public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
         this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
+        tableGUIobserver.updatePublicObjectiveCards();
     }
 
     public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore
