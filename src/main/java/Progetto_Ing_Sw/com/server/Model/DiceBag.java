@@ -23,7 +23,7 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
         splittableRandom = new SplittableRandom();
     }
 
-  /*  public DiceBag getInstance(){
+    /*  public DiceBag getInstance(){
         return diceBag;
     }*/
 
@@ -65,7 +65,7 @@ public ArrayList<Dice> diceDraw(int numDiceToDraw){
         return drawnDice;
 }
 
-public void returnDice(Dice dice) throws IllegalDiceException{      //"Restituisce" il dado specificato nel senso che viene reinserito nel sacchetto
+public void reintroduceDice(Dice dice) throws IllegalDiceException{      //"Restituisce" il dado specificato nel senso che viene reinserito nel sacchetto
         switch(dice.getColor()){
             case Color.RED:
                 if(numDiceRed<18) numDiceRed++; //Controllo il numero di dadi prima del reinserimento per evitare inconsistenze

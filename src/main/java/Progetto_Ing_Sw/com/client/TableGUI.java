@@ -1,6 +1,5 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.tools.JSONCreator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -22,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
@@ -31,8 +29,9 @@ import java.io.FileReader;
 
 public class TableGUI extends Stage{
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label;
-    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
+    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
+    Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
 
     TableGUI() {
         this.setTitle("Sagrada Game");
@@ -212,7 +211,7 @@ public class TableGUI extends Stage{
 
             //Bottoni che riferiscono alle Tool Cards
             ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(10);
-            ToolCard1BTN.setId("ToolCardBTN");
+            ToolCard1BTN.setId("CardBTN");
             ToolCard1BTN.setOnAction(event -> {
                 ToolCard1BTN.setDisable(true);
                 ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer();
@@ -222,7 +221,7 @@ public class TableGUI extends Stage{
 
 
             ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(10);
-            ToolCard2BTN.setId("ToolCardBTN");
+            ToolCard2BTN.setId("CardBTN");
             ToolCard2BTN.setOnAction(event -> {
                 ToolCard2BTN.setDisable(true);
                 ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer();
@@ -232,7 +231,7 @@ public class TableGUI extends Stage{
 
 
             ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(10);
-            ToolCard3BTN.setId("ToolCardBTN");
+            ToolCard3BTN.setId("CardBTN");
             ToolCard3BTN.setOnAction(event -> {
                 ToolCard3BTN.setDisable(true);
                 ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer();
@@ -298,7 +297,6 @@ public class TableGUI extends Stage{
 
             //StackPane per contenere le carte
             StackPane ToolCardList = new StackPane();
-            ToolCardList.setAlignment(Pos.BOTTOM_LEFT);
             ToolCardList.setMaxHeight(280);
             ToolCardList.setPrefWidth(240);
             ToolCardList.setTranslateY(-100);
@@ -315,13 +313,13 @@ public class TableGUI extends Stage{
             //INIZIO  PUBLIC OBJECTIVE MENU
 
             //Contenuto del menu Public Objetives
-            Label PublicObjectiveCardMenuTitle = new Label("      Public Objectives");
-            PublicObjectiveCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: white;" + "-fx-font: 25 \"Centaur\";");
+            Label PublicObjectiveCardMenuTitle = new Label("Public\nObjectives");PublicObjectiveCardMenuTitle.setTranslateY(50);PublicObjectiveCardMenuTitle.setTextAlignment(TextAlignment.CENTER);
+            PublicObjectiveCardMenuTitle.setStyle("-fx-background-color: transparent;"  + "-fx-font: 25 'Castellar';");
 
             //Bottoni che riferiscono alle Public Objective Cards
-            Button PublicObjectiveCard1 = new Button("Public Objective 1");
-            PublicObjectiveCard1.setId("ToolCardBTN");
-            PublicObjectiveCard1.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard1BTN = new Button("Public Objective 1");PublicObjectiveCard1BTN.setTranslateX(22);PublicObjectiveCard1BTN.setTranslateY(8);
+            PublicObjectiveCard1BTN.setId("CardBTN");
+            PublicObjectiveCard1BTN.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
 
@@ -330,9 +328,9 @@ public class TableGUI extends Stage{
             });
 
 
-            Button PublicObjectiveCard2 = new Button("Public Objective 2");
-            PublicObjectiveCard2.setId("ToolCardBTN");
-            PublicObjectiveCard2.setOnAction(new EventHandler<ActionEvent>() {
+            PublicObjectiveCard2BTN = new Button("Public Objective 2");PublicObjectiveCard2BTN.setTranslateX(22);PublicObjectiveCard2BTN.setTranslateY(8);
+            PublicObjectiveCard2BTN.setId("CardBTN");
+            PublicObjectiveCard2BTN.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     new ToolCardDisplayer();
@@ -342,33 +340,57 @@ public class TableGUI extends Stage{
             });
 
 
-            Button PublicObjectiveCard3 = new Button("Public Objective 3");
-            PublicObjectiveCard3.setId("ToolCardBTN");
-            PublicObjectiveCard3.setOnAction(event -> {
-                PublicObjectiveCard3.setDisable(true);
+            PublicObjectiveCard3BTN = new Button("Public Objective 3");PublicObjectiveCard3BTN.setTranslateX(22);PublicObjectiveCard3BTN.setTranslateY(8);
+            PublicObjectiveCard3BTN.setId("CardBTN");
+            PublicObjectiveCard3BTN.setOnAction(event -> {
+                PublicObjectiveCard3BTN.setDisable(true);
                 PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer();
                 PublicDisplay3.showAndWait();
-                PublicObjectiveCard3.setDisable(false);
+                PublicObjectiveCard3BTN.setDisable(false);
             });
 
+            //Label delle Public Objective Cards
+            PublicObjectiveCard1Label = new Label();PublicObjectiveCard1Label.setMinSize(268,131);PublicObjectiveCard1Label.setId("PublicObjectiveCardLabel");
+            PublicObjectiveCard2Label = new Label();PublicObjectiveCard2Label.setMinSize(268,131);PublicObjectiveCard2Label.setId("PublicObjectiveCardLabel");
+            PublicObjectiveCard3Label = new Label();PublicObjectiveCard3Label.setMinSize(268,131);PublicObjectiveCard3Label.setId("PublicObjectiveCardLabel");
+
+
+            //Text per le descrizioni
+            PublicObjectiveCard1Description = new Text("Description");PublicObjectiveCard1Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard1Description.setTranslateY(30);
+            PublicObjectiveCard2Description = new Text("Description");PublicObjectiveCard2Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard2Description.setTranslateY(30);
+            PublicObjectiveCard3Description = new Text("Description");PublicObjectiveCard3Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard3Description.setTranslateY(30);
+
+            PublicObjectiveCard1Value= new Text("4");PublicObjectiveCard1Value.setStyle("-fx-font: 50 'Centaur';"+ "-fx-font-weight: bold;");PublicObjectiveCard1Value.setTranslateX(-86);PublicObjectiveCard1Value.setTranslateY(21);
+            PublicObjectiveCard2Value= new Text("5");PublicObjectiveCard2Value.setStyle("-fx-font: 50 'Centaur';"+ "-fx-font-weight: bold;");PublicObjectiveCard2Value.setTranslateX(-86);PublicObjectiveCard2Value.setTranslateY(21);
+            PublicObjectiveCard3Value= new Text("2");PublicObjectiveCard3Value.setStyle("-fx-font: 50 'Centaur';"+ "-fx-font-weight: bold;");PublicObjectiveCard3Value.setTranslateX(-86);PublicObjectiveCard3Value.setTranslateY(21);
+
+            //StackPane per i vari menù
+            StackPane PublicObjectiveMenuHeader = new StackPane();PublicObjectiveMenuHeader.setId("PublicObjectiveCardMenuHeader");PublicObjectiveMenuHeader.setTranslateY(-120);PublicObjectiveMenuHeader.setMinHeight(205);
+            PublicObjectiveMenuHeader.getChildren().add(PublicObjectiveCardMenuTitle);
+
+            StackPane PublicObjectiveCard1= new StackPane();PublicObjectiveCard1.setTranslateY(-10);
+            PublicObjectiveCard1.getChildren().addAll(PublicObjectiveCard1Label,PublicObjectiveCard1BTN,PublicObjectiveCard1Description,PublicObjectiveCard1Value);
+
+            StackPane PublicObjectiveCard2= new StackPane();PublicObjectiveCard2.setTranslateY(65);
+            PublicObjectiveCard2.getChildren().addAll(PublicObjectiveCard2Label,PublicObjectiveCard2BTN,PublicObjectiveCard2Description,PublicObjectiveCard2Value);
+
+            StackPane PublicObjectiveCard3= new StackPane();PublicObjectiveCard3.setTranslateY(140);
+            PublicObjectiveCard3.getChildren().addAll(PublicObjectiveCard3Label,PublicObjectiveCard3BTN,PublicObjectiveCard3Description,PublicObjectiveCard3Value);
 
 
 
-
-            //VBox per contenere le carte
-            VBox PublicObjectiveCardList = new VBox(20);
-            PublicObjectiveCardList.setAlignment(Pos.BOTTOM_LEFT);
-            PublicObjectiveCardList.setMaxHeight(280);
+            //StackPane per contenere le Public Objective Cards
+            StackPane PublicObjectiveCardList = new StackPane();
+            PublicObjectiveCardList.setMaxHeight(350);
             PublicObjectiveCardList.setPrefWidth(240);
-            PublicObjectiveCardList.setTranslateY(-100);
-            PublicObjectiveCardList.getChildren().addAll(PublicObjectiveCard1, PublicObjectiveCard2, PublicObjectiveCard3);
+            PublicObjectiveCardList.setTranslateY(0);
+            PublicObjectiveCardList.getChildren().addAll(PublicObjectiveCard3, PublicObjectiveCard2, PublicObjectiveCard1, PublicObjectiveMenuHeader);
 
             //VBox del Menu Public Objective Card
-            VBox PublicObjectiveMenu = new VBox(120);
-            PublicObjectiveMenu.setId("CardMenu");
+            VBox PublicObjectiveMenu = new VBox(100);PublicObjectiveMenu.setTranslateY(-30);
             PublicObjectiveMenu.setMaxHeight(280);
             PublicObjectiveMenu.setMaxWidth(240);
-            PublicObjectiveMenu.getChildren().addAll(PublicObjectiveCardMenuTitle, PublicObjectiveCardList);
+            PublicObjectiveMenu.getChildren().add(PublicObjectiveCardList);
 
             //FINE PUBLIC OBJECTIVE MENU
 
@@ -435,6 +457,17 @@ public class TableGUI extends Stage{
 
         public void updatePublicObjectiveCards(){
             Platform.runLater(()->{
+                PublicObjectiveCard1BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle());
+                PublicObjectiveCard1Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()));
+                PublicObjectiveCard1Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription());
+
+                PublicObjectiveCard2BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle());
+                PublicObjectiveCard2Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()));
+                PublicObjectiveCard2Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription());
+
+                PublicObjectiveCard3BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle());
+                PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
+                PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
 
             });
         }

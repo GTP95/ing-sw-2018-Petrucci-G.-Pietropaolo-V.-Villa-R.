@@ -1,8 +1,5 @@
 package Progetto_Ing_Sw.com.server.Model;
 
-import Progetto_Ing_Sw.com.server.Model.Color;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.DiceBag;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -135,35 +132,35 @@ public class DiceBagTest {
         Dice diceGreen=new Dice(splittableRandom.nextInt(1,7),Color.GREEN);
 
         try {
-            diceBag.returnDice(diceRed);
+            diceBag.reintroduceDice(diceRed);
             Assert.fail("Dado rosso inserito nonostante il sacchetto sia pieno!");          //Il sacchetto è pieno, non dovrebbe lasciar reinserire il dado
         } catch (IllegalDiceException e) {
             Assert.assertTrue(true);    //Non esiste Assert.pass()...
         }
 
         try {
-            diceBag.returnDice(diceBlue);
+            diceBag.reintroduceDice(diceBlue);
             Assert.fail("Dado blu inserito nonostante il sacchetto sia pieno!");          //Il sacchetto è pieno, non dovrebbe lasciar reinserire il dado
         } catch (IllegalDiceException e) {
             Assert.assertTrue(true);    //Non esiste Assert.pass()...
         }
 
         try {
-            diceBag.returnDice(dicePurple);
+            diceBag.reintroduceDice(dicePurple);
             Assert.fail("Dado viola inserito nonostante il sacchetto sia pieno!");          //Il sacchetto è pieno, non dovrebbe lasciar reinserire il dado
         } catch (IllegalDiceException e) {
             Assert.assertTrue(true);    //Non esiste Assert.pass()...
         }
 
         try {
-            diceBag.returnDice(diceYellow);
+            diceBag.reintroduceDice(diceYellow);
             Assert.fail("Dado giallo inserito nonostante il sacchetto sia pieno!");          //Il sacchetto è pieno, non dovrebbe lasciar reinserire il dado
         } catch (IllegalDiceException e) {
             Assert.assertTrue(true);    //Non esiste Assert.pass()...
         }
 
         try {
-            diceBag.returnDice(diceGreen);
+            diceBag.reintroduceDice(diceGreen);
             Assert.fail("Dado verde inserito nonostante il sacchetto sia pieno!");          //Il sacchetto è pieno, non dovrebbe lasciar reinserire il dado
         } catch (IllegalDiceException e) {
             Assert.assertTrue(true);    //Non esiste Assert.pass()...
@@ -182,35 +179,35 @@ public class DiceBagTest {
             diceBag.diceDraw(90);   //Pesca tutti i dadi per evitare inconsistenze nei valori dei contatori dei dadi per colore
 
             try{
-                diceBag.returnDice(diceRed);
+                diceBag.reintroduceDice(diceRed);
             }
             catch (IllegalDiceException e){
                 Assert.fail("Dado rosso non reinserito nonostante il sacchetto sia vuoto!");
             }
 
         try{
-            diceBag.returnDice(diceBlue);
+            diceBag.reintroduceDice(diceBlue);
         }
         catch (IllegalDiceException e){
             Assert.fail("Dado blu non reinserito nonostante il sacchetto sia vuoto!");
         }
 
         try{
-            diceBag.returnDice(dicePurple);
+            diceBag.reintroduceDice(dicePurple);
         }
         catch (IllegalDiceException e){
             Assert.fail("Dado viola non reinserito nonostante il sacchetto sia vuoto!");
         }
 
         try{
-            diceBag.returnDice(diceYellow);
+            diceBag.reintroduceDice(diceYellow);
         }
         catch (IllegalDiceException e){
             Assert.fail("Dado giallo non reinserito nonostante il sacchetto sia vuoto!");
         }
 
         try{
-            diceBag.returnDice(diceGreen);
+            diceBag.reintroduceDice(diceGreen);
         }
         catch (IllegalDiceException e){
             Assert.fail("Dado verde non reinserito nonostante il sacchetto sia vuoto!");

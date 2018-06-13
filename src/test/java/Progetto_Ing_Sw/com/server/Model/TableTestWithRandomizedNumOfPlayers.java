@@ -1,6 +1,6 @@
 
 /*
-Lo scopo di questa calsse è di testare la funzione returnDice con più dadi. Dato che il numero di dadi pescato dipende dal numero di giocatori è necessario
+Lo scopo di questa calsse è di testare la funzione reintroduceDice con più dadi. Dato che il numero di dadi pescato dipende dal numero di giocatori è necessario
 aggiungere manualmente dei giocatori nella lobby. Dato che questo è necessario farlo solo per questo test, ho creato una classe separata anzichè metterlo nella sezione
 @Before dei test di TableTest
 */
