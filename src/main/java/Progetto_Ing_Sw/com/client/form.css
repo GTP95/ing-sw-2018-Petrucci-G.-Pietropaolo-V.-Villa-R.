@@ -390,28 +390,28 @@
 #Shade5{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("GUI/Shade5.png") ;
+    -fx-background-image: url("GUI/Shades/Shade5.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade5:hover{
     -fx-border-color: blue;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("GUI/Shade5.png") ;
+    -fx-background-image: url("GUI/Shades/Shade5.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade6{
     -fx-border-color: black;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("GUI/Shade6.png") ;
+    -fx-background-image: url("GUI/Shades/Shade6.png") ;
     -fx-background-size: 75 75;
 }
 
 #Shade6:hover{
     -fx-border-color: blue;
     -fx-border-width:  4 4 4 4;
-    -fx-background-image: url("GUI/Shade6.png") ;
+    -fx-background-image: url("GUI/Shades/Shade6.png") ;
     -fx-background-size: 75 75;
 }
 

@@ -1,6 +1,6 @@
 {"title":"Copper Foil Burnisher",
-  "description":"Move any one die in your window ignoring value restrictions",
-  "info":"You must obey all other placement restrictions",
+  "description":"Move any one die in your window\nignoring value restrictions",
+  "info":"You must obey all other\nplacement restrictions",
   "ID":3,
   "firstUsage":false,
   "color":"Red",
