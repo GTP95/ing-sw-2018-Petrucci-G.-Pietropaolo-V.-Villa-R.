@@ -1,1 +1,6 @@
-{"title":"Grozing Pliers","description":"After drafting,\nincrease or decrease the value\nof the drafted die by 1","info":"1 may not change to 6, or 6 to 1","ID":1,"firstUsage":false,"color":"Purple"}
+{"title":"Grozing Pliers","description":"After drafting,\nincrease or decrease the value\nof the drafted die by 1",
+  "info":"1 may not change to 6, or 6 to 1",
+  "ID":1,
+  "firstUsage":false,
+  "color":"Purple"
+}
