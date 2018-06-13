@@ -2,6 +2,25 @@
 
 }
 
+#red{
+    -fx-background-color: red;
+}
+
+#purple{
+    -fx-background-color: #d600d6;
+}
+
+#blue{
+    -fx-background-color: #46ddff;
+}
+
+#green{
+    -fx-background-color: #23b800;
+}
+
+#yellow{
+    -fx-background-color: #ffef10;
+}
 
 #startScreen{
     -fx-background-image: url("GUI/StartMenuHover.png");

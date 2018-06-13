@@ -1,7 +1,7 @@
 {"title":"Lens Cutter",
   "description":"After drafting, swap the drafted\ndie with a die from the\nRound Track",
-  "info":"",
+  "info":"/GUI/ToolCards/5ToolCard.png",
   "ID":5,
   "firstUsage":false,
-  "color":"Green"
+  "color":"green"
 }

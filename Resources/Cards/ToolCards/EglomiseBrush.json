@@ -1,6 +1,6 @@
 {"title":"Eglomise Brush",
-  "description":"Move any one die in your windows\nignoring color restrictions",
-  "info":"You must obey all other\nplacement restrictions",
+  "description":"Move any one die in your windows\nignoring color restrictions\r\nYou must obey all other\nplacement restrictions",
+  "info":"GUI/ToolCards/2ToolCard.png",
   "ID":2,
   "firstUsage":false,
-  "color":"Blue"}
+  "color":"blue"}

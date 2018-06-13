@@ -1,6 +1,6 @@
 {"title":"Flux Brusher",
-  "description":"After drefting,\nre-roll the drafted die",
-  "info":"If it cannot be placed\nreturn it to the Draft Pool",
+  "description":"After drefting,\nre-roll the drafted die\r\nIf it cannot be placed\nreturn it to the Draft Pool",
+  "info":"GUI/ToolCards/6ToolCard.png",
   "ID":6,
   "firstUsage":false,
-  "color":"Purple"}
+  "color":"purple"}

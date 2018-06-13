@@ -30,7 +30,7 @@ import java.io.FileReader;
 
 public class TableGUI extends Stage{
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
 
@@ -250,9 +250,15 @@ public class TableGUI extends Stage{
                 ToolCard3BTN.setDisable(false);
             });
 
+            //Colori
+            ToolCardColor1 = new Label();ToolCardColor1.setMinSize(50,50);ToolCardColor1.setId("red");ToolCardColor1.setTranslateX(-85);ToolCardColor1.setTranslateY(-20);
+            ToolCardColor2 = new Label();ToolCardColor2.setMinSize(50,50);ToolCardColor2.setId("yellow");ToolCardColor2.setTranslateX(-85);ToolCardColor2.setTranslateY(-20);
+            ToolCardColor3 = new Label();ToolCardColor3.setMinSize(50,50);ToolCardColor3.setId("purple");ToolCardColor3.setTranslateX(-85);ToolCardColor3.setTranslateY(-20);
+
+
             //StackPane Bottoni su Label
             StackPane ToolCard1 = new StackPane();
-            ToolCard1.getChildren().addAll(ToolCard1Label,ToolCard1BTN);
+            ToolCard1.getChildren().addAll(ToolCardColor1,ToolCard1Label,ToolCard1BTN);
             ToolCard1.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 TranslateTransition Hover1 = new TranslateTransition(Duration.millis(500), ToolCard1);
                 Hover1.setFromY(0);
@@ -270,7 +276,7 @@ public class TableGUI extends Stage{
             });
 
             StackPane ToolCard2 = new StackPane();ToolCard2.setTranslateY(75);
-            ToolCard2.getChildren().addAll(ToolCard2Label,ToolCard2BTN);
+            ToolCard2.getChildren().addAll(ToolCardColor2,ToolCard2Label,ToolCard2BTN);
             ToolCard2.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard2);
                 Hover2.setFromY(75);
@@ -288,7 +294,7 @@ public class TableGUI extends Stage{
             });
 
             StackPane ToolCard3 = new StackPane();ToolCard3.setTranslateY(150);
-            ToolCard3.getChildren().addAll(ToolCard3Label,ToolCard3BTN);
+            ToolCard3.getChildren().addAll(ToolCardColor3,ToolCard3Label,ToolCard3BTN);
             ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
                 TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
                 Hover2.setFromY(150);
@@ -480,9 +486,13 @@ public class TableGUI extends Stage{
         public void updateToolCards(){
             Platform.runLater(()->{
                 ToolCard1BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(0).getTitle());
-                ToolCard2BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(1).getTitle());
-                ToolCard3BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(2).getTitle());
+                ToolCardColor1.setId(LocalModel.getInstance().getDrawnToolCards().get(0).getColor());
 
+                ToolCard2BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(1).getTitle());
+                ToolCardColor2.setId(LocalModel.getInstance().getDrawnToolCards().get(1).getColor());
+
+                ToolCard3BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(2).getTitle());
+                ToolCardColor3.setId(LocalModel.getInstance().getDrawnToolCards().get(2).getColor());
             });
         }
 

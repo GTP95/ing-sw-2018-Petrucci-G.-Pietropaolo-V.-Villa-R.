@@ -1,6 +1,6 @@
 {"title":"Cork-backed Straightedge",
-  "description":"After drafting, place the\ndie in a spot that is not adjacent\nto another die",
-  "info":"You must obey all other\nplacement restrictions",
+  "description":"After drafting, place the\ndie in a spot that is not adjacent\nto another die\r\nYou must obey all other\nplacement restrictions",
+  "info":"GUI/ToolCards/9ToolCard.png",
   "ID":9,
   "firstUsage":false,
-  "color":"Yellow"}
+  "color":"yellow"}
