@@ -41,6 +41,7 @@ public class TableGUI extends Stage{
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
 
+        LocalModel.getInstance().registerAsObserver(this);
 
         //INIZIO Gameplay Scene
         int rows = 4;
@@ -382,6 +383,21 @@ public class TableGUI extends Stage{
 
             StackPane PublicObjectiveCard3= new StackPane();PublicObjectiveCard3.setTranslateY(150);
             PublicObjectiveCard3.getChildren().addAll(PublicObjectiveCard3Label,PublicObjectiveCard3Description,PublicObjectiveCard3Value,PublicObjectiveCard3BTN);
+            ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+                Hover2.setFromY(150);
+                Hover2.setToY(140);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            ToolCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
+                Hover2.setFromY(140);
+                Hover2.setToY(150);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
 
 
 
