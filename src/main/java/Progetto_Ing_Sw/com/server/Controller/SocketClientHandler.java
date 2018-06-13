@@ -1,15 +1,13 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Controller;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
+import Progetto_Ing_Sw.com.server.Controller.Lobby;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
-import sun.applet.Main;
 
-import static jdk.nashorn.internal.objects.NativeArray.join;
-
-public class SocketClientHandler implements Runnable, TableObserver, RoundTrackObserver{
+public class SocketClientHandler implements Runnable, TableObserver, RoundTrackObserver {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;

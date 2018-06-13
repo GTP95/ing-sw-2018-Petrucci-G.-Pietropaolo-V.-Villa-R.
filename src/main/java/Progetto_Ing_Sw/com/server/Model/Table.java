@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Controller.Lobby;
+
 import java.io.File;
 import java.util.ArrayList;
 

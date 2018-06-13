@@ -1,10 +1,11 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Controller;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class Lobby {

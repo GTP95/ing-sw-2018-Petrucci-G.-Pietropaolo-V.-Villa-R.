@@ -1,30 +1,15 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Model.Lobby;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.awt.event.MouseEvent;
-import java.sql.Time;
-import java.util.*;
 
 
 public class MultiplayerGUI extends Stage {

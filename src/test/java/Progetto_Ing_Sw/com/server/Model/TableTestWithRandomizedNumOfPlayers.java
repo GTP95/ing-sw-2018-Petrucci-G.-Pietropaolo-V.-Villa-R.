@@ -7,6 +7,7 @@ aggiungere manualmente dei giocatori nella lobby. Dato che questo è necessario 
 
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

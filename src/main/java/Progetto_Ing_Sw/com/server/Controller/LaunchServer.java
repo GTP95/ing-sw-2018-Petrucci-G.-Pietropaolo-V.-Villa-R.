@@ -1,9 +1,10 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class LaunchServer {

@@ -1,7 +1,8 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Player{
    private String name;

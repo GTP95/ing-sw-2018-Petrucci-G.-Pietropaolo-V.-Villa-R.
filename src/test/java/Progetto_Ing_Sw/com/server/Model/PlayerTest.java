@@ -1,6 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
