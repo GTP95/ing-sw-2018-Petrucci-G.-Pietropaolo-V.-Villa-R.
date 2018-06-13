@@ -31,6 +31,8 @@ import java.io.FileReader;
 
 public class TableGUI extends Stage{
     Scene GameplayScene;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label;
+    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN;
 
     TableGUI() {
         this.setTitle("Sagrada Game");
@@ -204,12 +206,12 @@ public class TableGUI extends Stage{
             Label ToolCardMenuTitle = new Label("            Tool Cards");
             ToolCardMenuTitle.setStyle("-fx-background-color: transparent;" + "-fx-text-fill: black;" + "-fx-font: 25 \"Centaur\";");
 
-            Label ToolCard1Label= new Label();ToolCard1Label.setMinSize(268,131);ToolCard1Label.setId("ToolCardLabel");
-            Label ToolCard2Label= new Label();ToolCard2Label.setMinSize(268,131);ToolCard2Label.setId("ToolCardLabel");
-            Label ToolCard3Label= new Label();ToolCard3Label.setMinSize(268,131);ToolCard3Label.setId("ToolCardLabel");
+            ToolCard1Label= new Label();ToolCard1Label.setMinSize(268,131);ToolCard1Label.setId("ToolCardLabel");
+            ToolCard2Label= new Label();ToolCard2Label.setMinSize(268,131);ToolCard2Label.setId("ToolCardLabel");
+            ToolCard3Label= new Label();ToolCard3Label.setMinSize(268,131);ToolCard3Label.setId("ToolCardLabel");
 
             //Bottoni che riferiscono alle Tool Cards
-            Button ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(10);
+            ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(10);
             ToolCard1BTN.setId("ToolCardBTN");
             ToolCard1BTN.setOnAction(event -> {
                 ToolCard1BTN.setDisable(true);
@@ -219,7 +221,7 @@ public class TableGUI extends Stage{
                     });
 
 
-            Button ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(10);
+            ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(10);
             ToolCard2BTN.setId("ToolCardBTN");
             ToolCard2BTN.setOnAction(event -> {
                 ToolCard2BTN.setDisable(true);
@@ -229,7 +231,7 @@ public class TableGUI extends Stage{
             });
 
 
-            Button ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(10);
+            ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(10);
             ToolCard3BTN.setId("ToolCardBTN");
             ToolCard3BTN.setOnAction(event -> {
                 ToolCard3BTN.setDisable(true);
@@ -423,6 +425,15 @@ public class TableGUI extends Stage{
         }
 
         public void updateToolCards(){
+            Platform.runLater(()->{
+                ToolCard1BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(0).getTitle());
+                ToolCard2BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(1).getTitle());
+                ToolCard3BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(2).getTitle());
+
+            });
+        }
+
+        public void updatePublicObjectiveCards(){
             Platform.runLater(()->{
 
             });

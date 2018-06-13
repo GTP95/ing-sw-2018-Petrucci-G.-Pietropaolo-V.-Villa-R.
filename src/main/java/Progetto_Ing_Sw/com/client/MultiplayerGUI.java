@@ -32,12 +32,6 @@ public class MultiplayerGUI extends Stage {
     Label Player1Label,Player2Label,Player3Label,Player4Label;
     ToggleButton Player1BTN, Player2BTN, Player3BTN,Player4BTN;
 
-    private ArrayList<ClientPlayer> PlayersList;
-    private Timer timer;
-
-
-
-
 
 
     MultiplayerGUI(){
@@ -90,13 +84,6 @@ public class MultiplayerGUI extends Stage {
         Player2BTN = new ToggleButton("READY!"); Player2BTN.setId("ReadyBTN");Player2BTN.setTranslateY(155);Player2BTN.setPrefHeight(139);Player2BTN.setDisable(true);
         Player3BTN = new ToggleButton("READY!"); Player3BTN.setId("ReadyBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefHeight(139);Player3BTN.setDisable(true);
         Player4BTN = new ToggleButton("READY!"); Player4BTN.setId("ReadyBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefHeight(139);Player4BTN.setDisable(true);
-
-        //Player Placeholder
-        PlayersList= new ArrayList<>();
-        PlayersList.add(0, new ClientPlayer("Player1"));
-        PlayersList.add(1, new ClientPlayer("Player2"));
-        PlayersList.add(2, new ClientPlayer("Player3"));
-        PlayersList.add(3, new ClientPlayer("Player4"));
 
 
 
