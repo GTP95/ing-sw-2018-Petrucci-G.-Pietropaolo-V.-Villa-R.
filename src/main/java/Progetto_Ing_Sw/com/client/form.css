@@ -431,12 +431,16 @@
 }
 
 
-
-#CardMenu{
-    -fx-background-color: black;
-
-
+#PublicObjectiveCardMenuHeader{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font: 25 "Centaur";
+    -fx-background-image: url("GUI/PublicObjectiveCardMenuHeader.png");
+    -fx-background-repeat: no-repeat;
+    /*-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );*/
 }
+
+
 #ToolCardMenu{
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -460,17 +464,16 @@
     -fx-background-image: url("GUI/ToolCardTile.png");
     -fx-background-repeat: no-repeat;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
-
 }
 
 
-#ToolCardBTN{
+#CardBTN{
     -fx-background-color: transparent;
     -fx-text-fill: black;
     -fx-font: 25 "Centaur";
 }
 
-#ToolCardBTN:hover{
+#CardBTN:hover{
     -fx-background-color: transparent;
     -fx-text-fill: #903b12;
     -fx-font: 25 "Centaur";
@@ -486,6 +489,15 @@
     -fx-font: 33 "Centaur";
     -fx-text-fill: black;
     -fx-font-weight: bold;
+}
+
+#PublicObjectiveCardLabel{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font: 25 "Centaur";
+    -fx-background-image: url("GUI/PublicObjectiveCardTile.png");
+    -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
 
 #PublicObjectiveCardDescription{
