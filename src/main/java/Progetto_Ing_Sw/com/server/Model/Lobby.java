@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Progetto_Ing_Sw.com.client.ClientPlayer;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class Lobby {

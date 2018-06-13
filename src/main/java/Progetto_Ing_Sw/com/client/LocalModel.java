@@ -36,13 +36,13 @@ public  class LocalModel {
     public synchronized ArrayList<ClientPlayer> getClientPlayerArrayList() {
 
         System.out.println("Getting clientPlayerArrayList");
-        while (clientPlayerArrayList ==null) {
+       /* while (clientPlayerArrayList ==null) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         return clientPlayerArrayList;
 
     }
@@ -86,15 +86,15 @@ public  class LocalModel {
         return drawnPublicObjectiveCards;
     }
 
-    public synchronized void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
+    public void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
 
                 this.clientPlayerArrayList = clientPlayerArrayList;
                 System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
                 observer.update();
-                notifyAll();
+
     }
 
-    public synchronized void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
+    public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
         boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
             for(ClientPlayer clientPlayerInArray : clientPlayerArrayList){
@@ -108,7 +108,7 @@ public  class LocalModel {
             }
             observer.update();
             System.out.println("Observer was just notified");
-            notifyAll();
+
         }
     }
 
@@ -122,15 +122,22 @@ public  class LocalModel {
 
     public void setDrawnDice(ArrayList<ClientDice> drawnDice) {
         this.drawnDice=drawnDice;
-        notifyAll();
+
     }
 
     public void setDrawnToolCards(ArrayList<ClientToolCard> drawnToolCards) {
         this.drawnToolCards = drawnToolCards;
-        notifyAll();
+
     }
 
     public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
         this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
+    }
+
+    public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore
+        switch(description){
+            case "ToolCard":
+
+        }
     }
 }

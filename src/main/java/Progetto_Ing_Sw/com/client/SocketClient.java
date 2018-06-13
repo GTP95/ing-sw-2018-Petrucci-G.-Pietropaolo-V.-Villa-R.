@@ -156,4 +156,8 @@ public class SocketClient implements Runnable{
     public void resetException(){
         trownException=null;
     }
+
+    public void sendMessage(){
+
+    }
 }
