@@ -7,9 +7,6 @@ import java.io.FileNotFoundException;
 
 public class FluxRemover {
 
-        private Table table = Table.getOurInstance();
-        private DiceBag diceBag;
-
         //-------import del costo di primo uso
         private boolean localFirstUsage;
         {try {
@@ -27,7 +24,7 @@ public class FluxRemover {
         public boolean isFirstUsage() {return firstUsage;}
         public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-        public WindowBoard applyEffect(WindowBoard localBoard, Dice dice,DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed){
+        public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed){
 
             Dice localDice = new Dice(dice.getValue(),dice.getColor());
 
