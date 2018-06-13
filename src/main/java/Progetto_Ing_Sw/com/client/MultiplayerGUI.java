@@ -137,6 +137,13 @@ public class MultiplayerGUI extends Stage {
 
     }
 
+    public void StartGame(){
+        Platform.runLater(() ->{
+            close();
+            new TableGUI();
+        });
+    }
+
     public void update(){
         Platform.runLater(() ->{
             Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
@@ -148,10 +155,5 @@ public class MultiplayerGUI extends Stage {
         });
     }
 
-    public void StartGame(){
-        Platform.runLater(() ->{
-            close();
-            new TableGUI();
-        });
-    }
+
 }
