@@ -93,9 +93,16 @@ public class SocketClient implements Runnable{
                 System.out.println("Connected");
                 break;
             case "Max number of players exceeded":
-                throw new TooManyPlayersException();
-                //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione edunque il break non verrebbe mai eseguito
-
+                throw new TooManyPlayersException();    //TODO: GUI
+                //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione dunque il break non verrebbe mai eseguito
+            case "Invalid username: username cannot be null":
+                throw new InvalidUsernameException("Invalid username: username cannot be null");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+            case "Invalid username: empty username not allowed":
+                throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+            case "Game started!":
+                localModel.setGameRunning(true);
+                break;
+            default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
     }
@@ -140,7 +147,7 @@ public class SocketClient implements Runnable{
                 ClientWindowBoard windowBoard=JSONCreator.clientWindowBoardLoaderFromString(json);
                 localModel.getPlayerFromName(username).updateWindowBoard(windowBoard);
                 break;
-
+            default: System.err.println("Can't understand the following action message sent from the server: "+actionDescription);
         }
     }
 

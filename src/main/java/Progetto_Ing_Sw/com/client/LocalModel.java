@@ -14,6 +14,7 @@ public  class LocalModel {
     private ArrayList<ClientToolCard> drawnToolCards;
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
+    private boolean gameRunning;
 
     private LocalModel(){
 
@@ -149,5 +150,10 @@ public  class LocalModel {
             case "ToolCard":
 
         }
+    }
+
+    public void setGameRunning(boolean gameRunning) {
+        this.gameRunning = gameRunning;
+        multiplayerGUIobserver.StartGame();
     }
 }

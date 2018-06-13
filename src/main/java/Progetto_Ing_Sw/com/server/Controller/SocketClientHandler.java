@@ -45,7 +45,9 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
                                 sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da conferma della sua validità
                             }
                         }
+                        //arrivati qui il gioco è cominciato
                 sendPlayerMessage();
+                sendControlMessage("Game started!");
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 sendGameInitializationData();
 
