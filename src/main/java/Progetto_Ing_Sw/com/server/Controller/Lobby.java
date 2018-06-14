@@ -35,13 +35,14 @@ public class Lobby {
                 @Override
                 public void run() {
                     Table.getOurInstance().startGame();
+                    isRunning=false;
                 }
             }, timerValue);
         }
     }
 
     public synchronized void addPlayer(String playerName, SocketClientHandler socketClientHandler) throws TooManyPlayersException, InvalidUsernameException {
-        if(connectedPlayers.size()<4) {     //Non più di 4 giocatori per partita
+        if(connectedPlayers.size()<4 && isRunning) {     //Non più di 4 giocatori per partita e vietate connessioni a gioco già iniziato
             if(playerName==null) throw new InvalidUsernameException("Invalid username: username cannot be null");
             if (playerName.isEmpty()) throw new InvalidUsernameException("Invalid username: empty username not allowed");
             for(Player alreadyConnected : connectedPlayers){
@@ -69,7 +70,7 @@ public class Lobby {
         }
 
         else{
-            System.out.println("User " + playerName + " Tried to connect, but 4 players are already connected.");
+            System.out.println("User " + playerName + " Tried to connect, but 4 players are already connected or game is already started.");
             throw new TooManyPlayersException();
         }
     }
