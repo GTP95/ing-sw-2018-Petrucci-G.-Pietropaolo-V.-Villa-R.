@@ -50,11 +50,7 @@ public class Lobby {
             Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw(), socketClientHandler);   //se vengono passati tutti i controlli, viene generato il nuovo utente ed inserito nell'arraylist
             connectedPlayers.add(player);
             System.out.println("Player " + player.getName() + " joined the game!");    //TODO: test per verificare aggiunta giocatori nell'arraylist
-            for(Player player1 : connectedPlayers){
-              SocketClientHandler socketClientHandler1=player1.getSocketClientHandler();
-              Thread thread=socketClientHandler.ourThread;
-              thread.interrupt();   //Perchè se è tutto su una sola riga ho una NullPointerException mentre se è diviso in questo modo no? Perchè SocketClientHandler continua a "spammare" il playerMessage? ha a che fare con lo scheduler del SO?
-            }
+           //Qui giacciono le ceneri del pattern observer, che miseramente fallì il suo compito, e dell'interrupt, che con eccessivo zelo svolse il proprio.
             if(connectedPlayers.size()==2){ //fa partire il conto alla rovescia per l'inizio della partita. ==2 per non far partire più timer se si connettono più di due giocatori
                 timer.schedule(new TimerTask() {
                     @Override

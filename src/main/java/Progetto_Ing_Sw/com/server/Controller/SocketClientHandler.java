@@ -2,23 +2,25 @@ package Progetto_Ing_Sw.com.server.Controller;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
-public class SocketClientHandler implements Runnable, TableObserver, RoundTrackObserver {
+public class SocketClientHandler implements Runnable {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
     private static int timeout;
     public final Thread ourThread;
-    boolean updateFromTable, updateFromRoundtrack;  //necessario per observer su thread
     private Table table;
+    private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
         ourThread=Thread.currentThread();
+
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -41,8 +43,10 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
                     Lobby.getInstance().addPlayer(in.readLine(), this);
                     sendControlMessage("Connected");
                         while(Lobby.isRunning) {
-                            if(ourThread.isInterrupted()) {
-                                sendPlayerMessage(); //Invia al client i nomi dei giocatori già connessi, incluso il proprio nome che funge da conferma della sua validità
+                            currentPlayerArrayList=Lobby.getInstance().getConnctedPlayers();
+                            if(!currentPlayerArrayList.equals(previousPlayerArrayList)){    //Se i due array non sono uguali si è connesso un nuovo giocatore ed è necessario aggiornare il client. Purtroppo non c'è stato verso di far funzionare l'observer e gli interrupt "spammano" l'elenco dei giocatori...
+                                sendPlayerMessage();    //Invia l'elenco aggiornato dei giocatori
+                                previousPlayerArrayList=currentPlayerArrayList; //aggiornamento dello stato
                             }
                         }
                         //arrivati qui il gioco è cominciato
@@ -52,7 +56,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
                 sendGameInitializationData();
 
                 while(Table.gameRunning){
-                        listenForNotificationFromModel();   //TODO: implementare observer
+
                  }
 
             }
@@ -101,11 +105,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
         }
     }
 
-    private void listenForNotificationFromModel(){
-        if(updateFromTable){
 
-        }
-    }
 
     public void getNotificationNewPlayerConnected(String playerName){
             System.out.println("Sending newly connected player name to player");
@@ -114,15 +114,7 @@ public class SocketClientHandler implements Runnable, TableObserver, RoundTrackO
 
     }
 
-    @Override
-    public void notifyRoundTrackUpdate() {
-        updateFromRoundtrack=true;
-    }
 
-    @Override
-    public void NotifyTableUpdate() {
-        updateFromTable=true;
-    }
 
     private void sendGameInitializationData(){
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
