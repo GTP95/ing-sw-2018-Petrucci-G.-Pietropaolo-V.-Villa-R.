@@ -13,15 +13,16 @@ import javafx.stage.StageStyle;
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
 
-    ToolCardDisplayer(String Title, int Number, String Description){
+    ToolCardDisplayer(String Title, int Number, String Description, String Info){
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.initStyle(StageStyle.TRANSPARENT);
 
 
         //ImageView della tool card
         ImageView ToolCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/BaseToolCard.png");
-        ImageView ToolCardImage = new ImageView("Progetto_Ing_Sw/com/client/GUI/ToolCards/1ToolCard.png");
+        ImageView ToolCardImage = new ImageView(Info);
 
 
         //I Label che contengono le varie descrizioni della Carta

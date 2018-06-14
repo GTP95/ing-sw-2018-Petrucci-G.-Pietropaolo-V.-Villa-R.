@@ -62,7 +62,7 @@ public class TableGUI extends Stage{
             griglia.getRowConstraints().add(row);
         }
 
-        //Creazione carta da Json - TEST
+        //Creazione carta da Json
 
         JsonElement jelement = null;
         try {
@@ -219,7 +219,8 @@ public class TableGUI extends Stage{
                 ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer(
                         LocalModel.getInstance().getDrawnToolCards().get(0).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getID(),
-                        LocalModel.getInstance().getDrawnToolCards().get(0).getDescription());
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getDescription(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getInfo());
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -232,7 +233,8 @@ public class TableGUI extends Stage{
                 ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer(
                         LocalModel.getInstance().getDrawnToolCards().get(1).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getID(),
-                        LocalModel.getInstance().getDrawnToolCards().get(1).getDescription());
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getDescription(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getInfo());
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -245,7 +247,8 @@ public class TableGUI extends Stage{
                 ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer(
                         LocalModel.getInstance().getDrawnToolCards().get(2).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getID(),
-                        LocalModel.getInstance().getDrawnToolCards().get(2).getDescription());
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getDescription(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getInfo());
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });

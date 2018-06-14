@@ -2,6 +2,20 @@
 
 }
 
+#transparentBTN{
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 10;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#transparentBTN:hover{
+    -fx-background-color: transparent;
+    -fx-border-color:#436aff ;
+    -fx-border-width: 10;
+    -fx-border-radius: 4 4 4 4;
+}
+
 #red{
     -fx-background-color: red;
 }

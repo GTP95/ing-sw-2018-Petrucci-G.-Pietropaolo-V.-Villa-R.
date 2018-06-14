@@ -1,8 +1,13 @@
 package Progetto_Ing_Sw.com.client;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -14,8 +19,89 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class ChooseAWindow extends Stage {
     Scene Window;
+
+    public GridPane CreateAGrid (String GridPath){
+        int rows = 4;
+        int columns = 5;
+
+        GridPane Board = new GridPane();
+        Board.setTranslateY(-20);
+        Board.setAlignment(Pos.CENTER);
+        Board.setId("TheGrid");
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints column = new ColumnConstraints(75);
+            Board.getColumnConstraints().add(column);
+        }
+
+        for (int i = 0; i < rows; i++) {
+            RowConstraints row = new RowConstraints(75);
+            Board.getRowConstraints().add(row);
+        }
+
+        JsonElement jelement = null;
+        try {
+            jelement = new JsonParser().parse(new FileReader(GridPath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JsonObject jobject = jelement.getAsJsonObject();
+        JsonArray matrixTexture = jobject.getAsJsonArray("matrixScheme");
+        int[][] matrix = new int[rows][columns];
+
+        for (int r = 0; r < matrixTexture.size(); r++) {
+            JsonArray row = matrixTexture.get(r).getAsJsonArray();
+            for (int c = 0; c < row.size(); c++) {
+                matrix[r][c] = row.get(c).getAsInt();
+                Pane block = new Pane();
+                block.setId("Block");
+                switch (matrix[r][c]) {
+                    case (0):
+                        break;
+                    case (1):
+                        block.setStyle("-fx-background-color: red;");
+                        break;
+                    case (2):
+                        block.setStyle("-fx-background-color: #46ddff;");
+                        break;
+                    case (3):
+                        block.setStyle("-fx-background-color: #a800a8;");
+                        break;
+                    case (4):
+                        block.setStyle("-fx-background-color: Yellow;");
+                        break;
+                    case (5):
+                        block.setStyle("-fx-background-color: #009d1d;");
+                        break;
+                    case (6):
+                        block.setId("Shade1");
+                        break;
+                    case (7):
+                        block.setId("Shade2");
+                        break;
+                    case (8):
+                        block.setId("Shade3");
+                        break;
+                    case (9):
+                        block.setId("Shade4");
+                        break;
+                    case (10):
+                        block.setId("Shade5");
+                        break;
+                    case (11):
+                        block.setId("Shade6");
+                        break;
+                }
+                Board.add(block, c, r);
+
+            }
+        }
+        return Board;
+    }
 
     ChooseAWindow(){
         this.setTitle("Choose a Window");
@@ -25,91 +111,71 @@ public class ChooseAWindow extends Stage {
         this.initStyle(StageStyle.UNDECORATED);
         this.alwaysOnTopProperty();
 
-        BackgroundImage Board1 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board1.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background Board1BG = new Background(Board1);
-
-        BackgroundImage Board2 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board2.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background Board2BG = new Background(Board2);
-
-        BackgroundImage Board3 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board3.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background Board3BG = new Background(Board3);
-
-        BackgroundImage Board4 = new BackgroundImage( new Image("Progetto_Ing_Sw/com/client/GUI/Board4.JPG"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background Board4BG = new Background(Board4);
-
-
         //Bottoni che rappresentano le finestre da scegliere
-        Button Window1BTN = new Button();Window1BTN.setTranslateX(1000);Window1BTN.setPrefSize(386,313);Window1BTN.setBackground(Board1BG);
-        Button Window2BTN = new Button();Window2BTN.setTranslateX(1000);Window2BTN.setPrefSize(386,313);Window2BTN.setBackground(Board2BG);
-        Button Window3BTN = new Button();Window3BTN.setTranslateX(1000);Window3BTN.setPrefSize(386,313);Window3BTN.setBackground(Board3BG);
-        Button Window4BTN = new Button();Window4BTN.setTranslateX(1000);Window4BTN.setPrefSize(386,313);Window4BTN.setBackground(Board4BG);
+        Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
+        Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
+        Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
+        Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
 
-        final Rectangle rectPath = new Rectangle (0, 0, 300, 300);
-        rectPath.setArcHeight(10);
-        rectPath.setArcWidth(10);
-        rectPath.setFill(Color.ORANGE);
+        StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
+        Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/SymphonyOfLight.json"),Window1BTN);
 
-        final Rectangle rectPath2 = new Rectangle (1000, 0, 300, 300);
-        rectPath2.setArcHeight(10);
-        rectPath2.setArcWidth(10);
-        rectPath2.setFill(Color.GREEN);
+        StackPane Board2 = new StackPane();Board2.setTranslateX(1000);
+        Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ViaLux.json"),Window2BTN);
 
-        //Animazioni Window1BTN
-        TranslateTransition Enter1 = new TranslateTransition(Duration.millis(500), Window1BTN);
+        StackPane Board3 = new StackPane();Board3.setTranslateX(1000);
+        Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/Industria.json"),Window3BTN);
+
+        StackPane Board4 = new StackPane();Board4.setTranslateX(1000);
+        Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ShadowThief.json"),Window4BTN);
+
+
+
+        //Animazioni Board1
+        TranslateTransition Enter1 = new TranslateTransition(Duration.millis(500), Board1);
         Enter1.setFromX(1000);
         Enter1.setToX(0);
         Enter1.setAutoReverse(false);
         Enter1.play();
 
-        TranslateTransition Exit1 = new TranslateTransition(Duration.millis(500), Window1BTN);
+        TranslateTransition Exit1 = new TranslateTransition(Duration.millis(500), Board1);
         Exit1.setFromX(0);
         Exit1.setToX(-1000);
         Exit1.setAutoReverse(false);
 
-        //Animazioni Window2BTN
-        TranslateTransition Enter2 = new TranslateTransition(Duration.millis(500), Window2BTN);
+        //Animazioni Board2
+        TranslateTransition Enter2 = new TranslateTransition(Duration.millis(500), Board2);
         Enter2.setFromX(1000);
         Enter2.setToX(0);
         Enter2.setAutoReverse(false);
 
-        TranslateTransition Exit2 = new TranslateTransition(Duration.millis(500), Window2BTN);
+        TranslateTransition Exit2 = new TranslateTransition(Duration.millis(500), Board2);
         Exit2.setFromX(0);
         Exit2.setToX(-1000);
         Exit2.setAutoReverse(false);
 
-        //Animazioni Window3BTN
-        TranslateTransition Enter3 = new TranslateTransition(Duration.millis(500), Window3BTN);
+        //Animazioni Board3
+        TranslateTransition Enter3 = new TranslateTransition(Duration.millis(500), Board3);
         Enter3.setFromX(1000);
         Enter3.setToX(0);
         Enter3.setAutoReverse(false);
 
-        TranslateTransition Exit3 = new TranslateTransition(Duration.millis(500), Window3BTN);
+        TranslateTransition Exit3 = new TranslateTransition(Duration.millis(500), Board3);
         Exit3.setFromX(0);
         Exit3.setToX(-1000);
         Exit3.setAutoReverse(false);
 
-        //Animazioni WindowBTN4
-        TranslateTransition Enter4 = new TranslateTransition(Duration.millis(500), Window4BTN);
+        //Animazioni Board4
+        TranslateTransition Enter4 = new TranslateTransition(Duration.millis(500), Board4);
         Enter4.setFromX(1000);
         Enter4.setToX(0);
         Enter4.setAutoReverse(false);
 
-        TranslateTransition Exit4 = new TranslateTransition(Duration.millis(500), Window4BTN);
+        TranslateTransition Exit4 = new TranslateTransition(Duration.millis(500), Board4);
         Exit4.setFromX(0);
         Exit4.setToX(-1000);
         Exit4.setAutoReverse(false);
 
-        /*Path path = new Path();
-        path.getElements().add(new MoveTo(100,100));
-        path.getElements().add(new CubicCurveTo(380, 0, 380, 120, 200, 120));
-        path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(4000));
-        pathTransition.setPath(path);
-        pathTransition.setNode(rectPath);
-        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        pathTransition.setCycleCount(Timeline.INDEFINITE);
-        pathTransition.setAutoReverse(true);*/
 
         Text ChooseAWindow = new Text("Choose a Window");ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");ChooseAWindow.setTranslateY(-250);
 
@@ -130,7 +196,7 @@ public class ChooseAWindow extends Stage {
         StackPane Animation = new StackPane();
         Animation.setId("ChooseAWindow");
         Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Animation.getChildren().addAll(ChooseAWindow,Window4BTN,Window3BTN,Window2BTN,Window1BTN,Play,Play2,Play3,Play4);
+        Animation.getChildren().addAll(ChooseAWindow,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
 
         Window = new Scene(Animation,720,720);
 
