@@ -2,13 +2,13 @@ package Progetto_Ing_Sw.com.client;
 
 import java.util.ArrayList;
 
+/*Questa classe non necessita sincronizzazione in quanto è implicita nel pattern observer*/
 
 public  class LocalModel {
 
     private static LocalModel ourInstance=new LocalModel();
 
     private ArrayList <ClientPlayer> clientPlayerArrayList;
-    private Object lockUsername, lockPlayerArrayList, lockDrawnDice, lockDrawnToolCards, lockDrawnPublicObjectiveCards, lockDrawnWindowBoards;  //TODO: pulizia
     private MultiplayerGUI multiplayerGUIobserver;
     private ArrayList<ClientDice> drawnDice;
     private ArrayList<ClientToolCard> drawnToolCards;
@@ -19,12 +19,6 @@ public  class LocalModel {
     private LocalModel(){
 
         ourInstance=this;
-        lockUsername=new Object();
-        lockPlayerArrayList=new Object();
-        lockDrawnDice=new Object();
-        lockDrawnToolCards=new Object();
-        lockDrawnPublicObjectiveCards=new Object();
-        lockDrawnWindowBoards=new Object();
     }
 
     public static LocalModel getInstance(){
@@ -36,17 +30,8 @@ public  class LocalModel {
 
 
     public synchronized ArrayList<ClientPlayer> getClientPlayerArrayList() {
-
         System.out.println("Getting clientPlayerArrayList");
-       /* while (clientPlayerArrayList ==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
         return clientPlayerArrayList;
-
     }
 
     public ClientPlayer getPlayerFromName(String name){
@@ -88,14 +73,6 @@ public  class LocalModel {
         return drawnPublicObjectiveCards;
     }
 
-    public void setClientPlayerArrayList(ArrayList<ClientPlayer> clientPlayerArrayList) {
-
-                this.clientPlayerArrayList = clientPlayerArrayList;
-                System.out.println("clientPlayerArrayList set to"+ clientPlayerArrayList.toString());
-                multiplayerGUIobserver.update();
-
-    }
-
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
         boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
@@ -113,11 +90,7 @@ public  class LocalModel {
 
         }
     }
-
-   /* private void notifyObserver(){
-        observer.update();
-    }*/
-
+    
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
