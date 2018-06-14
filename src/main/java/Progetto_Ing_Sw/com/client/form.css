@@ -1,5 +1,5 @@
 .root {
-
+    -fx-background-color: transparent;
 }
 
 #transparentBTN{
@@ -149,6 +149,11 @@
             radial-gradient(center 50% 50%, radius 100%, #36629d, #154290);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 
+}
+
+#BackButton2{
+    -fx-background-image: url("GUI/BackIcon2.png");
+    -fx-background-color: transparent;
 }
 
 #SocketBTN{
@@ -513,6 +518,7 @@
 
 #ToolCardDisplayer{
     -fx-font: 33 "Centaur";
+
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
 
@@ -703,5 +709,33 @@
     -fx-border-color: black;
 }
 
+#Pay1Button{
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("GUI/Pay1Icon.png");
+    -fx-text-fill: transparent;
+}
 
+#Pay1Button:hover{
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("GUI/Pay1Icon.png");
+    -fx-text-fill: white;
+}
 
+#Pay2Button{
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("GUI/Pay2Icon.png");
+}
+
+#Pay2Button:hover{
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("GUI/Pay1Icon.png");
+    -fx-text-fill: white;
+}

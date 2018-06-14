@@ -1,6 +1,6 @@
 {"title":"Tap Wheel",
   "description":"Move up to two dice of the same\ncolor that match the color of die\non the Round Track\r\nYou must obey all placement restrictions",
-  "info":"GUI/ToolCard/12ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCard/12ToolCard.png",
   "ID":12,
   "firstUsage":false,
   "color":"blue"}

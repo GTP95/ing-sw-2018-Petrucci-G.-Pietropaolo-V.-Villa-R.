@@ -141,6 +141,7 @@ public class MultiplayerGUI extends Stage {
         Platform.runLater(() ->{
             close();
             new TableGUI();
+            new ChooseAWindow();
         });
     }
 

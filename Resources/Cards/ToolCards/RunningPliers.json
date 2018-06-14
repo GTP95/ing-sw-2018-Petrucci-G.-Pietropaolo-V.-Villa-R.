@@ -1,6 +1,6 @@
 {"title":"Running Pliers",
   "description":"After your first turn,\nimmediately draft a die\r\nSkip your next turn this round",
-  "info":"GUI/ToolCards/8ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCards/8ToolCard.png",
   "ID":8,
   "firstUsage":false,
   "color":"red"}

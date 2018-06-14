@@ -1,6 +1,6 @@
 {"title":"Copper Foil Burnisher",
   "description":"Move any one die in your window\nignoring value restrictions\r\nYou must obey all other\nplacement restrictions",
-  "info":"GUI/ToolCards/3ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCards/3ToolCard.png",
   "ID":3,
   "firstUsage":false,
   "color":"red",

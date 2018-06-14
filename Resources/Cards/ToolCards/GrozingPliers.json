@@ -1,6 +1,6 @@
 {"title":"Grozing Pliers",
   "description":"After drafting,\nincrease or decrease the value\nof the drafted die by 1\r\n1 may not change to 6, or 6 to 1",
-  "info":"GUI/ToolCards/1ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCards/1ToolCard.png",
   "ID":1,
   "firstUsage":false,
   "color":"purple"

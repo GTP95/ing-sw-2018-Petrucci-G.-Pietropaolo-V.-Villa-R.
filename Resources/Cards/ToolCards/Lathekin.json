@@ -1,6 +1,6 @@
 {"title":"Lathekin",
   "description":"Move exactly two dice, obeying\nall placement restrictions",
-  "info":"GUI/ToolCards/4ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCards/4ToolCard.png",
   "ID":4,
   "firstUsage":false,
   "color":"yellow"

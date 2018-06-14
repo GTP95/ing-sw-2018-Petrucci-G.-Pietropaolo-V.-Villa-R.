@@ -220,7 +220,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(0).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getDescription(),
-                        LocalModel.getInstance().getDrawnToolCards().get(0).getInfo());
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getInfo(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),false);
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -234,7 +235,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(1).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getDescription(),
-                        LocalModel.getInstance().getDrawnToolCards().get(1).getInfo());
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getInfo(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),false);
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -248,7 +250,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(2).getTitle(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getDescription(),
-                        LocalModel.getInstance().getDrawnToolCards().get(2).getInfo());
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getInfo(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),false);
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });

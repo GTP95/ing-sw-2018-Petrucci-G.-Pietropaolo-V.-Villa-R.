@@ -1,6 +1,6 @@
 {"title":"Eglomise Brush",
   "description":"Move any one die in your windows\nignoring color restrictions\r\nYou must obey all other\nplacement restrictions",
-  "info":"GUI/ToolCards/2ToolCard.png",
+  "info":"Progetto_Ing_Sw/com/client/GUI/ToolCards/2ToolCard.png",
   "ID":2,
   "firstUsage":false,
   "color":"blue"}

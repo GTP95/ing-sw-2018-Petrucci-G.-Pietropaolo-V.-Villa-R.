@@ -10,6 +10,7 @@ import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,6 +25,7 @@ import java.io.FileReader;
 
 public class ChooseAWindow extends Stage {
     Scene Window;
+    Label info1,info2,info3,info4;
 
     public GridPane CreateAGrid (String GridPath){
         int rows = 4;
@@ -117,6 +119,9 @@ public class ChooseAWindow extends Stage {
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
 
+        //Label che indicano nome e difficoltà della scheda in questione
+        info1 = new Label();
+
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
         Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/SymphonyOfLight.json"),Window1BTN);
 
@@ -204,4 +209,5 @@ public class ChooseAWindow extends Stage {
         this.show();
 
     }
+
 }
