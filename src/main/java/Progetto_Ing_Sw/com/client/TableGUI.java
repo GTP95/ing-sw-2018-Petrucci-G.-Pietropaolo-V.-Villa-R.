@@ -216,7 +216,10 @@ public class TableGUI extends Stage{
             ToolCard1BTN.setId("CardBTN");
             ToolCard1BTN.setOnAction(event -> {
                 ToolCard1BTN.setDisable(true);
-                ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer();
+                ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer(
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getTitle(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getID(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getDescription());
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -226,7 +229,10 @@ public class TableGUI extends Stage{
             ToolCard2BTN.setId("CardBTN");
             ToolCard2BTN.setOnAction(event -> {
                 ToolCard2BTN.setDisable(true);
-                ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer();
+                ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer(
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getTitle(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getID(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getDescription());
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -236,7 +242,10 @@ public class TableGUI extends Stage{
             ToolCard3BTN.setId("CardBTN");
             ToolCard3BTN.setOnAction(event -> {
                 ToolCard3BTN.setDisable(true);
-                ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer();
+                ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer(
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getTitle(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getID(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getDescription());
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });
@@ -329,7 +338,10 @@ public class TableGUI extends Stage{
                 @Override
                 public void handle(ActionEvent event){
                     PublicObjectiveCard1BTN.setDisable(true);
-                    PublicObjectiveCardDisplayer PublicDisplay1 = new PublicObjectiveCardDisplayer();
+                    PublicObjectiveCardDisplayer PublicDisplay1 = new PublicObjectiveCardDisplayer(
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints());
                     PublicDisplay1.showAndWait();
                     PublicObjectiveCard1BTN.setDisable(false);
                 }
@@ -342,7 +354,10 @@ public class TableGUI extends Stage{
                 @Override
                 public void handle(ActionEvent event) {
                    PublicObjectiveCard2BTN.setDisable(true);
-                    PublicObjectiveCardDisplayer PublicDisplay2 = new PublicObjectiveCardDisplayer();
+                    PublicObjectiveCardDisplayer PublicDisplay2 = new PublicObjectiveCardDisplayer(
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints());
                     PublicDisplay2.showAndWait();
                     PublicObjectiveCard2BTN.setDisable(false);
                 }
@@ -353,7 +368,10 @@ public class TableGUI extends Stage{
             PublicObjectiveCard3BTN.setId("CardBTN");
             PublicObjectiveCard3BTN.setOnAction(event -> {
                 PublicObjectiveCard3BTN.setDisable(true);
-                PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer();
+                PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer(
+                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle(),
+                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription(),
+                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints());
                 PublicDisplay3.showAndWait();
                 PublicObjectiveCard3BTN.setDisable(false);
             });
@@ -430,8 +448,8 @@ public class TableGUI extends Stage{
 
         //INIZIO Round Track
 
-        Button RoundTrack = new Button();RoundTrack.setId("Round4");RoundTrack.setMinSize(150,150);RoundTrack.setTranslateY(10);RoundTrack.setTranslateX(-10);
-        RoundTrack.setOnAction(event -> RoundTrack.setId("Round5"));
+        Button RoundTrack = new Button();RoundTrack.setId("Round1");RoundTrack.setMinSize(150,150);RoundTrack.setTranslateY(10);RoundTrack.setTranslateX(-10);
+        RoundTrack.setOnAction(event -> RoundTrack.setId("Round2"));
         //TODO Observer del round
 
         //FINE Round Track
