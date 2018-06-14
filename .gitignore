@@ -10,8 +10,8 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea
-src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json
-
+ClientSettings.json
+ServerSettings.json
 # Sensitive or high-churn files:
 .idea/**/dataSources/
 .idea/**/dataSources.ids
