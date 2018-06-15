@@ -598,6 +598,29 @@
     -fx-border-radius: 4 4 4 4;
 }
 
+
+#Die #1.Blue{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#Die:hover{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: grey;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
 #Die:selected{
     -fx-background-image: url("GUI/Dice/1.Blue.png");
     -fx-background-position: center;
