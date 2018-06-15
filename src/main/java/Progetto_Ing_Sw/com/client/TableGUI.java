@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -46,7 +47,7 @@ public class TableGUI extends Stage{
         //INIZIO Gameplay Scene
         int rows = 4;
         int columns = 5;
-        int NumPlayers = 4; //TODO mettere il get number of players
+        int NumPlayers =LocalModel.getInstance().getClientPlayerArrayList().size();
 
         //GridPane per la griglia 5x4
         GridPane griglia = new GridPane();griglia.setTranslateY(-20);
@@ -221,7 +222,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(0).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).isFirstUsage());
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -236,7 +238,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(1).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).isFirstUsage());
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -251,7 +254,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(2).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).isFirstUsage());
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });
@@ -450,7 +454,7 @@ public class TableGUI extends Stage{
 
 
 
-        for (int i = 0; i < NumPlayers*2+1; i++){
+        for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
             ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");
             DraftPool.getChildren().addAll(Die);
         }
@@ -459,7 +463,6 @@ public class TableGUI extends Stage{
         //FINE Draft Area
 
         //INIZIO Round Track
-
         Button RoundTrack = new Button();RoundTrack.setId("Round1");RoundTrack.setMinSize(150,150);RoundTrack.setTranslateY(10);RoundTrack.setTranslateX(-10);
         RoundTrack.setOnAction(event -> RoundTrack.setId("Round2"));
         //TODO Observer del round
@@ -517,6 +520,10 @@ public class TableGUI extends Stage{
                 PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
 
             });
+        }
+
+        public void updateDice(){
+            Platform.runLater(()->{});
         }
 
 }
