@@ -85,7 +85,7 @@ public  class LocalModel {
             for(ClientPlayer player : clientPlayerArrayList){
                 System.out.println(player.getName());
             }
-            multiplayerGUIobserver.update();
+            updateMultiplayerGUIobserver();
             System.out.println("Observer was just notified");
 
         }
@@ -128,5 +128,12 @@ public  class LocalModel {
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
         multiplayerGUIobserver.StartGame();
+    }
+
+    private void updateMultiplayerGUIobserver(){
+        if(clientPlayerArrayList.size()==1) multiplayerGUIobserver.updatePlayer1();
+        if(clientPlayerArrayList.size()==2) multiplayerGUIobserver.updatePlayer2();
+        if(clientPlayerArrayList.size()==3) multiplayerGUIobserver.updatePlayer3();
+        if(clientPlayerArrayList.size()==4) multiplayerGUIobserver.updatePlayer4();
     }
 }
