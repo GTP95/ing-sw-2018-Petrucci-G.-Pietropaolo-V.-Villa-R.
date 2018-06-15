@@ -34,6 +34,10 @@ public class Player{
         this.drawnGameBoardCard = drawnGameBoardCard;
     }
 
+    public void setPrivateObjective(PrivateObjectiveCard privateObjective) {
+        this.privateObjective = privateObjective;
+    }
+
     public String getName() {
         return name;
     }

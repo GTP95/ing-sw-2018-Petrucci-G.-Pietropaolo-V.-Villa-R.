@@ -19,6 +19,7 @@ public final class JSONCreator {
     private static final Type arrayListOfDice=new TypeToken<ArrayList<ClientDice>>(){}.getType();
     private static final Type arrayListOfPublicObjectiveCards=new TypeToken<ArrayList<ClientPublicObjectiveCard>>(){}.getType();
     private static final Type arrayListOfToolCards=new TypeToken<ArrayList<ClientToolCard>>(){}.getType();
+    private static final Type arrayListOfGameBoardCards=new TypeToken<ArrayList<ClientGameBoardCard>>(){}.getType();
 
     private JSONCreator() {};
 
@@ -149,6 +150,11 @@ public final class JSONCreator {
     public static ArrayList<ClientToolCard> toolCardArrayListloaderFromString(String json){
         ArrayList<ClientToolCard> clientToolCards=gson.fromJson(json, arrayListOfToolCards);
         return clientToolCards;
+    }
+
+    public static ArrayList<ClientGameBoardCard> gameBoardCardArrayListLoaderFromString(String json){
+        ArrayList<ClientGameBoardCard> clientGameBoardCards=gson.fromJson(json, arrayListOfGameBoardCards);
+        return clientGameBoardCards;
     }
 
     public static ClientDice diceLoaderFromString(String json){

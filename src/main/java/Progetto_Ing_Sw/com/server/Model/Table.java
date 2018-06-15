@@ -11,6 +11,8 @@ public class Table {
     private ArrayList<ToolCard> drawnToolCards;
     private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("Resources/Cards/ToolCards"));
     private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
+    private static PrivateObjectiveCardDeck privateObjectiveCardDeck=PrivateObjectiveCardDeck.getInstance();    //Il caricamento da file viene effettuato all'interno della classe stessa
+    private static GameBoardCardDeck gameBoardCardDeck=new GameBoardCardDeck(new File("Resources/Cards/GameBoardCards"));
     private ArrayList<Dice> drawnDice;
     private static DiceBag diceBag=new DiceBag();
     private static Table ourInstance=new Table();
@@ -27,6 +29,15 @@ public class Table {
     }
 
     public static ArrayList<Player> getPlayers() {return players;}
+
+    public Player getPlayerFromName(String name) throws InvalidUsernameException {
+        for(Player player : players){
+            if(player.getName().equals(name)){
+                return player;
+            }
+        }
+        throw new InvalidUsernameException("The player you're looking for doesn't exists!");
+    }
 
     public Player getActivePlayer(){
         ArrayList<Player> clonePlayers=getPlayers();
@@ -81,6 +92,10 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
+        for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
+            player.setPrivateObjective(privateObjectiveCardDeck.draw());
+            player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
+        }
         System.out.println("Game started!");    //TODO: completare
         System.out.println("Connected players:");
         for(Player player : players){

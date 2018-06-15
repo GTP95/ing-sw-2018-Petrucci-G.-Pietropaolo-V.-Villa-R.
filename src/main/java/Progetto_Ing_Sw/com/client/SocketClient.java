@@ -119,6 +119,9 @@ public class SocketClient implements Runnable{
             case "arrayListOfToolCards":
                 localModel.setDrawnToolCards(JSONCreator.toolCardArrayListloaderFromString(json));
                 break;
+            case "arrayListOfGameBoardCards":
+                localModel.setDrawnGameBoardCards(JSONCreator.gameBoardCardArrayListLoaderFromString(json));
+                break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
         }

@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
+
 import java.util.ArrayList;
 
 /*Questa classe non necessita sincronizzazione in quanto è implicita nel pattern observer*/
@@ -15,6 +17,7 @@ public  class LocalModel {
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
     private boolean gameRunning;
+    private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
 
     private LocalModel(){
 
@@ -90,7 +93,11 @@ public  class LocalModel {
 
         }
     }
-    
+
+    public ArrayList<ClientGameBoardCard> getDrawnGameBoardCards() {
+        return drawnGameBoardCards;
+    }
+
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
@@ -118,6 +125,11 @@ public  class LocalModel {
     public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
         this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
         tableGUIobserver.updatePublicObjectiveCards();
+    }
+
+    public void setDrawnGameBoardCards(ArrayList<ClientGameBoardCard> drawnGameBoardCards) {
+        this.drawnGameBoardCards = drawnGameBoardCards;
+        //notify
     }
 
     public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore
