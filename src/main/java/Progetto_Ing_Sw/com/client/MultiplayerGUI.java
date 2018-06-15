@@ -147,12 +147,26 @@ public class MultiplayerGUI extends Stage {
 
     public void update(){
         Platform.runLater(() ->{
-            Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
-            Player1BTN.setSelected(true);
-            Player2Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(1).getName());
-            Player2BTN.setSelected(true);
-            Player3Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(2).getName());
-            Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
+            int numOfPlayers=LocalModel.getInstance().getClientPlayerArrayList().size();
+            switch(numOfPlayers){
+                case 4:
+                    Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
+                    Player4BTN.setSelected(true);
+                case 3:
+                    Player3Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(2).getName());
+                    Player3BTN.setSelected(true);
+                case 2:
+                    Player2Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(1).getName());
+                    Player2BTN.setSelected(true);
+                case 1:
+                    Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
+                    Player1BTN.setSelected(true);
+
+            }
+
+
+
+
         });
     }
 
