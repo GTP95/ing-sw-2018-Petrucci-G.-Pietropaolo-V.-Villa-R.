@@ -16,6 +16,7 @@ public  class LocalModel {
     private ArrayList<ClientToolCard> drawnToolCards;
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
+    private ChooseAWindow chooseAWindowobserver;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
 
@@ -107,6 +108,10 @@ public  class LocalModel {
             if (currentObject instanceof TableGUI){
                 this.tableGUIobserver=(TableGUI)currentObject;
                 System.out.println("TableGUI registarta come observer");
+                return;
+            }
+            if(currentObject instanceof ChooseAWindow){
+                this.chooseAWindowobserver=(ChooseAWindow)currentObject;
                 return;
             }
     }
