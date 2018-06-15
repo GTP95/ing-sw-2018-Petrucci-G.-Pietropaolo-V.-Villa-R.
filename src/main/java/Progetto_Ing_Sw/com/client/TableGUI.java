@@ -46,7 +46,7 @@ public class TableGUI extends Stage{
         //INIZIO Gameplay Scene
         int rows = 4;
         int columns = 5;
-        int NumPlayers = 4; //TODO mettere il get number of players
+        int NumPlayers = LocalModel.getInstance().getClientPlayerArrayList().size();
 
         //GridPane per la griglia 5x4
         GridPane griglia = new GridPane();griglia.setTranslateY(-20);
@@ -450,7 +450,7 @@ public class TableGUI extends Stage{
 
 
 
-        for (int i = 0; i < NumPlayers*2+1; i++){
+        for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
             ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");
             DraftPool.getChildren().addAll(Die);
         }
@@ -460,8 +460,10 @@ public class TableGUI extends Stage{
 
         //INIZIO Round Track
 
-        Button RoundTrack = new Button();RoundTrack.setId("Round1");RoundTrack.setMinSize(150,150);RoundTrack.setTranslateY(10);RoundTrack.setTranslateX(-10);
-        RoundTrack.setOnAction(event -> RoundTrack.setId("Round2"));
+        Button RoundTrack = new Button();RoundTrack.setId("Round1");
+        RoundTrack.setMinSize(150,150);
+        RoundTrack.setTranslateY(10);
+        RoundTrack.setTranslateX(-10);
         //TODO Observer del round
 
         //FINE Round Track
@@ -473,7 +475,7 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.BOTTOM_LEFT);
             GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
-            GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+            //GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
             GameplayArea.setAlignment(RoundTrack,Pos.TOP_RIGHT);
             GameplayArea.getChildren().addAll(WindowBoard,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 

@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class ChooseAWindow extends Stage {
-    Scene Window;
+    Scene Window,PrivateObjective;
     Label info1,info2,info3,info4;
 
     public GridPane CreateAGrid (String GridPath){
@@ -113,6 +114,7 @@ public class ChooseAWindow extends Stage {
         this.initStyle(StageStyle.UNDECORATED);
         this.alwaysOnTopProperty();
 
+        //SCENA WINDOW
         //Bottoni che rappresentano le finestre da scegliere
         Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
@@ -182,7 +184,9 @@ public class ChooseAWindow extends Stage {
         Exit4.setAutoReverse(false);
 
 
-        Text ChooseAWindow = new Text("Choose a Window");ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");ChooseAWindow.setTranslateY(-250);
+        Text ChooseAWindow = new Text("Choose a Window");
+        ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
+        ChooseAWindow.setTranslateY(-250);
 
         Button Play = new Button("Next");Play.setTranslateY(250);Play.setId("NextBTN");Play.setPrefSize(150,150);
         Button Play2 = new Button("Next");Play2.setTranslateY(250);Play2.setVisible(false);Play2.setId("NextBTN");Play2.setPrefSize(150,150);
@@ -202,12 +206,33 @@ public class ChooseAWindow extends Stage {
         Animation.setId("ChooseAWindow");
         Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         Animation.getChildren().addAll(ChooseAWindow,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
-
         Window = new Scene(Animation,720,720);
+        //FINE SCENA CHOOSE A WINDOW
+
+        //INIZIO SCENA PRIVATE OBJECTIVE
+
+        //Testo
+        Text YourColor = new Text("Your\nPrivate Objective\nis");
+        YourColor.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
+        YourColor.setTranslateY(-250);
+
+        //Label col Colore
+
+
+
+        PrivateObjective = new Scene(Animation,720,720);
 
         this.setScene(Window);
         this.show();
 
+    }
+
+    public void updateBoards(){
+        Platform.runLater(()->{});
+    }
+
+    public void updatePrivateObjective(){
+        Platform.runLater(()->{});
     }
 
 }
