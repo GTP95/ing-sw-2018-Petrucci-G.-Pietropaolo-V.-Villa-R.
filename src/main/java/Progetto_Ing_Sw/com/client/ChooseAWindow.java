@@ -26,7 +26,7 @@ import java.io.FileReader;
 
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective;
-    Label info1,info2,info3,info4;
+    Label info1,info2,info3,info4,PrivateObjectiveColor;
 
     public GridPane CreateAGrid (String GridPath){
         int rows = 4;
@@ -113,6 +113,8 @@ public class ChooseAWindow extends Stage {
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.alwaysOnTopProperty();
+
+        LocalModel.getInstance().registerAsObserver(this);
 
         //SCENA WINDOW
         //Bottoni che rappresentano le finestre da scegliere
@@ -217,18 +219,38 @@ public class ChooseAWindow extends Stage {
         YourColor.setTranslateY(-250);
 
         //Label col Colore
+        PrivateObjectiveColor = new Label();
+        PrivateObjectiveColor.setMinSize(75,75);
+        PrivateObjectiveColor.setId("red");
 
 
+        StackPane PrivateObjectiveDisplayer = new StackPane();
+        PrivateObjectiveDisplayer.setId("ChooseAWindow");
+        PrivateObjectiveDisplayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+        PrivateObjectiveDisplayer.getChildren().addAll(YourColor,PrivateObjectiveColor);
 
-        PrivateObjective = new Scene(Animation,720,720);
+        PrivateObjective = new Scene(PrivateObjectiveDisplayer,720,720);
 
-        this.setScene(Window);
+        this.setScene(PrivateObjective);
         this.show();
 
     }
 
     public void updateBoards(){
-        Platform.runLater(()->{});
+        Platform.runLater(()->{
+            int color = LocalModel.getInstance().getPrivateObjectiveCard().getColor();
+            switch (color){
+                case ClientColor.RED: PrivateObjectiveColor.setId("red");
+                break;
+                case ClientColor.BLUE: PrivateObjectiveColor.setId("blue");
+                break;
+                case ClientColor.PURPLE: PrivateObjectiveColor.setId("purple");
+                break;
+                case ClientColor.YELLOW: PrivateObjectiveColor.setId("yellow");
+                break;
+                case ClientColor.GREEN: PrivateObjectiveColor.setId("green");
+            }
+        });
     }
 
     public void updatePrivateObjective(){

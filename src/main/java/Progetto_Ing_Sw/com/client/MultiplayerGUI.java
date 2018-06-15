@@ -163,10 +163,6 @@ public class MultiplayerGUI extends Stage {
                     Player1BTN.setSelected(true);
 
             }
-
-
-
-
         });
     }
 
