@@ -126,4 +126,39 @@ public class GameBoardCardDeckTest {
         System.out.println(card.getOtherSideCode());
 
     }
+
+    @Test
+    public void drawFrontRear(){
+
+        ArrayList<GameBoardCard> cardDrawn;
+
+        cardDrawn=gameBoardCardDeckTest.drawFrontRear();
+        Assert.assertTrue(cardDrawn.size()==2);
+
+        System.out.println("FRONT :"+cardDrawn.get(0).getTitle());
+        System.out.println("REAR :"+cardDrawn.get(1).getTitle());
+
+        Assert.assertTrue(cardDrawn.get(0).getOtherSideCode()==cardDrawn.get(1).getGameBoardCode());
+        Assert.assertTrue(cardDrawn.get(1).getOtherSideCode()==cardDrawn.get(0).getGameBoardCode());
+
+    }
+
+    @Test
+    public void drawThreeCardsFrontRear(){
+
+        ArrayList<GameBoardCard> cardDrawn;
+
+        int num=3;
+        cardDrawn=gameBoardCardDeckTest.drawMultipleFrontRear(num);
+        Assert.assertTrue(cardDrawn.size()==(num*2));
+
+
+        for(int i=0; i<cardDrawn.size();i=i+2){
+            System.out.println("FRONT :"+cardDrawn.get(i).getTitle());
+            System.out.println("REAR :"+cardDrawn.get(i+1).getTitle());
+            Assert.assertTrue(cardDrawn.get(i).getOtherSideCode()==cardDrawn.get(i+1).getGameBoardCode());
+            Assert.assertTrue(cardDrawn.get(i+1).getOtherSideCode()==cardDrawn.get(i).getGameBoardCode());
+        }
+
+    }
 }

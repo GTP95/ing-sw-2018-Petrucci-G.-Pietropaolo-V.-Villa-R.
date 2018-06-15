@@ -60,4 +60,43 @@ public class GameBoardCardDeck extends Deck{
         }
         return cardsArrayList;
     }
+
+    public ArrayList<GameBoardCard> drawFrontRear(){
+
+        GameBoardCard card=null;
+        ArrayList<GameBoardCard> cardChoosed = new ArrayList<>();
+        int index=0;
+        int cardCode;
+
+        while(card==null) {  //isEmpty?
+            index = splittableRandom.nextInt(0, cards.size());
+            card = cards.get(index);
+        }
+
+        card=cards.remove(index);
+        cardChoosed.add(card);
+        cardCode=card.getOtherSideCode();
+        for (int counter=0;counter<cards.size();counter++)
+        {
+            if (cards.get(counter).getGameBoardCode()==cardCode)
+            {
+                cardChoosed.add(cards.get((counter)));
+                cards.remove(counter);//qui si potrà aggiungere la parte che permetta al giocatore di scegliere quale delle due della coppia
+            }
+        }
+        return cardChoosed;
+    }
+
+    public ArrayList<GameBoardCard> drawMultipleFrontRear(int num){
+
+        ArrayList<GameBoardCard> localCardChoosed;
+        ArrayList<GameBoardCard> cardsDrawn = new ArrayList<>();
+
+        for(int i=0;i<num*2;i=i+2){
+            localCardChoosed=drawFrontRear();
+            cardsDrawn.add(i,localCardChoosed.get(0));//aggiungo il fronte
+            cardsDrawn.add(i+1,localCardChoosed.get(1));//aggiungo il retro
+        }
+        return cardsDrawn;
+    }
 }
