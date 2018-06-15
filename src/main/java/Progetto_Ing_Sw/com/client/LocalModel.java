@@ -94,10 +94,12 @@ public  class LocalModel {
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
+                System.out.println("MultiplayerGUI registrata come observer");
                 return;
             }
             if (currentObject instanceof TableGUI){
                 this.tableGUIobserver=(TableGUI)currentObject;
+                System.out.println("TableGUI registarta come observer");
                 return;
             }
     }
