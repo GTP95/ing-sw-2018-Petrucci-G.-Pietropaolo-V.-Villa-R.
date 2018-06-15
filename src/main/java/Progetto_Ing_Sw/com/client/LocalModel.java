@@ -117,7 +117,6 @@ public  class LocalModel {
             }
             if(currentObject instanceof ChooseAWindow){
                 this.chooseAWindowobserver=(ChooseAWindow)currentObject;
-                notifyAll();
                 return;
             }
     }
@@ -135,25 +134,13 @@ public  class LocalModel {
 
     public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
         this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
-        while(tableGUIobserver==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        while(tableGUIobserver==null);  //Non posso usare la wait(): IllegalMonitorStateException
         tableGUIobserver.updatePublicObjectiveCards();
     }
 
     public void setDrawnGameBoardCards(ArrayList<ClientGameBoardCard> drawnGameBoardCards) {
         this.drawnGameBoardCards = drawnGameBoardCards;
-        while (chooseAWindowobserver==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        while (chooseAWindowobserver==null); //Non posso usare la wait(): IllegalMonitorStateException
         chooseAWindowobserver.updateBoards();   //notifica l'observer della ricezione delle GameBoardCards
     }
 
