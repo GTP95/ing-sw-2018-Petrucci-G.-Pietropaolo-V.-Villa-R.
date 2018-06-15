@@ -11,7 +11,6 @@ public class Table {
     private ArrayList<ToolCard> drawnToolCards;
     private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("Resources/Cards/ToolCards"));
     private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
-    private GameBoardCardDeck gameBoardCardDeck=new GameBoardCardDeck(new File("Resources/Cards/GameBoardCards"));
     private ArrayList<Dice> drawnDice;
     private static DiceBag diceBag=new DiceBag();
     private static Table ourInstance=new Table();
@@ -73,10 +72,6 @@ public class Table {
             }
         }
         throw new IllegalDiceException();
-    }
-
-    public GameBoardCardDeck getGameBoardCardDeck() {
-        return gameBoardCardDeck;
     }
 
     public void returnDice(Dice dice){  //"Restituisce" il dado, nel senso che viene riposto nuovamente sul tavolo di gioco a disposizione dei giocatori

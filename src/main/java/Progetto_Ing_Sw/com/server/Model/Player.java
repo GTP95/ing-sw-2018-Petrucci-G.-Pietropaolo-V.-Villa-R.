@@ -23,6 +23,7 @@ public class Player{
         this.privateObjective = privateObjective;
         this.victoryPoints = 0;
         this.isActive=true;
+        this.drawnGameBoardCard = drawnGameBoardCard;
     }
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {
