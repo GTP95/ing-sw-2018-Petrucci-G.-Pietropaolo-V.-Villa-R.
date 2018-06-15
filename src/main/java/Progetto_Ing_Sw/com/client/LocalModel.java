@@ -17,6 +17,7 @@ public  class LocalModel {
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
+    private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
 
@@ -99,6 +100,10 @@ public  class LocalModel {
         return drawnGameBoardCards;
     }
 
+    public ClientPrivateObjectiveCard getPrivateObjectiveCard() {
+        return privateObjectiveCard;
+    }
+
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
@@ -134,7 +139,12 @@ public  class LocalModel {
 
     public void setDrawnGameBoardCards(ArrayList<ClientGameBoardCard> drawnGameBoardCards) {
         this.drawnGameBoardCards = drawnGameBoardCards;
-        //notify
+        chooseAWindowobserver.updateBoards();   //notifica l'observer della ricezione delle GameBoardCards
+    }
+
+    public void setPrivateObjectiveCard(ClientPrivateObjectiveCard privateObjectiveCard) {
+        this.privateObjectiveCard = privateObjectiveCard;
+        chooseAWindowobserver.updatePrivateObjective();
     }
 
     public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore

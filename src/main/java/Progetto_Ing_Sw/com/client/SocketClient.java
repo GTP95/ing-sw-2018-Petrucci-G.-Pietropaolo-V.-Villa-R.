@@ -122,6 +122,9 @@ public class SocketClient implements Runnable{
             case "arrayListOfGameBoardCards":
                 localModel.setDrawnGameBoardCards(JSONCreator.gameBoardCardArrayListLoaderFromString(json));
                 break;
+            case "privateObjectiveCard":
+                localModel.setPrivateObjectiveCard(JSONCreator.clientPrivateObjectiveCardLoaderFromString(json));
+                break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
         }

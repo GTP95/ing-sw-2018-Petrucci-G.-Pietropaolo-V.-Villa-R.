@@ -167,6 +167,11 @@ public final class JSONCreator {
         return windowBoard;
     }
 
+    public static ClientPrivateObjectiveCard clientPrivateObjectiveCardLoaderFromString(String json){
+        ClientPrivateObjectiveCard clientPrivateObjectiveCard=gson.fromJson(json, ClientPrivateObjectiveCard.class);
+        return clientPrivateObjectiveCard;
+    }
+
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){
         JsonElement jsonElement=new JsonParser().parse(json);

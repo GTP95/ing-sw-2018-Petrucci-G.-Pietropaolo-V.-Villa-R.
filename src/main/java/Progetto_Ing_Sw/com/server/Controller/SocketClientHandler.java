@@ -122,7 +122,10 @@ public class SocketClientHandler implements Runnable {
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnPublicObjectiveCards()),"arrayListOfPublicObjectiveCards");
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnToolCards()),"arrayListOfToolCards");
-        try {sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");}
+        try {
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");
+        }
         catch(InvalidUsernameException e){System.err.println(e.getMessage());}
     }
 }
