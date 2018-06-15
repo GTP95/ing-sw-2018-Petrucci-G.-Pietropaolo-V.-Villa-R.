@@ -140,38 +140,21 @@ public class MultiplayerGUI extends Stage {
     public void StartGame(){
         Platform.runLater(() ->{
             close();
+            new TableGUI();
             new ChooseAWindow();
         });
     }
 
-    
-
-    public void updatePlayer1(){
+    public void update(){
         Platform.runLater(() ->{
             Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
             Player1BTN.setSelected(true);
-        });
-    }
-
-    public void updatePlayer2(){
-        Platform.runLater(() ->{
             Player2Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(1).getName());
             Player2BTN.setSelected(true);
-        });
-    }
-
-    public void updatePlayer3(){
-        Platform.runLater(() ->{
             Player3Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(2).getName());
-            Player3BTN.setSelected(true);
+            Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
         });
     }
 
-    public void updatePlayer4(){
-        Platform.runLater(() ->{
-            Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
-            Player4BTN.setSelected(true);
-        });
-    }
 
 }

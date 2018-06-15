@@ -82,7 +82,7 @@ public class ToolCardDisplayer extends Stage {
 
 
         this.setScene(ToolCardDisplay);
-        this.show();
+        //this.show();
 
     }
 }

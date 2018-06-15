@@ -48,9 +48,8 @@ public class StartMenuGUI extends Application {
         singlePlayer.setId("SinglePlayerButton");                               //assegno un ID al bottone in modo che sia riconoscibile dal CSS
         singlePlayer.setPrefSize(350,350);                    //imposto le dimensioni del bottone
         singlePlayer.setOnAction(event ->{
-                //new ToolCardDisplayer("Title",2,"Description","Progetto_Ing_Sw/com/client/GUI/ToolCards/3ToolCard.png","blue",true);
+                new ToolCardDisplayer("Title",2,"Description","Progetto_Ing_Sw/com/client/GUI/ToolCards/3ToolCard.png","blue",true);
                 //new PublicObjectiveCardDisplayer("Title","Descriptio",5);
-                new TableGUI();
         });
 
 
