@@ -16,14 +16,12 @@ public class Player{
    private SocketClientHandler socketClientHandler;
    private WindowBoard choosenWindowBoard;
 
-    public Player(String name, PrivateObjectiveCard privateObjective, SocketClientHandler socketClientHandler) {
+    public Player(String name,  SocketClientHandler socketClientHandler) {    //Non assegno subito alla creazione del player il privateObjective e le drawnGameBoardCard per evitare di esaurirle in caso di disconnessione se guita da connessione di altri giocatori (nella Lobby, non a gioco iniziato)
         this.name = name;
         this.favorTokens = favorTokens;
         this.roundNumber=2;
-        this.privateObjective = privateObjective;
         this.victoryPoints = 0;
         this.isActive=true;
-        this.drawnGameBoardCard = drawnGameBoardCard;
     }
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {

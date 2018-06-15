@@ -39,9 +39,9 @@ public class RunningPliers {
             {
                 localBoard.insertDice(row1,column1,localDice1);
                 localBoard.insertDice(row2,column2,localDice2);
-                if(table.getAcivePlayer().getRoundNumber()==1)
+                if(table.getActivePlayer().getRoundNumber()==1)
                 {
-                    table.getAcivePlayer().setRoundNumber(0);
+                    table.getActivePlayer().setRoundNumber(0);
                 }
                 else{
                     //TODO eccezione di turno,
@@ -58,9 +58,9 @@ public class RunningPliers {
             {
                 localBoard.insertDice(row1,column1,localDice1);
                 localBoard.insertDice(row2,column2,localDice2);
-                if(table.getAcivePlayer().getRoundNumber()==1)
+                if(table.getActivePlayer().getRoundNumber()==1)
                 {
-                    table.getAcivePlayer().setRoundNumber(0);
+                    table.getActivePlayer().setRoundNumber(0);
                 }
                 else{
                     //TODO eccezione di turno,

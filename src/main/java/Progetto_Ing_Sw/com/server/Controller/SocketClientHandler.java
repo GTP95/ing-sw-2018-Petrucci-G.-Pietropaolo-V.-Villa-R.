@@ -16,6 +16,7 @@ public class SocketClientHandler implements Runnable {
     public final Thread ourThread;
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
+    private String myPlayerName;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
@@ -39,8 +40,8 @@ public class SocketClientHandler implements Runnable {
     public void run(){
 
             try {
-
-                    Lobby.getInstance().addPlayer(in.readLine(), this);
+                    myPlayerName=in.readLine();
+                    Lobby.getInstance().addPlayer(myPlayerName, this);
                     sendControlMessage("Connected");
                         while(Lobby.isRunning) {
                             currentPlayerArrayList=Lobby.getInstance().getConnctedPlayers();
@@ -65,6 +66,7 @@ public class SocketClientHandler implements Runnable {
             }
             catch(InvalidUsernameException e){
                 sendControlMessage(e.getMessage());
+                myPlayerName=null;  //resetto il nome perchè non valido
             }
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome

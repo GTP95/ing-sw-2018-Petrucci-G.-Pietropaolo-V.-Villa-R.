@@ -48,7 +48,7 @@ public class Lobby {
             for(Player alreadyConnected : connectedPlayers){
                 if (alreadyConnected.getName().equals(playerName)) throw new InvalidUsernameException("Username already in use");
             }
-            Player player=new Player(playerName, PrivateObjectiveCardDeck.getInstance().draw(), socketClientHandler);   //se vengono passati tutti i controlli, viene generato il nuovo utente ed inserito nell'arraylist
+            Player player=new Player(playerName, socketClientHandler);   //se vengono passati tutti i controlli, viene generato il nuovo utente ed inserito nell'arraylist
             connectedPlayers.add(player);
             System.out.println("Player " + player.getName() + " joined the game!");    //TODO: test per verificare aggiunta giocatori nell'arraylist
            //Qui giacciono le ceneri del pattern observer, che miseramente fallì il suo compito, e dell'interrupt, che con eccessivo zelo svolse il proprio.

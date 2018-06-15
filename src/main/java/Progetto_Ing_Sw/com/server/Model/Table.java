@@ -28,7 +28,7 @@ public class Table {
 
     public static ArrayList<Player> getPlayers() {return players;}
 
-    public Player getAcivePlayer(){
+    public Player getActivePlayer(){
         ArrayList<Player> clonePlayers=getPlayers();
         Player selectedPlayer = clonePlayers.get(currentPlayer);
         return selectedPlayer;
