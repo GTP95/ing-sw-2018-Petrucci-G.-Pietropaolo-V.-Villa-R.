@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -115,7 +116,7 @@ public class MultiplayerGUI extends Stage {
         HBox TimerBox = new HBox();
         TimerBox.setAlignment(Pos.TOP_CENTER);
         TimerBox.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Label TimerLabel = new Label("  00:30"); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);
+        Label TimerLabel = new Label("30"); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);TimerLabel.setTextAlignment(TextAlignment.CENTER);
         TimerBox.getChildren().addAll(TimerLabel);
 
 
