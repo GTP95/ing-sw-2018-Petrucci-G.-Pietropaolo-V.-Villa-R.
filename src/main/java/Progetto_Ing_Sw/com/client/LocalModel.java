@@ -97,7 +97,6 @@ public  class LocalModel {
     }
 
     public ArrayList<ClientGameBoardCard> getDrawnGameBoardCards() {
-        while(drawnGameBoardCards==null);   //non uso wait/notify a causa della IllegalMonitorStateException
         return drawnGameBoardCards;
     }
 
