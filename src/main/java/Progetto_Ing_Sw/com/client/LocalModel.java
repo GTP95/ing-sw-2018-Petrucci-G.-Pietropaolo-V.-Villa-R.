@@ -101,6 +101,7 @@ public  class LocalModel {
     }
 
     public ClientPrivateObjectiveCard getPrivateObjectiveCard() {
+        System.out.println("L'obbiettivo privato è: "+privateObjectiveCard.getColor());
         return privateObjectiveCard;
     }
 
