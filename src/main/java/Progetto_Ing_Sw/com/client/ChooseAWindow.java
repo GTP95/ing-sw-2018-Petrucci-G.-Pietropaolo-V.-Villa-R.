@@ -17,16 +17,20 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective;
-    Label info1,info2,info3,info4,PrivateObjectiveColor;
+    int difficulty1, difficulty2, difficulty3, difficulty4;
+    Label PrivateObjectiveColor;
+    String  name1,name2,name3,name4,PrivateObjectiveInfoText;
 
     public GridPane CreateAGrid (String GridPath){
         int rows = 4;
@@ -124,19 +128,22 @@ public class ChooseAWindow extends Stage {
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
 
         //Label che indicano nome e difficoltà della scheda in questione
-        info1 = new Label();
+        Label info1 = new Label("Name: "+name1+"\n\r"+"Difficulty: "+String.join("", Collections.nCopies(difficulty1, "•")));info1.setId("WindowInfo");info1.setTranslateY(250);
+        Label info2 = new Label("Name: "+name2+"\n\r"+"Difficulty: "+String.join("", Collections.nCopies(difficulty2, "•")));info2.setId("WindowInfo");info2.setTranslateY(250);
+        Label info3 = new Label("Name: "+name3+"\n\r"+"Difficulty: "+String.join("", Collections.nCopies(difficulty3, "•")));info3.setId("WindowInfo");info3.setTranslateY(250);
+        Label info4 = new Label("Name: "+name4+"\n\r"+"Difficulty: "+String.join("", Collections.nCopies(difficulty4, "•")));info4.setId("WindowInfo");info4.setTranslateY(250);
 
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
-        Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/SymphonyOfLight.json"),Window1BTN);
+        Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/SymphonyOfLight.json"),info1,Window1BTN);
 
         StackPane Board2 = new StackPane();Board2.setTranslateX(1000);
-        Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ViaLux.json"),Window2BTN);
+        Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ViaLux.json"),info2,Window2BTN);
 
         StackPane Board3 = new StackPane();Board3.setTranslateX(1000);
-        Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/Industria.json"),Window3BTN);
+        Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/Industria.json"),info3,Window3BTN);
 
         StackPane Board4 = new StackPane();Board4.setTranslateX(1000);
-        Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ShadowThief.json"),Window4BTN);
+        Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/ShadowThief.json"),info4,Window4BTN);
 
 
 
@@ -190,44 +197,57 @@ public class ChooseAWindow extends Stage {
         ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
         ChooseAWindow.setTranslateY(-250);
 
-        Button Play = new Button("Next");Play.setTranslateY(250);Play.setId("NextBTN");Play.setPrefSize(150,150);
-        Button Play2 = new Button("Next");Play2.setTranslateY(250);Play2.setVisible(false);Play2.setId("NextBTN");Play2.setPrefSize(150,150);
-        Button Play3 = new Button("Next");Play3.setTranslateY(250);Play3.setVisible(false);Play3.setId("NextBTN");Play3.setPrefSize(150,150);
-        Button Play4 = new Button("Next");Play4.setTranslateY(250);Play4.setVisible(false);Play4.setId("NextBTN");Play4.setPrefSize(150,150);
+        Button Play = new Button("Next");Play.setTranslateX(300);Play.setId("NextBTN");Play.setPrefSize(150,150);
+        Button Play2 = new Button("Next");Play2.setTranslateX(300);Play2.setVisible(false);Play2.setId("NextBTN");Play2.setPrefSize(150,150);
+        Button Play3 = new Button("Next");Play3.setTranslateX(300);Play3.setVisible(false);Play3.setId("NextBTN");Play3.setPrefSize(150,150);
+        Button Play4 = new Button("Next");Play4.setTranslateX(300);Play4.setVisible(false);Play4.setId("NextBTN");Play4.setPrefSize(150,150);
 
         Play.setOnAction(event -> {Exit1.play();Enter2.play();Play.setVisible(false);Play2.setVisible(true);});
         Play2.setOnAction(event -> {Exit2.play();Enter3.play();Play2.setVisible(false);Play3.setVisible(true);});
         Play3.setOnAction(event -> {Exit3.play();Enter4.play();Play3.setVisible(false);Play4.setVisible(true);});
         Play4.setOnAction(event -> {Exit4.play();Enter1.play();Play4.setVisible(false);Play.setVisible(true);});
 
-        /*Button Stop = new Button("Stop");Stop.setTranslateY(200);
-        Stop.setOnAction(event -> {translateTransition.pause();});*/
-
 
         StackPane Animation = new StackPane();
         Animation.setId("ChooseAWindow");
         Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         Animation.getChildren().addAll(ChooseAWindow,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
+
         Window = new Scene(Animation,720,720);
         //FINE SCENA CHOOSE A WINDOW
 
         //INIZIO SCENA PRIVATE OBJECTIVE
 
         //Testo
-        Text YourColor = new Text("Your\nPrivate Objective\nis");
-        YourColor.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
-        YourColor.setTranslateY(-250);
+        Text YourColorText = new Text("Your\nPrivate Objective\nis");
+        YourColorText.setTextAlignment(TextAlignment.CENTER);
+        YourColorText.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
+        YourColorText.setTranslateY(-250);
+
+        PrivateObjectiveInfoText = "purple";
+        Text PrivateObjectiveInfo = new Text("• Shades of "+PrivateObjectiveInfoText+" • \n\rPrivate Sum of value on the\n"+PrivateObjectiveInfoText+" dice");
+        PrivateObjectiveInfo.setTextAlignment(TextAlignment.CENTER);
+        PrivateObjectiveInfo.setStyle("-fx-font: 35 \"Castellar\";-fx-fill: white");
+        PrivateObjectiveInfo.setTranslateY(250);
+
+        //Bottoni
+        Button ProceedButton = new Button();
+        ProceedButton.setId("NextBTN");
+        ProceedButton.setMinSize(250,250);
+        ProceedButton.setTranslateX(300);
+        ProceedButton.setOnAction(event -> this.setScene(Window));
 
         //Label col Colore
         PrivateObjectiveColor = new Label();
         PrivateObjectiveColor.setMinSize(75,75);
-        PrivateObjectiveColor.setId("red");
+        PrivateObjectiveColor.setId(PrivateObjectiveInfoText);
+
 
 
         StackPane PrivateObjectiveDisplayer = new StackPane();
         PrivateObjectiveDisplayer.setId("ChooseAWindow");
         PrivateObjectiveDisplayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        PrivateObjectiveDisplayer.getChildren().addAll(YourColor,PrivateObjectiveColor);
+        PrivateObjectiveDisplayer.getChildren().addAll(PrivateObjectiveInfo,YourColorText,ProceedButton,PrivateObjectiveColor);
 
         PrivateObjective = new Scene(PrivateObjectiveDisplayer,720,720);
 
@@ -236,25 +256,39 @@ public class ChooseAWindow extends Stage {
 
     }
 
-    public void updateBoards(){
+    public void updatePrivateObjective(){
         Platform.runLater(()->{
             int color = LocalModel.getInstance().getPrivateObjectiveCard().getColor();
             switch (color){
-                case ClientColor.RED: PrivateObjectiveColor.setId("red");
-                break;
-                case ClientColor.BLUE: PrivateObjectiveColor.setId("blue");
-                break;
-                case ClientColor.PURPLE: PrivateObjectiveColor.setId("purple");
-                break;
-                case ClientColor.YELLOW: PrivateObjectiveColor.setId("yellow");
-                break;
-                case ClientColor.GREEN: PrivateObjectiveColor.setId("green");
+                case ClientColor.RED: PrivateObjectiveInfoText = "red";
+                    break;
+                case ClientColor.BLUE: PrivateObjectiveInfoText = "blue";
+                    break;
+                case ClientColor.PURPLE: PrivateObjectiveInfoText = "purple";
+                    break;
+                case ClientColor.YELLOW: PrivateObjectiveInfoText = "yellow";
+                    break;
+                case ClientColor.GREEN: PrivateObjectiveInfoText = "green";
+                    break;
             }
         });
     }
 
-    public void updatePrivateObjective(){
-        Platform.runLater(()->{});
+    public void updateBoards(){
+        Platform.runLater(()->{
+            name1 = LocalModel.getInstance().getDrawnGameBoardCards().get(0).getTitle();
+            difficulty1 = LocalModel.getInstance().getDrawnGameBoardCards().get(0).getDifficulty();
+
+            name2 = LocalModel.getInstance().getDrawnGameBoardCards().get(1).getTitle();
+            difficulty2 = LocalModel.getInstance().getDrawnGameBoardCards().get(1).getDifficulty();
+
+            name3 = LocalModel.getInstance().getDrawnGameBoardCards().get(2).getTitle();
+            difficulty3 = LocalModel.getInstance().getDrawnGameBoardCards().get(2).getDifficulty();
+
+            name4 = LocalModel.getInstance().getDrawnGameBoardCards().get(3).getTitle();
+            difficulty4 = LocalModel.getInstance().getDrawnGameBoardCards().get(3).getDifficulty();
+        });
     }
+
 
 }

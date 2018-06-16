@@ -51,7 +51,6 @@ public class TableGUI extends Stage{
         //GridPane per la griglia 5x4
         GridPane griglia = new GridPane();griglia.setTranslateY(-20);
         griglia.setAlignment(Pos.CENTER);
-        griglia.setId("TheGrid");
         for (int i = 0; i < columns; i++) {
             ColumnConstraints column = new ColumnConstraints(75);
             griglia.getColumnConstraints().add(column);

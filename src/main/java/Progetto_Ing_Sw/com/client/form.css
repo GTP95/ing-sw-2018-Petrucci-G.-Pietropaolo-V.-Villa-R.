@@ -348,9 +348,7 @@
     -fx-background-color: transparent;
 }
 
-#TheGrid{
 
-}
 
 #Block{
     -fx-border-color: black;
@@ -557,8 +555,9 @@
 }
 
 #NextBTN{
-    -fx-background-image: url("GUI/NextBTN.png");
+    -fx-background-image: url("GUI/ProceedArrow.png");
     -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
     -fx-background-size: 150 150;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
