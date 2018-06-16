@@ -124,6 +124,7 @@ public class SocketClient implements Runnable{
                 break;
             case "privateObjectiveCard":
                 localModel.setPrivateObjectiveCard(JSONCreator.clientPrivateObjectiveCardLoaderFromString(json));
+                System.out.println("Il tuo obbiettivo privato è: "+localModel.getPrivateObjectiveCard().getColor());
                 break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
