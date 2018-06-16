@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
@@ -260,15 +261,15 @@ public class ChooseAWindow extends Stage {
         Platform.runLater(()->{
             int color = LocalModel.getInstance().getPrivateObjectiveCard().getColor();
             switch (color){
-                case ClientColor.RED: PrivateObjectiveInfoText = "red";
+                case ClientColor.RED: PrivateObjectiveInfoText = "red"; PrivateObjectiveColor.setId("red");
                     break;
-                case ClientColor.BLUE: PrivateObjectiveInfoText = "blue";
+                case ClientColor.BLUE: PrivateObjectiveInfoText = "blue"; PrivateObjectiveColor.setId("blue");
                     break;
-                case ClientColor.PURPLE: PrivateObjectiveInfoText = "purple";
+                case ClientColor.PURPLE: PrivateObjectiveInfoText = "purple"; PrivateObjectiveColor.setId("purple");
                     break;
-                case ClientColor.YELLOW: PrivateObjectiveInfoText = "yellow";
+                case ClientColor.YELLOW: PrivateObjectiveInfoText = "yellow"; PrivateObjectiveColor.setId("yellow");
                     break;
-                case ClientColor.GREEN: PrivateObjectiveInfoText = "green";
+                case ClientColor.GREEN: PrivateObjectiveInfoText = "green"; PrivateObjectiveColor.setId("green");
                     break;
             }
         });
@@ -276,17 +277,24 @@ public class ChooseAWindow extends Stage {
 
     public void updateBoards(){
         Platform.runLater(()->{
-            name1 = LocalModel.getInstance().getDrawnGameBoardCards().get(0).getTitle();
-            difficulty1 = LocalModel.getInstance().getDrawnGameBoardCards().get(0).getDifficulty();
+            ArrayList<ClientGameBoardCard> Gameboardcards=null;
 
-            name2 = LocalModel.getInstance().getDrawnGameBoardCards().get(1).getTitle();
-            difficulty2 = LocalModel.getInstance().getDrawnGameBoardCards().get(1).getDifficulty();
+            while (Gameboardcards==null){
+                Gameboardcards=LocalModel.getInstance().getDrawnGameBoardCards();
+            }
 
-            name3 = LocalModel.getInstance().getDrawnGameBoardCards().get(2).getTitle();
-            difficulty3 = LocalModel.getInstance().getDrawnGameBoardCards().get(2).getDifficulty();
+            name1 = Gameboardcards.get(0).getTitle();
+            difficulty1 = Gameboardcards.get(0).getDifficulty();
 
-            name4 = LocalModel.getInstance().getDrawnGameBoardCards().get(3).getTitle();
-            difficulty4 = LocalModel.getInstance().getDrawnGameBoardCards().get(3).getDifficulty();
+            name2 = Gameboardcards.get(1).getTitle();
+            difficulty2 = Gameboardcards.get(1).getDifficulty();
+
+            name3 = Gameboardcards.get(2).getTitle();
+            difficulty3 = Gameboardcards.get(2).getDifficulty();
+
+            name4 = Gameboardcards.get(3).getTitle();
+            difficulty4 = Gameboardcards.get(3).getDifficulty();
+            
         });
     }
 
