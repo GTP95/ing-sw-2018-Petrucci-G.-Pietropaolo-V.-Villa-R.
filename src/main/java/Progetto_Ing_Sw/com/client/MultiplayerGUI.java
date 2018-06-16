@@ -137,6 +137,10 @@ public class MultiplayerGUI extends Stage {
 
     }
 
+    public void updateTimer(){
+        Platform.runLater(()->{});
+    }
+
     public void StartGame(){
         Platform.runLater(() ->{
             close();
