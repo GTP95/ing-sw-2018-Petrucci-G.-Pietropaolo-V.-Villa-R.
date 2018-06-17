@@ -123,6 +123,21 @@ public class SocketClientHandler implements Runnable {
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnToolCards()),"arrayListOfToolCards");
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnPublicObjectiveCards()),"arrayListOfPublicObjectiveCards"); */
 
+
+
+        try {
+        /*    sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
+            sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
+            for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
+                sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
+            }
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"PrivateObjectiveCard");
+        }
+        catch(InvalidUsernameException e){System.err.println(e.getMessage());}
+
+        receiveControlMessage();
+
         sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
         for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
             sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
@@ -137,16 +152,24 @@ public class SocketClientHandler implements Runnable {
         for (PublicObjectiveCard publicObjectiveCard : table.getDrawnPublicObjectiveCards()){
             sendJSONmessage(JSONCreator.generateJSON(publicObjectiveCard),"PublicObjectiveCard");
         }
+    }
 
-        try {
-        /*    sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
-            sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
-            for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
-                sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
+    private void receiveControlMessage(){
+        try{
+        while(!in.ready()); //aspetta che il buffer sia pronto ad essere letto
+
+            String message=in.readLine();
+            String messageFields[]=message.split("%");
+            switch(messageFields[0]){
+                case "Data received, go ahead":
+                    //niente, va avanti
+                    break;
             }
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"PrivateObjectiveCard");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(InvalidUsernameException e){System.err.println(e.getMessage());}
+
+
+
     }
 }

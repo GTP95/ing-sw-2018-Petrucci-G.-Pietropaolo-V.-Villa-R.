@@ -133,24 +133,23 @@ public  class LocalModel {
 
     public void setDrawnToolCards(ArrayList<ClientToolCard> drawnToolCards) {
         this.drawnToolCards = drawnToolCards;
-        tableGUIobserver.updateToolCards();
+
     }
 
     public void setDrawnPublicObjectiveCards(ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards) {  //Provo a non sincronizzare dal momentto che la sincronizzazione è implicita nnell'observer
         this.drawnPublicObjectiveCards = drawnPublicObjectiveCards;
-        while(tableGUIobserver==null);  //Non posso usare la wait(): IllegalMonitorStateException
-        tableGUIobserver.updatePublicObjectiveCards();
+
     }
 
     public void setDrawnGameBoardCards(ArrayList<ClientGameBoardCard> drawnGameBoardCards) {
         this.drawnGameBoardCards = drawnGameBoardCards;
-        while (chooseAWindowobserver==null); //Non posso usare la wait(): IllegalMonitorStateException
-        chooseAWindowobserver.updateBoards();   //notifica l'observer della ricezione delle GameBoardCards
+
     }
 
     public void setPrivateObjectiveCard(ClientPrivateObjectiveCard privateObjectiveCard) {
         this.privateObjectiveCard = privateObjectiveCard;
-        chooseAWindowobserver.updatePrivateObjective();
+        while (chooseAWindowobserver==null);
+        chooseAWindowobserver.updateChooseAWindow();
     }
 
     public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore
@@ -168,25 +167,19 @@ public  class LocalModel {
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
         drawnDice.add(dice);
-        if(drawnDice.size()==numOfDice) {
-            while(tableGUIobserver==null);
-            tableGUIobserver.updateDice();
-        }
+
     }
 
     public void addDrawnToolCard(ClientToolCard toolCard){
         if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
         drawnToolCards.add(toolCard);
-        if(drawnToolCards.size()==numOfToolCards){
-            while(tableGUIobserver==null);
-            tableGUIobserver.updateToolCards();
-        }
+
     }
 
     public void addDrawnGameBoardCard(ClientGameBoardCard gameBoardCard){
         if(drawnGameBoardCards==null) drawnGameBoardCards=new ArrayList<>();
         drawnGameBoardCards.add(gameBoardCard);
-       // if(drawnGameBoardCards.size()==numOfGameBoardCards) multiplayerGUIobserver
+
     }
 
     public void setNumOfDice(int numOfDice) {

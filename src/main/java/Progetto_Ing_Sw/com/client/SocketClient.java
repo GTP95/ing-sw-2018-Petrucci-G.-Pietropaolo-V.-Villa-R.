@@ -138,6 +138,7 @@ public class SocketClient implements Runnable{
             case "PrivateObjectiveCard":
                 localModel.setPrivateObjectiveCard(JSONCreator.clientPrivateObjectiveCardLoaderFromString(json));
                 System.out.println("OBBIETTIVO PRIVATO RICEVUTO");
+                sendControlMessage("Data received, go ahead");
                 break;
             case "Dice":
                 localModel.addDrawnDice(JSONCreator.diceLoaderFromString(json));
@@ -192,5 +193,10 @@ public class SocketClient implements Runnable{
 
     public void sendMessage(){
 
+    }
+
+    private void sendControlMessage(String message){    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
+        String messageToSend="Control%"+message;
+        out.println(messageToSend);
     }
 }
