@@ -179,7 +179,8 @@ public  class LocalModel {
         if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
         drawnToolCards.add(toolCard);
         if(drawnToolCards.size()==numOfToolCards){
-            while (tableGUIobserver==null); //Aspetta che la view si registri come observer
+            System.err.print("IN ATTESA DI TABLEGUI");
+            while (tableGUIobserver==null)System.err.println("."); //Aspetta che la view si registri come observer
             tableGUIobserver.updateTable(); //Notifica la view
             System.err.println("TABLEGUI NOTIFICATA DELL'ARRIVO DELLE CARTE");
         }
