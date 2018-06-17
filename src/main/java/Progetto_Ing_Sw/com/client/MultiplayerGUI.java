@@ -1,6 +1,8 @@
 package Progetto_Ing_Sw.com.client;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +13,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 
 public class MultiplayerGUI extends Stage {
@@ -132,9 +137,12 @@ public class MultiplayerGUI extends Stage {
 
         //FINE Lobby Scene
 
+
+
         this.setScene(ChooseConnectionScene);
 
         this.show();
+
 
     }
 
@@ -142,10 +150,13 @@ public class MultiplayerGUI extends Stage {
         Platform.runLater(()->{});
     }
 
+
+
     public void StartGame(){
         Platform.runLater(() ->{
             close();
             //new TableGUI();
+
             new ChooseAWindow();
         });
     }
