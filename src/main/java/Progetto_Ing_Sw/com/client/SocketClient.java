@@ -148,6 +148,8 @@ public class SocketClient implements Runnable{
                 break;
             case "PublicObjectiveCard":
                 localModel.addDrawnToolCard(JSONCreator.clientToolCardLoaderFromString(json));
+                while(localModel.getChoosenGameBoardCard()==null);  //aspeta che il giocatore abbia scelto la GameBoardCard
+                sendJSONmessage(JSONCreator.generateJSON(localModel.getChoosenGameBoardCard()),"GameBoardCard");
                 break;
             case "GameBoardCard":
                 localModel.addDrawnGameBoardCard(JSONCreator.clientGameBoardCardLoaderFromString(json));
@@ -198,5 +200,11 @@ public class SocketClient implements Runnable{
     private void sendControlMessage(String message){    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
         String messageToSend="Control%"+message;
         out.println(messageToSend);
+    }
+
+    private void sendJSONmessage(String json, String nameOfClass){
+        String messageToSend="JSON%"+json+"%"+nameOfClass;
+        out.println(messageToSend);
+        System.out.println("JSON message sent");
     }
 }

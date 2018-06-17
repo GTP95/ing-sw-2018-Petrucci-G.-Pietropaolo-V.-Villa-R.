@@ -20,6 +20,7 @@ public  class LocalModel {
     private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
+    private GameBoardCard choosenGameBoardCard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
 
     private LocalModel(){
@@ -106,6 +107,10 @@ public  class LocalModel {
     public ClientPrivateObjectiveCard getPrivateObjectiveCard() {
         System.out.println("L'obbiettivo privato è: "+privateObjectiveCard.getColor());
         return privateObjectiveCard;
+    }
+
+    public GameBoardCard getChoosenGameBoardCard() {
+        return choosenGameBoardCard;
     }
 
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
@@ -196,5 +201,9 @@ public  class LocalModel {
 
     public void setNumOfGameBoardCards(int numOfGameBoardCards) {
         this.numOfGameBoardCards = numOfGameBoardCards;
+    }
+
+    public void setChoosenGameBoardCard(GameBoardCard choosenGameBoardCard) {
+        this.choosenGameBoardCard = choosenGameBoardCard;
     }
 }

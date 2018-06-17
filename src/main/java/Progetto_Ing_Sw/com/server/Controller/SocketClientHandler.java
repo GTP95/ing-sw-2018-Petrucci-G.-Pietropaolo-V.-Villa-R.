@@ -55,6 +55,7 @@ public class SocketClientHandler implements Runnable {
                 sendControlMessage("Game started!");
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 sendGameInitializationData();
+                receiveChoosenWindowBoard();
 
                 while(Table.gameRunning){
 
@@ -175,5 +176,20 @@ public class SocketClientHandler implements Runnable {
 
 
 
+    }
+
+    private void receiveChoosenWindowBoard(){
+        try {
+            while (!in.ready()) ; //aspetta che il buffer sia pronto per essere letto
+            String message = in.readLine();
+            String messageFields[] = message.split("%");
+            table.getPlayerFromName(myPlayerName).setChoosenGameBoard(JSONCreator.gameBoardCardLoaderFromString(messageFields[0]));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch (InvalidUsernameException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
