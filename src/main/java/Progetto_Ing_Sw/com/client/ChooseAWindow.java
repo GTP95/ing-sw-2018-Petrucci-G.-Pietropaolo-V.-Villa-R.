@@ -116,7 +116,7 @@ public class ChooseAWindow extends Stage {
 
     public String FromTitleToJSON(String name){
         String jsonfilename = new String();
-        if (name=="Sun's Glory"){
+        if (name.equals("Sun's Glory")){
             jsonfilename= "SunsGlory";
         }
         else{
@@ -313,6 +313,11 @@ public class ChooseAWindow extends Stage {
 
 
 
+    }
+
+    public void updateChooseAWindow(){
+        updatePrivateObjective();
+        updateBoards();
     }
 
     public void updatePrivateObjective(){
