@@ -189,8 +189,10 @@ public  class LocalModel {
         if(drawnPublicObjectiveCards==null) drawnPublicObjectiveCards=new ArrayList<>();
         drawnPublicObjectiveCards.add(publicObjectiveCard);
         if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
-            while(tableGUIobserver==null);
+            System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
+            while(tableGUIobserver==null)System.err.print(".");
             tableGUIobserver.updateTable();
+            System.err.println("NOTIFICA INVIATA A TABLEGUI");
         }
     }
 
