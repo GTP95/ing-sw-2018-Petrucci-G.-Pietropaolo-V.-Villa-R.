@@ -520,4 +520,8 @@ public class TableGUI extends Stage{
             });
         }
 
+    public void updateDice(){
+        Platform.runLater(()->{});
+    }
+
 }

@@ -32,8 +32,7 @@ import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective;
-    int difficulty1, difficulty2, difficulty3, difficulty4;
-    Label PrivateObjectiveColor,info1,info2,info3,info4;
+    Label PrivateObjectiveColor,info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
 
@@ -158,31 +157,36 @@ public class ChooseAWindow extends Stage {
         info3 = new Label("Virtus");info3.setId("WindowInfo");info3.setTranslateY(200);
         info4 = new Label("Virtus");info4.setId("WindowInfo");info4.setTranslateY(200);
 
+        difficulty1 = new Label("•");difficulty1.setId("WindowInfo");difficulty1.setTranslateY(250);
+        difficulty2 = new Label("•");difficulty2.setId("WindowInfo");difficulty2.setTranslateY(250);
+        difficulty3 = new Label("•");difficulty3.setId("WindowInfo");difficulty3.setTranslateY(250);
+        difficulty4 = new Label("•");difficulty4.setId("WindowInfo");difficulty4.setTranslateY(250);
+
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event ->
-                Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info1.getText())+".json"),info1,Window1BTN)
+                Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info1.getText())+".json"),info1,difficulty1,Window1BTN)
         );
         pause.play();
 
         StackPane Board2 = new StackPane();Board2.setTranslateX(1000);
         PauseTransition pause2 = new PauseTransition(Duration.seconds(2));
         pause2.setOnFinished(event ->
-                Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info2.getText())+".json"),info2,Window2BTN)
+                Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info2.getText())+".json"),info2,difficulty2,Window2BTN)
         );
         pause2.play();
 
         StackPane Board3 = new StackPane();Board3.setTranslateX(1000);
         PauseTransition pause3 = new PauseTransition(Duration.seconds(2));
         pause3.setOnFinished(event ->
-                Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info3.getText())+".json"),info3,Window3BTN)
+                Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info3.getText())+".json"),info3,difficulty3,Window3BTN)
         );
         pause3.play();
 
         StackPane Board4 = new StackPane();Board4.setTranslateX(1000);
         PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
         pause4.setOnFinished(event ->
-                Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info4.getText())+".json"),info4,Window4BTN)
+                Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info4.getText())+".json"),info4,difficulty4,Window4BTN)
         );
         pause4.play();
 
@@ -236,7 +240,16 @@ public class ChooseAWindow extends Stage {
 
         Text ChooseAWindow = new Text("Choose a Window");
         ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
-        ChooseAWindow.setTranslateY(-250);
+        ChooseAWindow.setTranslateY(-300);
+
+        Label PrivateObjectiveColor2 = new Label();
+        PrivateObjectiveColor2.setTranslateY(-250);
+        PrivateObjectiveColor2.setTranslateX(250);
+        PrivateObjectiveColor2=PrivateObjectiveColor;
+
+        Text RememberColor = new Text("Remember your private color is: ");
+        RememberColor.setStyle("-fx-font: 40 \"Centaur\";-fx-fill: white");
+        RememberColor.setTranslateY(-250);
 
         Button Play = new Button("Next");Play.setTranslateX(300);Play.setId("NextBTN");Play.setPrefSize(150,150);
         Button Play2 = new Button("Next");Play2.setTranslateX(300);Play2.setVisible(false);Play2.setId("NextBTN");Play2.setPrefSize(150,150);
@@ -252,7 +265,7 @@ public class ChooseAWindow extends Stage {
         StackPane Animation = new StackPane();
         Animation.setId("ChooseAWindow");
         Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Animation.getChildren().addAll(ChooseAWindow,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
+        Animation.getChildren().addAll(ChooseAWindow,RememberColor,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
 
         Window = new Scene(Animation,720,720);
         //FINE SCENA CHOOSE A WINDOW
@@ -291,6 +304,7 @@ public class ChooseAWindow extends Stage {
         PrivateObjectiveDisplayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         PrivateObjectiveDisplayer.getChildren().addAll(PrivateObjectiveInfo,YourColorText,ProceedButton,PrivateObjectiveColor);
 
+
         PrivateObjective = new Scene(PrivateObjectiveDisplayer,720,720);
 
         this.setScene(PrivateObjective);
@@ -328,17 +342,14 @@ public class ChooseAWindow extends Stage {
             }
 
             info1.setText(Gameboardcards.get(0).getTitle());
-            difficulty1 = LocalModel.getInstance().getDrawnGameBoardCards().get(0).getDifficulty();
-
             info2.setText(Gameboardcards.get(1).getTitle());
-            difficulty2 = LocalModel.getInstance().getDrawnGameBoardCards().get(1).getDifficulty();
-
             info3.setText(Gameboardcards.get(2).getTitle());
-            difficulty3 = LocalModel.getInstance().getDrawnGameBoardCards().get(2).getDifficulty();
-
             info4.setText(Gameboardcards.get(3).getTitle());
-            difficulty4 = LocalModel.getInstance().getDrawnGameBoardCards().get(3).getDifficulty();
 
+            difficulty1.setText("Difficulty: "+String.join("", Collections.nCopies(LocalModel.getInstance().getDrawnGameBoardCards().get(0).getDifficulty(), "•")));
+            difficulty2.setText("Difficulty: "+String.join("", Collections.nCopies(LocalModel.getInstance().getDrawnGameBoardCards().get(1).getDifficulty(), "•")));
+            difficulty3.setText("Difficulty: "+String.join("", Collections.nCopies(LocalModel.getInstance().getDrawnGameBoardCards().get(2).getDifficulty(), "•")));
+            difficulty4.setText("Difficulty: "+String.join("", Collections.nCopies(LocalModel.getInstance().getDrawnGameBoardCards().get(3).getDifficulty(), "•")));
         });
     }
 
