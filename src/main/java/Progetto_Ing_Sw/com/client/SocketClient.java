@@ -88,7 +88,8 @@ public class SocketClient implements Runnable{
     }
 
     private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException {
-        switch (messageContent) {
+        String messageFields[]=messageContent.split("&");
+        switch (messageFields[0]) {
             case "Connected":
                 System.out.println("Connected");
                 break;
@@ -101,6 +102,18 @@ public class SocketClient implements Runnable{
                 throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Game started!":
                 localModel.setGameRunning(true);
+                break;
+            case "Sending Dice":
+                localModel.setNumOfDice(Integer.parseInt(messageFields[1]));
+                break;
+            case "Sending ToolCards":
+                localModel.setNumOfToolCards(Integer.parseInt(messageFields[1]));
+                break;
+            case "Sending publicObjectiveCards":
+                localModel.setNumOfPublicObjectiveCards(Integer.parseInt(messageFields[1]));
+                break;
+            case "Sending GameBoardcards":
+                localModel.setNumOfGameBoardCards(Integer.parseInt(messageFields[1]));
                 break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
@@ -122,9 +135,21 @@ public class SocketClient implements Runnable{
             case "arrayListOfGameBoardCards":
                 localModel.setDrawnGameBoardCards(JSONCreator.gameBoardCardArrayListLoaderFromString(json));
                 break;
-            case "privateObjectiveCard":
+            case "PrivateObjectiveCard":
                 localModel.setPrivateObjectiveCard(JSONCreator.clientPrivateObjectiveCardLoaderFromString(json));
                 System.out.println("OBBIETTIVO PRIVATO RICEVUTO");
+                break;
+            case "Dice":
+                localModel.addDrawnDice(JSONCreator.diceLoaderFromString(json));
+                break;
+            case "ToolCard":
+                localModel.addDrawnToolCard(JSONCreator.clientToolCardLoaderFromString(json));
+                break;
+            case "PublicObjectiveCard":
+                localModel.addDrawnToolCard(JSONCreator.clientToolCardLoaderFromString(json));
+                break;
+            case "GameBoardCard":
+                localModel.addDrawnGameBoardCard(JSONCreator.clientGameBoardCardLoaderFromString(json));
                 break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
