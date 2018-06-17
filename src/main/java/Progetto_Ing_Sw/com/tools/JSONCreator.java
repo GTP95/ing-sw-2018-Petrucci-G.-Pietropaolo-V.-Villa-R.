@@ -182,6 +182,11 @@ public final class JSONCreator {
         return gameBoardCard;
     }
 
+    public static ClientPublicObjectiveCard clientPublicObjectiveCardLoaderFromString(String json){
+        ClientPublicObjectiveCard card=gson.fromJson(json, ClientPublicObjectiveCard.class);
+        return card;
+    }
+
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){
         JsonElement jsonElement=new JsonParser().parse(json);

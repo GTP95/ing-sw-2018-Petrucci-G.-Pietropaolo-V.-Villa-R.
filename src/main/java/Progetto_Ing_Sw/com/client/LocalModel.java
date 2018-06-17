@@ -178,12 +178,6 @@ public  class LocalModel {
     public void addDrawnToolCard(ClientToolCard toolCard){
         if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
         drawnToolCards.add(toolCard);
-        if(drawnToolCards.size()==numOfToolCards){
-            System.err.print("IN ATTESA DI TABLEGUI");
-            while (tableGUIobserver==null)System.err.println("."); //Aspetta che la view si registri come observer
-            tableGUIobserver.updateTable(); //Notifica la view
-            System.err.println("TABLEGUI NOTIFICATA DELL'ARRIVO DELLE CARTE");
-        }
     }
 
     public void addDrawnGameBoardCard(ClientGameBoardCard gameBoardCard){
@@ -191,7 +185,14 @@ public  class LocalModel {
         drawnGameBoardCards.add(gameBoardCard);
     }
 
-
+    public void addDrawnPublicObjectiveCard(ClientPublicObjectiveCard publicObjectiveCard){
+        if(drawnPublicObjectiveCards==null) drawnPublicObjectiveCards=new ArrayList<>();
+        drawnPublicObjectiveCards.add(publicObjectiveCard);
+        if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
+            while(tableGUIobserver==null);
+            tableGUIobserver.updateTable();
+        }
+    }
 
     public void setNumOfDice(int numOfDice) {
         this.numOfDice = numOfDice;
