@@ -116,7 +116,7 @@ public class ChooseAWindow extends Stage {
 
     public String FromTitleToJSON(String name){
         String jsonfilename = new String();
-        if (name=="Sun's Glory"){
+        if (name.equals("Sun's Glory")){
             jsonfilename= "SunsGlory";
         }
         else{
@@ -147,6 +147,7 @@ public class ChooseAWindow extends Stage {
             new TableGUI(FromTitleToJSON(info1.getText()));
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
+        Window2
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
 
@@ -313,6 +314,11 @@ public class ChooseAWindow extends Stage {
 
 
 
+    }
+
+    public void updateChooseAWindow(){
+        updatePrivateObjective();
+        updateBoards();
     }
 
     public void updatePrivateObjective(){
