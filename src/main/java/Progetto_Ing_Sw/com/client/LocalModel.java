@@ -20,7 +20,7 @@ public  class LocalModel {
     private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
-    private GameBoardCard choosenGameBoardCard;
+    private ClientGameBoardCard choosenGameBoardCard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
 
     private LocalModel(){
@@ -109,7 +109,7 @@ public  class LocalModel {
         return privateObjectiveCard;
     }
 
-    public GameBoardCard getChoosenGameBoardCard() {
+    public ClientGameBoardCard getChoosenGameBoardCard() {
         return choosenGameBoardCard;
     }
 
@@ -203,7 +203,7 @@ public  class LocalModel {
         this.numOfGameBoardCards = numOfGameBoardCards;
     }
 
-    public void setChoosenGameBoardCard(GameBoardCard choosenGameBoardCard) {
+    public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
         this.choosenGameBoardCard = choosenGameBoardCard;
     }
 }
