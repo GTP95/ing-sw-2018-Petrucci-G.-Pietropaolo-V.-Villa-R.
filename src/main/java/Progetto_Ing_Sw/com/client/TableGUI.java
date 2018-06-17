@@ -26,20 +26,24 @@ import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 
 public class TableGUI extends Stage{
+    ClientGameBoardCard ChoosenGmaeBoardCard;
     Scene GameplayScene;
     Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
 
-    TableGUI(String BoardName) {
+    TableGUI(ClientGameBoardCard gameBoardCard) {
         this.setTitle("Sagrada Game");
         this.setWidth(1280);
         this.setHeight(720);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+
+        ChoosenGmaeBoardCard = gameBoardCard;
 
         LocalModel.getInstance().registerAsObserver(this);
 
@@ -61,25 +65,14 @@ public class TableGUI extends Stage{
             griglia.getRowConstraints().add(row);
         }
 
-        //Creazione carta da Json
 
-        JsonElement jelement = null;
-        try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/"+BoardName+".json"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        JsonObject jobject = jelement.getAsJsonObject();
-        JsonArray matrixTexture = jobject.getAsJsonArray("matrixScheme");
-        int[][] matrix = new int[rows][columns];
+        int [][] matrixTexture = gameBoardCard.getMatrixScheme();
 
-        for (int r = 0; r < matrixTexture.size(); r++) {
-            JsonArray row = matrixTexture.get(r).getAsJsonArray();
-            for (int c = 0; c < row.size(); c++) {
-                matrix[r][c] = row.get(c).getAsInt();
+        for (int r = 0; r < matrixTexture.length; r++) {
+            for (int c = 0; c < matrixTexture[r].length; c++) {
                     Pane block = new Pane();
                     block.setId("Block");
-                    switch (matrix[r][c]) {
+                    switch (matrixTexture[r][c]) {
                         case (0):
                             break;
                         case (1):
@@ -474,7 +467,7 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.BOTTOM_LEFT);
             GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
-            //GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+            GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
             GameplayArea.setAlignment(RoundTrack,Pos.TOP_RIGHT);
             GameplayArea.getChildren().addAll(WindowBoard,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 
@@ -488,6 +481,10 @@ public class TableGUI extends Stage{
 
             this.setScene(GameplayScene);
             this.show();
+        }
+
+        public void updateTable(){
+        
         }
 
         public void updateToolCards(){

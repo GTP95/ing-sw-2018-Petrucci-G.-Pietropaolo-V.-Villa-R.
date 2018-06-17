@@ -121,7 +121,7 @@ public class MultiplayerGUI extends Stage {
         HBox TimerBox = new HBox();
         TimerBox.setAlignment(Pos.TOP_CENTER);
         TimerBox.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Label TimerLabel = new Label("30"); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);TimerLabel.setTextAlignment(TextAlignment.CENTER);
+        Label TimerLabel = new Label(); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);TimerLabel.setTextAlignment(TextAlignment.CENTER);TimerLabel.setText("Timer");
         TimerBox.getChildren().addAll(TimerLabel);
 
 

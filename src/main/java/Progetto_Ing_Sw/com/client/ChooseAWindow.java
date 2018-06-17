@@ -36,7 +36,7 @@ public class ChooseAWindow extends Stage {
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
 
-    public GridPane CreateAGrid (String GridPath){
+    public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
         int rows = 4;
         int columns = 5;
 
@@ -54,23 +54,13 @@ public class ChooseAWindow extends Stage {
             Board.getRowConstraints().add(row);
         }
 
-        JsonElement jelement = null;
-        try {
-            jelement = new JsonParser().parse(new FileReader(GridPath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        JsonObject jobject = jelement.getAsJsonObject();
-        JsonArray matrixTexture = jobject.getAsJsonArray("matrixScheme");
-        int[][] matrix = new int[rows][columns];
+        int [][] matrixTexture = gameBoardCard.getMatrixScheme();
 
-        for (int r = 0; r < matrixTexture.size(); r++) {
-            JsonArray row = matrixTexture.get(r).getAsJsonArray();
-            for (int c = 0; c < row.size(); c++) {
-                matrix[r][c] = row.get(c).getAsInt();
+        for (int r = 0; r < matrixTexture.length; r++) {
+            for (int c = 0; c < matrixTexture[r].length; c++) {
                 Pane block = new Pane();
                 block.setId("Block");
-                switch (matrix[r][c]) {
+                switch (matrixTexture[r][c]) {
                     case (0):
                         break;
                     case (1):
@@ -114,17 +104,7 @@ public class ChooseAWindow extends Stage {
         return Board;
     }
 
-    public String FromTitleToJSON(String name){
-        String jsonfilename = new String();
-        if (name.equals("Sun's Glory")){
-            jsonfilename= "SunsGlory";
-        }
-        else{
-            jsonfilename = name.replaceAll("\\s","");
-        }
 
-        return jsonfilename;
-    }
 
 
 
@@ -144,12 +124,27 @@ public class ChooseAWindow extends Stage {
         Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
         Window1BTN.setOnAction(event -> {
             this.close();
-            new TableGUI(FromTitleToJSON(info1.getText()));
+            LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
+            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
-        Window2
+        Window2BTN.setOnAction(event -> {
+            this.close();
+            LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
+            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
+        });
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
+        Window3BTN.setOnAction(event -> {
+            this.close();
+            LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
+            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
+        });
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
+        Window4BTN.setOnAction(event -> {
+            this.close();
+            LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
+            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
+        });
 
         //Label che indicano nome e difficoltà della scheda in questione
 
@@ -166,28 +161,28 @@ public class ChooseAWindow extends Stage {
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event ->
-                Board1.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info1.getText())+".json"),info1,difficulty1,Window1BTN)
+                Board1.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(0)),info1,difficulty1,Window1BTN)
         );
         pause.play();
 
         StackPane Board2 = new StackPane();Board2.setTranslateX(1000);
         PauseTransition pause2 = new PauseTransition(Duration.seconds(2));
         pause2.setOnFinished(event ->
-                Board2.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info2.getText())+".json"),info2,difficulty2,Window2BTN)
+                Board2.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(1)),info2,difficulty2,Window2BTN)
         );
         pause2.play();
 
         StackPane Board3 = new StackPane();Board3.setTranslateX(1000);
         PauseTransition pause3 = new PauseTransition(Duration.seconds(2));
         pause3.setOnFinished(event ->
-                Board3.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info3.getText())+".json"),info3,difficulty3,Window3BTN)
+                Board3.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(2)),info3,difficulty3,Window3BTN)
         );
         pause3.play();
 
         StackPane Board4 = new StackPane();Board4.setTranslateX(1000);
         PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
         pause4.setOnFinished(event ->
-                Board4.getChildren().addAll(CreateAGrid("Resources/Cards/GameBoardCards/"+FromTitleToJSON(info4.getText())+".json"),info4,difficulty4,Window4BTN)
+                Board4.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(3)),info4,difficulty4,Window4BTN)
         );
         pause4.play();
 
@@ -346,6 +341,7 @@ public class ChooseAWindow extends Stage {
             while (Gameboardcards==null){
                 Gameboardcards=LocalModel.getInstance().getDrawnGameBoardCards();
             }
+
 
             info1.setText(Gameboardcards.get(0).getTitle());
             info2.setText(Gameboardcards.get(1).getTitle());
