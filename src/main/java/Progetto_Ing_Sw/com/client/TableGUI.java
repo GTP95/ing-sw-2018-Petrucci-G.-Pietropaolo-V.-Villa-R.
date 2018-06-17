@@ -170,11 +170,11 @@ public class TableGUI extends Stage{
 
             //HBox che contiene le informazioni sulla carta
             HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
-            Text VictoryPoints = new Text("VP: 10");VictoryPoints.setFill(Paint.valueOf("white"));
-            Text WindowTitle = new Text("Via Lux");WindowTitle.setFill(Paint.valueOf("white"));//TODO WindowTitle.setText da file
-            Text DifficultyTokens = new Text("Tokens: 4");DifficultyTokens.setFill(Paint.valueOf("white"));//TODO Difficulty.setText da file
+            Text VictoryPoints = new Text("VP: 0");VictoryPoints.setFill(Paint.valueOf("white"));
+            Text WindowTitle = new Text(gameBoardCard.getTitle());WindowTitle.setFill(Paint.valueOf("white"));
+            Text DifficultyTokens = new Text("Tokens: "+Integer.toString(gameBoardCard.getDifficulty()));DifficultyTokens.setFill(Paint.valueOf("white"));
             WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
-            WindowInfo.getChildren().addAll(VictoryPoints,WindowTitle,DifficultyTokens);
+            WindowInfo.getChildren().addAll(WindowTitle);
 
             //StackPane che fa da cornice alla griglia
             StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
@@ -484,7 +484,9 @@ public class TableGUI extends Stage{
         }
 
         public void updateTable(){
-        
+            System.err.println("----------------------------------------------------------------------------------------------------");
+            updatePublicObjectiveCards();
+            updateToolCards();
         }
 
         public void updateToolCards(){
@@ -513,12 +515,11 @@ public class TableGUI extends Stage{
                 PublicObjectiveCard3BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle());
                 PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
                 PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
-
             });
         }
 
-    public void updateDice(){
-        Platform.runLater(()->{});
-    }
+        public void updateDice(){
+            Platform.runLater(()->{});
+        }
 
 }
