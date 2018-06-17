@@ -197,6 +197,7 @@ public  class LocalModel {
 
     public void setNumOfToolCards(int numOfToolCards) {
         this.numOfToolCards = numOfToolCards;
+        System.err.println("NUM OF TOOLCARDS IMPOSTATO A +" + numOfToolCards);
     }
 
     public void setNumOfPublicObjectiveCards(int numOfPublicObjectiveCards) {
