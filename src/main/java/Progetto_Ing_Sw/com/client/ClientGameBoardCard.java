@@ -9,6 +9,7 @@ public class ClientGameBoardCard extends Card {
     private int difficulty;
     private String otherSide;
     private int otherSideCode;
+    private int[][] matrixScheme;
 
     public ClientGameBoardCard(String title, int gameBoardCode, int difficulty, String otherSide, int otherSideCode) {
         this.title = title;
@@ -27,4 +28,8 @@ public class ClientGameBoardCard extends Card {
     public String getOtherSide() { return otherSide; }
 
     public int getOtherSideCode() { return otherSideCode; }
+
+    public int[][] getMatrixScheme() {
+        return matrixScheme;
+    }
 }
