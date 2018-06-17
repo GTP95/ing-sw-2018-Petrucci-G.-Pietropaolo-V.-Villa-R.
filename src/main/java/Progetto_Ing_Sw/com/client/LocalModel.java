@@ -121,7 +121,7 @@ public  class LocalModel {
             }
             if (currentObject instanceof TableGUI){
                 this.tableGUIobserver=(TableGUI)currentObject;
-                System.out.println("TableGUI registarta come observer");
+                System.out.println("TableGUI registrata come observer");
                 return;
             }
             if(currentObject instanceof ChooseAWindow){
@@ -190,7 +190,7 @@ public  class LocalModel {
         drawnPublicObjectiveCards.add(publicObjectiveCard);
         if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
             System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
-            while(tableGUIobserver==null){}
+            while(tableGUIobserver==null);
             tableGUIobserver.updateTable();
             System.err.println("NOTIFICA INVIATA A TABLEGUI");
         }
@@ -214,5 +214,9 @@ public  class LocalModel {
 
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
         this.choosenGameBoardCard = choosenGameBoardCard;
+    }
+
+    private void doNothing(){
+
     }
 }
