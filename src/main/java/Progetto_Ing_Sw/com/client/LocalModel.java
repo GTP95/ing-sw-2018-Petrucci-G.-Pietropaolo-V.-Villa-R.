@@ -181,6 +181,7 @@ public  class LocalModel {
         if(drawnToolCards.size()==numOfToolCards){
             while (tableGUIobserver==null); //Aspetta che la view si registri come observer
             tableGUIobserver.updateTable(); //Notifica la view
+            System.err.println("TABLEGUI NOTIFICATA DELL'ARRIVO DELLE CARTE");
         }
     }
 
@@ -197,7 +198,6 @@ public  class LocalModel {
 
     public void setNumOfToolCards(int numOfToolCards) {
         this.numOfToolCards = numOfToolCards;
-        System.err.println("NUM OF TOOLCARDS IMPOSTATO A +" + numOfToolCards);
     }
 
     public void setNumOfPublicObjectiveCards(int numOfPublicObjectiveCards) {
