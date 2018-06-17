@@ -128,6 +128,10 @@ public class SocketClientHandler implements Runnable {
         try {
         /*    sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
             sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
+            ArrayList<GameBoardCard> drawnGameBoardCard=null;
+            while(drawnGameBoardCard==null){
+                drawnGameBoardCard=table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard();
+            }
             sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
             for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
                 sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
