@@ -168,13 +168,19 @@ public  class LocalModel {
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
         drawnDice.add(dice);
-        if(drawnDice.size()==numOfDice) tableGUIobserver.updateDice();
+        if(drawnDice.size()==numOfDice) {
+            while(tableGUIobserver==null);
+            tableGUIobserver.updateDice();
+        }
     }
 
     public void addDrawnToolCard(ClientToolCard toolCard){
         if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
         drawnToolCards.add(toolCard);
-        if(drawnToolCards.size()==numOfToolCards) tableGUIobserver.updateToolCards();
+        if(drawnToolCards.size()==numOfToolCards){
+            while(tableGUIobserver==null);
+            tableGUIobserver.updateToolCards();
+        }
     }
 
     public void addDrawnGameBoardCard(ClientGameBoardCard gameBoardCard){
