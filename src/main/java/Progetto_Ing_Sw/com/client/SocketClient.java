@@ -105,12 +105,16 @@ public class SocketClient implements Runnable{
                 break;
             case "Sending Dice":
                 localModel.setNumOfDice(Integer.parseInt(messageFields[1]));
+                break;
             case "Sending ToolCards":
                 localModel.setNumOfToolCards(Integer.parseInt(messageFields[1]));
+                break;
             case "Sending publicObjectiveCards":
                 localModel.setNumOfPublicObjectiveCards(Integer.parseInt(messageFields[1]));
+                break;
             case "Sending GameBoardcards":
                 localModel.setNumOfGameBoardCards(Integer.parseInt(messageFields[1]));
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
