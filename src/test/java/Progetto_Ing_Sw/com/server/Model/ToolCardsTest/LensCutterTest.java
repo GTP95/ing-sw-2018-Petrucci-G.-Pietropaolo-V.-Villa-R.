@@ -1,5 +1,6 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Model.ToolCardsTest;
 
+import Progetto_Ing_Sw.com.server.Model.*;
 import org.junit.Before;
 import org.junit.Test;
 
