@@ -39,6 +39,7 @@ public class RowShadeVariety {
             for(int c=0;c<localBoard.getUsedMatrix().get(r).size();c++){
                 if (localBoard.getUsedMatrix().get(r).get(c).isUsed() == false) {
                     //se ho una casella vuota non fa nulla, non calcola il punteggio
+                    System.out.println("Non ho considerato la riga");
                     break;
                 }
                 else{
