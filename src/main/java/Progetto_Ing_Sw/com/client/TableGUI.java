@@ -34,7 +34,7 @@ public class TableGUI extends Stage{
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
 
-    TableGUI() {
+    TableGUI(String BoardName) {
         this.setTitle("Sagrada Game");
         this.setWidth(1280);
         this.setHeight(720);
@@ -65,7 +65,7 @@ public class TableGUI extends Stage{
 
         JsonElement jelement = null;
         try {
-            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/SymphonyOfLight.json"));
+            jelement = new JsonParser().parse(new FileReader("Resources/Cards/GameBoardCards/"+BoardName+".json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -519,5 +519,9 @@ public class TableGUI extends Stage{
 
             });
         }
+
+    public void updateDice(){
+        Platform.runLater(()->{});
+    }
 
 }

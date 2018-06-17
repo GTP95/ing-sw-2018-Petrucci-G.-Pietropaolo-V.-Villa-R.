@@ -1,7 +1,10 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.server.Model.ToolCardsTest;
 
+import Progetto_Ing_Sw.com.server.Model.Color;
+import Progetto_Ing_Sw.com.server.Model.Dice;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.FluxRemover;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.TapWheel;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Before;
 import org.junit.Test;
 
