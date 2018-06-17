@@ -16,7 +16,7 @@ public class GameBoardCardDeck extends Deck{
         for(File file : folder.listFiles()){
             try {
                 cards.add(gameBoardCardLoaderFromFile(file.getPath()));
-            } catch (FileNotFoundException e) {
+            }catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
