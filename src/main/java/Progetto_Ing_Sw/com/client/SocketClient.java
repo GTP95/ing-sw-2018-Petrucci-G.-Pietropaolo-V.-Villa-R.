@@ -148,8 +148,8 @@ public class SocketClient implements Runnable{
                 break;
             case "PublicObjectiveCard":
                 localModel.addDrawnPublicObjectiveCard(JSONCreator.clientPublicObjectiveCardLoaderFromString(json));
-                while(localModel.getChoosenGameBoardCard()==null);  //aspeta che il giocatore abbia scelto la GameBoardCard
-                sendJSONmessage(JSONCreator.generateJSON(localModel.getChoosenGameBoardCard()),"GameBoardCard");
+            /*    while(localModel.getChoosenGameBoardCard()==null);  //aspeta che il giocatore abbia scelto la GameBoardCard
+                sendJSONmessage(JSONCreator.generateJSON(localModel.getChoosenGameBoardCard()),"GameBoardCard");*/
                 break;
             case "GameBoardCard":
                 localModel.addDrawnGameBoardCard(JSONCreator.clientGameBoardCardLoaderFromString(json));
