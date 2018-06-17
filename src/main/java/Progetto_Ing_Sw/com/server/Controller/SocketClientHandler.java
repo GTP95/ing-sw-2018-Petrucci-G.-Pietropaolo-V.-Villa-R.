@@ -123,11 +123,29 @@ public class SocketClientHandler implements Runnable {
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnToolCards()),"arrayListOfToolCards");
         sendJSONmessage(JSONCreator.generateJSON(table.getDrawnPublicObjectiveCards()),"arrayListOfPublicObjectiveCards"); */
 
+        sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+        for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+            sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
+        }
+
+        sendControlMessage("Sending ToolCards&"+table.getDrawnToolCards().size());
+        for(ToolCard toolCard : table.getDrawnToolCards()){
+            sendJSONmessage(JSONCreator.generateJSON(toolCard),"ToolCard");
+        }
+
+        sendControlMessage("Sending publicObjectiveCards&"+table.getDrawnPublicObjectiveCards().size());
+        for (PublicObjectiveCard publicObjectiveCard : table.getDrawnPublicObjectiveCards()){
+            sendJSONmessage(JSONCreator.generateJSON(publicObjectiveCard),"PublicObjectiveCard");
+        }
 
         try {
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");
-
+        /*    sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
+            sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
+            for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
+                sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
+            }
+            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"PrivateObjectiveCard");
         }
         catch(InvalidUsernameException e){System.err.println(e.getMessage());}
     }

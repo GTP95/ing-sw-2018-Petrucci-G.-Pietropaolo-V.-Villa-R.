@@ -20,6 +20,7 @@ public  class LocalModel {
     private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
+    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
 
     private LocalModel(){
 
@@ -97,6 +98,8 @@ public  class LocalModel {
     }
 
     public ArrayList<ClientGameBoardCard> getDrawnGameBoardCards() {
+        while(drawnGameBoardCards==null);   //aspetta che l'ArrayList venga creato
+        while(drawnGameBoardCards.size()!=numOfGameBoardCards); //aspetta di ricevere tutte le GameBoardCards
         return drawnGameBoardCards;
     }
 
@@ -160,5 +163,39 @@ public  class LocalModel {
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
         multiplayerGUIobserver.StartGame();
+    }
+
+    public void addDrawnDice(ClientDice dice){
+        if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
+        drawnDice.add(dice);
+        if(drawnDice.size()==numOfDice) tableGUIobserver.updateDice();
+    }
+
+    public void addDrawnToolCard(ClientToolCard toolCard){
+        if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
+        drawnToolCards.add(toolCard);
+        if(drawnToolCards.size()==numOfToolCards) tableGUIobserver.updateToolCards();
+    }
+
+    public void addDrawnGameBoardCard(ClientGameBoardCard gameBoardCard){
+        if(drawnGameBoardCards==null) drawnGameBoardCards=new ArrayList<>();
+        drawnGameBoardCards.add(gameBoardCard);
+       // if(drawnGameBoardCards.size()==numOfGameBoardCards) multiplayerGUIobserver
+    }
+
+    public void setNumOfDice(int numOfDice) {
+        this.numOfDice = numOfDice;
+    }
+
+    public void setNumOfToolCards(int numOfToolCards) {
+        this.numOfToolCards = numOfToolCards;
+    }
+
+    public void setNumOfPublicObjectiveCards(int numOfPublicObjectiveCards) {
+        this.numOfPublicObjectiveCards = numOfPublicObjectiveCards;
+    }
+
+    public void setNumOfGameBoardCards(int numOfGameBoardCards) {
+        this.numOfGameBoardCards = numOfGameBoardCards;
     }
 }

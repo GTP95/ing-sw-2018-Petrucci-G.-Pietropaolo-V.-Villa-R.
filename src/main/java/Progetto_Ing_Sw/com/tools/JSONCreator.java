@@ -172,6 +172,16 @@ public final class JSONCreator {
         return clientPrivateObjectiveCard;
     }
 
+    public static ClientToolCard clientToolCardLoaderFromString(String json){
+        ClientToolCard toolCard=gson.fromJson(json, ClientToolCard.class);
+        return toolCard;
+    }
+
+    public static ClientGameBoardCard clientGameBoardCardLoaderFromString(String json){
+        ClientGameBoardCard gameBoardCard=gson.fromJson(json,ClientGameBoardCard.class);
+        return gameBoardCard;
+    }
+
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){
         JsonElement jsonElement=new JsonParser().parse(json);
