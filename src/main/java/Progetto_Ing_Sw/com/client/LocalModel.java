@@ -27,10 +27,13 @@ public  class LocalModel {
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
     private long countdownValue;
+    public volatile boolean sendDataToServer;
+
 
     private LocalModel(){
 
         ourInstance=this;
+        sendDataToServer=false;
     }
 
     public static LocalModel getInstance(){
@@ -245,6 +248,7 @@ public  class LocalModel {
     public void insertDice(ClientDice dice, int x, int y){
         System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
 
+        sendDataToServer=true;
 
     }
 }
