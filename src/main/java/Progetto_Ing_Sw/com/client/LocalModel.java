@@ -232,6 +232,7 @@ public  class LocalModel {
 
     public void setCountdownValue(long countdownValue) {
         this.countdownValue = countdownValue;
-        //notify
+        while(multiplayerGUIobserver==null);
+        multiplayerGUIobserver.updateTimer();
     }
 }
