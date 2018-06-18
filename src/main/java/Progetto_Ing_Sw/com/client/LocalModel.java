@@ -241,4 +241,10 @@ public  class LocalModel {
         while(multiplayerGUIobserver==null);
         multiplayerGUIobserver.updateTimer();
     }
+
+    public void insertDice(ClientDice dice, int x, int y){
+        System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
+
+
+    }
 }

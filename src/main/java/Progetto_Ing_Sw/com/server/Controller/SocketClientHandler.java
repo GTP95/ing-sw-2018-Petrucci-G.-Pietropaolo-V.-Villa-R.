@@ -206,4 +206,10 @@ public class SocketClientHandler implements Runnable {
             System.err.println(e.getMessage());
         }
     }
+
+    private void handleInsertDice(Dice dice, int x, int y){}
+
+    private void handleUseToolCard(ToolCard toolCard){}
+
+    private void handleEndTurn(){}
 }
