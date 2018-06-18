@@ -210,4 +210,8 @@ public class SocketClient implements Runnable{
         out.println(messageToSend);
         System.out.println("JSON message sent");
     }
+
+    private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
+        
+    }
 }
