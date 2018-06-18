@@ -190,7 +190,13 @@ public  class LocalModel {
         drawnPublicObjectiveCards.add(publicObjectiveCard);
         if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
             System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
-            while(tableGUIobserver==null);
+            while(tableGUIobserver==null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             tableGUIobserver.updateTable();
             System.err.println("NOTIFICA INVIATA A TABLEGUI");
         }
