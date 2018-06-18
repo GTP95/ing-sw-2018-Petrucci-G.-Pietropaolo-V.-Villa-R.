@@ -62,7 +62,7 @@ public class ToolCardDisplayer extends Stage {
         ToolCardColor.setTranslateX(-180);
 
         StackPane ToolCardD = new StackPane();ToolCardD.setId("ToolCardDisplayer");ToolCardD.setPrefSize(500,711);
-        if (FirstUsage==false){
+        if (FirstUsage==true){
             Pay1Icon.setVisible(false);
             Pay2Icon.setVisible(true);
         }
