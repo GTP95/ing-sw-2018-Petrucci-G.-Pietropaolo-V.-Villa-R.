@@ -117,6 +117,7 @@ public class SocketClient implements Runnable{
                 break;
             case "CountdownValue":
                 localModel.setCountdownValue(Long.parseLong(messageFields[1]));
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));

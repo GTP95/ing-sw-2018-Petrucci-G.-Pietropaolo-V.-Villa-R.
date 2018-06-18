@@ -24,6 +24,7 @@ public  class LocalModel {
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
+    private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
     private long countdownValue;
 
@@ -82,6 +83,10 @@ public  class LocalModel {
 
     public int getCountdownValue() {
         return (int)countdownValue; //cast ad int per comodità della GUI
+    }
+
+    public ClientWindowBoard getWindowBoard() {
+        return windowBoard;
     }
 
     public ArrayList<ClientPublicObjectiveCard> getDrawnPublicObjectiveCards() {    //provo a non sincronizzare perchè la sincronizzazione è implicita nell'observer
@@ -228,6 +233,7 @@ public  class LocalModel {
 
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
         this.choosenGameBoardCard = choosenGameBoardCard;
+        this.windowBoard=new ClientWindowBoard(choosenGameBoardCard);
     }
 
     public void setCountdownValue(long countdownValue) {

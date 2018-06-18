@@ -22,6 +22,11 @@ public class ClientWindowBoard implements WindowBoardObserver{
 
     }
 
+    public ClientWindowBoard(ClientGameBoardCard gameBoardCard){
+        Matrix=gameBoardCard.getMatrixScheme();
+        usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
+    }
+
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
     public void setUsedMatrix(ArrayList<ArrayList<MatrixCell>> usedMatrix) {this.usedMatrix = usedMatrix;}
 
