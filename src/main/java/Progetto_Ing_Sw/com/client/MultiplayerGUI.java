@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
-    Label Player1Label,Player2Label,Player3Label,Player4Label;
+    Label Player1Label,Player2Label,Player3Label,Player4Label,TimerLabel;
     ToggleButton Player1BTN, Player2BTN, Player3BTN,Player4BTN;
 
 
@@ -118,11 +118,15 @@ public class MultiplayerGUI extends Stage {
         Players.getChildren().addAll(Player1V,Player2V,Player3V,Player4V);
 
         //Timer
-        HBox TimerBox = new HBox();
-        TimerBox.setAlignment(Pos.TOP_CENTER);
-        TimerBox.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Label TimerLabel = new Label(); TimerLabel.setId("Timer");TimerLabel.setTranslateY(-10);TimerLabel.setPrefWidth(200);TimerLabel.setTextAlignment(TextAlignment.CENTER);TimerLabel.setText("Timer");
-        TimerBox.getChildren().addAll(TimerLabel);
+
+        TimerLabel = new Label("");
+        TimerLabel.setId("Timer");
+        TimerLabel.setPrefWidth(100);
+        TimerLabel.setTranslateY(-10);
+        TimerLabel.setTranslateX(590);
+        TimerLabel.setTextAlignment(TextAlignment.CENTER);
+
+
 
 
         //Un Borderpane per domarli, un BorderPane per trovarli,
@@ -130,7 +134,7 @@ public class MultiplayerGUI extends Stage {
         BorderPane LobbyPane = new BorderPane();
         LobbyPane.setId("GamemodeSelectionScreen");
         LobbyPane.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        LobbyPane.setTop(TimerBox);
+        LobbyPane.setTop(TimerLabel);
         LobbyPane.setCenter(Players);
 
         LobbyScene= new Scene(LobbyPane,1280,720);
@@ -146,10 +150,6 @@ public class MultiplayerGUI extends Stage {
 
     }
 
-    public void updateTimer(){
-        Platform.runLater(()->{});
-    }
-
 
 
     public void StartGame(){
@@ -160,6 +160,8 @@ public class MultiplayerGUI extends Stage {
             new ChooseAWindow();
         });
     }
+
+
 
     public void update(){
         Platform.runLater(() ->{
@@ -179,6 +181,12 @@ public class MultiplayerGUI extends Stage {
                     Player1BTN.setSelected(true);
 
             }
+        });
+    }
+
+    public void updateTimer(){
+        Platform.runLater(()->{
+            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()/1000));
         });
     }
 

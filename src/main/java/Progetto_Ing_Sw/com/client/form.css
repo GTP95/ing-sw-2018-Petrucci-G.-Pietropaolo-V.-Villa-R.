@@ -576,7 +576,7 @@
 }
 
 #Die{
-    -fx-background-image: url("GUI/Dice/1.Blue.png");
+
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 40 40 ;
@@ -587,7 +587,7 @@
 }
 
 #Die:hover{
-    -fx-background-image: url("GUI/Dice/1.Blue.png");
+
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 40 40 ;
@@ -597,6 +597,16 @@
     -fx-border-radius: 4 4 4 4;
 }
 
+#Die:selected {
+
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: green;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
 
 #Die #1.Blue{
     -fx-background-image: url("GUI/Dice/1.Blue.png");
@@ -609,27 +619,7 @@
     -fx-border-radius: 4 4 4 4;
 }
 
-#Die:hover{
-    -fx-background-image: url("GUI/Dice/1.Blue.png");
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: grey;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
 
-#Die:selected{
-    -fx-background-image: url("GUI/Dice/1.Blue.png");
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: green;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
 
 #Round1{
     -fx-background-image: url("GUI/RoundTrack/TrackBoard1.png");

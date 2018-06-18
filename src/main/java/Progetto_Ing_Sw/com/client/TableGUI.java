@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.Dice;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
@@ -24,8 +26,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 
@@ -35,6 +35,9 @@ public class TableGUI extends Stage{
     Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
+    ArrayList<ToggleButton> DiceButtons;
+    Dice DieToInsert;
+    int Xindex=0, Yindex=0;
 
     TableGUI(ClientGameBoardCard gameBoardCard) {
         this.setTitle("Sagrada Game");
@@ -118,33 +121,33 @@ public class TableGUI extends Stage{
             //Stampa due interi che indicano su che casella sto cliccando
             griglia.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                 if (e.getX() < 71 && e.getX() > 4) {
-                    final int Xindex = 1;
-
+                    Xindex = 1;
                     System.out.println("Colonna: " + Xindex);
                 }
 
+
                 if (e.getX() < 146 && e.getX() > 79) {
-                    final int Xindex = 2;
+                    Xindex = 2;
                     System.out.println("Colonna: " + Xindex);
                 }
 
                 if (e.getX() < 221 && e.getX() > 154) {
-                    final int Xindex = 3;
+                    Xindex = 3;
                     System.out.println("Colonna: " + Xindex);
                 }
 
                 if (e.getX() < 296 && e.getX() > 229) {
-                    final int Xindex = 4;
+                    Xindex = 4;
                     System.out.println("Colonna: " + Xindex);
                 }
 
                 if (e.getX() < 371 && e.getX() > 304) {
-                    final int Xindex = 5;
+                    Xindex = 5;
                     System.out.println("Colonna: " + Xindex);
                 }
 
                 if (e.getY() > 23 && e.getY() < 91) {
-                    final int Yindex = 1;
+                    Yindex = 1;
                     System.out.println("Riga: " + Yindex);
                 }
 
@@ -154,15 +157,14 @@ public class TableGUI extends Stage{
                 }
 
                 if (e.getY() > 173 && e.getY() < 241) {
-                    final int Yindex = 3;
+                    Yindex = 3;
                     System.out.println("Riga: " + Yindex);
                 }
 
                 if (e.getY() > 248 && e.getY() < 316) {
-                    final int Yindex = 4;
+                    Yindex = 4;
                     System.out.println("Riga: " + Yindex);
                 }
-
 
 
             });
@@ -441,11 +443,14 @@ public class TableGUI extends Stage{
         DraftPool.setMaxSize(200,200);
 
 
-
+        DiceButtons= new ArrayList<>();
         for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
-            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");
+            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die #1.Blue");Die.setText("DiePresente");
             DraftPool.getChildren().addAll(Die);
+            DiceButtons.add(Die);
         }
+
+
 
 
         //FINE Draft Area
@@ -487,6 +492,7 @@ public class TableGUI extends Stage{
             System.err.println("----------------------------------------------------------------------------------------------------");
             updatePublicObjectiveCards();
             updateToolCards();
+            updateDice();
         }
 
         public void updateToolCards(){
@@ -519,7 +525,21 @@ public class TableGUI extends Stage{
         }
 
         public void updateDice(){
-            Platform.runLater(()->{});
+            Platform.runLater(()->{
+                for (int i=0; i<DiceButtons.size(); i++ ){
+                    int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
+                    int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+                    DiceButtons.get(i).setText("Color: "+Integer.toString(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue));
+                    DiceButtons.get(i).setOnAction(event -> {
+                        DieToInsert = new Dice(LocalValue,LocalColor);
+                                System.out.println("Die choosen: " + Integer.toString(LocalValue)+ "," + Integer.toString(LocalColor));
+                                
+                    }
+                    );
+                    Tooltip t= new Tooltip(DiceButtons.get(i).getText());
+                    Tooltip.install(DiceButtons.get(i),t);
+                }
+            });
         }
 
 }
