@@ -1,11 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,12 +22,13 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGmaeBoardCard;
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<ToggleButton> DiceButtons;
@@ -172,15 +168,38 @@ public class TableGUI extends Stage{
 
             //HBox che contiene le informazioni sulla carta
             HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
-            Text VictoryPoints = new Text("VP: 0");VictoryPoints.setFill(Paint.valueOf("white"));
             Text WindowTitle = new Text(gameBoardCard.getTitle());WindowTitle.setFill(Paint.valueOf("white"));
-            Text DifficultyTokens = new Text("Tokens: "+Integer.toString(gameBoardCard.getDifficulty()));DifficultyTokens.setFill(Paint.valueOf("white"));
             WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
             WindowInfo.getChildren().addAll(WindowTitle);
 
             //StackPane che fa da cornice alla griglia
             StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
             WindowBoard.getChildren().addAll(griglia,WindowInfo);
+
+            //Player Stats
+            Tokens = new Label("•");
+            Tokens.setText(String.join("", Collections.nCopies(gameBoardCard.getDifficulty(), "  •\n")));
+            Tokens.setId("Tokens");
+            Tokens.setTranslateX(-220);
+            Tokens.setMinWidth(70);
+
+            PrivateObjectiveColor = new Label();
+            PrivateObjectiveColor.setId(new ClientColor().IntToColor(LocalModel.getInstance().getPrivateObjectiveCard().getColor()));
+            PrivateObjectiveColor.setMinSize(40,40);
+            PrivateObjectiveColor.setStyle("-fx-border-color: black;"+"-fx-border-width: 2 2 2 2;" + "-fx-border-radius: 2.5 2.5 2.5 2.5;" + "-fx-background-radius: 3.5 3.5 3.5 3.5;"+ "-fx-background-size: 0.99");
+            PrivateObjectiveColor.setTranslateY(100);
+            PrivateObjectiveColor.setTranslateX(230);
+            PrivateObjectiveColor.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+                PrivateObjectiveColor.setStyle("-fx-border-color: black;"
+                        + "-fx-background-color: grey;"
+                        + "-fx-border-width: 2 2 2 2;"
+                        + "-fx-border-radius: 2.5 2.5 2.5 2.5;"
+                        + "-fx-background-radius: 3.5 3.5 3.5 3.5;"
+                        + "-fx-background-size: 0.99"
+                );
+            });
+            //Tokens.setTranslateY(180);
+
 
 
             //HBox Tabs per gli altri giocatori
@@ -206,8 +225,12 @@ public class TableGUI extends Stage{
             ToolCard3Label= new Label();ToolCard3Label.setMinSize(268,131);ToolCard3Label.setId("ToolCardLabel");
 
             //Bottoni che riferiscono alle Tool Cards
-            ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(10);
+            ToolCard1BTN = new Button("Tool Card1");ToolCard1BTN.setTranslateY(-40);ToolCard1BTN.setTranslateX(35);
+            ToolCard1BTN.setMaxWidth(180);
+            ToolCard1BTN.setMinWidth(180);
+            ToolCard1BTN.setPrefWidth(180);
             ToolCard1BTN.setId("CardBTN");
+            //ToolCard1BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
             ToolCard1BTN.setOnAction(event -> {
                 ToolCard1BTN.setDisable(true);
                 ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer(
@@ -221,8 +244,10 @@ public class TableGUI extends Stage{
                     });
 
 
-            ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(10);
+            ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(35);
+            ToolCard2BTN.setMaxWidth(180);
             ToolCard2BTN.setId("CardBTN");
+           // ToolCard2BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
             ToolCard2BTN.setOnAction(event -> {
                 ToolCard2BTN.setDisable(true);
                 ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer(
@@ -236,8 +261,10 @@ public class TableGUI extends Stage{
             });
 
 
-            ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(10);
+            ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(35);
+            ToolCard3BTN.setMaxWidth(180);
             ToolCard3BTN.setId("CardBTN");
+            //ToolCard3BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
             ToolCard3BTN.setOnAction(event -> {
                 ToolCard3BTN.setDisable(true);
                 ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer(
@@ -329,17 +356,13 @@ public class TableGUI extends Stage{
 
             //INIZIO  PUBLIC OBJECTIVE MENU
 
-            //Contenuto del menu Public Objetives
-            Label PublicObjectiveCardMenuTitle = new Label();
-            PublicObjectiveCardMenuTitle.setTranslateY(-125);PublicObjectiveCardMenuTitle.setTranslateX(-1);
-            PublicObjectiveCardMenuTitle.setId("PublicObjectiveCardMenuHeader");
-            PublicObjectiveCardMenuTitle.setTextAlignment(TextAlignment.CENTER);
-            PublicObjectiveCardMenuTitle.setMaxSize(267,205);
+
 
 
             //Bottoni che riferiscono alle Public Objective Cards
-            PublicObjectiveCard1BTN = new Button("Public Objective 1");PublicObjectiveCard1BTN.setTranslateX(22);PublicObjectiveCard1BTN.setTranslateY(8);
+            PublicObjectiveCard1BTN = new Button("Public Objective 1");PublicObjectiveCard1BTN.setTranslateX(25);PublicObjectiveCard1BTN.setTranslateY(8);
             PublicObjectiveCard1BTN.setId("CardBTN");
+            PublicObjectiveCard1BTN.setMaxWidth(170);
             PublicObjectiveCard1BTN.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event){
@@ -354,24 +377,22 @@ public class TableGUI extends Stage{
             });
 
 
-            PublicObjectiveCard2BTN = new Button("Public Objective 2");PublicObjectiveCard2BTN.setTranslateX(22);PublicObjectiveCard2BTN.setTranslateY(8);
+            PublicObjectiveCard2BTN = new Button("Public Objective 2");PublicObjectiveCard2BTN.setTranslateX(25);PublicObjectiveCard2BTN.setTranslateY(8);
             PublicObjectiveCard2BTN.setId("CardBTN");
-            PublicObjectiveCard2BTN.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                   PublicObjectiveCard2BTN.setDisable(true);
+            PublicObjectiveCard2BTN.setMaxWidth(170);
+            PublicObjectiveCard2BTN.setOnAction(event ->  {
                     PublicObjectiveCardDisplayer PublicDisplay2 = new PublicObjectiveCardDisplayer(
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle(),
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription(),
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints());
                     PublicDisplay2.showAndWait();
                     PublicObjectiveCard2BTN.setDisable(false);
-                }
-            });
+                });
 
 
-            PublicObjectiveCard3BTN = new Button("Public Objective 3");PublicObjectiveCard3BTN.setTranslateX(22);PublicObjectiveCard3BTN.setTranslateY(8);
+            PublicObjectiveCard3BTN = new Button("Public Objective 3");PublicObjectiveCard3BTN.setTranslateX(25);PublicObjectiveCard3BTN.setTranslateY(8);
             PublicObjectiveCard3BTN.setId("CardBTN");
+            PublicObjectiveCard3BTN.setMaxWidth(170);
             PublicObjectiveCard3BTN.setOnAction(event -> {
                 PublicObjectiveCard3BTN.setDisable(true);
                 PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer(
@@ -389,36 +410,92 @@ public class TableGUI extends Stage{
 
 
             //Text per le descrizioni
-            PublicObjectiveCard1Description = new Text("Description");PublicObjectiveCard1Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard1Description.setTranslateY(30);
-            PublicObjectiveCard2Description = new Text("Description");PublicObjectiveCard2Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard2Description.setTranslateY(30);
-            PublicObjectiveCard3Description = new Text("Description");PublicObjectiveCard3Description.setStyle(" -fx-font: 17 'Centaur';");PublicObjectiveCard3Description.setTranslateY(30);
+            PublicObjectiveCard1Description = new Text("Description");
+            PublicObjectiveCard1Description.setStyle(" -fx-font: 12 'Centaur';");
+            PublicObjectiveCard1Description.setTranslateY(30);
+            PublicObjectiveCard1Description.setTranslateX(10);
+            PublicObjectiveCard1Description.setTextAlignment(TextAlignment.CENTER);
 
-            PublicObjectiveCard1Value= new Text("4");PublicObjectiveCard1Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");PublicObjectiveCard1Value.setTranslateX(-86);PublicObjectiveCard1Value.setTranslateY(21);
-            PublicObjectiveCard2Value= new Text("X");PublicObjectiveCard2Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");PublicObjectiveCard2Value.setTranslateX(-86);PublicObjectiveCard2Value.setTranslateY(21);
-            PublicObjectiveCard3Value= new Text("2");PublicObjectiveCard3Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");PublicObjectiveCard3Value.setTranslateX(-86);PublicObjectiveCard3Value.setTranslateY(21);
+            PublicObjectiveCard2Description = new Text("Description");
+            PublicObjectiveCard2Description.setStyle(" -fx-font: 12 'Centaur';");
+            PublicObjectiveCard2Description.setTranslateY(30);
+            PublicObjectiveCard2Description.setTranslateX(10);
+            PublicObjectiveCard2Description.setTextAlignment(TextAlignment.CENTER);
+
+            PublicObjectiveCard3Description = new Text("Description");
+            PublicObjectiveCard3Description.setStyle(" -fx-font: 12 'Centaur';");
+            PublicObjectiveCard3Description.setTranslateY(30);
+            PublicObjectiveCard3Description.setTranslateX(10);
+            PublicObjectiveCard3Description.setTextAlignment(TextAlignment.CENTER);
+
+
+            PublicObjectiveCard1Value= new Text("4");
+            PublicObjectiveCard1Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");
+            PublicObjectiveCard1Value.setTranslateX(-86);
+            PublicObjectiveCard1Value.setTranslateY(21);
+
+            PublicObjectiveCard2Value= new Text("X");
+            PublicObjectiveCard2Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");
+            PublicObjectiveCard2Value.setTranslateX(-86);
+            PublicObjectiveCard2Value.setTranslateY(21);
+
+            PublicObjectiveCard3Value= new Text("2");
+            PublicObjectiveCard3Value.setStyle("-fx-font: 50 'Centaur';" + "-fx-font-weight: bold;");
+            PublicObjectiveCard3Value.setTranslateX(-86);
+            PublicObjectiveCard3Value.setTranslateY(21);
 
             //StackPane per i vari menù
 
-            StackPane PublicObjectiveCard1= new StackPane();PublicObjectiveCard1.setTranslateY(0);
+            StackPane PublicObjectiveCard1= new StackPane();PublicObjectiveCard1.setTranslateY(-150);PublicObjectiveCard1.setMaxSize(268,131);
             PublicObjectiveCard1.getChildren().addAll(PublicObjectiveCard1Label,PublicObjectiveCard1Description,PublicObjectiveCard1Value,PublicObjectiveCard1BTN);
-
-            StackPane PublicObjectiveCard2= new StackPane();PublicObjectiveCard2.setTranslateY(75);
-            PublicObjectiveCard2.getChildren().addAll(PublicObjectiveCard2Label,PublicObjectiveCard2Description,PublicObjectiveCard2Value,PublicObjectiveCard2BTN);
-
-            StackPane PublicObjectiveCard3= new StackPane();PublicObjectiveCard3.setTranslateY(150);
-            PublicObjectiveCard3.getChildren().addAll(PublicObjectiveCard3Label,PublicObjectiveCard3Description,PublicObjectiveCard3Value,PublicObjectiveCard3BTN);
-            ToolCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
-                Hover2.setFromY(150);
-                Hover2.setToY(140);
+            PublicObjectiveCard1.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard1);
+                Hover2.setFromY(-150);
+                Hover2.setToY(-140);
                 Hover2.setAutoReverse(true);
                 Hover2.play();
             });
 
-            ToolCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), ToolCard3);
-                Hover2.setFromY(140);
-                Hover2.setToY(150);
+            PublicObjectiveCard1.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard1);
+                Hover2.setFromY(-140);
+                Hover2.setToY(-150);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            StackPane PublicObjectiveCard2= new StackPane();PublicObjectiveCard2.setTranslateY(-75);PublicObjectiveCard2.setMaxSize(268,131);
+            PublicObjectiveCard2.getChildren().addAll(PublicObjectiveCard2Label,PublicObjectiveCard2Description,PublicObjectiveCard2Value,PublicObjectiveCard2BTN);
+            PublicObjectiveCard2.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard2);
+                Hover2.setFromY(-75);
+                Hover2.setToY(-65);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            PublicObjectiveCard2.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard2);
+                Hover2.setFromY(-65);
+                Hover2.setToY(-75);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            StackPane PublicObjectiveCard3= new StackPane();PublicObjectiveCard3.setTranslateY(0);PublicObjectiveCard3.setMaxSize(268,131);
+            PublicObjectiveCard3.getChildren().addAll(PublicObjectiveCard3Label,PublicObjectiveCard3Description,PublicObjectiveCard3Value,PublicObjectiveCard3BTN);
+            PublicObjectiveCard3.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard3);
+                Hover2.setFromY(0);
+                Hover2.setToY(10);
+                Hover2.setAutoReverse(true);
+                Hover2.play();
+            });
+
+            PublicObjectiveCard3.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                TranslateTransition Hover2 = new TranslateTransition(Duration.millis(500), PublicObjectiveCard3);
+                Hover2.setFromY(10);
+                Hover2.setToY(0);
                 Hover2.setAutoReverse(true);
                 Hover2.play();
             });
@@ -426,8 +503,11 @@ public class TableGUI extends Stage{
 
 
             //StackPane per il menu Public Objective Cards
-            StackPane PublicObjectiveCardMenu = new StackPane();PublicObjectiveCardMenu.setMaxSize(268,445);
-            PublicObjectiveCardMenu.getChildren().addAll(PublicObjectiveCard3, PublicObjectiveCard2, PublicObjectiveCard1,PublicObjectiveCardMenuTitle);
+            StackPane PublicObjectiveCardMenu = new StackPane();
+            PublicObjectiveCardMenu.setTranslateY(30);
+            PublicObjectiveCardMenu.setTranslateX(-15);
+            PublicObjectiveCardMenu.setMaxSize(268,300);
+            PublicObjectiveCardMenu.getChildren().addAll(PublicObjectiveCard3, PublicObjectiveCard2, PublicObjectiveCard1);
 
             //FINE PUBLIC OBJECTIVE MENU
 
@@ -445,7 +525,7 @@ public class TableGUI extends Stage{
 
         DiceButtons= new ArrayList<>();
         for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
-            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die #1.Blue");Die.setText("DiePresente");
+            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");Die.setText("DiePresente");
             DraftPool.getChildren().addAll(Die);
             DiceButtons.add(Die);
         }
@@ -459,8 +539,8 @@ public class TableGUI extends Stage{
 
         Button RoundTrack = new Button();RoundTrack.setId("Round1");
         RoundTrack.setMinSize(150,150);
-        RoundTrack.setTranslateY(10);
-        RoundTrack.setTranslateX(-10);
+        RoundTrack.setTranslateY(-10);
+        RoundTrack.setTranslateX(10);
         //TODO Observer del round
 
         //FINE Round Track
@@ -470,11 +550,13 @@ public class TableGUI extends Stage{
             StackPane GameplayArea = new StackPane();
             GameplayArea.setId("GamemodeSelectionScreen");
             GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
-            GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.BOTTOM_LEFT);
+            GameplayArea.setAlignment(Tokens,Pos.CENTER);
+            GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
+            GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
             GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
             GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
-            GameplayArea.setAlignment(RoundTrack,Pos.TOP_RIGHT);
-            GameplayArea.getChildren().addAll(WindowBoard,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
+            GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
+            GameplayArea.getChildren().addAll(Tokens,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 
 
 
@@ -489,7 +571,6 @@ public class TableGUI extends Stage{
         }
 
         public void updateTable(){
-            System.err.println("----------------------------------------------------------------------------------------------------");
             updatePublicObjectiveCards();
             updateToolCards();
             updateDice();
@@ -529,14 +610,15 @@ public class TableGUI extends Stage{
                 for (int i=0; i<DiceButtons.size(); i++ ){
                     int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
                     int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
-                    DiceButtons.get(i).setText("Color: "+Integer.toString(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue));
+                    DiceButtons.get(i).setText("");
+                    DiceButtons.get(i).setId(Integer.toString(LocalValue)+new ClientColor().IntToColor(LocalColor));
                     DiceButtons.get(i).setOnAction(event -> {
                         DieToInsert = new Dice(LocalValue,LocalColor);
                                 System.out.println("Die choosen: " + Integer.toString(LocalValue)+ "," + Integer.toString(LocalColor));
                                 
                     }
                     );
-                    Tooltip t= new Tooltip(DiceButtons.get(i).getText());
+                    Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue)));
                     Tooltip.install(DiceButtons.get(i),t);
                 }
             });

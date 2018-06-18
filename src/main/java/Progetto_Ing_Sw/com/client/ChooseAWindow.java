@@ -32,7 +32,7 @@ import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective;
-    Label PrivateObjectiveColor,info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
+    Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
 
@@ -148,15 +148,15 @@ public class ChooseAWindow extends Stage {
 
         //Label che indicano nome e difficoltà della scheda in questione
 
-        info1 = new Label("Virtus");info1.setId("WindowInfo");info1.setTranslateY(200);
-        info2 = new Label("Virtus");info2.setId("WindowInfo");info2.setTranslateY(200);
-        info3 = new Label("Virtus");info3.setId("WindowInfo");info3.setTranslateY(200);
-        info4 = new Label("Virtus");info4.setId("WindowInfo");info4.setTranslateY(200);
+        info1 = new Label("Virtus");info1.setId("WindowInfo");info1.setTranslateY(175);info1.setStyle("-fx-font-size: 45");
+        info2 = new Label("Virtus");info2.setId("WindowInfo");info2.setTranslateY(175);info2.setStyle("-fx-font-size: 45");
+        info3 = new Label("Virtus");info3.setId("WindowInfo");info3.setTranslateY(175);info3.setStyle("-fx-font-size: 45");
+        info4 = new Label("Virtus");info4.setId("WindowInfo");info4.setTranslateY(175);info4.setStyle("-fx-font-size: 45");
 
-        difficulty1 = new Label("•");difficulty1.setId("WindowInfo");difficulty1.setTranslateY(250);
-        difficulty2 = new Label("•");difficulty2.setId("WindowInfo");difficulty2.setTranslateY(250);
-        difficulty3 = new Label("•");difficulty3.setId("WindowInfo");difficulty3.setTranslateY(250);
-        difficulty4 = new Label("•");difficulty4.setId("WindowInfo");difficulty4.setTranslateY(250);
+        difficulty1 = new Label("•");difficulty1.setId("WindowInfo");difficulty1.setTranslateY(275);difficulty1.setStyle("-fx-font-size: 45");
+        difficulty2 = new Label("•");difficulty2.setId("WindowInfo");difficulty2.setTranslateY(275);difficulty2.setStyle("-fx-font-size: 45");
+        difficulty3 = new Label("•");difficulty3.setId("WindowInfo");difficulty3.setTranslateY(275);difficulty3.setStyle("-fx-font-size: 45");
+        difficulty4 = new Label("•");difficulty4.setId("WindowInfo");difficulty4.setTranslateY(275);difficulty4.setStyle("-fx-font-size: 45");
 
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -200,6 +200,16 @@ public class ChooseAWindow extends Stage {
         Exit1.setToX(-1000);
         Exit1.setAutoReverse(false);
 
+        TranslateTransition EntraDaSinistra1 = new TranslateTransition(Duration.millis(500), Board1);
+        EntraDaSinistra1.setFromX(-1000);
+        EntraDaSinistra1.setToX(0);
+        EntraDaSinistra1.setAutoReverse(false);
+
+        TranslateTransition EsceVersoDestra1 = new TranslateTransition(Duration.millis(500),Board1);
+        EsceVersoDestra1.setFromX(0);
+        EsceVersoDestra1.setToX(1000);
+        EsceVersoDestra1.setAutoReverse(false);
+
         //Animazioni Board2
         TranslateTransition Enter2 = new TranslateTransition(Duration.millis(500), Board2);
         Enter2.setFromX(1000);
@@ -210,6 +220,16 @@ public class ChooseAWindow extends Stage {
         Exit2.setFromX(0);
         Exit2.setToX(-1000);
         Exit2.setAutoReverse(false);
+
+        TranslateTransition EntraDaSinistra2 = new TranslateTransition(Duration.millis(500), Board2);
+        EntraDaSinistra2.setFromX(-1000);
+        EntraDaSinistra2.setToX(0);
+        EntraDaSinistra2.setAutoReverse(false);
+
+        TranslateTransition EsceVersoDestra2 = new TranslateTransition(Duration.millis(500),Board2);
+        EsceVersoDestra2.setFromX(0);
+        EsceVersoDestra2.setToX(1000);
+        EsceVersoDestra2.setAutoReverse(false);
 
         //Animazioni Board3
         TranslateTransition Enter3 = new TranslateTransition(Duration.millis(500), Board3);
@@ -222,6 +242,16 @@ public class ChooseAWindow extends Stage {
         Exit3.setToX(-1000);
         Exit3.setAutoReverse(false);
 
+        TranslateTransition EntraDaSinistra3 = new TranslateTransition(Duration.millis(500), Board3);
+        EntraDaSinistra3.setFromX(-1000);
+        EntraDaSinistra3.setToX(0);
+        EntraDaSinistra3.setAutoReverse(false);
+
+        TranslateTransition EsceVersoDestra3 = new TranslateTransition(Duration.millis(500),Board3);
+        EsceVersoDestra3.setFromX(0);
+        EsceVersoDestra3.setToX(1000);
+        EsceVersoDestra3.setAutoReverse(false);
+
         //Animazioni Board4
         TranslateTransition Enter4 = new TranslateTransition(Duration.millis(500), Board4);
         Enter4.setFromX(1000);
@@ -233,15 +263,27 @@ public class ChooseAWindow extends Stage {
         Exit4.setToX(-1000);
         Exit4.setAutoReverse(false);
 
+        TranslateTransition EntraDaSinistra4 = new TranslateTransition(Duration.millis(500), Board4);
+        EntraDaSinistra4.setFromX(-1000);
+        EntraDaSinistra4.setToX(0);
+        EntraDaSinistra4.setAutoReverse(false);
+
+        TranslateTransition EsceVersoDestra4 = new TranslateTransition(Duration.millis(500),Board4);
+        EsceVersoDestra4.setFromX(0);
+        EsceVersoDestra4.setToX(1000);
+        EsceVersoDestra4.setAutoReverse(false);
 
         Text ChooseAWindow = new Text("Choose a Window");
         ChooseAWindow.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
         ChooseAWindow.setTranslateY(-300);
 
-        Label PrivateObjectiveColor2 = new Label();
-        PrivateObjectiveColor2.setTranslateY(-250);
+        PrivateObjectiveColor2 = new Label();
+        PrivateObjectiveColor2.setId("purple");
+        PrivateObjectiveColor2.setMinSize(40,40);
+        PrivateObjectiveColor2.setStyle("-fx-border-color: black;"+"-fx-border-width: 2 2 2 2;" + "-fx-border-radius: 2.5 2.5 2.5 2.5;" + "-fx-background-radius: 3.5 3.5 3.5 3.5;"+ "-fx-background-size: 0.99");
+        PrivateObjectiveColor2.setTranslateY(-247);
         PrivateObjectiveColor2.setTranslateX(250);
-        PrivateObjectiveColor2=PrivateObjectiveColor;
+
 
         Text RememberColor = new Text("Remember your private color is: ");
         RememberColor.setStyle("-fx-font: 40 \"Centaur\";-fx-fill: white");
@@ -252,16 +294,26 @@ public class ChooseAWindow extends Stage {
         Button Play3 = new Button("Next");Play3.setTranslateX(300);Play3.setVisible(false);Play3.setId("NextBTN");Play3.setPrefSize(150,150);
         Button Play4 = new Button("Next");Play4.setTranslateX(300);Play4.setVisible(false);Play4.setId("NextBTN");Play4.setPrefSize(150,150);
 
-        Play.setOnAction(event -> {Exit1.play();Enter2.play();Play.setVisible(false);Play2.setVisible(true);});
-        Play2.setOnAction(event -> {Exit2.play();Enter3.play();Play2.setVisible(false);Play3.setVisible(true);});
-        Play3.setOnAction(event -> {Exit3.play();Enter4.play();Play3.setVisible(false);Play4.setVisible(true);});
-        Play4.setOnAction(event -> {Exit4.play();Enter1.play();Play4.setVisible(false);Play.setVisible(true);});
+        Button Reverse1 = new Button();Reverse1.setTranslateX(-300);Reverse1.setId("BackBTN");Reverse1.setPrefSize(150,150);
+        Button Reverse2 = new Button();Reverse2.setTranslateX(-300);Reverse2.setVisible(false);Reverse2.setId("BackBTN");Reverse2.setPrefSize(150,150);
+        Button Reverse3 = new Button();Reverse3.setTranslateX(-300);Reverse3.setVisible(false);Reverse3.setId("BackBTN");Reverse3.setPrefSize(150,150);
+        Button Reverse4 = new Button();Reverse4.setTranslateX(-300);Reverse4.setVisible(false);Reverse4.setId("BackBTN");Reverse4.setPrefSize(150,150);
+
+        Reverse1.setOnAction(event -> {EsceVersoDestra1.play();EntraDaSinistra4.play();Reverse1.setVisible(false);Reverse2.setVisible(true);Play.setVisible(false);Play4.setVisible(true);});
+        Reverse2.setOnAction(event -> {EsceVersoDestra4.play();EntraDaSinistra3.play();Reverse2.setVisible(false);Reverse3.setVisible(true);Play4.setVisible(false);Play3.setVisible(true);});
+        Reverse3.setOnAction(event -> {EsceVersoDestra3.play();EntraDaSinistra2.play();Reverse3.setVisible(false);Reverse4.setVisible(true);Play3.setVisible(false);Play2.setVisible(true);});
+        Reverse4.setOnAction(event -> {EsceVersoDestra2.play();EntraDaSinistra1.play();Reverse4.setVisible(false);Reverse1.setVisible(true);Play2.setVisible(false);Play.setVisible(true);});
+
+        Play.setOnAction(event -> {Exit1.play();Enter2.play();Play.setVisible(false);Play2.setVisible(true);Reverse1.setVisible(false);Reverse4.setVisible(true);});
+        Play2.setOnAction(event -> {Exit2.play();Enter3.play();Play2.setVisible(false);Play3.setVisible(true);Reverse4.setVisible(false);Reverse3.setVisible(true);});
+        Play3.setOnAction(event -> {Exit3.play();Enter4.play();Play3.setVisible(false);Play4.setVisible(true);Reverse3.setVisible(false);Reverse2.setVisible(true);});
+        Play4.setOnAction(event -> {Exit4.play();Enter1.play();Play4.setVisible(false);Play.setVisible(true);Reverse2.setVisible(false);Reverse1.setVisible(true);});
 
 
         StackPane Animation = new StackPane();
         Animation.setId("ChooseAWindow");
         Animation.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        Animation.getChildren().addAll(ChooseAWindow,RememberColor,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4);
+        Animation.getChildren().addAll(ChooseAWindow,RememberColor,PrivateObjectiveColor2,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4,Reverse1,Reverse2,Reverse3,Reverse4);
 
         Window = new Scene(Animation,720,720);
         //FINE SCENA CHOOSE A WINDOW
@@ -319,18 +371,10 @@ public class ChooseAWindow extends Stage {
     public void updatePrivateObjective(){
         Platform.runLater(()->{
             int color = LocalModel.getInstance().getPrivateObjectiveCard().getColor();
-            switch (color){
-                case ClientColor.RED:  PrivateObjectiveColor.setId("red");PrivateObjectiveInfo.setText("• Shades of Red • \n\rPrivate Sum of value on the\nred dice");
-                    break;
-                case ClientColor.BLUE: PrivateObjectiveColor.setId("blue");PrivateObjectiveInfo.setText("• Shades of Blue • \n\rPrivate Sum of value on the\nblue dice");
-                    break;
-                case ClientColor.PURPLE: PrivateObjectiveColor.setId("purple");PrivateObjectiveInfo.setText("• Shades of Purple • \n\rPrivate Sum of value on the\npurple dice");
-                    break;
-                case ClientColor.YELLOW: PrivateObjectiveColor.setId("yellow");PrivateObjectiveInfo.setText("• Shades of Yellow • \n\rPrivate Sum of value on the\nyellow dice");
-                    break;
-                case ClientColor.GREEN: PrivateObjectiveColor.setId("green");PrivateObjectiveInfo.setText("• Shades of Green • \n\rPrivate Sum of value on the\ngreen dice");
-                    break;
-            }
+            PrivateObjectiveInfo.setText("• Shades of " + new ClientColor().IntToColor(color) +  " • \n\rPrivate Sum of value on the\n"+new ClientColor().IntToColor(color)+" dice");
+            PrivateObjectiveColor.setId(new ClientColor().IntToColor(color));
+            PrivateObjectiveColor2.setId(new ClientColor().IntToColor(color));
+
         });
     }
 

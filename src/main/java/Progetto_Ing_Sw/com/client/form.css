@@ -466,6 +466,18 @@
 
 }
 
+#Tokens{
+    -fx-font-size: 40;
+    -fx-text-fill: white;
+    -fx-background-color: grey;
+    -fx-background-size: 0.99;
+    -fx-background-radius: 8 8 8 8;
+    -fx-border-color: black;
+    -fx-border-width: 5 5 5 5;
+    -fx-border-radius: 7 7 7 7;
+
+}
+
 
 #PublicObjectiveCardMenuHeader{
     -fx-text-fill: black;
@@ -506,6 +518,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: black;
     -fx-font: 25 "Centaur";
+
 }
 
 #CardBTN:hover{
@@ -567,57 +580,29 @@
     -fx-text-fill: transparent;
 }
 
+#BackBTN{
+    -fx-background-image: url("GUI/BackArrow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-text-fill: transparent;
+}
+
 #DraftPool{
-    /*-fx-background-image: url("GUI/DraftRoom.jpg");*/
-    -fx-background-radius: 50 50 50 50;
+    -fx-background-color: #a03805;
+    -fx-background-radius: 7 7 7 7;
+    -fx-background-size: 0.99;
     -fx-border-color: black;
     -fx-border-width: 10 10 10 10;
     -fx-border-radius: 4 4 4 4;
 }
 
-#Die{
 
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: black;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
-
-#Die:hover{
-
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: grey;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
-
-#Die:selected {
-
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: green;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
-
-#Die #1.Blue{
-    -fx-background-image: url("GUI/Dice/1.Blue.png");
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
-    -fx-background-radius: 4 4 4 4;
-    -fx-border-color: black;
-    -fx-border-width: 5;
-    -fx-border-radius: 4 4 4 4;
-}
 
 
 
@@ -751,3 +736,370 @@
     -fx-background-image: url("GUI/Pay2Icon.png");
     -fx-text-fill: white;
 }
+
+.Die{
+    -fx-background-color: grey;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+.Die:hover{
+
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: grey;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+.Die:selected {
+
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: green;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#1blue{
+    -fx-background-image: url("GUI/Dice/1.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+ }
+
+#2blue{
+    -fx-background-image: url("GUI/Dice/2.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#3blue{
+    -fx-background-image: url("GUI/Dice/3.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#4blue{
+    -fx-background-image: url("GUI/Dice/4.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#5blue{
+    -fx-background-image: url("GUI/Dice/5.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#6blue{
+    -fx-background-image: url("GUI/Dice/6.Blue.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#1red{
+    -fx-background-image: url("GUI/Dice/1.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#2red{
+    -fx-background-image: url("GUI/Dice/2.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#3red{
+    -fx-background-image: url("GUI/Dice/3.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#4red{
+    -fx-background-image: url("GUI/Dice/4.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#5red{
+    -fx-background-image: url("GUI/Dice/5.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#6red{
+    -fx-background-image: url("GUI/Dice/6.Red.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#1purple{
+    -fx-background-image: url("GUI/Dice/1.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#2purple{
+    -fx-background-image: url("GUI/Dice/2.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#3purple{
+    -fx-background-image: url("GUI/Dice/3.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#4purple{
+    -fx-background-image: url("GUI/Dice/4.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#5purple{
+    -fx-background-image: url("GUI/Dice/5.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#6purple{
+    -fx-background-image: url("GUI/Dice/6.Purple.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#1yellow{
+    -fx-background-image: url("GUI/Dice/1.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#2yellow{
+    -fx-background-image: url("GUI/Dice/2.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#3yellow{
+    -fx-background-image: url("GUI/Dice/3.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#4yellow{
+    -fx-background-image: url("GUI/Dice/4.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#5yellow{
+    -fx-background-image: url("GUI/Dice/5.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#6yellow{
+    -fx-background-image: url("GUI/Dice/6.Yellow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#1green{
+     -fx-background-image: url("GUI/Dice/1.Green.png");
+     -fx-background-position: center;
+     -fx-background-repeat: no-repeat;
+     -fx-background-size: 40 40 ;
+     -fx-background-radius: 4 4 4 4;
+     -fx-border-color: black;
+     -fx-border-width: 5;
+     -fx-border-radius: 4 4 4 4;
+ }
+
+#2green{
+    -fx-background-image: url("GUI/Dice/2.Green.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#3green{
+    -fx-background-image: url("GUI/Dice/3.Green.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#4green{
+    -fx-background-image: url("GUI/Dice/4.Green.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#5green{
+    -fx-background-image: url("GUI/Dice/5.Green.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+#6green{
+    -fx-background-image: url("GUI/Dice/6.Green.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40 ;
+    -fx-background-radius: 4 4 4 4;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 4 4 4 4;
+}
+
+
+
+
