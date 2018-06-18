@@ -11,8 +11,9 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 public class Lobby {
     private static Lobby ourInstance = new Lobby();
     private ArrayList<Player> connectedPlayers;
-    private Timer timer;
+    private Timer timer, countdown;
     private long timerValue;
+    public volatile long countdownValue;    //accesso concorrente da più Task che inviano il countdown ai client e dal task interno a questa classe che ne aggiorna il valore
     public static boolean isRunning;
 
 
@@ -23,7 +24,8 @@ public class Lobby {
     private Lobby() {
         connectedPlayers = new ArrayList<>();
         isRunning=true;
-        timer = new Timer();
+        timer = new Timer();    //serve a far partire il gioco dopo un certo tempo se sono connessi almeno due giocatori
+        countdown=new Timer();  //Serve a comunicare ai client il tempo rimanente prima dell'inizio automatico del gioco
         try {
             timerValue = JSONCreator.parseLongFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerValue");
 
@@ -38,6 +40,9 @@ public class Lobby {
                     isRunning=false;
                 }
             }, timerValue);
+        }
+        finally {
+            countdownValue=timerValue;
         }
     }
 
@@ -62,6 +67,15 @@ public class Lobby {
                         return;     //Di vitale importanza per non far partire il gioco due volte!!
                     }
                 }, timerValue);
+
+                countdown.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        countdownValue-=1000;
+                        if (countdownValue>=0) System.out.println(countdownValue);
+                        else countdown.cancel();
+                    }
+                },1000,1000);   //decrementa ogni secondo countdownValue;
             }
             if(getNumOfPlayers()==4) {
                 Table.getOurInstance().startGame();    //La parita comincia automaticamente se ci sono connessi 4 giocatori

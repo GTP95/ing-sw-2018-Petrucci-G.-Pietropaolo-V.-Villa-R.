@@ -4,7 +4,10 @@ import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 
 import java.util.ArrayList;
 
-/*Questa classe non necessita sincronizzazione in quanto è implicita nel pattern observer*/
+/*
+* Questa classe non utilizza synchronyzed in quanto l'esecuzione in ordine dei metodi è implicita nel pattern observer e non utilizza le primitive wait() e
+* notify a causa della IllegalMonitorStateException.
+*/
 
 public  class LocalModel {
 
@@ -22,6 +25,7 @@ public  class LocalModel {
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
+    private long countdownValue;
 
     private LocalModel(){
 
@@ -74,6 +78,10 @@ public  class LocalModel {
             }
         }
         return drawnToolCards;
+    }
+
+    public int getCountdownValue() {
+        return (int)countdownValue; //cast ad int per comodità della GUI
     }
 
     public ArrayList<ClientPublicObjectiveCard> getDrawnPublicObjectiveCards() {    //provo a non sincronizzare perchè la sincronizzazione è implicita nell'observer
@@ -192,7 +200,7 @@ public  class LocalModel {
             System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
             while(tableGUIobserver==null) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(100);  //In questo caso il while vuoto non funziona!
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -222,7 +230,8 @@ public  class LocalModel {
         this.choosenGameBoardCard = choosenGameBoardCard;
     }
 
-    private void doNothing(){
-
+    public void setCountdownValue(long countdownValue) {
+        this.countdownValue = countdownValue;
+        //notify
     }
 }

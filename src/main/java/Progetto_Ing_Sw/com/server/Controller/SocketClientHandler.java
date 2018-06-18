@@ -3,6 +3,8 @@ package Progetto_Ing_Sw.com.server.Controller;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Model.*;
@@ -17,10 +19,12 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private String myPlayerName;
+    private Timer countdown;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket;
         ourThread=Thread.currentThread();
+        countdown=new Timer();
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -43,6 +47,16 @@ public class SocketClientHandler implements Runnable {
                     myPlayerName=in.readLine();
                     Lobby.getInstance().addPlayer(myPlayerName, this);
                     sendControlMessage("Connected");
+
+                countdown.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        long countdownValue=Lobby.getInstance().countdownValue;
+                        if(countdownValue>=0) sendControlMessage("CountdownValue&"+countdownValue);
+                        else countdown.cancel();
+                    }
+                },1000,1000);   //invia ogni secondo countdownValue;
+
                         while(Lobby.isRunning) {
                             currentPlayerArrayList=Lobby.getInstance().getConnctedPlayers();
                             if(!currentPlayerArrayList.equals(previousPlayerArrayList)){    //Se i due array non sono uguali si è connesso un nuovo giocatore ed è necessario aggiornare il client. Purtroppo non c'è stato verso di far funzionare l'observer e gli interrupt "spammano" l'elenco dei giocatori...
