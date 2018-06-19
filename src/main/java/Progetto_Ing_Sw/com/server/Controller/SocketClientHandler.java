@@ -209,8 +209,13 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void handleInsertDice(Dice dice, int row, int column){
-        myPlayer.getChoosenWindowBoard().insertDice(row,column,dice);
+    private void handleInsertDice(Dice dice, int row, int column) {
+        try {
+            myPlayer.getChoosenWindowBoard().insertDice(row, column, dice);
+        }
+        catch (PlaceDiceException e){
+            sendControlMessage(e.getMessage());
+        }
     }
 
     private void handleUseToolCard(ToolCard toolCard){
