@@ -41,8 +41,17 @@ public class LoginStage extends Stage {
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
         AcceptBTN.setOnAction(event -> {
             ClientSettings.getInstance().setUsername(UsernameField.getText());
+            while(LocalModel.getInstance().checkUsername()==null);
+            if (LocalModel.getInstance().checkUsername()==true){
+                this.close();
+            }
+            else{
+                Alert UserNameExpetionAlert = new Alert(Alert.AlertType.ERROR);
+                UserNameExpetionAlert.setTitle("Bad Username");
+                UserNameExpetionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+                UserNameExpetionAlert.showAndWait();
+            }
 
-            this.close();
         });
 
 
@@ -122,7 +131,8 @@ public class LoginStage extends Stage {
 
     }
 
-    public void usernameCheck(){
-        
+    public void ussernameCheck(){
+
     }
+
 }
