@@ -1,8 +1,10 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
 
 import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /*
 * Questa classe non utilizza synchronyzed in quanto l'esecuzione in ordine dei metodi è implicita nel pattern observer e non utilizza le primitive wait() e
@@ -28,12 +30,14 @@ public  class LocalModel {
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
     private long countdownValue;
     public volatile boolean sendDataToServer;
+    private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
 
 
     private LocalModel(){
 
         ourInstance=this;
         sendDataToServer=false;
+        exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
     }
 
     public static LocalModel getInstance(){
@@ -250,5 +254,18 @@ public  class LocalModel {
 
         sendDataToServer=true;
 
+    }
+
+    public Exception returnTrownException(){    //restituisce l'eccezione in testa alla coda
+        return exceptions.poll();
+    }
+
+    public void addException(Exception e){  //aggiunge un'eccezione alla coda delle eccezioni lanciate dal server
+        exceptions.add(e);
+    }
+
+    public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
+        if(exceptions.size()==0) return false;
+        return true;
     }
 }

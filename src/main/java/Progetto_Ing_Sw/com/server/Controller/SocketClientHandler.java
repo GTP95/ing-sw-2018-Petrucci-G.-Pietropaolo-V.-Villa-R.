@@ -19,6 +19,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private String myPlayerName;
+    private Player myPlayer;
     private Timer countdown;
 
     public SocketClientHandler(Socket clientSocket){
@@ -145,7 +146,8 @@ public class SocketClientHandler implements Runnable {
             sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
             ArrayList<GameBoardCard> drawnGameBoardCard=null;
             while(drawnGameBoardCard==null){
-                drawnGameBoardCard=table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard();
+                myPlayer=table.getPlayerFromName(myPlayerName);
+                drawnGameBoardCard=myPlayer.getDrawnGameBoardCard();
             }
             sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
             for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
@@ -207,9 +209,18 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void handleInsertDice(Dice dice, int x, int y){}
+    private void handleInsertDice(Dice dice, int row, int column){
+        myPlayer.getChoosenWindowBoard().insertDice(row,column,dice);
+    }
 
-    private void handleUseToolCard(ToolCard toolCard){}
+    private void handleUseToolCard(ToolCard toolCard){
+        try {
+            myPlayer.useToolCard(toolCard);
+            sendControlMessage("OK");
+        } catch (NotEnoughFavorTokensException e) {
+            sendControlMessage("You don't have enough favour tokens!");
+        }
+    }
 
     private void handleEndTurn(){}
 }

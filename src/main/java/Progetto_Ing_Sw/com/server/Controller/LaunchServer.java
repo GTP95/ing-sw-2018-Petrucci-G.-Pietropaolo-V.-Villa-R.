@@ -16,7 +16,7 @@ public class LaunchServer {
                 try{portNumber=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","port");}
                 catch (FileNotFoundException e){
                     portNumber=1024;
-                    System.out.println("File \"ServerSetting.json\" not found, falling back to default port 1024");
+                    System.err.println("File \"ServerSetting.json\" not found, falling back to default port 1024");
                 }
             ServerSocket serverSocket=new ServerSocket(portNumber);
             System.out.println("Server started on port " + portNumber);
