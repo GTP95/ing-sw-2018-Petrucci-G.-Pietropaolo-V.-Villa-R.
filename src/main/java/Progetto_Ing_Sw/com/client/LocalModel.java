@@ -37,7 +37,7 @@ public  class LocalModel {
 
         ourInstance=this;
         sendDataToServer=false;
-        exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbai consumato quella presente nella coda
+        exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
     }
 
     public static LocalModel getInstance(){

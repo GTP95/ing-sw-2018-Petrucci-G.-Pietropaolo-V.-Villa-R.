@@ -94,7 +94,7 @@ public class SocketClient implements Runnable{
                 System.out.println("Connected");
                 break;
             case "Username already in use":
-                throw new InvalidUsernameException("Username already in use");
+                throw new InvalidUsernameException("Username already in use");  //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Max number of players exceeded":
                 throw new TooManyPlayersException();    //TODO: GUI
                 //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione dunque il break non verrebbe mai eseguito
