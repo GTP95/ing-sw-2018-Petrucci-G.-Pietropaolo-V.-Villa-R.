@@ -15,6 +15,7 @@ import java.net.UnknownHostException;
 
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
+    Boolean StartUsernameCheck;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     LoginStage(){
@@ -26,6 +27,7 @@ public class LoginStage extends Stage {
         this.initStyle(StageStyle.UNDECORATED);
         this.getIcons().add(windowIcon);
 
+        StartUsernameCheck = false;
 
         //INIZIO Username Selection Scene
 
@@ -41,17 +43,16 @@ public class LoginStage extends Stage {
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
         AcceptBTN.setOnAction(event -> {
             ClientSettings.getInstance().setUsername(UsernameField.getText());
-            while(LocalModel.getInstance().checkUsername()==null);
-            if (LocalModel.getInstance().checkUsername()==true){
-                this.close();
+            if(StartUsernameCheck ==true) {
+                if (LocalModel.getInstance().checkUsername() == true) {
+                    this.close();
+                } else {
+                    Alert UserNameExpetionAlert = new Alert(Alert.AlertType.ERROR);
+                    UserNameExpetionAlert.setTitle("Bad Username");
+                    UserNameExpetionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+                    UserNameExpetionAlert.showAndWait();
+                }
             }
-            else{
-                Alert UserNameExpetionAlert = new Alert(Alert.AlertType.ERROR);
-                UserNameExpetionAlert.setTitle("Bad Username");
-                UserNameExpetionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
-                UserNameExpetionAlert.showAndWait();
-            }
-
         });
 
 
@@ -131,8 +132,8 @@ public class LoginStage extends Stage {
 
     }
 
-    public void ussernameCheck(){
-
+    public void usernameCheck(){
+        StartUsernameCheck = true;
     }
 
 }
