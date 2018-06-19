@@ -100,8 +100,10 @@ public class SocketClient implements Runnable{
                 throw new TooManyPlayersException();    //TODO: GUI
                 //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione dunque il break non verrebbe mai eseguito
             case "Invalid username: username cannot be null":
+                localModel.setUsernameIsCorrect(false);
                 throw new InvalidUsernameException("Invalid username: username cannot be null");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Invalid username: empty username not allowed":
+                localModel.setUsernameIsCorrect(false);
                 throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Game started!":
                 localModel.setGameRunning(true);
