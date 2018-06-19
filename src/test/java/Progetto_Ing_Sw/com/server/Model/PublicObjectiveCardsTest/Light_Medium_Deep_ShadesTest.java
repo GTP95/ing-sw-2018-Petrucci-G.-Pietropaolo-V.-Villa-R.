@@ -60,7 +60,7 @@ public class Light_Medium_Deep_ShadesTest {
     }
 
     @Test
-    public void countPoints() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void countPoints() throws PlaceDiceException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows,columns);
         LightShades lightShades = new LightShades();

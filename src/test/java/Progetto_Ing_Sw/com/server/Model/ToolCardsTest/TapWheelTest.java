@@ -51,7 +51,7 @@ public class TapWheelTest {
     }
 
     @Test
-    public void applyEffect() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void applyEffect() throws PlaceDiceException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows, columns);
         TapWheel tapWheel = new TapWheel();

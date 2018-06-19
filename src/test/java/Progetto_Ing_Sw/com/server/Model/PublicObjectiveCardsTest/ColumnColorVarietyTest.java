@@ -53,7 +53,7 @@ public class ColumnColorVarietyTest {
     }
 
     @Test
-    public void countPoints() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void countPoints() throws PlaceDiceException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows,columns);
         ColumnColorVariety columnColorVariety = new ColumnColorVariety();

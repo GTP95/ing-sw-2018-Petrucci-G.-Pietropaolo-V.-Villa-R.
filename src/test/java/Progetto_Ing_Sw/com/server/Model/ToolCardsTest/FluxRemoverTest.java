@@ -56,7 +56,7 @@ public class FluxRemoverTest {
     }
 
     @Test
-    public void applyEffect() throws ShadeNotEqualException, AdjacencyBreakerException, OccupiedCellException, ColorNotEqualException, AdjacencyException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void applyEffect() throws PlaceDiceException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows, columns);
         FluxRemover fluxRemover = new FluxRemover();

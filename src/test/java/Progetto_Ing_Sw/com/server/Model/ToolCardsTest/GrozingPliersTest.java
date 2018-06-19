@@ -47,7 +47,7 @@ public class GrozingPliersTest {
     }
 
     @Test
-    public void testCard() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void testCard() throws PlaceDiceException {
 
         // dice3 = rosso,3
         // dice2 = viola,2

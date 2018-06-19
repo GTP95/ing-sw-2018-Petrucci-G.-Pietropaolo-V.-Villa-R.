@@ -30,7 +30,7 @@ public class EglomiseBrush {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());

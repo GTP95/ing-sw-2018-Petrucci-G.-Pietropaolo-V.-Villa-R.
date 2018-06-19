@@ -24,7 +24,7 @@ public class FluxRemover {
         public boolean isFirstUsage() {return firstUsage;}
         public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-        public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+        public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed) throws PlaceDiceException {
 
             Dice localDice = new Dice(dice.getValue(),dice.getColor());
 

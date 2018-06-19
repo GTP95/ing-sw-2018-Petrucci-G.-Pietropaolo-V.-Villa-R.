@@ -25,7 +25,7 @@ public class Lathekin {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, int rowBefore1, int columnBefore1, int rowBefore2, int columnBefore2, int rowAfter1, int columnAfter1, int rowAfter2, int columnAfter2, Dice dice1, Dice dice2, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public WindowBoard applyEffect(WindowBoard localBoard, int rowBefore1, int columnBefore1, int rowBefore2, int columnBefore2, int rowAfter1, int columnAfter1, int rowAfter2, int columnAfter2, Dice dice1, Dice dice2, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localdice1 = new Dice(dice1.getValue(),dice1.getColor());
         Dice localdice2 = new Dice(dice2.getValue(),dice2.getColor());

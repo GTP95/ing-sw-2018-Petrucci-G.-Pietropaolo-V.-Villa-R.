@@ -26,7 +26,7 @@ public class RunningPliers {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice1 = new Dice(dice1.getValue(),dice1.getColor());
         Dice localDice2 = new Dice(dice2.getValue(),dice2.getColor());

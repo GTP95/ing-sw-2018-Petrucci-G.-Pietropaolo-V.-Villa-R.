@@ -28,7 +28,7 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
 
-    public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());

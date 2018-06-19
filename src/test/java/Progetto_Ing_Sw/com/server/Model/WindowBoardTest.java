@@ -315,7 +315,7 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void TEST_INSERT_DICE_GAMEPLAY() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
+    public void TEST_INSERT_DICE_GAMEPLAY() throws PlaceDiceException {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);//Industria
