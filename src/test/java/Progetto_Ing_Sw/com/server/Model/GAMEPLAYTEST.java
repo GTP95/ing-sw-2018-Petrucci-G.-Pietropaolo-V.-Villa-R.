@@ -72,7 +72,7 @@ public class GAMEPLAYTEST {
     }
 
     @Test
-    public void GAMEPLAY() {
+    public void GAMEPLAY() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         //apertura prima schermata
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");

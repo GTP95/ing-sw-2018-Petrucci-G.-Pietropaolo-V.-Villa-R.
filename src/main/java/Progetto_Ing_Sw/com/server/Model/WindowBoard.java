@@ -510,7 +510,7 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     //controlla la regola di ortogonalità dei colori, restituisce TRUE se il dado inserito nella posizione immessa non ha dadi ortogonali dello stesso colore
-    public boolean checkOrtogonalColor(int row, int column){
+    public boolean checkOrthogonalColor(int row, int column){
         boolean correctColor=false;
 
         //System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
@@ -619,7 +619,7 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     //controlla la regola di ortogonalità dei numeri, restituisce TRUE se il dado inserito nella posizione immessa non ha dadi ortogonali con lo stesso valore
-    public boolean checkOrtogonalValue(int row, int column){
+    public boolean checkOrthogonalValue(int row, int column){
         boolean correctNumber=false;
 
         //System.out.println(">>> CELL INPUT (ortogonal value) ["+(row)+"]["+(column)+"]");
@@ -698,7 +698,7 @@ public class WindowBoard implements WindowBoardObserver{
 
     //******************************REAL GAMEPLAY*************************************************************//
 
-    public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice){
+    public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice) throws ShadeNotEqualException, ColorNotEqualException, NotOnBordersException, AdjacencyBreakerException, OrthogonalColorException, AdjacencyException, OrthogonalValueException, OccupiedCellException {
 
         if(matrixNotEmpty()==false)
         { //CONTROLLO PRIMO TURNO
@@ -728,8 +728,8 @@ public class WindowBoard implements WindowBoardObserver{
                                     usedMatrix.get(r).get(c).setUsed(true);
                                     break;
                                 }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
-                                {   //TODO eccezione + GUI
-                                    break;
+                                {
+                                    throw new ShadeNotEqualException();
                                 }
                                 //CASO LIMITE COLOR BREAKER - CONTROLLO COLORE
                                 if(usedMatrix.get(r).get(c).getColor() != Color.SHADE)
@@ -750,8 +750,8 @@ public class WindowBoard implements WindowBoardObserver{
                                     usedMatrix.get(r).get(c).setUsed(true);
                                     break;
                                 }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
-                                {   //TODO eccezione + GUI
-                                    break;
+                                {
+                                    throw new ColorNotEqualException();
                                 }
                                 //CASO LIMITE NUMBER BREAKER + CONTROLLO SFUMATURA
                                 if(usedMatrix.get(r).get(c).getColor() == Color.SHADE)
@@ -772,25 +772,23 @@ public class WindowBoard implements WindowBoardObserver{
                                 break;
                             }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {
-                                //TODO eccezione + GUI
-                                break;
+                                throw new ShadeNotEqualException();
                             }
                             if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
                             {//CONTROLLO COLORE
                                 usedMatrix.get(r).get(c).setDiceContained(dice);
                                 usedMatrix.get(r).get(c).setUsed(true);
                                 break;
-                            }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor()){
-                                //TODO eccezione + GUI
-                                break;
+                            }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
+                            {
+                                throw new ColorNotEqualException();
                             }
 
                         }
                     }
-                    else if (usedMatrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1) {
-                        System.out.println("Prima mossa illegale, non stai partendo dai bordi");
-                        //TODO eccezione + GUI
-                        break;
+                    else if (usedMatrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1)
+                    {
+                       throw new NotOnBordersException();
                     }
                 }
             }
@@ -815,15 +813,16 @@ public class WindowBoard implements WindowBoardObserver{
                             {
                                 System.out.println("ADIACENCY - BREAKER (white)");
 
-                                if(checkAdjacency(r+1,c+1)==false){
+                                if(checkAdjacency(r+1,c+1)==false)
+                                {
                                     //non ho alcun effetto, infatti in questo caso ho una cella bianca staccata da tutto il resto
                                     break;
                                 }
-                                else if (checkAdjacency(r+1,c+1)){
-                                    //TODO eccezione + GUI
+                                else if (checkAdjacency(r+1,c+1))
+                                {
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyBreakerException();
                                 }
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
@@ -835,22 +834,20 @@ public class WindowBoard implements WindowBoardObserver{
 
                                 if(checkAdjacency(r+1,c+1))
                                 {//CONTROLLO ADIACENZA OK
-                                    if (checkOrtogonalValue(r + 1, c + 1))
+                                    if (checkOrthogonalValue(r + 1, c + 1))
                                     {//CONTROLLO NUMERO OK
                                         break;
-                                    }else if (checkOrtogonalValue(r + 1, c + 1)==false)
-                                    {   //CONTROLLO COLORE NO
-                                        //TODO eccezione + GUI
+                                    }else if (checkOrthogonalValue(r + 1, c + 1)==false)
+                                    {   //CONTROLLO NUMERO NO
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new OrthogonalValueException();
                                     }
                                 }else if(checkAdjacency(r+1,c+1)==false)
                                 { // NO ADIACENZA
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyException();
                                 }
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
@@ -862,24 +859,22 @@ public class WindowBoard implements WindowBoardObserver{
 
                                 if(checkAdjacency(r+1,c+1))
                                 {//CONTROLLO ADIACENZA OK
-                                    if (checkOrtogonalColor(r + 1, c + 1))
+                                    if (checkOrthogonalColor(r + 1, c + 1))
                                     {//CONTROLLO COLORE OK
                                         break;
                                     }
-                                    else if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                    else if (checkOrthogonalColor(r + 1, c + 1)==false)
                                     { // NO COLORE
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new OrthogonalColorException();
                                     }
                                 }
                                 else if(checkAdjacency(+1,c+1)==false)
                                 { // NO ADIACENZA
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyException();
                                 }
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
@@ -888,43 +883,40 @@ public class WindowBoard implements WindowBoardObserver{
                             if(checkAdjacency(r+1,c+1))
                             {//CONTROLLO ADIACENZA OK
 
-                                if (checkOrtogonalColor(r + 1, c + 1) || checkOrtogonalValue(r + 1, c + 1))
+                                if (checkOrthogonalColor(r + 1, c + 1) || checkOrthogonalValue(r + 1, c + 1))
                                 {//CONTROLLO COLORE/NUMERO OK
 
-                                    if (checkOrtogonalColor(r + 1, c + 1))
+                                    if (checkOrthogonalColor(r + 1, c + 1))
                                     {//CONTROLLO COLORE OK
                                         break;
                                     }
-                                    else if (checkOrtogonalValue( + 1, c + 1))
+                                    else if (checkOrthogonalValue( + 1, c + 1))
                                     {//CONTROLLO NUMERO OK
                                         break;
                                     }
                                 }
-                                else if (checkOrtogonalColor(r + 1, c + 1) == false || checkOrtogonalValue(r + 1, c + 1)==false)
+                                else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false)
                                 { // NO COLORE/NUMERO
 
-                                    if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                    if (checkOrthogonalColor(r + 1, c + 1)==false)
                                     {//CONTROLLO COLORE NO
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new OrthogonalColorException();
                                     }
-                                    else if (checkOrtogonalValue(r + 1, c + 1)==false)
+                                    else if (checkOrthogonalValue(r + 1, c + 1)==false)
                                     {//CONTROLLO NUMERO NO
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new OrthogonalValueException();
                                     }
                                 }
                             }
                             else if(checkAdjacency(r+1,c+1)==false)
                             { // NO ADIACENZA
-                                //TODO eccezione + GUI
                                 usedMatrix.get(r).get(c).setDiceContained(null);
                                 usedMatrix.get(r).get(c).setUsed(false);
-                                break;
+                                throw new AdjacencyException();
                             }
 
                         }
@@ -943,32 +935,29 @@ public class WindowBoard implements WindowBoardObserver{
                                 {//CONTROLLO COLORE
                                     if(checkAdjacency(r+1,c+1))
                                     {//CONTROLLO ADIACENZA OK
-                                        if (checkOrtogonalColor(r + 1, c + 1))
+                                        if (checkOrthogonalColor(r + 1, c + 1))
                                         {//CONTROLLO COLORE ORTOGONALE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                        else if (checkOrthogonalColor(r + 1, c + 1)==false)
                                         { // NO COLORE ORTOGONALE
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalColorException();
                                         }
                                     }
                                     else if(checkAdjacency(r+1,c+1)==false)
                                     { // NO ADIACENZA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new AdjacencyException();
                                     }
                                 }
                                 else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                                 {//NO COLORE CELLA
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new ColorNotEqualException();
                                 }
 
                                 if(usedMatrix.get(r).get(c).getColor() == Color.SHADE)
@@ -978,24 +967,22 @@ public class WindowBoard implements WindowBoardObserver{
 
                                     if(checkAdjacency(r+1,c+1))
                                     {//CONTROLLO ADIACENZA OK
-                                        if (checkOrtogonalColor(r + 1, c + 1))
+                                        if (checkOrthogonalColor(r + 1, c + 1))
                                         {//CONTROLLO COLORE ORTOGONALE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                        else if (checkOrthogonalColor(r + 1, c + 1)==false)
                                         { // NO COLORE ORTOGONALE
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalColorException();
                                         }
                                     }
                                     else if(checkAdjacency(r+1,c+1)==false)
                                     { // NO ADIACENZA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new AdjacencyException();
                                     }
                                 }
                             }
@@ -1010,31 +997,28 @@ public class WindowBoard implements WindowBoardObserver{
                                 {//CONTROLLO SFUMATURA
                                     if(checkAdjacency(r+1,c+1))
                                     {//CONTROLLO ADIACENZA OK
-                                        if (checkOrtogonalValue(r + 1, c + 1))
+                                        if (checkOrthogonalValue(r + 1, c + 1))
                                         {//CONTROLLO NUMERO ORTOGONALE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1)==false)
-                                        {   //CONTROLLO COLORE ORTOGONALE NO
-                                            //TODO eccezione + GUI
+                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
+                                        {   //CONTROLLO NUMERO ORTOGONALE NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalValueException();
                                         }
                                     }
                                     else if(checkAdjacency(r+1,c+1)==false)
                                     { // NO ADIACENZA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new AdjacencyException();
                                     }
                                 }else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 {//NO SFUMATURA
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new ShadeNotEqualException();
                                 }
 
                                 if(usedMatrix.get(r).get(c).getColor() != Color.SHADE)
@@ -1044,24 +1028,22 @@ public class WindowBoard implements WindowBoardObserver{
 
                                     if(checkAdjacency(r+1,c+1))
                                     {//CONTROLLO ADIACENZA OK
-                                        if (checkOrtogonalValue(r + 1, c + 1))
+                                        if (checkOrthogonalValue(r + 1, c + 1))
                                         {//CONTROLLO NUMERO OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1)==false)
-                                        {   //CONTROLLO COLORE NO
-                                            //TODO eccezione + GUI
+                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
+                                        {   //CONTROLLO VALORE NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalValueException();
                                         }
                                     }
                                     else if(checkAdjacency(r+1,c+1)==false)
                                     { // NO ADIACENZA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new AdjacencyException();
                                     }
                                 }
                             }
@@ -1080,11 +1062,9 @@ public class WindowBoard implements WindowBoardObserver{
                                     }
                                     else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                     {//NO SFUMATURA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        System.out.println("Il dado inserito non rispetta la sfumatura data");
-                                        break;
+                                        throw new ShadeNotEqualException();
                                     }
 
                                     if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
@@ -1093,19 +1073,16 @@ public class WindowBoard implements WindowBoardObserver{
                                     }
                                     else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                                     {//NO COLORE CELLA
-                                        //TODO eccezione + GUI
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
-                                        break;
+                                        throw new ColorNotEqualException();
                                     }
                                 }
                                 else if (checkAdjacency(r+1,c+1))
                                 {
-
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyBreakerException();
                                 }
                             }
                             ///++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
@@ -1117,53 +1094,47 @@ public class WindowBoard implements WindowBoardObserver{
                                 if(checkAdjacency(r+1,c+1))
                                 {//CONTROLLO ADIACENZA
 
-                                    if (checkOrtogonalColor(r + 1, c + 1) || checkOrtogonalValue(r + 1, c + 1))
+                                    if (checkOrthogonalColor(r + 1, c + 1) || checkOrthogonalValue(r + 1, c + 1))
                                     {///CONTROLLO COLORE/NUMERO OK
 
-                                        if (checkOrtogonalColor(r + 1, c + 1))
+                                        if (checkOrthogonalColor(r + 1, c + 1))
                                         {//CONTROLLO COLORE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1))
+                                        else if (checkOrthogonalValue(r + 1, c + 1))
                                         {//CONTROLLO NUMERO OK
                                             break;
                                         }
                                     }
-                                    else if (checkOrtogonalColor(r + 1, c + 1) == false || checkOrtogonalValue(r + 1, c + 1)==false )
+                                    else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false )
                                     {// COLORE/NUMERO NO
 
-                                        if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                        if (checkOrthogonalColor(r + 1, c + 1)==false)
                                         {//CONTROLLO COLORE NO
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalColorException();
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1)==false)
+                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
                                         {//CONTROLLO NUMERO NO
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalValueException();
                                         }
                                     }
                                 }
                                 else if(checkAdjacency(r+1,c+1)==false)
                                 { // ADIACENZA NO
-                                    //TODO eccezione + GUI
-                                    System.out.println("Non stai rispettando le regole di adiacenza");
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyException();
                                 }
                             }
                             else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {//NO SFUMATURA
-                                //TODO eccezione + GUI
                                 usedMatrix.get(r).get(c).setDiceContained(null);
                                 usedMatrix.get(r).get(c).setUsed(false);
-                                System.out.println("Il dado inserito non rispetta la sfumatura data");
-                                break;
+                                throw new ShadeNotEqualException();
                             }
 
                             //-------
@@ -1174,59 +1145,53 @@ public class WindowBoard implements WindowBoardObserver{
                                 if(checkAdjacency(r+1,c+1))
                                 {//CONTROLLO ADIACENZA
 
-                                    if (checkOrtogonalColor(r + 1, c + 1) || checkOrtogonalValue(r + 1, c + 1) )
+                                    if (checkOrthogonalColor(r + 1, c + 1) || checkOrthogonalValue(r + 1, c + 1) )
                                     {//CONTROLLO COLORE/NUMERO
 
-                                        if (checkOrtogonalColor(r + 1, c + 1))
+                                        if (checkOrthogonalColor(r + 1, c + 1))
                                         {//CONTROLLO COLORE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1)){
+                                        else if (checkOrthogonalValue(r + 1, c + 1)){
                                             break;
                                         }
 
                                     }
-                                    else if (checkOrtogonalColor(r + 1, c + 1) == false || checkOrtogonalValue(r + 1, c + 1)==false)
+                                    else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false)
                                     {//NO COLORE/NUMERO
 
-                                        if (checkOrtogonalColor(r + 1, c + 1)==false)
+                                        if (checkOrthogonalColor(r + 1, c + 1)==false)
                                         {//CONTROLLO COLORE NO
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalColorException();
                                         }
-                                        else if (checkOrtogonalValue(r + 1, c + 1)==false)
+                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
                                         {//CONTROLLO NUMERO NO
-                                            //TODO eccezione + GUI
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
-                                            break;
+                                            throw new OrthogonalValueException();
                                         }
                                     }
                                 }
                                 else if(checkAdjacency(r+1,c+1)==false)
                                 {// NO ADIACENZA
-                                    //TODO eccezione + GUI
                                     usedMatrix.get(r).get(c).setDiceContained(null);
                                     usedMatrix.get(r).get(c).setUsed(false);
-                                    break;
+                                    throw new AdjacencyException();
                                 }
                             }
                             else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                             {//NO COLORE CELLA
-                                //TODO eccezione + GUI
                                 usedMatrix.get(r).get(c).setDiceContained(null);
                                 usedMatrix.get(r).get(c).setUsed(false);
-                                break;
+                                throw new ColorNotEqualException();
                             }
                         }
                     }
                     else if (usedMatrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1)
                     {//CASO CELLA OCCUPATA
-                        //TODO EXCEPTION + GUI
-                        System.out.println("La casella è già occupata! Salti il turno");
-                        break;
+                       throw new OccupiedCellException();
                     }
                 }
             }

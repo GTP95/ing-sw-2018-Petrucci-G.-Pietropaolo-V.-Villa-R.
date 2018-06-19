@@ -67,31 +67,31 @@ public class TemporarySketchClass {
                                 if(checkAdjacency(usedMatrix,r+1,c+1))
                                 {//CONTROLLO ADIACENZA OK
 
-                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                     {//CONTROLLO COLORE/NUMERO OK
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO COLORE OK
                                             System.out.println("DADO INSERITO CORRETTAMENTE (after  adj+color control (MOSSA SUCCESSIVA-  white -)");
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO NUMERO OK
                                             System.out.println("DADO INSERITO CORRETTAMENTE (after  adj+number control (MOSSA SUCCESSIVA-  white -)");
                                             break;
                                         }
                                     }
-                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                     { // NO COLORE/NUMERO
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO COLORE NO
                                             System.out.println("Non stai rispettando l'ortogonalità dei colori (MOSSA SUCCESSIVA-  white -)");
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO NUMERO NO
                                             System.out.println("Non stai rispettando l'ortogonalità dei numeri (MOSSA SUCCESSIVA-  white -)");
                                             usedMatrix.get(r).get(c).setDiceContained(null);
@@ -119,31 +119,31 @@ public class TemporarySketchClass {
                                     if(checkAdjacency(usedMatrix,r+1,c+1))
                                     {//CONTROLLO ADIACENZA
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                         {///CONTROLLO COLORE/NUMERO OK
 
-                                            if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                            if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                             {//CONTROLLO COLORE OK
                                                 System.out.println("DADO INSERITO CORRETTAMENTE after  adj+color control (MOSSA SUCCESSIVA - not white/shade ON -)");
                                                 break;
                                             }
-                                            else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                            else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                             {//CONTROLLO NUMERO OK
                                                 System.out.println("DADO INSERITO CORRETTAMENTE after  adj+number control (MOSSA SUCCESSIVA - not white/shade ON -)");
                                                 break;
                                             }
                                         }
-                                        else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false )
+                                        else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false )
                                         {// COLORE/NUMERO NO
 
-                                            if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                            if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                             {//CONTROLLO COLORE NO
                                                 System.out.println("Non stai rispettando le regole di ortogonalità dei colori (MOSSA SUCCESSIVA - not white/shade ON -)");
                                                 usedMatrix.get(r).get(c).setDiceContained(null);
                                                 usedMatrix.get(r).get(c).setUsed(false);
                                                 break;
                                             }
-                                            else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                            else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                             {//CONTROLLO NUMERO NO
                                                 System.out.println("Non stai rispettando l'ortogonalità dei numeri (MOSSA SUCCESSIVA - not white/shade ON -)");
                                                 usedMatrix.get(r).get(c).setDiceContained(null);
@@ -176,32 +176,32 @@ public class TemporarySketchClass {
                                     if(checkAdjacency(usedMatrix,r+1,c+1))
                                     {//CONTROLLO ADIACENZA
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1) )
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1) )
                                         {//CONTROLLO COLORE/NUMERO
 
-                                            if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                            if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                             {//CONTROLLO COLORE OK
                                                 System.out.println("DADO INSERITO CORRETTAMENTE after  adj+color control (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
                                                 break;
                                             }
-                                            else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                            else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                             {//CONTROLLO NUMERO OK
                                                 System.out.println("DADO INSERITO CORRETTAMENTE after  adj+number control (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
                                                 break;
                                             }
 
                                         }
-                                        else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                         {//NO COLORE/NUMERO
 
-                                            if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                            if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                             {//CONTROLLO COLORE NO
                                                 System.out.println("Non stai rispettando le regole di ortogonalità dei colori (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
                                                 usedMatrix.get(r).get(c).setDiceContained(null);
                                                 usedMatrix.get(r).get(c).setUsed(false);
                                                 break;
                                             }
-                                            else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                            else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                             {//CONTROLLO NUMERO NO
                                                 System.out.println("Non stai rispettando l'ortogonalità dei numeri (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
                                                 usedMatrix.get(r).get(c).setDiceContained(null);
@@ -294,28 +294,28 @@ public class TemporarySketchClass {
                             if(checkAdjacency(usedMatrix,r+1,c+1))
                             {//CONTROLLO ADIACENZA OK
 
-                                if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                 {//CONTROLLO COLORE/NUMERO OK
 
-                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                    if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                     {//CONTROLLO COLORE OK
                                         break;
                                     }
-                                    else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                     {//CONTROLLO NUMERO OK
                                         break;
                                     }
                                 }
-                                else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                 { // NO COLORE/NUMERO
 
-                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                    if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                     {//CONTROLLO COLORE NO
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
                                         break;
                                     }
-                                    else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                     {//CONTROLLO NUMERO NO
                                         usedMatrix.get(r).get(c).setDiceContained(null);
                                         usedMatrix.get(r).get(c).setUsed(false);
@@ -342,28 +342,28 @@ public class TemporarySketchClass {
                                 if(checkAdjacency(usedMatrix,r+1,c+1))
                                 {//CONTROLLO ADIACENZA
 
-                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                    if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                     {///CONTROLLO COLORE/NUMERO OK
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO COLORE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO NUMERO OK
                                             break;
                                         }
                                     }
-                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false )
+                                    else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false )
                                     {// COLORE/NUMERO NO
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO COLORE NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO NUMERO NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
@@ -395,29 +395,29 @@ public class TemporarySketchClass {
                                 if(checkAdjacency(usedMatrix,r+1,c+1))
                                 {//CONTROLLO ADIACENZA
 
-                                    if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) || checkOrtogonalValue(usedMatrix, r + 1, c + 1) )
+                                    if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) || checkOrthogonalValue(usedMatrix, r + 1, c + 1) )
                                     {//CONTROLLO COLORE/NUMERO
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1))
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO COLORE OK
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1))
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1))
                                         {//CONTROLLO NUMERO OK
                                             break;
                                         }
 
                                     }
-                                    else if (checkOrtogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                    else if (checkOrthogonalColor(usedMatrix, r + 1, c + 1) == false || checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                     {//NO COLORE/NUMERO
 
-                                        if (checkOrtogonalColor(usedMatrix, r + 1, c + 1)==false)
+                                        if (checkOrthogonalColor(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO COLORE NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);
                                             break;
                                         }
-                                        else if (checkOrtogonalValue(usedMatrix, r + 1, c + 1)==false)
+                                        else if (checkOrthogonalValue(usedMatrix, r + 1, c + 1)==false)
                                         {//CONTROLLO NUMERO NO
                                             usedMatrix.get(r).get(c).setDiceContained(null);
                                             usedMatrix.get(r).get(c).setUsed(false);

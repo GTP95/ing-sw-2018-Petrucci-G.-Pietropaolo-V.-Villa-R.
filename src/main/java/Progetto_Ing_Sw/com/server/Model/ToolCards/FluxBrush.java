@@ -1,8 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.Table;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -29,7 +27,7 @@ public class FluxBrush {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice diceDrawn, int row, int column, int favorTokensUsed){
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice diceDrawn, int row, int column, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         Dice localdice = new Dice(diceDrawn.getValue(),diceDrawn.getColor());
         System.out.println("Valor del dado prima della nuova pescata :"+localdice.getValue());

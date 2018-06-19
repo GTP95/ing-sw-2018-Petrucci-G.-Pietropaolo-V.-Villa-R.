@@ -1,10 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model.PublicObjectiveCardsTest;
 
-import Progetto_Ing_Sw.com.server.Model.Color;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.DiceBag;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCards.ColumnShadeVariety;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,7 +53,7 @@ public class ColumnShadeVarietyTest {
         }
 
         @Test
-        public void countPoints(){
+        public void countPoints() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
             WindowBoard boardPlayerOne = new WindowBoard(rows,columns);
             ColumnShadeVariety columnShadeVariety = new ColumnShadeVariety();

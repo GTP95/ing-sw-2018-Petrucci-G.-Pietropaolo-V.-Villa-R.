@@ -267,7 +267,7 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void checkAdjacencyAndOrtogonalColor(){
+    public void checkAdjacencyAndOrthogonalColor(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
@@ -285,12 +285,12 @@ public class WindowBoardTest {
         windowBoard.insertDiceARRLIST(1,4,dice3);
         windowBoard.insertDiceARRLIST(1,5,dice3);
 
-        windowBoard.checkOrtogonalColor(1,4);
+        windowBoard.checkOrthogonalColor(1,4);
 
     }
 
     @Test
-    public void checkAdjacencyAndOrtogonalNumber(){
+    public void checkAdjacencyAndOrthogonalNumber(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
@@ -311,11 +311,11 @@ public class WindowBoardTest {
         windowBoard.insertDiceARRLIST(1,4,dice3);
         windowBoard.insertDiceARRLIST(1,5,dice1);
 
-        windowBoard.checkOrtogonalValue(1,4);
+        windowBoard.checkOrthogonalValue(1,4);
     }
 
     @Test
-    public void TEST_INSERT_DICE_GAMEPLAY(){
+    public void TEST_INSERT_DICE_GAMEPLAY() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);//Industria

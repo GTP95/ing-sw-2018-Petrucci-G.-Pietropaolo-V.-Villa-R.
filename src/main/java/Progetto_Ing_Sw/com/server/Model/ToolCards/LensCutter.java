@@ -1,9 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.IllegalDiceException;
-import Progetto_Ing_Sw.com.server.Model.RoundTrack;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -31,7 +28,7 @@ public class LensCutter {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, Dice roundTrackDice, int row, int column, int favorTokensUsed){
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, Dice roundTrackDice, int row, int column, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
         Dice localRoundTrackDice = new Dice(roundTrackDice.getValue(),roundTrackDice.getColor());

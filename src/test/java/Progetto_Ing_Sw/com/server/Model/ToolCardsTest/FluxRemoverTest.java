@@ -1,10 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCardsTest;
 
-import Progetto_Ing_Sw.com.server.Model.Color;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.DiceBag;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.*;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +56,7 @@ public class FluxRemoverTest {
     }
 
     @Test
-    public void applyEffect(){
+    public void applyEffect() throws ShadeNotEqualException, AdjacencyBreakerException, OccupiedCellException, ColorNotEqualException, AdjacencyException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows, columns);
         FluxRemover fluxRemover = new FluxRemover();

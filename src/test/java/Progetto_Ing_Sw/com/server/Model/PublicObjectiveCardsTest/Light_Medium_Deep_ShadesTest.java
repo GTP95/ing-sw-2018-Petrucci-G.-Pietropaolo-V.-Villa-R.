@@ -1,11 +1,9 @@
 package Progetto_Ing_Sw.com.server.Model.PublicObjectiveCardsTest;
 
-import Progetto_Ing_Sw.com.server.Model.Color;
-import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCards.DeepShades;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCards.LightShades;
 import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCards.MediumShades;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,7 +60,7 @@ public class Light_Medium_Deep_ShadesTest {
     }
 
     @Test
-    public void countPoints(){
+    public void countPoints() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         WindowBoard boardPlayerOne = new WindowBoard(rows,columns);
         LightShades lightShades = new LightShades();

@@ -1,7 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -26,7 +25,7 @@ public class GrindingStone {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed){
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
 

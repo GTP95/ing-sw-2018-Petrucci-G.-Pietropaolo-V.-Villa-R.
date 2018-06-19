@@ -1,9 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCardsTest;
 
-import Progetto_Ing_Sw.com.server.Model.Color;
-import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.GrozingPliers;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,7 +47,7 @@ public class GrozingPliersTest {
     }
 
     @Test
-    public void testCard(){
+    public void testCard() throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         // dice3 = rosso,3
         // dice2 = viola,2

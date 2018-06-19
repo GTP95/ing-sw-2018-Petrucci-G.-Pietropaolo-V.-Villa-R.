@@ -1,8 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.Table;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -28,7 +26,7 @@ public class RunningPliers {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed){
+    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws ShadeNotEqualException, AdjacencyException, OccupiedCellException, ColorNotEqualException, AdjacencyBreakerException, OrthogonalColorException, OrthogonalValueException, NotOnBordersException {
 
         Dice localDice1 = new Dice(dice1.getValue(),dice1.getColor());
         Dice localDice2 = new Dice(dice2.getValue(),dice2.getColor());
