@@ -50,7 +50,7 @@ public class SocketClient implements Runnable{
             try {
                 receiveMessage();
             } catch (TooManyPlayersException | Progetto_Ing_Sw.com.client.InvalidUsernameException e) {
-                trownException = e;
+                localModel.addException(e);
             }
         }
     }
@@ -183,18 +183,6 @@ public class SocketClient implements Runnable{
         }
     }
 
-    public Boolean exceptioneTrown(){
-        if(trownException!=null) return true;
-        return false;
- }
-
-    public Exception getTrownException() {
-        return trownException;
-    }
-
-    public void resetException(){
-        trownException=null;
-    }
 
     public void sendMessage(){
 
