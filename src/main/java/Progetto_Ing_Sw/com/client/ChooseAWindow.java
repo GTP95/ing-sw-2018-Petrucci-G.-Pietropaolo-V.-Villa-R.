@@ -35,6 +35,7 @@ public class ChooseAWindow extends Stage {
     Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
         int rows = 4;
@@ -115,6 +116,7 @@ public class ChooseAWindow extends Stage {
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.alwaysOnTopProperty();
+        this.getIcons().add(windowIcon);
 
         LocalModel.getInstance().registerAsObserver(this);
 

@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -13,7 +14,7 @@ import javafx.stage.StageStyle;
 public class StartMenuGUI extends Application {
     Scene TitleScreen, SelectGameMode;  //Specifico prima tutte le scene di cui avrò bisogno
 
-
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     @Override
     public void start(Stage primaryStage) {
@@ -21,6 +22,7 @@ public class StartMenuGUI extends Application {
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.getIcons().add(windowIcon);
 
         //INIZIO Start Screen
         HBox startscreen= new HBox(80);

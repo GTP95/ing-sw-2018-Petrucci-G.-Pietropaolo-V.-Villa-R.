@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
@@ -22,13 +23,14 @@ public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
     Label Player1Label,Player2Label,Player3Label,Player4Label,TimerLabel;
     ToggleButton Player1BTN, Player2BTN, Player3BTN,Player4BTN;
-
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
 
     MultiplayerGUI(){
         this.setTitle("Sagrada - Multiplayer");
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.getIcons().add(windowIcon);
 
         LocalModel.getInstance().registerAsObserver(this);
 

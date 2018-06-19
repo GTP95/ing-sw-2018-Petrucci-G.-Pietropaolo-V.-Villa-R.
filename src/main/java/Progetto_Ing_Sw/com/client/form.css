@@ -741,7 +741,7 @@
     -fx-background-color: grey;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -752,7 +752,7 @@
 
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: grey;
     -fx-border-width: 5;
@@ -763,7 +763,7 @@
 
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: green;
     -fx-border-width: 5;
@@ -774,7 +774,7 @@
     -fx-background-image: url("GUI/Dice/1.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -785,7 +785,7 @@
     -fx-background-image: url("GUI/Dice/2.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -796,7 +796,7 @@
     -fx-background-image: url("GUI/Dice/3.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -807,7 +807,7 @@
     -fx-background-image: url("GUI/Dice/4.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -818,7 +818,7 @@
     -fx-background-image: url("GUI/Dice/5.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -829,7 +829,7 @@
     -fx-background-image: url("GUI/Dice/6.Blue.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -840,7 +840,7 @@
     -fx-background-image: url("GUI/Dice/1.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -851,7 +851,7 @@
     -fx-background-image: url("GUI/Dice/2.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -862,7 +862,7 @@
     -fx-background-image: url("GUI/Dice/3.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -873,7 +873,7 @@
     -fx-background-image: url("GUI/Dice/4.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -884,7 +884,7 @@
     -fx-background-image: url("GUI/Dice/5.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -895,7 +895,7 @@
     -fx-background-image: url("GUI/Dice/6.Red.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -906,7 +906,7 @@
     -fx-background-image: url("GUI/Dice/1.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -917,7 +917,7 @@
     -fx-background-image: url("GUI/Dice/2.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -928,7 +928,7 @@
     -fx-background-image: url("GUI/Dice/3.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -939,7 +939,7 @@
     -fx-background-image: url("GUI/Dice/4.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -950,7 +950,7 @@
     -fx-background-image: url("GUI/Dice/5.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -961,7 +961,7 @@
     -fx-background-image: url("GUI/Dice/6.Purple.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -972,7 +972,7 @@
     -fx-background-image: url("GUI/Dice/1.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -983,7 +983,7 @@
     -fx-background-image: url("GUI/Dice/2.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -994,7 +994,7 @@
     -fx-background-image: url("GUI/Dice/3.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1005,7 +1005,7 @@
     -fx-background-image: url("GUI/Dice/4.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1016,7 +1016,7 @@
     -fx-background-image: url("GUI/Dice/5.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1027,7 +1027,7 @@
     -fx-background-image: url("GUI/Dice/6.Yellow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1038,7 +1038,7 @@
      -fx-background-image: url("GUI/Dice/1.Green.png");
      -fx-background-position: center;
      -fx-background-repeat: no-repeat;
-     -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
      -fx-background-radius: 4 4 4 4;
      -fx-border-color: black;
      -fx-border-width: 5;
@@ -1049,7 +1049,7 @@
     -fx-background-image: url("GUI/Dice/2.Green.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1060,7 +1060,7 @@
     -fx-background-image: url("GUI/Dice/3.Green.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1071,7 +1071,7 @@
     -fx-background-image: url("GUI/Dice/4.Green.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1082,7 +1082,7 @@
     -fx-background-image: url("GUI/Dice/5.Green.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;
@@ -1093,7 +1093,7 @@
     -fx-background-image: url("GUI/Dice/6.Green.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 40 40 ;
+    -fx-background-size: 70 70 ;
     -fx-background-radius: 4 4 4 4;
     -fx-border-color: black;
     -fx-border-width: 5;

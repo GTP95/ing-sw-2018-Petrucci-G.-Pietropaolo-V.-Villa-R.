@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.client;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -14,6 +15,7 @@ import java.net.UnknownHostException;
 
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     LoginStage(){
         this.setTitle("Sagrada - Login");
@@ -22,6 +24,7 @@ public class LoginStage extends Stage {
         this.setResizable(false);
         this.setAlwaysOnTop(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.getIcons().add(windowIcon);
 
 
         //INIZIO Username Selection Scene
@@ -36,7 +39,11 @@ public class LoginStage extends Stage {
 
         //Accept Button
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
-        AcceptBTN.setOnAction(event -> {this.setScene(ServerScene);ClientSettings.getInstance().setUsername(UsernameField.getText());});
+        AcceptBTN.setOnAction(event -> {
+            ClientSettings.getInstance().setUsername(UsernameField.getText());
+
+            this.close();
+        });
 
 
 
@@ -67,11 +74,12 @@ public class LoginStage extends Stage {
 
         //Accept Button
         Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
-        AcceptBTN2.setOnAction(event ->
-        {ClientSettings.getInstance().setHostname(HostField.getText());ClientSettings.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
+        AcceptBTN2.setOnAction(event -> {
+            ClientSettings.getInstance().setHostname(HostField.getText());
+            ClientSettings.getInstance().setSocketPort(Integer.parseInt(PortField.getText()));
             try{
                 new Thread (new SocketClient()).start();
-                this.close();
+                this.setScene(UserNameSelectionScene);
                 ClientSettings.getInstance().writeSettingsToJSON();
             }
 
@@ -91,8 +99,6 @@ public class LoginStage extends Stage {
                 UnknownHostAlert.setContentText("Press OK and enter another Host Name");
                 UnknownHostAlert.showAndWait();
             }
-
-
         });
 
 
@@ -112,7 +118,11 @@ public class LoginStage extends Stage {
 
 
 
-        this.setScene(UserNameSelectionScene);
+        this.setScene(ServerScene);
 
+    }
+
+    public void usernameCheck(){
+        
     }
 }

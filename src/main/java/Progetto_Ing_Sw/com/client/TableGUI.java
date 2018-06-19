@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
@@ -26,14 +27,16 @@ import java.util.Collections;
 
 
 public class TableGUI extends Stage{
-    ClientGameBoardCard ChoosenGmaeBoardCard;
+    ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
+    ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
     Dice DieToInsert;
     int Xindex=0, Yindex=0;
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     TableGUI(ClientGameBoardCard gameBoardCard) {
         this.setTitle("Sagrada Game");
@@ -41,8 +44,9 @@ public class TableGUI extends Stage{
         this.setHeight(720);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.getIcons().add(windowIcon);
 
-        ChoosenGmaeBoardCard = gameBoardCard;
+        ChoosenGameBoardCard = gameBoardCard;
 
         LocalModel.getInstance().registerAsObserver(this);
 
@@ -202,17 +206,7 @@ public class TableGUI extends Stage{
 
 
 
-            //HBox Tabs per gli altri giocatori
-            HBox OtherPlayerBox = new HBox(80);
-            OtherPlayerBox.setAlignment(Pos.CENTER);
-            OtherPlayerBox.setTranslateY(15);
 
-            //Bottoni altri giocatori
-            for (int i = 0; i < (NumPlayers - 1); i++) {
-                Button OtherPlayer = new Button();
-                OtherPlayer.setId("DefaultButton");
-                OtherPlayerBox.getChildren().addAll(OtherPlayer);
-            }
 
             //INIZIO MENU TOOL CARD
 
@@ -230,7 +224,6 @@ public class TableGUI extends Stage{
             ToolCard1BTN.setMinWidth(180);
             ToolCard1BTN.setPrefWidth(180);
             ToolCard1BTN.setId("CardBTN");
-            //ToolCard1BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
             ToolCard1BTN.setOnAction(event -> {
                 ToolCard1BTN.setDisable(true);
                 ToolCardDisplayer ToolCard1Stage = new ToolCardDisplayer(
@@ -247,7 +240,7 @@ public class TableGUI extends Stage{
             ToolCard2BTN = new Button("Tool Card2");ToolCard2BTN.setTranslateY(-40);ToolCard2BTN.setTranslateX(35);
             ToolCard2BTN.setMaxWidth(180);
             ToolCard2BTN.setId("CardBTN");
-           // ToolCard2BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
+
             ToolCard2BTN.setOnAction(event -> {
                 ToolCard2BTN.setDisable(true);
                 ToolCardDisplayer ToolCard2Stage = new ToolCardDisplayer(
@@ -264,7 +257,6 @@ public class TableGUI extends Stage{
             ToolCard3BTN = new Button("Tool Card3");ToolCard3BTN.setTranslateY(-40);ToolCard3BTN.setTranslateX(35);
             ToolCard3BTN.setMaxWidth(180);
             ToolCard3BTN.setId("CardBTN");
-            //ToolCard3BTN.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.10 * 180)));
             ToolCard3BTN.setOnAction(event -> {
                 ToolCard3BTN.setDisable(true);
                 ToolCardDisplayer ToolCard3Stage = new ToolCardDisplayer(
@@ -354,10 +346,10 @@ public class TableGUI extends Stage{
             ToolCardMenu.getChildren().addAll(ToolCardMenuTitle, ToolCardList);
             //FINE MENU TOOL CARD
 
+
+
+
             //INIZIO  PUBLIC OBJECTIVE MENU
-
-
-
 
             //Bottoni che riferiscono alle Public Objective Cards
             PublicObjectiveCard1BTN = new Button("Public Objective 1");PublicObjectiveCard1BTN.setTranslateX(25);PublicObjectiveCard1BTN.setTranslateY(8);
@@ -516,23 +508,21 @@ public class TableGUI extends Stage{
 
         FlowPane DraftPool = new FlowPane();
         DraftPool.setId("DraftPool");
+        DraftPool.setTranslateX(-10);
+        DraftPool.setTranslateY(-10);
         DraftPool.setHgap(5);
         DraftPool.setVgap(5);
         DraftPool.setPadding(new Insets(4,4,4,4));
         DraftPool.setAlignment(Pos.CENTER);
-        DraftPool.setMaxSize(200,200);
+        DraftPool.setMaxSize(200,400);
 
 
         DiceButtons= new ArrayList<>();
         for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
-            ToggleButton Die = new ToggleButton();Die.setPrefSize(50,50);Die.setMaxSize(50,50);Die.setId("Die");Die.setText("DiePresente");
+            ToggleButton Die = new ToggleButton();Die.setPrefSize(75,75);Die.setMaxSize(75,75);Die.setId("Die");Die.setText("DiePresente");
             DraftPool.getChildren().addAll(Die);
             DiceButtons.add(Die);
         }
-
-
-
-
         //FINE Draft Area
 
         //INIZIO Round Track
@@ -545,6 +535,25 @@ public class TableGUI extends Stage{
 
         //FINE Round Track
 
+        //HBox Tabs per gli altri giocatori
+        HBox OtherPlayerBox = new HBox(80);
+        OtherPlayerBox.setTranslateY(15);
+
+        //Bottoni altri giocatori
+        OtherPlayersList = new ArrayList<>();
+        for (int i = 0; i < (NumPlayers - 1); i++) {
+            Button OtherPlayer = new Button();
+            OtherPlayer.setId("DefaultButton");
+            OtherPlayerBox.getChildren().addAll(OtherPlayer);
+            OtherPlayersList.add(OtherPlayer);
+        }
+
+        //Il giocatore in questione
+        CurrentPlayer = new Label();
+        CurrentPlayer.setId("DefaultButton");
+        CurrentPlayer.setTranslateY(-15);
+        CurrentPlayer.setMinSize(100,50);
+
 
             //BorderPane per contenere tutti gli altri
             StackPane GameplayArea = new StackPane();
@@ -552,11 +561,13 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
             GameplayArea.setAlignment(Tokens,Pos.CENTER);
             GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
+            GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
             GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
             GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
             GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
-            GameplayArea.getChildren().addAll(Tokens,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
+            GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
+            GameplayArea.getChildren().addAll(Tokens,WindowBoard,PrivateObjectiveColor,OtherPlayerBox,CurrentPlayer,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 
 
 
@@ -620,6 +631,15 @@ public class TableGUI extends Stage{
                     );
                     Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue)));
                     Tooltip.install(DiceButtons.get(i),t);
+                }
+            });
+        }
+
+        public void updatePlayersName(){
+            Platform.runLater(()->{
+                CurrentPlayer.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
+                for (int i = 1; i < OtherPlayersList.size(); i++){
+                    OtherPlayersList.get(i).setText(LocalModel.getInstance().getClientPlayerArrayList().get(i).getName());
                 }
             });
         }

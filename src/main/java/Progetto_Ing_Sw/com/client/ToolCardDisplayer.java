@@ -16,11 +16,13 @@ import javafx.stage.StageStyle;
 
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     ToolCardDisplayer(String Title, int Number, String Description, String Info, String CardColor, boolean FirstUsage){
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.getIcons().add(windowIcon);
 
 
 

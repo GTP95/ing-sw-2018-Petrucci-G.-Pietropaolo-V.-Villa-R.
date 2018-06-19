@@ -3,6 +3,7 @@ package Progetto_Ing_Sw.com.client;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -11,14 +12,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class PublicObjectiveCardDisplayer extends Stage{
-
     Scene PublicObjectiveCardDisplayer;
+    static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     PublicObjectiveCardDisplayer(String Title, String Description, int Value){
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.initStyle(StageStyle.TRANSPARENT);
+        this.getIcons().add(windowIcon);
 
         //ImageView della Public Objective Card
         ImageView PublicObjectiveCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/PublicObjectiveDefault.png");
