@@ -32,6 +32,7 @@ public  class LocalModel {
     public volatile boolean sendDataToServer;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
+    private LoginStage loginStageObserver;
 
 
     private LocalModel(){
@@ -149,6 +150,9 @@ public  class LocalModel {
             if(currentObject instanceof ChooseAWindow){
                 this.chooseAWindowobserver=(ChooseAWindow)currentObject;
                 return;
+            }
+            if(currentObject instanceof LoginStage){
+                this.loginStageObserver=(LoginStage)currentObject;
             }
     }
 
@@ -276,5 +280,6 @@ public  class LocalModel {
 
     public void setUsernameIsCorrect(Boolean usernameIsCorrect) {
         this.usernameIsCorrect = usernameIsCorrect;
+        loginStageObserver.usernameCheck();
     }
 }
