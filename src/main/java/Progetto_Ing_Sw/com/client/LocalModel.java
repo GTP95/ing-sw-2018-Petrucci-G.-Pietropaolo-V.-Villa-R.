@@ -280,6 +280,7 @@ public  class LocalModel {
 
     public void setUsernameIsCorrect(Boolean usernameIsCorrect) {
         this.usernameIsCorrect = usernameIsCorrect;
+        while(loginStageObserver==null);
         loginStageObserver.usernameCheck();
     }
 }
