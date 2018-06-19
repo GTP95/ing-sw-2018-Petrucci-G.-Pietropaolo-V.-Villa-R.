@@ -91,6 +91,7 @@ public class SocketClient implements Runnable{
         String messageFields[]=messageContent.split("&");
         switch (messageFields[0]) {
             case "Connected":
+                localModel.setUsernameIsCorrect(true);
                 System.out.println("Connected");
                 break;
             case "Username already in use":

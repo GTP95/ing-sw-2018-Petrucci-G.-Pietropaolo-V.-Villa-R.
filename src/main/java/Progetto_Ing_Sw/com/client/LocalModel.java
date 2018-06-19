@@ -31,6 +31,7 @@ public  class LocalModel {
     private long countdownValue;
     public volatile boolean sendDataToServer;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
+    private Boolean usernameIsCorrect;
 
 
     private LocalModel(){
@@ -38,6 +39,7 @@ public  class LocalModel {
         ourInstance=this;
         sendDataToServer=false;
         exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
+        usernameIsCorrect=null;
     }
 
     public static LocalModel getInstance(){
@@ -150,6 +152,9 @@ public  class LocalModel {
             }
     }
 
+    public Boolean checkUsername(){ //ATTENZIONE: può ritornare null
+        return usernameIsCorrect;
+    }
 
     public void setDrawnDice(ArrayList<ClientDice> drawnDice) {
         this.drawnDice=drawnDice;
@@ -267,5 +272,9 @@ public  class LocalModel {
     public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
         if(exceptions.size()==0) return false;
         return true;
+    }
+
+    public void setUsernameIsCorrect(Boolean usernameIsCorrect) {
+        this.usernameIsCorrect = usernameIsCorrect;
     }
 }
