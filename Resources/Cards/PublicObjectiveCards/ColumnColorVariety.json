@@ -1,3 +1,6 @@
-{"title":"Column Color Variety",
-"description":"Columns with no repeated colors",
-"victoryPoints":5}
+{
+  "title":"Column Color Variety",
+  "description":"Columns with no repeated colors",
+  "victoryPoints":5,
+  "image": "Progetto_Ing_Sw/com/client/GUI/PublicObjectiveCards/ColumnColorVariety.png"
+}

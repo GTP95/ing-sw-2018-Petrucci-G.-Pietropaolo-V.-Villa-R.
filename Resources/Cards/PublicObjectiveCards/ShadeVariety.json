@@ -1,5 +1,6 @@
 {
   "title": "Shade Variety",
   "description": "Sets of one of each value anywhere",
-  "victoryPoints": 5
+  "victoryPoints": 5,
+  "image": "Progetto_Ing_Sw/com/client/GUI/PublicObjectiveCards/ShadeVariety.png"
 }

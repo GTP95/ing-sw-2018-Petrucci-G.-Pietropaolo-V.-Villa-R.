@@ -1,5 +1,6 @@
 {
   "title": "Color Variety",
   "description": "Sets of one of each color anywhere",
-  "victoryPoints": 4
+  "victoryPoints": 4,
+  "image": "Progetto_Ing_Sw/com/client/GUI/PublicObjectiveCards/ColorVariety.png"
 }

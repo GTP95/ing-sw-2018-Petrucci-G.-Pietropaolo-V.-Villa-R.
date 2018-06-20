@@ -34,8 +34,10 @@ public class TableGUI extends Stage{
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
+    ArrayList<Pane> GridBlocks;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0;
+    GridPane griglia;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     TableGUI(ClientGameBoardCard gameBoardCard) {
@@ -56,7 +58,8 @@ public class TableGUI extends Stage{
         int NumPlayers = LocalModel.getInstance().getClientPlayerArrayList().size();
 
         //GridPane per la griglia 5x4
-        GridPane griglia = new GridPane();griglia.setTranslateY(-20);
+        griglia = new GridPane();
+        griglia.setTranslateY(-20);
         griglia.setAlignment(Pos.CENTER);
         for (int i = 0; i < columns; i++) {
             ColumnConstraints column = new ColumnConstraints(75);
@@ -112,6 +115,7 @@ public class TableGUI extends Stage{
                             block.setId("Shade6");
                             break;
                     }
+
                     griglia.add(block, c, r);
 
                 }
@@ -536,32 +540,35 @@ public class TableGUI extends Stage{
         //FINE Round Track
 
         //HBox Tabs per gli altri giocatori
-        HBox OtherPlayerBox = new HBox(80);
-        OtherPlayerBox.setTranslateY(15);
+        FlowPane OtherPlayerBox = new FlowPane();
+        OtherPlayerBox.setTranslateY(10);
+        OtherPlayerBox.setHgap(10);
+        OtherPlayerBox.setStyle("-fx-background-color: black;");
+        OtherPlayerBox.setMaxSize(100,50);
 
         //Bottoni altri giocatori
         OtherPlayersList = new ArrayList<>();
         for (int i = 0; i < (NumPlayers - 1); i++) {
-            Button OtherPlayer = new Button();
+            Button OtherPlayer = new Button("Player 2");
             OtherPlayer.setId("DefaultButton");
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
         }
 
+
         //Il giocatore in questione
-        CurrentPlayer = new Label();
+        CurrentPlayer = new Label("Player 1");
         CurrentPlayer.setId("DefaultButton");
-        CurrentPlayer.setTranslateY(-15);
-        CurrentPlayer.setMinSize(100,50);
+        CurrentPlayer.setTranslateY(-10);
+        CurrentPlayer.setMinSize(200,50);
 
         //Move Button
-        Button Move = new Button("Move Dice");
+        Button Move = new Button("     Move");
         Move.setId("DefaultButton");
         Move.setTranslateX(220);
         Move.setTranslateY(-150);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
-            LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
         });
 
 
@@ -579,7 +586,7 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
             GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-            GameplayArea.getChildren().addAll(Tokens,Move,WindowBoard,PrivateObjectiveColor,/*OtherPlayerBox,CurrentPlayer,*/PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
+            GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 
 
 
@@ -648,6 +655,7 @@ public class TableGUI extends Stage{
         }
 
         public void insertion(){
+            LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
 
         }
 
