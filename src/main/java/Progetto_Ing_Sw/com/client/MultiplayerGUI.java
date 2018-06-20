@@ -157,8 +157,6 @@ public class MultiplayerGUI extends Stage {
     public void StartGame(){
         Platform.runLater(() ->{
             close();
-            //new TableGUI();
-
             new ChooseAWindow();
         });
     }
@@ -167,6 +165,7 @@ public class MultiplayerGUI extends Stage {
 
     public void update(){
         Platform.runLater(() ->{
+            System.err.println("-------------------------------------------------AGGIORNO LA LOBBY------------------------------------");
             int numOfPlayers=LocalModel.getInstance().getClientPlayerArrayList().size();
             switch(numOfPlayers){
                 case 4:
