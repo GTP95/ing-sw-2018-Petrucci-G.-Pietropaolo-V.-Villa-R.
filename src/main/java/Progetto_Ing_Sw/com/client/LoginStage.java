@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -10,6 +12,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 
@@ -43,17 +46,34 @@ public class LoginStage extends Stage {
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
         AcceptBTN.setOnAction(event -> {
             ClientSettings.getInstance().setUsername(UsernameField.getText());
-            if(StartUsernameCheck ==true) {
-                if (LocalModel.getInstance().checkUsername() == true) {
-                    this.close();
-                } else {
-                    Alert UserNameExpetionAlert = new Alert(Alert.AlertType.ERROR);
-                    UserNameExpetionAlert.setTitle("Bad Username");
-                    UserNameExpetionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
-                    UserNameExpetionAlert.showAndWait();
+            System.err.println("---------------------ClientSettings passato---------------------");
+            Task<Boolean> checkUsername = new Task<Boolean>() {
+                @Override
+                protected Boolean call() throws Exception {
+                    System.err.println("----------------------------------------TASK AVVIATO----------------------------------------");
+                    if (LocalModel.getInstance().checkUsername() == true);
+                    return true;
                 }
-            }
-        });
+            };
+            Thread threadToCheckUsername = new Thread(checkUsername);
+            threadToCheckUsername.start();
+
+
+            checkUsername.setOnSucceeded(event1 -> {
+                System.err.println("----------------------------------------TASK HA AVUTO SUCCESSO----------------------------------------");
+                this.close();
+            });
+
+            checkUsername.setOnFailed(event1 ->{
+                    System.err.println("---------------------NOME UTENTE SBAGLIATO---------------------");
+                    Alert UserNameExceptionAlert = new Alert(Alert.AlertType.ERROR);
+                    UserNameExceptionAlert.setTitle("Bad Username");
+                    UserNameExceptionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+                    UserNameExceptionAlert.setContentText("Press OK and enter another Name");
+                    UserNameExceptionAlert.showAndWait();
+                });
+            });
+
 
 
 
@@ -133,7 +153,8 @@ public class LoginStage extends Stage {
     }
 
     public void usernameCheck(){
-        StartUsernameCheck = true;
-    }
+        Platform.runLater(()->
+            StartUsernameCheck = true
+    );}
 
 }
