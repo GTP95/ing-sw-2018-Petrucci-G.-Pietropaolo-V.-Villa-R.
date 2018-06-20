@@ -141,7 +141,7 @@ public class LoginStage extends Stage {
 
 
         //Title Text
-        Text ChooseNameText = new Text("Choose\r\na\r\nName");ChooseNameText.setTextAlignment(TextAlignment.CENTER);ChooseNameText.setId("MenuText");ChooseNameText.setTranslateY(-100);
+        Text ChooseNameText = new Text("Choose\r\na\r\nName");ChooseNameText.setTextAlignment(TextAlignment.CENTER);ChooseNameText.setId("MenuText");ChooseNameText.setTranslateY(-130);
 
         //StackPane
         StackPane LoginFrame= new StackPane();
