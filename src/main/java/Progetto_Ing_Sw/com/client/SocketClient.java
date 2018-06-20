@@ -220,7 +220,7 @@ public class SocketClient implements Runnable{
     private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
         if(localModel.sendDataToServer){
             if(localModel.sendWindowBoard=true){
-                sendJSONmessage(JSONCreator.generateJSON(localModel.getChoosenGameBoardCard()),"GameBoardCard");
+                sendControlMessage("Choosen GameBoardCard's name:%"+localModel.getChoosenGameBoardCard().getTitle());
                 localModel.sendWindowBoard=false;
             }
             ClientDice diceTosend=localModel.getDiceToInsert();

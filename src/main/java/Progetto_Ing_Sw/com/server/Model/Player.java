@@ -70,6 +70,13 @@ public class Player{
         return drawnGameBoardCard;
     }
 
+    public GameBoardCard getGameBoardCardFromTitle(String title){
+        for(GameBoardCard card : drawnGameBoardCard){
+            if(card.getTitle().equals(title)) return card;
+        }
+        return null;
+    }
+
     public WindowBoard getChoosenWindowBoard() {
         return choosenWindowBoard;
     }

@@ -69,7 +69,7 @@ public class SocketClientHandler implements Runnable {
                 sendControlMessage("Game started!");
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 sendGameInitializationData();
-                receiveChoosenWindowBoard();
+                receiveChoosenGameBoardCard();
 
                 while(Table.gameRunning){
 
@@ -193,23 +193,21 @@ public class SocketClientHandler implements Runnable {
 
     }
 
-    private void receiveChoosenWindowBoard(){
+    private void receiveChoosenGameBoardCard(){
         try {
             while (!in.ready()) ; //aspetta che il buffer sia pronto per essere letto
             String message = in.readLine();
             String messageFields[] = message.split("%");
-            System.err.println("receiveWindowBoard output di debug:----------------------------");
+            System.err.println("receiveGameBoardCard output di debug:----------------------------");
             for(String string : messageFields){
                 System.out.println(string);
             }
-            table.getPlayerFromName(myPlayerName).setChoosenGameBoard(JSONCreator.gameBoardCardLoaderFromString(messageFields[0]));
+            myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[1]));
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        catch (InvalidUsernameException e){
-            System.err.println(e.getMessage());
-        }
+        
     }
 
     private void handleInsertDice(Dice dice, int row, int column) {

@@ -10,14 +10,14 @@ public class GameBoardCard extends Card {
     private int [][] matrixScheme;
 
 
-    public GameBoardCard(String title, int gameBoardCode, int difficulty, String otherSide, int otherSideCode) {
+ /*   public GameBoardCard(String title, int gameBoardCode, int difficulty, String otherSide, int otherSideCode) {
         this.title = title;
         this.gameBoardCode = gameBoardCode;
         this.difficulty = difficulty;
         this.otherSide = otherSide;
         this.otherSideCode = otherSideCode;
-    }
-    
+    }*/
+
 
     public String getTitle() {return title;}
     public int getGameBoardCode() {return gameBoardCode;}
