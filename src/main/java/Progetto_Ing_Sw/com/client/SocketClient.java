@@ -231,7 +231,7 @@ public class SocketClient implements Runnable{
     }
 
     private void sendPlaceDiceActionMessage(String json, int row, int column){
-        String actionDescription="Place dice!"+row+"!"+column;
+        String actionDescription="Place dice&"+row+"&"+column;
         sendActionMessage(json, actionDescription);
     }
 }

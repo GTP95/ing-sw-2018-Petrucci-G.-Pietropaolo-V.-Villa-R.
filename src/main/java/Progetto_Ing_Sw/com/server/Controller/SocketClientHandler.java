@@ -228,12 +228,12 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void handleActionMessage(String json, String actionDescription){
-        String[] actionDescriptionFields=actionDescription.split("!");
-        switch(actionDescriptionFields[0]){
+    private void handleActionMessage(String messageContent){
+        String[] fields=messageContent.split("&");
+        switch(fields[1]){
             case "Place dice":
                 try {
-                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(actionDescriptionFields[1]), Integer.parseInt(actionDescriptionFields[2]), JSONCreator.diceLoaderFromString(json));
+                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), JSONCreator.diceLoaderFromString(fields[0]));
                     sendControlMessage("Dice placed successfully");
                     sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
                 }
@@ -254,7 +254,7 @@ public class SocketClientHandler implements Runnable {
             String messageType=messageFields[0];    //il primo campo del messaggio contiene il tipo del messaggio
             switch (messageType){
                 case "Action":
-                    handleActionMessage(messageFields[1], messageFields[2]);
+                    handleActionMessage(messageFields[1]);
             }
         }
         catch(IOException e){
