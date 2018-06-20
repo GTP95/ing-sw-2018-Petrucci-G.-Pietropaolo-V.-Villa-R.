@@ -234,11 +234,13 @@ public class SocketClientHandler implements Runnable {
             case "Place dice":
                 try {
                     myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), JSONCreator.diceLoaderFromString(fields[0]));
+                    myPlayer.getChoosenWindowBoard().printMatrixArrayList();
                     sendControlMessage("Dice placed successfully");
                     sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
                 }
                 catch(PlaceDiceException e){
                     sendControlMessage("Eccezione piazzamento: "+e.getMessage());
+                    myPlayer.getChoosenWindowBoard().printMatrixArrayList();
                 }
                 }
     }

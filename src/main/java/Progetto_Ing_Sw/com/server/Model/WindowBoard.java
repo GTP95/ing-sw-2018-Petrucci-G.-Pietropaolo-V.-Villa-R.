@@ -21,6 +21,7 @@ public class WindowBoard implements WindowBoardObserver{
     public WindowBoard(GameBoardCard gameBoardCard){
         Matrix=gameBoardCard.getMatrixScheme();
         usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
+        setBorders();
     }
 
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
@@ -1191,7 +1192,7 @@ public class WindowBoard implements WindowBoardObserver{
                     }
                     else if (usedMatrix.get(r).get(c).isUsed() == true && c == column - 1 && r == row - 1)
                     {//CASO CELLA OCCUPATA
-                       throw new PlaceDiceException("This cell is occuopied");
+                       throw new PlaceDiceException("This cell is occupied");
                     }
                 }
             }

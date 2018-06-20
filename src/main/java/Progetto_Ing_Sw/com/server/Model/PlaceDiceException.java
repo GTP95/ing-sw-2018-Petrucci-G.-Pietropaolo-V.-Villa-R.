@@ -6,4 +6,9 @@ public class PlaceDiceException extends  Exception {
     public PlaceDiceException(String message){
         this.message=message;
     }
+
+    @Override
+    public String getMessage(){
+        return message;
+    }
 }
