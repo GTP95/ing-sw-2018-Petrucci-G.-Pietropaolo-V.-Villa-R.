@@ -224,9 +224,9 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
-#ReadyBTN{
+#ReadyBTN:disabled{
     /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
-    -fx-text-fill: grey;
+    -fx-text-fill: white;
     -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -244,7 +244,7 @@
 #ReadyBTN:selected{
     /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
 
-    -fx-text-fill: white ;
+    -fx-text-fill: #ffffff;
     -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -258,6 +258,8 @@
     radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
+
+
 
 #Player1WindowLabel{
     -fx-background-image: url("GUI/RedWindowBlown.png");
@@ -737,7 +739,7 @@
     -fx-text-fill: white;
 }
 
-.Die{
+#Die{
     -fx-background-color: grey;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -748,7 +750,7 @@
     -fx-border-radius: 4 4 4 4;
 }
 
-.Die:hover{
+#Die:hover{
 
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -759,8 +761,7 @@
     -fx-border-radius: 4 4 4 4;
 }
 
-.Die:selected {
-
+#Die:selected {
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 70 70 ;

@@ -34,7 +34,7 @@ public class TableGUI extends Stage{
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
-    Dice DieToInsert;
+    ClientDice DieToInsert;
     int Xindex=0, Yindex=0;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
@@ -152,7 +152,7 @@ public class TableGUI extends Stage{
                 }
 
                 if (e.getY() > 98 && e.getY() < 166) {
-                    final int Yindex = 2;
+                    Yindex = 2;
                     System.out.println("Riga: " + Yindex);
                 }
 
@@ -554,12 +554,24 @@ public class TableGUI extends Stage{
         CurrentPlayer.setTranslateY(-15);
         CurrentPlayer.setMinSize(100,50);
 
+        //Move Button
+        Button Move = new Button("Move Dice");
+        Move.setId("DefaultButton");
+        Move.setTranslateX(220);
+        Move.setTranslateY(-150);
+        Move.setOnAction(event -> {
+            LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
+            LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
+        });
+
+
 
             //BorderPane per contenere tutti gli altri
             StackPane GameplayArea = new StackPane();
             GameplayArea.setId("GamemodeSelectionScreen");
             GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
             GameplayArea.setAlignment(Tokens,Pos.CENTER);
+            GameplayArea.setAlignment(Move,Pos.CENTER);
             GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
             GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
             GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
@@ -567,7 +579,7 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
             GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-            GameplayArea.getChildren().addAll(Tokens,WindowBoard,PrivateObjectiveColor,OtherPlayerBox,CurrentPlayer,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
+            GameplayArea.getChildren().addAll(Tokens,Move,WindowBoard,PrivateObjectiveColor,/*OtherPlayerBox,CurrentPlayer,*/PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
 
 
 
@@ -624,7 +636,7 @@ public class TableGUI extends Stage{
                     DiceButtons.get(i).setText("");
                     DiceButtons.get(i).setId(Integer.toString(LocalValue)+new ClientColor().IntToColor(LocalColor));
                     DiceButtons.get(i).setOnAction(event -> {
-                        DieToInsert = new Dice(LocalValue,LocalColor);
+                        DieToInsert = new ClientDice(LocalValue,LocalColor);
                                 System.out.println("Die choosen: " + Integer.toString(LocalValue)+ "," + Integer.toString(LocalColor));
                                 
                     }
@@ -633,6 +645,10 @@ public class TableGUI extends Stage{
                     Tooltip.install(DiceButtons.get(i),t);
                 }
             });
+        }
+
+        public void insertion(){
+
         }
 
         public void updatePlayersName(){
