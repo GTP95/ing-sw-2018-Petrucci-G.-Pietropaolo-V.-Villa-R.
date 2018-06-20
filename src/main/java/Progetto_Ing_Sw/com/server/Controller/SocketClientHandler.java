@@ -202,7 +202,7 @@ public class SocketClientHandler implements Runnable {
             for(String string : messageFields){
                 System.out.println(string);
             }
-            myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[1]));
+            myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
         }
         catch(IOException e){
             e.printStackTrace();
