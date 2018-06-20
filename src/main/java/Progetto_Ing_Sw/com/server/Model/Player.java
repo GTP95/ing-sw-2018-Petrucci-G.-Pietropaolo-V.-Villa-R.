@@ -74,7 +74,7 @@ public class Player{
         for(int counter=0; counter<drawnGameBoardCard.size();counter++){
             if(drawnGameBoardCard.get(counter).getTitle().equals(title)) return drawnGameBoardCard.get(counter);
         }
-        System.err.println("Non ho trovato la GameBoardCard!!!");
+        System.err.println("Non ho trovato la GameBoardCard "+ title);
         return null;
     }
 
