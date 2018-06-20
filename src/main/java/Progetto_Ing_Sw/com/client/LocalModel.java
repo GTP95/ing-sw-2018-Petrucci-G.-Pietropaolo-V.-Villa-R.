@@ -252,7 +252,7 @@ public  class LocalModel {
         multiplayerGUIobserver.updateTimer();
     }
 
-    public void insertDice(ClientDice dice, int x, int y){
+    public void insertDice(ClientDice dice, int row, int column){
         System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
 
         sendDataToServer=true;
