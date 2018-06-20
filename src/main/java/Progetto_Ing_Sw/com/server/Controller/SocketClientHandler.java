@@ -198,6 +198,10 @@ public class SocketClientHandler implements Runnable {
             while (!in.ready()) ; //aspetta che il buffer sia pronto per essere letto
             String message = in.readLine();
             String messageFields[] = message.split("%");
+            System.err.println("receiveWindowBoard output di debug:----------------------------");
+            for(String string : messageFields){
+                System.out.println(string);
+            }
             table.getPlayerFromName(myPlayerName).setChoosenGameBoard(JSONCreator.gameBoardCardLoaderFromString(messageFields[0]));
         }
         catch(IOException e){
