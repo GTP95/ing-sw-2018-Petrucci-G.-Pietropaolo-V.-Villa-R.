@@ -95,6 +95,7 @@ public class SocketClient implements Runnable{
                 System.out.println("Connected");
                 break;
             case "Username already in use":
+                localModel.setUsernameIsCorrect(false);
                 throw new InvalidUsernameException("Username already in use");  //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Max number of players exceeded":
                 throw new TooManyPlayersException();    //TODO: GUI
