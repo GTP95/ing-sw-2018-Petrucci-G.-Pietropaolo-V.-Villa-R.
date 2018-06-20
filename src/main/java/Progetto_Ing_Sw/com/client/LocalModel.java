@@ -70,13 +70,7 @@ public  class LocalModel {
     }
 
     public ArrayList<ClientDice> getDrawnDice() {
-        while(drawnDice==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        while(drawnDice==null);
         return drawnDice;
     }
 
