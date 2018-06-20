@@ -9,7 +9,7 @@ public class GameBoardCard extends Card {
     private int otherSideCode;
     private int [][] matrixScheme;
 
-    /*
+
     public GameBoardCard(String title, int gameBoardCode, int difficulty, String otherSide, int otherSideCode) {
         this.title = title;
         this.gameBoardCode = gameBoardCode;
@@ -17,7 +17,7 @@ public class GameBoardCard extends Card {
         this.otherSide = otherSide;
         this.otherSideCode = otherSideCode;
     }
-    */
+    
 
     public String getTitle() {return title;}
     public int getGameBoardCode() {return gameBoardCode;}
