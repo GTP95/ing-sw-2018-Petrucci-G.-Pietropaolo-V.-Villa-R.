@@ -238,7 +238,7 @@ public class SocketClientHandler implements Runnable {
                     sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
                 }
                 catch(PlaceDiceException e){
-                    sendControlMessage(e.getMessage());
+                    sendControlMessage("Eccezione piazzamento: "+e.getMessage());
                 }
                 }
     }
