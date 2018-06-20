@@ -226,6 +226,7 @@ public class SocketClient implements Runnable{
             ClientDice diceTosend=localModel.getDiceToInsert();
             if(diceTosend!=null){
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
+                localModel.sendDataToServer=false;
             }
         }
     }
