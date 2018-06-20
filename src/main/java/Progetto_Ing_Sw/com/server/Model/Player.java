@@ -26,6 +26,7 @@ public class Player{
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {
         this.choosenGameBoard = choosenGameBoard;
+        this.choosenWindowBoard=new WindowBoard(choosenGameBoard);
     }
     public void setFavorTokens(){
         favorTokens=choosenGameBoard.getDifficulty();
