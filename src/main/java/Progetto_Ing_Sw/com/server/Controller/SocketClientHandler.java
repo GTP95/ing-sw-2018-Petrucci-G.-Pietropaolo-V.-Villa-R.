@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
@@ -111,8 +110,8 @@ public class SocketClientHandler implements Runnable {
         System.out.println("JSON message sent");
     }
 
-    private void sendActionMessage(String actionDescription){   //TODO: stabilire formato actionDescription
-        String messageToSend="Action%"+actionDescription;
+    private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
+        String messageToSend="Action%"+json+"%"+actionDescription;
         out.println(messageToSend);
     }
 
@@ -225,6 +224,21 @@ public class SocketClientHandler implements Runnable {
         } catch (NotEnoughFavorTokensException e) {
             sendControlMessage("You don't have enough favour tokens!");
         }
+    }
+
+    private void handleActionMessage(String message){
+        String[] messageFields=message.split("&");
+        switch(messageFields[1]){
+            case "Place dice":
+                try {
+                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(messageFields[2]), Integer.parseInt(messageFields[3]), JSONCreator.diceLoaderFromString(messageFields[0]));
+                    sendControlMessage("Dice placed successfully");
+                    sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
+                }
+                catch(PlaceDiceException e){
+                    sendControlMessage(e.getMessage());
+                }
+                }
     }
 
     private void handleEndTurn(){}

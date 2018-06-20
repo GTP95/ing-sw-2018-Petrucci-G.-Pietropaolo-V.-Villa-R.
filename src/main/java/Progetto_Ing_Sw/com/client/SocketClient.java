@@ -48,7 +48,8 @@ public class SocketClient implements Runnable{
         System.out.println("Inviato "+username+" come username");
         while (true) {      //TODO:ricevere notifica chiusura GUI ed usarla come condizione
             try {
-                receiveMessage();
+                receiveMessage();   //possibile fonte di problemi perchè bloccante
+                tryToSendMessage();
             } catch (TooManyPlayersException | Progetto_Ing_Sw.com.client.InvalidUsernameException e) {
                 localModel.addException(e);
             }
@@ -57,7 +58,7 @@ public class SocketClient implements Runnable{
 
     private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException {
         try {
-            while (!in.ready()) ;    //aspetta il messaggio dal server
+            if(!in.ready()) return;
             String message = in.readLine();
             System.out.println("Message received: "+message);
             String messageFields[]=message.split("%");  //Salva nell'array i campi del messaggio separati da %
@@ -124,6 +125,9 @@ public class SocketClient implements Runnable{
             case "CountdownValue":
                 localModel.setCountdownValue(Long.parseLong(messageFields[1]));
                 break;
+            case "Dice placed successfully":
+                System.out.println("Dice placed successfully");
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
@@ -150,7 +154,7 @@ public class SocketClient implements Runnable{
                 sendControlMessage("Data received, go ahead");
                 break;
             case "Dice":
-                localModel.addDrawnDice(JSONCreator.diceLoaderFromString(json));
+                localModel.addDrawnDice(JSONCreator.clientDiceLoaderFromString(json));
                 break;
             case "ToolCard":
                 localModel.addDrawnToolCard(JSONCreator.clientToolCardLoaderFromString(json));
@@ -162,6 +166,9 @@ public class SocketClient implements Runnable{
                 break;
             case "GameBoardCard":
                 localModel.addDrawnGameBoardCard(JSONCreator.clientGameBoardCardLoaderFromString(json));
+                break;
+            case "WindowBoard":
+                localModel.setWindowBoard(JSONCreator.clientWindowBoardLoaderFromString(json));
                 break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
@@ -205,7 +212,22 @@ public class SocketClient implements Runnable{
         System.out.println("JSON message sent");
     }
 
+    private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
+        String messageToSend="Action%"+json+"&"+actionDescription;
+        out.println(messageToSend);
+    }
+
     private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
-        
+        if(localModel.sendDataToServer){
+            ClientDice diceTosend=localModel.getDiceToInsert();
+            if(diceTosend!=null){
+                sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
+            }
+        }
+    }
+
+    private void sendPlaceDiceActionMessage(String json, int row, int column){
+        String actionDescription="Place dice&"+row+"&"+column;
+        sendActionMessage(json, actionDescription);
     }
 }

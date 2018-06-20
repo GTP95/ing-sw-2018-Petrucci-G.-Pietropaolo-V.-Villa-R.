@@ -1,10 +1,6 @@
 package Progetto_Ing_Sw.com.tools;
 import Progetto_Ing_Sw.com.client.*;
-import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
-import Progetto_Ing_Sw.com.server.Model.PrivateObjectiveCard;
-import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.Player;
+import Progetto_Ing_Sw.com.server.Model.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -157,7 +153,12 @@ public final class JSONCreator {
         return clientGameBoardCards;
     }
 
-    public static ClientDice diceLoaderFromString(String json){
+    public static Dice diceLoaderFromString(String json){
+        Dice dice=gson.fromJson(json, Dice.class);
+        return dice;
+    }
+
+    public static ClientDice clientDiceLoaderFromString(String json){
         ClientDice dice=gson.fromJson(json, ClientDice.class);
         return dice;
     }

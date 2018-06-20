@@ -33,7 +33,9 @@ public  class LocalModel {
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
     private LoginStage loginStageObserver;
-
+    /*sezione informazioni azioni*/
+    private ClientDice diceToInsert;
+    private int row,column;
 
     private LocalModel(){
 
@@ -41,6 +43,7 @@ public  class LocalModel {
         sendDataToServer=false;
         exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
         usernameIsCorrect=null;
+
     }
 
     public static LocalModel getInstance(){
@@ -97,6 +100,10 @@ public  class LocalModel {
         return drawnPublicObjectiveCards;
     }
 
+    public ClientDice getDiceToInsert() {
+        return diceToInsert;
+    }
+
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
         boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
@@ -128,6 +135,14 @@ public  class LocalModel {
 
     public ClientGameBoardCard getChoosenGameBoardCard() {
         return choosenGameBoardCard;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
@@ -253,8 +268,10 @@ public  class LocalModel {
     }
 
     public void insertDice(ClientDice dice, int row, int column){
-        System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
-
+      //  System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
+        this.diceToInsert=dice;
+        this.row=row;
+        this.column=column;
         sendDataToServer=true;
 
     }
@@ -276,5 +293,11 @@ public  class LocalModel {
         this.usernameIsCorrect = usernameIsCorrect;
         while(loginStageObserver==null);
         loginStageObserver.usernameCheck();
+    }
+
+    public void setWindowBoard(ClientWindowBoard windowBoard) {
+        this.windowBoard = windowBoard;
+        while(tableGUIobserver==null);
+        tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
 }
