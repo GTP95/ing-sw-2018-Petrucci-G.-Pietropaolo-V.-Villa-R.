@@ -30,6 +30,7 @@ public  class LocalModel {
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
     private long countdownValue;
     public volatile boolean sendDataToServer;
+    public volatile boolean sendWindowBoard;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
     private LoginStage loginStageObserver;
@@ -43,7 +44,7 @@ public  class LocalModel {
         sendDataToServer=false;
         exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
         usernameIsCorrect=null;
-
+        windowBoard=null;
     }
 
     public static LocalModel getInstance(){
@@ -259,6 +260,7 @@ public  class LocalModel {
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
         this.choosenGameBoardCard = choosenGameBoardCard;
         this.windowBoard=new ClientWindowBoard(choosenGameBoardCard);
+        this.sendWindowBoard=true;
     }
 
     public void setCountdownValue(long countdownValue) {

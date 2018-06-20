@@ -48,7 +48,7 @@ public class SocketClient implements Runnable{
         System.out.println("Inviato "+username+" come username");
         while (true) {      //TODO:ricevere notifica chiusura GUI ed usarla come condizione
             try {
-                receiveMessage();   //possibile fonte di problemi perchè bloccante
+                receiveMessage();
                 tryToSendMessage();
             } catch (TooManyPlayersException | Progetto_Ing_Sw.com.client.InvalidUsernameException e) {
                 localModel.addException(e);
@@ -219,6 +219,10 @@ public class SocketClient implements Runnable{
 
     private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
         if(localModel.sendDataToServer){
+            if(localModel.sendWindowBoard=true){
+                sendJSONmessage(JSONCreator.generateJSON(localModel.getChoosenGameBoardCard()),"GameBoardCard");
+                localModel.sendWindowBoard=false;
+            }
             ClientDice diceTosend=localModel.getDiceToInsert();
             if(diceTosend!=null){
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
