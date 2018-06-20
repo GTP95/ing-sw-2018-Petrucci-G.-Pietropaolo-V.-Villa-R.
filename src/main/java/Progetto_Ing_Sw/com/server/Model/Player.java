@@ -71,9 +71,10 @@ public class Player{
     }
 
     public GameBoardCard getGameBoardCardFromTitle(String title){
-        for(GameBoardCard card : drawnGameBoardCard){
-            if(card.getTitle().equals(title)) return card;
+        for(int counter=0; counter<drawnGameBoardCard.size();counter++){
+            if(drawnGameBoardCard.get(counter).getTitle().equals(title)) return drawnGameBoardCard.get(counter);
         }
+        System.err.println("Non ho trovato la GameBoardCard!!!");
         return null;
     }
 

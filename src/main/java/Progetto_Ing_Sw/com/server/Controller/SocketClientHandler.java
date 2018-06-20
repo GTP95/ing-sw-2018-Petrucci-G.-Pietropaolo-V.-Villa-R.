@@ -207,7 +207,7 @@ public class SocketClientHandler implements Runnable {
         catch(IOException e){
             e.printStackTrace();
         }
-        
+
     }
 
     private void handleInsertDice(Dice dice, int row, int column) {
