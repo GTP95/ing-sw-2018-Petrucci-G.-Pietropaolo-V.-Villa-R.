@@ -302,4 +302,8 @@ public  class LocalModel {
         while(tableGUIobserver==null);
         tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
+    public void resetDiceArrayIfNecessary(){
+        if(drawnDice==null) return;
+        drawnDice.clear();
+    }
 }

@@ -17,6 +17,7 @@ public class SocketClientHandler implements Runnable {
     public final Thread ourThread;
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
+    private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown;
@@ -70,9 +71,11 @@ public class SocketClientHandler implements Runnable {
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
+                currentDiceArrayList=table.getDrawnDice();
 
                 while(Table.gameRunning){
                     receiveMessage();
+                    updateTableIfSomethingChanged();
                  }
 
             }
@@ -258,18 +261,30 @@ public class SocketClientHandler implements Runnable {
 
     private void receiveMessage(){
         try {
-            while (!in.ready());    //aspetta che il buffer sia prono ad essere letto
-            String message = in.readLine();
-            System.out.println("Message received: "+message);
-            String messageFields[]=message.split("%");  //Salva nell'array i campi del messaggio separati da %
-            String messageType=messageFields[0];    //il primo campo del messaggio contiene il tipo del messaggio
-            switch (messageType){
-                case "Action":
-                    handleActionMessage(messageFields[1]);
+            if (in.ready()) {    //aspetta che il buffer sia prono ad essere letto
+                String message = in.readLine();
+                System.out.println("Message received: " + message);
+                String messageFields[] = message.split("%");  //Salva nell'array i campi del messaggio separati da %
+                String messageType = messageFields[0];    //il primo campo del messaggio contiene il tipo del messaggio
+                switch (messageType) {
+                    case "Action":
+                        handleActionMessage(messageFields[1]);
+                }
             }
         }
         catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    private void updateTableIfSomethingChanged(){
+        currentDiceArrayList=table.getDrawnDice();
+        if(!currentDiceArrayList.equals(previousDiceArrayList)){
+            sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+            for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+                sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
+            }
+            previousDiceArrayList=currentDiceArrayList;
         }
     }
 }

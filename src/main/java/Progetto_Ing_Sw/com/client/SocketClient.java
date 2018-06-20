@@ -115,6 +115,7 @@ public class SocketClient implements Runnable{
                 break;
             case "Sending Dice":
                 localModel.setNumOfDice(Integer.parseInt(messageFields[1]));
+                localModel.resetDiceArrayIfNecessary();
                 break;
             case "Sending ToolCards":
                 localModel.setNumOfToolCards(Integer.parseInt(messageFields[1]));
