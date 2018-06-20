@@ -1,5 +1,5 @@
 {
   "port":1025,
-  "timerValue":3000,
+  "timerValue":30000,
   "timeout":30000
 }
