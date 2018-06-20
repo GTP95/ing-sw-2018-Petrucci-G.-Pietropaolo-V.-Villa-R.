@@ -72,7 +72,7 @@ public class SocketClientHandler implements Runnable {
                 receiveChoosenGameBoardCard();
 
                 while(Table.gameRunning){
-
+                    receiveMessage();
                  }
 
             }
@@ -228,12 +228,12 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void handleActionMessage(String message){
-        String[] messageFields=message.split("&");
-        switch(messageFields[1]){
+    private void handleActionMessage(String json, String actionDescription){
+        String[] actionDescriptionFields=actionDescription.split("!");
+        switch(actionDescriptionFields[0]){
             case "Place dice":
                 try {
-                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(messageFields[2]), Integer.parseInt(messageFields[3]), JSONCreator.diceLoaderFromString(messageFields[0]));
+                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(actionDescriptionFields[1]), Integer.parseInt(actionDescriptionFields[2]), JSONCreator.diceLoaderFromString(json));
                     sendControlMessage("Dice placed successfully");
                     sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
                 }
@@ -244,4 +244,21 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void handleEndTurn(){}
+
+    private void receiveMessage(){
+        try {
+            while (!in.ready());    //aspetta che il buffer sia prono ad essere letto
+            String message = in.readLine();
+            System.out.println("Message received: "+message);
+            String messageFields[]=message.split("%");  //Salva nell'array i campi del messaggio separati da %
+            String messageType=messageFields[0];    //il primo campo del messaggio contiene il tipo del messaggio
+            switch (messageType){
+                case "Action":
+                    handleActionMessage(messageFields[1], messageFields[2]);
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }
