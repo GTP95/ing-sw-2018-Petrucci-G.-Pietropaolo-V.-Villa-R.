@@ -53,10 +53,13 @@ public class SocketClient implements Runnable{
             } catch (TooManyPlayersException | Progetto_Ing_Sw.com.client.InvalidUsernameException e) {
                 localModel.addException(e);
             }
+            catch (IllegalDiceException e){
+                localModel.addException(e);
+            }
         }
     }
 
-    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException {
+    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException {
         try {
             if(!in.ready()) return;
             String message = in.readLine();
@@ -88,7 +91,7 @@ public class SocketClient implements Runnable{
         }
     }
 
-    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException {
+    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException {
         String messageFields[]=messageContent.split("&");
         switch (messageFields[0]) {
             case "Connected":
@@ -128,6 +131,8 @@ public class SocketClient implements Runnable{
             case "Dice placed successfully":
                 System.out.println("Dice placed successfully");
                 break;
+            case "Selected dice doesn't exists!":
+                throw new IllegalDiceException("Selected dice doesn't exists!");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));

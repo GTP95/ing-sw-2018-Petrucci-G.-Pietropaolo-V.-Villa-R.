@@ -75,6 +75,10 @@ public class Table {
     	return clone;
     }
 
+    public Boolean removeDice(Dice dice){
+        return drawnDice.remove(dice);
+    }
+
     public Dice getChoosenDice(Dice dice) throws IllegalDiceException{      //Estrae il dado specificato prendendolo tra quelli disponibili. Se il dado indicato non è disponibile lancia eccezione
         for(Dice die : drawnDice){
             if(die.equals(dice)){
@@ -88,6 +92,10 @@ public class Table {
     public void returnDice(Dice dice){  //"Restituisce" il dado, nel senso che viene riposto nuovamente sul tavolo di gioco a disposizione dei giocatori
         Dice cloneDice=new Dice(dice.getValue(),dice.getColor());   //fa una copia del dado per evitare modifiche del dado al di fuori di questa classe
         drawnDice.add(cloneDice);
+    }
+
+    public boolean diceExists(Dice dice){
+        return drawnDice.contains(dice);
     }
 
     public void startGame(){

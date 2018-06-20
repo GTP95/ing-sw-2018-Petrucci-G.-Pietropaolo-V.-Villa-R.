@@ -1,7 +1,7 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.client;
 
-public class IllegalDiceException extends Throwable {
-  private   String message;
+public class IllegalDiceException extends Exception {
+   private String message;
 
     IllegalDiceException(){
         message="Selected dice is not available";   //messaggio di default
@@ -12,7 +12,7 @@ public class IllegalDiceException extends Throwable {
     }
 
     @Override
-    public String getMessage() {
+    public String getMessage(){
         return message;
     }
 }

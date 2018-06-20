@@ -228,21 +228,30 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void handleActionMessage(String messageContent){
-        String[] fields=messageContent.split("&");
-        switch(fields[1]){
+    private void handleActionMessage(String messageContent) {
+        String[] fields = messageContent.split("&");
+        switch (fields[1]) {
             case "Place dice":
                 try {
-                    myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), JSONCreator.diceLoaderFromString(fields[0]));
+                    Dice dice = JSONCreator.diceLoaderFromString(fields[0]);
+                    if (table.diceExists(dice)) {
+                        myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), dice);
+                        if (table.removeDice(dice)) System.out.println("Dice removed");
+                        sendControlMessage("Dice placed successfully");
+                        sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()), "WindowBoard");
+                        sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+                        for (Dice diceToSend : table.getDrawnDice()) {  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+                            sendJSONmessage(JSONCreator.generateJSON(diceToSend), "Dice");
+                        }
+
+                    } else throw new IllegalDiceException("Selected dice doesn't exists!");
+                } catch (PlaceDiceException e) {
+                    sendControlMessage(e.getMessage());
                     myPlayer.getChoosenWindowBoard().printMatrixArrayList();
-                    sendControlMessage("Dice placed successfully");
-                    sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()),"WindowBoard");
+                } catch (IllegalDiceException e) {
+                    sendControlMessage(e.getMessage());
                 }
-                catch(PlaceDiceException e){
-                    sendControlMessage("Eccezione piazzamento: "+e.getMessage());
-                    myPlayer.getChoosenWindowBoard().printMatrixArrayList();
-                }
-                }
+        }
     }
 
     private void handleEndTurn(){}
