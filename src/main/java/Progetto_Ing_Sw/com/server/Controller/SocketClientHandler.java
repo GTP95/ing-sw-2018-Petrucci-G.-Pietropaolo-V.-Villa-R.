@@ -69,9 +69,9 @@ public class SocketClientHandler implements Runnable {
                 sendPlayerMessage();
                 sendControlMessage("Game started!");
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
+                previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
-                currentDiceArrayList=table.getDrawnDice();
 
                 while(Table.gameRunning){
                     receiveMessage();
@@ -110,7 +110,7 @@ public class SocketClientHandler implements Runnable {
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
-        System.out.println("JSON message sent");
+        System.out.println("JSON message sent "+nameOfClass);
     }
 
     private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
@@ -280,7 +280,8 @@ public class SocketClientHandler implements Runnable {
     private void updateTableIfSomethingChanged(){
         currentDiceArrayList=table.getDrawnDice();
         if(!currentDiceArrayList.equals(previousDiceArrayList)){
-            sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+            System.err.println("--------modifica dadi rilevata---------");
+            sendControlMessage("Sending Dice&"+currentDiceArrayList.size());    //Comunico al client quanti dadi sto per inviare
             for(Dice dice : currentDiceArrayList){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
