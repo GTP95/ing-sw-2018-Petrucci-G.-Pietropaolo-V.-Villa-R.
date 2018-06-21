@@ -76,7 +76,12 @@ public class Table {
     }
 
     public Boolean removeDice(Dice dice){
-        return drawnDice.remove(dice);
+        if(drawnDice.contains(dice)){
+            int index=drawnDice.indexOf(dice);
+            drawnDice.get(index).setValue(0);
+            return true;
+        }
+        return false;
     }
 
     public Dice getChoosenDice(Dice dice) throws IllegalDiceException{      //Estrae il dado specificato prendendolo tra quelli disponibili. Se il dado indicato non è disponibile lancia eccezione
