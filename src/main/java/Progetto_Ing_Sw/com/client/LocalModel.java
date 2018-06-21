@@ -1,8 +1,5 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
-import Progetto_Ing_Sw.com.server.Model.GameBoardCard;
-
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -29,8 +26,7 @@ public  class LocalModel {
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
     private long countdownValue;
-    public volatile boolean sendDataToServer;
-    public volatile boolean sendWindowBoard;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
     private LoginStage loginStageObserver;
@@ -45,6 +41,7 @@ public  class LocalModel {
         exceptions=new ArrayBlockingQueue<>(3); //La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
         usernameIsCorrect=null;
         windowBoard=null;
+        immediatelyUpdateGUI=false;
     }
 
     public static LocalModel getInstance(){
@@ -211,10 +208,7 @@ public  class LocalModel {
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
         drawnDice.add(dice);
-        if(drawnDice.size()==numOfDice){
-            while(tableGUIobserver==null);
-            tableGUIobserver.updateDice();
-            }
+        if(immediatelyUpdateGUI) tableGUIobserver.updateDice();
     }
 
     public void addDrawnToolCard(ClientToolCard toolCard){
@@ -308,5 +302,6 @@ public  class LocalModel {
     public void resetDiceArrayIfNecessary(){
         if(drawnDice==null) return;
         drawnDice.clear();
+        immediatelyUpdateGUI=true;
     }
 }
