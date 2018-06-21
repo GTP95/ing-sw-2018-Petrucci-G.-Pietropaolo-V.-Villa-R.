@@ -281,7 +281,7 @@ public class SocketClientHandler implements Runnable {
         currentDiceArrayList=table.getDrawnDice();
         if(!currentDiceArrayList.equals(previousDiceArrayList)){
             sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
-            for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+            for(Dice dice : currentDiceArrayList){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
             previousDiceArrayList=currentDiceArrayList;
