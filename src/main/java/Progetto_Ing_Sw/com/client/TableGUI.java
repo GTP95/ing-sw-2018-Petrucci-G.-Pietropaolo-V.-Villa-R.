@@ -35,7 +35,7 @@ public class TableGUI extends Stage{
     ArrayList<Pane> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
     ClientDice DieToInsert;
-    int Xindex=0, Yindex=0,NumPlayers;
+    int Xindex=0, Yindex=0,NumPlayers, LocalValue, LocalColor;
     GridPane griglia;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
@@ -667,12 +667,13 @@ public class TableGUI extends Stage{
         }
 
 
-        int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
-        int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+
         public void updateDice(){
             System.err.println("--------------------------------------UPDATE DICE-----------------------------------------------------");
             Platform.runLater(()->{
                 for (int i=0; i<DiceButtons.size(); i++ ){
+                    LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
+                    LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
                     if (LocalValue==0){
                         DiceButtons.get(i).setVisible(false);
                     }
