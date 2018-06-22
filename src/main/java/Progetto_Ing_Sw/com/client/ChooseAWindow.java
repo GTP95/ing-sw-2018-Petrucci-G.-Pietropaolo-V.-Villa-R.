@@ -161,28 +161,28 @@ public class ChooseAWindow extends Stage {
         difficulty4 = new Label("•");difficulty4.setId("WindowInfo");difficulty4.setTranslateY(275);difficulty4.setStyle("-fx-font-size: 45");
 
         StackPane Board1 = new StackPane();Board1.setTranslateX(1000);
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(event ->
                 Board1.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(0)),info1,difficulty1,Window1BTN)
         );
         pause.play();
 
         StackPane Board2 = new StackPane();Board2.setTranslateX(1000);
-        PauseTransition pause2 = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
         pause2.setOnFinished(event ->
                 Board2.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(1)),info2,difficulty2,Window2BTN)
         );
         pause2.play();
 
         StackPane Board3 = new StackPane();Board3.setTranslateX(1000);
-        PauseTransition pause3 = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause3 = new PauseTransition(Duration.seconds(1));
         pause3.setOnFinished(event ->
                 Board3.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(2)),info3,difficulty3,Window3BTN)
         );
         pause3.play();
 
         StackPane Board4 = new StackPane();Board4.setTranslateX(1000);
-        PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause4 = new PauseTransition(Duration.seconds(1));
         pause4.setOnFinished(event ->
                 Board4.getChildren().addAll(CreateAGrid(LocalModel.getInstance().getDrawnGameBoardCards().get(3)),info4,difficulty4,Window4BTN)
         );
