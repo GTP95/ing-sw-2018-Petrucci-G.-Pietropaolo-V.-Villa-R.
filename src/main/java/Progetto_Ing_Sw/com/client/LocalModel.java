@@ -305,7 +305,7 @@ public  class LocalModel {
         immediatelyUpdateGUI=true;
     }
     public void notifyTurn(){
-       // while (tableGUIobserver==null);
+        while (tableGUIobserver==null);
         tableGUIobserver.isYourTurn();
     }
 }

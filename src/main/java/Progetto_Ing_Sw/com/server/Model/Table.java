@@ -106,7 +106,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
-        randomizePlayerArray();
+      //  randomizePlayerArray();
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
             player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
