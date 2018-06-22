@@ -297,6 +297,9 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(table.getActivePlayer().getName().equals(myPlayerName)) sendControlMessage("It's your turn now");
+        if(table.getActivePlayer().getName().equals(myPlayerName)) {
+            sendControlMessage("It's your turn now");
+            System.err.println("--------Inviata notifica inizio turno----------------");
+        }
     }
 }
