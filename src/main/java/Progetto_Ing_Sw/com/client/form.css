@@ -36,6 +36,11 @@
     -fx-background-color: #ffef10;
 }
 
+#grey{
+    -fx-background-color: grey;
+    -fx-opacity: 0.75;
+}
+
 #startScreen{
     -fx-background-image: url("GUI/StartMenuHover.png");
     -fx-background-repeat: no-repeat;
