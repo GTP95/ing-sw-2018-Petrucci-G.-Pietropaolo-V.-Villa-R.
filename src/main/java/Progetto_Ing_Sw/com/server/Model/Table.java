@@ -4,6 +4,7 @@ import Progetto_Ing_Sw.com.server.Controller.Lobby;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 public class Table {
 
@@ -105,6 +106,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
+        randomizePlayerArray();
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
             player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
@@ -136,5 +138,32 @@ public class Table {
         drawnDice.add(cloneDice);
     }
 
+    private ArrayList<Player> shufflePlayerArray(){
+        ArrayList<Player>arrayToReturn=new ArrayList<>(players.size());
+        for(int index1=0,index2=players.size()-1;index1<players.size();index1++, index2--){
+            arrayToReturn.add(index2,players.get(index1));
+        }
+        return arrayToReturn;
+    }
+
+    private void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
+        if(currentPlayer==players.size()-1){
+            currentPlayer=0;
+            return;
+        }
+        currentPlayer++;
+    }
+
+    private void randomizePlayerArray(){
+        ArrayList<Player> randomizedArray=new ArrayList<>(players.size());
+        SplittableRandom splittableRandom=new SplittableRandom();
+        int index;
+        for(Player player : players){
+            index=splittableRandom.nextInt(0,players.size());
+            while(randomizedArray.get(index)!=null) index=splittableRandom.nextInt(0,players.size());
+            randomizedArray.add(index,player);
+        }
+        players=randomizedArray;
+    }
 }
 
