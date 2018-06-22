@@ -134,6 +134,8 @@ public class SocketClient implements Runnable{
                 break;
             case "Selected dice doesn't exists!":
                 throw new IllegalDiceException("Selected dice doesn't exists!");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+            case "It's your turn now":
+                localModel.notifyTurn();
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));

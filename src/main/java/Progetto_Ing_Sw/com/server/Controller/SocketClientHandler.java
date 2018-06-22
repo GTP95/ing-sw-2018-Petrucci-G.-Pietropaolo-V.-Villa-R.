@@ -76,6 +76,7 @@ public class SocketClientHandler implements Runnable {
                 while(Table.gameRunning){
                     receiveMessage();
                     updateTableIfSomethingChanged();
+                    notifyIfIsYourTurn();
                  }
 
             }
@@ -279,13 +280,23 @@ public class SocketClientHandler implements Runnable {
 
     private void updateTableIfSomethingChanged(){
         currentDiceArrayList=table.getDrawnDice();
-        if(!currentDiceArrayList.equals(previousDiceArrayList)){
-            System.err.println("--------modifica dadi rilevata---------");
-            sendControlMessage("Sending Dice&"+currentDiceArrayList.size());    //Comunico al client quanti dadi sto per inviare
+        boolean changeDetected=false;
+        for(int index=0;index<currentDiceArrayList.size();index++){
+            if(currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
+                changeDetected=true;
+                break;
+            }
+        }
+        if(changeDetected){
+            sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
             for(Dice dice : currentDiceArrayList){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
             previousDiceArrayList=currentDiceArrayList;
         }
+    }
+
+    private void notifyIfIsYourTurn(){
+        if(table.getActivePlayer().getName().equals(myPlayerName)) sendControlMessage("It's your turn now");
     }
 }

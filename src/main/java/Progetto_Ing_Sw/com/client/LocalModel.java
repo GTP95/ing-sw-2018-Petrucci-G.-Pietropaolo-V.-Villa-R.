@@ -304,4 +304,8 @@ public  class LocalModel {
         drawnDice.clear();
         immediatelyUpdateGUI=true;
     }
+    public void notifyTurn(){
+        while (tableGUIobserver==null);
+        tableGUIobserver.isYourTurn();
+    }
 }

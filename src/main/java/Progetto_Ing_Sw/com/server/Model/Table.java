@@ -146,8 +146,9 @@ public class Table {
         return arrayToReturn;
     }
 
-    private void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
+    public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){
+            shufflePlayerArray();
             currentPlayer=0;
             return;
         }
