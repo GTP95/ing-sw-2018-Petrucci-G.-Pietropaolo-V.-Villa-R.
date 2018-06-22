@@ -523,7 +523,6 @@ public class TableGUI extends Stage{
         DiceCover.setId("grey");
         DiceCover.setMaxSize(200,400);
         DiceCover.setTranslateX(-10);
-        DiceCover.setTranslateY(-10);
         DiceCover.setVisible(true);
 
 
