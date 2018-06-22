@@ -30,12 +30,13 @@ import java.util.Collections;
 public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer;
+    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer,DiceCover;
     Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
     ArrayList<Pane> GridBlocks;
+    ArrayList<ClientPlayer> OtherPlayersNames;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia;
@@ -521,6 +522,14 @@ public class TableGUI extends Stage{
         DraftPool.setAlignment(Pos.CENTER);
         DraftPool.setMaxSize(200,400);
 
+        DiceCover = new Label();
+        DiceCover.setId("grey");
+        DiceCover.setMaxSize(200,400);
+        DiceCover.setTranslateX(-10);
+        DiceCover.setTranslateY(-10);
+        DiceCover.setVisible(true);
+
+
 
 
         DiceButtons= new ArrayList<>();
@@ -535,9 +544,7 @@ public class TableGUI extends Stage{
         }
 
 
-
-
-
+        
 
         //FINE Draft Area
 
@@ -555,24 +562,34 @@ public class TableGUI extends Stage{
         FlowPane OtherPlayerBox = new FlowPane();
         OtherPlayerBox.setTranslateY(10);
         OtherPlayerBox.setHgap(10);
-        OtherPlayerBox.setStyle("-fx-background-color: black;");
-        OtherPlayerBox.setMaxSize(100,50);
+        //OtherPlayerBox.setStyle("-fx-background-color: black;");
+        OtherPlayerBox.setMaxSize(600,50);
 
         //Bottoni altri giocatori
+        OtherPlayersNames = (ArrayList<ClientPlayer>) LocalModel.getInstance().getClientPlayerArrayList().clone();
+        for (int i=0; i<OtherPlayersNames.size();i++){
+            if (OtherPlayersNames.get(i).getName().equals(ClientSettings.getInstance().getUsername())){
+                OtherPlayersNames.remove(i);
+                break;
+            }
+        }
+
         OtherPlayersList = new ArrayList<>();
         for (int i = 0; i < (NumPlayers - 1); i++) {
-            Button OtherPlayer = new Button("Player 2");
+            Button OtherPlayer = new Button(OtherPlayersNames.get(i).getName());
             OtherPlayer.setId("DefaultButton");
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
         }
 
 
+
+
         //Il giocatore in questione
-        CurrentPlayer = new Label("Player 1");
+        CurrentPlayer = new Label(ClientSettings.getInstance().getUsername());
         CurrentPlayer.setId("DefaultButton");
         CurrentPlayer.setTranslateY(-10);
-        CurrentPlayer.setMinSize(200,50);
+        //CurrentPlayer.setMinSize(200,50);
 
         //Move Button
         Button Move = new Button("     Move");
@@ -596,9 +613,10 @@ public class TableGUI extends Stage{
             GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
             GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
             GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+            GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
             GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
             GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-            GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,RoundTrack);
+            GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
 
 
 
