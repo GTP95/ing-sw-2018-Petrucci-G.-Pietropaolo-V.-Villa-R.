@@ -544,7 +544,7 @@ public class TableGUI extends Stage{
         }
 
 
-        
+
 
         //FINE Draft Area
 
