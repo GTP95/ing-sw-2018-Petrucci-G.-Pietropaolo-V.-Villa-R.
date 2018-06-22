@@ -521,8 +521,9 @@ public class TableGUI extends Stage{
 
         DiceCover = new Label();
         DiceCover.setId("grey");
-        DiceCover.setMaxSize(200,400);
+        DiceCover.setMaxSize(DraftPool.getWidth(),DraftPool.getHeight());
         DiceCover.setTranslateX(-10);
+        DiceCover.setTranslateY(-10);
         DiceCover.setVisible(true);
 
 
