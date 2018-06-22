@@ -574,6 +574,10 @@ public class TableGUI extends Stage{
         for (int i = 0; i < (NumPlayers - 1); i++) {
             Button OtherPlayer = new Button(OtherPlayersNames.get(i).getName());
             OtherPlayer.setId("DefaultButton");
+            OtherPlayer.setOnAction(event ->{
+                OtherPlayerBoardView OtherBoard = new OtherPlayerBoardView(gameBoardCard);
+                OtherBoard.showAndWait();
+            });
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
         }
@@ -694,6 +698,7 @@ public class TableGUI extends Stage{
         }
 
         public void isYourTurn(){
+            System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
             Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
             itsYourTurn.initStyle(StageStyle.UNDECORATED);
             itsYourTurn.setHeaderText("It's Your Turn boy!");

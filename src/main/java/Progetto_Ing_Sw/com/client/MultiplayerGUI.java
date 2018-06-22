@@ -42,7 +42,7 @@ public class MultiplayerGUI extends Stage {
         RMISocket.setAlignment(Pos.CENTER);
 
         Button socketBTN = new Button("SOCKET");socketBTN.setId("SocketBTN");socketBTN.setPrefSize(250,250);
-        //TODO configurare la parte socket all'attivazione
+
         socketBTN.setOnAction(event -> {LoginStage Login = new LoginStage(); Login.showAndWait(); this.setScene(LobbyScene);});
 
 

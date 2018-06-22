@@ -43,7 +43,10 @@ public class ToolCardDisplayer extends Stage {
         Pay2Icon.setMinSize(256,256);
         Pay2Icon.setId("Pay2Button");
 
-        Button GoBack = new Button();GoBack.setTranslateX(-450);GoBack.setId("BackButton2");GoBack.setMinSize(256,256);
+        Button GoBack = new Button();
+        GoBack.setTranslateX(-450);
+        GoBack.setId("BackButton2");
+        GoBack.setMinSize(256,256);
         GoBack.setOnAction(event -> this.close());
 
         //I Label che contengono le varie descrizioni della Carta

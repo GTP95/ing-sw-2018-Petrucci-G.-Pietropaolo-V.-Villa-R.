@@ -2,21 +2,23 @@ package Progetto_Ing_Sw.com.client;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.Stack;
+
 public class OtherPlayerBoardView extends Stage {
-    /*Scene OtherPlayerBoardScene;
+    Scene OtherPlayerBoardScene;
     GridPane griglia;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
-    OtherPlayerBoardView(){
+    OtherPlayerBoardView(ClientGameBoardCard gameBoardCard){
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.initStyle(StageStyle.TRANSPARENT);
@@ -89,10 +91,31 @@ public class OtherPlayerBoardView extends Stage {
             }
         }
 
+        Button goback = new Button();
+        goback.setTranslateX(-450);
+        goback.setMinSize(256,256);
+        goback.setId("BackButton2");
+        goback.setOnAction(event -> this.close());
+
         griglia.setAlignment(Pos.CENTER);
 
-        OtherPlayerBoardScene = new Scene(griglia,1280,720);
+        //HBox che contiene le informazioni sulla carta
+        HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
+        Text WindowTitle = new Text(gameBoardCard.getTitle());WindowTitle.setFill(Paint.valueOf("white"));
+        WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
+        WindowInfo.getChildren().addAll(WindowTitle);
+
+        //StackPane che fa da cornice alla griglia
+        StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
+        WindowBoard.getChildren().addAll(griglia,WindowInfo);
+
+        StackPane OtherBoardStack = new StackPane();
+        OtherBoardStack.getChildren().addAll(WindowBoard,goback);
+
+        OtherPlayerBoardScene = new Scene(OtherBoardStack,1280,720);
         OtherPlayerBoardScene.setFill(Color.rgb(0, 0, 0, 0.75));
         OtherPlayerBoardScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-    }*/
+
+        this.setScene(OtherPlayerBoardScene);
+    }
 }
