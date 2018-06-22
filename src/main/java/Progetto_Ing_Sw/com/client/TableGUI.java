@@ -9,10 +9,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -697,13 +694,16 @@ public class TableGUI extends Stage{
 
         }
 
-        public void updatePlayersName(){
-            Platform.runLater(()->{
-                CurrentPlayer.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
-                for (int i = 1; i < OtherPlayersList.size(); i++){
-                    OtherPlayersList.get(i).setText(LocalModel.getInstance().getClientPlayerArrayList().get(i).getName());
-                }
-            });
+        public void isYourTurn(){
+            Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
+            itsYourTurn.initStyle(StageStyle.UNDECORATED);
+            itsYourTurn.setHeaderText("It's Your Turn boy!");
+            DiceCover.setVisible(false);
+            CurrentPlayer.setId("DefaultButtonActivated");
         }
 
+        public void isNotYourTurn(){
+            DiceCover.setVisible(true);
+            CurrentPlayer.setId("DefaultButton");
+        }
 }

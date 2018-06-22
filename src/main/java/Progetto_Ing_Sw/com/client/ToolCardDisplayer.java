@@ -22,6 +22,7 @@ public class ToolCardDisplayer extends Stage {
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
+        this.initStyle(StageStyle.TRANSPARENT);
         this.getIcons().add(windowIcon);
 
 
@@ -76,7 +77,6 @@ public class ToolCardDisplayer extends Stage {
 
         ToolCardDisplay = new Scene(ToolCardD,1280,720);
         ToolCardDisplay.setFill(Color.rgb(0, 0, 0, 0.75));
-        this.initStyle(StageStyle.TRANSPARENT);
         ToolCardDisplay.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
 
 
