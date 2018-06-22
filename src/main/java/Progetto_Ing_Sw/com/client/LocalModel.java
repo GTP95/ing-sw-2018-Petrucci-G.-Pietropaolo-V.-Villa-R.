@@ -306,6 +306,11 @@ public  class LocalModel {
     }
     public void notifyTurn(){
        // while (tableGUIobserver==null);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         tableGUIobserver.isYourTurn();
     }
 }
