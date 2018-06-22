@@ -523,7 +523,7 @@ public class TableGUI extends Stage{
         DiceCover.setId("grey");
         DiceCover.setMaxSize(DraftPool.getWidth(),DraftPool.getHeight());
         DiceCover.setTranslateX(-10);
-        DiceCover.setTranslateY(-10);
+        //DiceCover.setTranslateY(-10);
         DiceCover.setVisible(true);
 
 
@@ -703,6 +703,7 @@ public class TableGUI extends Stage{
             Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
             itsYourTurn.initStyle(StageStyle.UNDECORATED);
             itsYourTurn.setHeaderText("It's Your Turn boy!");
+            itsYourTurn.showAndWait()
             DiceCover.setVisible(false);
             CurrentPlayer.setId("DefaultButtonActivated");
         }
