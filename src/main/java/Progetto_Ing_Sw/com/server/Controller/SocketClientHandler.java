@@ -23,8 +23,8 @@ public class SocketClientHandler implements Runnable {
     private Timer countdown;
 
     public SocketClientHandler(Socket clientSocket){
-        this.clientSocket=clientSocket;
-        ourThread=Thread.currentThread();
+        this.clientSocket=clientSocket; //socket su cui è in ascolto il client
+        ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
         countdown=new Timer();
 
         try {
@@ -46,6 +46,7 @@ public class SocketClientHandler implements Runnable {
 
             try {
                     myPlayerName=in.readLine();
+                    ourThread.setName(myPlayerName+"'s SocketClientHandler");
                     Lobby.getInstance().addPlayer(myPlayerName, this);
                     sendControlMessage("Connected");
 
@@ -71,14 +72,17 @@ public class SocketClientHandler implements Runnable {
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
+                System.err.println("----mi blocco subito dopo questo "+ourThread.getName());
                 receiveChoosenGameBoardCard();
+                System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
+                    System.err.println("STAMPO O NON STAMPO? QUESTO È IL PROBLEMA "+ourThread.getName());
                     receiveMessage();
                     updateTableIfSomethingChanged();
                     notifyIfIsYourTurn();
                  }
-
+                System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -199,7 +203,9 @@ public class SocketClientHandler implements Runnable {
 
     private void receiveChoosenGameBoardCard(){
         try {
+            System.err.println("ASPETTO LA GAMEBOARDCARD "+ourThread.getName());
             while (!in.ready()) ; //aspetta che il buffer sia pronto per essere letto
+            System.err.println("Sto per leggere il buffer "+ourThread.getName());
             String message = in.readLine();
             String messageFields[] = message.split("%");
             System.err.println("receiveGameBoardCard output di debug:----------------------------");
@@ -297,6 +303,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
+        System.err.println("--------controllo turno------------");
         if(table.getActivePlayer().getName().equals(myPlayerName)) {
             sendControlMessage("It's your turn now");
             System.err.println("--------Inviata notifica inizio turno----------------");
