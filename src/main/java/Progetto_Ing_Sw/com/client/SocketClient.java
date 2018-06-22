@@ -230,17 +230,20 @@ public class SocketClient implements Runnable{
             if(localModel.sendWindowBoard=true){
                 sendControlMessage("Choosen GameBoardCard's name:%"+localModel.getChoosenGameBoardCard().getTitle());
                 localModel.sendWindowBoard=false;
+                localModel.sendDataToServer=false;
             }
             ClientDice diceTosend=localModel.getDiceToInsert();
             if(diceTosend!=null){
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
                 localModel.sendDataToServer=false;
             }
+
         }
     }
 
     private void sendPlaceDiceActionMessage(String json, int row, int column){
         String actionDescription="Place dice&"+row+"&"+column;
         sendActionMessage(json, actionDescription);
+        localModel.sendDataToServer=false;
     }
 }

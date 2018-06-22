@@ -258,6 +258,7 @@ public  class LocalModel {
         this.choosenGameBoardCard = choosenGameBoardCard;
         this.windowBoard=new ClientWindowBoard(choosenGameBoardCard);
         this.sendWindowBoard=true;
+        this.sendDataToServer=true;
     }
 
     public void setCountdownValue(long countdownValue) {

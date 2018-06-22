@@ -15,8 +15,8 @@ public class Table {
     private static PrivateObjectiveCardDeck privateObjectiveCardDeck=PrivateObjectiveCardDeck.getInstance();    //Il caricamento da file viene effettuato all'interno della classe stessa
     private static GameBoardCardDeck gameBoardCardDeck=new GameBoardCardDeck(new File("Resources/Cards/GameBoardCards"));
     private ArrayList<Dice> drawnDice;
-    private static DiceBag diceBag=new DiceBag();
-    private static Table ourInstance=new Table();
+    private static final DiceBag diceBag=new DiceBag();
+    private static final Table ourInstance=new Table();
     private static ArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
@@ -107,6 +107,7 @@ public class Table {
     public void startGame(){
         gameRunning=true;
       //  randomizePlayerArray();
+        currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
             player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
