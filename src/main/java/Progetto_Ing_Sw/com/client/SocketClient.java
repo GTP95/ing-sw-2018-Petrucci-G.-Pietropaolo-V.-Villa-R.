@@ -239,6 +239,7 @@ public class SocketClient implements Runnable{
             if(diceTosend!=null){
                 System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
+                System.err.println("Dado inviato");
                 localModel.sendDataToServer=false;
             }
 
