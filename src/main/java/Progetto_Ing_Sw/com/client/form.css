@@ -41,6 +41,8 @@
     -fx-opacity: 0.75;
 }
 
+
+
 #startScreen{
     -fx-background-image: url("GUI/StartMenuHover.png");
     -fx-background-repeat: no-repeat;
@@ -384,8 +386,6 @@
     -fx-border-color: blue;
     -fx-border-width:  4 4 4 4;
     -fx-background-color: white;
-
-
 }
 
 #Block:selected{
@@ -393,6 +393,19 @@
     -fx-border-width:  4 4 4 4;
     -fx-background-color: white;
 
+}
+
+#DieBlock{
+    -fx-background-color: transparent;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: transparent;
+}
+
+#DieBlock:hover{
+    -fx-border-color: blue;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: blue;
+    -fx-opacity: 0.45;
 }
 
 
