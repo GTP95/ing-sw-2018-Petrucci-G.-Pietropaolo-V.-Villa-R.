@@ -15,24 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 public class Sagrada {
-    //static final Image windowIcon = new Image("file:///../GUI/WindowLogo.png");
+
 
     public static void main(String[] args) {
         Application.launch(StartMenuGUI.class,args);
 
     }
-
-    //@Override
-
-    /*public void start(Stage stage){
-        stage.setTitle("Sagrada");
-        stage.setMaxHeight(720);
-        stage.setMaxWidth(1280);
-        stage.setResizable(false);
-
-        stage.getIcons().add(windowIcon);
-        //stage.setScene(scene);
-        stage.show();
-    }*/
 
 }

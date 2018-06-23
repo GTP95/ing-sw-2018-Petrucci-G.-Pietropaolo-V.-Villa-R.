@@ -35,7 +35,7 @@ public class TableGUI extends Stage{
     ArrayList<Pane> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
     ClientDice DieToInsert;
-    int Xindex=0, Yindex=0,NumPlayers, LocalValue, LocalColor;
+    int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
@@ -521,9 +521,9 @@ public class TableGUI extends Stage{
 
         DiceCover = new Label();
         DiceCover.setId("grey");
-        DiceCover.setMaxSize(200,400);
+        DiceCover.setMaxSize(DraftPool.getWidth(),DraftPool.getHeight());
         DiceCover.setTranslateX(-10);
-        DiceCover.setTranslateY(-10);
+        //DiceCover.setTranslateY(-10);
         DiceCover.setVisible(true);
 
 
@@ -672,23 +672,22 @@ public class TableGUI extends Stage{
             System.err.println("--------------------------------------UPDATE DICE-----------------------------------------------------");
             Platform.runLater(()->{
                 for (int i=0; i<DiceButtons.size(); i++ ){
-                    /*LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
-                    LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();*/
-                    if (LocalModel.getInstance().getDrawnDice().get(i).getValue()==0){
+                    int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
+                    int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+                    if (LocalValue==0){
                         DiceButtons.get(i).setVisible(false);
                     }
                     else {
-                        final int j=i;
                         DiceButtons.get(i).setText("");
-                        DiceButtons.get(i).setId(Integer.toString(LocalModel.getInstance().getDrawnDice().get(i).getValue()) + new ClientColor().IntToColor(LocalModel.getInstance().getDrawnDice().get(i).getColor()));
+                        DiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
                         DiceButtons.get(i).setOnAction(event -> {
-                                    DieToInsert = new ClientDice(LocalModel.getInstance().getDrawnDice().get(j).getValue(), LocalModel.getInstance().getDrawnDice().get(j).getColor());
-                                    System.out.println("Die choosen: " + Integer.toString(LocalModel.getInstance().getDrawnDice().get(j).getValue()) + "," + Integer.toString(LocalModel.getInstance().getDrawnDice().get(j).getColor()));
+                                    DieToInsert = new ClientDice(LocalValue, LocalColor);
+                                    System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
 
                                 }
                         );
                     }
-                    Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalModel.getInstance().getDrawnDice().get(i).getColor())+"\n"+"Value: "+Integer.toString(LocalModel.getInstance().getDrawnDice().get(i).getValue())));
+                    Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue)));
                     Tooltip.install(DiceButtons.get(i),t);
                 }
             });
