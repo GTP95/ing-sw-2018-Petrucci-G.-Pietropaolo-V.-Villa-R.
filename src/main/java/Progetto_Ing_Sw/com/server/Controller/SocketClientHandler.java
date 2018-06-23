@@ -72,12 +72,10 @@ public class SocketClientHandler implements Runnable {
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
-                System.err.println("----mi blocco subito dopo questo "+ourThread.getName());
                 receiveChoosenGameBoardCard();
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
-                    System.err.println("STAMPO O NON STAMPO? QUESTO È IL PROBLEMA "+ourThread.getName());
                     receiveMessage();
                     updateTableIfSomethingChanged();
                     notifyIfIsYourTurn();
@@ -115,7 +113,7 @@ public class SocketClientHandler implements Runnable {
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
-        System.out.println("JSON message sent "+nameOfClass);
+   //     System.out.println("JSON message sent "+nameOfClass);
     }
 
     private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
@@ -208,11 +206,9 @@ public class SocketClientHandler implements Runnable {
             System.err.println("Sto per leggere il buffer "+ourThread.getName());
             String message = in.readLine();
             String messageFields[] = message.split("%");
-            System.err.println("receiveGameBoardCard output di debug:----------------------------");
-            for(String string : messageFields){
-                System.out.println(string);
-            }
+            System.err.println("receiveGameBoardCard: ricevuta "+messageFields[2]);
             myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
+            System.err.println();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -303,10 +299,8 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        System.err.println("--------controllo turno------------");
         if(table.getActivePlayer().getName().equals(myPlayerName)) {
             sendControlMessage("It's your turn now");
-            System.err.println("--------Inviata notifica inizio turno----------------");
         }
     }
 }
