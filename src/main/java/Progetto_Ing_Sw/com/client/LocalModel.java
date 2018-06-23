@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -24,7 +26,7 @@ public  class LocalModel {
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
-    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards;
+    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards;
     private long countdownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
@@ -33,6 +35,7 @@ public  class LocalModel {
     /*sezione informazioni azioni*/
     private ClientDice diceToInsert;
     private int row,column;
+    private ArrayList<ClientWindowBoard> updatedWindowBoards;
 
     private LocalModel(){
 
@@ -253,6 +256,10 @@ public  class LocalModel {
         this.numOfGameBoardCards = numOfGameBoardCards;
     }
 
+    public void setNumOfWindowBoards(int numOfWindowBoards) {
+        this.numOfWindowBoards = numOfWindowBoards;
+    }
+
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
         System.err.println("chiamato metodo setChoosenGameBoardCard");
         this.choosenGameBoardCard = choosenGameBoardCard;
@@ -300,6 +307,20 @@ public  class LocalModel {
         while(tableGUIobserver==null);
         tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
+
+    public void addUpdatedWindowBoard(ClientWindowBoard windowBoard){
+        if(updatedWindowBoards==null) updatedWindowBoards=new ArrayList<>();
+        updatedWindowBoards.add(windowBoard);
+        if (updatedWindowBoards.size()==numOfWindowBoards){
+            for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
+            //TODO: notifyView
+        }
+    }
+
+    public void updateGenericPlayerWindowBoard(String playerName, ClientWindowBoard windowBoard){
+        getPlayerFromName(playerName).updateWindowBoard(windowBoard);
+    }
+
     public void resetDiceArrayIfNecessary(){
         if(drawnDice==null) return;
         drawnDice.clear();

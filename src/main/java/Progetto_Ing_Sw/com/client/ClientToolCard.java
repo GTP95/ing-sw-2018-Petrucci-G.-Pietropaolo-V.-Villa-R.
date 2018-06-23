@@ -10,6 +10,7 @@ public class ClientToolCard extends Card {
     private int ID;
     private boolean firstUsage;
     private String color; //Single Player Only
+    private String Image;
     //TODO EFFECT
 
     public ClientToolCard(String title, String description, String info, int ID, boolean firstUsage, String color) {
@@ -27,4 +28,5 @@ public class ClientToolCard extends Card {
     public int getID() {return ID;}
     public boolean isFirstUsage() {return firstUsage;}
     public String getColor() {return color;}
+
 }

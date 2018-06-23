@@ -137,6 +137,9 @@ public class SocketClient implements Runnable{
             case "It's your turn now":
                 localModel.notifyTurn();
                 break;
+            case "Sending WindowBoards update":
+                localModel.setNumOfWindowBoards(Integer.parseInt(messageFields[1]));
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
@@ -178,6 +181,9 @@ public class SocketClient implements Runnable{
                 break;
             case "WindowBoard":
                 localModel.setWindowBoard(JSONCreator.clientWindowBoardLoaderFromString(json));
+                break;
+            case "WindowBoardUpdate":
+                localModel.addUpdatedWindowBoard(JSONCreator.clientWindowBoardLoaderFromString(json));
                 break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
@@ -221,7 +227,7 @@ public class SocketClient implements Runnable{
         System.out.println("JSON message sent");
     }
 
-    private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
+    private void sendActionMessage(String json, String actionDescription){
         String messageToSend="Action%"+json+"&"+actionDescription;
         out.println(messageToSend);
     }

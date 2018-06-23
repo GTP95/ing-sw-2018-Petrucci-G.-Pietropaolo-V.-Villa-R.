@@ -20,13 +20,15 @@ public class Table {
     private static ArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
-    
+    private int numOfSetWindowBoards;
+
     private Table(){
     	int numPlayers=Lobby.getInstance().getNumOfPlayers();
 	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
 	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
 	    drawnToolCards=toolCardDeck.drawToolCards(3);
 	    players=Lobby.getInstance().getConnctedPlayers();
+	    numOfSetWindowBoards=0;
     }
 
     public static ArrayList<Player> getPlayers() {return players;}
@@ -167,6 +169,35 @@ public class Table {
             randomizedArray.add(index,player);
         }
         players=randomizedArray;
+    }
+
+    public void notifyWindowBoardChange(Thread notifierThread){
+        for(Player player : players){
+            if(player.getSocketClientHandler().ourThread!=notifierThread){          //in questo caso posso limitarmi a confrontare i riferimenti anzichè usare la equals()
+                player.getSocketClientHandler().updateWindowBoards=true;
+                player.getSocketClientHandler().ourThread.interrupt();
+            }
+        }
+    }
+
+    public void setChoosenGameBoardCard (String playerName, String gameBoardCardTitle) {
+        try {
+            getPlayerFromName(playerName).setChoosenGameBoard(getPlayerFromName(playerName).getGameBoardCardFromTitle(gameBoardCardTitle));
+            numOfSetWindowBoards++;
+            if (numOfSetWindowBoards == players.size()){
+                for(Player player:players) player.getSocketClientHandler().updateWindowBoards=true;
+                notifyAllSocketClientHandlers();
+            }
+        }
+        catch(InvalidUsernameException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void notifyAllSocketClientHandlers(){
+        for (Player player : players){
+            player.getSocketClientHandler().ourThread.interrupt();
+        }
     }
 }
 

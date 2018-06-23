@@ -7,6 +7,7 @@ public class ClientPublicObjectiveCard extends Card {
     private String title;
     private String description;
     private int victoryPoints;
+    private String image;
     //TODO:effect
 
 
@@ -28,4 +29,7 @@ public class ClientPublicObjectiveCard extends Card {
         return victoryPoints;
     }
 
+    public String getImagePath(){
+        return image;
+    }
 }
