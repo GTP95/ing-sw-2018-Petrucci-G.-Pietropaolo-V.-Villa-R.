@@ -599,8 +599,6 @@ public class TableGUI extends Stage{
         Move.setTranslateY(-150);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
-            PauseTransition pausamossa = new PauseTransition(Duration.millis(200));
-            pausamossa.play();
         });
 
 
