@@ -18,6 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
+    public volatile boolean updateWindowBoards;
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown;
@@ -25,6 +26,7 @@ public class SocketClientHandler implements Runnable {
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
+        updateWindowBoards=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -247,6 +249,7 @@ public class SocketClientHandler implements Runnable {
                         if (table.removeDice(dice)) System.out.println("Dice removed");
                         sendControlMessage("Dice placed successfully");
                         sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()), "WindowBoard");
+                        table.notifyWindowBoardChange(ourThread);
                       /*  sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
                         for (Dice diceToSend : table.getDrawnDice()) {  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                             sendJSONmessage(JSONCreator.generateJSON(diceToSend), "Dice");
@@ -284,6 +287,7 @@ public class SocketClientHandler implements Runnable {
 
     private void updateTable(){
         updateDrawnDiceIfNecessary();
+    //    updatePlayersWindowBoardsIfNecessary();
         notifyIfIsYourTurn();
     }
 
@@ -308,6 +312,15 @@ public class SocketClientHandler implements Runnable {
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
             previousDiceArrayList=currentDiceArrayList;
+        }
+    }
+    private void updatePlayersWindowBoardsIfNecessary(){
+        if(updateWindowBoards) {
+            sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
+            for (Player player : table.getPlayers()) {
+                sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoard");
+            }
+            updateWindowBoards=false;
         }
     }
 }

@@ -168,5 +168,14 @@ public class Table {
         }
         players=randomizedArray;
     }
+
+    public void notifyWindowBoardChange(Thread notifierThread){
+        for(Player player : players){
+            if(player.getSocketClientHandler().ourThread!=notifierThread){          //in questo caso posso limitarmi a confrontare i riferimenti anzichè usare la equals()
+                player.getSocketClientHandler().updateWindowBoards=true;
+                player.getSocketClientHandler().ourThread.interrupt();
+            }
+        }
+    }
 }
 
