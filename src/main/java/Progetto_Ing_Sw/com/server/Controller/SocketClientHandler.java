@@ -14,7 +14,7 @@ public class SocketClientHandler implements Runnable {
     private PrintWriter out;
     private BufferedReader in;
     private static int timeout;
-    public final Thread ourThread;
+    public Thread ourThread;
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
@@ -24,7 +24,6 @@ public class SocketClientHandler implements Runnable {
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
-        ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
         countdown=new Timer();
 
         try {
@@ -46,6 +45,8 @@ public class SocketClientHandler implements Runnable {
 
             try {
                     myPlayerName=in.readLine();
+                    ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
+                    System.err.println(ourThread.getName());
                     ourThread.setName(myPlayerName+"'s SocketClientHandler");
                     Lobby.getInstance().addPlayer(myPlayerName, this);
                     sendControlMessage("Connected");
@@ -206,7 +207,7 @@ public class SocketClientHandler implements Runnable {
             System.err.println("Sto per leggere il buffer "+ourThread.getName());
             String message = in.readLine();
             String messageFields[] = message.split("%");
-            System.err.println("receiveGameBoardCard: ricevuta "+messageFields[2]);
+            System.err.println("receiveGameBoardCard: ricevuta "+messageFields[2]+" "+ourThread.getName());
             myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
             System.err.println();
         }
