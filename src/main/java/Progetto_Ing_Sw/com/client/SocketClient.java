@@ -232,7 +232,6 @@ public class SocketClient implements Runnable{
                 sendControlMessage("Choosen GameBoardCard's name:%"+localModel.getChoosenGameBoardCard().getTitle());
                 System.err.println("Inviata GameBoardCard");
                 localModel.sendWindowBoard=false;
-                localModel.sendDataToServer=false;
             }
             ClientDice diceTosend=localModel.getDiceToInsert();
             System.err.println("Controllo se devo inviare un dado");
@@ -240,9 +239,9 @@ public class SocketClient implements Runnable{
                 System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
                 System.err.println("Dado inviato");
-                localModel.sendDataToServer=false;
             }
 
+            localModel.sendDataToServer=false;
         }
     }
 
