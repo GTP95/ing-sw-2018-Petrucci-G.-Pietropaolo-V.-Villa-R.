@@ -597,9 +597,7 @@ public class TableGUI extends Stage{
         Move.setId("DefaultButton");
         Move.setTranslateX(220);
         Move.setTranslateY(-150);
-        Move.setOnAction(event -> {
-            LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
-        });
+        Move.setOnAction(event -> LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex));
 
 
 
