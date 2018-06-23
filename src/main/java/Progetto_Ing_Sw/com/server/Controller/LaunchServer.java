@@ -20,10 +20,13 @@ public class LaunchServer {
                 }
             ServerSocket serverSocket=new ServerSocket(portNumber);
             System.out.println("Server started on port " + portNumber);
+            System.err.println("Il mio thread è: "+Thread.currentThread().getName());
             while (true) {
                 Socket clientSocket = serverSocket.accept();
 
-                new Thread(new SocketClientHandler(clientSocket)).start();
+              Thread thread=new Thread(new SocketClientHandler(clientSocket));
+              thread.start();
+              System.err.println("LaunchServer: creato "+thread.getName());
 
             }
         }
