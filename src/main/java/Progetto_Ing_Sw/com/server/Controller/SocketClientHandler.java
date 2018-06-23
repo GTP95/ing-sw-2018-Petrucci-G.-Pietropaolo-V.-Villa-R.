@@ -72,12 +72,12 @@ public class SocketClientHandler implements Runnable {
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
+                notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
                     receiveMessage();
                     if(ourThread.isInterrupted()) updateTable();
-                    notifyIfIsYourTurn();
                  }
 
                  System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
@@ -113,7 +113,7 @@ public class SocketClientHandler implements Runnable {
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
-        System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
+      //  System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
     }
 
     private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
@@ -286,6 +286,7 @@ public class SocketClientHandler implements Runnable {
         for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
             sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
         }
+        notifyIfIsYourTurn();
     }
 
     private void notifyIfIsYourTurn(){
