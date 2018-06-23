@@ -108,12 +108,13 @@ public class SocketClientHandler implements Runnable {
     private void sendControlMessage(String message){    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
         String messageToSend="Control%"+message;
         out.println(messageToSend);
+        System.out.println(ourThread.getName()+": sent control message "+messageToSend);
     }
 
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
-      //  System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
+        System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
     }
 
     private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
@@ -265,7 +266,7 @@ public class SocketClientHandler implements Runnable {
 
     private void receiveMessage(){
         try {
-            if (in.ready()) {    //aspetta che il buffer sia prono ad essere letto
+            while (!in.ready());     //aspetta che il buffer sia prono ad essere letto
                 String message = in.readLine();
                 System.out.println("Message received: " + message);
                 String messageFields[] = message.split("%");  //Salva nell'array i campi del messaggio separati da %
@@ -274,7 +275,7 @@ public class SocketClientHandler implements Runnable {
                     case "Action":
                         handleActionMessage(messageFields[1]);
                 }
-            }
+
         }
         catch(IOException e){
             e.printStackTrace();
