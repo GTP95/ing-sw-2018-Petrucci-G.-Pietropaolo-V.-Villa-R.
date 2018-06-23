@@ -16,7 +16,6 @@ import javafx.scene.layout.*;
 
 public class Sagrada {
 
-
     public static void main(String[] args) {
         Application.launch(StartMenuGUI.class,args);
 

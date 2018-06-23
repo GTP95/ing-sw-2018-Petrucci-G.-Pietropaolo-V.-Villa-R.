@@ -490,8 +490,9 @@
 }
 
 #Tokens{
-    -fx-font-size: 40;
+
     -fx-text-fill: white;
+    -fx-font: 40 "Bauhaus 93" ;
     -fx-background-color: grey;
     -fx-background-size: 0.99;
     -fx-background-radius: 8 8 8 8;
