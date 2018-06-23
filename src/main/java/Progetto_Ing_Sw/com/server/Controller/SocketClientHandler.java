@@ -287,7 +287,7 @@ public class SocketClientHandler implements Runnable {
 
     private void updateTable(){
         updateDrawnDiceIfNecessary();
-    //    updatePlayersWindowBoardsIfNecessary();
+        updatePlayersWindowBoardsIfNecessary();
         notifyIfIsYourTurn();
     }
 
