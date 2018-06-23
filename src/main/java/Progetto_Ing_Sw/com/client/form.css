@@ -388,6 +388,13 @@
 
 }
 
+#Block:selected{
+    -fx-border-color: green;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: white;
+
+}
+
 
 
 #Shade1{

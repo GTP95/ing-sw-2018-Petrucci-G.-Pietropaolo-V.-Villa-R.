@@ -28,7 +28,7 @@ public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
     Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer,DiceCover;
-    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN;
+    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN,Move;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
@@ -36,7 +36,7 @@ public class TableGUI extends Stage{
     ArrayList<ClientPlayer> OtherPlayersNames;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
-    GridPane griglia;
+    GridPane griglia, DieGrid;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     TableGUI(ClientGameBoardCard gameBoardCard) {
@@ -69,7 +69,6 @@ public class TableGUI extends Stage{
             RowConstraints row = new RowConstraints(75);
             griglia.getRowConstraints().add(row);
         }
-
 
         int [][] matrixTexture = gameBoardCard.getMatrixScheme();
 
@@ -593,10 +592,11 @@ public class TableGUI extends Stage{
         //CurrentPlayer.setMinSize(200,50);
 
         //Move Button
-        Button Move = new Button("     Move");
+        Move = new Button("     Move");
         Move.setId("DefaultButton");
         Move.setTranslateX(220);
         Move.setTranslateY(-150);
+        Move.setDisable(true);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
         });
@@ -701,6 +701,7 @@ public class TableGUI extends Stage{
         public void isYourTurn(){
             System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
             DiceCover.setVisible(false);
+            Move.setDisable(false);
             CurrentPlayer.setId("DefaultButtonActivated");
             /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
             itsYourTurn.initStyle(StageStyle.UNDECORATED);
