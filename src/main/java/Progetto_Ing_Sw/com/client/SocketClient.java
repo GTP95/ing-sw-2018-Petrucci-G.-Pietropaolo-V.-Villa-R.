@@ -230,6 +230,7 @@ public class SocketClient implements Runnable{
         if(localModel.sendDataToServer){
             if(localModel.sendWindowBoard=true){
                 sendControlMessage("Choosen GameBoardCard's name:%"+localModel.getChoosenGameBoardCard().getTitle());
+                System.err.println("Inviata GameBoardCard");
                 localModel.sendWindowBoard=false;
                 localModel.sendDataToServer=false;
             }
