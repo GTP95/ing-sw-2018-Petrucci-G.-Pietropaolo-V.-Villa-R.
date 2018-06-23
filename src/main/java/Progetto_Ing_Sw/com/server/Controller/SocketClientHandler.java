@@ -61,10 +61,8 @@ public class SocketClientHandler implements Runnable {
                 },1000,1000);   //invia ogni secondo countdownValue;
 
                         while(Lobby.isRunning) {
-                            currentPlayerArrayList=Lobby.getInstance().getConnctedPlayers();
-                            if(!currentPlayerArrayList.equals(previousPlayerArrayList)){    //Se i due array non sono uguali si è connesso un nuovo giocatore ed è necessario aggiornare il client. Purtroppo non c'è stato verso di far funzionare l'observer e gli interrupt "spammano" l'elenco dei giocatori...
-                                sendPlayerMessage();    //Invia l'elenco aggiornato dei giocatori
-                                previousPlayerArrayList=currentPlayerArrayList; //aggiornamento dello stato
+                            if(ourThread.interrupted()){
+                                sendPlayerMessage();
                             }
                         }
                         //arrivati qui il gioco è cominciato
@@ -78,10 +76,11 @@ public class SocketClientHandler implements Runnable {
 
                 while(Table.gameRunning){
                     receiveMessage();
-                    updateTableIfSomethingChanged();
+                    if(ourThread.isInterrupted()) updateTable();
                     notifyIfIsYourTurn();
                  }
-                System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
+
+                 System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -114,7 +113,7 @@ public class SocketClientHandler implements Runnable {
     private void sendJSONmessage(String json, String nameOfClass){
         String messageToSend="JSON%"+json+"%"+nameOfClass;
         out.println(messageToSend);
-   //     System.out.println("JSON message sent "+nameOfClass);
+        System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
     }
 
     private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
@@ -123,6 +122,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void sendPlayerMessage() {
+        System.err.println("Sending players");
         for (Player player : Lobby.getInstance().getConnctedPlayers()) {
             String messageToSend = "Player%" + player.getName();
             out.println(messageToSend);
@@ -181,7 +181,7 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void receiveControlMessage(){
+    private void receiveControlMessage(){   //È bloccante!
         try{
         while(!in.ready()); //aspetta che il buffer sia pronto ad essere letto
 
@@ -246,10 +246,10 @@ public class SocketClientHandler implements Runnable {
                         if (table.removeDice(dice)) System.out.println("Dice removed");
                         sendControlMessage("Dice placed successfully");
                         sendJSONmessage(JSONCreator.generateJSON(myPlayer.getChoosenWindowBoard()), "WindowBoard");
-                        sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+                      /*  sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
                         for (Dice diceToSend : table.getDrawnDice()) {  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                             sendJSONmessage(JSONCreator.generateJSON(diceToSend), "Dice");
-                        }
+                        }*/
 
                     } else throw new IllegalDiceException("Selected dice doesn't exists!");
                 } catch (PlaceDiceException e) {
@@ -281,21 +281,10 @@ public class SocketClientHandler implements Runnable {
         }
     }
 
-    private void updateTableIfSomethingChanged(){
-        currentDiceArrayList=table.getDrawnDice();
-        boolean changeDetected=false;
-        for(int index=0;index<currentDiceArrayList.size();index++){
-            if(currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
-                changeDetected=true;
-                break;
-            }
-        }
-        if(changeDetected){
-            sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
-            for(Dice dice : currentDiceArrayList){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
-                sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
-            }
-            previousDiceArrayList=currentDiceArrayList;
+    private void updateTable(){
+        sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+        for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+            sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
         }
     }
 

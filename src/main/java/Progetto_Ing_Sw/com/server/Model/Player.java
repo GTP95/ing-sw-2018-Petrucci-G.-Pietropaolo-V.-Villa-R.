@@ -22,6 +22,7 @@ public class Player{
         this.roundNumber=2;
         this.victoryPoints = 0;
         this.isActive=true;
+        this.socketClientHandler=socketClientHandler;
     }
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {

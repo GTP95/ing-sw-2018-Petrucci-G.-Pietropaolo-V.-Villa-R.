@@ -80,6 +80,7 @@ public class Table {
         if(drawnDice.contains(dice)){
             int index=drawnDice.indexOf(dice);
             drawnDice.get(index).setValue(0);
+            for(Player player:players) player.getSocketClientHandler().ourThread.interrupt();   //invia notifica ai thread dei SocketClientHandler
             return true;
         }
         return false;
