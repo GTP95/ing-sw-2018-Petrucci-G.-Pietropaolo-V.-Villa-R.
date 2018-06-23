@@ -43,7 +43,11 @@ public class MultiplayerGUI extends Stage {
 
         Button socketBTN = new Button("SOCKET");socketBTN.setId("SocketBTN");socketBTN.setPrefSize(250,250);
 
-        socketBTN.setOnAction(event -> {LoginStage Login = new LoginStage(); Login.showAndWait(); this.setScene(LobbyScene);});
+        socketBTN.setOnAction(event -> {
+            LoginStage Login = new LoginStage();
+            Login.showAndWait();
+            this.setScene(LobbyScene);
+        });
 
 
         Button RMIBTN = new Button("RMI");
@@ -95,7 +99,6 @@ public class MultiplayerGUI extends Stage {
         //StackPane Player1
         StackPane Player1V = new StackPane();
         Player1V.getChildren().addAll(Player1BTN,Player1Label,Player1Window);
-
 
 
         //StackPane Player2
