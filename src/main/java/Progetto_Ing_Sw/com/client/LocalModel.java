@@ -254,10 +254,12 @@ public  class LocalModel {
     }
 
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
+        System.err.println("chiamato metodo setChoosenGameBoardCard");
         this.choosenGameBoardCard = choosenGameBoardCard;
         this.windowBoard=new ClientWindowBoard(choosenGameBoardCard);
         this.sendWindowBoard=true;
         this.sendDataToServer=true;
+        System.err.println("Settate tutte le variabili per l'invio della gameBoardCard");
     }
 
     public void setCountdownValue(long countdownValue) {
