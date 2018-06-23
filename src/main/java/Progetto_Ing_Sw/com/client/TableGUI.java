@@ -58,16 +58,21 @@ public class TableGUI extends Stage{
 
         //GridPane per la griglia 5x4
         griglia = new GridPane();
+        DieGrid = new GridPane();
         griglia.setTranslateY(-20);
+        DieGrid.setTranslateY(-20);
         griglia.setAlignment(Pos.CENTER);
+        DieGrid.setAlignment(Pos.CENTER);
         for (int i = 0; i < columns; i++) {
             ColumnConstraints column = new ColumnConstraints(75);
             griglia.getColumnConstraints().add(column);
+            DieGrid.getColumnConstraints().add(column);
         }
 
         for (int i = 0; i < rows; i++) {
             RowConstraints row = new RowConstraints(75);
             griglia.getRowConstraints().add(row);
+            DieGrid.getRowConstraints().add(row);
         }
 
         int [][] matrixTexture = gameBoardCard.getMatrixScheme();
@@ -120,59 +125,65 @@ public class TableGUI extends Stage{
             }
 
 
-            //Stampa due interi che indicano su che casella sto cliccando
-            griglia.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                if (e.getX() < 71 && e.getX() > 4) {
-                    Xindex = 1;
-                    System.out.println("Colonna: " + Xindex);
+
+
+
+        //GRIGLIA DADI
+            for (int r = 0; r < matrixTexture.length; r++) {
+                for (int c = 0; c < matrixTexture[r].length; c++) {
+
                 }
+            }
 
+        //Stampa due interi che indicano su che casella sto cliccando
+            DieGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            if (e.getX() < 71 && e.getX() > 4) {
+                Xindex = 1;
+                System.out.println("Colonna: " + Xindex);
+            }
 
-                if (e.getX() < 146 && e.getX() > 79) {
-                    Xindex = 2;
-                    System.out.println("Colonna: " + Xindex);
-                }
+            if (e.getX() < 146 && e.getX() > 79) {
+                Xindex = 2;
+                System.out.println("Colonna: " + Xindex);
+            }
 
-                if (e.getX() < 221 && e.getX() > 154) {
-                    Xindex = 3;
-                    System.out.println("Colonna: " + Xindex);
-                }
+            if (e.getX() < 221 && e.getX() > 154) {
+                Xindex = 3;
+                System.out.println("Colonna: " + Xindex);
+            }
 
-                if (e.getX() < 296 && e.getX() > 229) {
-                    Xindex = 4;
-                    System.out.println("Colonna: " + Xindex);
-                }
+            if (e.getX() < 296 && e.getX() > 229) {
+                Xindex = 4;
+                System.out.println("Colonna: " + Xindex);
+            }
 
-                if (e.getX() < 371 && e.getX() > 304) {
-                    Xindex = 5;
-                    System.out.println("Colonna: " + Xindex);
-                }
+            if (e.getX() < 371 && e.getX() > 304) {
+                Xindex = 5;
+                System.out.println("Colonna: " + Xindex);
+            }
 
-                if (e.getY() > 23 && e.getY() < 91) {
-                    Yindex = 1;
-                    System.out.println("Riga: " + Yindex);
-                }
+            if (e.getY() > 23 && e.getY() < 91) {
+                Yindex = 1;
+                System.out.println("Riga: " + Yindex);
+            }
 
-                if (e.getY() > 98 && e.getY() < 166) {
-                    Yindex = 2;
-                    System.out.println("Riga: " + Yindex);
-                }
+            if (e.getY() > 98 && e.getY() < 166) {
+                Yindex = 2;
+                System.out.println("Riga: " + Yindex);
+            }
 
-                if (e.getY() > 173 && e.getY() < 241) {
-                    Yindex = 3;
-                    System.out.println("Riga: " + Yindex);
-                }
+            if (e.getY() > 173 && e.getY() < 241) {
+                Yindex = 3;
+                System.out.println("Riga: " + Yindex);
+            }
 
-                if (e.getY() > 248 && e.getY() < 316) {
-                    Yindex = 4;
-                    System.out.println("Riga: " + Yindex);
-                }
+            if (e.getY() > 248 && e.getY() < 316) {
+                Yindex = 4;
+                System.out.println("Riga: " + Yindex);
+            }
+        });
 
-
-            });
-
-
-            //HBox che contiene le informazioni sulla carta
+        //HBox che contiene le informazioni sulla carta
             HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
             Text WindowTitle = new Text(gameBoardCard.getTitle());WindowTitle.setFill(Paint.valueOf("white"));
             WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
@@ -180,7 +191,7 @@ public class TableGUI extends Stage{
 
             //StackPane che fa da cornice alla griglia
             StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
-            WindowBoard.getChildren().addAll(griglia,WindowInfo);
+            WindowBoard.getChildren().addAll(griglia,DieGrid,WindowInfo);
 
             //Player Stats
             Tokens = new Label("•");
@@ -606,7 +617,7 @@ public class TableGUI extends Stage{
             //BorderPane per contenere tutti gli altri
             StackPane GameplayArea = new StackPane();
             GameplayArea.setId("GamemodeSelectionScreen");
-            GameplayArea.setAlignment(WindowBoard,Pos.CENTER);
+            GameplayArea.setAlignment(WindowBoard,Pos.CENTER);;
             GameplayArea.setAlignment(Tokens,Pos.CENTER);
             GameplayArea.setAlignment(Move,Pos.CENTER);
             GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
@@ -695,7 +706,21 @@ public class TableGUI extends Stage{
 
         public void insertion(){
             LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
-
+            Platform.runLater(()-> {
+                for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
+                    for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
+                        Pane block = new Pane();
+                        if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed() == false) {
+                            block.setId("DieBlock");
+                        } else if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
+                            block.setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                                    + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                            block.setStyle("-fx-opacity: 0.75;"+ "-fx-background-radius: 20 20 20 20;" + "-fx-background-size: 60 60");
+                        }
+                        DieGrid.add(block, c, r);
+                    }
+                }
+            });
         }
 
         public void isYourTurn(){
@@ -703,11 +728,14 @@ public class TableGUI extends Stage{
             DiceCover.setVisible(false);
             Move.setDisable(false);
             CurrentPlayer.setId("DefaultButtonActivated");
+            insertion();
             /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
             itsYourTurn.initStyle(StageStyle.UNDECORATED);
             itsYourTurn.setHeaderText("It's Your Turn boy!");
             itsYourTurn.showAndWait();*/
         }
+
+
 
         public void isNotYourTurn(){
             DiceCover.setVisible(true);
