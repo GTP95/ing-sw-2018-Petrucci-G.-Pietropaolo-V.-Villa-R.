@@ -184,7 +184,10 @@ public class Table {
         try {
             getPlayerFromName(playerName).setChoosenGameBoard(getPlayerFromName(playerName).getGameBoardCardFromTitle(gameBoardCardTitle));
             numOfSetWindowBoards++;
-            if (numOfSetWindowBoards == players.size()) notifyAllSocketClientHandlers();
+            if (numOfSetWindowBoards == players.size()){
+                for(Player player:players) player.getSocketClientHandler().updateWindowBoards=true;
+                notifyAllSocketClientHandlers();
+            }
         }
         catch(InvalidUsernameException e){
             System.err.println(e.getMessage());
