@@ -227,7 +227,7 @@ public class SocketClient implements Runnable{
         System.out.println("JSON message sent");
     }
 
-    private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
+    private void sendActionMessage(String json, String actionDescription){
         String messageToSend="Action%"+json+"&"+actionDescription;
         out.println(messageToSend);
     }

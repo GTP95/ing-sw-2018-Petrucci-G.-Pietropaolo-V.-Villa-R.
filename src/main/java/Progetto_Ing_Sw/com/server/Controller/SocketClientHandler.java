@@ -211,6 +211,7 @@ public class SocketClientHandler implements Runnable {
             String message = in.readLine();
             String messageFields[] = message.split("%");
             System.err.println("receiveGameBoardCard: ricevuta "+messageFields[2]+" "+ourThread.getName());
+            table.setChoosenGameBoardCard(myPlayerName, messageFields[2]);
             myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
             System.err.println();
         }
