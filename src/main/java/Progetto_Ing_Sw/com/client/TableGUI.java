@@ -700,10 +700,10 @@ public class TableGUI extends Stage{
             System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
             DiceCover.setVisible(false);
             CurrentPlayer.setId("DefaultButtonActivated");
-            Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
+            /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
             itsYourTurn.initStyle(StageStyle.UNDECORATED);
             itsYourTurn.setHeaderText("It's Your Turn boy!");
-            itsYourTurn.showAndWait();
+            itsYourTurn.showAndWait();*/
         }
 
         public void isNotYourTurn(){
