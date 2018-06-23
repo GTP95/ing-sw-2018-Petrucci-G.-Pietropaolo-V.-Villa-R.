@@ -349,7 +349,7 @@
 
 #DefaultButtonActivated{
     -fx-text-fill: #ffffff;
-    -fx-font: 40 "Castellar";
+    -fx-font: 25 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 250 250;
