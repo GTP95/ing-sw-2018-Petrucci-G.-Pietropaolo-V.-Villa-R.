@@ -272,7 +272,6 @@ public  class LocalModel {
         this.row=row;
         this.column=column;
         sendDataToServer=true;
-
     }
 
     public Exception returnTrownException(){    //restituisce l'eccezione in testa alla coda

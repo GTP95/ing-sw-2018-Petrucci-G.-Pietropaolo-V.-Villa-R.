@@ -235,7 +235,9 @@ public class SocketClient implements Runnable{
                 localModel.sendDataToServer=false;
             }
             ClientDice diceTosend=localModel.getDiceToInsert();
+            System.err.println("Controllo se devo inviare un dado");
             if(diceTosend!=null){
+                System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
                 localModel.sendDataToServer=false;
             }
