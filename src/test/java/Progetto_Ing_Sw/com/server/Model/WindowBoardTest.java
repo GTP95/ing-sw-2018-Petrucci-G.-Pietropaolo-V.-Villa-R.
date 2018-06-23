@@ -16,6 +16,7 @@ public class WindowBoardTest {
     private Dice dice1;
     private Dice dice4;
     private Dice dice5;
+    private Dice dice5r;
 
     private final int rows = 4;       //colonne e righe rimangono costanti
     private final int columns = 5;
@@ -28,6 +29,7 @@ public class WindowBoardTest {
         dice3=mock(Dice.class);
         dice4=mock(Dice.class);
         dice5=mock(Dice.class);
+        dice5r=mock(Dice.class);
 
 
         when(dice1.getColor()).thenReturn(Color.BLUE);
@@ -44,6 +46,9 @@ public class WindowBoardTest {
 
         when(dice5.getColor()).thenReturn(Color.GREEN);
         when(dice5.getValue()).thenReturn(5);
+
+        when(dice5r.getColor()).thenReturn(Color.RED);
+        when(dice5r.getValue()).thenReturn(5);
     }
 
     @Test//Test utile solo al controllo delle variabili, da eliminare
@@ -267,51 +272,36 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void checkAdjacencyAndOrthogonalColor(){
+    public void checkSecondaryPositionRules(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
-
-        //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
 
-        System.out.println("DICE COLOR ="+dice3.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice3.getValue()); //3
+        /* when(dice5.getColor()).thenReturn(Color.GREEN);
+        when(dice5.getValue()).thenReturn(5);
 
-        //Set di inserimenti;
-        windowBoard.insertDiceARRLIST(1,4,dice3);
-        windowBoard.insertDiceARRLIST(1,5,dice3);
+        when(dice5r.getColor()).thenReturn(Color.RED);
+        when(dice5r.getValue()).thenReturn(5);
 
-        windowBoard.checkOrthogonalColor(1,4);
+        when(dice3.getColor()).thenReturn(Color.RED);
+        when(dice3.getValue()).thenReturn(3);
+        */
 
-    }
+        //Set di inserimenti, da commenrtare/decommentare a seconda del test che voglio fare
+        windowBoard.insertDiceARRLIST(3,1,dice5);
+        windowBoard.insertDiceARRLIST(4,1,dice5r);
+        windowBoard.insertDiceARRLIST(4,2,dice3);
+        Assert.assertTrue(windowBoard.getUsedMatrix().get(4-1).get(1-1).isUsed());
+        System.out.println();
+        System.out.println(windowBoard.checkOrthogonalColor(4,1));
+        System.out.println(windowBoard.checkOrthogonalValue(4,1));
+        //i due controlli funzionano contemporaneamente, il primo dei due che trova una cosa sbagliata lo notifica e ferma
+        //anche l'altro; in questo caso, infatti, trova prima il numero uguale, che si trova sopra, e poi il colore, a destra
 
-    @Test
-    public void checkAdjacencyAndOrthogonalNumber(){
-
-        WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
-        System.out.println("Matrice prima dell'inserimento");
-        windowBoard.printMatrix(testMatrix,rows,columns);
-
-        //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
-        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
-        windowBoard.setBorders();
-
-        System.out.println("DICE COLOR ="+dice3.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice3.getValue()); //3
-        System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice2.getValue()); //5
-
-        //Set di inserimenti;
-        //DA COMPLETARE
-        windowBoard.insertDiceARRLIST(1,4,dice3);
-        windowBoard.insertDiceARRLIST(1,5,dice1);
-
-        windowBoard.checkOrthogonalValue(1,4);
     }
 
     @Test
@@ -321,36 +311,38 @@ public class WindowBoardTest {
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);//Industria
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
-
-        //parte dell'algoritmo per settare i bordi
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
 
-        // dice3 = rosso,3
-        // dice2 = viola,2
-        // dice1 = blu, 1
-        // dice4 = giallo, 4
-        // dice5 = verde, 5
+        /*
+        when(dice1.getColor()).thenReturn(Color.BLUE);
+        when(dice1.getValue()).thenReturn(1);
+
+        when(dice2.getColor()).thenReturn(Color.PURPLE);
+        when(dice2.getValue()).thenReturn(2);
+
+        when(dice3.getColor()).thenReturn(Color.RED);
+        when(dice3.getValue()).thenReturn(3);
+
+        when(dice4.getColor()).thenReturn(Color.YELLOW);
+        when(dice4.getValue()).thenReturn(4);
+
+        when(dice5.getColor()).thenReturn(Color.GREEN);
+        when(dice5.getValue()).thenReturn(5);
+
+        when(dice5r.getColor()).thenReturn(Color.RED);
+        when(dice5r.getValue()).thenReturn(5);
+         */
 
         //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
 
         System.out.println(" 1° INSERIMENTO");
-        windowBoard.insertDice(1,2,dice3);
+        windowBoard.insertDice(3,1,dice5);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
         System.out.println(" 2° INSERIMENTO");
-        windowBoard.insertDice(2,4,dice2);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-
-        System.out.println(" 3° INSERIMENTO");
-        windowBoard.insertDice(2,5,dice3);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-
-        System.out.println(" 4° INSERIMENTO");
-        windowBoard.insertDice(2,1,dice5);
+        windowBoard.insertDice(4,1,dice3);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
