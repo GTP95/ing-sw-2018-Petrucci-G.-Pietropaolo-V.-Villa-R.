@@ -27,7 +27,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards;
-    private long countdownValue;
+    private long countdownValue, turnCountDownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
@@ -143,6 +143,10 @@ public  class LocalModel {
 
     public int getColumn() {
         return column;
+    }
+
+    public int getTurnCountDownValue() {
+        return (int)turnCountDownValue; //cast ad int per comodità della GUI
     }
 
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
@@ -334,5 +338,10 @@ public  class LocalModel {
             e.printStackTrace();
         }
         tableGUIobserver.isYourTurn();
+    }
+
+    public void setTurnCountDownValue(long turnCountDownValue) {
+        this.turnCountDownValue = turnCountDownValue;
+        tableGUIobserver.updateTimer();
     }
 }

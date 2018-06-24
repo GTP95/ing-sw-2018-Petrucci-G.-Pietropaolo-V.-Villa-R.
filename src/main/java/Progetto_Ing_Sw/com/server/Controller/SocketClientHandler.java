@@ -13,30 +13,34 @@ public class SocketClientHandler implements Runnable {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
-    private static int timeout;
+    private static int timeout, turnDuration;
     public Thread ourThread;
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards;
+    public volatile boolean updateWindowBoards, isMyTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
-    private Timer countdown;
+    private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
-        updateWindowBoards=false;
+        timerTurn=new Timer();
+        updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+        isMyTurn=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timeout");
             clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
+            turnDuration=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
         }
         catch (FileNotFoundException e){
-            System.out.println("File ServerSettings not found, falling back to 30 seconds of timeout");
+            System.out.println("File ServerSettings not found, falling back to 30 seconds of timeout and 60 seconds of turn duration");
             timeout=30000;  //timeout in millisecopndi
+            turnDuration=60000;
         }
         catch (IOException e){
             e.printStackTrace();    //TODO: timeout?
@@ -293,8 +297,23 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(table.getActivePlayer().getName().equals(myPlayerName)) {
+        if(table.getActivePlayer().getName().equals(myPlayerName) && isMyTurn==false) {
+            isMyTurn=true;
             sendControlMessage("It's your turn now");
+            long countdownValue=turnDuration;
+            timerTurn.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if(countdownValue>=0) {
+                        sendControlMessage("Your turn will end in&" + countdownValue);
+
+                    }
+                    else {
+                        isMyTurn=false;
+                        countdown.cancel();
+                    }
+                }
+            },1000,1000);   //invia ogni secondo countdownValue;
         }
     }
 
