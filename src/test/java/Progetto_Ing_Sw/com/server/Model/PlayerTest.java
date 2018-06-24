@@ -108,7 +108,11 @@ public class PlayerTest {
 
         GameBoardCard card1=mock(GameBoardCard.class);
         when(card1.getTitle()).thenReturn("Titolo1");
-        
+        GameBoardCard card2=mock(GameBoardCard.class);
+        when(card2.getTitle()).thenReturn("Titolo2");
+
+        drawnGameBoardCards.add(card1);
+        drawnGameBoardCards.add(card2);
     }
 }
 
