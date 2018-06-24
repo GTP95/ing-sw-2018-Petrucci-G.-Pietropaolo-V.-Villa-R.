@@ -13,7 +13,7 @@ public class SocketClientHandler implements Runnable {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
-    private static int timeout, turnDuration;
+    private static int timeout;
     public Thread ourThread;
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
@@ -35,12 +35,10 @@ public class SocketClientHandler implements Runnable {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timeout");
             clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
-            turnDuration=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
         }
         catch (FileNotFoundException e){
             System.out.println("File ServerSettings not found, falling back to 30 seconds of timeout and 60 seconds of turn duration");
             timeout=30000;  //timeout in millisecopndi
-            turnDuration=60000;
         }
         catch (IOException e){
             e.printStackTrace();    //TODO: timeout?
@@ -300,13 +298,12 @@ public class SocketClientHandler implements Runnable {
         if(table.getActivePlayer().getName().equals(myPlayerName) && isMyTurn==false) {
             isMyTurn=true;
             sendControlMessage("It's your turn now");
-            long countdownValue=turnDuration;
             timerTurn.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
+                   int countdownValue=table.getTurnDuration();
                     if(countdownValue>=0) {
                         sendControlMessage("Your turn will end in&" + countdownValue);
-
                     }
                     else {
                         isMyTurn=false;

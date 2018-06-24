@@ -1,8 +1,10 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
@@ -21,14 +23,22 @@ public class Table {
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     private int numOfSetWindowBoards;
+    private int turnDuration;
 
-    private Table(){
-    	int numPlayers=Lobby.getInstance().getNumOfPlayers();
-	    drawnDice=diceBag.diceDraw(2*numPlayers+1);
-	    drawnPublicObjectiveCards=publicObjectiveCardDeck.drawPublicObjectiveCards(3);
-	    drawnToolCards=toolCardDeck.drawToolCards(3);
-	    players=Lobby.getInstance().getConnctedPlayers();
-	    numOfSetWindowBoards=0;
+    private Table() {
+        int numPlayers = Lobby.getInstance().getNumOfPlayers();
+        drawnDice = diceBag.diceDraw(2 * numPlayers + 1);
+        drawnPublicObjectiveCards = publicObjectiveCardDeck.drawPublicObjectiveCards(3);
+        drawnToolCards = toolCardDeck.drawToolCards(3);
+        players = Lobby.getInstance().getConnctedPlayers();
+        numOfSetWindowBoards = 0;
+        try {
+            turnDuration = JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
+        }
+        catch(FileNotFoundException e){
+            System.err.println("File ServerSettings.json not found, falling back to 60 seconds of turn duration");
+            turnDuration=60;
+        }
     }
 
     public static ArrayList<Player> getPlayers() {return players;}
@@ -105,6 +115,21 @@ public class Table {
 
     public boolean diceExists(Dice dice){
         return drawnDice.contains(dice);
+    }
+
+    public int getTurnDuration() {
+        if(turnDuration==0){
+            try{
+                turnDuration=turnDuration = JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
+                return 0;
+            }
+            catch (FileNotFoundException e){
+                turnDuration=60;
+            }
+        }
+        int valueToReturn=turnDuration;
+        turnDuration--;
+        return valueToReturn;
     }
 
     public void startGame(){
@@ -199,5 +224,7 @@ public class Table {
             player.getSocketClientHandler().ourThread.interrupt();
         }
     }
+
+
 }
 
