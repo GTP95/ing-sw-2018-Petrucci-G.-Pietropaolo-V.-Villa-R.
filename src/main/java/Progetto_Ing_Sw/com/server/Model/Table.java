@@ -118,9 +118,9 @@ public class Table {
     }
 
     public int getTurnDuration() {
-        if(turnDuration==0){
+        if(turnDuration<=0){
             try{
-                turnDuration=turnDuration = JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
+                turnDuration= JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
                 return 0;
             }
             catch (FileNotFoundException e){
@@ -140,7 +140,7 @@ public class Table {
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
             player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
         }
-        System.out.println("Game started!");    //TODO: completare
+        System.out.println("Game started!");
         System.out.println("Connected players:");
         for(Player player : players){
             System.out.println(player.getName());
