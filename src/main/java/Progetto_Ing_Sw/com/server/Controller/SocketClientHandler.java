@@ -58,7 +58,7 @@ public class SocketClientHandler implements Runnable {
                 countdown.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
-                        long countdownValue=Lobby.getInstance().countdownValue;
+                        int countdownValue=Lobby.getInstance().countdownValue;
                         if(countdownValue>=0) sendControlMessage("CountdownValue&"+countdownValue);
                         else countdown.cancel();
                     }
@@ -308,8 +308,7 @@ public class SocketClientHandler implements Runnable {
                     else if(countdownValue==0){
                         sendControlMessage("Your turn will end in&" + countdownValue);
                         isMyTurn=false;
-                        table.changeCurrentPlayer();
-                        countdown.cancel();
+                        timerTurn.cancel();
                     }
                 }
             },1000,1000);   //invia ogni secondo countdownValue;

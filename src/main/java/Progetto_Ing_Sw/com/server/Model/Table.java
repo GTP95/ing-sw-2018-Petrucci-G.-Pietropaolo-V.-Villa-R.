@@ -121,6 +121,7 @@ public class Table {
         if(turnDuration<=0){
             try{
                 turnDuration= JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
+                changeCurrentPlayer();
                 return 0;
             }
             catch (FileNotFoundException e){
@@ -176,7 +177,7 @@ public class Table {
     }
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
-        if(currentPlayer==players.size()-1){
+        if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
             shufflePlayerArray();
             currentPlayer=0;
             return;
