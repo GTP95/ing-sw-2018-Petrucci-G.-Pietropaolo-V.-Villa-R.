@@ -6,6 +6,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,13 +28,14 @@ import java.util.Collections;
 public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
-    Label ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer,DiceCover;
-    Button ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN,Move;
+    Label TimerLabel,ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer,DiceCover;
+    Button PassButton,ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN,Move;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
     ArrayList<Pane> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
+    TranslateTransition TimerEnteringAnimation, TimerExitingAnimation;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia, DieGrid;
@@ -618,22 +620,51 @@ public class TableGUI extends Stage{
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
         });
 
+        //TIMER LABEL
+        TimerLabel = new Label("60");
+        TimerLabel.setId("Timer");
+        TimerLabel.setPrefWidth(100);
+        TimerLabel.setTranslateY(0);
+
+        TimerEnteringAnimation = new TranslateTransition(Duration.millis(700), TimerLabel);
+        TimerEnteringAnimation.setFromY(0);
+        TimerEnteringAnimation.setToY(-200);
+        TimerEnteringAnimation.setAutoReverse(true);
+
+        TimerExitingAnimation = new TranslateTransition(Duration.millis(700), TimerLabel);
+        TimerExitingAnimation.setFromY(-200);
+        TimerExitingAnimation.setToY(0);
+        TimerExitingAnimation.setAutoReverse(true);
+
+
+        //TimerLabel.setTextAlignment(TextAlignment.CENTER);
+
+
+        //PASS BUTTON
+        PassButton = new Button("   Pass");
+        PassButton.setDisable(true);
+        PassButton.setId("DefaultButton");
+        PassButton.setTranslateX(180);
+
+
 
         //BorderPane per contenere tutti gli altri
         StackPane GameplayArea = new StackPane();
         GameplayArea.setId("GamemodeSelectionScreen");
         GameplayArea.setAlignment(WindowBoard,Pos.CENTER);;
         GameplayArea.setAlignment(Tokens,Pos.CENTER);
+        GameplayArea.setAlignment(TimerLabel,Pos.CENTER);
         GameplayArea.setAlignment(Move,Pos.CENTER);
         GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
         GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
         GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+        GameplayArea.setAlignment(PassButton,Pos.TOP_LEFT);
         GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,DiceCover,RoundTrack);
 
 
 
@@ -720,7 +751,7 @@ public class TableGUI extends Stage{
                         } else if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
                             block.setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
                                     + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
-                            block.setStyle("-fx-opacity: 0.75;"+ "-fx-background-radius: 20 20 20 20;" + "-fx-background-size: 60 60");
+                            block.setStyle("-fx-opacity: 0.75;" + "-fx-background-size: 60 60");
                         }
                         DieGrid.add(block, c, r);
                     }
@@ -732,6 +763,9 @@ public class TableGUI extends Stage{
             System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
             DiceCover.setVisible(false);
             Move.setDisable(false);
+            PassButton.setDisable(false);
+            TimerEnteringAnimation.play();
+            //TimerExitingAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
             insertion();
             /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
@@ -740,10 +774,14 @@ public class TableGUI extends Stage{
             itsYourTurn.showAndWait();*/
         }
 
+    public void updateTimer(){
+        Platform.runLater(()->{
+            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()/1000));
+        });
+    }
 
-
-        public void isNotYourTurn(){
-            DiceCover.setVisible(true);
-            CurrentPlayer.setId("DefaultButton");
-        }
+    public void isNotYourTurn(){
+        DiceCover.setVisible(true);
+        CurrentPlayer.setId("DefaultButton");
+    }
 }
