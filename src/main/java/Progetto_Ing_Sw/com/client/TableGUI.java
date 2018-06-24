@@ -1,6 +1,9 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Dice;
+import com.sun.javafx.geom.transform.Affine3D;
+import com.sun.javafx.geom.transform.BaseTransform;
+import javafx.animation.Animation;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -16,9 +19,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -35,7 +40,7 @@ public class TableGUI extends Stage{
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
-    ArrayList<Pane> GridBlocks;
+    ArrayList<ArrayList<Pane>> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
     TranslateTransition TimerEnteringAnimation, TimerExitingAnimation;
     RotateTransition MoveBTNRotation;
@@ -618,18 +623,12 @@ public class TableGUI extends Stage{
         Move.setId("DefaultButton");
         Move.setTranslateX(220);
         Move.setTranslateY(-150);
-        Move.setRotate(90);
         Move.setDisable(true);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
         });
 
-        
 
-        MoveBTNRotation = new RotateTransition(Duration.millis(300),Move);
-        MoveBTNRotation.setToAngle(0);
-        MoveBTNRotation.setFromAngle(90);
-        MoveBTNRotation.setAutoReverse(false);
 
         //TIMER LABEL
         TimerLabel = new Label("60");
@@ -758,6 +757,7 @@ public class TableGUI extends Stage{
                 for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
                     for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
                         Pane block = new Pane();
+                        block.setId("DieBlock");
                         if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed() == false) {
                             block.setId("DieBlock");
                         } else if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
@@ -777,8 +777,6 @@ public class TableGUI extends Stage{
             Move.setDisable(false);
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
-            MoveBTNRotation.play();
-            //TimerExitingAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
             insertion();
             /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
@@ -787,14 +785,20 @@ public class TableGUI extends Stage{
             itsYourTurn.showAndWait();*/
         }
 
+    public void isNotYourTurn(){
+        System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
+        DiceCover.setVisible(true);
+        Move.setDisable(true);
+        PassButton.setDisable(true);
+        TimerExitingAnimation.play();
+        CurrentPlayer.setId("DefaultButton");
+    }
+
     public void updateTimer(){
         Platform.runLater(()->{
             TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getTurnCountDownValue()));
         });
     }
 
-    public void isNotYourTurn(){
-        DiceCover.setVisible(true);
-        CurrentPlayer.setId("DefaultButton");
-    }
+
 }
