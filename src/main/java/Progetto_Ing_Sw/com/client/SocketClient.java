@@ -127,7 +127,7 @@ public class SocketClient implements Runnable{
                 localModel.setNumOfGameBoardCards(Integer.parseInt(messageFields[1]));
                 break;
             case "CountdownValue":
-                localModel.setCountdownValue(Long.parseLong(messageFields[1]));
+                localModel.setCountdownValue(Integer.parseInt(messageFields[1]));
                 break;
             case "Your turn will end in":
                 localModel.setTurnCountDownValue(Integer.parseInt(messageFields[1]));

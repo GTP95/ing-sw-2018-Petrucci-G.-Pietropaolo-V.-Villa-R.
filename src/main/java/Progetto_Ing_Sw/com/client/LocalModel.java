@@ -26,8 +26,7 @@ public  class LocalModel {
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
-    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, turnCountDownValue;
-    private long countdownValue;
+    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
@@ -89,7 +88,7 @@ public  class LocalModel {
     }
 
     public int getCountdownValue() {
-        return (int)countdownValue; //cast ad int per comodità della GUI
+        return countdownValue; //cast ad int per comodità della GUI
     }
 
     public ClientWindowBoard getWindowBoard() {
@@ -273,7 +272,7 @@ public  class LocalModel {
         System.err.println("Settate tutte le variabili per l'invio della gameBoardCard");
     }
 
-    public void setCountdownValue(long countdownValue) {
+    public void setCountdownValue(int countdownValue) {
         this.countdownValue = countdownValue;
         while(multiplayerGUIobserver==null);
         multiplayerGUIobserver.updateTimer();

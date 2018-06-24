@@ -13,7 +13,7 @@ public class Lobby {
     private ArrayList<Player> connectedPlayers;
     private Timer timer, countdown;
     private long timerValue;
-    public volatile long countdownValue;    //accesso concorrente da più Task che inviano il countdown ai client e dal task interno a questa classe che ne aggiorna il valore
+    public volatile int countdownValue;    //accesso concorrente da più Task che inviano il countdown ai client e dal task interno a questa classe che ne aggiorna il valore
     public static boolean isRunning;
 
 
@@ -42,7 +42,7 @@ public class Lobby {
             }, timerValue);
         }
         finally {
-            countdownValue=timerValue;
+            countdownValue=(int)timerValue/1000;
         }
     }
 
@@ -73,7 +73,7 @@ public class Lobby {
                 countdown.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
-                        countdownValue-=1000;
+                        countdownValue--;
                         if (countdownValue>=0) System.out.println(countdownValue);
                         else countdown.cancel();
                     }
