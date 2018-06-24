@@ -702,6 +702,10 @@ public class TableGUI extends Stage{
             updateDice();
         }
 
+        public void updateOtherPlayersBoards(){
+        
+        }
+
         public void updateToolCards(){
             Platform.runLater(()->{
                 ToolCard1BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(0).getTitle());
@@ -795,7 +799,10 @@ public class TableGUI extends Stage{
         DiceCover.setVisible(true);
         Move.setDisable(true);
         PassButton.setDisable(true);
-        TimerExitingAnimation.play();
+        if (TimerLabel.getTranslateY()<0){
+            TimerExitingAnimation.play();
+        }
+
         CurrentPlayer.setId("DefaultButton");
         for(int i=0; i<OtherPlayersList.size();i++){
             if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
