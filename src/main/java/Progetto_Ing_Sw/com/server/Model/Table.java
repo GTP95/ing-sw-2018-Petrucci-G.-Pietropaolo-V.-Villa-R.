@@ -186,6 +186,7 @@ public class Table {
             return;
         }
         currentPlayer++;
+        for (Player player:players) player.getSocketClientHandler().changedTurn=true;
         notifyAllSocketClientHandlers();
         System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
     }

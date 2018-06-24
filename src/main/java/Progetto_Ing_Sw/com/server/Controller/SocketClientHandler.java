@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, isMyTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, isMyTurn, changedTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -82,10 +82,8 @@ public class SocketClientHandler implements Runnable {
 
                 while(Table.gameRunning){
                     receiveMessage();
-                    if(ourThread.isInterrupted()){
-                        System.err.println(ourThread.getName()+" ho ricevuto un interrupt");
-                        updateTable();
-                    }
+                    if(ourThread.isInterrupted()) updateTable();
+
                  }
 
                  System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
@@ -349,8 +347,9 @@ public class SocketClientHandler implements Runnable {
         }
     }
    private void notifyWhoIsTheCurrentPlayer(){
-        if(!isMyTurn){
+        if(!isMyTurn && changedTurn){
             sendControlMessage("Current player is&"+table.getActivePlayer().getName());
+            changedTurn=false;
         }
 
    }
