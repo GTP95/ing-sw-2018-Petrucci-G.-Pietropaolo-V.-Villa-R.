@@ -397,10 +397,12 @@ public class WindowBoardTest {
         windowBoard.printMatrixArrayList();
         System.out.println();
 
+
         System.out.println(" 4° INSERIMENTO");
         windowBoard.insertDice(2,1,dice4r);
         windowBoard.printMatrixArrayList();
         System.out.println();
+
 
     }
 }
