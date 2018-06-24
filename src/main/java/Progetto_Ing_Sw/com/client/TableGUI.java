@@ -608,10 +608,8 @@ public class TableGUI extends Stage{
         for (int i = 0; i < (NumPlayers - 1); i++) {
             Button OtherPlayer = new Button(OtherPlayersNames.get(i).getName());
             OtherPlayer.setId("DefaultButton");
-            OtherPlayer.setOnAction(event ->{
-                OtherPlayerBoardView OtherBoard = new OtherPlayerBoardView(gameBoardCard);
-                OtherBoard.showAndWait();
-            });
+            OtherPlayer.setDisable(true);
+
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
         }
@@ -703,7 +701,15 @@ public class TableGUI extends Stage{
         }
 
         public void updateOtherPlayersBoards(){
-        
+        for(int i=0; i<OtherPlayersList.size();i++){
+            ClientWindowBoard OtherWindowBoard=LocalModel.getInstance().getUpdatedWindowBoards().get(i);
+            OtherPlayersList.get(i).setDisable(false);
+            OtherPlayersList.get(i).setOnAction(event ->{
+                OtherPlayerBoardView OtherBoard = new OtherPlayerBoardView(OtherWindowBoard);
+                OtherBoard.showAndWait();
+            });
+        }
+
         }
 
         public void updateToolCards(){

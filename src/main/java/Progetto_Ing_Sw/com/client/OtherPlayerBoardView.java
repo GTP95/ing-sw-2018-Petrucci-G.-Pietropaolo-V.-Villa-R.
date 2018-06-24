@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
+import Progetto_Ing_Sw.com.server.Model.MatrixCell;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,14 +12,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class OtherPlayerBoardView extends Stage {
     Scene OtherPlayerBoardScene;
-    GridPane griglia;
+    GridPane griglia, DieGrid;
+    ArrayList<ArrayList<MatrixCell>> OtherPlayerBoard;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
-    OtherPlayerBoardView(ClientGameBoardCard gameBoardCard){
+    OtherPlayerBoardView(ClientWindowBoard windowBoard){
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.initStyle(StageStyle.TRANSPARENT);
@@ -42,14 +45,14 @@ public class OtherPlayerBoardView extends Stage {
             griglia.getRowConstraints().add(row);
         }
 
+        OtherPlayerBoard= windowBoard.getUsedMatrix();
 
-        int [][] matrixTexture = gameBoardCard.getMatrixScheme();
 
-        for (int r = 0; r < matrixTexture.length; r++) {
-            for (int c = 0; c < matrixTexture[r].length; c++) {
+        for (int r = 0; r <OtherPlayerBoard.size(); r++) {
+            for (int c = 0; c < OtherPlayerBoard.get(r).size(); c++) {
                 Pane block = new Pane();
                 block.setId("Block");
-                switch (matrixTexture[r][c]) {
+                switch (OtherPlayerBoard.get(r).get(c).getColor()) {
                     case (0):
                         break;
                     case (1):
@@ -67,24 +70,27 @@ public class OtherPlayerBoardView extends Stage {
                     case (5):
                         block.setStyle("-fx-background-color: #009d1d;");
                         break;
-                    case (6):
-                        block.setId("Shade1");
-                        break;
-                    case (7):
-                        block.setId("Shade2");
-                        break;
-                    case (8):
-                        block.setId("Shade3");
-                        break;
-                    case (9):
-                        block.setId("Shade4");
-                        break;
-                    case (10):
-                        block.setId("Shade5");
-                        break;
-                    case (11):
-                        block.setId("Shade6");
-                        break;
+                    case (23):
+                        switch (OtherPlayerBoard.get(r).get(c).getShade()){
+                            case (6):
+                                block.setId("Shade1");
+                                break;
+                            case (7):
+                                block.setId("Shade2");
+                                break;
+                            case (8):
+                                block.setId("Shade3");
+                                break;
+                            case (9):
+                                block.setId("Shade4");
+                                break;
+                            case (10):
+                                block.setId("Shade5");
+                                break;
+                            case (11):
+                                block.setId("Shade6");
+                                break;
+                        }
                 }
 
                 griglia.add(block, c, r);
@@ -101,7 +107,7 @@ public class OtherPlayerBoardView extends Stage {
 
         //HBox che contiene le informazioni sulla carta
         HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
-        Text WindowTitle = new Text(gameBoardCard.getTitle());WindowTitle.setFill(Paint.valueOf("white"));
+        Text WindowTitle = new Text("Titolo");WindowTitle.setFill(Paint.valueOf("white"));
         WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
         WindowInfo.getChildren().addAll(WindowTitle);
 
