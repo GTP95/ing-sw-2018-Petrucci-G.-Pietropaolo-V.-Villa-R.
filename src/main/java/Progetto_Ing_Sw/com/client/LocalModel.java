@@ -340,6 +340,11 @@ public  class LocalModel {
     }
 
     public void setTurnCountDownValue(int turnCountDownValue) {
+        if(turnCountDownValue==-1){         //-1 significa che il turno è finito
+            this.turnCountDownValue=-1;
+            tableGUIobserver.isYourTurn();
+            return;
+        }
         this.turnCountDownValue = turnCountDownValue;
         tableGUIobserver.updateTimer();
     }

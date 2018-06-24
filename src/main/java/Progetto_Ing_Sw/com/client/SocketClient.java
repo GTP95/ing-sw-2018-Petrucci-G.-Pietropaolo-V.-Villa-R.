@@ -132,6 +132,9 @@ public class SocketClient implements Runnable{
             case "Your turn will end in":
                 localModel.setTurnCountDownValue(Integer.parseInt(messageFields[1]));
                 break;
+            case "Your turn just ended":
+                localModel.setTurnCountDownValue(-1);
+                break;
             case "Dice placed successfully":
                 System.out.println("Dice placed successfully");
                 break;

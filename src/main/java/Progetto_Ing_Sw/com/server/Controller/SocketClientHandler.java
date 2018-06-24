@@ -308,6 +308,7 @@ public class SocketClientHandler implements Runnable {
                     else if(countdownValue==0){
                         sendControlMessage("Your turn will end in&" + countdownValue);
                         isMyTurn=false;
+                        sendControlMessage("Your turn just ended");
                         timerTurn.cancel();
                     }
                 }
