@@ -341,7 +341,7 @@ public class SocketClientHandler implements Runnable {
         if(updateWindowBoards) {
             sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
             for (Player player : table.getPlayers()) {
-                sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoard");
+                sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
             }
             updateWindowBoards=false;
         }
