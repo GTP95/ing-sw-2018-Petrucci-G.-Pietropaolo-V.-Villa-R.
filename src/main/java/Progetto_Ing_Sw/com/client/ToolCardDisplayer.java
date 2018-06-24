@@ -16,6 +16,7 @@ import javafx.stage.StageStyle;
 
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
+    Scene GrozingPliers;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     ToolCardDisplayer(String Title, int Number, String Description, String Info, String CardColor, boolean FirstUsage){
@@ -88,6 +89,16 @@ public class ToolCardDisplayer extends Stage {
 
         this.setScene(ToolCardDisplay);
         //this.show();
+
+
+        //Grozing Pliers Scene
+
+        GrozingPliers = new Scene(ToolCardD,1280,720);
+        GrozingPliers.setFill(Color.rgb(0, 0, 0, 0.75));
+        GrozingPliers.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+
+
+
 
     }
 }

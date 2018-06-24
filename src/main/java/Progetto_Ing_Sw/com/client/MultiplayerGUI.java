@@ -190,7 +190,7 @@ public class MultiplayerGUI extends Stage {
 
     public void updateTimer(){
         Platform.runLater(()->{
-            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()/1000));
+            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()));
         });
     }
 
