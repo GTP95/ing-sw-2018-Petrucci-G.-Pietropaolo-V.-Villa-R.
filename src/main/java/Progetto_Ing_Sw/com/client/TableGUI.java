@@ -244,7 +244,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(0).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(0).isFirstUsage());
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -261,7 +262,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(1).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(1).isFirstUsage());
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -277,7 +279,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(2).getID(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getInfo(),
-                        LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),false);
+                        LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),
+                        LocalModel.getInstance().getDrawnToolCards().get(2).isFirstUsage());
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });
@@ -375,7 +378,8 @@ public class TableGUI extends Stage{
                     PublicObjectiveCardDisplayer PublicDisplay1 = new PublicObjectiveCardDisplayer(
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle(),
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription(),
-                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints());
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getImagePath());
                     PublicDisplay1.showAndWait();
                     PublicObjectiveCard1BTN.setDisable(false);
                 }
@@ -389,7 +393,8 @@ public class TableGUI extends Stage{
                     PublicObjectiveCardDisplayer PublicDisplay2 = new PublicObjectiveCardDisplayer(
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle(),
                             LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription(),
-                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints());
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints(),
+                            LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getImagePath());
                     PublicDisplay2.showAndWait();
                     PublicObjectiveCard2BTN.setDisable(false);
                 });
@@ -403,7 +408,8 @@ public class TableGUI extends Stage{
                 PublicObjectiveCardDisplayer PublicDisplay3 = new PublicObjectiveCardDisplayer(
                         LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle(),
                         LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription(),
-                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints());
+                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints(),
+                        LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getImagePath());
                 PublicDisplay3.showAndWait();
                 PublicObjectiveCard3BTN.setDisable(false);
             });
@@ -613,34 +619,33 @@ public class TableGUI extends Stage{
         });
 
 
-
-            //BorderPane per contenere tutti gli altri
-            StackPane GameplayArea = new StackPane();
-            GameplayArea.setId("GamemodeSelectionScreen");
-            GameplayArea.setAlignment(WindowBoard,Pos.CENTER);;
-            GameplayArea.setAlignment(Tokens,Pos.CENTER);
-            GameplayArea.setAlignment(Move,Pos.CENTER);
-            GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
-            GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
-            GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
-            GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
-            GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
-            GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
-            GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
-            GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-            GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
-
+        //BorderPane per contenere tutti gli altri
+        StackPane GameplayArea = new StackPane();
+        GameplayArea.setId("GamemodeSelectionScreen");
+        GameplayArea.setAlignment(WindowBoard,Pos.CENTER);;
+        GameplayArea.setAlignment(Tokens,Pos.CENTER);
+        GameplayArea.setAlignment(Move,Pos.CENTER);
+        GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
+        GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
+        GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
+        GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
+        GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
+        GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
+        GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
+        GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
 
 
-            GameplayScene = new Scene(GameplayArea, 1280, 720);
-            GameplayScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
 
-            //FINE Gameplay Scene
+        GameplayScene = new Scene(GameplayArea, 1280, 720);
+        GameplayScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+
+        //FINE Gameplay Scene
 
 
-            this.setScene(GameplayScene);
-            this.show();
-        }
+        this.setScene(GameplayScene);
+        this.show();
+    }
 
         public void updateTable(){
             updatePublicObjectiveCards();
