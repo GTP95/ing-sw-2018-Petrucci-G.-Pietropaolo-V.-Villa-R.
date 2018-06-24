@@ -15,7 +15,7 @@ public class PublicObjectiveCardDisplayer extends Stage{
     Scene PublicObjectiveCardDisplayer;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
-    PublicObjectiveCardDisplayer(String Title, String Description, int Value){
+    PublicObjectiveCardDisplayer(String Title, String Description, int Value, String Image){
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
@@ -23,8 +23,9 @@ public class PublicObjectiveCardDisplayer extends Stage{
         this.getIcons().add(windowIcon);
 
         //ImageView della Public Objective Card
+        System.out.println(Image);
         ImageView PublicObjectiveCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/PublicObjectiveDefault.png");
-        ImageView PublicObjectiveCardImage = new ImageView();
+        ImageView PublicObjectiveCardImage = new ImageView(Image);
 
         Button GoBack = new Button();GoBack.setTranslateX(-450);GoBack.setId("BackButton2");GoBack.setMinSize(256,256);
         GoBack.setOnAction(event -> this.close());
@@ -37,7 +38,7 @@ public class PublicObjectiveCardDisplayer extends Stage{
         Label PublicObjectiveCardPoints = new Label(Integer.toString(Value));PublicObjectiveCardPoints.setTranslateX(-170);PublicObjectiveCardPoints.setTranslateY(270);PublicObjectiveCardPoints.setId("PublicObjectiveCardNumber");
 
         StackPane PublicObjectiveCardD = new StackPane();
-        PublicObjectiveCardD.getChildren().addAll(PublicObjectiveCardSample,PublicObjectiveCardDescription,PublicObjectiveCardPoints,PublicObjectiveCardTitle,GoBack);
+        PublicObjectiveCardD.getChildren().addAll(PublicObjectiveCardSample,PublicObjectiveCardImage,PublicObjectiveCardDescription,PublicObjectiveCardPoints,PublicObjectiveCardTitle,GoBack);
 
         PublicObjectiveCardDisplayer = new Scene(PublicObjectiveCardD,1280,720);
         PublicObjectiveCardDisplayer.setFill(Color.rgb(0, 0, 0, 0.75));
