@@ -307,6 +307,7 @@ public class SocketClientHandler implements Runnable {
                     }
                     else if(countdownValue==0){
                         isMyTurn=false;
+                        table.changeCurrentPlayer();
                         countdown.cancel();
                     }
                 }
