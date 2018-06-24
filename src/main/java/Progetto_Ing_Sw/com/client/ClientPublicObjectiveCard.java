@@ -11,11 +11,10 @@ public class ClientPublicObjectiveCard extends Card {
     //TODO:effect
 
 
-    public ClientPublicObjectiveCard(String title, String description, int victoryPoints, String image) {
+    public ClientPublicObjectiveCard(String title, String description, int victoryPoints) {
         this.title = title;
         this.description = description;
         this.victoryPoints = victoryPoints;
-        this.image=image;
     }
 
     public String getTitle() {
