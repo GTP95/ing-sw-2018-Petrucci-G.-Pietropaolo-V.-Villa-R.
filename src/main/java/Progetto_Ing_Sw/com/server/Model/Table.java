@@ -180,9 +180,11 @@ public class Table {
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
             shufflePlayerArray();
             currentPlayer=0;
+            notifyAllSocketClientHandlers();
             return;
         }
         currentPlayer++;
+        notifyAllSocketClientHandlers();
     }
 
     private void randomizePlayerArray(){
