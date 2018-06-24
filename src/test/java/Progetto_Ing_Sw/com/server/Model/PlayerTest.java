@@ -1,10 +1,12 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
+import Progetto_Ing_Sw.com.tools.JSONCreator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
@@ -97,6 +99,16 @@ public class PlayerTest {
         catch(NotEnoughFavorTokensException e){
             Assert.assertTrue(true);    //Non esiste Assert.pass...
         }
+    }
+
+    @Test
+    public void getGameBoardFromTitleTest(){
+        player=new Player("John",null);     //socketClientHandler settato a null perchè tanto non usato nel test
+        ArrayList<GameBoardCard> drawnGameBoardCards=new ArrayList<>();
+
+        GameBoardCard card1=mock(GameBoardCard.class);
+        when(card1.getTitle()).thenReturn("Titolo1");
+        
     }
 }
 
