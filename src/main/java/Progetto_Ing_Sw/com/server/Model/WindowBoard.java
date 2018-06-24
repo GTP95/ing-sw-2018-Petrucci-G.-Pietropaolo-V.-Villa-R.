@@ -417,7 +417,7 @@ public class WindowBoard implements WindowBoardObserver{
     public boolean checkAdjacency(int row, int column){
         boolean adjacencyState=false;
 
-        System.out.println(">>> CELL INPUT (adjacency) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (adjacency) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -433,7 +433,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -442,7 +442,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -451,7 +451,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r-1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -460,7 +460,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -469,7 +469,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -478,7 +478,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c-1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -487,7 +487,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -496,7 +496,7 @@ public class WindowBoard implements WindowBoardObserver{
                             int row_adj=r+1;
                             int col_adj=c+1;
 
-                            System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
+                            //System.out.println("CELL ADJACENT ["+(row_adj+1)+"]["+(col_adj+1)+"]");
                             adjacencyState=true;
                             break;
                         }
@@ -515,7 +515,7 @@ public class WindowBoard implements WindowBoardObserver{
 
         boolean correctColor=true;
 
-        System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (ortogonal color) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -527,7 +527,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if( ((r-1>0)||(r-1==0)) && usedMatrix.get(r-1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r-1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOPRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOPRA");
                                 correctColor=false;
                                 break;
                             }
@@ -538,7 +538,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c-1>0)||(c-1==0)) && usedMatrix.get(r).get(c-1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r).get(c-1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A SINISTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A SINISTRA");
                                 correctColor=false;
                                 break;
                             }
@@ -548,7 +548,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r).get(c+1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r).get(c+1).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A DESTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore A DESTRA");
                                 correctColor=false;
                                 break;
                             }
@@ -558,7 +558,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((r+1)<usedMatrix.size()) && usedMatrix.get(r+1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getColor()==usedMatrix.get(r+1).get(c).getDiceContained().getColor()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
                                 correctColor=false;
                                 break;
                             }
@@ -579,7 +579,7 @@ public class WindowBoard implements WindowBoardObserver{
 
         boolean correctNumber=true;
 
-        System.out.println(">>> CELL INPUT (ortogonal value) ["+(row)+"]["+(column)+"]");
+        //System.out.println(">>> CELL INPUT (ortogonal value) ["+(row)+"]["+(column)+"]");
 
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
@@ -590,7 +590,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if( ((r-1>0)||(r-1==0)) && usedMatrix.get(r-1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r-1).get(c).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore SOPRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore SOPRA");
                                 correctNumber=false;
                                 break;
                             }
@@ -601,7 +601,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c-1>0)||(c-1==0)) && usedMatrix.get(r).get(c-1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r).get(c-1).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A SINISTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A SINISTRA");
                                 correctNumber=false;
                                 break;
                             }
@@ -611,7 +611,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((c+1)<usedMatrix.get(r).size()) && usedMatrix.get(r).get(c+1).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r).get(c+1).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A DESTRA");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso valore A DESTRA");
                                 correctNumber=false;
                                 break;
                             }
@@ -621,7 +621,7 @@ public class WindowBoard implements WindowBoardObserver{
                         else if(((r+1)<usedMatrix.size()) && usedMatrix.get(r+1).get(c).isUsed()){
 
                             if(usedMatrix.get(r).get(c).getDiceContained().getValue()==usedMatrix.get(r+1).get(c).getDiceContained().getValue()){
-                                System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
+                                //System.out.println("La mossa non è valida, ho un dado ortogonale con lo stesso colore SOTTO");
                                 correctNumber=false;
                                 break;
                             }
@@ -830,7 +830,7 @@ public class WindowBoard implements WindowBoardObserver{
                             //CONTROLLI NORMALI
                             if(checkAdjacency(r+1,c+1))
                             {//CONTROLLO ADIACENZA OK
-                                System.out.println("Dovrei essere qui");
+
                                 if (checkOrthogonalColor(r + 1, c + 1) && checkOrthogonalValue(r + 1, c + 1))
                                 {//CONTROLLO COLORE/NUMERO OK
                                     break;
