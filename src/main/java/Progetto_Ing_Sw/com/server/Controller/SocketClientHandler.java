@@ -302,10 +302,10 @@ public class SocketClientHandler implements Runnable {
                 @Override
                 public void run() {
                    int countdownValue=table.getTurnDuration();
-                    if(countdownValue>=0) {
+                    if(countdownValue>0) {
                         sendControlMessage("Your turn will end in&" + countdownValue);
                     }
-                    else {
+                    else if(countdownValue==0){
                         isMyTurn=false;
                         countdown.cancel();
                     }
