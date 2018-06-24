@@ -48,7 +48,7 @@ public class SocketClientHandler implements Runnable {
     public void run(){
 
             try {
-                    myPlayerName=in.readLine();
+                    myPlayerName=in.readLine();          //nome del giocatore gestito da questo thread
                     ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
                     System.err.println(ourThread.getName());
                     ourThread.setName(myPlayerName+"'s SocketClientHandler");
@@ -76,13 +76,16 @@ public class SocketClientHandler implements Runnable {
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
-                sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
+              //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
                 notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
                     receiveMessage();
-                    if(ourThread.isInterrupted()) updateTable();
+                    if(ourThread.isInterrupted()){
+                        System.err.println(ourThread.getName()+" ho ricevuto un interrupt");
+                        updateTable();
+                    }
                  }
 
                  System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
@@ -273,7 +276,7 @@ public class SocketClientHandler implements Runnable {
 
     private void receiveMessage(){
         try {
-            while (!in.ready());     //aspetta che il buffer sia prono ad essere letto
+            if (in.ready()) {     //aspetta che il buffer sia prono ad essere letto
                 String message = in.readLine();
                 System.out.println("Message received: " + message);
                 String messageFields[] = message.split("%");  //Salva nell'array i campi del messaggio separati da %
@@ -282,7 +285,7 @@ public class SocketClientHandler implements Runnable {
                     case "Action":
                         handleActionMessage(messageFields[1]);
                 }
-
+            }
         }
         catch(IOException e){
             e.printStackTrace();
@@ -311,7 +314,8 @@ public class SocketClientHandler implements Runnable {
                         sendControlMessage("Your turn will end in&" + countdownValue);
                         isMyTurn=false;
                         sendControlMessage("Your turn just ended");
-                        timerTurn.cancel();
+                        table.changeCurrentPlayer();
+                        timerTurn.cancel(); //"disattiva" il timer ed indica che può essere rimosso dal garbage collector
                     }
                 }
             },1000,1000);   //invia ogni secondo countdownValue;

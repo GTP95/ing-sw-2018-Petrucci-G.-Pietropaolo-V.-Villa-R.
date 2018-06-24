@@ -53,9 +53,10 @@ public class Table {
     }
 
     public Player getActivePlayer(){
-        ArrayList<Player> clonePlayers=getPlayers();
+       /* ArrayList<Player> clonePlayers=getPlayers();
         Player selectedPlayer = clonePlayers.get(currentPlayer);
-        return selectedPlayer;
+        return selectedPlayer;*/
+        return players.get(currentPlayer);
     }
 
     public static Table getOurInstance(){
@@ -168,23 +169,25 @@ public class Table {
         drawnDice.add(cloneDice);
     }
 
-    private ArrayList<Player> shufflePlayerArray(){
-        ArrayList<Player>arrayToReturn=new ArrayList<>(players.size());
-        for(int index1=0,index2=players.size()-1;index1<players.size();index1++, index2--){
-            arrayToReturn.add(index2,players.get(index1));
+    private ArrayList<Player> shufflePlayerArray(){ //inverte l'array dei giocatori
+        ArrayList<Player>arrayToReturn=new ArrayList<>();
+        for(int index=players.size()-1;index>=0;index--){
+            arrayToReturn.add(players.get(index));
         }
         return arrayToReturn;
     }
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            shufflePlayerArray();
+            players=shufflePlayerArray();
             currentPlayer=0;
             notifyAllSocketClientHandlers();
+            System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
         }
         currentPlayer++;
         notifyAllSocketClientHandlers();
+        System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
     }
 
     private void randomizePlayerArray(){
