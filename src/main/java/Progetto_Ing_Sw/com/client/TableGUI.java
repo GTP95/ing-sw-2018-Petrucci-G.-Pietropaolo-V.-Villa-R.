@@ -137,13 +137,20 @@ public class TableGUI extends Stage{
 
 
 
-
+        GridBlocks = new ArrayList<>();
         //GRIGLIA DADI
             for (int r = 0; r < matrixTexture.length; r++) {
+                ArrayList<Pane> PaneRow = new ArrayList<>();
                 for (int c = 0; c < matrixTexture[r].length; c++) {
-
+                    Pane block = new Pane();
+                    block.setId("DieBlock");
+                    DieGrid.add(block,c,r);
+                    PaneRow.add(c,block);
                 }
+                GridBlocks.add(PaneRow);
             }
+
+
 
         //Stampa due interi che indicano su che casella sto cliccando
             DieGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -756,16 +763,14 @@ public class TableGUI extends Stage{
             Platform.runLater(()-> {
                 for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
                     for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
-                        Pane block = new Pane();
-                        block.setId("DieBlock");
-                        if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed() == false) {
-                            block.setId("DieBlock");
-                        } else if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
-                            block.setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                        /*if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed() == false) {
+                            GridBlocks.get(r).get(c).setId("DieBlock");
+                        } else */
+                        if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
+                            GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
                                     + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
-                            block.setStyle("-fx-opacity: 0.75;" + "-fx-background-size: 60 60");
+                            GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
                         }
-                        DieGrid.add(block, c, r);
                     }
                 }
             });
@@ -792,6 +797,11 @@ public class TableGUI extends Stage{
         PassButton.setDisable(true);
         TimerExitingAnimation.play();
         CurrentPlayer.setId("DefaultButton");
+        for(int i=0; i<OtherPlayersList.size();i++){
+            if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
+                OtherPlayersList.get(i).setId("DefaultButtonActivated");
+            }
+        }
     }
 
     public void updateTimer(){

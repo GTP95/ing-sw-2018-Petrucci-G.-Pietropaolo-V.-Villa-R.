@@ -83,7 +83,6 @@ public class LoginStage extends Stage {
                 ConnectExpetionAlert.setTitle("Incorrect Port");
                 ConnectExpetionAlert.setHeaderText("The port you entered is not valid");
                 ConnectExpetionAlert.setContentText("Press OK and enter another Port Number");
-
                 ConnectExpetionAlert.showAndWait();
             }
 
