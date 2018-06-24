@@ -9,6 +9,10 @@ public class WindowBoard implements WindowBoardObserver{
 
     private int [][] Matrix; //righe - colonne
     private ArrayList<ArrayList<MatrixCell>> usedMatrix;
+    private String localTitle;
+
+    public String getTitle() {return localTitle;}
+    public void setTitle(String title) {this.localTitle = title;}
 
     //crea una matrice di vuota delle dimensioni volute
     public WindowBoard(int rows, int columns) {
@@ -150,6 +154,87 @@ public class WindowBoard implements WindowBoardObserver{
         }
         return Matrix;
     }
+
+    public void importNameFromFile(int cardCode){
+
+        String localTitle = new String();
+
+        switch (cardCode){
+            case (1):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/KaleidoscopicDream.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (2):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Firmitas.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (3):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/FractalDrops.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (4):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/RipplesOfLight.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (5):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/LuxMundi.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (6):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/LuxAstram.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (7):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Gravitas.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (8):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/WaterOfLife.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (9):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/SunCatcher.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (10):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/ShadowThief.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (11):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/AuroraeMagnificus.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (12):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/AuroraSagradis.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (13):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/SymphonyOfLight.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (14):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Virtus.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (15):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Firelight.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (16):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/SunsGlory.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (17):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Batllo.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (18):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Bellesguard.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (19):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/FulgorDelCielo.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (20):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/LuzCelestial.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (21):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/ChromaticSplendor.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (22):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Comitas.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (23):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/ViaLux.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+            case (24):try { localTitle= JSONCreator.parseStringFieldFromFile("Resources/Cards/GameBoardCards/Industria.json", "title");}
+            catch(FileNotFoundException e){e.printStackTrace();}
+                break;
+        }
+        setTitle(localTitle);
+    };
 
     //trasforma la matrice da interi a dadi, per poter ragionare sulle mosse
     public ArrayList<ArrayList<MatrixCell>> fromIntToArrayList(int Matrix[][], int rows, int columns){
