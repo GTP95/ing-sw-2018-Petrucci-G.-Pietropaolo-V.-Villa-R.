@@ -35,6 +35,7 @@ public  class LocalModel {
     private ClientDice diceToInsert;
     private int row,column;
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
+    private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
 
     private LocalModel(){
 
@@ -146,6 +147,10 @@ public  class LocalModel {
 
     public int getTurnCountDownValue() {
         return turnCountDownValue;
+    }
+
+    public String getCurrentPlayerName() {
+        return currentPlayerName;
     }
 
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
@@ -347,5 +352,10 @@ public  class LocalModel {
         }
         this.turnCountDownValue = turnCountDownValue;
         tableGUIobserver.updateTimer();
+    }
+
+    public void setCurrentPlayerName(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
+        tableGUIobserver.isNotYourTurn();   //notifica la GUI
     }
 }

@@ -292,6 +292,7 @@ public class SocketClientHandler implements Runnable {
         updateDrawnDiceIfNecessary();
         updatePlayersWindowBoardsIfNecessary();
         notifyIfIsYourTurn();
+        notifyWhoIsTheCurrentPlayer();
     }
 
     private void notifyIfIsYourTurn(){
@@ -342,4 +343,9 @@ public class SocketClientHandler implements Runnable {
             updateWindowBoards=false;
         }
     }
+   private void notifyWhoIsTheCurrentPlayer(){
+        if(!isMyTurn){
+            sendControlMessage("Current player is&"+table.getActivePlayer().getName());
+        }
+   }
 }
