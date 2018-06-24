@@ -145,6 +145,7 @@ public class SocketClient implements Runnable{
                 break;
             case "Current player is":
                 localModel.setCurrentPlayerName(messageFields[1]);
+                break;
             case "Sending WindowBoards update":
                 localModel.setNumOfWindowBoards(Integer.parseInt(messageFields[1]));
                 break;
