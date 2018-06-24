@@ -154,6 +154,10 @@ public  class LocalModel {
         return currentPlayerName;
     }
 
+    public ArrayList<ClientWindowBoard> getUpdatedWindowBoards() {
+        return updatedWindowBoards;
+    }
+
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
@@ -322,7 +326,7 @@ public  class LocalModel {
         updatedWindowBoards.add(windowBoard);
         if (updatedWindowBoards.size()==numOfWindowBoards){
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
-            //TODO: notifyView
+            tableGUIobserver.updateOtherPlayersBoards();
         }
     }
 
