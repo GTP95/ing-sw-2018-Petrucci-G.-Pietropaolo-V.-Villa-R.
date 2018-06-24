@@ -326,7 +326,7 @@ public class SocketClientHandler implements Runnable {
         currentDiceArrayList=table.getDrawnDice();
         boolean changeDetected=false;
         for(int index=0;index<currentDiceArrayList.size();index++){
-            if(currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
+            if(!currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
                 changeDetected=true;
                 break;
             }
