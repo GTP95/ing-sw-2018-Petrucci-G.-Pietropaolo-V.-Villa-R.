@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Dice;
 import javafx.animation.PauseTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -36,6 +38,7 @@ public class TableGUI extends Stage{
     ArrayList<Pane> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
     TranslateTransition TimerEnteringAnimation, TimerExitingAnimation;
+    RotateTransition MoveBTNRotation;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia, DieGrid;
@@ -615,10 +618,18 @@ public class TableGUI extends Stage{
         Move.setId("DefaultButton");
         Move.setTranslateX(220);
         Move.setTranslateY(-150);
+        Move.setRotate(90);
         Move.setDisable(true);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
         });
+
+        
+
+        MoveBTNRotation = new RotateTransition(Duration.millis(300),Move);
+        MoveBTNRotation.setToAngle(0);
+        MoveBTNRotation.setFromAngle(90);
+        MoveBTNRotation.setAutoReverse(false);
 
         //TIMER LABEL
         TimerLabel = new Label("60");
@@ -635,6 +646,7 @@ public class TableGUI extends Stage{
         TimerExitingAnimation.setFromY(-200);
         TimerExitingAnimation.setToY(0);
         TimerExitingAnimation.setAutoReverse(true);
+
 
 
         //TimerLabel.setTextAlignment(TextAlignment.CENTER);
@@ -765,6 +777,7 @@ public class TableGUI extends Stage{
             Move.setDisable(false);
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
+            MoveBTNRotation.play();
             //TimerExitingAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
             insertion();
@@ -776,7 +789,7 @@ public class TableGUI extends Stage{
 
     public void updateTimer(){
         Platform.runLater(()->{
-            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()/1000));
+            TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getTurnCountDownValue()));
         });
     }
 
