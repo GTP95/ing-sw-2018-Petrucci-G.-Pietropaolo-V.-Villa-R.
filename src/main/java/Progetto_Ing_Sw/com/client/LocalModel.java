@@ -44,6 +44,7 @@ public  class LocalModel {
         usernameIsCorrect=null;
         windowBoard=null;
         immediatelyUpdateGUI=false;
+        currentPlayerName="NotAValidPlayerName";
     }
 
     public static LocalModel getInstance(){
