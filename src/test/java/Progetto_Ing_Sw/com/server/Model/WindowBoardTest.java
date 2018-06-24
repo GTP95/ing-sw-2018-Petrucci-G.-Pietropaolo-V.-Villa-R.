@@ -18,6 +18,11 @@ public class WindowBoardTest {
     private Dice dice5;
     private Dice dice5r;
 
+    private Dice dice6Y;
+    private Dice dice5Y;
+    private Dice dice4Y;
+    private Dice dice4r;
+
     private final int rows = 4;       //colonne e righe rimangono costanti
     private final int columns = 5;
 
@@ -30,6 +35,12 @@ public class WindowBoardTest {
         dice4=mock(Dice.class);
         dice5=mock(Dice.class);
         dice5r=mock(Dice.class);
+
+        dice6Y=mock(Dice.class);
+        dice5Y=mock(Dice.class);
+        dice4Y=mock(Dice.class);
+        dice4r=mock(Dice.class);
+
 
 
         when(dice1.getColor()).thenReturn(Color.BLUE);
@@ -49,6 +60,15 @@ public class WindowBoardTest {
 
         when(dice5r.getColor()).thenReturn(Color.RED);
         when(dice5r.getValue()).thenReturn(5);
+
+        when(dice6Y.getColor()).thenReturn(Color.YELLOW);
+        when(dice6Y.getValue()).thenReturn(6);
+        when(dice5Y.getColor()).thenReturn(Color.YELLOW);
+        when(dice5Y.getValue()).thenReturn(5);
+        when(dice4Y.getColor()).thenReturn(Color.YELLOW);
+        when(dice4Y.getValue()).thenReturn(4);
+        when(dice4r.getColor()).thenReturn(Color.RED);
+        when(dice4r.getValue()).thenReturn(4);
     }
 
     @Test//Test utile solo al controllo delle variabili, da eliminare
@@ -275,30 +295,56 @@ public class WindowBoardTest {
     public void checkSecondaryPositionRules(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,8);
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
 
-        /* when(dice5.getColor()).thenReturn(Color.GREEN);
-        when(dice5.getValue()).thenReturn(5);
+        /*System.out.println(" 1° INSERIMENTO");
+        windowBoard.insertDice(1,1,dice6Y);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
 
-        when(dice5r.getColor()).thenReturn(Color.RED);
-        when(dice5r.getValue()).thenReturn(5);
+        System.out.println(" 2° INSERIMENTO");
+        windowBoard.insertDice(2,2,dice5Y);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
 
-        when(dice3.getColor()).thenReturn(Color.RED);
-        when(dice3.getValue()).thenReturn(3);
+        System.out.println(" 3° INSERIMENTO");
+        windowBoard.insertDice(3,1,dice4Y);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println(" 4° INSERIMENTO");
+        windowBoard.insertDice(2,1,dice4r);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
         */
 
-        //Set di inserimenti, da commenrtare/decommentare a seconda del test che voglio fare
-        windowBoard.insertDiceARRLIST(3,1,dice5);
-        windowBoard.insertDiceARRLIST(4,1,dice5r);
-        windowBoard.insertDiceARRLIST(4,2,dice3);
-        Assert.assertTrue(windowBoard.getUsedMatrix().get(4-1).get(1-1).isUsed());
-        System.out.println();
-        System.out.println(windowBoard.checkOrthogonalColor(4,1));
-        System.out.println(windowBoard.checkOrthogonalValue(4,1));
+        windowBoard.insertDiceARRLIST(1,1,dice6Y);
+        System.out.println(windowBoard.checkOrthogonalColor(1,1));
+        System.out.println(windowBoard.checkOrthogonalValue(1,1));
+        windowBoard.printMatrixArrayList();
+
+        windowBoard.insertDiceARRLIST(2,2,dice5Y);
+        System.out.println(windowBoard.checkAdjacency(2,2));
+        System.out.println(windowBoard.checkOrthogonalColor(2,2));
+        System.out.println(windowBoard.checkOrthogonalValue(2,2));
+        windowBoard.printMatrixArrayList();
+
+        windowBoard.insertDiceARRLIST(3,1,dice4Y);
+        System.out.println(windowBoard.checkAdjacency(3,1));
+        System.out.println(windowBoard.checkOrthogonalColor(3,1));
+        System.out.println(windowBoard.checkOrthogonalValue(3,1));
+        windowBoard.printMatrixArrayList();
+
+        windowBoard.insertDiceARRLIST(2,1,dice4r);
+        System.out.println(windowBoard.checkAdjacency(2,1));
+        System.out.println(windowBoard.checkOrthogonalColor(2,1));
+        System.out.println(windowBoard.checkOrthogonalValue(2,1));
+        windowBoard.printMatrixArrayList();
+
         //i due controlli funzionano contemporaneamente, il primo dei due che trova una cosa sbagliata lo notifica e ferma
         //anche l'altro; in questo caso, infatti, trova prima il numero uguale, che si trova sopra, e poi il colore, a destra
 
@@ -308,7 +354,7 @@ public class WindowBoardTest {
     public void TEST_INSERT_DICE_GAMEPLAY() throws PlaceDiceException {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);//Industria
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,8);//WaterOfLife
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
@@ -337,12 +383,22 @@ public class WindowBoardTest {
         //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
 
         System.out.println(" 1° INSERIMENTO");
-        windowBoard.insertDice(3,1,dice5);
+        windowBoard.insertDice(1,1,dice6Y);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
         System.out.println(" 2° INSERIMENTO");
-        windowBoard.insertDice(4,1,dice3);
+        windowBoard.insertDice(2,2,dice5Y);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println(" 3° INSERIMENTO");
+        windowBoard.insertDice(3,1,dice4Y);
+        windowBoard.printMatrixArrayList();
+        System.out.println();
+
+        System.out.println(" 4° INSERIMENTO");
+        windowBoard.insertDice(2,1,dice4r);
         windowBoard.printMatrixArrayList();
         System.out.println();
 
