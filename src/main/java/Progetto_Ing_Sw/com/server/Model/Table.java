@@ -148,7 +148,7 @@ public class Table {
     public void startGame(){
         gameRunning=true;
         players=Lobby.getInstance().getConnctedPlayers();
-     Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
+    // Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
         currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
@@ -174,8 +174,6 @@ public class Table {
         for(Dice dice : drawnDice){
             System.out.println("Color: "+dice.getColor()+" value: "+dice.getValue());
         }
-        for(Player player: players) player.getSocketClientHandler().changedTurn=true;
-        notifyAllSocketClientHandlers();
     }
 
     public void addDiceFluxBrush(Dice diceRejectedByInsert){
@@ -193,19 +191,20 @@ public class Table {
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            Collections.reverse(players);
+           // Collections.reverse(players);
             currentPlayer=0;
             RoundTrack.getInstance().incrementRound();
+            resetTurnTime();
             for(Player player:players) {
-                player.getSocketClientHandler().changedTurn = true;
                 player.getSocketClientHandler().updatedRoundNumber = true;
+                player.getSocketClientHandler().changedTurn=true;
             }
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
         }
         currentPlayer++;
-        for (Player player:players) player.getSocketClientHandler().changedTurn=true;
+        for(Player player:players) player.getSocketClientHandler().changedTurn=true;
         notifyAllSocketClientHandlers();
         System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
     }

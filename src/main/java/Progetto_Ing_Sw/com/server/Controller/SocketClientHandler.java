@@ -19,7 +19,7 @@ public class SocketClientHandler implements Runnable {
     private  RoundTrack roundTrack;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, updatedRoundNumber; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice, changedTurn, updatedRoundNumber; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -30,7 +30,7 @@ public class SocketClientHandler implements Runnable {
       //  timerTurn=new Timer();
         updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
         updateDice=false;           //Idem come sopra
-        isMyTurn=false;
+        changedTurn=true;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -311,7 +311,6 @@ public class SocketClientHandler implements Runnable {
     private void notifyIfIsYourTurn(){
         if(changedTurn && table.getActivePlayer().getName().equals(myPlayerName)) {
             changedTurn=false;
-            isMyTurn=true;
             sendControlMessage("It's your turn now");
             timerTurn=new Timer();
             timerTurn.scheduleAtFixedRate(new TimerTask() {
@@ -323,10 +322,10 @@ public class SocketClientHandler implements Runnable {
                     }
                     else if(countdownValue==0){
                         sendControlMessage("Your turn will end in&" + countdownValue);
-                        isMyTurn=false;
                         sendControlMessage("Your turn just ended");
                         table.changeCurrentPlayer();
                         timerTurn.cancel(); //"disattiva" il timer ed indica che può essere rimosso dal garbage collector
+                        timerTurn.purge();
                     }
                 }
             },1000,1000);   //invia ogni secondo countdownValue;
@@ -373,7 +372,6 @@ public class SocketClientHandler implements Runnable {
        switch(message){
            case "End my turn":
                timerTurn.cancel();
-               table.resetTurnTime();
                table.changeCurrentPlayer();
                sendControlMessage("Your turn just ended");
                break;
