@@ -127,6 +127,7 @@ public class ChooseAWindow extends Stage {
         Window1BTN.setOnAction(event -> {
             this.close();
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
+            System.err.println("-----------------------------------------------------------------------SCELTA LA BOARD-----------------------------------------------------------------");
             new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");

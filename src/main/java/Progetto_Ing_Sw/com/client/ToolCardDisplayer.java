@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -101,7 +102,11 @@ public class ToolCardDisplayer extends Stage {
                 Pay1Icon.setVisible(false);
                 GoBack.setVisible(false);
                 SceneTransition.play();
-                SceneTransition.setOnFinished(event1 -> this.setScene(ToolCarddisplayerScene2));
+                SceneTransition.setOnFinished(event1 -> {
+                    this.setScene(ToolCarddisplayerScene2);
+                    ToolCardD.setTranslateX(0);
+                });
+
             });
         }
         ToolCardDisplayer.getChildren().addAll(ToolCardD, Pay1Icon, Pay2Icon, GoBack);
@@ -143,20 +148,41 @@ public class ToolCardDisplayer extends Stage {
         ToolCardColor1.setTranslateY(-280);
         ToolCardColor1.setTranslateX(-180);
 
+        Button ToolCard1BTN = new Button();
+        ToolCard1BTN.setMinSize(500,711);
+        ToolCard1BTN.setStyle("-fx-background-color: transparent;");
+
         StackPane ToolCardD1 = new StackPane();
         ToolCardD1.setId("ToolCardDisplayer");
         ToolCardD1.setMaxSize(500, 711);
         ToolCardD1.setTranslateX(-350);
-        ToolCardD1.getChildren().addAll(ToolCardColor1, ToolCardSample1, ToolCardTitle1, ToolCardNumber1, ToolCardDescription1, ToolCardImage1);
+        ToolCardD1.getChildren().addAll(ToolCardColor1, ToolCardSample1, ToolCardTitle1, ToolCardNumber1, ToolCardDescription1, ToolCardImage1,ToolCard1BTN);
+
+        TranslateTransition ReturnToFirstScene = new TranslateTransition(Duration.millis(700),ToolCardD1);
+        ReturnToFirstScene.setFromX(-350);
+        ReturnToFirstScene.setToX(0);
+        ReturnToFirstScene.setAutoReverse(false);
+
+        ToolCard1BTN.setOnAction(event -> {
+            ReturnToFirstScene.play();
+            ReturnToFirstScene.setOnFinished(event1 -> {
+                this.setScene(ToolCardDisplay);
+                ToolCardD1.setTranslateX(-350);
+            });
+            Pay1Icon.setVisible(true);
+            GoBack.setVisible(true);
+        });
+
 
         StackPane ToolCardDisplayerSecond = new StackPane();
 
 
-        //----------------------------------------------------------------------------------INIZIO GROZING PLIERS----------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------INIZIO GROZING PLIERS----------------------------------------------------------------------------------//
         Text TitleInfo = new Text("Choose a Die to Increase or Decrease");
         TitleInfo.setStyle("-fx-fill: white;");
         TitleInfo.setTranslateX(380);
         TitleInfo.setTranslateY(-325);
+
 
 
         VBox GrozingPool = new VBox(5);
@@ -240,9 +266,17 @@ public class ToolCardDisplayer extends Stage {
         StackPane GrozingPliers = new StackPane();
         GrozingPliers.setPrefSize(1280, 720);
         GrozingPliers.getChildren().addAll(TitleInfo, GrozingPool, IncreaseValue, DecreaseValue, DieChoosen, AcceptGrozing);
-        //----------------------------------------------------------------------------------FINE GROZING PLIERS----------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------FINE GROZING PLIERS----------------------------------------------------------------------------------//
 
-        ToolCardDisplayerSecond.getChildren().addAll(ToolCardD1,GrozingPliers);
+        //----------------------------------------------------------------------------------INIZIO ENGLOMISE BRUSH----------------------------------------------------------------------------------//
+
+
+
+        //----------------------------------------------------------------------------------FINE ENGLOMISE BRUSH----------------------------------------------------------------------------------//
+
+
+
+        ToolCardDisplayerSecond.getChildren().addAll(GrozingPliers,ToolCardD1);
         ToolCardDisplayerSecond.setId("ToolCardDisplayer");
 
 
