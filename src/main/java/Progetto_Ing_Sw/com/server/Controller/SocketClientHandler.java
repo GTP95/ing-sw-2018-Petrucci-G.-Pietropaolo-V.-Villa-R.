@@ -339,7 +339,8 @@ public class SocketClientHandler implements Runnable {
     }
     private void updatePlayersWindowBoardsIfNecessary(){
         if(updateWindowBoards) {
-            sendControlMessage("Sending WindowBoards update&" + (table.getPlayers().size()-1)); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
+            int numOfWindowBoardsToSend=table.getPlayers().size()-2;
+            sendControlMessage("Sending WindowBoards update&" + numOfWindowBoardsToSend); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
             for (Player player : table.getPlayers()) {
                 if (!player.getName().equals(myPlayerName))
                     sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");

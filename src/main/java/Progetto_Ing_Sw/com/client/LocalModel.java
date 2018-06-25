@@ -363,4 +363,8 @@ public  class LocalModel {
         this.currentPlayerName = currentPlayerName;
         tableGUIobserver.isNotYourTurn();   //notifica la GUI
     }
+
+    public void skipTurn(){
+        
+    }
 }
