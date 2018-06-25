@@ -8,4 +8,21 @@ public final class Color {
     public static final int YELLOW=4;
     public static final int GREEN=5;
     public static final int SHADE=23;
+
+    public String IntToColor(int i){
+        String color = new String();
+        switch (i){
+            case Color.RED: color= "red";
+                break;
+            case Color.BLUE: color = "blue";
+                break;
+            case Color.PURPLE: color = "purple";
+                break;
+            case Color.YELLOW: color = "yellow";
+                break;
+            case Color.GREEN: color = "green";
+                break;
+        }
+        return color;
+    }
 }

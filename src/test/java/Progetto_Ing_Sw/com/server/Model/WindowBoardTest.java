@@ -108,17 +108,6 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void importingNameFromJson(){
-
-        for (int i=1;i<=24;i++){
-            WindowBoard windowBoard = new WindowBoard(4,5);
-            windowBoard.importNameFromFile(i);
-            System.out.println("Nome carta #["+i+"] : "+windowBoard.getTitle());
-        }
-
-    }
-
-    @Test
     public void checkThatTheMatrixIsEmpty() {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
@@ -160,6 +149,32 @@ public class WindowBoardTest {
     }
 
     //TEST COMPLETI FINO A QUI
+
+    @Test
+    public void printingValueColorDice(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,8);
+        windowBoard.importNameFromFile(8);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrixArrayList();
+        windowBoard.printDiceColorValueArrayList();
+
+    }
+
+    @Test
+    public void importingNameFromJson(){
+
+        for (int i=1;i<=24;i++){
+            WindowBoard windowBoard = new WindowBoard(4,5);
+            windowBoard.importNameFromFile(i);
+            System.out.println("Nome carta #["+i+"] : "+windowBoard.getTitle());
+        }
+
+    }
+
     @Test
     public void checkShadeOfAMatrixCell() {
 
@@ -406,6 +421,7 @@ public class WindowBoardTest {
         System.out.println(" 3° INSERIMENTO");
         windowBoard.insertDice(3,1,dice4Y);
         windowBoard.printMatrixArrayList();
+        windowBoard.printDiceColorValueArrayList();
         System.out.println();
 
         /* inserimento  che lancia l'eccezione
