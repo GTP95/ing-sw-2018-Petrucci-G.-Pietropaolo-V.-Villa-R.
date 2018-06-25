@@ -157,6 +157,10 @@ public  class LocalModel {
     }
 
     public ArrayList<ClientWindowBoard> getUpdatedWindowBoards() {
+        ArrayList<ClientWindowBoard> clientWindowBoardsToReturn=new ArrayList<>();
+        for(ClientWindowBoard updatedWindowBoard : updatedWindowBoards)
+            if(!windowBoard.equals(this.windowBoard))
+                clientWindowBoardsToReturn.add(updatedWindowBoard);
         return updatedWindowBoards;
     }
 
