@@ -194,6 +194,7 @@ public class Table {
             Collections.reverse(players);
             currentPlayer=0;
             roundNumber++;
+            for(Player player:players) player.getSocketClientHandler().changedTurn=true;
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
