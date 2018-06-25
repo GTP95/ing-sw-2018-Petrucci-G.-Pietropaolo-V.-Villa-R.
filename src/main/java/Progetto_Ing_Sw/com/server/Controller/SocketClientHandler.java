@@ -26,7 +26,7 @@ public class SocketClientHandler implements Runnable {
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
-        timerTurn=new Timer();
+      //  timerTurn=new Timer();
         updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
         isMyTurn=false;
 
@@ -307,6 +307,7 @@ public class SocketClientHandler implements Runnable {
         if(table.getActivePlayer().getName().equals(myPlayerName) && isMyTurn==false) {
             isMyTurn=true;
             sendControlMessage("It's your turn now");
+            timerTurn=new Timer();
             timerTurn.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
@@ -345,10 +346,8 @@ public class SocketClientHandler implements Runnable {
     }
     private void updatePlayersWindowBoardsIfNecessary(){
         if(updateWindowBoards) {
-            int numOfWindowBoardsToSend=table.getPlayers().size()-2;
-            sendControlMessage("Sending WindowBoards update&" + numOfWindowBoardsToSend); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
+            sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size()); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
             for (Player player : table.getPlayers()) {
-                if (!player.getName().equals(myPlayerName))
                     sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
             }
             updateWindowBoards=false;
