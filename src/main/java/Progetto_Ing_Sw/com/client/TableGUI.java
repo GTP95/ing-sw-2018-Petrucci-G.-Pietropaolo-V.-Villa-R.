@@ -36,7 +36,7 @@ public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
     Label TimerLabel,ToolCard1Label, ToolCard2Label, ToolCard3Label, ToolCardColor1, ToolCardColor2, ToolCardColor3, PublicObjectiveCard1Label, PublicObjectiveCard2Label, PublicObjectiveCard3Label,Tokens, PrivateObjectiveColor, CurrentPlayer,DiceCover;
-    Button PassButton,ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN,Move;
+    Button RoundTrack,PassButton,ToolCard1BTN, ToolCard2BTN, ToolCard3BTN,PublicObjectiveCard1BTN, PublicObjectiveCard2BTN,PublicObjectiveCard3BTN,Move;
     Text PublicObjectiveCard1Description,PublicObjectiveCard2Description,PublicObjectiveCard3Description,PublicObjectiveCard1Value,PublicObjectiveCard2Value,PublicObjectiveCard3Value;
     ArrayList<Button> OtherPlayersList;
     ArrayList<ToggleButton> DiceButtons;
@@ -580,11 +580,11 @@ public class TableGUI extends Stage{
 
         //INIZIO Round Track
 
-        Button RoundTrack = new Button();RoundTrack.setId("Round1");
+        RoundTrack = new Button();RoundTrack.setId("Round1");
         RoundTrack.setMinSize(150,150);
         RoundTrack.setTranslateY(-10);
         RoundTrack.setTranslateX(10);
-        //TODO Observer del round
+
 
         //FINE Round Track
 
@@ -818,6 +818,10 @@ public class TableGUI extends Stage{
         Platform.runLater(()->{
             TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getTurnCountDownValue()));
         });
+    }
+
+    public void updateRound(){
+        RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
     }
 
 
