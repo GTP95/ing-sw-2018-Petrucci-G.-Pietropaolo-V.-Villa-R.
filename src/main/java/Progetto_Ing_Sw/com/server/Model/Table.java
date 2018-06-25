@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
+import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.File;
@@ -98,7 +99,12 @@ public class Table {
         if(drawnDice.contains(dice)){
             int index=drawnDice.indexOf(dice);
             drawnDice.get(index).setValue(0);
-            for(Player player:players) player.getSocketClientHandler().ourThread.interrupt();   //invia notifica ai thread dei SocketClientHandler
+            SocketClientHandler socketClientHandler;
+            for(Player player:players){
+                socketClientHandler=player.getSocketClientHandler();
+                socketClientHandler.updateDice=true;
+                socketClientHandler.ourThread.interrupt();   //invia notifica ai thread dei SocketClientHandler
+            }
             return true;
         }
         return false;
@@ -195,7 +201,7 @@ public class Table {
         notifyAllSocketClientHandlers();
         System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
     }
-    
+
 
     public void notifyWindowBoardChange(Thread notifierThread){
         for(Player player : players){
