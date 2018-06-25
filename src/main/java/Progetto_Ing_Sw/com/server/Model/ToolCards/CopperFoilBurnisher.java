@@ -5,6 +5,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+//TESTING fatto direttamente sulla classe GamePlayTest
 public class CopperFoilBurnisher {
 
 
