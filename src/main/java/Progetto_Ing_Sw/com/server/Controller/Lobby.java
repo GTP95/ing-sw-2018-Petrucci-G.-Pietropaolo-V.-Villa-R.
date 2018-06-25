@@ -4,13 +4,14 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 public class Lobby {
     private static Lobby ourInstance = new Lobby();
-    private ArrayList<Player> connectedPlayers;
+    private CopyOnWriteArrayList<Player> connectedPlayers;
     private Timer timer, countdown;
     private long timerValue;
     public volatile int countdownValue;    //accesso concorrente da più Task che inviano il countdown ai client e dal task interno a questa classe che ne aggiorna il valore
@@ -22,7 +23,7 @@ public class Lobby {
     }
 
     private Lobby() {
-        connectedPlayers = new ArrayList<>();
+        connectedPlayers = new CopyOnWriteArrayList<>();
         isRunning=true;
         timer = new Timer();    //serve a far partire il gioco dopo un certo tempo se sono connessi almeno due giocatori
         countdown=new Timer();  //Serve a comunicare ai client il tempo rimanente prima dell'inizio automatico del gioco
@@ -91,8 +92,8 @@ public class Lobby {
         }
     }
 
-    public synchronized ArrayList<Player> getConnctedPlayers(){  //Ritorna l'arraylist per copia e non per riferimento per evitare modifiche all'esterno della classe
-        ArrayList<Player> arrayList=new ArrayList<>();
+    public synchronized CopyOnWriteArrayList<Player> getConnctedPlayers(){  //Ritorna l'arraylist per copia e non per riferimento per evitare modifiche all'esterno della classe
+        CopyOnWriteArrayList<Player> arrayList=new CopyOnWriteArrayList<>();
      //   while(connectedPlayers.size()==0);              //aspetta finchè viene aggiunto almeno un giocatore, evita NullPointerException
         for(Player player : connectedPlayers) arrayList.add(player);
         return arrayList;
