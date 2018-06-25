@@ -6,6 +6,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.SplittableRandom;
 
 public class Table {
@@ -136,7 +137,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
-      //  randomizePlayerArray();
+     Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
         currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
