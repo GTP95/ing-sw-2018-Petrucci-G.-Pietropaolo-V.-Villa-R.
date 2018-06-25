@@ -608,7 +608,6 @@ public class TableGUI extends Stage{
         for (int i = 0; i < (NumPlayers - 1); i++) {
             Button OtherPlayer = new Button(OtherPlayersNames.get(i).getName());
             OtherPlayer.setId("DefaultButton");
-            OtherPlayer.setDisable(true);
 
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
