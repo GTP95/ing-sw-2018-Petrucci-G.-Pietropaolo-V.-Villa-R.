@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, isMyTurn, changedTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -26,8 +26,9 @@ public class SocketClientHandler implements Runnable {
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
-        timerTurn=new Timer();
+      //  timerTurn=new Timer();
         updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+        updateDice=false;           //Idem come sopra
         isMyTurn=false;
 
         try {
@@ -162,11 +163,11 @@ public class SocketClientHandler implements Runnable {
                 myPlayer=table.getPlayerFromName(myPlayerName);
                 drawnGameBoardCard=myPlayer.getDrawnGameBoardCard();
             }
-            sendControlMessage("Sending GameBoardcards&"+table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard().size());
-            for(GameBoardCard gameBoardCard : table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()){
+            sendControlMessage("Sending GameBoardcards&"+myPlayer.getDrawnGameBoardCard().size());
+            for(GameBoardCard gameBoardCard : myPlayer.getDrawnGameBoardCard()){
                 sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
             }
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"PrivateObjectiveCard");
+            sendJSONmessage(JSONCreator.generateJSON(myPlayer.getPrivateObjective()),"PrivateObjectiveCard");
         }
         catch(InvalidUsernameException e){System.err.println(e.getMessage());}
 
@@ -249,6 +250,7 @@ public class SocketClientHandler implements Runnable {
             case "Place dice":
                 try {
                     Dice dice = JSONCreator.diceLoaderFromString(fields[0]);
+                    System.err.println("Received the following dice color: "+dice.getColor()+" value: "+dice.getValue());
                     if (table.diceExists(dice)) {
                         myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), dice);
                         if (table.removeDice(dice)) System.out.println("Dice removed");
@@ -282,6 +284,12 @@ public class SocketClientHandler implements Runnable {
                 switch (messageType) {
                     case "Action":
                         handleActionMessage(messageFields[1]);
+                        break;
+                    case "Control":
+                        handleControlMessage(messageFields[1]);
+                        break;
+                    default:
+                        System.err.println("Can't understand the following message's category: "+message);
                 }
             }
         }
@@ -301,6 +309,7 @@ public class SocketClientHandler implements Runnable {
         if(table.getActivePlayer().getName().equals(myPlayerName) && isMyTurn==false) {
             isMyTurn=true;
             sendControlMessage("It's your turn now");
+            timerTurn=new Timer();
             timerTurn.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
@@ -321,28 +330,28 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void updateDrawnDiceIfNecessary(){
-        currentDiceArrayList=table.getDrawnDice();
+       /* currentDiceArrayList=table.getDrawnDice();
         boolean changeDetected=false;
-        for(int index=0;index<currentDiceArrayList.size();index++){
+        for(int index=0;index<previousDiceArrayList.size();index++){
             if(!currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
                 changeDetected=true;
                 break;
             }
-        }
-        if(changeDetected){
+        }*/
+        if(updateDice){
+            System.err.println("INVIO AGGIORNAMENTO DADI");
             sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
-            for(Dice dice : currentDiceArrayList){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+            for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
-            previousDiceArrayList=currentDiceArrayList;
+         //   previousDiceArrayList=currentDiceArrayList;
+            updateDice=false;
         }
     }
     private void updatePlayersWindowBoardsIfNecessary(){
         if(updateWindowBoards) {
-            int numOfWindowBoardsToSend=table.getPlayers().size()-2;
-            sendControlMessage("Sending WindowBoards update&" + numOfWindowBoardsToSend); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
+            sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size()); //non invio la WindowBoard del giocatore che le riceve per comodità della GUI
             for (Player player : table.getPlayers()) {
-                if (!player.getName().equals(myPlayerName))
                     sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
             }
             updateWindowBoards=false;
@@ -353,6 +362,17 @@ public class SocketClientHandler implements Runnable {
             sendControlMessage("Current player is&"+table.getActivePlayer().getName());
             changedTurn=false;
         }
+
+   }
+
+   private void handleControlMessage(String message){
+       switch(message){
+           case "End my turn":
+               table.changeCurrentPlayer();
+               break;
+           default:
+               System.err.println("Can't understand the following control message: "+message);
+       }
 
    }
 }

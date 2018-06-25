@@ -1,12 +1,15 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
+import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.SplittableRandom;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Table {
 
@@ -19,7 +22,7 @@ public class Table {
     private ArrayList<Dice> drawnDice;
     private static final DiceBag diceBag=new DiceBag();
     private static final Table ourInstance=new Table();
-    private static ArrayList<Player> players;
+    private static CopyOnWriteArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     private int numOfSetWindowBoards;
@@ -41,7 +44,10 @@ public class Table {
         }
     }
 
-    public static ArrayList<Player> getPlayers() {return players;}
+    public static ArrayList<Player> getPlayers() {
+        ArrayList<Player> playersToReturn=new ArrayList<Player>();
+        return playersToReturn;
+    }
 
     public Player getPlayerFromName(String name) throws InvalidUsernameException {
         for(Player player : players){
@@ -93,7 +99,12 @@ public class Table {
         if(drawnDice.contains(dice)){
             int index=drawnDice.indexOf(dice);
             drawnDice.get(index).setValue(0);
-            for(Player player:players) player.getSocketClientHandler().ourThread.interrupt();   //invia notifica ai thread dei SocketClientHandler
+            SocketClientHandler socketClientHandler;
+            for(Player player:players){
+                socketClientHandler=player.getSocketClientHandler();
+                socketClientHandler.updateDice=true;
+                socketClientHandler.ourThread.interrupt();   //invia notifica ai thread dei SocketClientHandler
+            }
             return true;
         }
         return false;
@@ -136,7 +147,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
-      //  randomizePlayerArray();
+     Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
         currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
@@ -169,8 +180,8 @@ public class Table {
         drawnDice.add(cloneDice);
     }
 
-    private ArrayList<Player> shufflePlayerArray(){ //inverte l'array dei giocatori
-        ArrayList<Player>arrayToReturn=new ArrayList<>();
+    private CopyOnWriteArrayList<Player> shufflePlayerArray(){ //inverte l'array dei giocatori
+        CopyOnWriteArrayList<Player>arrayToReturn=new CopyOnWriteArrayList<>();
         for(int index=players.size()-1;index>=0;index--){
             arrayToReturn.add(players.get(index));
         }
@@ -191,17 +202,6 @@ public class Table {
         System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
     }
 
-    private void randomizePlayerArray(){
-        ArrayList<Player> randomizedArray=new ArrayList<>(players.size());
-        SplittableRandom splittableRandom=new SplittableRandom();
-        int index;
-        for(Player player : players){
-            index=splittableRandom.nextInt(0,players.size());
-            while(randomizedArray.get(index)!=null) index=splittableRandom.nextInt(0,players.size());
-            randomizedArray.add(index,player);
-        }
-        players=randomizedArray;
-    }
 
     public void notifyWindowBoardChange(Thread notifierThread){
         for(Player player : players){

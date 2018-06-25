@@ -730,6 +730,22 @@ public class WindowBoard implements WindowBoardObserver{
         System.out.println("----------------------------------------");
     }
 
+    public void printDiceColorValueArrayList(){
+
+        System.out.println();
+        Color color = new Color();
+        System.out.println("***********************************************");
+        for(int r=0;r<usedMatrix.size();r++) {
+            for (int c = 0; c < usedMatrix.get(r).size(); c++) {
+                    if(usedMatrix.get(r).get(c).isUsed()){
+                        System.out.println("DICE IN (row = "+(r+1)+" & column= "+(c+1)+") ==> ["+color.IntToColor(usedMatrix.get(r).get(c).getDiceContained().getColor())+" , "+usedMatrix.get(r).get(c).getDiceContained().getValue()+"]");
+                        System.out.println();
+                    }
+            }
+        }
+        System.out.println("***********************************************");
+    }
+
     //******************************REAL GAMEPLAY*************************************************************//
 
     public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice) throws PlaceDiceException {

@@ -128,11 +128,19 @@ public class GAMEPLAYTEST {
 
         //Inizio inserimento/uso carte
         System.out.println("1° Inserimento");
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice1.getColor());
+        System.out.println("Dice value chosen :"+dice1.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
         boardPlayerOne.insertDice(4,1,dice1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("2° Inserimento");
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice2.getColor());
+        System.out.println("Dice value chosen :"+dice2.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
         boardPlayerOne.insertDice(4,2,dice2);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
@@ -175,6 +183,10 @@ public class GAMEPLAYTEST {
         System.out.println();
 
         System.out.println("CorkBackedStraightedge");
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice5.getColor());
+        System.out.println("Dice value chosen :"+dice5.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
         corkBackedStraightedge.applyEffect(boardPlayerOne,dice5,2,5,1);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(1).get(4).isUsed(),true);
         boardPlayerOne.printMatrixArrayList();
@@ -182,19 +194,31 @@ public class GAMEPLAYTEST {
 
 
         System.out.println("CorkBackedStraightedge 2° uso");
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice1.getColor());
+        System.out.println("Dice value chosen :"+dice1.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
         corkBackedStraightedge.applyEffect(boardPlayerOne,dice1,4,5,2);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("Grinding Stone");
-        grindingStone.applyEffect(boardPlayerOne,dice6,3,5,1);
-        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
-        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).getDiceContained().getValue(),1);
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice6.getColor());
+        System.out.println("Dice value chosen :"+dice6.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
+        grindingStone.applyEffect(boardPlayerOne,dice6,4,3,1);//diventa un 1, giallo
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(2).isUsed(),true);
+        Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(2).getDiceContained().getValue(),1);
         boardPlayerOne.printMatrixArrayList();
         System.out.println();
 
         System.out.println("Grinding Stone 2° uso");
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println("Dice color chosen :"+dice1.getColor());
+        System.out.println("Dice value chosen :"+dice1.getValue());
+        System.out.println("+++++++++++++++++++++++++++");
         grindingStone.applyEffect(boardPlayerOne,dice1,1,5,2);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).isUsed(),true);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(0).get(4).getDiceContained().getValue(),6);
