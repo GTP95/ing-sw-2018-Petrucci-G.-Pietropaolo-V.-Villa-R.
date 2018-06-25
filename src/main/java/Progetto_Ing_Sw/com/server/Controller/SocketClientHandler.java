@@ -282,6 +282,12 @@ public class SocketClientHandler implements Runnable {
                 switch (messageType) {
                     case "Action":
                         handleActionMessage(messageFields[1]);
+                        break;
+                    case "Control":
+                        handleControlMessage(messageFields[1]);
+                        break;
+                    default:
+                        System.err.println("Can't understand the following message's category: "+message);
                 }
             }
         }
@@ -353,6 +359,17 @@ public class SocketClientHandler implements Runnable {
             sendControlMessage("Current player is&"+table.getActivePlayer().getName());
             changedTurn=false;
         }
+
+   }
+
+   private void handleControlMessage(String message){
+       switch(message){
+           case "End my turn":
+               table.changeCurrentPlayer();
+               break;
+           default:
+               System.err.println("Can't understand the following control message: "+message);
+       }
 
    }
 }
