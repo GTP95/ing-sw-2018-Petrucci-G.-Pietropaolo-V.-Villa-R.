@@ -790,6 +790,9 @@ public class TableGUI extends Stage{
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
+            for (int i=0;i<OtherPlayersList.size();i++){
+                OtherPlayersList.get(i).setId("DefaultButton");
+            }
             insertion();
         }
 
