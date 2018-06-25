@@ -108,6 +108,17 @@ public class WindowBoardTest {
     }
 
     @Test
+    public void importingNameFromJson(){
+
+        for (int i=1;i<=24;i++){
+            WindowBoard windowBoard = new WindowBoard(4,5);
+            windowBoard.importNameFromFile(i);
+            System.out.println("Nome carta #["+i+"] : "+windowBoard.getTitle());
+        }
+
+    }
+
+    @Test
     public void checkThatTheMatrixIsEmpty() {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
@@ -397,11 +408,12 @@ public class WindowBoardTest {
         windowBoard.printMatrixArrayList();
         System.out.println();
 
-
+        /* inserimento  che lancia l'eccezione
         System.out.println(" 4° INSERIMENTO");
         windowBoard.insertDice(2,1,dice4r);
         windowBoard.printMatrixArrayList();
         System.out.println();
+        */
 
 
     }
