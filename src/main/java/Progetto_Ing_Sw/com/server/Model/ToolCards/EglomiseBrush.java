@@ -10,6 +10,7 @@ Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di COLORE
 Devi rispettare tutte le altre restrizioni di piazzamento
 */
 
+//TESTING fatto direttamente sulla classe GamePlayTest
 public class EglomiseBrush {
 
     //-------import del costo di primo uso
