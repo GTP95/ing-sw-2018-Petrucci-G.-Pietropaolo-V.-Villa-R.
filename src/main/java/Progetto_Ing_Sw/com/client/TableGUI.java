@@ -701,6 +701,7 @@ public class TableGUI extends Stage{
         }
 
         public void updateOtherPlayersBoards(){
+            System.err.println("---------------------------UPDATE BOARDS---------------------------------------");
         for(int i=0; i<OtherPlayersList.size();i++){
             ClientWindowBoard OtherWindowBoard=LocalModel.getInstance().getUpdatedWindowBoards().get(i);
             OtherPlayersList.get(i).setDisable(false);
