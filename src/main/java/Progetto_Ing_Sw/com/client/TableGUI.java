@@ -705,7 +705,6 @@ public class TableGUI extends Stage{
             System.err.println("---------------------------UPDATE BOARDS---------------------------------------");
         for(int i=0; i<OtherPlayersList.size();i++){
             ClientWindowBoard OtherWindowBoard=LocalModel.getInstance().getUpdatedWindowBoards().get(i);
-            OtherPlayersList.get(i).setDisable(false);
             OtherPlayersList.get(i).setOnAction(event ->{
                 OtherPlayerBoardView OtherBoard = new OtherPlayerBoardView(OtherWindowBoard);
                 OtherBoard.showAndWait();
@@ -811,7 +810,6 @@ public class TableGUI extends Stage{
         for(int i=0; i<OtherPlayersList.size();i++){
             if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
                 OtherPlayersList.get(i).setId("DefaultButtonActivated");
-                OtherPlayersList.get(i).setDisable(false);
             }
         }
     }
