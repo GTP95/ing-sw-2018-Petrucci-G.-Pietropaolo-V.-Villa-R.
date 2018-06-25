@@ -661,6 +661,7 @@ public class TableGUI extends Stage{
         PassButton.setDisable(true);
         PassButton.setId("DefaultButton");
         PassButton.setTranslateX(180);
+        PassButton.setOnAction(event -> LocalModel.getInstance().skipTurn());
 
 
 
@@ -774,9 +775,6 @@ public class TableGUI extends Stage{
             Platform.runLater(()-> {
                 for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
                     for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
-                        /*if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed() == false) {
-                            GridBlocks.get(r).get(c).setId("DieBlock");
-                        } else */
                         if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
                             GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
                                     + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
@@ -809,11 +807,11 @@ public class TableGUI extends Stage{
         if (TimerLabel.getTranslateY()<0){
             TimerExitingAnimation.play();
         }
-
         CurrentPlayer.setId("DefaultButton");
         for(int i=0; i<OtherPlayersList.size();i++){
             if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
                 OtherPlayersList.get(i).setId("DefaultButtonActivated");
+                OtherPlayersList.get(i).setDisable(false);
             }
         }
     }
