@@ -108,11 +108,45 @@ public class PlayerTest {
 
         GameBoardCard card1=mock(GameBoardCard.class);
         when(card1.getTitle()).thenReturn("Titolo1");
+
         GameBoardCard card2=mock(GameBoardCard.class);
         when(card2.getTitle()).thenReturn("Titolo2");
 
+        GameBoardCard card3=mock(GameBoardCard.class);
+        when(card3.getTitle()).thenReturn("Titolo1");
+
+        GameBoardCard card4=mock(GameBoardCard.class);
+        when(card4.getTitle()).thenReturn("Titolo2");
+
+        GameBoardCard card5=mock(GameBoardCard.class);
+        when(card5.getTitle()).thenReturn("Titolo1");
+
+        GameBoardCard card6=mock(GameBoardCard.class);
+        when(card6.getTitle()).thenReturn("Titolo2");
+
+
+
         drawnGameBoardCards.add(card1);
         drawnGameBoardCards.add(card2);
+        drawnGameBoardCards.add(card3);
+        drawnGameBoardCards.add(card4);
+        drawnGameBoardCards.add(card5);
+        drawnGameBoardCards.add(card6);
+
+        player.setDrawnGameBoardCard(drawnGameBoardCards);
+
+        Assert.assertEquals(card1, player.getGameBoardCardFromTitle("Titolo1"));
+        Assert.assertEquals(card2, player.getGameBoardCardFromTitle("Titolo2"));
+    }
+
+    @Test
+    public void setChoosenGameBoardCardTest(){
+  /*      GameBoardCard gameBoardCard=mock(GameBoardCard.class);
+        WindowBoard windowBoard=new WindowBoard(gameBoardCard);
+        player=new Player("John",null);     //socketClientHandler settato a null perchè tanto non usato nel test
+        player.setChoosenGameBoard(gameBoardCard);
+        Assert.assertEquals(gameBoardCard, player.getChoosenGameBoard());
+        Assert.assertEquals(windowBoard,player.getChoosenWindowBoard());*/
     }
 }
 

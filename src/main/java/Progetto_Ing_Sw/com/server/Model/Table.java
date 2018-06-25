@@ -25,7 +25,7 @@ public class Table {
     private static CopyOnWriteArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
-    private int numOfSetWindowBoards;
+    private int numOfSetWindowBoards, roundNumber;
     private int turnDuration;
 
     private Table() {
@@ -181,18 +181,19 @@ public class Table {
         drawnDice.add(cloneDice);
     }
 
-    private CopyOnWriteArrayList<Player> shufflePlayerArray(){ //inverte l'array dei giocatori
+    private void shufflePlayerArray(){ //inverte l'array dei giocatori
         CopyOnWriteArrayList<Player>arrayToReturn=new CopyOnWriteArrayList<>();
         for(int index=players.size()-1;index>=0;index--){
             arrayToReturn.add(players.get(index));
         }
-        return arrayToReturn;
+        players=arrayToReturn;
     }
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            players=shufflePlayerArray();
+            Collections.reverse(players);
             currentPlayer=0;
+            roundNumber++;
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
