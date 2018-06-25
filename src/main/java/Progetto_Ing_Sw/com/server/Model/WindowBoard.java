@@ -738,7 +738,7 @@ public class WindowBoard implements WindowBoardObserver{
         for(int r=0;r<usedMatrix.size();r++) {
             for (int c = 0; c < usedMatrix.get(r).size(); c++) {
                     if(usedMatrix.get(r).get(c).isUsed()){
-                        System.out.println("DICE IN (row = "+(r+1)+" & column= "+(r+1)+") ==> ["+color.IntToColor(usedMatrix.get(r).get(c).getDiceContained().getColor())+" , "+usedMatrix.get(r).get(c).getDiceContained().getValue()+"]");
+                        System.out.println("DICE IN (row = "+(r+1)+" & column= "+(c+1)+") ==> ["+color.IntToColor(usedMatrix.get(r).get(c).getDiceContained().getColor())+" , "+usedMatrix.get(r).get(c).getDiceContained().getValue()+"]");
                         System.out.println();
                     }
             }

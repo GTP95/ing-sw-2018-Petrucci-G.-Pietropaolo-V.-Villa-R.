@@ -201,6 +201,7 @@ public class GAMEPLAYTEST {
         corkBackedStraightedge.applyEffect(boardPlayerOne,dice1,4,5,2);
         Assert.assertEquals(boardPlayerOne.getUsedMatrix().get(3).get(4).isUsed(),true);
         boardPlayerOne.printMatrixArrayList();
+        boardPlayerOne.printDiceColorValueArrayList();
         System.out.println();
 
         System.out.println("Grinding Stone");
