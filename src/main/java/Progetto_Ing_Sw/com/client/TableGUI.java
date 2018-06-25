@@ -791,10 +791,6 @@ public class TableGUI extends Stage{
             TimerEnteringAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
             insertion();
-            /*Alert itsYourTurn = new Alert(Alert.AlertType.INFORMATION);
-            itsYourTurn.initStyle(StageStyle.UNDECORATED);
-            itsYourTurn.setHeaderText("It's Your Turn boy!");
-            itsYourTurn.showAndWait();*/
         }
 
     public void isNotYourTurn(){
@@ -808,7 +804,9 @@ public class TableGUI extends Stage{
         CurrentPlayer.setId("DefaultButton");
         for(int i=0; i<OtherPlayersList.size();i++){
             if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
-                OtherPlayersList.get(i).setId("DefaultButtonActivated");
+                OtherPlayersList.get(i).setId("DefaultButtonActivated");}
+                else{
+                    OtherPlayersList.get(i).setId("DefaultButton");
             }
         }
     }
