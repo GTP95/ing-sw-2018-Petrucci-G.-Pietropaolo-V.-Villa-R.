@@ -368,7 +368,10 @@ public class SocketClientHandler implements Runnable {
    private void handleControlMessage(String message){
        switch(message){
            case "End my turn":
+               timerTurn.cancel();
+               table.resetTurnTime();
                table.changeCurrentPlayer();
+               sendControlMessage("Your turn just ended");
                break;
            default:
                System.err.println("Can't understand the following control message: "+message);

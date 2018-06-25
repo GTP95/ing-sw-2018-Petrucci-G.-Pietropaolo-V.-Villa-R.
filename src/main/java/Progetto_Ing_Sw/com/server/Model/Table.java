@@ -147,6 +147,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
+        players=Lobby.getInstance().getConnctedPlayers();
      Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
         currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
@@ -232,6 +233,15 @@ public class Table {
         }
     }
 
+    public void resetTurnTime(){
+        try{
+            turnDuration= JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
+            return ;
+        }
+        catch (FileNotFoundException e){
+            turnDuration=60;
+        }
+    }
 
 }
 
