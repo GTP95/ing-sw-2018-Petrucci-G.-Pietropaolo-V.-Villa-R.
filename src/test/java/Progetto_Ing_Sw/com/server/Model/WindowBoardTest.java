@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
@@ -78,6 +79,19 @@ public class WindowBoardTest {
         windowBoard.printMatrix(testMatrix, rows, columns);
     }
 
+    //non posso testare le eccezioni in quanto dovrei cambiare  il path delle carte e creerei problemi al gioco
+    @Test
+    public void testCorrectImportFromFile(){
+
+        for(int i=1;i<=24;i++){
+            WindowBoard windowBoard = new WindowBoard(rows, columns);
+            int [][] localMatrix = windowBoard.importFromFile(4,5,i);
+            ArrayList<ArrayList<MatrixCell>> localMatrixArray = windowBoard.fromIntToArrayList(localMatrix,4,5);
+            windowBoard.setUsedMatrix(localMatrixArray);
+            Assert.assertNotNull(windowBoard.getUsedMatrix());
+        }
+    }
+
     @Test
     public void correctNumberOfRowsAfterHJsonImport() {
 
@@ -145,10 +159,8 @@ public class WindowBoardTest {
                 }
             }
         }
-        windowBoard.areOnBorders(); //visual test method
+        Assert.assertTrue(windowBoard.areOnBorders());
     }
-
-    //TEST COMPLETI FINO A QUI
 
     @Test
     public void printingValueColorDice(){
@@ -176,25 +188,22 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void checkShadeOfAMatrixCell() {
+    public void checkShadeOfAMatrixCell(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,24);
-        System.out.println("Matrice prima dell'inserimento");
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
 
-        windowBoard.printMatrix(testMatrix,rows,columns);
-        System.out.println("DICE COLOR ="+dice3.getColor());
-        System.out.println("DICE VALUE ="+dice3.getValue());
-
-        ArrayList<ArrayList<MatrixCell>> martrixArray = windowBoard.fromIntToArrayList(testMatrix, rows, columns);
-        for (int row = 0; row < martrixArray.size(); row++) {
-            for (int column = 0; column < martrixArray.get(row).size(); column++) {
-                if (windowBoard.checkShade(martrixArray.get(row).get(column), dice3)) {
-                    System.out.println("CELL ["+(row+1)+"]["+(column+1)+"] SHADE IS "+martrixArray.get(row).get(column).getShade());
-                }
-            }
-        }
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(1).get(0),dice4));
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(1).get(2),dice3));
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(1).get(4),dice2));
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(2).get(1),dice1));
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(2).get(3),dice5));
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(3).get(2),dice6Y));
     }
+
+    //Copertura dei test fatta fino a qui
 
     @Test
     public void checkBlankOfAMatrixCell(){

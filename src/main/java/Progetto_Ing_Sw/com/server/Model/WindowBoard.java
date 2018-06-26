@@ -22,6 +22,7 @@ public class WindowBoard implements WindowBoardObserver{
 
     }
 
+
     public WindowBoard(GameBoardCard gameBoardCard){
         Matrix=gameBoardCard.getMatrixScheme();
         usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
@@ -31,17 +32,7 @@ public class WindowBoard implements WindowBoardObserver{
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
     public void setUsedMatrix(ArrayList<ArrayList<MatrixCell>> usedMatrix) {this.usedMatrix = usedMatrix;}
 
-    // crea la matrice vuota
-    public int[][] buildEmptyMatrix(int rows, int columns) {// crea la matrice vuota
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < columns; c++) {
-                Matrix[r][c] = 0;
-            }
-        }
-        return Matrix;
-    }
-
-    //stampa matrici SOLO 4righeX5colonne
+      //stampa matrici SOLO 4righeX5colonne
     public void printMatrix(int Matrix[][], int rows, int columns){
 
         for(int i=0;i<rows;i++){
@@ -49,30 +40,6 @@ public class WindowBoard implements WindowBoardObserver{
             System.out.println("| "+Matrix[i][columns-5]+" | "+Matrix[i][columns-4]+" | "+Matrix[i][columns-3]+" | "+Matrix[i][columns-2]+" | "+Matrix[i][columns-1]+" |");
         }
         System.out.println("---------------------");
-    }
-
-    //inserisce il dado nella cella richiesta, passando però tutte le celle, POCO EFFICIENTE
-    public int [][] insertDiceINT(int Matrix[][], int rows, int columns, int cell, int dice){
-
-        int [][] tmpMatrix=Matrix;
-        int position = 1;
-        for (int r = 0; r < rows; r++) {
-            position = position + 10;
-            for (int c = 0; c < columns; c++, position++)
-            {
-                if(position==cell){
-                    if (Matrix[r][c]!=0) {
-                        System.out.println("Cella occupata, salti il turno");
-                        break;
-                    }else {
-                        Matrix[r][c] = dice;
-                        tmpMatrix = Matrix;
-                    }
-                }
-            }
-            position=position-5;
-        }
-        return tmpMatrix;
     }
 
     //importa la matrice da file Json tramite Switch/case
@@ -155,6 +122,7 @@ public class WindowBoard implements WindowBoardObserver{
         return Matrix;
     }
 
+    //importa il nome della carta da file Json tramite Switch/case
     public void importNameFromFile(int cardCode){
 
         String localTitle = new String();
@@ -356,17 +324,19 @@ public class WindowBoard implements WindowBoardObserver{
         return usedMatrix;
     }
 
-    //**TEST METHOD** per verificare che le caselle sono sui bordi
-    public void areOnBorders(){
+    //metodo per verificare che ci siano caselle che sono settate correttamente sui bordi
+    public boolean areOnBorders(){
+
+        boolean onBorders=false;
+
         for(int r=0;r<usedMatrix.size();r++){
             for (int c=0;c<usedMatrix.get(r).size();c++){
                 if(usedMatrix.get(r).get(c).isOnBorder()==true){
-                    System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is on border");
-                }else{
-                    System.out.println("CELL ["+(r+1)+"]["+(c+1)+"] is NOT on border");
-                }
+                    onBorders=true;
+                }else{}
             }
         }
+        return onBorders;
     }
 
     //controlla che un dato abbia la stessa numerazione della cella, da TRUE se vero
