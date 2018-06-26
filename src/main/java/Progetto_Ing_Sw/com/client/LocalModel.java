@@ -22,7 +22,7 @@ public  class LocalModel {
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
     private ClientPrivateObjectiveCard privateObjectiveCard;
-    private boolean gameRunning;
+    private boolean gameRunning, firstTimeWindowBoards;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
@@ -45,6 +45,7 @@ public  class LocalModel {
         windowBoard=null;
         immediatelyUpdateGUI=false;
         currentPlayerName="NotAValidPlayerName";    //valore di default per comodità della GUI
+        firstTimeWindowBoards=true;
     }
 
     public static LocalModel getInstance(){
@@ -332,7 +333,12 @@ public  class LocalModel {
         updatedWindowBoards.add(windowBoard);
         if (updatedWindowBoards.size()==numOfWindowBoards){
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
-            tableGUIobserver.updateOtherPlayersBoards();
+            if(firstTimeWindowBoards){
+                chooseAWindowobserver.StartTable();
+                firstTimeWindowBoards=false;
+            }
+                else tableGUIobserver.updateOtherPlayersBoards();
+
         }
     }
 

@@ -174,6 +174,11 @@ public class Table {
         for(Dice dice : drawnDice){
             System.out.println("Color: "+dice.getColor()+" value: "+dice.getValue());
         }
+        getActivePlayer().getSocketClientHandler().isMyTurn=true;
+        for (Player player:players){
+            player.getSocketClientHandler().changedTurn=true;
+        }
+        notifyAllSocketClientHandlers();
     }
 
     public void addDiceFluxBrush(Dice diceRejectedByInsert){
@@ -193,11 +198,16 @@ public class Table {
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
             players=shufflePlayerArray();
             currentPlayer=0;
+            getActivePlayer().getSocketClientHandler().isMyTurn=true;
+            for (Player player:players){
+                player.getSocketClientHandler().changedTurn=true;
+            }
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
         }
         currentPlayer++;
+        getActivePlayer().getSocketClientHandler().isMyTurn=true;
         for (Player player:players) player.getSocketClientHandler().changedTurn=true;
         notifyAllSocketClientHandlers();
         System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
