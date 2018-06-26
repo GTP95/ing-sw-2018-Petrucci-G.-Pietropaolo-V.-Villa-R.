@@ -334,6 +334,7 @@ public  class LocalModel {
         if (updatedWindowBoards.size()==numOfWindowBoards){
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstTimeWindowBoards){
+                System.err.println("chiamato metodo StartTable");
                 chooseAWindowobserver.StartTable();
                 firstTimeWindowBoards=false;
             }
