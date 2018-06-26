@@ -16,10 +16,9 @@ public class SocketClientHandler implements Runnable {
     private static int timeout;
     public Thread ourThread;
     private Table table;
-    private  RoundTrack roundTrack;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, updatedRoundNumber; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -75,7 +74,6 @@ public class SocketClientHandler implements Runnable {
                 sendPlayerMessage();
                 sendControlMessage("Game started!");
                 this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
-                this.roundTrack=RoundTrack.getInstance();
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
@@ -305,7 +303,6 @@ public class SocketClientHandler implements Runnable {
         updatePlayersWindowBoardsIfNecessary();
         notifyIfIsYourTurn();
         notifyWhoIsTheCurrentPlayer();
-        updateRoundNumber();
     }
 
     private void notifyIfIsYourTurn(){
@@ -362,7 +359,7 @@ public class SocketClientHandler implements Runnable {
         }
     }
    private void notifyWhoIsTheCurrentPlayer(){
-        if(!table.getActivePlayer().getName().equals(myPlayerName) && changedTurn){
+        if(!isMyTurn && changedTurn){
             sendControlMessage("Current player is&"+table.getActivePlayer().getName());
             changedTurn=false;
         }
@@ -381,12 +378,5 @@ public class SocketClientHandler implements Runnable {
                System.err.println("Can't understand the following control message: "+message);
        }
 
-   }
-
-   private void updateRoundNumber(){
-        if(updatedRoundNumber){
-            sendControlMessage("Round number&"+roundTrack.getRoundNumber());
-            updatedRoundNumber=false;
-        }
    }
 }

@@ -26,7 +26,7 @@ public  class LocalModel {
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
-    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue, roundNumber;
+    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect;
@@ -373,14 +373,5 @@ public  class LocalModel {
     public void skipTurn(){
         skipTurn=true;
         sendDataToServer=true;
-    }
-
-    public void setRoundNumber(int roundNumber) {
-        this.roundNumber = roundNumber;
-        tableGUIobserver.updateRound();
-    }
-
-    public int getRoundNumber() {
-        return roundNumber;
     }
 }
