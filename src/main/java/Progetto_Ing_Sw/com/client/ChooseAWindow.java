@@ -31,10 +31,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
-    Scene Window,PrivateObjective;
+    Scene Window,PrivateObjective,WaitingForOtherPlayers;
     Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
+    ClientGameBoardCard ChoosenGameboardCard;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
@@ -121,31 +122,31 @@ public class ChooseAWindow extends Stage {
         LocalModel.getInstance().registerAsObserver(this);
 
 
-        //SCENA WINDOW
+        //-------------------------------------------------------------------------------------SCENA WINDOW------------------------------------------------------------------------------------------
         //Bottoni che rappresentano le finestre da scegliere
         Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
         Window1BTN.setOnAction(event -> {
-            this.close();
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
-            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
+            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(0);
+            this.setScene(WaitingForOtherPlayers);
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
         Window2BTN.setOnAction(event -> {
-            this.close();
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
-            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
+            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(1);
+            this.setScene(WaitingForOtherPlayers);
         });
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
         Window3BTN.setOnAction(event -> {
-            this.close();
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
-            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
+            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(2);
+            this.setScene(WaitingForOtherPlayers);
         });
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
         Window4BTN.setOnAction(event -> {
-            this.close();
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
-            new TableGUI(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
+            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(3);
+            this.setScene(WaitingForOtherPlayers);
         });
 
         //Label che indicano nome e difficoltà della scheda in questione
@@ -318,9 +319,9 @@ public class ChooseAWindow extends Stage {
         Animation.getChildren().addAll(ChooseAWindow,RememberColor,PrivateObjectiveColor2,Board4,Board3,Board2,Board1,Play,Play2,Play3,Play4,Reverse1,Reverse2,Reverse3,Reverse4);
 
         Window = new Scene(Animation,720,720);
-        //FINE SCENA CHOOSE A WINDOW
+        //------------------------------------------------------------------------------------FINE SCENA CHOOSE A WINDOW------------------------------------------------------------------------------
 
-        //INIZIO SCENA PRIVATE OBJECTIVE
+        //-----------------------------------------------------------------------------------INIZIO SCENA PRIVATE OBJECTIVE---------------------------------------------------------------------------
 
         //Testo
         Text YourColorText = new Text("Your\nPrivate Objective\nis");
@@ -353,16 +354,36 @@ public class ChooseAWindow extends Stage {
         PrivateObjectiveDisplayer.setId("ChooseAWindow");
         PrivateObjectiveDisplayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         PrivateObjectiveDisplayer.getChildren().addAll(PrivateObjectiveInfo,YourColorText,ProceedButton,PrivateObjectiveColor);
-
-
         PrivateObjective = new Scene(PrivateObjectiveDisplayer,720,720);
+
+        //-----------------------------------------------------------------------------------FINE SCENA PRIVATE OBJECTIVE---------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------INIZIO SCENE DI ATTESA------------------------------------------------------------------------------
+
+        Text WaitingText = new Text("Waiting for other players");
+        WaitingText.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
+        WaitingText.setTranslateY(-300);
+
+        StackPane WaitingForOthers = new StackPane();
+        WaitingForOthers.setId("ChooseAWindow");
+        WaitingForOthers.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+        WaitingForOthers.getChildren().addAll(WaitingText);
+
+        WaitingForOtherPlayers = new Scene(WaitingForOthers,720,720);
+
+        //--------------------------------------------------------------------------------------FINE SCENE DI ATTESA------------------------------------------------------------------------------
+
+        
 
         this.setScene(PrivateObjective);
 
         this.show();
 
+    }
 
-
+    public void StartTable(){
+        close();
+        new TableGUI(ChoosenGameboardCard);
     }
 
     public void updateChooseAWindow(){
