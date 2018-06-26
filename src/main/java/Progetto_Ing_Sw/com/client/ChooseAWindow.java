@@ -345,7 +345,7 @@ public class ChooseAWindow extends Stage {
         //Label col Colore
         PrivateObjectiveColor = new Label();
         PrivateObjectiveColor.setMinSize(75,75);
-        PrivateObjectiveColor.setId("purple");
+        PrivateObjectiveColor.setId("Crashed");
         PrivateObjectiveColor.setStyle("-fx-border-color: black;"+"-fx-border-width: 4 4 4 4;" + "-fx-border-radius: 5 5 5 5;" + "-fx-background-radius: 7 7 7 7;"+ "-fx-background-size: 0.99");
 
 
@@ -383,6 +383,7 @@ public class ChooseAWindow extends Stage {
 
     public void StartTable(){
         Platform.runLater(()->{
+            System.err.println("---------------------------------------------------------Start Table chiamata----------------------------------------------------------------------");
             close();
             new TableGUI(ChoosenGameboardCard);
         });

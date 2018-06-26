@@ -16,6 +16,12 @@
     -fx-border-radius: 4 4 4 4;
 }
 
+#Crashed{
+    -fx-background-image: url("GUI/Crashed.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: black;
+}
+
 #red{
     -fx-background-color: red;
 }
