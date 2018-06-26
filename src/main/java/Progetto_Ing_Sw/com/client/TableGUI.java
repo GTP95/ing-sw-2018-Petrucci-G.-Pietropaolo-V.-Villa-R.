@@ -678,10 +678,10 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PassButton,Pos.TOP_LEFT);
-        GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
+        //GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,DiceCover,RoundTrack);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,RoundTrack);
 
 
 
