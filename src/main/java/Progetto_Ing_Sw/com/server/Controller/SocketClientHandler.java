@@ -306,8 +306,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(changedTurn && table.getActivePlayer().getName().equals(myPlayerName)) {
-            changedTurn=false;
+        if(table.getActivePlayer().getName().equals(myPlayerName) && isMyTurn==false) {
             isMyTurn=true;
             sendControlMessage("It's your turn now");
             timerTurn=new Timer();
