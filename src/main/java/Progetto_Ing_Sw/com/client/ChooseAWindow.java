@@ -373,7 +373,7 @@ public class ChooseAWindow extends Stage {
 
         //--------------------------------------------------------------------------------------FINE SCENE DI ATTESA------------------------------------------------------------------------------
 
-        
+
 
         this.setScene(PrivateObjective);
 
@@ -382,8 +382,10 @@ public class ChooseAWindow extends Stage {
     }
 
     public void StartTable(){
-        close();
-        new TableGUI(ChoosenGameboardCard);
+        Platform.runLater(()->{
+            close();
+            new TableGUI(ChoosenGameboardCard);
+        });
     }
 
     public void updateChooseAWindow(){
