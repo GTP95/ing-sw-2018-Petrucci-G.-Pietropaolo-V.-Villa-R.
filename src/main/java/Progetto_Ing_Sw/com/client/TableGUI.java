@@ -552,16 +552,16 @@ public class TableGUI extends Stage{
         DraftPool.setAlignment(Pos.CENTER);
         DraftPool.setMaxSize(200,400);
 
-        DiceCover = new Label();
+        /*DiceCover = new Label();
         DiceCover.setId("grey");
         DiceCover.setMaxSize(200,400);
         DiceCover.setTranslateX(-10);
         DiceCover.setTranslateY(-10);
-        DiceCover.setVisible(true);
+        DiceCover.setVisible(true);*/
 
 
 
-
+        ToggleGroup DiceButtonsGroup = new ToggleGroup();
         DiceButtons= new ArrayList<>();
         for (ClientDice dice : LocalModel.getInstance().getDrawnDice()){
             ToggleButton Die = new ToggleButton();
@@ -569,6 +569,7 @@ public class TableGUI extends Stage{
             Die.setMaxSize(75,75);
             Die.setId("Die");
             Die.setText("DiePresente");
+            Die.setToggleGroup(DiceButtonsGroup);
             DraftPool.getChildren().addAll(Die);
             DiceButtons.add(Die);
         }
@@ -785,7 +786,7 @@ public class TableGUI extends Stage{
 
         public void isYourTurn(){
             System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
-            DiceCover.setVisible(false);
+            //DiceCover.setVisible(false);
             Move.setDisable(false);
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
@@ -798,7 +799,7 @@ public class TableGUI extends Stage{
 
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
-        DiceCover.setVisible(true);
+        //DiceCover.setVisible(true);
         Move.setDisable(true);
         PassButton.setDisable(true);
         if (TimerLabel.getTranslateY()<0){
@@ -812,6 +813,7 @@ public class TableGUI extends Stage{
                     OtherPlayersList.get(i).setId("DefaultButton");
             }
         }
+        System.err.println("----------------------------------------------------------------FINITO IS NOT YOUR TURN-----------------------------------------------------------------------");
     }
 
     public void updateTimer(){
@@ -821,7 +823,7 @@ public class TableGUI extends Stage{
     }
 
     public void updateRound(){
-       //RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
+       // RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
     }
 
 
