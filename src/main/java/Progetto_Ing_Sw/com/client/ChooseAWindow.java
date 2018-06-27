@@ -381,7 +381,8 @@ public class ChooseAWindow extends Stage {
         Platform.runLater(()->{
             System.err.println("---------------------------------------------------------Start Table chiamata----------------------------------------------------------------------");
             close();
-            new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard());
+            TableGUI tableGUI = new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard());
+            tableGUI.updateTable();
         });
     }
 
