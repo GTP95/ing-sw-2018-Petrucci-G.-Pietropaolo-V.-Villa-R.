@@ -337,9 +337,12 @@ public  class LocalModel {
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
                 chooseAWindowobserver.StartTable();
+                while (tableGUIobserver==null); //aspetta che tableGui si registri come observer
+                tableGUIobserver.updateTable();
                 firstWindowBoardsReceived=false;
             }
-            tableGUIobserver.updateOtherPlayersBoards();
+
+           else tableGUIobserver.updateOtherPlayersBoards();
         }
     }
 

@@ -80,7 +80,7 @@ public class SocketClientHandler implements Runnable {
                 System.out.println(ourThread.getName()+": waiting for windowboards");
                 int counter=0;
                 while(!updateWindowBoards){
-                    if(counter%100==0) System.out.print(".");
+                   // if(counter%100==0) System.out.print(".");
                     counter++;
                 }
                 updatePlayersWindowBoardsIfNecessary();

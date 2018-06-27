@@ -44,9 +44,10 @@ public class Table {
         }
     }
 
-    public static ArrayList<Player> getPlayers() {
-        ArrayList<Player> playersToReturn=new ArrayList<Player>();
-        return playersToReturn;
+    public static CopyOnWriteArrayList<Player> getPlayers() {
+        /*ArrayList<Player> playersToReturn;
+        playersToReturn=(ArrayList<Player>) players.clone();*/
+        return players;
     }
 
     public Player getPlayerFromName(String name) throws InvalidUsernameException {
@@ -147,7 +148,7 @@ public class Table {
 
     public void startGame(){
         gameRunning=true;
-        players=Lobby.getInstance().getConnctedPlayers();
+       // players=Lobby.getInstance().getConnctedPlayers();
      Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno
         currentPlayer=0;
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
