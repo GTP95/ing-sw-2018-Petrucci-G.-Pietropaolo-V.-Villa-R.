@@ -29,7 +29,7 @@ public  class LocalModel {
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
-    private Boolean usernameIsCorrect;
+    private Boolean usernameIsCorrect, firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
     /*sezione informazioni azioni*/
     private ClientDice diceToInsert;
@@ -45,6 +45,7 @@ public  class LocalModel {
         windowBoard=null;
         immediatelyUpdateGUI=false;
         currentPlayerName="NotAValidPlayerName";    //valore di default per comodità della GUI
+        firstWindowBoardsReceived=true;
     }
 
     public static LocalModel getInstance(){
@@ -245,9 +246,10 @@ public  class LocalModel {
     public void addDrawnPublicObjectiveCard(ClientPublicObjectiveCard publicObjectiveCard){
         if(drawnPublicObjectiveCards==null) drawnPublicObjectiveCards=new ArrayList<>();
         drawnPublicObjectiveCards.add(publicObjectiveCard);
-        if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
+        /*if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
             System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
             while(tableGUIobserver==null) {
+                System.err.println("Waiting for table");
                 try {
                     Thread.sleep(100);  //In questo caso il while vuoto non funziona!
                 } catch (InterruptedException e) {
@@ -256,7 +258,7 @@ public  class LocalModel {
             }
             tableGUIobserver.updateTable();
             System.err.println("NOTIFICA INVIATA A TABLEGUI");
-        }
+        }*/
     }
 
     public void setNumOfDice(int numOfDice) {
@@ -332,6 +334,10 @@ public  class LocalModel {
         updatedWindowBoards.add(windowBoard);
         if (updatedWindowBoards.size()==numOfWindowBoards){
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
+            if(firstWindowBoardsReceived){
+                chooseAWindowobserver.StartTable();
+                firstWindowBoardsReceived=false;
+            }
             tableGUIobserver.updateOtherPlayersBoards();
         }
     }
@@ -352,6 +358,7 @@ public  class LocalModel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        while (tableGUIobserver==null);
         tableGUIobserver.isYourTurn();
     }
 

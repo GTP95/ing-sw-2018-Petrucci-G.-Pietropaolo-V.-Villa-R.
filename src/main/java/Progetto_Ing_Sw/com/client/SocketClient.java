@@ -243,6 +243,7 @@ public class SocketClient implements Runnable{
 
     private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
         if(localModel.sendDataToServer){
+            System.err.println("DEVO INVIARE QUALCOSA");
             if(localModel.sendWindowBoard=true){
                 sendControlMessage("Choosen GameBoardCard's name:%"+localModel.getChoosenGameBoardCard().getTitle());
                 System.err.println("Inviata GameBoardCard");
