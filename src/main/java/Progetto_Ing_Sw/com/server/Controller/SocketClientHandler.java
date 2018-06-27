@@ -77,6 +77,13 @@ public class SocketClientHandler implements Runnable {
                 previousDiceArrayList=table.getDrawnDice();
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
+                System.out.println(ourThread.getName()+": waiting for windowboards");
+                int counter=0;
+                while(!updateWindowBoards){
+                    if(counter%100==0) System.out.print(".");
+                    counter++;
+                }
+                updatePlayersWindowBoardsIfNecessary();
               //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
                 notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());

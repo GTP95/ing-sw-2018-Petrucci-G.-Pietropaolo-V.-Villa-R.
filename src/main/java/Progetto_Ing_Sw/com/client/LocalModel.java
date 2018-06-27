@@ -333,6 +333,7 @@ public  class LocalModel {
         if(updatedWindowBoards==null) updatedWindowBoards=new ArrayList<>();
         updatedWindowBoards.add(windowBoard);
         if (updatedWindowBoards.size()==numOfWindowBoards){
+            System.err.println("Ricevute tutte le gameboardcard");
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
                 chooseAWindowobserver.StartTable();
@@ -358,6 +359,7 @@ public  class LocalModel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+      //  chooseAWindowobserver.StartTable();
         while (tableGUIobserver==null);
         tableGUIobserver.isYourTurn();
     }
