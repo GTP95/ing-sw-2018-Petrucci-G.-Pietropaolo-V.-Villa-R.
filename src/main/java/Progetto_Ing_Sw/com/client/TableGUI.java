@@ -552,12 +552,12 @@ public class TableGUI extends Stage{
         DraftPool.setAlignment(Pos.CENTER);
         DraftPool.setMaxSize(200,400);
 
-        /*DiceCover = new Label();
+        DiceCover = new Label();
         DiceCover.setId("grey");
         DiceCover.setMaxSize(200,400);
         DiceCover.setTranslateX(-10);
         DiceCover.setTranslateY(-10);
-        DiceCover.setVisible(true);*/
+        DiceCover.setVisible(true);
 
 
 
@@ -573,9 +573,6 @@ public class TableGUI extends Stage{
             DraftPool.getChildren().addAll(Die);
             DiceButtons.add(Die);
         }
-
-
-
 
         //FINE Draft Area
 
@@ -678,10 +675,10 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PassButton,Pos.TOP_LEFT);
-        //GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
+        GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,RoundTrack);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,DiceCover,RoundTrack);
 
 
 
@@ -787,7 +784,7 @@ public class TableGUI extends Stage{
 
         public void isYourTurn(){
             System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
-            //DiceCover.setVisible(false);
+            DiceCover.setVisible(false);
             Move.setDisable(false);
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
@@ -800,7 +797,7 @@ public class TableGUI extends Stage{
 
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
-        //DiceCover.setVisible(true);
+        DiceCover.setVisible(true);
         Move.setDisable(true);
         PassButton.setDisable(true);
         if (TimerLabel.getTranslateY()<0){
