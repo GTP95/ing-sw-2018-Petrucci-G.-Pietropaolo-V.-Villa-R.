@@ -127,25 +127,21 @@ public class ChooseAWindow extends Stage {
         Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
         Window1BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
-            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(0);
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
         Window2BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
-            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(1);
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
         Window3BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
-            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(2);
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
         Window4BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
-            ChoosenGameboardCard = LocalModel.getInstance().getDrawnGameBoardCards().get(3);
             this.setScene(WaitingForOtherPlayers);
         });
 
@@ -385,7 +381,7 @@ public class ChooseAWindow extends Stage {
         Platform.runLater(()->{
             System.err.println("---------------------------------------------------------Start Table chiamata----------------------------------------------------------------------");
             close();
-            new TableGUI(ChoosenGameboardCard);
+            new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard());
         });
     }
 

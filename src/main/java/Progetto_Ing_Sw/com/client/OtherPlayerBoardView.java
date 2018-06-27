@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
-import java.util.Stack;
+
 
 public class OtherPlayerBoardView extends Stage {
     Scene OtherPlayerBoardScene;
