@@ -696,6 +696,7 @@ public class TableGUI extends Stage{
     }
 
         public void updateTable(){
+            System.err.println("-----------------------------------------------------------UPDATE TABLE-----------------------------------------------------------------------------------");
             updatePublicObjectiveCards();
             updateToolCards();
             updateDice();

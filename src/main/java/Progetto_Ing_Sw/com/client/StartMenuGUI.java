@@ -46,12 +46,11 @@ public class StartMenuGUI extends Application {
         //INIZIO Scena Selezione Modalità
 
         //Bottone per il Single ClientPlayer
-        Button singlePlayer =new Button("Debug Mode");                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
+        Button singlePlayer =new Button("Single Player");                                      //Creo un nuovo bottone non specifico il testo per mettere un immagine col CSS
         singlePlayer.setId("SinglePlayerButton");                               //assegno un ID al bottone in modo che sia riconoscibile dal CSS
         singlePlayer.setPrefSize(350,350);                    //imposto le dimensioni del bottone
         singlePlayer.setOnAction(event ->{
-                new ToolCardDisplayer("Title",2,"Description","Progetto_Ing_Sw/com/client/GUI/ToolCards/3ToolCard.png","blue",true);
-                //new PublicObjectiveCardDisplayer("Title","Descriptio",5);
+
         });
 
 
