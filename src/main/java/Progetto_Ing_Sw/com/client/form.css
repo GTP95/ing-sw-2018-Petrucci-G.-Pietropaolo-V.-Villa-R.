@@ -134,17 +134,13 @@
 
 #BackButton{
     -fx-background-image: url("GUI/BackIcon.png");
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 120 80;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #4283a3 0%, #154290 100%),
-            #36629d,
-            #4283a3,
-            radial-gradient(center 50% 50%, radius 100%, #4283a3, #154290);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-background-color: transparent;
 
 }
 
@@ -155,11 +151,7 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #2a65a3 0%, #154290 100%),
-            #36629d,
-            #36629d,
-            radial-gradient(center 50% 50%, radius 100%, #36629d, #154290);
+    -fx-background-color: transparent;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 
 }
@@ -632,6 +624,19 @@
 
 #BackBTN{
     -fx-background-image: url("GUI/BackArrow.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-text-fill: transparent;
+}
+
+#SwapBTN{
+    -fx-background-image: url("GUI/SwapArrow.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 150 150;

@@ -32,10 +32,11 @@ import java.util.Collections;
 
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective,WaitingForOtherPlayers;
-    Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1;
+    Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1,PrivateObjectiveColorRecap;
     ArrayList<String> BoardInfos;
     Text  PrivateObjectiveInfo;
     ClientGameBoardCard ChoosenGameboardCard;
+    int ChoosenGrid;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
@@ -119,6 +120,8 @@ public class ChooseAWindow extends Stage {
         this.alwaysOnTopProperty();
         this.getIcons().add(windowIcon);
 
+        ChoosenGrid=0;
+
         LocalModel.getInstance().registerAsObserver(this);
 
 
@@ -127,21 +130,25 @@ public class ChooseAWindow extends Stage {
         Button Window1BTN = new Button();Window1BTN.setPrefSize(386,313);Window1BTN.setTranslateY(-20);Window1BTN.setId("transparentBTN");
         Window1BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(0));
+            ChoosenGrid=0;
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window2BTN = new Button();Window2BTN.setPrefSize(386,313);Window2BTN.setTranslateY(-20);Window2BTN.setId("transparentBTN");
         Window2BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(1));
+            ChoosenGrid=1;
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window3BTN = new Button();Window3BTN.setPrefSize(386,313);Window3BTN.setTranslateY(-20);Window3BTN.setId("transparentBTN");
         Window3BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(2));
+            ChoosenGrid=2;
             this.setScene(WaitingForOtherPlayers);
         });
         Button Window4BTN = new Button();Window4BTN.setPrefSize(386,313);Window4BTN.setTranslateY(-20);Window4BTN.setId("transparentBTN");
         Window4BTN.setOnAction(event -> {
             LocalModel.getInstance().setChoosenGameBoardCard(LocalModel.getInstance().getDrawnGameBoardCards().get(3));
+            ChoosenGrid=3;
             this.setScene(WaitingForOtherPlayers);
         });
 
@@ -358,11 +365,11 @@ public class ChooseAWindow extends Stage {
 
         Text WaitingText = new Text("Waiting for other players");
         WaitingText.setStyle("-fx-font: 40 \"Castellar\";-fx-fill: white");
-        WaitingText.setTranslateY(-300);
 
         StackPane WaitingForOthers = new StackPane();
         WaitingForOthers.setId("ChooseAWindow");
         WaitingForOthers.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
+
         WaitingForOthers.getChildren().addAll(WaitingText);
 
         WaitingForOtherPlayers = new Scene(WaitingForOthers,720,720);
@@ -397,7 +404,6 @@ public class ChooseAWindow extends Stage {
             PrivateObjectiveInfo.setText("• Shades of " + new ClientColor().IntToColor(color) +  " • \n\rPrivate Sum of value on the\n"+new ClientColor().IntToColor(color)+" dice");
             PrivateObjectiveColor.setId(new ClientColor().IntToColor(color));
             PrivateObjectiveColor2.setId(new ClientColor().IntToColor(color));
-
         });
     }
 

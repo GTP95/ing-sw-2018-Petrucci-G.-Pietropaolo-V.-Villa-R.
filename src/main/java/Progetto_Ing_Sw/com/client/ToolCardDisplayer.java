@@ -531,6 +531,133 @@ public class ToolCardDisplayer extends Stage {
 
         //----------------------------------------------------------------------------------FINE GLAZING HAMMER----------------------------------------------------------------------------------//
 
+        //----------------------------------------------------------------------------------INIZIO RUNNING PLIERS----------------------------------------------------------------------------------//
+
+        Text RunningPliersInfo = new Text("Choose Your Extra Move");
+        RunningPliersInfo.setStyle("-fx-fill: white;");
+        RunningPliersInfo.setTranslateX(380);
+        RunningPliersInfo.setTranslateY(-325);
+
+        VBox RunningPliersPool = getDraftPool();
+
+
+        Button RunningPliersAccept = new Button();
+        RunningPliersAccept.setId("NextBTN");
+        RunningPliersAccept.setMaxSize(150, 150);
+        RunningPliersAccept.setTranslateX(600);
+        RunningPliersAccept.setVisible(false);
+
+        if (!DieChoosen.getId().equals("transparent")){RunningPliersAccept.setVisible(true);}
+
+        StackPane RunningPliers = new StackPane();
+        RunningPliers.setPrefSize(1280,720);
+        //----------------------------------------------------------------------------------FINE RUNNING PLIERS----------------------------------------------------------------------------------//
+
+        //----------------------------------------------------------------------------------INIZIO LENS CUTTER----------------------------------------------------------------------------------//
+        Text LensCutterInfo = new Text("Choose what Dice you want to swap with the Round Track");
+        LensCutterInfo.setStyle("-fx-fill: white;");
+        LensCutterInfo.setTranslateX(380);
+        LensCutterInfo.setTranslateY(-325);
+
+        Button LensCutterAccept = new Button();
+        LensCutterAccept.setId("NextBTN");
+        LensCutterAccept.setMaxSize(150,150);
+        LensCutterAccept.setTranslateX(600);
+        LensCutterAccept.setVisible(false);
+
+        Button LensCutterSwap = new Button();
+        LensCutterSwap.setId("SwapBTN");
+        LensCutterSwap.setMaxSize(150,150);
+        LensCutterSwap.setTranslateX(425);
+        //TODO ACTION SWAP DICE
+
+        FlowPane LensCutterPool = new FlowPane();
+        LensCutterPool.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
+        LensCutterPool.setTranslateX(200);
+        LensCutterPool.setVgap(5);
+        LensCutterPool.setHgap(5);
+        LensCutterPool.setPadding(new Insets(4, 4, 4, 4));
+        LensCutterPool.setAlignment(Pos.CENTER);
+        LensCutterPool.setMaxSize(200,200);
+
+        ToggleGroup  Dicegroup2 = new ToggleGroup();
+        ArrayList<ToggleButton> LensCutterDiceButtons = new ArrayList<>();
+        for (ClientDice dice : LocalModel.getInstance().getDrawnDice()) {
+            ToggleButton Die = new ToggleButton();
+            Die.setPrefSize(75, 75);
+            Die.setMaxSize(75, 75);
+            Die.setId("Die");
+            Die.setText("DiePresente");
+            Die.setToggleGroup(Dicegroup2);
+            LensCutterPool.getChildren().addAll(Die);
+            LensCutterDiceButtons.add(Die);
+        }
+        for (int i = 0; i < LensCutterDiceButtons.size(); i++) {
+            int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
+            int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+            if (LocalValue == 0) {
+                LensCutterDiceButtons.get(i).setVisible(false);
+            } else {
+                LensCutterDiceButtons.get(i).setText("");
+                LensCutterDiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
+                LensCutterDiceButtons.get(i).setOnAction(event -> {
+                            DieToInsert = new ClientDice(LocalValue, LocalColor);
+                            valoredado = DieToInsert.getValue();
+                            DieChoosen.setId(Integer.toString(DieToInsert.getValue()) + new ClientColor().IntToColor(DieToInsert.getColor()));
+                            System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
+                        }
+                );
+            }
+            Tooltip t = new Tooltip(("Color: " + new ClientColor().IntToColor(LocalColor) + "\n" + "Value: " + Integer.toString(LocalValue)));
+            Tooltip.install(LensCutterDiceButtons.get(i), t);
+        }
+
+        FlowPane LensCutterRoundTrack = new FlowPane();
+        LensCutterRoundTrack.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
+        LensCutterRoundTrack.setTranslateX(500);
+        LensCutterRoundTrack.setVgap(5);
+        LensCutterRoundTrack.setHgap(5);
+        LensCutterRoundTrack.setPadding(new Insets(4, 4, 4, 4));
+        LensCutterRoundTrack.setAlignment(Pos.CENTER);
+        LensCutterRoundTrack.setMaxSize(200,200);
+
+        ToggleGroup  Dicegroup3 = new ToggleGroup();
+        ArrayList<ToggleButton>RoundTrackDiceButtons = new ArrayList<>();
+        for (ClientDice dice : LocalModel.getInstance().getDrawnDice()) {
+            ToggleButton Die = new ToggleButton();
+            Die.setPrefSize(75, 75);
+            Die.setMaxSize(75, 75);
+            Die.setId("Die");
+            Die.setText("DiePresente");
+            Die.setToggleGroup(Dicegroup3);
+            LensCutterRoundTrack.getChildren().addAll(Die);
+            RoundTrackDiceButtons.add(Die);
+        }
+        for (int i = 0; i < RoundTrackDiceButtons.size(); i++) {
+            int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();//TODO PRENDI I DADI DALLA ROUND TRACK
+            int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+            if (LocalValue == 0) {
+                RoundTrackDiceButtons.get(i).setVisible(false);
+            } else {
+                RoundTrackDiceButtons.get(i).setText("");
+                RoundTrackDiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
+                RoundTrackDiceButtons.get(i).setOnAction(event -> {
+                            DieToInsert = new ClientDice(LocalValue, LocalColor);
+                            valoredado = DieToInsert.getValue();
+                            DieChoosen.setId(Integer.toString(DieToInsert.getValue()) + new ClientColor().IntToColor(DieToInsert.getColor()));
+                            System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
+                        }
+                );
+            }
+            Tooltip t = new Tooltip(("Color: " + new ClientColor().IntToColor(LocalColor) + "\n" + "Value: " + Integer.toString(LocalValue)));
+            Tooltip.install(RoundTrackDiceButtons.get(i), t);
+        }
+
+        StackPane LensCutter = new StackPane();
+        LensCutter.setPrefSize(1280,720);
+
+        //----------------------------------------------------------------------------------FINE LENS CUTTER----------------------------------------------------------------------------------//
+
         //ToolCardDisplayerSecond.getChildren().addAll(ToolCardD1);
         switch (Title){
             case ("Grozing Pliers"):
@@ -552,6 +679,14 @@ public class ToolCardDisplayer extends Stage {
             case ("Glazing Hammer"):
                 GlazingHammer.getChildren().addAll(GlazingHammerInfo,GlazingHammerAccept,GlazingHammerPool,GlazingHammerReRollButton);
                 ToolCardDisplayerSecond.getChildren().addAll(GlazingHammer,ToolCardD1);
+                break;
+            case ("Running Pliers"):
+                RunningPliers.getChildren().addAll(RunningPliersAccept,RunningPliersInfo,RunningPliersPool,DieChoosen);
+                ToolCardDisplayerSecond.getChildren().addAll(RunningPliers,ToolCardD1);
+                break;
+            case("Lens Cutter"):
+                LensCutter.getChildren().addAll(LensCutterAccept,LensCutterInfo,LensCutterPool,LensCutterRoundTrack,LensCutterSwap);
+                ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
         }
 

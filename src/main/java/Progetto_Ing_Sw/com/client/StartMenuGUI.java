@@ -8,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class StartMenuGUI extends Application {
-    Scene TitleScreen, SelectGameMode;  //Specifico prima tutte le scene di cui avrò bisogno
+    Scene TitleScreen, SelectGameMode, SinglePlayer;  //Specifico prima tutte le scene di cui avrò bisogno
 
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
@@ -50,6 +51,7 @@ public class StartMenuGUI extends Application {
         singlePlayer.setId("SinglePlayerButton");                               //assegno un ID al bottone in modo che sia riconoscibile dal CSS
         singlePlayer.setPrefSize(350,350);                    //imposto le dimensioni del bottone
         singlePlayer.setOnAction(event ->{
+            primaryStage.setScene(SinglePlayer);
 
         });
 
@@ -62,9 +64,7 @@ public class StartMenuGUI extends Application {
         multiPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                //new ChooseAWindow();
-                //new TableGUI();
-                new MultiplayerGUI(); //TODO rimetti new MultiplayerGUI(); qua
+                new MultiplayerGUI();
                 primaryStage.close();
 
             }
@@ -95,11 +95,29 @@ public class StartMenuGUI extends Application {
         SelectGameMode = new Scene(SelectionScreenPane, 1280,720); //creo la scena impostandone le dimensioni
 
 
+        //SINGLE PLAYER SCENE
+
+        Text SingleText = new Text("Coming Soon...");
+        SingleText.setStyle("-fx-font: 120 'Edwardian Script ITC';"+"-fx-fill: black;");
+        SingleText.setTranslateX(-300);
+
+        Button BackTOHome = new Button();
+        BackTOHome.setId("BackButton");
+        BackTOHome.setPrefSize(125,80);
+        BackTOHome.setOnAction(event -> primaryStage.setScene(SelectGameMode));
+
+        StackPane SinglePlayerScene = new StackPane();
+        SinglePlayerScene.setAlignment(SingleText,Pos.CENTER);
+        SinglePlayerScene.setAlignment(BackTOHome,Pos.TOP_RIGHT);
+        SinglePlayerScene.getChildren().addAll(SingleText,BackTOHome);
+        SinglePlayerScene.setId("GamemodeSelectionScreen");
+
+        SinglePlayer = new Scene(SinglePlayerScene,1280,720);
+        SinglePlayer.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
 
 
 
         primaryStage.setScene(TitleScreen); //faccio in modo che all'avvio il programma mostri la TitleScreen per prima
         primaryStage.show();                //mostra la schermata
-
     }
 }
