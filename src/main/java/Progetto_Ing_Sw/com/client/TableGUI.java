@@ -727,15 +727,18 @@ public class TableGUI extends Stage{
         public void updatePublicObjectiveCards(){
             Platform.runLater(()->{
                 PublicObjectiveCard1BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle());
-                PublicObjectiveCard1Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()));
+                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()==-1){PublicObjectiveCard1Value.setText("x");}
+                else PublicObjectiveCard1Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()));
                 PublicObjectiveCard1Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription());
 
                 PublicObjectiveCard2BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle());
-                PublicObjectiveCard2Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()));
+                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()==-1){PublicObjectiveCard2Value.setText("x");}
+                else PublicObjectiveCard2Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()));
                 PublicObjectiveCard2Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription());
 
                 PublicObjectiveCard3BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle());
-                PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
+                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()==-1){PublicObjectiveCard3Value.setText("x");}
+                else PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
                 PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
             });
         }

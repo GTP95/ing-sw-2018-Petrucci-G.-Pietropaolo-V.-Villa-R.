@@ -568,12 +568,12 @@ public class ToolCardDisplayer extends Stage {
         Button LensCutterSwap = new Button();
         LensCutterSwap.setId("SwapBTN");
         LensCutterSwap.setMaxSize(150,150);
-        LensCutterSwap.setTranslateX(425);
+        LensCutterSwap.setTranslateX(175);
         //TODO ACTION SWAP DICE
 
         FlowPane LensCutterPool = new FlowPane();
         LensCutterPool.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
-        LensCutterPool.setTranslateX(200);
+        LensCutterPool.setTranslateX(-25);
         LensCutterPool.setVgap(5);
         LensCutterPool.setHgap(5);
         LensCutterPool.setPadding(new Insets(4, 4, 4, 4));
@@ -614,7 +614,7 @@ public class ToolCardDisplayer extends Stage {
 
         FlowPane LensCutterRoundTrack = new FlowPane();
         LensCutterRoundTrack.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
-        LensCutterRoundTrack.setTranslateX(500);
+        LensCutterRoundTrack.setTranslateX(350);
         LensCutterRoundTrack.setVgap(5);
         LensCutterRoundTrack.setHgap(5);
         LensCutterRoundTrack.setPadding(new Insets(4, 4, 4, 4));
