@@ -26,7 +26,7 @@ public class Table {
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     private int numOfSetWindowBoards;
-    private int turnDuration;
+
 
     private Table() {
         int numPlayers = Lobby.getInstance().getNumOfPlayers();
@@ -35,13 +35,6 @@ public class Table {
         drawnToolCards = toolCardDeck.drawToolCards(3);
         players = Lobby.getInstance().getConnctedPlayers();
         numOfSetWindowBoards = 0;
-        try {
-            turnDuration = JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
-        }
-        catch(FileNotFoundException e){
-            System.err.println("File ServerSettings.json not found, falling back to 60 seconds of turn duration");
-            turnDuration=60;
-        }
     }
 
     public static CopyOnWriteArrayList<Player> getPlayers() {
@@ -130,21 +123,7 @@ public class Table {
         return drawnDice.contains(dice);
     }
 
-    public int getTurnDuration() {
-        if(turnDuration<=0){
-            try{
-                turnDuration= JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
-                changeCurrentPlayer();
-                return 0;
-            }
-            catch (FileNotFoundException e){
-                turnDuration=60;
-            }
-        }
-        int valueToReturn=turnDuration;
-        turnDuration--;
-        return valueToReturn;
-    }
+
 
     public void startGame(){
         gameRunning=true;
@@ -244,15 +223,6 @@ public class Table {
         }
     }
 
-    public void resetTurnTime(){
-        try{
-            turnDuration= JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timerTurn");
-            return ;
-        }
-        catch (FileNotFoundException e){
-            turnDuration=60;
-        }
-    }
 
 }
 

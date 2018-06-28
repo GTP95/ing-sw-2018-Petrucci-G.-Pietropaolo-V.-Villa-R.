@@ -78,14 +78,9 @@ public class SocketClientHandler implements Runnable {
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
                 System.out.println(ourThread.getName()+": waiting for windowboards");
-                int counter=0;
-                while(!updateWindowBoards){
-                   // if(counter%100==0) System.out.print(".");
-                    counter++;
-                }
                 updatePlayersWindowBoardsIfNecessary();
               //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
-                notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
+               // notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
@@ -313,30 +308,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(isMyTurn && !timerStarted) {
-            sendControlMessage("It's your turn now");
-            timerTurn=new Timer();
-            timerTurn.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    if (table.getActivePlayer().getName().equals(myPlayerName)){
-                        int countdownValue = table.getTurnDuration();
-                    if (countdownValue > 0) {
-                        sendControlMessage("Your turn will end in&" + countdownValue);
-                    } else if (countdownValue == 0) {
-                        sendControlMessage("Your turn will end in&" + countdownValue);
-                        isMyTurn = false;
-                        sendControlMessage("Your turn just ended");
-                        table.changeCurrentPlayer();
-                        timerTurn.cancel(); //"disattiva" il timer ed indica che può essere rimosso dal garbage collector
-                        timerStarted = false;
-                    }
-                }
-                else this.cancel();
-                }
-            },1000,1000);   //invia ogni secondo countdownValue;
-            timerStarted=true;
-        }
+
     }
 
     private void updateDrawnDiceIfNecessary(){
