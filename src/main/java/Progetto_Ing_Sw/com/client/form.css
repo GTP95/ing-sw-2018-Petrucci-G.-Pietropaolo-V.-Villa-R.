@@ -1465,3 +1465,10 @@
     -fx-background-size: 200 200;
 }
 
+#DiceBag{
+    -fx-background-image: url("GUI/DiceBag.png");
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 400 400;
+}
+
