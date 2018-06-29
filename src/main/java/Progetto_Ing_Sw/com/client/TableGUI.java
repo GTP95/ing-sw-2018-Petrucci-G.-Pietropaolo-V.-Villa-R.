@@ -658,7 +658,10 @@ public class TableGUI extends Stage{
         PassButton.setDisable(true);
         PassButton.setId("DefaultButton");
         PassButton.setTranslateX(180);
-        PassButton.setOnAction(event -> LocalModel.getInstance().skipTurn());
+        PassButton.setOnAction(event -> {
+            PassButton.setDisable(true);
+            LocalModel.getInstance().skipTurn();
+        });
 
 
 
