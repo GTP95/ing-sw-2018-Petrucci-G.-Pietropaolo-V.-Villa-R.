@@ -3,6 +3,7 @@ package Progetto_Ing_Sw.com.server.Model;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import sun.plugin.services.WIExplorerBrowserService;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -203,7 +204,7 @@ public class WindowBoardTest {
         Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(3).get(2),dice6Y));
     }
 
-    //Copertura dei test fatta fino a qui
+
 
     @Test
     public void checkBlankOfAMatrixCell(){
@@ -292,99 +293,150 @@ public class WindowBoardTest {
     }
 
     @Test
-    public void checkUsedCellAdjacent(){
+    public void AdditionalTestForCoverageForMethodInsertDiceInArrayListMatrix(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
         int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
         System.out.println("Matrice prima dell'inserimento");
         windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
 
-        //parte dell'algoritmo per settare i bordi - SEMPRE DA METTERE -
+        windowBoard.insertDiceARRLIST(1,3,dice5); // copertura prima mossa illegale
+        Assert.assertFalse(windowBoard.getUsedMatrix().get(0).get(2).isOnBorder());
+        windowBoard.setBorders();
+
+        windowBoard.insertDiceARRLIST(3,1,dice5); // copertura sfumaura non corretta
+        Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(2).get(0), dice3));
+
+        windowBoard.insertDiceARRLIST(4,3,dice3); // copertura colore corretto
+        Assert.assertNotEquals(windowBoard.getUsedMatrix().get(3).get(2).getColor(),Color.SHADE);
+
+        windowBoard.getUsedMatrix().get(3).get(2).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(2).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(4,3,dice6Y); // copertura colore NON  corretto
+        Assert.assertNotEquals(windowBoard.getUsedMatrix().get(3).get(2).getColor(),Color.SHADE);
+        Assert.assertNotEquals(windowBoard.getUsedMatrix().get(3).get(2).getColor(),dice6Y.getColor());
+    }
+
+    @Test
+    public void checkUsedCellAdjacent(){
+
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,17);
+        windowBoard.printMatrix(testMatrix,rows,columns);
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
-        System.out.println("DICE COLOR ="+dice3.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice3.getValue()); //3
-        System.out.println("DICE COLOR ="+dice2.getColor()); //rosso
-        System.out.println("DICE VALUE ="+dice2.getValue()); //5
 
         //Set di inserimenti;
+
         windowBoard.insertDiceARRLIST(1,1,dice3);
-        windowBoard.insertDiceARRLIST(1,2,dice3);
-        windowBoard.insertDiceARRLIST(1,4,dice3);
-        windowBoard.insertDiceARRLIST(1,5,dice3);
-        windowBoard.insertDiceARRLIST(2,1,dice3);
-        windowBoard.insertDiceARRLIST(2,5,dice3);
-        windowBoard.insertDiceARRLIST(4,5,dice3);
-        windowBoard.insertDiceARRLIST(4,4,dice2);
-
         windowBoard.printMatrixArrayList();
+        Assert.assertFalse(windowBoard.checkAdjacency(1,1));//nessuna cella
+
+        windowBoard.insertDiceARRLIST(1,2,dice5);
+        windowBoard.printMatrixArrayList();
+        Assert.assertTrue(windowBoard.checkAdjacency(1,1));//adiacenza a destra
+
+        windowBoard.getUsedMatrix().get(0).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(1).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(2,1,dice5);
+        windowBoard.printMatrixArrayList();
+        Assert.assertTrue(windowBoard.checkAdjacency(1,1));//adiacenza sotto
+
+        windowBoard.getUsedMatrix().get(1).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(0).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(2,2,dice5);
+        windowBoard.printMatrixArrayList();
+        Assert.assertTrue(windowBoard.checkAdjacency(1,1));//adiacenza diag sotto/destra
+
+        windowBoard.getUsedMatrix().get(1).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(1).setUsed(false);
+        windowBoard.getUsedMatrix().get(0).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(0).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(1,5,dice3);
+        windowBoard.insertDiceARRLIST(1,4,dice5);
+        windowBoard.printMatrixArrayList();
+        Assert.assertTrue(windowBoard.checkAdjacency(1,5));//adiacenza sinistra
+
+        windowBoard.getUsedMatrix().get(0).get(3).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(3).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(2,4,dice4);
+        windowBoard.printMatrixArrayList();
+        Assert.assertTrue(windowBoard.checkAdjacency(1,5));//adiacenza diag sotto/sinistra
 
 
-        //Parte di controllo adiacenza
-        if(windowBoard.checkAdjacency(1,5)){
-            System.out.println("Ho trovato un dado adiacente!!!");
-        }
+
     }
 
     @Test
     public void checkSecondaryPositionRules(){
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,8);
-        System.out.println("Matrice prima dell'inserimento");
-        windowBoard.printMatrix(testMatrix,rows,columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
 
-        /*System.out.println(" 1° INSERIMENTO");
-        windowBoard.insertDice(1,1,dice6Y);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
+        windowBoard.insertDiceARRLIST(4,1,dice3);
+        windowBoard.insertDiceARRLIST(3,1,dice4r);
+        Assert.assertFalse(windowBoard.checkOrthogonalColor(4,1)); //colore sopra
 
-        System.out.println(" 2° INSERIMENTO");
-        windowBoard.insertDice(2,2,dice5Y);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
+        windowBoard.insertDiceARRLIST(3,5,dice4r);
+        windowBoard.insertDiceARRLIST(4,5,dice3);
+        Assert.assertFalse(windowBoard.checkOrthogonalColor(3,5)); //colore sotto
 
-        System.out.println(" 3° INSERIMENTO");
-        windowBoard.insertDice(3,1,dice4Y);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
+        windowBoard.getUsedMatrix().get(2).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(2).get(4).setUsed(false);
+        windowBoard.getUsedMatrix().get(2).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(2).get(0).setUsed(false);
 
-        System.out.println(" 4° INSERIMENTO");
-        windowBoard.insertDice(2,1,dice4r);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-        */
+        windowBoard.insertDiceARRLIST(4,2,dice4r);
+        Assert.assertFalse(windowBoard.checkOrthogonalColor(4,1)); //colore destra
 
-        windowBoard.insertDiceARRLIST(1,1,dice6Y);
-        System.out.println(windowBoard.checkOrthogonalColor(1,1));
-        System.out.println(windowBoard.checkOrthogonalValue(1,1));
-        windowBoard.printMatrixArrayList();
+        windowBoard.insertDiceARRLIST(4,4,dice4r);
+        Assert.assertFalse(windowBoard.checkOrthogonalColor(4,5)); //colore sinistra
 
-        windowBoard.insertDiceARRLIST(2,2,dice5Y);
-        System.out.println(windowBoard.checkAdjacency(2,2));
-        System.out.println(windowBoard.checkOrthogonalColor(2,2));
-        System.out.println(windowBoard.checkOrthogonalValue(2,2));
-        windowBoard.printMatrixArrayList();
+        //-----
 
-        windowBoard.insertDiceARRLIST(3,1,dice4Y);
-        System.out.println(windowBoard.checkAdjacency(3,1));
-        System.out.println(windowBoard.checkOrthogonalColor(3,1));
-        System.out.println(windowBoard.checkOrthogonalValue(3,1));
-        windowBoard.printMatrixArrayList();
+        windowBoard.getUsedMatrix().get(3).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(0).setUsed(false);
+        windowBoard.getUsedMatrix().get(3).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(4).setUsed(false);
+        windowBoard.getUsedMatrix().get(3).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(1).setUsed(false);
+        windowBoard.getUsedMatrix().get(3).get(3).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(3).setUsed(false);
 
-        windowBoard.insertDiceARRLIST(2,1,dice4r);
-        System.out.println(windowBoard.checkAdjacency(2,1));
-        System.out.println(windowBoard.checkOrthogonalColor(2,1));
-        System.out.println(windowBoard.checkOrthogonalValue(2,1));
-        windowBoard.printMatrixArrayList();
 
-        //i due controlli funzionano contemporaneamente, il primo dei due che trova una cosa sbagliata lo notifica e ferma
-        //anche l'altro; in questo caso, infatti, trova prima il numero uguale, che si trova sopra, e poi il colore, a destra
+
+        windowBoard.insertDiceARRLIST(4,1,dice4r);
+        windowBoard.insertDiceARRLIST(3,1,dice4);
+        Assert.assertFalse(windowBoard.checkOrthogonalValue(4,1)); //valore sopra
+
+        windowBoard.insertDiceARRLIST(3,5,dice5);
+        windowBoard.insertDiceARRLIST(4,5,dice5Y);
+        Assert.assertFalse(windowBoard.checkOrthogonalValue(3,5)); //valore sotto
+
+        windowBoard.getUsedMatrix().get(2).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(2).get(4).setUsed(false);
+        windowBoard.getUsedMatrix().get(2).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(2).get(0).setUsed(false);
+
+        windowBoard.insertDiceARRLIST(4,2,dice4);
+        Assert.assertFalse(windowBoard.checkOrthogonalValue(4,1)); //valore destra
+
+        windowBoard.insertDiceARRLIST(4,4,dice5);
+        Assert.assertFalse(windowBoard.checkOrthogonalValue(4,5)); //valore sinistra
 
     }
 
+    //Copertura dei test fatta fino a qui
     @Test
     public void TEST_INSERT_DICE_GAMEPLAY() throws PlaceDiceException {
 

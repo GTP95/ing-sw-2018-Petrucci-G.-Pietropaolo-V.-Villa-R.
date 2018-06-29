@@ -40,7 +40,7 @@ public class FluxBrush {
                 localdice.setValue(newDiceValue); //assegno il nuovo valore al dado
                 System.out.println("Nuovo Valore del dado : "+localdice.getValue());
 
-                localBoard.insertDice(row,column,localdice);
+                localBoard.insertDice(row,column,localdice);//TODO catch dell'eccezione altriementi crasha
                 if(localBoard.getUsedMatrix().get(row-1).get(column-1).isUsed()==false)//ossia mancato inserimento
                 {
                     table.addDiceFluxBrush(localdice);
@@ -55,7 +55,8 @@ public class FluxBrush {
                 int newDiceValue =new SplittableRandom().nextInt(1,7); //lancio il nuovo dado
                 localdice.setValue(newDiceValue); //assegno il nuovo valore al dado
                 System.out.println("Nuovo Valore del dado : "+localdice.getValue());
-                localBoard.insertDice(row,column,localdice);
+
+                localBoard.insertDice(row,column,localdice);//TODO catch dell'eccezione altriementi crasha
                 if(localBoard.getUsedMatrix().get(row-1).get(column-1).isUsed()==false)//ossia mancato inserimento
                 {
                     table.addDiceFluxBrush(localdice);
