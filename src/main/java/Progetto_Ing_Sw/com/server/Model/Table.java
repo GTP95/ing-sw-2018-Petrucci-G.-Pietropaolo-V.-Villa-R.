@@ -154,11 +154,6 @@ public class Table {
         for(Dice dice : drawnDice){
             System.out.println("Color: "+dice.getColor()+" value: "+dice.getValue());
         }
-        getActivePlayer().getSocketClientHandler().isMyTurn=true;
-        for (Player player:players){
-            player.getSocketClientHandler().changedTurn=true;
-        }
-        notifyAllSocketClientHandlers();
     }
 
     public void addDiceFluxBrush(Dice diceRejectedByInsert){
