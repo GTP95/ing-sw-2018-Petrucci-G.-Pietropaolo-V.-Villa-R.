@@ -22,6 +22,7 @@ public class SocketClientHandler implements Runnable {
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
+    private boolean otherPlayersWindowBoardsSent;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
@@ -29,6 +30,7 @@ public class SocketClientHandler implements Runnable {
         updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
         updateDice=false;           //Idem come sopra
         isMyTurn=false;
+        otherPlayersWindowBoardsSent=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -77,7 +79,7 @@ public class SocketClientHandler implements Runnable {
                 sendGameInitializationData();
                 receiveChoosenGameBoardCard();
                 System.out.println(ourThread.getName()+": waiting for windowboards");
-                updatePlayersWindowBoardsIfNecessary();
+                sendOtherPlayersWindowBoards();
               //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
                 notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
@@ -299,7 +301,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
+        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn && otherPlayersWindowBoardsSent){    //otherPlayersWindowBoardsSent serve per evitare che all'inizio un client riceva il messaggio di inizio turno prima di aver ricevuto le WindowBoard degli altri giocatori bloccandosi così in attesa delle windowboard (waiting for other players)
             isMyTurn=true;
             sendControlMessage("It's your turn now");
         }
@@ -344,5 +346,14 @@ public class SocketClientHandler implements Runnable {
                System.err.println("Can't understand the following control message: "+message);
        }
 
+   }
+
+   private void sendOtherPlayersWindowBoards(){
+        while(!updateWindowBoards); //aspetta che il server riceva le WindowBoards di tutti i giocatori
+       sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
+       for (Player player : table.getPlayers()) {
+           sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
+       }
+       updateWindowBoards=false;
    }
 }

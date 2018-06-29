@@ -333,10 +333,11 @@ public  class LocalModel {
     public void addUpdatedWindowBoard(ClientWindowBoard windowBoard){
         if(updatedWindowBoards==null) updatedWindowBoards=new ArrayList<>();
         updatedWindowBoards.add(windowBoard);
-        if (updatedWindowBoards.size()==numOfWindowBoards){ //qui c'è il problema perchè viene eseguito prima di riceverle tutte
+        if (updatedWindowBoards.size()==numOfWindowBoards){
             System.err.println("Ricevute tutte le gameboardcard");
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
+                System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
                 while (tableGUIobserver==null); //aspetta che tableGui si registri come observer
                // tableGUIobserver.updateTable();

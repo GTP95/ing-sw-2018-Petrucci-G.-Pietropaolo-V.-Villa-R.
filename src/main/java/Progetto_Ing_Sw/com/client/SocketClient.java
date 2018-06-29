@@ -250,11 +250,9 @@ public class SocketClient implements Runnable{
                 localModel.sendWindowBoard=false;
             }
             ClientDice diceTosend=localModel.getAndResetDiceToInsert();
-            System.err.println("Controllo se devo inviare un dado");
             if(diceTosend!=null){
                 System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getAndResetDiceToInsert()), localModel.getRow(),localModel.getColumn());
-                System.err.println("Dado inviato");
             }
             if(localModel.skipTurn) sendControlMessage("End my turn");
 
