@@ -21,12 +21,11 @@ public class SocketClientHandler implements Runnable {
     public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
-    private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
+    private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
-      //  timerTurn=new Timer();
         updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
         updateDice=false;           //Idem come sopra
         isMyTurn=false;
@@ -151,15 +150,7 @@ public class SocketClientHandler implements Runnable {
 
 
     private void sendGameInitializationData(){
-     /*   sendJSONmessage(JSONCreator.generateJSON(table.getDrawnDice()),"arrayListOfDice"); //invia ArrayList dei dadi pescati
-        sendJSONmessage(JSONCreator.generateJSON(table.getDrawnToolCards()),"arrayListOfToolCards");
-        sendJSONmessage(JSONCreator.generateJSON(table.getDrawnPublicObjectiveCards()),"arrayListOfPublicObjectiveCards"); */
-
-
-
         try {
-        /*    sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getDrawnGameBoardCard()), "arrayListOfGameBoardCards");
-            sendJSONmessage(JSONCreator.generateJSON(table.getPlayerFromName(myPlayerName).getPrivateObjective()),"privateObjectiveCard");*/
             ArrayList<GameBoardCard> drawnGameBoardCard=null;
             while(drawnGameBoardCard==null){
                 myPlayer=table.getPlayerFromName(myPlayerName);
@@ -312,14 +303,6 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void updateDrawnDiceIfNecessary(){
-       /* currentDiceArrayList=table.getDrawnDice();
-        boolean changeDetected=false;
-        for(int index=0;index<previousDiceArrayList.size();index++){
-            if(!currentDiceArrayList.get(index).equals(previousDiceArrayList.get(index))){
-                changeDetected=true;
-                break;
-            }
-        }*/
         if(updateDice){
             System.err.println("INVIO AGGIORNAMENTO DADI");
             sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
@@ -350,8 +333,6 @@ public class SocketClientHandler implements Runnable {
    private void handleControlMessage(String message){
        switch(message){
            case "End my turn":
-               timerTurn.cancel();
-               table.resetTurnTime();
                table.changeCurrentPlayer();
                sendControlMessage("Your turn just ended");
                break;
