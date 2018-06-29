@@ -176,7 +176,7 @@ public class Table {
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            players=shufflePlayerArray();
+            Collections.reverse(players);
             currentPlayer=0;
             getActivePlayer().getSocketClientHandler().isMyTurn=true;
             for (Player player:players){
@@ -186,12 +186,12 @@ public class Table {
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
         }
-        currentPlayer++;
-        getActivePlayer().getSocketClientHandler().isMyTurn=true;
-        for (Player player:players) player.getSocketClientHandler().changedTurn=true;
-        notifyAllSocketClientHandlers();
-        System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
-    }
+            currentPlayer++;
+            for (Player player : players) player.getSocketClientHandler().changedTurn = true;
+            notifyAllSocketClientHandlers();
+            System.out.println("Il nuovo giocatore è " + getActivePlayer().getName());
+
+        }
 
 
     public void notifyWindowBoardChange(Thread notifierThread){

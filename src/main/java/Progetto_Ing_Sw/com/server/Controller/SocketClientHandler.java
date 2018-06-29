@@ -26,7 +26,7 @@ public class SocketClientHandler implements Runnable {
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
-        updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, aanalogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+        updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
         updateDice=false;           //Idem come sopra
         isMyTurn=false;
 
@@ -79,7 +79,7 @@ public class SocketClientHandler implements Runnable {
                 System.out.println(ourThread.getName()+": waiting for windowboards");
                 updatePlayersWindowBoardsIfNecessary();
               //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
-               // notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
+                notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
@@ -299,7 +299,10 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-
+        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
+            isMyTurn=true;
+            sendControlMessage("It's your turn now");
+        }
     }
 
     private void updateDrawnDiceIfNecessary(){
@@ -335,6 +338,7 @@ public class SocketClientHandler implements Runnable {
            case "End my turn":
                table.changeCurrentPlayer();
                sendControlMessage("Your turn just ended");
+               isMyTurn=false;
                break;
            default:
                System.err.println("Can't understand the following control message: "+message);
