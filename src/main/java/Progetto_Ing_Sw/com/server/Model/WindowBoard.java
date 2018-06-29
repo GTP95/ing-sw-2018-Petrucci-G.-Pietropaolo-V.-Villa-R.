@@ -378,6 +378,95 @@ public class WindowBoard implements WindowBoardObserver{
         return shadeState;
     }
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    private void placeDice(Dice dice, int r, int c){
+        usedMatrix.get(r).get(c).setDiceContained(dice);
+        usedMatrix.get(r).get(c).setUsed(true);
+    }
+
+    private void removeDice(int r, int c){
+        usedMatrix.get(r).get(c).setDiceContained(null);
+        usedMatrix.get(r).get(c).setUsed(false);
+    }
+
+    private void applyColorBreaker(int r, int c) throws PlaceDiceException {
+
+        if(checkAdjacency(r+1,c+1))
+        {//CONTROLLO ADIACENZA OK
+            if (checkOrthogonalValue(r + 1, c + 1))
+            {//CONTROLLO NUMERO OK
+                //break;
+            }else if (checkOrthogonalValue(r + 1, c + 1)==false)
+            {   //CONTROLLO NUMERO NO
+                removeDice(r,c);
+                throw new PlaceDiceException("Wrong orthogonal value");
+            }
+        }else if(checkAdjacency(r+1,c+1)==false)
+        { // NO ADIACENZA
+            removeDice(r,c);
+            throw new PlaceDiceException("No adjacent dice");
+        }
+
+    }
+
+    private void applyNumberBreaker(int r, int c) throws PlaceDiceException {
+
+        if(checkAdjacency(r+1,c+1))
+        {//CONTROLLO ADIACENZA OK
+            if (checkOrthogonalColor(r + 1, c + 1))
+            {//CONTROLLO COLORE OK
+                //break;
+            }
+            else if (checkOrthogonalColor(r + 1, c + 1)==false)
+            { // NO COLORE
+                removeDice(r,c);
+                throw new PlaceDiceException("Wrong orthogonal color");
+            }
+        }
+        else if(checkAdjacency(r+1,c+1)==false)
+        { // NO ADIACENZA
+            removeDice(r,c);
+            throw new PlaceDiceException("No adjacent dice");
+        }
+
+    }
+
+    private void applyNormalRules (int r, int c) throws PlaceDiceException {
+
+        if(checkAdjacency(r+1,c+1))
+        {//CONTROLLO ADIACENZA OK
+
+            if (checkOrthogonalColor(r + 1, c + 1) && checkOrthogonalValue(r + 1, c + 1))
+            {//CONTROLLO COLORE/NUMERO OK
+                //break;
+            }
+            else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false)
+            { // NO COLORE/NUMERO
+
+                if (checkOrthogonalColor(r + 1, c + 1)==false)
+                {//CONTROLLO COLORE NO
+                    removeDice(r,c);
+                    throw new PlaceDiceException("Wrong orthogonal color");
+                }
+                else if (checkOrthogonalValue(r + 1, c + 1)==false)
+                {//CONTROLLO NUMERO NO
+                    removeDice(r,c);
+                    throw new PlaceDiceException("Wrong orthogonal value");
+                }
+            }
+        }
+        else if(checkAdjacency(r+1,c+1)==false)
+        { // NO ADIACENZA
+            removeDice(r,c);
+            throw new PlaceDiceException("No adjacent dice");
+        }
+
+    }
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     //metodo di inserimento di oggetti di tipo dato nella matrice di arraylist
     public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(int row, int column, Dice dice){
 
@@ -389,8 +478,7 @@ public class WindowBoard implements WindowBoardObserver{
                             if (usedMatrix.get(r).get(c).isOnBorder() == true && c == column - 1 && r == row - 1) { //CONTROLLO BORDI, CELLA CORRETTA
 
                                 if (usedMatrix.get(r).get(c).getColor() == Color.BLANK) { //CONROLLO BIANCO
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA -  white -)");
                                     break;
                                 }
@@ -398,8 +486,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK){ //CONTROLLO NON BIANCO
 
                                     if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE){//CONTROLLO SFUMATURA
-                                        usedMatrix.get(r).get(c).setDiceContained(dice);
-                                        usedMatrix.get(r).get(c).setUsed(true);
+                                        placeDice(dice,r,c);
                                         System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade ON -)");
                                         break;
                                     }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE){
@@ -407,8 +494,7 @@ public class WindowBoard implements WindowBoardObserver{
                                         break;
                                     }
                                     if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor()){//CONTROLLO COLORE
-                                        usedMatrix.get(r).get(c).setDiceContained(dice);
-                                        usedMatrix.get(r).get(c).setUsed(true);
+                                        placeDice(dice,r,c);
                                         System.out.println("DADO INSERITO CORRETTAMENTE (PRIMA MOSSA - not white/shade OFF/color ON -)");
                                         break;
                                     }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor()){
@@ -432,16 +518,14 @@ public class WindowBoard implements WindowBoardObserver{
                             if (usedMatrix.get(r).get(c).isUsed() == false && c == column - 1 && r == row - 1) {
 
                                 if (usedMatrix.get(r).get(c).getColor() == Color.BLANK) {
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA-  white -)");
                                     break;
 
                                 } else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK) {
 
                                     if (checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE) {//CONTROLLO SFUMATURA
-                                        usedMatrix.get(r).get(c).setDiceContained(dice);
-                                        usedMatrix.get(r).get(c).setUsed(true);
+                                        placeDice(dice,r,c);
                                         System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA - not white/shade ON -)");
                                         break;
                                     } else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE) {
@@ -449,8 +533,7 @@ public class WindowBoard implements WindowBoardObserver{
                                         break;
                                     }
                                     if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor()) {//CONTROLLO COLORE
-                                        usedMatrix.get(r).get(c).setDiceContained(dice);
-                                        usedMatrix.get(r).get(c).setUsed(true);
+                                        placeDice(dice,r,c);
                                         System.out.println("DADO INSERITO CORRETTAMENTE (MOSSA SUCCESSIVA - not white/shade OFF/color ON -)");
                                         break;
                                     } else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor()) {
@@ -691,6 +774,8 @@ public class WindowBoard implements WindowBoardObserver{
         return correctNumber;
     }
 
+    //*******COPERTURA FINO A QUI AL 100%***********************
+
     public void printMatrixArrayList(){
 
         for(int i=0;i<usedMatrix.size();i++){
@@ -709,14 +794,16 @@ public class WindowBoard implements WindowBoardObserver{
             for (int c = 0; c < usedMatrix.get(r).size(); c++) {
                     if(usedMatrix.get(r).get(c).isUsed()){
                         System.out.println("DICE IN (row = "+(r+1)+" & column= "+(c+1)+") ==> ["+color.IntToColor(usedMatrix.get(r).get(c).getDiceContained().getColor())+" , "+usedMatrix.get(r).get(c).getDiceContained().getValue()+"]");
-                        System.out.println();
                     }
             }
         }
         System.out.println("***********************************************");
     }
 
+
     //******************************REAL GAMEPLAY*************************************************************//
+
+
 
     public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice) throws PlaceDiceException {
 
@@ -731,8 +818,7 @@ public class WindowBoard implements WindowBoardObserver{
                     {//CONTROLLO BORDI, CELLA CORRETTA
 
                         if (usedMatrix.get(r).get(c).getColor() == Color.BLANK) { //CONROLLO BIANCO
-                            usedMatrix.get(r).get(c).setDiceContained(dice);
-                            usedMatrix.get(r).get(c).setUsed(true);
+                            placeDice(dice,r,c);
                             break;
                         }
                         else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK)
@@ -743,8 +829,7 @@ public class WindowBoard implements WindowBoardObserver{
                             {
                                 if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 {//CONTROLLO SFUMATURA
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     break;
                                 }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 {
@@ -753,8 +838,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 //CASO LIMITE COLOR BREAKER - CONTROLLO COLORE
                                 if(usedMatrix.get(r).get(c).getColor() != Color.SHADE)
                                 { //se è una cella colorata inserisco comunque il dado
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     break;
                                 }
                             }
@@ -765,8 +849,7 @@ public class WindowBoard implements WindowBoardObserver{
                             {
                                 if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
                                 {//CONTROLLO COLORE
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     break;
                                 }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                                 {
@@ -775,8 +858,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 //CASO LIMITE NUMBER BREAKER + CONTROLLO SFUMATURA
                                 if(usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 { //se è una sfumatura inserisco comunque il dado
-                                    usedMatrix.get(r).get(c).setDiceContained(dice);
-                                    usedMatrix.get(r).get(c).setUsed(true);
+                                    placeDice(dice,r,c);
                                     break;
                                 }
                             }
@@ -786,8 +868,7 @@ public class WindowBoard implements WindowBoardObserver{
 
                             if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {//CONTROLLO SFUMATURA
-                                usedMatrix.get(r).get(c).setDiceContained(dice);
-                                usedMatrix.get(r).get(c).setUsed(true);
+                                placeDice(dice,r,c);
                                 break;
                             }else if(checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {
@@ -795,8 +876,7 @@ public class WindowBoard implements WindowBoardObserver{
                             }
                             if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
                             {//CONTROLLO COLORE
-                                usedMatrix.get(r).get(c).setDiceContained(dice);
-                                usedMatrix.get(r).get(c).setUsed(true);
+                                placeDice(dice,r,c);
                                 break;
                             }else if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                             {
@@ -824,8 +904,7 @@ public class WindowBoard implements WindowBoardObserver{
                         if (usedMatrix.get(r).get(c).getColor() == Color.BLANK)
                         {//CASO CELLA BIANCA
 
-                            usedMatrix.get(r).get(c).setDiceContained(dice);
-                            usedMatrix.get(r).get(c).setUsed(true);
+                            placeDice(dice,r,c);
 
                             //++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
                             if(dice.isAdjacencyBreaker())
@@ -835,12 +914,11 @@ public class WindowBoard implements WindowBoardObserver{
                                 if(checkAdjacency(r+1,c+1)==false)
                                 {
                                     //non ho alcun effetto, infatti in questo caso ho una cella bianca staccata da tutto il resto
-                                    break;
+                                    //break;
                                 }
                                 else if (checkAdjacency(r+1,c+1))
                                 {
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    removeDice(r,c);
                                     throw new PlaceDiceException("No adjacent dice");
                                 }
                             }
@@ -850,24 +928,7 @@ public class WindowBoard implements WindowBoardObserver{
                             if(dice.isColorBreaker())
                             {
                                 System.out.println("COLOR - BREAKER (white)");
-
-                                if(checkAdjacency(r+1,c+1))
-                                {//CONTROLLO ADIACENZA OK
-                                    if (checkOrthogonalValue(r + 1, c + 1))
-                                    {//CONTROLLO NUMERO OK
-                                        break;
-                                    }else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                    {   //CONTROLLO NUMERO NO
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("Wrong orthogonal value");
-                                    }
-                                }else if(checkAdjacency(r+1,c+1)==false)
-                                { // NO ADIACENZA
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
-                                    throw new PlaceDiceException("No adjacent dice");
-                                }
+                                applyColorBreaker(r,c);
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
 
@@ -875,67 +936,18 @@ public class WindowBoard implements WindowBoardObserver{
                             if(dice.isNumberBreaker())
                             {
                                 System.out.println("NUMBER - BREAKER (white)");
-
-                                if(checkAdjacency(r+1,c+1))
-                                {//CONTROLLO ADIACENZA OK
-                                    if (checkOrthogonalColor(r + 1, c + 1))
-                                    {//CONTROLLO COLORE OK
-                                        break;
-                                    }
-                                    else if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                    { // NO COLORE
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("Wrong orthogonal color");
-                                    }
-                                }
-                                else if(checkAdjacency(r+1,c+1)==false)
-                                { // NO ADIACENZA
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
-                                    throw new PlaceDiceException("No adjacent dice");
-                                }
+                                applyNumberBreaker(r,c);
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
 
                             //CONTROLLI NORMALI
-                            if(checkAdjacency(r+1,c+1))
-                            {//CONTROLLO ADIACENZA OK
-
-                                if (checkOrthogonalColor(r + 1, c + 1) && checkOrthogonalValue(r + 1, c + 1))
-                                {//CONTROLLO COLORE/NUMERO OK
-                                    break;
-                                }
-                                else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false)
-                                { // NO COLORE/NUMERO
-
-                                    if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                    {//CONTROLLO COLORE NO
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("Wrong orthogonal color");
-                                    }
-                                    else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                    {//CONTROLLO NUMERO NO
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("Wrong orthogonal value");
-                                    }
-                                }
-                            }
-                            else if(checkAdjacency(r+1,c+1)==false)
-                            { // NO ADIACENZA
-                                usedMatrix.get(r).get(c).setDiceContained(null);
-                                usedMatrix.get(r).get(c).setUsed(false);
-                                throw new PlaceDiceException("No adjacent dice");
-                            }
+                            applyNormalRules(r,c);
 
                         }
                         else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK)
                         {//CASO CELLA NON BIANCA
 
-                            usedMatrix.get(r).get(c).setDiceContained(dice);
-                            usedMatrix.get(r).get(c).setUsed(true);
+                            placeDice(dice,r,c);
 
                             //++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
                             if(dice.isNumberBreaker())
@@ -944,30 +956,11 @@ public class WindowBoard implements WindowBoardObserver{
 
                                 if(usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
                                 {//CONTROLLO COLORE
-                                    if(checkAdjacency(r+1,c+1))
-                                    {//CONTROLLO ADIACENZA OK
-                                        if (checkOrthogonalColor(r + 1, c + 1))
-                                        {//CONTROLLO COLORE ORTOGONALE OK
-                                            break;
-                                        }
-                                        else if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                        { // NO COLORE ORTOGONALE
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal color");
-                                        }
-                                    }
-                                    else if(checkAdjacency(r+1,c+1)==false)
-                                    { // NO ADIACENZA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("No adjacent dice");
-                                    }
+                                    applyNumberBreaker(r,c);
                                 }
                                 else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                                 {//NO COLORE CELLA
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    removeDice(r,c);
                                     throw new PlaceDiceException("wrong color");
                                 }
 
@@ -975,26 +968,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 {//CONTROLLO SFUMATURA (caso limite)
 
                                     System.out.println("NUMBER - BREAKER (NOT white) --> SPECIAL CASE");
-
-                                    if(checkAdjacency(r+1,c+1))
-                                    {//CONTROLLO ADIACENZA OK
-                                        if (checkOrthogonalColor(r + 1, c + 1))
-                                        {//CONTROLLO COLORE ORTOGONALE OK
-                                            break;
-                                        }
-                                        else if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                        { // NO COLORE ORTOGONALE
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal color");
-                                        }
-                                    }
-                                    else if(checkAdjacency(r+1,c+1)==false)
-                                    { // NO ADIACENZA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("No adjacent dice");
-                                    }
+                                    applyNumberBreaker(r,c);
                                 }
                             }
                             //++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
@@ -1006,29 +980,11 @@ public class WindowBoard implements WindowBoardObserver{
 
                                 if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 {//CONTROLLO SFUMATURA
-                                    if(checkAdjacency(r+1,c+1))
-                                    {//CONTROLLO ADIACENZA OK
-                                        if (checkOrthogonalValue(r + 1, c + 1))
-                                        {//CONTROLLO NUMERO ORTOGONALE OK
-                                            break;
-                                        }
-                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                        {   //CONTROLLO NUMERO ORTOGONALE NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal value");
-                                        }
-                                    }
-                                    else if(checkAdjacency(r+1,c+1)==false)
-                                    { // NO ADIACENZA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("No adjacent dice");
-                                    }
+                                    applyColorBreaker(r,c);
+
                                 }else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                 {//NO SFUMATURA
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    removeDice(r,c);
                                     throw new PlaceDiceException("Wrong shade");
                                 }
 
@@ -1036,26 +992,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 {//CONTROLLO COLORE (caso limite)
 
                                     System.out.println("COLOR - BREAKER (NOT white) --> SPECIAL CASE");
-
-                                    if(checkAdjacency(r+1,c+1))
-                                    {//CONTROLLO ADIACENZA OK
-                                        if (checkOrthogonalValue(r + 1, c + 1))
-                                        {//CONTROLLO NUMERO OK
-                                            break;
-                                        }
-                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                        {   //CONTROLLO VALORE NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal value");
-                                        }
-                                    }
-                                    else if(checkAdjacency(r+1,c+1)==false)
-                                    { // NO ADIACENZA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
-                                        throw new PlaceDiceException("No adjacent dice");
-                                    }
+                                    applyColorBreaker(r,c);
                                 }
                             }
                             //+++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO COLORE
@@ -1069,12 +1006,11 @@ public class WindowBoard implements WindowBoardObserver{
                                 {//EFFETTIVAMENTE NON ADIACENTE A NULLA
                                     if(checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                     {//CONTROLLO SFUMATURA
-                                        break;
+                                        //break;
                                     }
                                     else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                                     {//NO SFUMATURA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        removeDice(r,c);
                                         throw new PlaceDiceException("Wrong shade");
                                     }
 
@@ -1084,15 +1020,13 @@ public class WindowBoard implements WindowBoardObserver{
                                     }
                                     else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                                     {//NO COLORE CELLA
-                                        usedMatrix.get(r).get(c).setDiceContained(null);
-                                        usedMatrix.get(r).get(c).setUsed(false);
+                                        removeDice(r,c);
                                         throw new PlaceDiceException("Wrong color");
                                     }
                                 }
                                 else if (checkAdjacency(r+1,c+1))
                                 {
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
+                                    removeDice(r,c);
                                     throw new PlaceDiceException("No adjacent dice");
                                 }
                             }
@@ -1102,42 +1036,11 @@ public class WindowBoard implements WindowBoardObserver{
 
                             if (checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {//CONTROLLO SFUMATURA OK
-
-                                if(checkAdjacency(r+1,c+1))
-                                {//CONTROLLO ADIACENZA
-
-                                    if (checkOrthogonalColor(r + 1, c + 1) && checkOrthogonalValue(r + 1, c + 1))
-                                    {///CONTROLLO COLORE/NUMERO OK
-                                        break;
-                                    }
-                                    else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false )
-                                    {// COLORE/NUMERO NO
-
-                                        if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                        {//CONTROLLO COLORE NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal color");
-                                        }
-                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                        {//CONTROLLO NUMERO NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal value");
-                                        }
-                                    }
-                                }
-                                else if(checkAdjacency(r+1,c+1)==false)
-                                { // ADIACENZA NO
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
-                                    throw new PlaceDiceException("No adjacent dice");
-                                }
+                                applyNormalRules(r,c);
                             }
                             else if (checkShade(usedMatrix.get(r).get(c), dice) == false && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {//NO SFUMATURA
-                                usedMatrix.get(r).get(c).setDiceContained(null);
-                                usedMatrix.get(r).get(c).setUsed(false);
+                                removeDice(r,c);
                                 throw new PlaceDiceException("Shade is different");
                             }
 
@@ -1145,42 +1048,11 @@ public class WindowBoard implements WindowBoardObserver{
 
                             if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() == dice.getColor())
                             {//CONTROLLO COLORE CELLA
-
-                                if(checkAdjacency(r+1,c+1))
-                                {//CONTROLLO ADIACENZA
-
-                                    if (checkOrthogonalColor(r + 1, c + 1) && checkOrthogonalValue(r + 1, c + 1) )
-                                    {//CONTROLLO COLORE/NUMERO
-                                        break;
-                                    }
-                                    else if (checkOrthogonalColor(r + 1, c + 1) == false || checkOrthogonalValue(r + 1, c + 1)==false)
-                                    {//NO COLORE/NUMERO
-
-                                        if (checkOrthogonalColor(r + 1, c + 1)==false)
-                                        {//CONTROLLO COLORE NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal color");
-                                        }
-                                        else if (checkOrthogonalValue(r + 1, c + 1)==false)
-                                        {//CONTROLLO NUMERO NO
-                                            usedMatrix.get(r).get(c).setDiceContained(null);
-                                            usedMatrix.get(r).get(c).setUsed(false);
-                                            throw new PlaceDiceException("Wrong orthogonal value");
-                                        }
-                                    }
-                                }
-                                else if(checkAdjacency(r+1,c+1)==false)
-                                {// NO ADIACENZA
-                                    usedMatrix.get(r).get(c).setDiceContained(null);
-                                    usedMatrix.get(r).get(c).setUsed(false);
-                                    throw new PlaceDiceException("There is no adjacent dice");
-                                }
+                                applyNormalRules(r,c);
                             }
                             else if (usedMatrix.get(r).get(c).getColor() != Color.SHADE && usedMatrix.get(r).get(c).getColor() != dice.getColor())
                             {//NO COLORE CELLA
-                                usedMatrix.get(r).get(c).setDiceContained(null);
-                                usedMatrix.get(r).get(c).setUsed(false);
+                                removeDice(r,c);
                                 throw new PlaceDiceException("Color is not equal");
                             }
                         }
