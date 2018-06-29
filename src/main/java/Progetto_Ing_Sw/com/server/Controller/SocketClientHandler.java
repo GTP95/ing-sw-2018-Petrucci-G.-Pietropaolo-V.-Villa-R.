@@ -301,7 +301,7 @@ public class SocketClientHandler implements Runnable {
     }
 
     private void notifyIfIsYourTurn(){
-        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn && otherPlayersWindowBoardsSent){    //otherPlayersWindowBoardsSent serve per evitare che all'inizio un client riceva il messaggio di inizio turno prima di aver ricevuto le WindowBoard degli altri giocatori bloccandosi così in attesa delle windowboard (waiting for other players)
+        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
             isMyTurn=true;
             sendControlMessage("It's your turn now");
         }
