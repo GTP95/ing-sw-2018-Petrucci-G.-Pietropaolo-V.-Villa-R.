@@ -82,6 +82,7 @@ public class SocketClientHandler implements Runnable {
                 sendOtherPlayersWindowBoards();
               //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
                 notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
+                if(!isMyTurn) sendControlMessage("Your turn just ended");
                 System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
 
                 while(Table.gameRunning){
