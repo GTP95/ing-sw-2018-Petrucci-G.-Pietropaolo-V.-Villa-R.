@@ -357,3 +357,4 @@ public class SocketClientHandler implements Runnable {
        updateWindowBoards=false;
    }
 }
+//commento per forzare sincronizzazione
