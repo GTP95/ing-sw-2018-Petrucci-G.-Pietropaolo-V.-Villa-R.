@@ -59,7 +59,6 @@ public class TableGUI extends Stage{
 
         ChoosenGameBoardCard = gameBoardCard;
 
-        LocalModel.getInstance().registerAsObserver(this);
 
         //INIZIO Gameplay Scene
         int rows = 4;
@@ -693,6 +692,8 @@ public class TableGUI extends Stage{
 
         this.setScene(GameplayScene);
         this.show();
+        LocalModel.getInstance().registerAsObserver(this);
+
     }
 
         public void updateTable(){
