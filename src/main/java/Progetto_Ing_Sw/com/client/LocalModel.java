@@ -326,6 +326,7 @@ public  class LocalModel {
 
     public void setWindowBoard(ClientWindowBoard windowBoard) {
         this.windowBoard = windowBoard;
+        System.err.println("aspetto tableGui (setWindowBoard)");
         while(tableGUIobserver==null);
         tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
@@ -339,7 +340,9 @@ public  class LocalModel {
             if(firstWindowBoardsReceived){
                 System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
-                while (tableGUIobserver==null); //aspetta che tableGui si registri come observer
+               // System.err.println("Aspetto tablegui (addUpdatedWindowBoard)");
+               // while (tableGUIobserver==null); //aspetta che tableGui si registri come observer
+               // System.err.println("tablegui registata (addUpadtedWindowBoard)");
                // tableGUIobserver.updateTable();
                 firstWindowBoardsReceived=false;
             }
@@ -361,11 +364,12 @@ public  class LocalModel {
        // while (tableGUIobserver==null);
         try {
             Thread.sleep(1000);
+            System.err.println("time elapsed");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
       //  chooseAWindowobserver.StartTable();
-        while (tableGUIobserver==null);
+
         tableGUIobserver.isYourTurn();
     }
 
