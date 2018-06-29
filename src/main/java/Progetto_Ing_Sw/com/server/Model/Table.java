@@ -176,12 +176,8 @@ public class Table {
 
     public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
         if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            Collections.reverse(players);
-            currentPlayer=0;
-            getActivePlayer().getSocketClientHandler().isMyTurn=true;
-            for (Player player:players){
-                player.getSocketClientHandler().changedTurn=true;
-            }
+            Collections.reverse(players);       //inverte l'arrayList, serve per fare il secondo giro del round in senso opposto
+            currentPlayer=0;                    //facendo giocare l'ultimo giocatore due volte di fila
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
             return;
