@@ -692,7 +692,7 @@ public class TableGUI extends Stage{
 
         this.setScene(GameplayScene);
         this.show();
-        LocalModel.getInstance().registerAsObserver(this);
+        //LocalModel.getInstance().registerAsObserver(this);
 
     }
 

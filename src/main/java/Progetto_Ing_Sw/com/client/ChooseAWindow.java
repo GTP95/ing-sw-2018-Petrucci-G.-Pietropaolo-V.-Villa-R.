@@ -390,6 +390,8 @@ public class ChooseAWindow extends Stage {
             close();
             TableGUI tableGUI = new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard());
             tableGUI.updateTable();
+            tableGUI.isNotYourTurn();
+            LocalModel.getInstance().registerAsObserver(tableGUI);
         });
     }
 
