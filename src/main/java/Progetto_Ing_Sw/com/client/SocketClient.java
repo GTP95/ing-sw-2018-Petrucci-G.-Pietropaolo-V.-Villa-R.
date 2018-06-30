@@ -149,6 +149,9 @@ public class SocketClient implements Runnable{
             case "Sending WindowBoards update":
                 localModel.setNumOfWindowBoards(Integer.parseInt(messageFields[1]));
                 break;
+            case "Changed round":
+                localModel.updateRound(Integer.parseInt(messageFields[1]));
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));
