@@ -188,6 +188,10 @@ public final class JSONCreator {
         return card;
     }
 
+    public static ClientRoundTrack clientRoundTrackLoaderFromString(String json){
+        ClientRoundTrack roundTrack=gson.fromJson(json,ClientRoundTrack.class);
+        return roundTrack;
+    }
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){
         JsonElement jsonElement=new JsonParser().parse(json);

@@ -212,19 +212,23 @@ public class Table {
         }
     }
 
-private void prepareForNextRound(){     //Cambia l'ordine di gioco dei giocatori al cambio di round
-        CopyOnWriteArrayList<Player> newPlayerArray=new CopyOnWriteArrayList<>();
-        for(int index=1;index<players.size();index++){
-            newPlayerArray.add(index-1,players.get(index));
-        }
-        newPlayerArray.add(players.get(0));
-        players=newPlayerArray;
-        buildMirrorArray();
-        currentPlayer=0;
-        RoundTrack.getInstance().incrementRound();
-        for (Player player:players)
-            player.getSocketClientHandler().changedRound=true;  //non c'è bisogno di chiamare la notifyAllSocketClientHandlers perchè viene chiamata dopo alla fine della changeCurrentPlayer()
+private void prepareForNextRound() {     //Cambia l'ordine di gioco dei giocatori al cambio di round
+    CopyOnWriteArrayList<Player> newPlayerArray = new CopyOnWriteArrayList<>();
+    for (int index = 1; index < players.size(); index++) {
+        newPlayerArray.add(index - 1, players.get(index));
     }
+    newPlayerArray.add(players.get(0));
+    players = newPlayerArray;
+    buildMirrorArray();
+    currentPlayer = 0;
+    for (Dice dice : drawnDice)
+        RoundTrack.getInstance().addRemainedDice(RoundTrack.getInstance().getRoundNumber(), dice);   //aggiunge i dadi avanzati alla roundtrack
+    RoundTrack.getInstance().incrementRound();
+    for (Player player : players) {
+        player.getSocketClientHandler().changedRound = true;  //non c'è bisogno di chiamare la notifyAllSocketClientHandlers perchè viene chiamata dopo alla fine della changeCurrentPlayer()
+        player.getSocketClientHandler().updateRoundTrack=true;
+    }
+}
 
 private void buildMirrorArray(){
         CopyOnWriteArrayList<Player> mirrorArray=new CopyOnWriteArrayList<>();

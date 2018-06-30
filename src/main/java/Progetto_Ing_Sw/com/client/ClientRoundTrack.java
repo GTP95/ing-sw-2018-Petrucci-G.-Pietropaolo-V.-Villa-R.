@@ -1,17 +1,21 @@
-package Progetto_Ing_Sw.com.server.Model;
+package Progetto_Ing_Sw.com.client;
+
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.IllegalDiceException;
+import Progetto_Ing_Sw.com.server.Model.Table;
 
 import java.util.ArrayList;
 
-public class RoundTrack {   //Implementata come singleton
-    private static RoundTrack ourInstance = new RoundTrack();
+public class ClientRoundTrack {   //Implementata come singleton
+    private static ClientRoundTrack ourInstance = new ClientRoundTrack();
     private int roundNumber;    //Il primo turno è il numero 0 per avere corrispondenza tra turni ed indici di diceRemained
     private ArrayList<ArrayList<Dice>> diceRemained;    //ciascun indice contiene un ArrayList con dentro i dadi avanzati in quel turno
 
-    public static RoundTrack getInstance() {
+    public static ClientRoundTrack getInstance() {
         return ourInstance;
     }
 
-    private RoundTrack() {
+    private ClientRoundTrack() {
         roundNumber=0;  //Il primo turno dev'essere il numero 0 per avere equivalenza con gli indici, vedi sopra
         diceRemained=new ArrayList<ArrayList<Dice>>();
         for (int index=0;index<10;index++)
@@ -40,7 +44,7 @@ public class RoundTrack {   //Implementata come singleton
         if(roundNumber<10) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
     }
 
-    public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard
+  /*  public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard
         Boolean diceToPlaceExists=false;
         for (Dice dice : Table.getOurInstance().getDrawnDice()){    //controlla che il dado che si vuole piazzare sulla roundTrack sia tra quelli pescati
             if(dice.equals(diceToPlace)){
@@ -59,5 +63,5 @@ public class RoundTrack {   //Implementata come singleton
             }
         }
         throw new IllegalDiceException();
-    }
+    }*/
 }

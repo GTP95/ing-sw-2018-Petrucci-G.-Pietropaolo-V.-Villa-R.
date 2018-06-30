@@ -197,6 +197,9 @@ public class SocketClient implements Runnable{
             case "WindowBoardUpdate":
                 localModel.addUpdatedWindowBoard(JSONCreator.clientWindowBoardLoaderFromString(json));
                 break;
+            case "RoundTrack":
+                localModel.setRoundTrack(JSONCreator.clientRoundTrackLoaderFromString(json));
+                break;
             default:
                 System.err.println("Can't understand class " + nameOfClass);
         }

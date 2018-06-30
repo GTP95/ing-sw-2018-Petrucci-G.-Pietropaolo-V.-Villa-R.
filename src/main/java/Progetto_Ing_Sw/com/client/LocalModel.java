@@ -21,6 +21,7 @@ public  class LocalModel {
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
+    private RoundTrackView roundTrackViewobserver;
     private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
@@ -36,6 +37,7 @@ public  class LocalModel {
     private int row,column, roundNumber;
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
+    private ClientRoundTrack roundTrack;
 
     private LocalModel(){
 
@@ -165,6 +167,10 @@ public  class LocalModel {
         return updatedWindowBoards;
     }
 
+    public ClientRoundTrack getRoundTrack() {
+        return roundTrack;
+    }
+
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
@@ -182,6 +188,9 @@ public  class LocalModel {
             }
             if(currentObject instanceof LoginStage){
                 this.loginStageObserver=(LoginStage)currentObject;
+            }
+            if (currentObject instanceof RoundTrackView){
+                this.roundTrackViewobserver=(RoundTrackView)currentObject;
             }
     }
 
@@ -401,5 +410,10 @@ public  class LocalModel {
 
     public int getRoundNumber() {
         return roundNumber;
+    }
+
+    public void setRoundTrack(ClientRoundTrack roundTrack) {
+        this.roundTrack = roundTrack;
+        roundTrackViewobserver.updateRoundTrack();
     }
 }
