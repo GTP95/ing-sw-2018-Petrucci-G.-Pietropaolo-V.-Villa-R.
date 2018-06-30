@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.RoundTrack;
 import com.sun.javafx.geom.transform.Affine3D;
 import com.sun.javafx.geom.transform.BaseTransform;
 import javafx.animation.Animation;
@@ -584,6 +585,11 @@ public class TableGUI extends Stage{
         RoundTrack.setMinSize(150,150);
         RoundTrack.setTranslateY(-10);
         RoundTrack.setTranslateX(10);
+        RoundTrack.setOnAction(event ->{
+            RoundTrackView roundtrack = new RoundTrackView();
+            roundtrack.updateRoundTrack();
+            roundtrack.showAndWait();
+        });
 
 
         //FINE Round Track
@@ -779,7 +785,7 @@ public class TableGUI extends Stage{
         }
 
         public void insertion(){
-            LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
+            //LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
             Platform.runLater(()-> {
                 for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
                     for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
