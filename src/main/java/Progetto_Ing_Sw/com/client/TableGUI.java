@@ -18,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -627,6 +630,7 @@ public class TableGUI extends Stage{
         Move.setDisable(true);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
+            //DiceCover.setVisible(true);//TODO ECCEZIONI
         });
 
 
@@ -804,6 +808,7 @@ public class TableGUI extends Stage{
 
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
+
         DiceCover.setVisible(true);
         Move.setDisable(true);
         PassButton.setDisable(true);
@@ -828,7 +833,13 @@ public class TableGUI extends Stage{
     }
 
     public void updateRound(){
-       // RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
+        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";     // For example
+
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+
+       RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
     }
 
 
