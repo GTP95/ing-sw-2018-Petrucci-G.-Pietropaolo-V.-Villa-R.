@@ -243,5 +243,9 @@ private void buildMirrorArray(){
     public CopyOnWriteArrayList<Player> getMirrorArray() {
         return mirrorArray;
     }
+
+    public static void setPlayers(CopyOnWriteArrayList<Player> players) {   //Usato solo per i test
+        Table.players = players;
+    }
 }
 

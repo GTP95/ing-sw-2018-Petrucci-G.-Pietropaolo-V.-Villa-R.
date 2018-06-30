@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.SplittableRandom;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 public class TableTest {    //Questa classe, data la sua natura, fa integration testing anzichè unit testing
@@ -57,6 +59,24 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
         System.out.println();
     }
 
+    @Test
+    public void getPlayerFromNameTest(){
+        Player player1=mock(Player.class);
+        when(player1.getName()).thenReturn("John");
 
+        Player player2=mock(Player.class);
+        when(player2.getName()).thenReturn("Smith");
+
+        CopyOnWriteArrayList<Player> players=new CopyOnWriteArrayList<>();
+        gameTable.setPlayers(players);
+
+        try {
+            Assert.assertEquals(player1, gameTable.getPlayerFromName("John"));
+            Assert.assertEquals(player2, gameTable.getPlayerFromName("Smith"));
+        }
+        catch (InvalidUsernameException e){
+            Assert.fail(e.getMessage());
+        }
+    }
 
     }
