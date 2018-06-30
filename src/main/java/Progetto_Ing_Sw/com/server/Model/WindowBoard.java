@@ -4,7 +4,15 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-
+/**
+ * <h1>WindowBoard</h1>
+ * The class WindowBoard implements the main object that the player uses
+ * during all the match. It represents the moment in which the player,
+ * after choosing the GameBoardCard, inserts it in the Window-like
+ * structure and begins to place the dice.
+ *
+ *@author Roberto Villa
+ */
 public class WindowBoard implements WindowBoardObserver{
 
     private int [][] Matrix; //righe - colonne
@@ -14,7 +22,13 @@ public class WindowBoard implements WindowBoardObserver{
     public String getTitle() {return localTitle;}
     public void setTitle(String title) {this.localTitle = title;}
 
-    //crea una matrice di vuota delle dimensioni volute
+    /**
+     * This method is used to create the integer matrix-object
+     * using two main parameters, rows and columns. It also create
+     * the empty ArrayList-matrix that it's used inside other methods.
+     * @param rows This is the first parameter, it represents the number of row
+     * @param columns This is the first parameter, it represents the number of row
+     */
     public WindowBoard(int rows, int columns) {
 
         Matrix = new int[rows][columns];
@@ -22,14 +36,27 @@ public class WindowBoard implements WindowBoardObserver{
 
     }
 
-
+    /**
+     * This method is used to build the main object, using the ArrayList-matrix
+     * (of MatrixCell, another object), by importing parameters of the GameBoardCard from Json file
+     * @param gameBoardCard It's the gameBoardCard that has been selected by the player, used for build the main matrix
+     */
     public WindowBoard(GameBoardCard gameBoardCard){
         Matrix=gameBoardCard.getMatrixScheme();
         usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
         setBorders();
     }
 
+    /**
+     * This is the method that return the main object of the class
+     * @return This returns the ArrayList-Matrix Object
+     */
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
+
+    /**
+     * This method is used to set the ArrayList-Matrix parameter as the used object
+     * @param usedMatrix is the ArrayList-Matrix that is gonna be used
+     */
     public void setUsedMatrix(ArrayList<ArrayList<MatrixCell>> usedMatrix) {this.usedMatrix = usedMatrix;}
 
       //stampa matrici SOLO 4righeX5colonne
@@ -42,7 +69,14 @@ public class WindowBoard implements WindowBoardObserver{
         System.out.println("---------------------");
     }
 
-    //importa la matrice da file Json tramite Switch/case
+    /**
+     * This method import, from Json file, the Integer-matrix object, used initially to create the
+     * ArrayList-Matrix object. It has also rows and columns, to avoid future problem with bigger matrix.
+     * @param rows This parameter represents the number of rows of the matrix
+     * @param columns This parameter represents the number of columns of the matrix
+     * @param cardCode This parameter represent the number of the GameBoardCard that is going to be imported
+     * @return int[][] This return the Integer-matrix object
+     */
     public int [][] importFromFile(int rows, int columns, int cardCode) {
 
         switch (cardCode){
@@ -122,7 +156,11 @@ public class WindowBoard implements WindowBoardObserver{
         return Matrix;
     }
 
-    //importa il nome della carta da file Json tramite Switch/case
+    /**
+     * This method is used to set the title at the main WindowBoard object, importing from Json using the
+     * GameBoardCard's code.
+     * @param cardCode This parameter represent the code of the GameBoardCard that is going to be imported
+     */
     public void importNameFromFile(int cardCode){
 
         String localTitle = new String();
@@ -204,7 +242,14 @@ public class WindowBoard implements WindowBoardObserver{
         setTitle(localTitle);
     };
 
-    //trasforma la matrice da interi a dadi, per poter ragionare sulle mosse
+
+    /**
+     * This method is used to create an ArrayList-matrix from an Integer-matrix, using rows and columns and switch-case
+     * @param Matrix Integer-matrix object that is going to be converted
+     * @param rows This parameter represents the number of rows of the matrix
+     * @param columns This parameter represents the number of rows of the matrix
+     * @return ArrayList<ArrayList<MatrixCell>> It returns the main WindowBoard object that is the ArrayList-matrix
+     */
     public ArrayList<ArrayList<MatrixCell>> fromIntToArrayList(int Matrix[][], int rows, int columns){
 
         ArrayList<ArrayList<MatrixCell>> matrixArrays = new ArrayList<>();
@@ -273,10 +318,7 @@ public class WindowBoard implements WindowBoardObserver{
         return matrixArrays;
     }
 
-    //******************************REGOLE DI INSERIMENTO*************************************************************//
-
     //verifica che la matrice non sia vuota, restituendo TRUE in tal caso
-
     public boolean matrixNotEmpty(){
         boolean cellState=false;
         for(int r=0;r<usedMatrix.size();r++){
@@ -289,7 +331,11 @@ public class WindowBoard implements WindowBoardObserver{
         return cellState;
     }
 
-    //setta le caselle che sono sui bordi, restituiendo la matrice settata correttaemente
+
+    /**
+     * This method set the borders of the ArrayList-matrix. It's necessary to implement the placement restrictions
+     * @return It returns the WindowBoard (ArrayList-matrix) with Borders set
+     */
     public ArrayList<ArrayList<MatrixCell>> setBorders(){
 
         for(int row=0;row<usedMatrix.size();row++){
@@ -339,7 +385,13 @@ public class WindowBoard implements WindowBoardObserver{
         return onBorders;
     }
 
-    //controlla che un dato abbia la stessa numerazione della cella, da TRUE se vero
+    /**
+     * This method control that the dice placed in the current matrixCell has the number that match the actual
+     * matrixCell's shade
+     * @param matrixCell This parameter represent the matrixCell where i place the dice
+     * @param dice the dice that is going to be placed
+     * @return it returns TRUE if the number of the dice matches the shade of the MatrixCell
+     */
     public boolean checkShade(MatrixCell matrixCell, Dice dice){
 
         boolean shadeState=false;
@@ -467,7 +519,14 @@ public class WindowBoard implements WindowBoardObserver{
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    //metodo di inserimento di oggetti di tipo dato nella matrice di arraylist
+    /**
+     * This method is used to insert Dice in the ArrayList-Matrix without following the placement restrictions;
+     * it's used to test placement restrictions' methods
+     * @param row This parameter represent the row's coordinate
+     * @param column This parameter represent the column's coordinate
+     * @param dice This parameter represent the dice selected to be placed in the matrix
+     * @return This returns a WindowBoard with the dice in the correct position
+     */
     public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(int row, int column, Dice dice){
 
                 if(matrixNotEmpty()==false){ //CONTROLLO PRIMO TURNO
@@ -551,7 +610,14 @@ public class WindowBoard implements WindowBoardObserver{
         return usedMatrix;
     }
 
-    //controlla la regola di adiacenza dei dadi, restituisce TRUE se il dado inserito nella posizione immessa ha almeno un dado adiacente
+
+    /**
+     * This method is used to control that the dice placed in the cell with the input-coordinates has a dice adjacent.
+     * It returns TRUE if this condition is verified
+     * @param row This parameter represent the row's coordinate
+     * @param column This parameter represent the columns's coordinate
+     * @return it returns TRUE if the dice in the cell has a dice adjacent
+     */
     public boolean checkAdjacency(int row, int column){
         boolean adjacencyState=false;
 
@@ -648,7 +714,13 @@ public class WindowBoard implements WindowBoardObserver{
         return adjacencyState;
     }
 
-    //controlla la regola di ortogonalità dei colori, restituisce TRUE se il dado inserito nella posizione immessa non ha dadi ortogonali dello stesso colore
+    /**
+     * This method is used to control that the dice placed with the input-coordinates has a dice with its same color
+     * in an orthogonal position. It returns FALSE if the condition is verified
+     * @param row This parameter represent the row's coordinate
+     * @param column This parameter represent the columns's coordinate
+     * @return it returns FALSE if the dice in the cell has a dice with its same color in an orthogonal position
+     */
     public boolean checkOrthogonalColor(int row, int column){
 
         boolean correctColor=true;
@@ -712,7 +784,13 @@ public class WindowBoard implements WindowBoardObserver{
         return correctColor;
     }
 
-    //controlla la regola di ortogonalità dei numeri, restituisce TRUE se il dado inserito nella posizione immessa non ha dadi ortogonali con lo stesso valore
+    /**
+     * This method is used to control that the dice placed with the input-coordinates has a dice with its same value
+     * in an orthogonal position. It returns FALSE if the condition is verified
+     * @param row This parameter represent the row's coordinate
+     * @param column This parameter represent the columns's coordinate
+     * @return it returns FALSE if the dice in the cell has a dice with its same value in an orthogonal position
+     */
     public boolean checkOrthogonalValue(int row, int column){
 
         boolean correctNumber=true;
@@ -801,10 +879,16 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
 
-    //******************************REAL GAMEPLAY*************************************************************//
-
-
-
+    /**
+     * This method is the main method of the game: with the input-coordinates, the method place a dice in the matrix.
+     * After that, this action is controlled by placement restrictions' methods described before. If something isn't correct,
+     * this method throws a PlaceDiceException (with a single message for each type of exception)
+     * @param row This parameter represent the row's coordinate
+     * @param column This parameter represent the columns's coordinate
+     * @param dice This parameter represent the dice that is going to be placed
+     * @return It returns a WindowBoard object with the Dice placed if the placement restrictions are verified
+     * @throws PlaceDiceException
+     */
     public ArrayList<ArrayList<MatrixCell>> insertDice(int row, int column, Dice dice) throws PlaceDiceException {
 
         if(matrixNotEmpty()==false)

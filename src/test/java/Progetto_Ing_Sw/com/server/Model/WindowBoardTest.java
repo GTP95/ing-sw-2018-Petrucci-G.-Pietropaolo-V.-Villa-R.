@@ -435,59 +435,13 @@ public class WindowBoardTest {
 
     //Copertura dei test fatta fino a qui
     @Test
-    public void TEST_INSERT_DICE_GAMEPLAY() throws PlaceDiceException {
+    public void insertDiceTestForGamePlay() throws PlaceDiceException {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,8);//WaterOfLife
-        System.out.println("Matrice prima dell'inserimento");
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);//WaterOfLife
         windowBoard.printMatrix(testMatrix,rows,columns);
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
-
-        /*
-        when(dice1.getColor()).thenReturn(Color.BLUE);
-        when(dice1.getValue()).thenReturn(1);
-
-        when(dice2.getColor()).thenReturn(Color.PURPLE);
-        when(dice2.getValue()).thenReturn(2);
-
-        when(dice3.getColor()).thenReturn(Color.RED);
-        when(dice3.getValue()).thenReturn(3);
-
-        when(dice4.getColor()).thenReturn(Color.YELLOW);
-        when(dice4.getValue()).thenReturn(4);
-
-        when(dice5.getColor()).thenReturn(Color.GREEN);
-        when(dice5.getValue()).thenReturn(5);
-
-        when(dice5r.getColor()).thenReturn(Color.RED);
-        when(dice5r.getValue()).thenReturn(5);
-         */
-
-        //Test da effettuare - windowBoard.insertDice(martrixArray,#,#,dice#);
-
-        System.out.println(" 1° INSERIMENTO");
-        windowBoard.insertDice(1,1,dice6Y);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-
-        System.out.println(" 2° INSERIMENTO");
-        windowBoard.insertDice(2,2,dice5Y);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-
-        System.out.println(" 3° INSERIMENTO");
-        windowBoard.insertDice(3,1,dice4Y);
-        windowBoard.printMatrixArrayList();
-        windowBoard.printDiceColorValueArrayList();
-        System.out.println();
-
-        /* inserimento  che lancia l'eccezione
-        System.out.println(" 4° INSERIMENTO");
-        windowBoard.insertDice(2,1,dice4r);
-        windowBoard.printMatrixArrayList();
-        System.out.println();
-        */
 
 
     }
