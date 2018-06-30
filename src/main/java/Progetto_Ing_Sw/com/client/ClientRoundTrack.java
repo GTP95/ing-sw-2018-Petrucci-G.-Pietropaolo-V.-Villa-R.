@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ClientRoundTrack {   //Implementata come singleton
     private static ClientRoundTrack ourInstance = new ClientRoundTrack();
-    private int roundNumber;    //Il primo turno è il numero 0 per avere corrispondenza tra turni ed indici di diceRemained
+    private int roundNumber;    //lasciato per compatibilità
     private ArrayList<ArrayList<Dice>> diceRemained;    //ciascun indice contiene un ArrayList con dentro i dadi avanzati in quel turno
 
     public static ClientRoundTrack getInstance() {
@@ -22,9 +22,6 @@ public class ClientRoundTrack {   //Implementata come singleton
             diceRemained.add(new ArrayList<>());
     }
 
-    public int getRoundNumber() {
-        return roundNumber;
-    }
 
     public ArrayList<Dice> getDiceRemained(int roundNumber){    //restituisce una copia dell'ArrayList contenete i dadi avanzati al turno numero roundNumber
         ArrayList<Dice> diceArrayList=new ArrayList<>();        //non viene restituito un riferimento all'oggetto originale per evitare modifiche all'esterno di questa classe
@@ -36,32 +33,8 @@ public class ClientRoundTrack {   //Implementata come singleton
         return diceArrayList;
     }
 
-    public void addRemainedDice(int roundNumber, Dice dice){
-        diceRemained.get(roundNumber).add(dice);
-    }
 
-    public void incrementRound(){
-        if(roundNumber<10) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
-    }
 
-  /*  public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard
-        Boolean diceToPlaceExists=false;
-        for (Dice dice : Table.getOurInstance().getDrawnDice()){    //controlla che il dado che si vuole piazzare sulla roundTrack sia tra quelli pescati
-            if(dice.equals(diceToPlace)){
-                diceToPlaceExists=true;
-                break;
-            }
-        }
-        if(!diceToPlaceExists) throw new IllegalDiceException();
 
-        for(int index=0;index<getRoundNumber();index++){    //controlla che il dado che si vuole togliere dalla roundTrack sia effettivamente presente sulla roundTrack
-            for(Dice dice : diceRemained.get(index)){
-                if(dice.equals(diceToGet)){
-                    diceRemained.remove(diceToGet);
-                    return diceToGet;
-                }
-            }
-        }
-        throw new IllegalDiceException();
-    }*/
+
 }
