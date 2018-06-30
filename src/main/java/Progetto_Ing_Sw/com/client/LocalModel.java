@@ -361,12 +361,13 @@ public  class LocalModel {
         immediatelyUpdateGUI=true;
     }
     public void notifyTurn(){
-       // while (tableGUIobserver==null);
-        try {
-            Thread.sleep(1000);
-            System.err.println("time elapsed");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (tableGUIobserver==null) {
+            try {
+                Thread.sleep(1000);
+                System.err.println("time elapsed");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
       //  chooseAWindowobserver.StartTable();
 
