@@ -26,6 +26,7 @@ public class Table {
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     private int numOfSetWindowBoards, numOfTurnsPlayedInCurrentRound;
+    private CopyOnWriteArrayList<Player> mirrorArray;
 
 
     private Table() {
@@ -57,7 +58,7 @@ public class Table {
        /* ArrayList<Player> clonePlayers=getPlayers();
         Player selectedPlayer = clonePlayers.get(currentPlayer);
         return selectedPlayer;*/
-        return players.get(currentPlayer);
+        return mirrorArray.get(currentPlayer);
     }
 
     public static Table getOurInstance(){
@@ -131,6 +132,7 @@ public class Table {
        // players=Lobby.getInstance().getConnctedPlayers();
    //  Collections.shuffle(players);  //Ordine casuale dei giocatori per il primo turno.
         currentPlayer=0;
+        buildMirrorArray();
         for(Player player : players){   //inizializza i giocatori assegnadoli il loro obbiettivo privato e le GmaeBoardCard tra cui scegliere
             player.setPrivateObjective(privateObjectiveCardDeck.draw());
             player.setDrawnGameBoardCard(gameBoardCardDeck.drawMultipleFrontRear(3));
@@ -171,26 +173,9 @@ public class Table {
     }
 
     public void changeCurrentPlayer() {//Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
-        if(numOfTurnsPlayedInCurrentRound==2*players.size()){
-            prepareForNextRound();
-            currentPlayer=0;
-            numOfTurnsPlayedInCurrentRound=1;
-            return;
-        }
-        if (currentPlayer == players.size() - 1) {    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            Collections.reverse(players);       //inverte l'arrayList, serve per fare il secondo giro del round in senso opposto
-            currentPlayer = 0;                    //facendo giocare l'ultimo giocatore due volte di fila
-            notifyAllSocketClientHandlers();
-            System.out.println("Il nuovo giocatore è " + getActivePlayer().getName());
-
-        } else {
-            currentPlayer++;
-            for (Player player : players) player.getSocketClientHandler().changedTurn = true;
-            notifyAllSocketClientHandlers();
-            System.out.println("Il nuovo giocatore è " + getActivePlayer().getName());
-
-        }
-        numOfTurnsPlayedInCurrentRound++;
+        if(currentPlayer<2*players.size()) currentPlayer++;
+        else prepareForNextRound();
+        System.out.println("indexOfCurrentPlayer: "+currentPlayer);
     }
 
 
@@ -230,7 +215,24 @@ private void prepareForNextRound(){     //Cambia l'ordine di gioco dei giocatori
         }
         newPlayerArray.add(players.get(0));
         players=newPlayerArray;
+        buildMirrorArray();
+        currentPlayer=0;
 }
 
+private void buildMirrorArray(){
+        CopyOnWriteArrayList<Player> mirrorArray=new CopyOnWriteArrayList<>();
+        int index1,index2;
+        for(index1=0;index1<players.size();index1++) mirrorArray.add(players.get(index1));
+
+        for(index2=players.size()-1;index2>=0;index2--) mirrorArray.add(players.get(index2));
+        this.mirrorArray=mirrorArray;
+        System.out.println("Printing mirrorarray");
+        for(Player player:mirrorArray)
+            System.out.print(player.getName()+" ");
+}
+
+    public CopyOnWriteArrayList<Player> getMirrorArray() {
+        return mirrorArray;
+    }
 }
 

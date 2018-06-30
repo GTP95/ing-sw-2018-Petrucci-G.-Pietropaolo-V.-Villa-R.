@@ -254,7 +254,11 @@ public class SocketClient implements Runnable{
                 System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getAndResetDiceToInsert()), localModel.getRow(),localModel.getColumn());
             }
-            if(localModel.skipTurn) sendControlMessage("End my turn");
+            if(localModel.skipTurn) {
+                sendControlMessage("End my turn");
+                localModel.skipTurn = false;
+            }
+            
 
             localModel.sendDataToServer=false;
         }
