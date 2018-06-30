@@ -30,6 +30,11 @@ public class ClientRoundTrack {   //Implementata come singleton
             diceArrayList.add(dice);
         }
 
+        System.err.println("getDiceremained debug output");
+        for (Dice dice:diceArrayList){
+            System.err.println("Dice value: "+dice.getValue()+" color: "+dice.getColor());
+        }
+
         return diceArrayList;
     }
 
