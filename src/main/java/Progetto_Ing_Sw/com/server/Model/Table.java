@@ -176,6 +176,10 @@ public class Table {
         if(currentPlayer<2*players.size()) currentPlayer++;
         else prepareForNextRound();
         System.out.println("indexOfCurrentPlayer: "+currentPlayer);
+        for(Player player:players){
+            player.getSocketClientHandler().changedTurn=true;
+        }
+        notifyAllSocketClientHandlers();
     }
 
 

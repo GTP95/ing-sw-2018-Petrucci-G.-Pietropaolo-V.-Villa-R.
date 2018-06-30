@@ -258,7 +258,7 @@ public class SocketClient implements Runnable{
                 sendControlMessage("End my turn");
                 localModel.skipTurn = false;
             }
-            
+
 
             localModel.sendDataToServer=false;
         }
