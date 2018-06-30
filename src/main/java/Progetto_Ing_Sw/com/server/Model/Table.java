@@ -25,7 +25,7 @@ public class Table {
     private static CopyOnWriteArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
-    private int numOfSetWindowBoards;
+    private int numOfSetWindowBoards, numOfTurnsPlayedInCurrentRound;
 
 
     private Table() {
@@ -35,6 +35,7 @@ public class Table {
         drawnToolCards = toolCardDeck.drawToolCards(3);
         players = Lobby.getInstance().getConnctedPlayers();
         numOfSetWindowBoards = 0;
+        numOfTurnsPlayedInCurrentRound=0;
     }
 
     public static CopyOnWriteArrayList<Player> getPlayers() {
@@ -169,20 +170,28 @@ public class Table {
         return arrayToReturn;
     }
 
-    public void changeCurrentPlayer(){ //Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
-        if(currentPlayer==players.size()-1){    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
-            Collections.reverse(players);       //inverte l'arrayList, serve per fare il secondo giro del round in senso opposto
-            currentPlayer=0;                    //facendo giocare l'ultimo giocatore due volte di fila
-            notifyAllSocketClientHandlers();
-            System.out.println("Il nuovo giocatore è "+getActivePlayer().getName());
+    public void changeCurrentPlayer() {//Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
+        if(numOfTurnsPlayedInCurrentRound==2*players.size()){
+            prepareForNextRound();
+            currentPlayer=0;
+            numOfTurnsPlayedInCurrentRound=1;
             return;
         }
+        if (currentPlayer == players.size() - 1) {    //controlla che il giocatore sia l'ultimo, in tal caso deve ripetere il turno prima di passare al giocatore successivo
+            Collections.reverse(players);       //inverte l'arrayList, serve per fare il secondo giro del round in senso opposto
+            currentPlayer = 0;                    //facendo giocare l'ultimo giocatore due volte di fila
+            notifyAllSocketClientHandlers();
+            System.out.println("Il nuovo giocatore è " + getActivePlayer().getName());
+
+        } else {
             currentPlayer++;
             for (Player player : players) player.getSocketClientHandler().changedTurn = true;
             notifyAllSocketClientHandlers();
             System.out.println("Il nuovo giocatore è " + getActivePlayer().getName());
 
         }
+        numOfTurnsPlayedInCurrentRound++;
+    }
 
 
     public void notifyWindowBoardChange(Thread notifierThread){
@@ -214,7 +223,14 @@ public class Table {
         }
     }
 
+private void prepareForNextRound(){     //Cambia l'ordine di gioco dei giocatori al cambio di round
+        CopyOnWriteArrayList<Player> newPlayerArray=new CopyOnWriteArrayList<>();
+        for(int index=1;index<players.size();index++){
+            newPlayerArray.add(index-1,players.get(index));
+        }
+        newPlayerArray.add(players.get(0));
+        players=newPlayerArray;
+}
 
 }
 
-//commento per forzare commit di sincronizzazione
