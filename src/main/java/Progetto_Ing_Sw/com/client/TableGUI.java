@@ -796,8 +796,8 @@ public class TableGUI extends Stage{
             PassButton.setDisable(false);
             TimerEnteringAnimation.play();
             CurrentPlayer.setId("DefaultButtonActivated");
-            for (int i=0;i<OtherPlayersList.size();i++){
-                OtherPlayersList.get(i).setId("DefaultButton");
+            for (Button button : OtherPlayersList){
+                button.setId("DefaultButton");
             }
             insertion();
         }
@@ -811,11 +811,11 @@ public class TableGUI extends Stage{
             TimerExitingAnimation.play();
         }
         CurrentPlayer.setId("DefaultButton");
-        for(int i=0; i<OtherPlayersList.size();i++){
-            if (OtherPlayersList.get(i).getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
-                OtherPlayersList.get(i).setId("DefaultButtonActivated");}
+        for(Button button : OtherPlayersList){
+            if (button.getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
+                button.setId("DefaultButtonActivated");}
                 else{
-                    OtherPlayersList.get(i).setId("DefaultButton");
+                    button.setId("DefaultButton");
             }
         }
         System.err.println("----------------------------------------------------------------FINITO IS NOT YOUR TURN-----------------------------------------------------------------------");
