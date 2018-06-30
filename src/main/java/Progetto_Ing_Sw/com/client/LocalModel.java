@@ -33,7 +33,7 @@ public  class LocalModel {
     private LoginStage loginStageObserver;
     /*sezione informazioni azioni*/
     private ClientDice diceToInsert;
-    private int row,column;
+    private int row,column, roundNumber;
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
 
@@ -392,5 +392,14 @@ public  class LocalModel {
     public void skipTurn(){
         skipTurn=true;
         sendDataToServer=true;
+    }
+
+    public void updateRound(int roundNumber){
+        this.roundNumber=roundNumber;
+        tableGUIobserver.updateRound(); //qui table si è sicuramente già registrato come observer, nessun bisogno di aspettare
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
     }
 }

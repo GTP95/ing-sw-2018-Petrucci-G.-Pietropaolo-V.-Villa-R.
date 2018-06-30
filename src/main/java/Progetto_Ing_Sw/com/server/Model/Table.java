@@ -173,7 +173,7 @@ public class Table {
     }
 
     public void changeCurrentPlayer() {//Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
-        if(currentPlayer<2*players.size()) currentPlayer++;
+        if(currentPlayer<2*players.size()-1) currentPlayer++;
         else prepareForNextRound();
         System.out.println("indexOfCurrentPlayer: "+currentPlayer);
         for(Player player:players){
@@ -221,7 +221,10 @@ private void prepareForNextRound(){     //Cambia l'ordine di gioco dei giocatori
         players=newPlayerArray;
         buildMirrorArray();
         currentPlayer=0;
-}
+        RoundTrack.getInstance().incrementRound();
+        for (Player player:players)
+            player.getSocketClientHandler().changedRound=true;  //non c'è bisogno di chiamare la notifyAllSocketClientHandlers perchè viene chiamata dopo alla fine della changeCurrentPlayer()
+    }
 
 private void buildMirrorArray(){
         CopyOnWriteArrayList<Player> mirrorArray=new CopyOnWriteArrayList<>();
@@ -230,9 +233,7 @@ private void buildMirrorArray(){
 
         for(index2=players.size()-1;index2>=0;index2--) mirrorArray.add(players.get(index2));
         this.mirrorArray=mirrorArray;
-        System.out.println("Printing mirrorarray");
-        for(Player player:mirrorArray)
-            System.out.print(player.getName()+" ");
+
 }
 
     public CopyOnWriteArrayList<Player> getMirrorArray() {
