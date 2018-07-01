@@ -109,7 +109,7 @@ public class RoundTrackView extends Stage {
         Round1Dice = new VBox(0);
         Round1Dice.setPrefSize(100,675);
         Round1Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(0).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -124,7 +124,7 @@ public class RoundTrackView extends Stage {
         Round2Dice = new VBox(0);
         Round2Dice.setPrefSize(100,675);
         Round2Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(1).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -137,7 +137,7 @@ public class RoundTrackView extends Stage {
         Round3Dice = new VBox(0);
         Round3Dice.setPrefSize(100,675);
         Round3Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(2).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -150,7 +150,7 @@ public class RoundTrackView extends Stage {
         Round4Dice = new VBox(0);
         Round4Dice.setPrefSize(100,675);
         Round4Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(3).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -163,7 +163,7 @@ public class RoundTrackView extends Stage {
         Round5Dice = new VBox(0);
         Round5Dice.setPrefSize(100,675);
         Round5Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(4).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -176,7 +176,7 @@ public class RoundTrackView extends Stage {
         Round6Dice = new VBox(0);
         Round6Dice.setPrefSize(100,675);
         Round6Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(5).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -189,7 +189,7 @@ public class RoundTrackView extends Stage {
         Round7Dice = new VBox(0);
         Round7Dice.setPrefSize(100,675);
         Round7Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(6).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -202,7 +202,7 @@ public class RoundTrackView extends Stage {
         Round8Dice = new VBox(0);
         Round8Dice.setPrefSize(100,675);
         Round8Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(7).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -215,7 +215,7 @@ public class RoundTrackView extends Stage {
         Round9Dice = new VBox(0);
         Round9Dice.setPrefSize(100,675);
         Round9Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(8).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
@@ -228,7 +228,7 @@ public class RoundTrackView extends Stage {
         Round10Dice = new VBox(0);
         Round10Dice.setPrefSize(100,675);
         Round10Array = new ArrayList<>();
-        for (int i=0;i<LocalModel.getInstance().getRoundTrack().getDiceRemained(9).size();i++){
+        for (int i=0;i<LocalModel.getInstance().getClientPlayerArrayList().size()*2+1;i++){
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
