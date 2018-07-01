@@ -2,6 +2,8 @@ package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.GrozingPliers;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.File;
@@ -15,6 +17,7 @@ public class Table {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
     private ArrayList<ToolCard> drawnToolCards;
+    private static ArrayList<Effect> toolCardsWithEffect=new ArrayList<>();
     private static ToolCardDeck toolCardDeck=new ToolCardDeck(new File("Resources/Cards/ToolCards"));
     private static PublicObjectiveCardDeck publicObjectiveCardDeck=new PublicObjectiveCardDeck(new File("Resources/Cards/PublicObjectiveCards"));
     private static PrivateObjectiveCardDeck privateObjectiveCardDeck=PrivateObjectiveCardDeck.getInstance();    //Il caricamento da file viene effettuato all'interno della classe stessa
@@ -34,6 +37,16 @@ public class Table {
         drawnDice = diceBag.diceDraw(2 * numPlayers + 1);
         drawnPublicObjectiveCards = publicObjectiveCardDeck.drawPublicObjectiveCards(3);
         drawnToolCards = toolCardDeck.drawToolCards(3);
+
+        for (ToolCard toolCard : drawnToolCards){
+            switch(toolCard.getTitle()){
+                case "Grozing Pliers":
+                    toolCardsWithEffect.add(new GrozingPliers(toolCard));
+                    System.out.println("Creata Grozing Pliers");
+                    break;
+            }
+        }
+
         players = Lobby.getInstance().getConnctedPlayers();
         numOfSetWindowBoards = 0;
         numOfTurnsPlayedInCurrentRound=0;
@@ -249,5 +262,14 @@ private void buildMirrorArray(){
     public static void setPlayers(CopyOnWriteArrayList<Player> players) {   //Usato solo per i test
         Table.players = players;
     }
+
+    public void useToolCard(String title){
+        switch(title){
+
+        }
+       // toolCardsWithEffect.get(0).applyEffect();
+
+    }
+
 }
 
