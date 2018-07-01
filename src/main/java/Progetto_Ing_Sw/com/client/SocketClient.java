@@ -140,6 +140,24 @@ public class SocketClient implements Runnable{
                 break;
             case "Selected dice doesn't exists!":
                 throw new IllegalDiceException("Selected dice doesn't exists!");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+            case "Shade is different":
+                throw new IllegalDiceException("Shade is different");
+            case "Color is different":
+                throw new IllegalDiceException("Color is different");
+            case "Wrong orthogonal value":
+                throw new IllegalDiceException("Wrong orthogonal value");
+            case "No adjacent dice":
+                throw new IllegalDiceException("No adjacent dice");
+            case "Should be placed on a border":
+                throw new IllegalDiceException("Should be placed on a border");
+            case "wrong color":
+                throw new IllegalDiceException("wrong color");
+            case "Wrong shade":
+                throw new IllegalDiceException("Wrong shade");
+            case "Color is not equal":
+                throw new IllegalDiceException("Color is not equal");
+            case "This cell is occupied":
+                throw new IllegalDiceException("This cell is occupied");
             case "It's your turn now":
                 localModel.notifyTurn();
                 break;
