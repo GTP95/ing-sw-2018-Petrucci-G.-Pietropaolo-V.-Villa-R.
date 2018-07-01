@@ -239,7 +239,12 @@ public  class LocalModel {
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
         drawnDice.add(dice);
-        if(immediatelyUpdateGUI) tableGUIobserver.updateDice();
+        if(immediatelyUpdateGUI){
+            tableGUIobserver.updateDice();
+            immediatelyUpdateGUI=false;
+            return;
+        }
+        if(drawnDice.size()==numOfDice) tableGUIobserver.updateDice();
     }
 
     public void addDrawnToolCard(ClientToolCard toolCard){

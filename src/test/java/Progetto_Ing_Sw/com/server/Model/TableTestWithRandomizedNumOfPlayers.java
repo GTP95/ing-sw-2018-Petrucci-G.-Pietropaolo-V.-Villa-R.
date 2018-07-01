@@ -16,39 +16,49 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.SplittableRandom;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TableTestWithRandomizedNumOfPlayers {
     private Lobby lobby;
     private Table gameTable;
     private int numOfPlayersToTest;
     private SplittableRandom splittableRandom;
-
+    private CopyOnWriteArrayList<Player> players;
 
     @Before
     public void testInit(){
         lobby=Mockito.mock(Lobby.class);
         splittableRandom=new SplittableRandom();
         numOfPlayersToTest=splittableRandom.nextInt(2,5);   //al solito, il 2 è incluso nell'intervallo mentre il 5 è escluso
+        players=new CopyOnWriteArrayList<>();
 
-       for(int counter=0;counter<numOfPlayersToTest;counter++){     //aggiungo i giocatori alla lobby in base al numero pseudocasuale generato
-           switch(counter){
-               case 0:
-                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(1);
-                   break;
-               case 1:
-                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(2);
-                   break;
+           switch(numOfPlayersToTest){      //Imposta il numero di giocatori e li genera in base al numero pseudocasuale generato. SocketClientHandler posto a null perchè non usato nei test
                case 2:
-                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(3);
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(2);
+                   players.add(new Player("John",null));
+                   players.add(new Player("Doe",null));
+                   Mockito.when(lobby.getConnctedPlayers()).thenReturn(players);
                    break;
                case 3:
+                   Mockito.when(lobby.getNumOfPlayers()).thenReturn(3);
+                   players.add(new Player("John",null));
+                   players.add(new Player("Doe",null));
+                   players.add(new Player("Smith",null));
+                   Mockito.when(lobby.getConnctedPlayers()).thenReturn(players);
+                   break;
+               case 4:
                    Mockito.when(lobby.getNumOfPlayers()).thenReturn(4);
+                   players.add(new Player("John",null));
+                   players.add(new Player("Doe",null));
+                   players.add(new Player("Smith",null));
+                   players.add(new Player("Sam",null));
+                   Mockito.when(lobby.getConnctedPlayers()).thenReturn(players);
                    break;
 
            }
 
            gameTable=Table.getOurInstance();    //creo oggetto Table dopo aver inserito i giocatori nella lobby, così verrà pescato il numero corretto di dadi
-       }
+
     }
 
     @Test
@@ -72,5 +82,10 @@ public class TableTestWithRandomizedNumOfPlayers {
             }
         }
         if(!diceArrayListAfterDraftingAndReinserting.isEmpty()) Assert.fail("Size is "+diceArrayListAfterDraftingAndReinserting.size());
+    }
+
+    @Test
+    public void changeCurrentPlayerTest(){ //include test di buildMirrorArray() che è privato e non testabile direttamente
+
     }
 }

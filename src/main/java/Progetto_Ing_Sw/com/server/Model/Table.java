@@ -224,9 +224,11 @@ private void prepareForNextRound() {     //Cambia l'ordine di gioco dei giocator
     for (Dice dice : drawnDice)
         RoundTrack.getInstance().addRemainedDice(RoundTrack.getInstance().getRoundNumber(), dice);   //aggiunge i dadi avanzati alla roundtrack
     RoundTrack.getInstance().incrementRound();
+    drawnDice=diceBag.diceDraw(2 * players.size() + 1);
     for (Player player : players) {
         player.getSocketClientHandler().changedRound = true;  //non c'è bisogno di chiamare la notifyAllSocketClientHandlers perchè viene chiamata dopo alla fine della changeCurrentPlayer()
         player.getSocketClientHandler().updateRoundTrack=true;
+        player.getSocketClientHandler().updateDice=true;
     }
 }
 
