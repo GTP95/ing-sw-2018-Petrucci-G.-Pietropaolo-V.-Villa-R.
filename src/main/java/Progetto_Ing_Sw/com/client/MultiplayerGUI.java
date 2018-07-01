@@ -70,11 +70,7 @@ public class MultiplayerGUI extends Stage {
 
         //INIZIO Lobby Scene
 
-        //Finestre
-        ImageView Loading1Icon = new ImageView("Progetto_Ing_Sw/com/client/GUI/Loading1.png");Loading1Icon.setTranslateY(0);
-        ImageView Loading2 = new ImageView("Progetto_Ing_Sw/com/client/GUI/Loading2.png");Loading2.setTranslateY(0);
-        ImageView Loading3 = new ImageView("Progetto_Ing_Sw/com/client/GUI/Loading3.png");Loading3.setTranslateY(0);
-        ImageView Loading4 = new ImageView("Progetto_Ing_Sw/com/client/GUI/Loading4.png");Loading4.setTranslateY(0);
+        
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
