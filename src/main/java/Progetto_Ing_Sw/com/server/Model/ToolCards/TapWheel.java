@@ -5,7 +5,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class TapWheel {
+public class TapWheel extends Effect {
 
     //-------import del costo di primo uso
     private boolean localFirstUsage;
@@ -20,6 +20,9 @@ public class TapWheel {
 
     private boolean firstUsage;
     public TapWheel() {this.firstUsage = localFirstUsage;}
+    public TapWheel(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -79,5 +82,10 @@ public class TapWheel {
         }
 
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

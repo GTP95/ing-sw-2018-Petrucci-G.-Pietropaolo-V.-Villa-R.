@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  *  The class CopperFoilBurnisher implements the ToolCard CopperFoilBurnisher
  *  @author Roberto Villa
  */
-public class CopperFoilBurnisher {
+public class CopperFoilBurnisher extends Effect{
     //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
@@ -26,6 +26,10 @@ public class CopperFoilBurnisher {
     public CopperFoilBurnisher() {
         this.firstUsage = localFirstUsage;
     }
+    public CopperFoilBurnisher(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
+
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -78,5 +82,10 @@ public class CopperFoilBurnisher {
             }
         }
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

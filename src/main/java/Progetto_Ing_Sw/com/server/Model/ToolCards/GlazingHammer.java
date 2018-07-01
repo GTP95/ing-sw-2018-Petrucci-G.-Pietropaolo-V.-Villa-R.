@@ -1,16 +1,14 @@
 package Progetto_Ing_Sw.com.server.Model.ToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.Table;
+import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 import java.util.SplittableRandom;
 
-public class GlazingHammer {
+public class GlazingHammer extends Effect{
 
     private Table table = Table.getOurInstance();
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/GlazingHammer.json","firstUsage" );
@@ -18,10 +16,12 @@ public class GlazingHammer {
         e.printStackTrace();
     }
     }
-    //-----------------
 
     private boolean firstUsage;
     public GlazingHammer() {this.firstUsage = localFirstUsage;}
+    public GlazingHammer(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -75,5 +75,10 @@ public class GlazingHammer {
             System.out.println("ERRORE DI PAGAMENTO DELLA CARTA - OTHER USAGE -");
             //TODO GUI EXCEPTION
         }
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

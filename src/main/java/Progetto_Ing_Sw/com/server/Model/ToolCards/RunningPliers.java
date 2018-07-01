@@ -5,11 +5,11 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class RunningPliers {
+public class RunningPliers extends Effect{
 
     private Table table = Table.getOurInstance();
 
-    //-------import del costo di primo uso
+
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/RunningPliers.json","firstUsage" );
@@ -17,11 +17,12 @@ public class RunningPliers {
         e.printStackTrace();
     }
     }
-    //-----------------
-
 
     private boolean firstUsage;
     public RunningPliers() {this.firstUsage = localFirstUsage;}
+    public RunningPliers(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -72,5 +73,10 @@ public class RunningPliers {
         }
 
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }
