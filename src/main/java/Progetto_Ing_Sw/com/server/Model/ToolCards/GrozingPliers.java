@@ -7,26 +7,36 @@ import java.io.FileNotFoundException;
 
 public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
 
+    private WindowBoard localWindowBoard = new WindowBoard(4,5);
+    private String localCommand = "";
+    private Dice localDice = new Dice(0,0);
+    private int localRow = 0;
+    private int localColumn = 0;
+    private boolean firstUsage;
     private boolean localFirstUsage;
-    {try {
-            localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/GrozingPliers.json","firstUsage" );
+
+    public void setLocalBoard(WindowBoard localBoard) {this.localWindowBoard = localBoard;}
+    public void setLocalCommand(String localCommand) {this.localCommand = localCommand;}
+    public void setLocalDice(Dice localDice) {this.localDice = localDice;}
+    public void setLocalRow(int localRow) {this.localRow = localRow;}
+    public void setLocalColumn(int localColumn) {this.localColumn = localColumn;}
+
+    {try {localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/GrozingPliers.json","firstUsage" );
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private boolean firstUsage;
     public GrozingPliers() {
         this.firstUsage = localFirstUsage;
     }
-
     public GrozingPliers(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
-
+    public boolean isLocalFirstUsage() {return localFirstUsage;}
 
     public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
@@ -108,4 +118,64 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
 
         return localBoard;
     }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+
+        WindowBoard methodBoard = localWindowBoard;
+        Dice methodDice = localDice;
+        String methodCommand = localCommand;
+        int methodRow = localRow;
+        int methodColumn = localColumn;
+
+        if(firstUsage==false) {
+
+            if (methodCommand.equals("UP")) {
+                    if (methodDice.getValue() == 6) {
+                        methodBoard.insertDice(methodRow, methodColumn, methodDice);
+                        firstUsage=true;
+                    } else {
+                        methodDice.setValue(methodDice.increaseValue(methodDice.getValue()));
+                        methodBoard.insertDice(methodRow, methodColumn, methodDice);
+                        firstUsage=true;
+                    }
+
+                } else if (methodCommand.equals("DOWN")) {
+                    if (methodDice.getValue() == 1) {
+                        methodBoard.insertDice(methodRow, methodColumn, methodDice);
+                        firstUsage=true;
+                    } else {
+                        methodDice.setValue(methodDice.decreaseValue(methodDice.getValue()));
+                        methodBoard.insertDice(methodRow, methodColumn, methodDice);
+                        firstUsage=true;
+                    }
+                }
+            }else
+                {
+                    if(methodCommand.equals("UP")){
+                        if(methodDice.getValue()==6)
+                        {
+                            methodBoard.insertDice(methodRow,methodColumn,methodDice);
+                        }
+                        else
+                        {
+                            methodDice.setValue(methodDice.increaseValue(methodDice.getValue()));
+                            methodBoard.insertDice(methodRow,methodColumn,methodDice);
+                        }
+
+                    }else if(methodCommand.equals("DOWN")){
+                        if(methodDice.getValue()==1)
+                        {
+                            methodBoard.insertDice(methodRow,methodColumn,methodDice);
+                        }
+                        else
+                        {
+                            methodDice.setValue(methodDice.decreaseValue(methodDice.getValue()));
+                            methodBoard.insertDice(methodRow,methodColumn,methodDice);
+                        }
+                    }
+                }
+            return methodBoard;
+    }
+
 }
