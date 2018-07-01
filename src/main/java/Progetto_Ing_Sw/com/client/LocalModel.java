@@ -414,7 +414,9 @@ public  class LocalModel {
 
     public void setRoundTrack(ClientRoundTrack roundTrack) {
         this.roundTrack = roundTrack;
+        System.err.println("Aspetto che la roundtrack si registri come observer");
         while(roundTrackViewobserver==null);    //aspetto che si registri come observer
         roundTrackViewobserver.updateRoundTrack();
+        System.err.println("roundtrackobserver notificato");
     }
 }
