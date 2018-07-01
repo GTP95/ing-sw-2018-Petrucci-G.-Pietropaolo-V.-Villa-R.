@@ -5,7 +5,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class GrozingPliers extends Card{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
+public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
 
     private boolean localFirstUsage;
     {try {
