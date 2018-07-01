@@ -851,13 +851,15 @@ public class TableGUI extends Stage{
     }
 
     public void DiceExceptionThrower(){
-        Alert MoveException = new Alert(Alert.AlertType.WARNING);
-        MoveException.initStyle(StageStyle.UNDECORATED);
-        MoveException.setTitle("Bad Move");
-        MoveException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
-        MoveException.setContentText("Press OK to try another move");
-        MoveException.showAndWait();
-        DiceCover.setVisible(false);
+        Platform.runLater(()-> {
+            Alert MoveException = new Alert(Alert.AlertType.WARNING);
+            MoveException.initStyle(StageStyle.UNDECORATED);
+            MoveException.setTitle("Bad Move");
+            MoveException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+            MoveException.setContentText("Press OK to try another move");
+            MoveException.showAndWait();
+            DiceCover.setVisible(false);
+        });
     }
 
 }
