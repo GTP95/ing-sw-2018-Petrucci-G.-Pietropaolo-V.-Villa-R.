@@ -5,10 +5,8 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
+public class GrozingPliers extends Card{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
 
-
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
             localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/GrozingPliers.json","firstUsage" );
@@ -16,9 +14,7 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
             e.printStackTrace();
         }
     }
-    //-----------------
 
-    //Costruttore della classe GrozingPliers
     private boolean firstUsage;
     public GrozingPliers() {
         this.firstUsage = localFirstUsage;
