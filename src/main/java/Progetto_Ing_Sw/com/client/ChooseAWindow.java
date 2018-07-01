@@ -392,6 +392,9 @@ public class ChooseAWindow extends Stage {
             tableGUI.updateTable();
             tableGUI.isNotYourTurn();
             LocalModel.getInstance().registerAsObserver(tableGUI);
+
+            RoundTrackView roundTrackView = new RoundTrackView();
+            roundTrackView.close();
         });
     }
 
