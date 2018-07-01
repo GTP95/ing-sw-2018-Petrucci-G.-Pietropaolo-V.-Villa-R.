@@ -1,11 +1,13 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientToolCard;
 import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class FluxRemover extends Effect{
+public class ClientFluxRemover extends ClientEffect{
 
         private boolean localFirstUsage;
         {try {
@@ -18,8 +20,8 @@ public class FluxRemover extends Effect{
         private boolean firstUsage;
         private String toolCardTitle;
 
-        public FluxRemover() {this.firstUsage = localFirstUsage;}
-        public FluxRemover(ToolCard toolCard) {
+        public ClientFluxRemover() {this.firstUsage = localFirstUsage;}
+        public ClientFluxRemover(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         toolCardTitle=toolCard.getTitle();
     }

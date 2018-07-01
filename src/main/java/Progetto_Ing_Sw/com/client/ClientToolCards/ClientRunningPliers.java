@@ -1,11 +1,14 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientRoundTrack;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
 import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class RunningPliers extends Effect{
+public class ClientRunningPliers extends ClientEffect{
 
     private Table table = Table.getOurInstance();
 
@@ -20,8 +23,8 @@ public class RunningPliers extends Effect{
 
     private boolean firstUsage;
     private String toolCardTitle;
-    public RunningPliers() {this.firstUsage = localFirstUsage;}
-    public RunningPliers(ToolCard toolCard) {
+    public ClientRunningPliers() {this.firstUsage = localFirstUsage;}
+    public ClientRunningPliers(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         toolCardTitle=toolCard.getTitle();
     }

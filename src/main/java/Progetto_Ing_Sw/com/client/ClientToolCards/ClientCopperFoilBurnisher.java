@@ -1,6 +1,11 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -12,7 +17,7 @@ import java.io.FileNotFoundException;
  *  The class CopperFoilBurnisher implements the ToolCard CopperFoilBurnisher
  *  @author Roberto Villa
  */
-public class CopperFoilBurnisher extends Effect{
+public class ClientCopperFoilBurnisher extends ClientEffect{
     //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
@@ -26,10 +31,10 @@ public class CopperFoilBurnisher extends Effect{
     private String toolCardTitle;
 
 
-    public CopperFoilBurnisher() {
+    public ClientCopperFoilBurnisher() {
         this.firstUsage = localFirstUsage;
     }
-    public CopperFoilBurnisher(ToolCard toolCard) {
+    public ClientCopperFoilBurnisher(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         this.toolCardTitle= toolCard.getTitle();
     }

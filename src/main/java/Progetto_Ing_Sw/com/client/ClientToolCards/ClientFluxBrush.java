@@ -1,13 +1,14 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientToolCard;
 import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.SplittableRandom;
 
-public class FluxBrush extends Effect{
+public class ClientFluxBrush extends ClientEffect{
 
     private Table table = Table.getOurInstance();
     private String toolcardTitle;
@@ -20,8 +21,8 @@ public class FluxBrush extends Effect{
     }
 
     private boolean firstUsage;
-    public FluxBrush() {this.firstUsage = localFirstUsage;}
-    public FluxBrush(ToolCard toolCard) {
+    public ClientFluxBrush() {this.firstUsage = localFirstUsage;}
+    public ClientFluxBrush(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         this.toolcardTitle=toolCard.getTitle();
     }

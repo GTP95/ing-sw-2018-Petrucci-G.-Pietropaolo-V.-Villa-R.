@@ -1,12 +1,17 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
 //TESTING fatto direttamente sulla classe GamePlayTest
-public class Lathekin extends Effect{
+public class ClientLathekin extends ClientEffect{
 
     private boolean localFirstUsage;
     {try {
@@ -18,8 +23,8 @@ public class Lathekin extends Effect{
 
     private String toolcardTitle;
     private boolean firstUsage;
-    public Lathekin() {this.firstUsage = localFirstUsage;}
-    public Lathekin(ToolCard toolCard) {
+    public ClientLathekin() {this.firstUsage = localFirstUsage;}
+    public ClientLathekin(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         toolcardTitle=toolCard.getTitle();
     }

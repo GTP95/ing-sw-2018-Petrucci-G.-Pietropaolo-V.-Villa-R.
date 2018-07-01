@@ -1,11 +1,16 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
+public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
 
     private WindowBoard localWindowBoard = new WindowBoard(4,5);
     private String localCommand = "";
@@ -28,10 +33,10 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
         }
     }
 
-    public GrozingPliers() {
+    public ClientGrozingPliers() {
         this.firstUsage = localFirstUsage;
     }
-    public GrozingPliers(ToolCard toolCard) {
+    public ClientGrozingPliers(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         this.toolCardTitle=toolCard.getTitle();
     }

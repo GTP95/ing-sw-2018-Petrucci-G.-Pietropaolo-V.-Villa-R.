@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.tools;
 import Progetto_Ing_Sw.com.client.*;
+import Progetto_Ing_Sw.com.client.ClientToolCards.ClientEffect;
 import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import com.google.gson.*;
@@ -196,6 +197,11 @@ public final class JSONCreator {
 
     public static Effect toolCardWithEffectLoaderFromString(String json){
         Effect card=gson.fromJson(json, Effect.class);
+        return card;
+    }
+
+    public static ClientEffect clientToolCardWithEffectLoaderFromString(String json){
+        ClientEffect card=gson.fromJson(json, ClientEffect.class);
         return card;
     }
 

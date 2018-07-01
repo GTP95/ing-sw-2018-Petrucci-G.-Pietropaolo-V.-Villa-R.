@@ -1,12 +1,17 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
 //TESTATA direttamente su GamePlayTest
-public class GrindingStone extends Effect{
+public class ClientGrindingStone extends ClientEffect{
 
     private boolean localFirstUsage;
     {try {
@@ -18,8 +23,8 @@ public class GrindingStone extends Effect{
 
     private boolean firstUsage;
     private String toolCardTitle;
-    public GrindingStone() {this.firstUsage = localFirstUsage;}
-    public GrindingStone(ToolCard toolCard) {
+    public ClientGrindingStone() {this.firstUsage = localFirstUsage;}
+    public ClientGrindingStone(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         this.toolCardTitle=toolCard.getTitle();
     }

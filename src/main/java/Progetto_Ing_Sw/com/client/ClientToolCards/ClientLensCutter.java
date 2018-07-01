@@ -1,13 +1,15 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientToolCard;
 import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
 //TODO FARE TEST DI QUESTA CARTA
 
-public class LensCutter extends Effect{
+public class ClientLensCutter extends ClientEffect{
 
     private RoundTrack roundTrack = RoundTrack.getInstance();
 
@@ -22,8 +24,8 @@ public class LensCutter extends Effect{
     private boolean firstUsage;
     private String toolCardTitle;
 
-    public LensCutter() {this.firstUsage = localFirstUsage;}
-    public LensCutter(ToolCard toolCard) {
+    public ClientLensCutter() {this.firstUsage = localFirstUsage;}
+    public ClientLensCutter(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         toolCardTitle=toolCard.getTitle();
     }

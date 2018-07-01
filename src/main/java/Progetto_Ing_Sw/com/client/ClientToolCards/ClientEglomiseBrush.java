@@ -1,6 +1,11 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -11,7 +16,7 @@ Devi rispettare tutte le altre restrizioni di piazzamento
 */
 
 //TESTING fatto direttamente sulla classe GamePlayTest
-public class EglomiseBrush extends Effect{
+public class ClientEglomiseBrush extends ClientEffect{
 
     private boolean localFirstUsage;
     {try {
@@ -23,10 +28,10 @@ public class EglomiseBrush extends Effect{
     private boolean firstUsage;
     private String toolcardTitle;
 
-    public EglomiseBrush() {
+    public ClientEglomiseBrush() {
         this.firstUsage = localFirstUsage;
     }
-    public EglomiseBrush(ToolCard toolCard) {
+    public ClientEglomiseBrush(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         this.toolcardTitle=toolCard.getTitle();
     }

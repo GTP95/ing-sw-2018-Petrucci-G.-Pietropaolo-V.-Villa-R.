@@ -1,11 +1,16 @@
-package Progetto_Ing_Sw.com.server.Model.ToolCards;
+package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.client.ClientToolCard;
+import Progetto_Ing_Sw.com.server.Model.Dice;
+import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
+import Progetto_Ing_Sw.com.server.Model.ToolCard;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class TapWheel extends Effect {
+public class ClientTapWheel extends ClientEffect {
 
     //-------import del costo di primo uso
     private boolean localFirstUsage;
@@ -20,8 +25,8 @@ public class TapWheel extends Effect {
 
     private boolean firstUsage;
     private String toolCardTitle;
-    public TapWheel() {this.firstUsage = localFirstUsage;}
-    public TapWheel(ToolCard toolCard) {
+    public ClientTapWheel() {this.firstUsage = localFirstUsage;}
+    public ClientTapWheel(ClientToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
         toolCardTitle=toolCard.getTitle();
     }
