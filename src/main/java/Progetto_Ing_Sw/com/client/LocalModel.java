@@ -1,6 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+import Progetto_Ing_Sw.com.client.ClientToolCards.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -18,6 +18,7 @@ public  class LocalModel {
     private MultiplayerGUI multiplayerGUIobserver;
     private ArrayList<ClientDice> drawnDice;
     private ArrayList<ClientToolCard> drawnToolCards;
+    private ArrayList<ClientEffect> drawnToolCardsWithEffect;
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
@@ -49,6 +50,7 @@ public  class LocalModel {
         currentPlayerName="NotAValidPlayerName";    //valore di default per comodità della GUI
         firstWindowBoardsReceived=true;
         sendDiceToServer=false;
+        drawnToolCardsWithEffect=new ArrayList<>();
     }
 
     public static LocalModel getInstance(){
@@ -349,6 +351,7 @@ public  class LocalModel {
             System.err.println("Ricevute tutte le gameboardcard");
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
+                generateToolcardsWithEffects();
                 System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
                // System.err.println("Aspetto tablegui (addUpdatedWindowBoard)");
@@ -420,5 +423,50 @@ public  class LocalModel {
         while(roundTrackViewobserver==null);    //aspetto che si registri come observer
         roundTrackViewobserver.updateRoundTrack();
         System.err.println("roundtrackobserver notificato");
+    }
+    
+    private void generateToolcardsWithEffects(){
+        for (ClientToolCard toolCard : drawnToolCards){
+            switch(toolCard.getTitle()){
+                case "Grozing Pliers":
+                    drawnToolCardsWithEffect.add(new ClientGrozingPliers(toolCard));
+                    break;
+                case "Copper Foil Burnisher":
+                    drawnToolCardsWithEffect.add(new ClientCopperFoilBurnisher(toolCard));
+                    break;
+                case "Cork-backed Straightedge":
+                    drawnToolCardsWithEffect.add(new ClientCorkBackedStraightedge(toolCard));
+                    break;
+                case "Eglomise Brush":
+                    drawnToolCardsWithEffect.add(new ClientEglomiseBrush(toolCard));
+                    break;
+                case "Flux Brusher":
+                    drawnToolCardsWithEffect.add(new ClientFluxBrush(toolCard));
+                    break;
+                case "Flux Remover":
+                    drawnToolCardsWithEffect.add(new ClientFluxRemover(toolCard));
+                    break;
+                case "Glazing Hammer":
+                    drawnToolCardsWithEffect.add(new ClientGlazingHammer(toolCard));
+                    break;
+                case "Grinding Stone":
+                    drawnToolCardsWithEffect.add(new ClientGrindingStone(toolCard));
+                    break;
+                case "Lathekin":
+                    drawnToolCardsWithEffect.add(new ClientLathekin(toolCard));
+                    break;
+                case "Lens Cutter":
+                    drawnToolCardsWithEffect.add(new ClientLensCutter(toolCard));
+                    break;
+                case "Running Pliers":
+                    drawnToolCardsWithEffect.add(new ClientRunningPliers(toolCard));
+                    break;
+                case "Tap Wheel":
+                    drawnToolCardsWithEffect.add(new ClientTapWheel(toolCard));
+                    break;
+                default:
+                    System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
+            }
+        }
     }
 }
