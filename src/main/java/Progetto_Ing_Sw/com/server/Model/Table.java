@@ -2,8 +2,7 @@ package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.GrozingPliers;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.File;
@@ -45,7 +44,40 @@ public class Table {
                     System.out.println("Creata Grozing Pliers");
                     break;
                 case "Copper Foil Burnisher":
-
+                    toolCardsWithEffect.add(new CopperFoilBurnisher(toolCard));
+                    break;
+                case "Cork-backed Straightedge":
+                    toolCardsWithEffect.add(new CorkBackedStraightedge(toolCard));
+                    break;
+                case "Eglomise Brush":
+                    toolCardsWithEffect.add(new EglomiseBrush(toolCard));
+                    break;
+                case "Flux Brusher":
+                    toolCardsWithEffect.add(new FluxBrush(toolCard));
+                    break;
+                case "Flux Remover":
+                    toolCardsWithEffect.add(new FluxRemover(toolCard));
+                    break;
+                case "Glazing Hammer":
+                    toolCardsWithEffect.add(new GlazingHammer(toolCard));
+                    break;
+                case "Grinding Stone":
+                    toolCardsWithEffect.add(new GrindingStone(toolCard));
+                    break;
+                case "Lathekin":
+                    toolCardsWithEffect.add(new Lathekin(toolCard));
+                    break;
+                case "Lens Cutter":
+                    toolCardsWithEffect.add(new LensCutter(toolCard));
+                    break;
+                case "Running Pliers":
+                    toolCardsWithEffect.add(new RunningPliers(toolCard));
+                    break;
+                case "Tap Wheel":
+                    toolCardsWithEffect.add(new TapWheel(toolCard));
+                    break;
+                default:
+                    System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
             }
         }
 
