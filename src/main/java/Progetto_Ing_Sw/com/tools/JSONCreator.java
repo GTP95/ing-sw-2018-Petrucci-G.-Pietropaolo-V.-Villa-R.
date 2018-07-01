@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.tools;
 import Progetto_Ing_Sw.com.client.*;
 import Progetto_Ing_Sw.com.server.Model.*;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -191,6 +192,11 @@ public final class JSONCreator {
     public static ClientRoundTrack clientRoundTrackLoaderFromString(String json){
         ClientRoundTrack roundTrack=gson.fromJson(json,ClientRoundTrack.class);
         return roundTrack;
+    }
+
+    public static Effect toolCardWithEffectLoaderFromString(String json){
+        Effect card=gson.fromJson(json, Effect.class);
+        return card;
     }
 
    /* public static ClientPlayer clientPlayerLoaderFromString(String json){

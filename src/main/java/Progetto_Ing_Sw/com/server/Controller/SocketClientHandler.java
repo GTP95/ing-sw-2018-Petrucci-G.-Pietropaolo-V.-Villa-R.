@@ -339,12 +339,19 @@ public class SocketClientHandler implements Runnable {
    }
 
    private void handleControlMessage(String message){
-       switch(message){
+        String[] messageFields=message.split("&");
+       switch(messageFields[0]){
            case "End my turn":
                table.changeCurrentPlayer();
                sendControlMessage("Your turn just ended");
                isMyTurn=false;
                break;
+           case "useToolCard":
+               try {
+                   table.useToolCardwithEffect(JSONCreator.toolCardWithEffectLoaderFromString(messageFields[1]),myPlayer);
+               } catch (PlaceDiceException e) {
+                   sendControlMessage(e.getMessage());
+               }
            default:
                System.err.println("Can't understand the following control message: "+message);
        }
