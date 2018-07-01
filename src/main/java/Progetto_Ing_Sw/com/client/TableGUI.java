@@ -643,7 +643,7 @@ public class TableGUI extends Stage{
 
         //TIMER LABEL
         TimerLabel = new Label("60");
-        TimerLabel.setId("Timer");
+        TimerLabel.setId("DefaultButtonBlack");
         TimerLabel.setPrefWidth(100);
         TimerLabel.setTranslateY(0);
 

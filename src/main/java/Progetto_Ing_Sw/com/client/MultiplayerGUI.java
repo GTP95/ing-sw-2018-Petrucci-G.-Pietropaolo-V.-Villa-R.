@@ -70,7 +70,7 @@ public class MultiplayerGUI extends Stage {
 
         //INIZIO Lobby Scene
 
-        
+
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
