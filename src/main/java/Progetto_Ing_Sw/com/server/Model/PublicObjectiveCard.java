@@ -6,7 +6,6 @@ public class PublicObjectiveCard extends Card {
     private String description;
     private int victoryPoints;
     private String image;
-    //TODO:effect
 
 
     public PublicObjectiveCard(String title, String description, int victoryPoints) {

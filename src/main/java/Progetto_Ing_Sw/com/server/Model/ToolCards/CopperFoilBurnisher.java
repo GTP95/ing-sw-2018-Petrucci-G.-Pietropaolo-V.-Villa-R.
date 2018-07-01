@@ -6,10 +6,13 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 
 //TESTING fatto direttamente sulla classe GamePlayTest
+
+/**
+ * <h1>CopperFoilBurnisher</h1>
+ *  The class CopperFoilBurnisher implements the ToolCard CopperFoilBurnisher
+ *  @author Roberto Villa
+ */
 public class CopperFoilBurnisher {
-
-
-
     //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
@@ -19,7 +22,6 @@ public class CopperFoilBurnisher {
     }
     //-----------------
 
-    //Costruttore della classe EglomiseBrush
     private boolean firstUsage;
     public CopperFoilBurnisher() {
         this.firstUsage = localFirstUsage;
@@ -28,6 +30,18 @@ public class CopperFoilBurnisher {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * This method apply CopperFoilBurnisher's effect at the input-WindowBoard
+     * @param localBoard this parameter represents the input-WindowBoard where i have to apply the effect
+     * @param dice this parameter represents
+     * @param rowBefore this parameter represents
+     * @param columnBefore this parameter represents
+     * @param rowAfter this parameter represents
+     * @param columnAfter this parameter represents
+     * @param favorTokensUsed this parameter represents
+     * @return
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());

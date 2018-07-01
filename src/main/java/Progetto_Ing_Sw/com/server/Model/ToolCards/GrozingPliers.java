@@ -24,6 +24,10 @@ public class GrozingPliers{ //prende un dado un entrata, lo incrementa/decrement
         this.firstUsage = localFirstUsage;
     }
 
+    public GrozingPliers(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
+
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 

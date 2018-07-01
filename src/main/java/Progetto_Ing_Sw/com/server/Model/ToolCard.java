@@ -8,7 +8,6 @@ public class ToolCard extends Card {
     private int ID;
     private boolean firstUsage;
     private String color; //Single Player Only
-    //TODO EFFECT
 
     public ToolCard(String title, String description, String info, int ID, boolean firstUsage, String color) {
         this.title = title;

@@ -7,6 +7,11 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * <h1>ColorDiagonals</h1>
+ *  The class ColorDiagonals implements the PublicObjectiveCard ColorDiagonal
+ *  @author Roberto Villa
+ */
 public class ColorDiagonals {
 
     //questa versione funziona solo con matrici 4X%
@@ -27,6 +32,11 @@ public class ColorDiagonals {
 
     public int getVictoryPoints() {return victoryPoints;}
 
+    /**
+     * This method counts how much consecutive colors there are in the input-object Diagonal (that is an integer array)
+     * @param diagonal this parameter represents the diagonal that has to be analyzed
+     * @return ths method returns the number of consecutive-same color-couple
+     */
     public int countConsecutiveColors(int [] diagonal){
 
         int count=0;
@@ -44,6 +54,11 @@ public class ColorDiagonals {
         return count;
     }
 
+    /**
+     * This method calculates points counting the number of consecutive colors located main diagonals
+     * @param localBoard this parameter represents the WindowBoard where i have to calculate points
+     * @return this method returns the points calculated
+     */
     public int calculatePoints(WindowBoard localBoard) {
 
         int points=0;

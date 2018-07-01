@@ -1,5 +1,13 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+/**
+ * <h1>MatrixCell</h1>
+ *  The class MatrixCell implements the main unit of the matrix, the cell.
+ *  This class has a key role in the game, because has all the variables used for positioning dice and check
+ *  placement rules;
+ *
+ *  @author Roberto Villa
+ */
 public class MatrixCell {
 
     private int color;
@@ -8,7 +16,7 @@ public class MatrixCell {
     private boolean used; //indica se la cella è libera o meno
     private boolean onBorder;//variabile usata per dire se la cella è sul bordo
 
-    //costruttore di default= inizializza la cella a blank, dice che la cella non è usata, dice che non si trova sul bordo
+
     public MatrixCell() {
         this.color = Color.BLANK;
         this.used=false;
