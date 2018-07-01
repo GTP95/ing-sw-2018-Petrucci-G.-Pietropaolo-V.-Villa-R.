@@ -236,11 +236,7 @@ public class ToolCardDisplayer extends Stage {
         TitleInfo.setTranslateX(380);
         TitleInfo.setTranslateY(-325);
 
-
-
         VBox GrozingPool = getDraftPool();
-
-
 
         Button AcceptGrozing = new Button();
         AcceptGrozing.setVisible(false);
@@ -249,7 +245,7 @@ public class ToolCardDisplayer extends Stage {
         AcceptGrozing.setTranslateX(600);
 
         Button IncreaseValue = new Button();
-        IncreaseValue.setVisible(false);
+        IncreaseValue.setVisible(true);
         IncreaseValue.setMaxSize(200, 200);
         IncreaseValue.setId("IncreaseBTN");
         IncreaseValue.setTranslateY(-100);
@@ -262,7 +258,7 @@ public class ToolCardDisplayer extends Stage {
         });
 
         Button DecreaseValue = new Button();
-        DecreaseValue.setVisible(false);
+        DecreaseValue.setVisible(true);
         DecreaseValue.setMaxSize(200, 200);
         DecreaseValue.setId("DecreaseBTN");
         DecreaseValue.setTranslateY(100);

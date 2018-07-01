@@ -95,46 +95,11 @@ public class LoginStage extends Stage {
             }
 
 
-
             ClientSettings.getInstance().setUsername(UsernameField.getText());
-            System.err.println("---------------------CLIENT SETTINGS RICEVE IL NOME---------------------");
-            Task checkUsername = new Task() {
-                @Override
-                protected Boolean call() throws Exception {
-                    System.err.println("----------------------------------------TASK AVVIATO----------------------------------------");
-                    if (StartUsernameCheck == true){
-                        System.err.println("TASK SUCCESSO");
-                        this.succeeded();
-                        return true;
-                        }
-                    else {
-                        this.failed();
-                        System.err.println("TASK FALLITO");
-                        return false;
-                    }
-                }
-            };
+            ClientSettings.getInstance().writeSettingsToJSON();
+            close();
+        });
 
-            Thread threadToCheckUsername = new Thread(checkUsername);
-            threadToCheckUsername.start();
-
-
-            checkUsername.setOnSucceeded(event1 -> {
-                System.err.println("----------------------------------------TASK HA AVUTO SUCCESSO----------------------------------------");
-                ClientSettings.getInstance().writeSettingsToJSON();
-                this.close();
-            });
-
-            checkUsername.setOnFailed(event1 ->{
-                    System.err.println("---------------------NOME UTENTE SBAGLIATO---------------------");
-                    Alert UserNameExceptionAlert = new Alert(Alert.AlertType.ERROR);
-                    UserNameExceptionAlert.setTitle("Bad Username");
-                    UserNameExceptionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
-                    UserNameExceptionAlert.setContentText("Press OK and enter another Name");
-                    UserNameExceptionAlert.showAndWait();
-                });
-
-            });
 
 
 
@@ -178,6 +143,17 @@ public class LoginStage extends Stage {
 
 
 
+
+    }
+
+    public void usernameException (){
+        Platform.runLater(()-> {
+            Alert UserNameExceptionAlert = new Alert(Alert.AlertType.ERROR);
+            UserNameExceptionAlert.setTitle("Bad Username");
+            UserNameExceptionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+            UserNameExceptionAlert.setContentText("Press OK and enter another Name");
+            UserNameExceptionAlert.showAndWait();
+        });
 
     }
 
