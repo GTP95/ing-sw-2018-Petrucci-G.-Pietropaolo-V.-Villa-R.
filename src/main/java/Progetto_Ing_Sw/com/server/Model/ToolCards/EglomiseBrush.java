@@ -11,21 +11,21 @@ Devi rispettare tutte le altre restrizioni di piazzamento
 */
 
 //TESTING fatto direttamente sulla classe GamePlayTest
-public class EglomiseBrush {
+public class EglomiseBrush extends Effect{
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/EglomiseBrush.json","firstUsage" );
     } catch (FileNotFoundException e) {
         e.printStackTrace();}
     }
-    //-----------------
 
-    //Costruttore della classe EglomiseBrush
     private boolean firstUsage;
     public EglomiseBrush() {
         this.firstUsage = localFirstUsage;
+    }
+    public EglomiseBrush(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -71,5 +71,10 @@ public class EglomiseBrush {
                 }
         }
                 return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

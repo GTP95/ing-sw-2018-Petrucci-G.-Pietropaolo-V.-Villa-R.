@@ -6,9 +6,8 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 
 //TESTING fatto direttamente sulla classe GamePlayTest
-public class Lathekin {
+public class Lathekin extends Effect{
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/Lathekin.json","firstUsage" );
@@ -16,11 +15,12 @@ public class Lathekin {
         e.printStackTrace();
     }
     }
-    //-----------------
 
-    //Costruttore della classe GrozingPliers
     private boolean firstUsage;
     public Lathekin() {this.firstUsage = localFirstUsage;}
+    public Lathekin(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -67,5 +67,10 @@ public class Lathekin {
             }
         }
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

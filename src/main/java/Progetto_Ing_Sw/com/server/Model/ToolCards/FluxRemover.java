@@ -5,9 +5,8 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class FluxRemover {
+public class FluxRemover extends Effect{
 
-        //-------import del costo di primo uso
         private boolean localFirstUsage;
         {try {
             localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/FluxRemover.json","firstUsage" );
@@ -15,11 +14,12 @@ public class FluxRemover {
             e.printStackTrace();
         }
         }
-        //-----------------
-
 
         private boolean firstUsage;
         public FluxRemover() {this.firstUsage = localFirstUsage;}
+        public FluxRemover(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
         public boolean isFirstUsage() {return firstUsage;}
         public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -75,4 +75,9 @@ public class FluxRemover {
 
             return localBoard;
         }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
+    }
 }

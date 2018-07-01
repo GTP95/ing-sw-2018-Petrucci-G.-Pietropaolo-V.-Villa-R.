@@ -6,9 +6,8 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 
 //TESTATA direttamente su GamePlayTest
-public class GrindingStone {
+public class GrindingStone extends Effect{
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/GrindingStone.json","firstUsage" );
@@ -16,11 +15,12 @@ public class GrindingStone {
         e.printStackTrace();
     }
     }
-    //-----------------
-
 
     private boolean firstUsage;
     public GrindingStone() {this.firstUsage = localFirstUsage;}
+    public GrindingStone(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -79,5 +79,10 @@ public class GrindingStone {
             }
         }
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

@@ -6,11 +6,10 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 
 //TESTATA direttamente in GamePlayTest
-public class CorkBackedStraightedge {
+public class CorkBackedStraightedge extends Effect{
 
     private WindowBoard helpBoard;
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/CorkBackedStraightedge.json","firstUsage" );
@@ -18,11 +17,12 @@ public class CorkBackedStraightedge {
         e.printStackTrace();
     }
     }
-    //-----------------
-
 
     private boolean firstUsage;
     public CorkBackedStraightedge() {this.firstUsage = localFirstUsage;}
+    public CorkBackedStraightedge(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -59,5 +59,10 @@ public class CorkBackedStraightedge {
         }
 
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

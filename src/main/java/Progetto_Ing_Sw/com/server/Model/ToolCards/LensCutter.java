@@ -7,11 +7,10 @@ import java.io.FileNotFoundException;
 
 //TODO FARE TEST DI QUESTA CARTA
 
-public class LensCutter {
+public class LensCutter extends Effect{
 
     private RoundTrack roundTrack = RoundTrack.getInstance();
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/LensCutter.json","firstUsage" );
@@ -19,11 +18,12 @@ public class LensCutter {
         e.printStackTrace();
     }
     }
-    //-----------------
-
 
     private boolean firstUsage;
     public LensCutter() {this.firstUsage = localFirstUsage;}
+    public LensCutter(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -66,5 +66,10 @@ public class LensCutter {
                 }
             }
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }

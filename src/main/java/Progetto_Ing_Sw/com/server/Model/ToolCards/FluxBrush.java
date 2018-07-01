@@ -7,11 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
-public class FluxBrush {
+public class FluxBrush extends Effect{
 
     private Table table = Table.getOurInstance();
 
-    //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/FluxBrush.json","firstUsage" );
@@ -19,10 +18,12 @@ public class FluxBrush {
         e.printStackTrace();
     }
     }
-    //-----------------
 
     private boolean firstUsage;
     public FluxBrush() {this.firstUsage = localFirstUsage;}
+    public FluxBrush(ToolCard toolCard) {
+        this.firstUsage = toolCard.isFirstUsage();
+    }
 
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
@@ -65,5 +66,10 @@ public class FluxBrush {
         }
 
         return localBoard;
+    }
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
     }
 }
