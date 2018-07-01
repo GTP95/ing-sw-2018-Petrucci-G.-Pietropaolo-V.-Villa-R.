@@ -28,7 +28,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean usernameIsCorrect, firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
@@ -48,6 +48,7 @@ public  class LocalModel {
         immediatelyUpdateGUI=false;
         currentPlayerName="NotAValidPlayerName";    //valore di default per comodità della GUI
         firstWindowBoardsReceived=true;
+        sendDiceToServer=false;
     }
 
     public static LocalModel getInstance(){
@@ -104,10 +105,8 @@ public  class LocalModel {
         return drawnPublicObjectiveCards;
     }
 
-    public ClientDice getAndResetDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard e lo reimposta a null
-        ClientDice diceToReturn=new ClientDice(diceToInsert.getValue(),diceToInsert.getColor());
-        diceToInsert=null;
-        return diceToReturn;
+    public ClientDice getDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard e lo reimposta a null
+        return diceToInsert;
     }
 
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
@@ -311,6 +310,7 @@ public  class LocalModel {
         this.diceToInsert=dice;
         this.row=row;
         this.column=column;
+        sendDiceToServer=true;
         sendDataToServer=true;
     }
 

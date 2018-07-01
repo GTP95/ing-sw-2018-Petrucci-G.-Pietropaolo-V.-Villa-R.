@@ -275,10 +275,11 @@ public class SocketClient implements Runnable{
                 System.err.println("Inviata GameBoardCard");
                 localModel.sendWindowBoard=false;
             }
-            ClientDice diceTosend=localModel.getAndResetDiceToInsert();
-            if(diceTosend!=null){
+            ClientDice diceTosend=localModel.getDiceToInsert();
+            if(localModel.sendDiceToServer){
                 System.err.println("Invio il dado");
-                sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getAndResetDiceToInsert()), localModel.getRow(),localModel.getColumn());
+                sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
+                localModel.sendDiceToServer=false;
             }
             if(localModel.skipTurn) {
                 sendControlMessage("End my turn");
