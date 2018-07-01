@@ -297,13 +297,15 @@ private void buildMirrorArray(){
         Table.players = players;
     }
 
-    public void useToolCard(String title){
-        switch(title){
-
-        }
-       // toolCardsWithEffect.get(0).applyEffect();
-
+    public void useToolCardwithEffect(Effect effect, Player player) throws PlaceDiceException {
+        player.setChoosenWindowBoard(effect.applyEffect());
     }
+
+/*private Effect getToolCardWithEffectFromTitle(String title){
+        for(Effect card : toolCardsWithEffect){
+            if()
+        }
+}*/
 
 }
 
