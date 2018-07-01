@@ -44,6 +44,8 @@ public class Table {
                     toolCardsWithEffect.add(new GrozingPliers(toolCard));
                     System.out.println("Creata Grozing Pliers");
                     break;
+                case "Copper Foil Burnisher":
+
             }
         }
 
