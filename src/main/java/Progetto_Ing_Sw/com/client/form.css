@@ -229,13 +229,13 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
-#WaitingBTN{
-    /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
+#WaitingPlayer1{
+    -fx-background-image: url("GUI/LobbyPlayer1.png");
     -fx-text-fill: white;
     -fx-font: 28 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 250 250;
+    -fx-background-size: 150 150;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
@@ -246,12 +246,115 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
-#ReadyBTN{
+#ReadyPlayer1{
+    -fx-background-image: url("GUI/LobbyPlayer1.png");
     -fx-text-fill: #ffffff;
     -fx-font: 40 "Castellar";
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 250 250;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
+    #3f9500,
+    #3f9500,
+    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#WaitingPlayer2{
+    -fx-background-image: url("GUI/LobbyPlayer2.png");
+    -fx-text-fill: white;
+    -fx-font: 28 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #9d4024,
+    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#ReadyPlayer2{
+    -fx-background-image: url("GUI/LobbyPlayer2.png");
+    -fx-text-fill: #ffffff;
+    -fx-font: 40 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
+    #3f9500,
+    #3f9500,
+    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#WaitingPlayer3{
+    -fx-background-image: url("GUI/LobbyPlayer3.png");
+    -fx-text-fill: white;
+    -fx-font: 28 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #9d4024,
+    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#ReadyPlayer3{
+    -fx-background-image: url("GUI/LobbyPlayer3.png");
+    -fx-text-fill: #ffffff;
+    -fx-font: 40 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
+    #3f9500,
+    #3f9500,
+    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#WaitingPlayer4{
+    -fx-background-image: url("GUI/LobbyPlayer4.png");
+    -fx-text-fill: white;
+    -fx-font: 28 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #9d4024,
+    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
+#ReadyPlayer4{
+    -fx-background-image: url("GUI/LobbyPlayer4.png");
+    -fx-text-fill: #ffffff;
+    -fx-font: 40 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
@@ -264,29 +367,20 @@
 
 
 
-#Player1WindowLabel{
-    -fx-background-image: url("GUI/RedWindowBlown.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: 240 560;
-
-}
 
 #Timer {
-    /*-fx-background-image: url("GUI/RMIBTNIcons.png");*/
-
+    -fx-background-image: url("GUI/TimerLabel.png");
     -fx-text-fill: white;
-    -fx-font: 40 "Castellar";
+    -fx-stroke: white;
+    -fx-font: 60 "Castellar";
+    -fx-font-weight: bold;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 250 250;
+    -fx-background-size: 150 150;
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #080707 0%, #000000 100%),
-    #000000,
-    #000000,
-    radial-gradient(center 50% 50%, radius 100%, #000000, #080707);
+    /*-fx-background-color: transparent;*/
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -361,6 +455,24 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
+
+#DefaultButtonBlack{
+    -fx-text-fill: white;
+    -fx-font: 40 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 200 230;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #000000 0%, #000000 100%),
+            #080707,
+            #ffffff,
+            radial-gradient(center 50% 50%, radius 100%, #000000, #080707);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
 #TextField{
     -fx-border-color: Black;
     -fx-border-width: 0 0 3 0 ;
