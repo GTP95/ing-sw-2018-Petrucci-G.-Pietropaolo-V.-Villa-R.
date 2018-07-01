@@ -319,13 +319,15 @@ public  class LocalModel {
     }
 
     public void addException(Exception e){  //aggiunge un'eccezione alla coda delle eccezioni lanciate dal server
+
         exceptions.add(e);
+        tableGUIobserver.DiceExceptionThrower();
     }
 
-    public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
+   /* public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
         if(exceptions.size()==0) return false;
         return true;
-    }
+    }*/
 
     public void setUsernameIsCorrect(Boolean usernameIsCorrect) {
         this.usernameIsCorrect = usernameIsCorrect;
