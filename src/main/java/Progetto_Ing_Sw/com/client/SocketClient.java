@@ -146,6 +146,8 @@ public class SocketClient implements Runnable{
                 throw new IllegalDiceException("Color is different");
             case "Wrong orthogonal value":
                 throw new IllegalDiceException("Wrong orthogonal value");
+            case "Wrong orthogonal color":
+                throw new IllegalDiceException("Wrong orthogonal color");
             case "No adjacent dice":
                 throw new IllegalDiceException("No adjacent dice");
             case "Should be placed on a border":
