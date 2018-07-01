@@ -244,7 +244,10 @@ public  class LocalModel {
             immediatelyUpdateGUI=false;
             return;
         }
-        if(drawnDice.size()==numOfDice) tableGUIobserver.updateDice();
+        if(drawnDice.size()==numOfDice){
+            while(tableGUIobserver==null);
+            tableGUIobserver.updateDice();
+        }
     }
 
     public void addDrawnToolCard(ClientToolCard toolCard){
