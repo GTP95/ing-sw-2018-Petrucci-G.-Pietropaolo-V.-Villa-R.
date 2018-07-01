@@ -839,13 +839,14 @@ public class TableGUI extends Stage{
     }
 
     public void updateRound(){
-        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";     // For example
+        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";
 
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
        RoundTrack.setId("Round"+Integer.toString(LocalModel.getInstance().getRoundNumber()+1));
+       updateDice();
     }
 
 
