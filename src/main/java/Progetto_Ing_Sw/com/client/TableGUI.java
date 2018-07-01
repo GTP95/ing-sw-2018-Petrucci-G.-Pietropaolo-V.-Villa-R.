@@ -666,7 +666,8 @@ public class TableGUI extends Stage{
         PassButton = new Button("   Pass");
         PassButton.setDisable(true);
         PassButton.setId("DefaultButton");
-        PassButton.setTranslateX(180);
+        PassButton.setTranslateX(220);
+        PassButton.setTranslateY(-70);
         PassButton.setOnAction(event -> {
             PassButton.setDisable(true);
             LocalModel.getInstance().skipTurn();
@@ -686,11 +687,11 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
-        GameplayArea.setAlignment(PassButton,Pos.TOP_LEFT);
+        GameplayArea.setAlignment(PassButton,Pos.CENTER);
         GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,PassButton,DraftPool,DiceCover,RoundTrack);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
 
 
 

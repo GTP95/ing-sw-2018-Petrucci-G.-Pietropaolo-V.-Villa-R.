@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
-    Label Player1Label,Player2Label,Player3Label,Player4Label,TimerLabel;
-    ToggleButton Player1BTN, Player2BTN, Player3BTN,Player4BTN;
+    Label Player1Label,Player2Label,Player3Label,Player4Label,TimerLabel,Player1BTN, Player2BTN, Player3BTN,Player4BTN;
+
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
 
@@ -77,10 +77,10 @@ public class MultiplayerGUI extends Stage {
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
-        Player1BTN = new ToggleButton("READY!"); Player1BTN.setId("ReadyBTN");Player1BTN.setTranslateY(155);Player1BTN.setPrefHeight(139);Player1BTN.setDisable(true);
-        Player2BTN = new ToggleButton("READY!"); Player2BTN.setId("ReadyBTN");Player2BTN.setTranslateY(155);Player2BTN.setPrefHeight(139);Player2BTN.setDisable(true);
-        Player3BTN = new ToggleButton("READY!"); Player3BTN.setId("ReadyBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefHeight(139);Player3BTN.setDisable(true);
-        Player4BTN = new ToggleButton("READY!"); Player4BTN.setId("ReadyBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefHeight(139);Player4BTN.setDisable(true);
+        Player1BTN = new Label("Waiting..."); Player1BTN.setId("WaitingBTN");Player1BTN.setTranslateY(155);Player1BTN.setPrefSize(200,180);Player1BTN.setDisable(true);
+        Player2BTN = new Label("Waiting..."); Player2BTN.setId("WaitingBTN");Player2BTN.setTranslateY(155);Player2BTN.setPrefSize(200,180);Player2BTN.setDisable(true);
+        Player3BTN = new Label("Waiting..."); Player3BTN.setId("WaitingBTN");Player3BTN.setTranslateY(155);Player3BTN.setPrefSize(200,180);Player3BTN.setDisable(true);
+        Player4BTN = new Label("Waiting..."); Player4BTN.setId("WaitingBTN");Player4BTN.setTranslateY(155);Player4BTN.setPrefSize(200,180);Player4BTN.setDisable(true);
 
 
 
@@ -173,16 +173,24 @@ public class MultiplayerGUI extends Stage {
             switch(numOfPlayers){
                 case 4:
                     Player4Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(3).getName());
-                    Player4BTN.setSelected(true);
+                    Player4BTN.setId("ReadyBTN");
+                    Player4BTN.setText("READY!");
+                    Player4BTN.setDisable(false);
                 case 3:
                     Player3Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(2).getName());
-                    Player3BTN.setSelected(true);
+                    Player3BTN.setId("ReadyBTN");
+                    Player3BTN.setText("READY!");
+                    Player3BTN.setDisable(false);
                 case 2:
                     Player2Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(1).getName());
-                    Player2BTN.setSelected(true);
+                    Player2BTN.setId("ReadyBTN");
+                    Player2BTN.setText("READY!");
+                    Player2BTN.setDisable(false);
                 case 1:
                     Player1Label.setText(LocalModel.getInstance().getClientPlayerArrayList().get(0).getName());
-                    Player1BTN.setSelected(true);
+                    Player1BTN.setId("ReadyBTN");
+                    Player1BTN.setText("READY!");
+                    Player1BTN.setDisable(false);
 
             }
         });
