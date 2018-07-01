@@ -105,7 +105,7 @@ public  class LocalModel {
     }
 
     public ClientDice getAndResetDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard e lo reimposta a null
-        ClientDice diceToReturn=diceToInsert;
+        ClientDice diceToReturn=new ClientDice(diceToInsert.getValue(),diceToInsert.getColor());
         diceToInsert=null;
         return diceToReturn;
     }
