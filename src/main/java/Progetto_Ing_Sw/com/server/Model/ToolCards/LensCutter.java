@@ -20,9 +20,12 @@ public class LensCutter extends Effect{
     }
 
     private boolean firstUsage;
+    private String toolCardTitle;
+
     public LensCutter() {this.firstUsage = localFirstUsage;}
     public LensCutter(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        toolCardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -71,5 +74,10 @@ public class LensCutter extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolCardTitle;
     }
 }

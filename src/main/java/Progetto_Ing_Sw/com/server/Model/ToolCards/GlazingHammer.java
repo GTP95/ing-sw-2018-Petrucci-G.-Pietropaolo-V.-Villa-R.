@@ -18,9 +18,12 @@ public class GlazingHammer extends Effect{
     }
 
     private boolean firstUsage;
+    private String toolCardTitle;
+
     public GlazingHammer() {this.firstUsage = localFirstUsage;}
     public GlazingHammer(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        toolCardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -80,5 +83,10 @@ public class GlazingHammer extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolCardTitle;
     }
 }

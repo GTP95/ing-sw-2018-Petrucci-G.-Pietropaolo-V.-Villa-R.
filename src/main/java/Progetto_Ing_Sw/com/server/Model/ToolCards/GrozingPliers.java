@@ -14,6 +14,7 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
     private int localColumn = 0;
     private boolean firstUsage;
     private boolean localFirstUsage;
+    private String toolCardTitle;
 
     public void setLocalBoard(WindowBoard localBoard) {this.localWindowBoard = localBoard;}
     public void setLocalCommand(String localCommand) {this.localCommand = localCommand;}
@@ -32,6 +33,7 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
     }
     public GrozingPliers(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolCardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -178,4 +180,8 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
             return methodBoard;
     }
 
+    @Override
+    public String getTitle() {
+        return toolCardTitle;
+    }
 }

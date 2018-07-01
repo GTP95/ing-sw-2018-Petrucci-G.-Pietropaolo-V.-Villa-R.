@@ -21,11 +21,14 @@ public class EglomiseBrush extends Effect{
     }
 
     private boolean firstUsage;
+    private String toolcardTitle;
+
     public EglomiseBrush() {
         this.firstUsage = localFirstUsage;
     }
     public EglomiseBrush(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolcardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -76,5 +79,10 @@ public class EglomiseBrush extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolcardTitle;
     }
 }

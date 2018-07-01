@@ -10,7 +10,7 @@ import java.util.SplittableRandom;
 public class FluxBrush extends Effect{
 
     private Table table = Table.getOurInstance();
-
+    private String toolcardTitle;
     private boolean localFirstUsage;
     {try {
         localFirstUsage = JSONCreator.parseBooleanFieldFromFile("Resources/Cards/ToolCards/FluxBrush.json","firstUsage" );
@@ -23,6 +23,7 @@ public class FluxBrush extends Effect{
     public FluxBrush() {this.firstUsage = localFirstUsage;}
     public FluxBrush(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolcardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -71,5 +72,10 @@ public class FluxBrush extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolcardTitle;
     }
 }

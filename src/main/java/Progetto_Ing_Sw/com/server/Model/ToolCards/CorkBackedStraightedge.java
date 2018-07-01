@@ -19,9 +19,12 @@ public class CorkBackedStraightedge extends Effect{
     }
 
     private boolean firstUsage;
+    private String toolCardTitle;
     public CorkBackedStraightedge() {this.firstUsage = localFirstUsage;}
     public CorkBackedStraightedge(ToolCard toolCard) {
+
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolCardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -64,5 +67,10 @@ public class CorkBackedStraightedge extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolCardTitle;
     }
 }

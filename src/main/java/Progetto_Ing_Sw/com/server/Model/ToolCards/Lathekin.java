@@ -16,10 +16,12 @@ public class Lathekin extends Effect{
     }
     }
 
+    private String toolcardTitle;
     private boolean firstUsage;
     public Lathekin() {this.firstUsage = localFirstUsage;}
     public Lathekin(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        toolcardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -72,5 +74,10 @@ public class Lathekin extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolcardTitle;
     }
 }

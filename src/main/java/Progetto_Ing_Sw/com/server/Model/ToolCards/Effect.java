@@ -6,5 +6,6 @@ import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 
 public abstract class Effect {
     public abstract WindowBoard applyEffect() throws PlaceDiceException;
+    public abstract String getTitle();
 
 }

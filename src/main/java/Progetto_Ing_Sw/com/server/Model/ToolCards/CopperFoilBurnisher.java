@@ -23,11 +23,15 @@ public class CopperFoilBurnisher extends Effect{
     //-----------------
 
     private boolean firstUsage;
+    private String toolCardTitle;
+
+
     public CopperFoilBurnisher() {
         this.firstUsage = localFirstUsage;
     }
     public CopperFoilBurnisher(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolCardTitle= toolCard.getTitle();
     }
 
 
@@ -87,5 +91,9 @@ public class CopperFoilBurnisher extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    public String getTitle() {
+        return toolCardTitle;
     }
 }

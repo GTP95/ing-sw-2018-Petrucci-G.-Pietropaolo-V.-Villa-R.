@@ -17,9 +17,11 @@ public class GrindingStone extends Effect{
     }
 
     private boolean firstUsage;
+    private String toolCardTitle;
     public GrindingStone() {this.firstUsage = localFirstUsage;}
     public GrindingStone(ToolCard toolCard) {
         this.firstUsage = toolCard.isFirstUsage();
+        this.toolCardTitle=toolCard.getTitle();
     }
 
     public boolean isFirstUsage() {return firstUsage;}
@@ -84,5 +86,10 @@ public class GrindingStone extends Effect{
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return toolCardTitle;
     }
 }
