@@ -771,6 +771,7 @@ public class TableGUI extends Stage{
                     else {
                         DiceButtons.get(i).setText("");
                         DiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
+                        DiceButtons.get(i).setVisible(true);
                         DiceButtons.get(i).setOnAction(event -> {
                                     DieToInsert = new ClientDice(LocalValue, LocalColor);
                                     System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
