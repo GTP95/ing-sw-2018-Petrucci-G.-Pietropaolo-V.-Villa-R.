@@ -70,10 +70,10 @@ public class MultiplayerGUI extends Stage {
         //INIZIO Lobby Scene
 
         //Finestre
-        ImageView Player1Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer1.png");
-        ImageView Player2Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer2.png");
-        ImageView Player3Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer3.png");
-        ImageView Player4Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer4.png");
+        ImageView Player1Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer1.png");Player1Window.setTranslateY(-30);
+        ImageView Player2Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer2.png");Player2Window.setTranslateY(-30);
+        ImageView Player3Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer3.png");Player3Window.setTranslateY(-30);
+        ImageView Player4Window = new ImageView("Progetto_Ing_Sw/com/client/GUI/LobbyPlayer4.png");Player4Window.setTranslateY(-30);
 
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
@@ -85,10 +85,10 @@ public class MultiplayerGUI extends Stage {
 
 
         //Labels con i nomi dei giocatori
-        Player1Label = new Label("Player 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(255);
-        Player2Label = new Label("Player 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(255);
-        Player3Label = new Label("Player 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(255);
-        Player4Label = new Label("Player 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(255);
+        Player1Label = new Label("Player 1"); Player1Label.setId("PlayerLobbyLabel");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(260);
+        Player2Label = new Label("Player 2"); Player2Label.setId("PlayerLobbyLabel");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(260);
+        Player3Label = new Label("Player 3"); Player3Label.setId("PlayerLobbyLabel");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(260);
+        Player4Label = new Label("Player 4"); Player4Label.setId("PlayerLobbyLabel");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(260);
 
 
 
@@ -191,7 +191,6 @@ public class MultiplayerGUI extends Stage {
                     Player1BTN.setId("ReadyBTN");
                     Player1BTN.setText("READY!");
                     Player1BTN.setDisable(false);
-
             }
         });
     }
