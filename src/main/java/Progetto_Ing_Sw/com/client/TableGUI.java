@@ -636,6 +636,14 @@ public class TableGUI extends Stage{
         Move.setDisable(true);
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
+            if (LocalModel.getInstance().exceptionTrown()){
+                Alert MoveException = new Alert(Alert.AlertType.WARNING);
+                MoveException.setTitle("Bad Move");
+                MoveException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+                MoveException.setContentText("Press OK to try another move");
+                MoveException.showAndWait();
+            }
+
             //DiceCover.setVisible(true);//TODO ECCEZIONI
         });
 
