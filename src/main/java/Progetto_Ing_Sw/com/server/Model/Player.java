@@ -97,6 +97,8 @@ public class Player{
 
 }
 
-
+    public void setChoosenWindowBoard(WindowBoard choosenWindowBoard) {
+        this.choosenWindowBoard = choosenWindowBoard;
+    }
 }
 
