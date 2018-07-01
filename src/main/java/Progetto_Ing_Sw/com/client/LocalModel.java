@@ -105,9 +105,9 @@ public  class LocalModel {
     }
 
     public ClientDice getAndResetDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard e lo reimposta a null
-      //  ClientDice diceToReturn=diceToInsert;
-       // diceToInsert=null;
-        return diceToInsert;
+        ClientDice diceToReturn=diceToInsert;
+        diceToInsert=null;
+        return diceToReturn;
     }
 
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
