@@ -3,6 +3,7 @@ package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.server.Model.ToolCards.GlazingHammer;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -49,6 +50,8 @@ public class ToolCardDisplayer extends Stage {
     Random randomValue;
     Random randomColor;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
+
+
 
     /**
      * This method is used to import the Draft Pool in this Stage
@@ -112,6 +115,7 @@ public class ToolCardDisplayer extends Stage {
         this.initStyle(StageStyle.TRANSPARENT);
         this.getIcons().add(windowIcon);
 
+        LocalModel.getInstance().registerAsObserver(this);
 
         //ImageView della tool card
         ImageView ToolCardSample = new ImageView("Progetto_Ing_Sw/com/client/GUI/BaseToolCard.png");
@@ -747,6 +751,6 @@ public class ToolCardDisplayer extends Stage {
     }
 
     public void closeToolCardMenu(){
-        close();
+        Platform.runLater(()->close());
     }
 }
