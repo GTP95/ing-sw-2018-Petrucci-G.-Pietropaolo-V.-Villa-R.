@@ -72,7 +72,7 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     /**
-     * This method import, from Json file, the Integer-matrix object, used initially to create the
+     * This method imports, from Json file, the Integer-matrix object, used initially to create the
      * ArrayList-Matrix object. It has also rows and columns, to avoid future problem with bigger matrix.
      * @param rows This parameter represents the number of rows of the matrix
      * @param columns This parameter represents the number of columns of the matrix
@@ -337,7 +337,7 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     /**
-     * This method set the borders of the ArrayList-matrix. It's necessary to implement the placement restrictions
+     * This method sets the borders of the ArrayList-matrix. It's necessary to implement the placement restrictions
      * @return It returns the WindowBoard (ArrayList-matrix) with Borders set
      */
     public ArrayList<ArrayList<MatrixCell>> setBorders(){
@@ -390,9 +390,9 @@ public class WindowBoard implements WindowBoardObserver{
     }
 
     /**
-     * This method control that the dice placed in the current matrixCell has the number that match the actual
+     * This method controls that the dice placed in the current matrixCell has the number that match the actual
      * matrixCell's shade
-     * @param matrixCell This parameter represent the matrixCell where i place the dice
+     * @param matrixCell This parameter represents the matrixCell where i place the dice
      * @param dice the dice that is going to be placed
      * @return it returns TRUE if the number of the dice matches the shade of the MatrixCell
      */
@@ -526,9 +526,9 @@ public class WindowBoard implements WindowBoardObserver{
     /**
      * This method is used to insert Dice in the ArrayList-Matrix without following the placement restrictions;
      * it's used to test placement restrictions' methods
-     * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the column's coordinate
-     * @param dice This parameter represent the dice selected to be placed in the matrix
+     * @param row This parameter represents the row's coordinate
+     * @param column This parameter represents the column's coordinate
+     * @param dice This parameter represents the dice selected to be placed in the matrix
      * @return This returns a WindowBoard with the dice in the correct position
      */
     public ArrayList<ArrayList<MatrixCell>> insertDiceARRLIST(int row, int column, Dice dice){
@@ -618,8 +618,8 @@ public class WindowBoard implements WindowBoardObserver{
     /**
      * This method is used to control that the dice placed in the cell with the input-coordinates has a dice adjacent.
      * It returns TRUE if this condition is verified
-     * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the columns's coordinate
+     * @param row This parameter represents the row's coordinate
+     * @param column This parameter represents the columns's coordinate
      * @return it returns TRUE if the dice in the cell has a dice adjacent
      */
     public boolean checkAdjacency(int row, int column){
@@ -721,8 +721,8 @@ public class WindowBoard implements WindowBoardObserver{
     /**
      * This method is used to control that the dice placed with the input-coordinates has a dice with its same color
      * in an orthogonal position. It returns FALSE if the condition is verified
-     * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the columns's coordinate
+     * @param row This parameter represents the row's coordinate
+     * @param column This parameter represents the columns's coordinate
      * @return it returns FALSE if the dice in the cell has a dice with its same color in an orthogonal position
      */
     public boolean checkOrthogonalColor(int row, int column){
@@ -791,8 +791,8 @@ public class WindowBoard implements WindowBoardObserver{
     /**
      * This method is used to control that the dice placed with the input-coordinates has a dice with its same value
      * in an orthogonal position. It returns FALSE if the condition is verified
-     * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the columns's coordinate
+     * @param row This parameter represents the row's coordinate
+     * @param column This parameter represents the columns's coordinate
      * @return it returns FALSE if the dice in the cell has a dice with its same value in an orthogonal position
      */
     public boolean checkOrthogonalValue(int row, int column){
@@ -887,9 +887,9 @@ public class WindowBoard implements WindowBoardObserver{
      * This method is the main method of the game: with the input-coordinates, the method place a dice in the matrix.
      * After that, this action is controlled by placement restrictions' methods described before. If something isn't correct,
      * this method throws a PlaceDiceException (with a single message for each type of exception)
-     * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the column's coordinate
-     * @param dice This parameter represent the dice that is going to be placed
+     * @param row This parameter represents the row's coordinate
+     * @param column This parameter represents the column's coordinate
+     * @param dice This parameter represents the dice that is going to be placed
      * @return It returns a WindowBoard object with the Dice placed if the placement restrictions are verified
      * @throws PlaceDiceException
      */
@@ -1156,6 +1156,46 @@ public class WindowBoard implements WindowBoardObserver{
             }
         }
         return usedMatrix;
+    }
+
+    /**
+     * This method calculates points for each dice that have the same color of the Private Objective;
+     * Points are gained by summing each dice values
+     * @param PrivateObjectiveColor This parameter represents the color of the Private Objective Card
+     * @return it returns the number of points gained  by all the dice with the Private Objective's color
+     */
+    public int calculatePointsFromPrivateObjective(int PrivateObjectiveColor){
+        int points = 0;
+
+        for(int r=0;r<usedMatrix.size();r++) {
+            for (int c = 0; c < usedMatrix.get(r).size(); c++) {
+                if(usedMatrix.get(r).get(c).isUsed()){
+                    if(usedMatrix.get(r).get(c).getDiceContained().getColor()==PrivateObjectiveColor) {
+                        points=points+usedMatrix.get(r).get(c).getDiceContained().getValue();
+                    }
+                }
+            }
+        }
+
+        return points;
+    }
+
+    /**
+     * This method calculates points that have to be subtracted from Victory Points
+     * @return it returns the total of Subtracted-Points
+     */
+    public int calculatePointsFromEmptySpaces(){
+        int points = 0;
+
+        for(int r=0;r<usedMatrix.size();r++) {
+            for (int c = 0; c < usedMatrix.get(r).size(); c++) {
+                if(!usedMatrix.get(r).get(c).isUsed()){
+                    points++;
+                }
+            }
+        }
+
+        return points;
     }
 
 }
