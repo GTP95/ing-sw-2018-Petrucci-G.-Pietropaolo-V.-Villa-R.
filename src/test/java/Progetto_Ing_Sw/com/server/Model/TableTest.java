@@ -79,4 +79,9 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
         }
     }
 
+    @Test
+    public void getActivePlayerTest(){
+
+    }
+
     }
