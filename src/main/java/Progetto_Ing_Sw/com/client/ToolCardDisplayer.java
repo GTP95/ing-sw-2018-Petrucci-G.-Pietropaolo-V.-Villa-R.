@@ -22,6 +22,18 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This Class that extends Stage contains all the UI elements used to show the Player the selected Tool Card and use its
+ * effects.
+ *
+ * The Stage is composed of two Scenes:
+ * the first shows the Player all the info on the Tool Card selected in TableGUI;
+ * the second Scene is different depending on the Tool Card and offers all the UI elements necessary for the player to use
+ * the effects of a Tool Card.
+ *
+ * The second Scene is built according to the selected card using a switch case that adds the right Nodes to the Scene.
+ * @author Vincenzo Pietropaolo
+ */
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
     Scene ToolCarddisplayerScene2;
@@ -34,6 +46,10 @@ public class ToolCardDisplayer extends Stage {
     Random randomColor;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
+    /**
+     * This method is used to import the Draft Pool in this Stage
+     * @return
+     */
     public VBox getDraftPool(){
         VBox GrozingPool = new VBox(5);
         GrozingPool.setTranslateX(50);
@@ -76,6 +92,15 @@ public class ToolCardDisplayer extends Stage {
         return GrozingPool;
     }
 
+    /**
+     * This stage needs the following parameters to build th right Tool Card 
+     * @param Title
+     * @param Number
+     * @param Description
+     * @param Info
+     * @param CardColor
+     * @param FirstUsage
+     */
     ToolCardDisplayer(String Title, int Number, String Description, String Info, String CardColor, boolean FirstUsage) {
         this.setTitle(Title);
         this.setResizable(false);
@@ -94,7 +119,7 @@ public class ToolCardDisplayer extends Stage {
         Pay1Icon.setMinSize(256, 256);
         Pay1Icon.setId("Pay1Button");
         Pay1Icon.setContentDisplay(ContentDisplay.TOP);
-        //TODO BUY
+
 
         Button Pay2Icon = new Button("Pay 2 Tokens to Buy this Card");
         Pay2Icon.setTranslateX(450);

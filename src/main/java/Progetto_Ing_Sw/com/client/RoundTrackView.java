@@ -16,9 +16,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.util.ArrayList;
 
+/**
+ * This Class that extends Stage contains all the UI parts used to create a Scene that shows the Player the Round Track,
+ * where all the Dice that remained at the end of each Round are stored.
+ *
+ * This Stage uses the same techniques used in the TableGUI stages to render Dice.
+ * @author Vincenzo Pietropaolo
+ */
 public class RoundTrackView extends Stage {
     VBox Round1Dice,Round2Dice,Round3Dice,Round4Dice,Round5Dice,Round6Dice,Round7Dice,Round8Dice,Round9Dice,Round10Dice;
     VBox Round1, Round2, Round3,Round4,Round5,Round6,Round7, Round8, Round9, Round10;
@@ -26,6 +32,12 @@ public class RoundTrackView extends Stage {
     ArrayList<Label> Round1Array,Round2Array,Round3Array,Round4Array,Round5Array,Round6Array,Round7Array,Round8Array,Round9Array,Round10Array;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
+    /**
+     * This methods reads an array of labels that represent the dice and a number of round and assigns each label the
+     * style of the die using CSS
+     * @param arrayListLabel
+     * @param round
+     */
     public void LabelToDiceCSS(ArrayList<Label> arrayListLabel,int round){
         System.err.println("General Kenobi!");
             for (int i=0; i<arrayListLabel.size(); i++ ){
@@ -291,6 +303,10 @@ public class RoundTrackView extends Stage {
         this.setScene(RoundTrackScene);
     }
 
+
+    /**
+     * This method is used to update the Round Track as Dice are inserted in it as Rounds go by during the game.
+     */
     public void updateRoundTrack (){
         Platform.runLater(()-> {
             System.err.println("Hello There!");
