@@ -998,11 +998,7 @@ public class WindowBoard implements WindowBoardObserver{
                             {
                                 System.out.println("ADIACENCY - BREAKER (white)");
 
-                                if(checkAdjacency(r+1,c+1)==false)
-                                {
-                                    //non ho alcun effetto, infatti in questo caso ho una cella bianca staccata da tutto il resto
-                                    //break;
-                                }
+                                if(checkAdjacency(r+1,c+1)==false){}
                                 else if (checkAdjacency(r+1,c+1))
                                 {
                                     removeDice(r,c);
@@ -1028,7 +1024,10 @@ public class WindowBoard implements WindowBoardObserver{
                             //++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO NUMERO
 
                             //CONTROLLI NORMALI
-                            applyNormalRules(r,c);
+
+                            if(!dice.isNumberBreaker() && !dice.isColorBreaker() && !dice.isAdjacencyBreaker()) {
+                                applyNormalRules(r, c);
+                            }
 
                         }
                         else if (usedMatrix.get(r).get(c).getColor() != Color.BLANK)
@@ -1121,6 +1120,9 @@ public class WindowBoard implements WindowBoardObserver{
 
                             //CONTROLLI NORMALI
 
+                            if(!dice.isNumberBreaker() && !dice.isColorBreaker() && !dice.isAdjacencyBreaker())
+                            {
+
                             if (checkShade(usedMatrix.get(r).get(c), dice) == true && usedMatrix.get(r).get(c).getColor() == Color.SHADE)
                             {//CONTROLLO SFUMATURA OK
                                 applyNormalRules(r,c);
@@ -1141,6 +1143,8 @@ public class WindowBoard implements WindowBoardObserver{
                             {//NO COLORE CELLA
                                 removeDice(r,c);
                                 throw new PlaceDiceException("Color is not equal");
+                            }
+
                             }
                         }
                     }
