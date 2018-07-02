@@ -477,4 +477,8 @@ public  class LocalModel {
     public void setToolCardWithEffectIndex(int toolCardWithEffectIndex) {
         this.toolCardWithEffectIndex = toolCardWithEffectIndex;
     }
+
+    public ArrayList<ClientEffect> getDrawnToolCardsWithEffect() {
+        return drawnToolCardsWithEffect;
+    }
 }
