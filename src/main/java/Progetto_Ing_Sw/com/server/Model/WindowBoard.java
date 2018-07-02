@@ -318,7 +318,10 @@ public class WindowBoard implements WindowBoardObserver{
         return matrixArrays;
     }
 
-    //verifica che la matrice non sia vuota, restituendo TRUE in tal caso
+    /**
+     * This method is used to check if the matrix is empty, so it's easy to verify that is the first phase
+     * @return it return TRUE if the matrix is not empty
+     */
     public boolean matrixNotEmpty(){
         boolean cellState=false;
         for(int r=0;r<usedMatrix.size();r++){
@@ -330,7 +333,6 @@ public class WindowBoard implements WindowBoardObserver{
         }
         return cellState;
     }
-
 
     /**
      * This method set the borders of the ArrayList-matrix. It's necessary to implement the placement restrictions
@@ -884,7 +886,7 @@ public class WindowBoard implements WindowBoardObserver{
      * After that, this action is controlled by placement restrictions' methods described before. If something isn't correct,
      * this method throws a PlaceDiceException (with a single message for each type of exception)
      * @param row This parameter represent the row's coordinate
-     * @param column This parameter represent the columns's coordinate
+     * @param column This parameter represent the column's coordinate
      * @param dice This parameter represent the dice that is going to be placed
      * @return It returns a WindowBoard object with the Dice placed if the placement restrictions are verified
      * @throws PlaceDiceException
@@ -966,7 +968,6 @@ public class WindowBoard implements WindowBoardObserver{
                             {
                                 throw new PlaceDiceException("Color is different");
                             }
-
                         }
                     }
                     else if (usedMatrix.get(r).get(c).isOnBorder() == false && c == column - 1 && r == row - 1)
@@ -1003,7 +1004,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 else if (checkAdjacency(r+1,c+1))
                                 {
                                     removeDice(r,c);
-                                    throw new PlaceDiceException("No adjacent dice");
+                                    throw new PlaceDiceException("Adjacent dice");
                                 }
                             }
                             //++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA
@@ -1111,7 +1112,7 @@ public class WindowBoard implements WindowBoardObserver{
                                 else if (checkAdjacency(r+1,c+1))
                                 {
                                     removeDice(r,c);
-                                    throw new PlaceDiceException("No adjacent dice");
+                                    throw new PlaceDiceException("Adjacent dice");
                                 }
                             }
                             ///++++++++++++++++++++++++++++++++++++++++++++++++++++EVITO CONTROLLO ADIACENZA

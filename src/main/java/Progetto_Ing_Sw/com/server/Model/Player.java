@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Player{
    private String name;
    private int favorTokens;
-   private int roundNumber;  //TODO funzione che lo decrementa ad ogni turno
+   private int roundNumber;
    private PrivateObjectiveCard privateObjective;
    private int victoryPoints;
    private boolean isActive;
@@ -88,7 +88,7 @@ public class Player{
     }
 
     public void useToolCard(ToolCard card) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore
-        if(card.isFirstUsage() && favorTokens>=1) favorTokens--;
+        if(!card.isFirstUsage() && favorTokens>=1) favorTokens--;
         else if(favorTokens>=2) favorTokens-=2; //ramo else, si finisce qui se non è il primo utilizzo della carta. Dunque il costo della carta è di due segnalini favore e bisogna controllare che il giocatore ce li abbia
             else throw new NotEnoughFavorTokensException();
     }

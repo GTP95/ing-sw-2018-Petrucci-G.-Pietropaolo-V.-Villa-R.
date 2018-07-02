@@ -1,5 +1,6 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Model.ToolCards.EglomiseBrush;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -200,8 +201,6 @@ public class WindowBoardTest {
         Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(2).get(3),dice5));
         Assert.assertTrue(windowBoard.checkShade(windowBoard.getUsedMatrix().get(3).get(2),dice6Y));
     }
-
-
 
     @Test
     public void checkBlankOfAMatrixCell(){
@@ -438,10 +437,50 @@ public class WindowBoardTest {
     public void insertDiceTestForGamePlay() throws PlaceDiceException {
 
         WindowBoard windowBoard = new WindowBoard(rows, columns);
-        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);//WaterOfLife
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
         windowBoard.printMatrix(testMatrix,rows,columns);
         windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
         windowBoard.setBorders();
+        Assert.assertFalse(windowBoard.matrixNotEmpty());
+
+        windowBoard.insertDice(4,1,dice5); //bordo, bianco
+        windowBoard.getUsedMatrix().get(3).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(0).setUsed(false);
+
+        windowBoard.insertDice(4,3,dice6Y); //bordo, sfumatura ok
+        windowBoard.getUsedMatrix().get(3).get(2).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(2).setUsed(false);
+
+        EglomiseBrush eglomiseBrush1 = new EglomiseBrush();//color breaker colore qualsiasi
+        windowBoard.insertDice(1,2,dice4Y);
+        eglomiseBrush1.applyEffect(windowBoard,dice4Y,1,2,1,1,1);
+        windowBoard.getUsedMatrix().get(0).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(0).setUsed(false);
+
+        EglomiseBrush eglomiseBrush2 = new EglomiseBrush();//color breaker sfumatura
+        windowBoard.insertDice(3,1,dice4Y);
+        eglomiseBrush2.applyEffect(windowBoard,dice4Y,3,1,2,1,1);
+        windowBoard.printMatrixArrayList();
+        windowBoard.getUsedMatrix().get(1).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(0).setUsed(false);
+
+        //Complete fino a qui
+
+        EglomiseBrush eglomiseBrush3 = new EglomiseBrush();//number breaker sfumature qualsiasi
+        windowBoard.insertDice(1,2,dice4Y);
+        eglomiseBrush3.applyEffect(windowBoard,dice4Y,1,2,1,1,1);
+        windowBoard.getUsedMatrix().get(0).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(0).setUsed(false);
+
+        EglomiseBrush eglomiseBrush4 = new EglomiseBrush();//number breaker colore
+        windowBoard.insertDice(3,1,dice4Y);
+        eglomiseBrush4.applyEffect(windowBoard,dice4Y,3,1,2,1,1);
+        windowBoard.printMatrixArrayList();
+        windowBoard.getUsedMatrix().get(1).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(0).setUsed(false);
+
 
 
     }
