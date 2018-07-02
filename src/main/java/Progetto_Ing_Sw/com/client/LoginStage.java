@@ -16,9 +16,18 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 
+/**
+ * This Class extends Stage and contains all the UI parts used to create a Scene where the Player is asked to insert
+ * information concerning the Username, the Host Name and the Port to which they want to connect to.
+ *
+ * TextFields are used for the Player to fill and all exceptions are handles accordingly using pop up windows that prevent
+ * the Player from exiting this Stage.
+ *
+ * Completing this Stage allows the Player to enter the Lobby in MultiplayerGUI.
+ * @author Vincenzo Pietropaolo
+ */
 public class LoginStage extends Stage {
     Scene UserNameSelectionScene,ServerScene;
-    Boolean StartUsernameCheck;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     LoginStage(){
@@ -31,7 +40,7 @@ public class LoginStage extends Stage {
         this.getIcons().add(windowIcon);
 
         LocalModel.getInstance().registerAsObserver(this);
-        StartUsernameCheck = false;
+
 
         //INIZIO Username Selection Scene
 
@@ -61,13 +70,6 @@ public class LoginStage extends Stage {
         PortField.setTranslateX(-50);
 
 
-
-
-        //Accept Button
-        Button AcceptBTN2 = new Button("Proceed");AcceptBTN2.setId("DefaultButton");AcceptBTN2.setTranslateX(100);AcceptBTN2.setTranslateY(250);
-        AcceptBTN2.setOnAction(event -> {
-
-        });
 
         //Accept Button
         Button AcceptBTN = new Button("Proceed");AcceptBTN.setId("DefaultButton");AcceptBTN.setTranslateX(100);AcceptBTN.setTranslateY(250);
@@ -134,6 +136,10 @@ public class LoginStage extends Stage {
         ServerScene = new Scene(HostFrame,420,590);
     }
 
+    /**
+     * This method is used to catch the exception thrown when the Player chooses a name that is already in use and prevents
+     * them to access the Lobby.
+     */
     public void usernameException (){
         Platform.runLater(()-> {
             Alert UserNameExceptionAlert = new Alert(Alert.AlertType.ERROR);
@@ -146,13 +152,11 @@ public class LoginStage extends Stage {
 
     }
 
+    /**
+     * This method is used to close this Stage and start the Lobby as the information inserted is verified by the server
+     */
     public void startLobby(){
         Platform.runLater(()->close());
     }
-
-    public void usernameCheck(){
-        Platform.runLater(()->
-            StartUsernameCheck = true
-    );}
 
 }

@@ -30,6 +30,18 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This Class that extends Stage contains all the UI parts that make GameBoard Card choosing Scene.
+ * This Stage shows the player the color of the Private Objective extracted for them and then proceeds to ask the player
+ * to choose one of the four GameBoard Cards extracted and the shows a Scene where the Player waits for other players to
+ * complete this part.
+ *
+ * The GameBoard Cards extracted are dynamically rendered by the CreateAGrid method from the JSON file extracted by
+ * creating a GridPane with a normal Pane in each block, of which style is set using CSS.
+ *
+ * Animations are used to help the Player navigate through the UI easily.
+ * @author Vincenzo Pietropaolo
+ */
 public class ChooseAWindow extends Stage {
     Scene Window,PrivateObjective,WaitingForOtherPlayers;
     Label PrivateObjectiveColor,PrivateObjectiveColor2, info1,info2,info3,info4,difficulty4, difficulty3,difficulty2,difficulty1,PrivateObjectiveColorRecap;
@@ -39,6 +51,11 @@ public class ChooseAWindow extends Stage {
     int ChoosenGrid;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
+    /**
+     * This method creates a GridPane given a GameBoard Card
+     * @param gameBoardCard
+     * @return
+     */
     public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
         int rows = 4;
         int columns = 5;
@@ -106,8 +123,6 @@ public class ChooseAWindow extends Stage {
         }
         return Board;
     }
-
-
 
 
 
@@ -384,6 +399,11 @@ public class ChooseAWindow extends Stage {
 
     }
 
+
+    /**
+     * This method is used to close this Stage and launch the Table Stage when all the players have chosen their GameBoard
+     * Cards and are Ready to Start the Game.
+     */
     public void StartTable(){
         Platform.runLater(()->{
             System.err.println("---------------------------------------------------------Start Table chiamata----------------------------------------------------------------------");
@@ -398,11 +418,17 @@ public class ChooseAWindow extends Stage {
         });
     }
 
+    /**
+     * This method updates the GUI with the Private Objective and the GameBoard Cards extracted for each player.
+     */
     public void updateChooseAWindow(){
         updatePrivateObjective();
         updateBoards();
     }
 
+    /**
+     * This method updates the style, using CSS, of a label to show the player the Private Objective Color
+     */
     public void updatePrivateObjective(){
         Platform.runLater(()->{
             int color = LocalModel.getInstance().getPrivateObjectiveCard().getColor();
@@ -412,6 +438,10 @@ public class ChooseAWindow extends Stage {
         });
     }
 
+
+    /**
+     * This method updates the GUI to show the players the GameBoard Cards extracted, for them to choose from.
+     */
     public void updateBoards(){
         Platform.runLater(()->{
             ArrayList<ClientGameBoardCard> Gameboardcards=null;

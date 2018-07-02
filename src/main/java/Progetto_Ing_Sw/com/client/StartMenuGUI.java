@@ -12,11 +12,19 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This Class that extends Application is the first GUI Stage of the Game it contains Buttons used to access the game,
+ * and its GameModes.
+ */
 public class StartMenuGUI extends Application {
     Scene TitleScreen, SelectGameMode, SinglePlayer;  //Specifico prima tutte le scene di cui avrò bisogno
 
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
+    /**
+     * This methods starts the primaryStage
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
 

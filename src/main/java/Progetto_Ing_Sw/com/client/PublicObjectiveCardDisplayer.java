@@ -11,6 +11,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This Class that extends Stage contains the UI parts used to create a Scene where the Player can view all the informations
+ * on a Public Objective Card that they selected in the TableGUI Stage
+ *
+ * The card layout is built by the system using a Default background for all cards to which additional info and image are
+ * attached from the corresponding JSON file extracted
+ *
+ * @author Vincenzo Pietropaolo
+ */
 public class PublicObjectiveCardDisplayer extends Stage{
     Scene PublicObjectiveCardDisplayer;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");

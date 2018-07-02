@@ -35,7 +35,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * This class that extends Stage contains all the UI parts that make the Table of the game;
+ * The Grid is created using a GridPane that contains a Pane in each block and each Pane is set with a different style,
+ * using CSS, according to the JSON file of the GameBoard Card chosen by the player.
+ *
+ * Another GridPane is also created and placed on top of the other to host the dice chosen by the player so that they
+ * overlap the GameBoard Card grid, as in real life
+ *
+ * Other Blocks of UI are also created to host the rest of the elements that compose the game table (such as Tool Cards,
+ * Public Objective Cards, Dice Pool, Round Number, Favor Tokens, and buttons used to interact with the game.
+ *
+ * Animations are also used to help the player identify what they might be selecting before the click.
+ *
+ * This stage allows access to other Stages to view the Round Track, each Tool Card, each Public Objective, and other
+ * players's WindowBoards
+ *
+ * @author Vincenzo Pietropaolo
+ */
 public class TableGUI extends Stage{
     ClientGameBoardCard ChoosenGameBoardCard;
     Scene GameplayScene;
@@ -53,6 +70,11 @@ public class TableGUI extends Stage{
     GridPane griglia, DieGrid;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
+
+    /**
+     * This is where all the elements are built according to the GameBoard Card choosen in the @param
+     * @param gameBoardCard
+     */
     TableGUI(ClientGameBoardCard gameBoardCard) {
         this.setTitle("Sagrada Game");
         this.setWidth(1280);
@@ -707,7 +729,11 @@ public class TableGUI extends Stage{
 
     }
 
-        public void updateTable(){
+    /**
+     * This method is used to launch the methods other update methods, it is called by the server at the beginning
+     * of the match
+     */
+    public void updateTable(){
             System.err.println("-----------------------------------------------------------UPDATE TABLE-----------------------------------------------------------------------------------");
             updatePublicObjectiveCards();
             updateToolCards();
@@ -715,7 +741,10 @@ public class TableGUI extends Stage{
             updateTokens();
         }
 
-        public void updateOtherPlayersBoards(){
+    /**
+     * This Method is used to update the GUI with other player's window Boards
+     */
+    public void updateOtherPlayersBoards(){
             System.err.println("---------------------------UPDATE BOARDS---------------------------------------");
         for(int i=0; i<OtherPlayersList.size();i++){
             ClientWindowBoard OtherWindowBoard=LocalModel.getInstance().getUpdatedWindowBoards().get(i);
@@ -727,93 +756,112 @@ public class TableGUI extends Stage{
 
         }
 
-        public void updateToolCards(){
-            Platform.runLater(()->{
-                ToolCard1BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(0).getTitle());
-                ToolCardColor1.setId(LocalModel.getInstance().getDrawnToolCards().get(0).getColor());
+    /**
+     * This Method updates the GUI with the Tool Cards extracted
+     */
 
-                ToolCard2BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(1).getTitle());
-                ToolCardColor2.setId(LocalModel.getInstance().getDrawnToolCards().get(1).getColor());
+    public void updateToolCards(){
+         Platform.runLater(()->{
+             ToolCard1BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(0).getTitle());
+             ToolCardColor1.setId(LocalModel.getInstance().getDrawnToolCards().get(0).getColor());
 
-                ToolCard3BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(2).getTitle());
-                ToolCardColor3.setId(LocalModel.getInstance().getDrawnToolCards().get(2).getColor());
-            });
-        }
+             ToolCard2BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(1).getTitle());
+             ToolCardColor2.setId(LocalModel.getInstance().getDrawnToolCards().get(1).getColor());
 
-        public void updatePublicObjectiveCards(){
-            Platform.runLater(()->{
-                PublicObjectiveCard1BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle());
-                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()==-1){PublicObjectiveCard1Value.setText("x");}
-                else PublicObjectiveCard1Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()));
-                PublicObjectiveCard1Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription());
+             ToolCard3BTN.setText(LocalModel.getInstance().getDrawnToolCards().get(2).getTitle());
+             ToolCardColor3.setId(LocalModel.getInstance().getDrawnToolCards().get(2).getColor());
+         });
+    }
 
-                PublicObjectiveCard2BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle());
-                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()==-1){PublicObjectiveCard2Value.setText("x");}
-                else PublicObjectiveCard2Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()));
-                PublicObjectiveCard2Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription());
+    /**
+     * This Methods update the GUI with the Public Objective Cards extracted
+     */
 
-                PublicObjectiveCard3BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle());
-                if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()==-1){PublicObjectiveCard3Value.setText("x");}
-                else PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
-                PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
-            });
-        }
+    public void updatePublicObjectiveCards(){
+        Platform.runLater(()->{
+            PublicObjectiveCard1BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle());
+            if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()==-1){PublicObjectiveCard1Value.setText("x");}
+            else PublicObjectiveCard1Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getVictoryPoints()));
+            PublicObjectiveCard1Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getDescription());
 
+            PublicObjectiveCard2BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle());
+            if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()==-1){PublicObjectiveCard2Value.setText("x");}
+            else PublicObjectiveCard2Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getVictoryPoints()));
+            PublicObjectiveCard2Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getDescription());
 
+            PublicObjectiveCard3BTN.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle());
+            if (LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()==-1){PublicObjectiveCard3Value.setText("x");}
+            else PublicObjectiveCard3Value.setText(Integer.toString(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getVictoryPoints()));
+            PublicObjectiveCard3Description.setText(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getDescription());
+        });
+    }
 
-        public void updateDice(){
-            System.err.println("--------------------------------------UPDATE DICE-----------------------------------------------------");
-            Platform.runLater(()->{
-                for (int i=0; i<DiceButtons.size(); i++ ){
-                    int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
-                    int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
-                    if (LocalValue==0){
-                        DiceButtons.get(i).setVisible(false);
-                    }
-                    else {
-                        DiceButtons.get(i).setText("");
-                        DiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
-                        DiceButtons.get(i).setVisible(true);
-                        DiceButtons.get(i).setOnAction(event -> {
-                                    DieToInsert = new ClientDice(LocalValue, LocalColor);
-                                    System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
+    /**
+     * This methods updates the GUI with the Dice extracted and sets their style using CSS;
+     * it also sets the DieToInsert value according to the last Die selected by the player
+     */
 
-                                }
-                        );
-                    }
-                    Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue)));
-                    Tooltip.install(DiceButtons.get(i),t);
+    public void updateDice(){
+        System.err.println("--------------------------------------UPDATE DICE-----------------------------------------------------");
+        Platform.runLater(()->{
+            for (int i=0; i<DiceButtons.size(); i++ ){
+                int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();
+                int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
+                if (LocalValue==0){
+                    DiceButtons.get(i).setVisible(false);
                 }
-            });
-        }
-
-        public void insertion(){
-            //LocalModel.getInstance().getWindowBoard().printMatrixArrayList(LocalModel.getInstance().getWindowBoard().getUsedMatrix());
-            Platform.runLater(()-> {
-                for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
-                    for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
-                        if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
-                            GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
-                                    + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
-                            GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
-                        }
-                    }
+                else {
+                    DiceButtons.get(i).setText("");
+                    DiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
+                    DiceButtons.get(i).setVisible(true);
+                    DiceButtons.get(i).setOnAction(event -> {
+                        DieToInsert = new ClientDice(LocalValue, LocalColor);
+                        System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
+                    });
                 }
-            });
-        }
-
-        public void isYourTurn(){
-            System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
-            DiceCover.setVisible(false);
-            Move.setDisable(false);
-            PassButton.setDisable(false);
-            TimerEnteringAnimation.play();
-            CurrentPlayer.setId("DefaultButtonActivated");
-            for (Button button : OtherPlayersList){
-                button.setId("DefaultButton");
+                Tooltip t= new Tooltip(("Color: "+new ClientColor().IntToColor(LocalColor)+"\n"+"Value: "+Integer.toString(LocalValue)));
+                Tooltip.install(DiceButtons.get(i),t);
             }
-            insertion();
+        });
+    }
+
+    /**
+     * This Methods updates the GUI with the Dice placed by the player
+     */
+    public void insertion(){
+        Platform.runLater(()-> {
+            for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
+                for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
+                    if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
+                        GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                                    + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                        GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * This method updates the GUI when it is the turn of the player allowing him to click on a die, move, or pass
+     */
+    public void isYourTurn(){
+        System.err.println("------------------------------------------TUO TURNO----------------------------------------------------------");
+        DiceCover.setVisible(false);
+        Move.setDisable(false);
+        PassButton.setDisable(false);
+        TimerEnteringAnimation.play();
+        CurrentPlayer.setId("DefaultButtonActivated");
+        for (Button button : OtherPlayersList){
+            button.setId("DefaultButton");
         }
+        insertion();
+    }
+
+    /**
+     * This method updates the GUI when it is NOT the turn of the player to prevent him from clicking on any Dice,
+     * move, pass, or accessing the tool cards
+     */
 
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
@@ -835,12 +883,18 @@ public class TableGUI extends Stage{
         System.err.println("----------------------------------------------------------------FINITO IS NOT YOUR TURN-----------------------------------------------------------------------");
     }
 
+    /**
+     * This method updates the GUI so that it shows the timer decreasing
+     */
     public void updateTimer(){
         Platform.runLater(()->{
             TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getTurnCountDownValue()));
         });
     }
 
+    /**
+     * This method updates the GUI as the Round changes and notifies the player with a sound
+     */
     public void updateRound(){
         String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";
 
@@ -852,6 +906,9 @@ public class TableGUI extends Stage{
 
     }
 
+    /**
+     * This method catches Die Placement Exceptions and show a pop up window to notify the player
+     */
     public void DiceExceptionThrower(){
         Platform.runLater(()-> {
             Alert MoveException = new Alert(Alert.AlertType.WARNING);
@@ -864,9 +921,12 @@ public class TableGUI extends Stage{
         });
     }
 
+    /**
+     * This method updates the number of Favor Tokens available to the player and updates it as the player uses them
+     */
     public void updateTokens(){
         Platform.runLater(()->
-                Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  •\n")))
+                Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  • \n")))
         );
     }
 

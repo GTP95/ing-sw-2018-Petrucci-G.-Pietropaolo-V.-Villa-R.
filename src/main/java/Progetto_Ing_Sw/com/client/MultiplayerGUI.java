@@ -19,6 +19,14 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
+/**
+ * This Class that extends Stage contains all the UI parts that make the Multiplayer screen of the game, it includes
+ * the buttons to choose what kind of connections you want to use (RMI or Socket) and the Lobby.
+ *
+ * This Stage allows access to the Login Stage that the player must complete in order to access the Lobby on this Stage.
+ *
+ * @author Vincenzo Pietropaolo
+ */
 
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
@@ -69,9 +77,6 @@ public class MultiplayerGUI extends Stage {
 
 
         //INIZIO Lobby Scene
-
-
-
 
         //Bottoni per i singoli giocatori da premere per dare il Ready
         Player1BTN = new Label(); Player1BTN.setId("WaitingPlayer1");Player1BTN.setTranslateY(155);Player1BTN.setPrefSize(150,150);Player1BTN.setDisable(true);
@@ -159,7 +164,9 @@ public class MultiplayerGUI extends Stage {
     }
 
 
-
+    /**
+     * This method is called when the game is ready to start, closes this stage to open the GameBoard selection Stage
+     */
     public void StartGame(){
         Platform.runLater(() ->{
             close();
@@ -167,8 +174,9 @@ public class MultiplayerGUI extends Stage {
         });
     }
 
-
-
+    /**
+     * This method is used to update the Lobby's UI as the players log in, so that everyone can see them online
+     */
     public void update(){
         Platform.runLater(() ->{
             System.err.println("-------------------------------------------------AGGIORNO LA LOBBY------------------------------------");
@@ -194,6 +202,9 @@ public class MultiplayerGUI extends Stage {
         });
     }
 
+    /**
+     * This method is used to update the timer for every client in the Lobby, so that everyone sees the same value
+     */
     public void updateTimer(){
         Platform.runLater(()->{
             TimerLabel.setText(" "+Integer.toString(LocalModel.getInstance().getCountdownValue()));
