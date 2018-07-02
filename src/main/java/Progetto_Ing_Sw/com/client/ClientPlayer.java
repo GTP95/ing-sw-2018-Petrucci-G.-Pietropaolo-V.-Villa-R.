@@ -34,8 +34,6 @@ public class ClientPlayer{
 
 
     public int getFavorTokens() {
-
-        System.err.println("NumOfFavorTokens: "+favorTokens);
         return favorTokens;
     }
 
