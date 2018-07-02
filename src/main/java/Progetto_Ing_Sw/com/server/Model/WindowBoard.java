@@ -18,6 +18,7 @@ public class WindowBoard implements WindowBoardObserver{
     private int [][] Matrix; //righe - colonne
     private ArrayList<ArrayList<MatrixCell>> usedMatrix;
     private String localTitle;
+    private int difficulty;
 
     public String getTitle() {return localTitle;}
     public void setTitle(String title) {this.localTitle = title;}
@@ -45,6 +46,7 @@ public class WindowBoard implements WindowBoardObserver{
         Matrix=gameBoardCard.getMatrixScheme();
         usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
         setBorders();
+        difficulty=gameBoardCard.getDifficulty();
     }
 
     /**

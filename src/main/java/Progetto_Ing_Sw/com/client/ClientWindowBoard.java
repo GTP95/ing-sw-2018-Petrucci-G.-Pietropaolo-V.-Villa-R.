@@ -13,18 +13,18 @@ public class ClientWindowBoard implements WindowBoardObserver{
 
     private int [][] Matrix; //righe - colonne
     private ArrayList<ArrayList<MatrixCell>> usedMatrix;
-
+    private int difficulty;
     //crea una matrice di vuota delle dimensioni volute
     public ClientWindowBoard(int rows, int columns) {
 
         Matrix = new int[rows][columns];
         ArrayList<ArrayList<MatrixCell>> usedMatrix = new ArrayList<>();
-
     }
 
     public ClientWindowBoard(ClientGameBoardCard gameBoardCard){
         Matrix=gameBoardCard.getMatrixScheme();
         usedMatrix=fromIntToArrayList(Matrix,Matrix.length,Matrix[0].length);
+        difficulty=gameBoardCard.getDifficulty();
     }
 
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
@@ -145,6 +145,8 @@ public class ClientWindowBoard implements WindowBoardObserver{
         return matrixArrays;
     }
 
-
+    public int getDifficulty() {
+        return difficulty;
+    }
 }
 
