@@ -265,7 +265,7 @@ public class SocketClient implements Runnable{
         out.println(messageToSend);
     }
 
-    private void tryToSendMessage(){    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
+    private void tryToSendMessage() throws IllegalDiceException{    //Controlla se LocalModel ha bisogno di inviare dati al server e nel caso li invia, altrimenti prosegue senza far nulla
         if(localModel.sendDataToServer){
             System.err.println("DEVO INVIARE QUALCOSA");
             if(localModel.sendWindowBoard=true){
@@ -273,8 +273,13 @@ public class SocketClient implements Runnable{
                 System.err.println("Inviata GameBoardCard");
                 localModel.sendWindowBoard=false;
             }
-            ClientDice diceTosend=localModel.getDiceToInsert();
+
             if(localModel.sendDiceToServer){
+                ClientDice diceTosend=localModel.getDiceToInsert();
+                if(diceTosend==null){
+                    localModel.sendDiceToServer=false;
+                    throw new IllegalDiceException("You haven't selected any dice!");
+                }
                 System.err.println("Invio il dado");
                 sendPlaceDiceActionMessage(JSONCreator.generateJSON(localModel.getDiceToInsert()), localModel.getRow(),localModel.getColumn());
                 localModel.sendDiceToServer=false;
