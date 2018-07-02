@@ -299,7 +299,6 @@ public  class LocalModel {
         this.sendWindowBoard=true;
         this.sendDataToServer=true;
         System.err.println("Settate tutte le variabili per l'invio della gameBoardCard");
-        getPlayerFromName(currentPlayerName).setChoosenGameBoardAndFavourTokens(choosenGameBoardCard);   //TODO: migliorare, meglio se viene fatto solo sul server ed inviati gli oggetti di tipo player
     }
 
     public void setCountdownValue(int countdownValue) {
