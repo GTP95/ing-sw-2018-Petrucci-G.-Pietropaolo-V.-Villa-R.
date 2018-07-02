@@ -97,7 +97,6 @@ public class LoginStage extends Stage {
 
             ClientSettings.getInstance().setUsername(UsernameField.getText());
             ClientSettings.getInstance().writeSettingsToJSON();
-            close();
         });
 
 
@@ -116,11 +115,6 @@ public class LoginStage extends Stage {
         UserNameSelectionScene = new Scene(LoginFrame,420,590);
         this.setScene(UserNameSelectionScene);
         
-        //Scena Tecnica
-
-        ImageView frame2 = new ImageView("Progetto_Ing_Sw/com/client/GUI/LoginScreenFrame.png");
-
-
 
 
 
@@ -136,7 +130,6 @@ public class LoginStage extends Stage {
         StackPane HostFrame= new StackPane();
         HostFrame.setId("GamemodeSelectionScreen");
         HostFrame.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
-        //HostFrame.getChildren().addAll(HostField,PortField,ChooseHostText,AcceptBTN2,frame2);
 
         ServerScene = new Scene(HostFrame,420,590);
     }
@@ -154,7 +147,7 @@ public class LoginStage extends Stage {
     }
 
     public void startLobby(){
-        close();
+        Platform.runLater(()->close());
     }
 
     public void usernameCheck(){
