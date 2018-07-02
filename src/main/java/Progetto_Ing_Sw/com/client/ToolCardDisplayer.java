@@ -118,14 +118,14 @@ public class ToolCardDisplayer extends Stage {
         ImageView ToolCardImage = new ImageView(Info);
 
         //Bottoni Utili
-        Button Pay1Icon = new Button("Pay 1 Token to Buy this Card");
+        Button Pay1Icon = new Button("");
         Pay1Icon.setTranslateX(450);
         Pay1Icon.setMinSize(256, 256);
         Pay1Icon.setId("Pay1Button");
         Pay1Icon.setContentDisplay(ContentDisplay.TOP);
 
 
-        Button Pay2Icon = new Button("Pay 2 Tokens to Buy this Card");
+        Button Pay2Icon = new Button("");
         Pay2Icon.setTranslateX(450);
         Pay2Icon.setMinSize(256, 256);
         Pay2Icon.setId("Pay2Button");
