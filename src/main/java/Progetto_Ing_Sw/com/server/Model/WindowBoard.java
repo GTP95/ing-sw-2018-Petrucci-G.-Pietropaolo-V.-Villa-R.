@@ -1154,5 +1154,8 @@ public class WindowBoard implements WindowBoardObserver{
         return usedMatrix;
     }
 
+    public int getDifficulty() {
+        return difficulty;
+    }
 }
 

@@ -29,6 +29,12 @@ public class ClientWindowBoard implements WindowBoardObserver{
         difficulty=gameBoardCard.getDifficulty();
     }
 
+    public ClientWindowBoard(int[][] matrix, ArrayList<ArrayList<MatrixCell>> usedMatrix, int difficulty) {
+        Matrix = matrix;
+        this.usedMatrix = usedMatrix;
+        this.difficulty = difficulty;
+    }
+
     public ArrayList<ArrayList<MatrixCell>> getUsedMatrix(){return usedMatrix;}
     public void setUsedMatrix(ArrayList<ArrayList<MatrixCell>> usedMatrix) {this.usedMatrix = usedMatrix;}
 
@@ -148,6 +154,7 @@ public class ClientWindowBoard implements WindowBoardObserver{
     }
 
     public int getDifficulty() {
+        System.err.println("getting WindowBoard difficulty: "+difficulty);
         return difficulty;
     }
 }
