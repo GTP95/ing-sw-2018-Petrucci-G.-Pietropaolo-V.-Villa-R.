@@ -51,10 +51,10 @@ public class SocketClient implements Runnable{
                 receiveMessage();
                 tryToSendMessage();
             } catch (TooManyPlayersException | Progetto_Ing_Sw.com.client.InvalidUsernameException e) {
-                localModel.addException(e);
+                localModel.addUsernameException(e);
             }
             catch (IllegalDiceException e){
-                localModel.addException(e);
+                localModel.addDiceException(e);
             }
         }
     }
@@ -95,11 +95,11 @@ public class SocketClient implements Runnable{
         String messageFields[]=messageContent.split("&");
         switch (messageFields[0]) {
             case "Connected":
-                localModel.setUsernameIsCorrect(true);
+                localModel.notifyUsernameIsCorrect();
                 System.out.println("Connected");
                 break;
             case "Username already in use":
-                localModel.setUsernameIsCorrect(false);
+               // localModel.setUsernameIsCorrect(false);
                 throw new InvalidUsernameException("Username already in use");  //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Max number of players exceeded":
                 throw new TooManyPlayersException();    //TODO: GUI

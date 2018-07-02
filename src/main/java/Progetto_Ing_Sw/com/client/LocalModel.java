@@ -320,7 +320,12 @@ public  class LocalModel {
         return exceptions.poll();
     }
 
-    public void addException(Exception e){  //aggiunge un'eccezione alla coda delle eccezioni lanciate dal server
+    public void addUsernameException(Exception e){
+        exceptions.add(e);
+        loginStageObserver.usernameException();
+    }
+
+    public void addDiceException(Exception e){  //aggiunge un'eccezione alla coda delle eccezioni lanciate dal server
 
         exceptions.add(e);
         tableGUIobserver.DiceExceptionThrower();
@@ -468,6 +473,10 @@ public  class LocalModel {
                     System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
             }
         }
+    }
+
+    public void notifyUsernameIsCorrect(){
+        loginStageObserver.startLobby();
     }
     
 }
