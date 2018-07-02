@@ -45,6 +45,9 @@ public  class LocalModel {
     private ClientRoundTrack roundTrack;
     private int toolCardWithEffectIndex;
 
+    public boolean useGrozingPliers;
+    private ClientDice diceToUseWithEffect;
+    private String command;
 
     private LocalModel(){
 
@@ -527,5 +530,20 @@ public  class LocalModel {
 
     public ArrayList<ClientEffect> getDrawnToolCardsWithEffect() {
         return drawnToolCardsWithEffect;
+    }
+
+    public void useGrozingPliers(ClientDice diceToModify, String command){
+        diceToUseWithEffect=diceToModify;
+        this.command=command;
+        useGrozingPliers=true;
+        sendDataToServer=true;
+    }
+
+    public ClientDice getDiceToUseWithEffect() {
+        return diceToUseWithEffect;
+    }
+
+    public String getCommand() {
+        return command;
     }
 }

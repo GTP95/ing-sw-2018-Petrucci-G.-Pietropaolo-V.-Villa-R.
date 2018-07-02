@@ -289,9 +289,15 @@ public class SocketClient implements Runnable{
                 localModel.skipTurn = false;
             }
 
+            if(localModel.useGrozingPliers){
+                String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                String actionDescription="Use Grozing Pliers"+"&"+localModel.getCommand();
+                sendActionMessage(diceJSON, actionDescription);
+            }
 
             localModel.sendDataToServer=false;
         }
+
     }
 
     private void sendPlaceDiceActionMessage(String json, int row, int column){

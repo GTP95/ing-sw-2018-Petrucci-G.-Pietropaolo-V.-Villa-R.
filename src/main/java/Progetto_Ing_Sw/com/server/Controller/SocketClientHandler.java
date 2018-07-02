@@ -265,6 +265,11 @@ public class SocketClientHandler implements Runnable {
                 } catch (IllegalDiceException e) {
                     sendControlMessage(e.getMessage());
                 }
+            case "Use Grozing Pliers":
+                //comunica a table
+                break;
+            default:
+                System.err.println("Can't understand the following action message: "+messageContent);
         }
     }
 
