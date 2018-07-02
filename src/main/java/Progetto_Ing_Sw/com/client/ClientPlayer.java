@@ -21,12 +21,8 @@ public class ClientPlayer{
 
     }
 
-    public void setChoosenGameBoardAndFavourTokens(ClientGameBoardCard choosenGameBoard) {
-        this.choosenGameBoard = choosenGameBoard;
-        this.favorTokens=choosenGameBoard.getDifficulty();
-    }
-    public void setDrawnGameBoardCard(ArrayList<ClientGameBoardCard> drawnGameBoardCard) {
-    }
+
+
 
     public String getName() {
         return name;
@@ -57,5 +53,10 @@ public class ClientPlayer{
     public void updateWindowBoard(ClientWindowBoard windowBoard){
         this.windowBoard=windowBoard;
     }
+
+    public void setFavorTokens(int favorTokens) {
+        this.favorTokens = favorTokens;
+    }
 }
+
 

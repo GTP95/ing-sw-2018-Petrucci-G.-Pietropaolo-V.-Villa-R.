@@ -350,6 +350,7 @@ public  class LocalModel {
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
                 generateToolcardsWithEffects();
+                getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(updatedWindowBoards.get(clientPlayerArrayList.indexOf(getPlayerFromName(ClientSettings.getInstance().getUsername()))).getDifficulty());
                 System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
                // System.err.println("Aspetto tablegui (addUpdatedWindowBoard)");
