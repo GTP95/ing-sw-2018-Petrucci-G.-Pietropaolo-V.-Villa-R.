@@ -1,7 +1,10 @@
 package Progetto_Ing_Sw.com.client;
 
+
 import Progetto_Ing_Sw.com.server.Model.ToolCards.GlazingHammer;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,6 +42,7 @@ public class ToolCardDisplayer extends Stage {
     Scene ToolCarddisplayerScene2;
     ClientDice DieToInsert;
     int valoredado =0;
+    int Row, Column;
     String GrozingCommand;
     Label DieChoosen;
     ArrayList<ToggleButton> DiceButtons;
@@ -93,7 +97,7 @@ public class ToolCardDisplayer extends Stage {
     }
 
     /**
-     * This stage needs the following parameters to build th right Tool Card 
+     * This stage needs the following parameters to build th right Tool Card
      * @param Title
      * @param Number
      * @param Description
@@ -101,7 +105,7 @@ public class ToolCardDisplayer extends Stage {
      * @param CardColor
      * @param FirstUsage
      */
-    ToolCardDisplayer(String Title, int Number, String Description, String Info, String CardColor, boolean FirstUsage) {
+    ToolCardDisplayer(String Title, int Number, String Description, String Info, String CardColor, boolean FirstUsage,int index) {
         this.setTitle(Title);
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
@@ -280,6 +284,9 @@ public class ToolCardDisplayer extends Stage {
         AcceptGrozing.setId("NextBTN");
         AcceptGrozing.setMaxSize(150, 150);
         AcceptGrozing.setTranslateX(600);
+        AcceptGrozing.setOnAction(event -> {
+            LocalModel.getInstance().useGrozingPliers(DieToInsert,GrozingCommand);
+        });
 
         Button IncreaseValue = new Button();
         IncreaseValue.setVisible(true);
@@ -307,8 +314,6 @@ public class ToolCardDisplayer extends Stage {
             AcceptGrozing.setVisible(true);
         });
 
-
-
         StackPane GrozingPliers = new StackPane();
         GrozingPliers.setPrefSize(1280, 720);
 
@@ -333,6 +338,9 @@ public class ToolCardDisplayer extends Stage {
         AcceptGridingStone.setMaxSize(150, 150);
         AcceptGridingStone.setVisible(false);
         AcceptGridingStone.setTranslateX(600);
+        AcceptGridingStone.setOnAction(event ->
+            LocalModel.getInstance().useGrindingStone(DieToInsert)
+        );
 
         Button FlipButton = new Button("Flip Die");
         FlipButton.setId("transparent");
@@ -694,7 +702,7 @@ public class ToolCardDisplayer extends Stage {
         //ToolCardDisplayerSecond.getChildren().addAll(ToolCardD1);
         switch (Title){
             case ("Grozing Pliers"):
-                GrozingPliers.getChildren().addAll(TitleInfo, GrozingPool, IncreaseValue, DecreaseValue, DieChoosen, AcceptGrozing);
+                GrozingPliers.getChildren().addAll(TitleInfo, GrozingPool, IncreaseValue, DecreaseValue, DieChoosen,AcceptGrozing);
                 ToolCardDisplayerSecond.getChildren().addAll(GrozingPliers,ToolCardD1);
                 break;
             case ("Grinding Stone"):
@@ -736,5 +744,9 @@ public class ToolCardDisplayer extends Stage {
 
 
 
+    }
+
+    public void closeToolCardMenu(){
+        close();
     }
 }

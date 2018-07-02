@@ -64,7 +64,6 @@ public class TableGUI extends Stage{
     ArrayList<ArrayList<Pane>> GridBlocks;
     ArrayList<ClientPlayer> OtherPlayersNames;
     TranslateTransition TimerEnteringAnimation, TimerExitingAnimation;
-    RotateTransition MoveBTNRotation;
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia, DieGrid;
@@ -287,7 +286,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(0).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getInfo(),
                         LocalModel.getInstance().getDrawnToolCards().get(0).getColor(),
-                        LocalModel.getInstance().getDrawnToolCards().get(0).isFirstUsage());
+                        LocalModel.getInstance().getDrawnToolCards().get(0).isFirstUsage(),
+                        0);
                 ToolCard1Stage.showAndWait();
                 ToolCard1BTN.setDisable(false);
                     });
@@ -305,7 +305,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(1).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getInfo(),
                         LocalModel.getInstance().getDrawnToolCards().get(1).getColor(),
-                        LocalModel.getInstance().getDrawnToolCards().get(1).isFirstUsage());
+                        LocalModel.getInstance().getDrawnToolCards().get(1).isFirstUsage(),
+                        1);
                 ToolCard2Stage.showAndWait();
                 ToolCard2BTN.setDisable(false);
             });
@@ -322,7 +323,8 @@ public class TableGUI extends Stage{
                         LocalModel.getInstance().getDrawnToolCards().get(2).getDescription(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getInfo(),
                         LocalModel.getInstance().getDrawnToolCards().get(2).getColor(),
-                        LocalModel.getInstance().getDrawnToolCards().get(2).isFirstUsage());
+                        LocalModel.getInstance().getDrawnToolCards().get(2).isFirstUsage(),
+                        2);
                 ToolCard3Stage.showAndWait();
                 ToolCard3BTN.setDisable(false);
             });
