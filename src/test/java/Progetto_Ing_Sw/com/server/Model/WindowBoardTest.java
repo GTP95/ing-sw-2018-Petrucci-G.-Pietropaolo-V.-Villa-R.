@@ -767,4 +767,31 @@ public class WindowBoardTest {
         windowBoard.insertDice(3,2,dice5r);//regole normali cella bianca
 
     }
+
+    @Test
+    public void CalculateFinalPoints() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+        int PrivateObjectiveColor = Color.RED;
+
+        windowBoard.insertDice(4,1,dice5r);
+        windowBoard.insertDice(4,2,dice6Y);
+        windowBoard.insertDice(3,3,dice1);
+        windowBoard.insertDice(2,4,dice5);
+        windowBoard.insertDice(1,4,dice4r);
+        windowBoard.insertDice(2,5,dice2);
+
+        System.out.println("I Punti calcolati dalla Private Objective sono :"+windowBoard.calculatePointsFromPrivateObjective(Color.RED));
+        Assert.assertEquals(windowBoard.calculatePointsFromPrivateObjective(Color.RED),9);
+
+        System.out.println("I Punti da rimuovere causa cella vuota sono :"+windowBoard.calculatePointsFromEmptySpaces());
+        Assert.assertEquals(windowBoard.calculatePointsFromEmptySpaces(),14);
+
+
+    }
 }
