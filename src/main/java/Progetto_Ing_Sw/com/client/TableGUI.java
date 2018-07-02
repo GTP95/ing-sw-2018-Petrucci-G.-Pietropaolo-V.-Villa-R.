@@ -215,7 +215,7 @@ public class TableGUI extends Stage{
 
             //Player Stats
             Tokens = new Label("•");
-            Tokens.setText(String.join("", Collections.nCopies(gameBoardCard.getDifficulty(), "  •\n")));
+            //Tokens.setText(String.join("", Collections.nCopies(gameBoardCard.getDifficulty(), "  •\n")));
             Tokens.setId("Tokens");
             Tokens.setTranslateX(-220);
             Tokens.setMinWidth(70);
@@ -235,7 +235,7 @@ public class TableGUI extends Stage{
                         + "-fx-background-size: 0.99"
                 );
             });
-            //Tokens.setTranslateY(180);
+
 
 
 
@@ -712,6 +712,7 @@ public class TableGUI extends Stage{
             updatePublicObjectiveCards();
             updateToolCards();
             updateDice();
+            updateTokens();
         }
 
         public void updateOtherPlayersBoards(){
@@ -861,6 +862,11 @@ public class TableGUI extends Stage{
             MoveException.showAndWait();
             DiceCover.setVisible(false);
         });
+    }
+
+    public void updateTokens(){
+        Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  •\n")));
+
     }
 
 }

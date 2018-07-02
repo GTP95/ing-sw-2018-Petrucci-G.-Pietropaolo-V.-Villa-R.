@@ -142,10 +142,22 @@ public class ToolCardDisplayer extends Stage {
         if (FirstUsage == true) {
             Pay1Icon.setVisible(false);
             Pay2Icon.setVisible(true);
-        } else {
+            Pay2Icon.setOnAction(event -> {
+                //TODO CONTROLLO RISORSE
+                Pay2Icon.setVisible(false);
+                GoBack.setVisible(false);
+                SceneTransition.play();
+                SceneTransition.setOnFinished(event1 -> {
+                    this.setScene(ToolCarddisplayerScene2);
+                    ToolCardD.setTranslateX(0);
+            });
+        });
+        }
+        else {
             Pay1Icon.setVisible(true);
             Pay2Icon.setVisible(false);
             Pay1Icon.setOnAction(event -> {
+                //TODO CONTROLLO RISORSE
                 Pay1Icon.setVisible(false);
                 GoBack.setVisible(false);
                 SceneTransition.play();
