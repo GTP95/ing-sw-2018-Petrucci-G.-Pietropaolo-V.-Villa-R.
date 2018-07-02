@@ -1,10 +1,11 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.server.Model.WindowBoard;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
@@ -17,7 +18,8 @@ import java.io.FileNotFoundException;
  *  The class CopperFoilBurnisher implements the ToolCard CopperFoilBurnisher
  *  @author Roberto Villa
  */
-public class ClientCopperFoilBurnisher extends ClientEffect{
+
+/*public class ClientCopperFoilBurnisher extends ClientEffect{
     //-------import del costo di primo uso
     private boolean localFirstUsage;
     {try {
@@ -55,9 +57,9 @@ public class ClientCopperFoilBurnisher extends ClientEffect{
      * @return
      * @throws PlaceDiceException
      */
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
+ /*   public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
 
-        Dice localDice = new Dice(dice.getValue(),dice.getColor());
+        ClientDice localDice = new ClientDice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());
 
         if(firstUsage==false){
@@ -94,7 +96,7 @@ public class ClientCopperFoilBurnisher extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -102,3 +104,4 @@ public class ClientCopperFoilBurnisher extends ClientEffect{
         return toolCardTitle;
     }
 }
+*/

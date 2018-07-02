@@ -1,29 +1,28 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
+/*public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entrata, lo incrementa/decrementa di 1 e lo posiziona
 
-    private WindowBoard localWindowBoard = new WindowBoard(4,5);
+    private ClientWindowBoard localWindowBoard = new ClientWindowBoard(4,5);
     private String localCommand = "";
-    private Dice localDice = new Dice(0,0);
+    private ClientDice localDice = new ClientDice(0,0);
     private int localRow = 0;
     private int localColumn = 0;
     private boolean firstUsage;
     private boolean localFirstUsage;
     private String toolCardTitle;
 
-    public void setLocalBoard(WindowBoard localBoard) {this.localWindowBoard = localBoard;}
+    public void setLocalBoard(ClientWindowBoard localBoard) {this.localWindowBoard = localBoard;}
     public void setLocalCommand(String localCommand) {this.localCommand = localCommand;}
-    public void setLocalDice(Dice localDice) {this.localDice = localDice;}
+    public void setLocalDice(ClientDice localDice) {this.localDice = localDice;}
     public void setLocalRow(int localRow) {this.localRow = localRow;}
     public void setLocalColumn(int localColumn) {this.localColumn = localColumn;}
 
@@ -45,9 +44,9 @@ public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entra
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
     public boolean isLocalFirstUsage() {return localFirstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, String command, ClientDice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
-        Dice localDice = new Dice(dice.getValue(),dice.getColor());
+        ClientDice localDice = new ClientDice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());
 
         if(firstUsage==false) {
@@ -127,10 +126,10 @@ public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entra
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
 
-        WindowBoard methodBoard = localWindowBoard;
-        Dice methodDice = localDice;
+        ClientWindowBoard methodBoard = localWindowBoard;
+        ClientDice methodDice = localDice;
         String methodCommand = localCommand;
         int methodRow = localRow;
         int methodColumn = localColumn;
@@ -189,4 +188,4 @@ public class ClientGrozingPliers extends ClientEffect{ //prende un dado un entra
     public String getTitle() {
         return toolCardTitle;
     }
-}
+}*/

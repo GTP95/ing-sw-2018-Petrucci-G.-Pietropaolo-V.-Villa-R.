@@ -1,16 +1,15 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class ClientTapWheel extends ClientEffect {
+/*public class ClientTapWheel extends ClientEffect {
 
     //-------import del costo di primo uso
     private boolean localFirstUsage;
@@ -34,11 +33,11 @@ public class ClientTapWheel extends ClientEffect {
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice roundTrackDice, int rowBefore1, int columnBefore1, int rowBefore2, int columnBefore2, int rowAfter1, int columnAfter1, int rowAfter2, int columnAfter2, Dice dice1, Dice dice2, int favorTokensUsed) throws PlaceDiceException{
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice roundTrackDice, int rowBefore1, int columnBefore1, int rowBefore2, int columnBefore2, int rowAfter1, int columnAfter1, int rowAfter2, int columnAfter2, ClientDice dice1, ClientDice dice2, int favorTokensUsed) throws PlaceDiceException{
 
-        Dice localdice1 = new Dice(dice1.getValue(),dice1.getColor());
-        Dice localdice2 = new Dice(dice2.getValue(),dice2.getColor());
-        Dice roundTrackLocalDice = new Dice(roundTrackDice.getValue(),roundTrackDice.getColor());
+        ClientDice localdice1 = new ClientDice(dice1.getValue(),dice1.getColor());
+        ClientDice localdice2 = new ClientDice(dice2.getValue(),dice2.getColor());
+        ClientDice roundTrackLocalDice = new ClientDice(roundTrackDice.getValue(),roundTrackDice.getColor());
         int colorChoosed = roundTrackLocalDice.getColor();
 
         if(firstUsage==false)
@@ -92,7 +91,7 @@ public class ClientTapWheel extends ClientEffect {
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -100,4 +99,4 @@ public class ClientTapWheel extends ClientEffect {
     public String getTitle() {
         return toolCardTitle;
     }
-}
+}*/

@@ -1,11 +1,10 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
@@ -16,7 +15,7 @@ Devi rispettare tutte le altre restrizioni di piazzamento
 */
 
 //TESTING fatto direttamente sulla classe GamePlayTest
-public class ClientEglomiseBrush extends ClientEffect{
+/*public class ClientEglomiseBrush extends ClientEffect{
 
     private boolean localFirstUsage;
     {try {
@@ -39,7 +38,7 @@ public class ClientEglomiseBrush extends ClientEffect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());
@@ -82,7 +81,7 @@ public class ClientEglomiseBrush extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -91,3 +90,4 @@ public class ClientEglomiseBrush extends ClientEffect{
         return toolcardTitle;
     }
 }
+*/

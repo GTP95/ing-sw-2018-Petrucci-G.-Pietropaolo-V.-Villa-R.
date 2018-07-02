@@ -1,17 +1,16 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.*;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.client.*;
+
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
 //TODO FARE TEST DI QUESTA CARTA
 
-public class ClientLensCutter extends ClientEffect{
+/*public class ClientLensCutter extends ClientEffect{
 
-    private RoundTrack roundTrack = RoundTrack.getInstance();
+    private ClientRoundTrack roundTrack = ClientRoundTrack.getInstance();
 
     private boolean localFirstUsage;
     {try {
@@ -33,10 +32,10 @@ public class ClientLensCutter extends ClientEffect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, Dice roundTrackDice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice dice, ClientDice roundTrackDice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
-        Dice localDice = new Dice(dice.getValue(),dice.getColor());
-        Dice localRoundTrackDice = new Dice(roundTrackDice.getValue(),roundTrackDice.getColor());
+        ClientDice localDice = new ClientDice(dice.getValue(),dice.getColor());
+        ClientDice localRoundTrackDice = new ClientDice(roundTrackDice.getValue(),roundTrackDice.getColor());
 
 
         if(firstUsage==false)
@@ -74,7 +73,7 @@ public class ClientLensCutter extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -83,3 +82,4 @@ public class ClientLensCutter extends ClientEffect{
         return toolCardTitle;
     }
 }
+*/

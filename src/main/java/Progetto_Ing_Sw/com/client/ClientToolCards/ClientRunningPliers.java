@@ -1,14 +1,12 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
-import Progetto_Ing_Sw.com.client.ClientRoundTrack;
-import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.*;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.client.*;
+
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class ClientRunningPliers extends ClientEffect{
+/*public class ClientRunningPliers extends ClientEffect{
 
     private Table table = Table.getOurInstance();
 
@@ -32,10 +30,10 @@ public class ClientRunningPliers extends ClientEffect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws PlaceDiceException {
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice dice1, ClientDice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws PlaceDiceException {
 
-        Dice localDice1 = new Dice(dice1.getValue(),dice1.getColor());
-        Dice localDice2 = new Dice(dice2.getValue(),dice2.getColor());
+        ClientDice localDice1 = new ClientDice(dice1.getValue(),dice1.getColor());
+        ClientDice localDice2 = new ClientDice(dice2.getValue(),dice2.getColor());
 
         if(firstUsage==false)
         {
@@ -81,7 +79,7 @@ public class ClientRunningPliers extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -89,4 +87,4 @@ public class ClientRunningPliers extends ClientEffect{
     public String getTitle() {
         return toolCardTitle;
     }
-}
+}*/

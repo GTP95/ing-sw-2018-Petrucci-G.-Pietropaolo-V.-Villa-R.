@@ -1,19 +1,19 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.Dice;
-import Progetto_Ing_Sw.com.server.Model.PlaceDiceException;
-import Progetto_Ing_Sw.com.server.Model.ToolCard;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
-import Progetto_Ing_Sw.com.server.Model.WindowBoard;
+
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
 //TESTATA direttamente in GamePlayTest
-public class ClientCorkBackedStraightedge extends ClientEffect{
+/*public class ClientCorkBackedStraightedge extends ClientEffect{
 
-    private WindowBoard helpBoard;
+    private ClientWindowBoard helpBoard;
 
     private boolean localFirstUsage;
     {try {
@@ -35,9 +35,9 @@ public class ClientCorkBackedStraightedge extends ClientEffect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
+    public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
-        Dice localDice = new Dice(dice.getValue(),dice.getColor());
+        ClientDice localDice = new ClientDice(dice.getValue(),dice.getColor());
 
         if(firstUsage==false)
         {
@@ -70,7 +70,7 @@ public class ClientCorkBackedStraightedge extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -79,3 +79,4 @@ public class ClientCorkBackedStraightedge extends ClientEffect{
         return toolCardTitle;
     }
 }
+*/

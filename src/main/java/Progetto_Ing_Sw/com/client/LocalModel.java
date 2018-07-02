@@ -5,9 +5,13 @@ import Progetto_Ing_Sw.com.client.ClientToolCards.*;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/*
-* Questa classe non utilizza synchronyzed in quanto l'esecuzione in ordine dei metodi è implicita nel pattern observer e non utilizza le primitive wait() e
-* notify a causa della IllegalMonitorStateException.
+/**
+ * @author Giacomo Tommaso Petrucci
+ * This class is used to keep a copy of the status of the game synchronized with the server so the view can display the
+ * current status and be separated from the model following the MVC pattern prescriptions.
+ * NOTE:
+* This class doens't use the synchronyzed keywork because the ordered execution of methods is omplicit in the observer
+ *pattern and doesn't utilize the primitives wait() and notify() because of IllegalMonitorStateException.
 */
 
 public  class LocalModel {
@@ -41,6 +45,7 @@ public  class LocalModel {
     private ClientRoundTrack roundTrack;
     private int toolCardWithEffectIndex;
 
+
     private LocalModel(){
 
         sendDataToServer=false;
@@ -53,19 +58,30 @@ public  class LocalModel {
         drawnToolCardsWithEffect=new ArrayList<>();
     }
 
+
+    /**
+     * Used to implement the singleton pattern, call this instead of a constructor
+     * @return a reference to it's unique instance
+     */
     public static LocalModel getInstance(){
         return ourInstance;
     }
 
 
-
-
-
+    /**
+     *
+     * @return the ArrayList of players in the current game
+     */
     public synchronized ArrayList<ClientPlayer> getClientPlayerArrayList() {
         System.out.println("Getting clientPlayerArrayList");
         return clientPlayerArrayList;
     }
 
+    /**
+     * Returns a reference to a player given it's name (username)
+     * @param name  the name of the player
+     * @return a reference to the specified player
+     */
     public ClientPlayer getPlayerFromName(String name){
         ClientPlayer player=null;
 
@@ -79,11 +95,18 @@ public  class LocalModel {
         return player;
     }
 
+    /**
+     * @return a reference to the ArrayList containing the dice aviable in the draftpool for the current round
+     */
     public ArrayList<ClientDice> getDrawnDice() {
         while(drawnDice==null);
         return drawnDice;
     }
 
+    /**
+     *
+     * @return a refernce to the avaiable tool cards of the current game
+     */
     public ArrayList<ClientToolCard> getDrawnToolCards() {
         while(drawnToolCards==null){
             try {
@@ -95,22 +118,46 @@ public  class LocalModel {
         return drawnToolCards;
     }
 
+    /**
+     * Returns an int representing how many seconds the lobby will still be visible before the players will be assigned
+     * their own private objective and will have to choose their own gameBoardCard
+     * @return int seconds left to closing lobby
+     */
     public int getCountdownValue() {
         return countdownValue; //cast ad int per comodità della GUI
     }
 
+    /**
+     * After the player has choosen a ClientGameBoarCard, this method returns a reference to the corresponding ClientWindowBoard
+     * @see ClientGameBoardCard ClientWindowBoard
+     * @return a reference to the choosen ClientWindowBoard
+     */
     public ClientWindowBoard getWindowBoard() {
         return windowBoard;
     }
 
+    /**
+     * @see ClientPublicObjectiveCard
+     * @return a reference to the arrayList containing the avaiable public objective cards
+     */
     public ArrayList<ClientPublicObjectiveCard> getDrawnPublicObjectiveCards() {    //provo a non sincronizzare perchè la sincronizzazione è implicita nell'observer
         return drawnPublicObjectiveCards;
     }
 
-    public ClientDice getDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard e lo reimposta a null
+    /**
+     * After the player has clicked on the "Move" button of the TableGUI, the die choosen from the player is saved in
+     * the attribute diceToInsert. This method returns a reference to the dice the player wants to insert in it's WindowBoard
+     * @see TableGUI
+     * @return a refernce to the dice the player wants to insert
+     */
+    public ClientDice getDiceToInsert() {   //Restituisce il dado di cui si richiede l'inserimento nella WindowBoard
         return diceToInsert;
     }
 
+    /**
+     *
+     * @param clientPlayer
+     */
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
         boolean addPlayer=true;
             if (clientPlayerArrayList == null) clientPlayerArrayList = new ArrayList<>();
@@ -350,7 +397,7 @@ public  class LocalModel {
             System.err.println("Ricevute tutte le gameboardcard");
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
-                generateToolcardsWithEffects();
+//                generateToolcardsWithEffects();   //TODO: decommentare!
                 getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(updatedWindowBoards.get(clientPlayerArrayList.indexOf(getPlayerFromName(ClientSettings.getInstance().getUsername()))).getDifficulty());
                 System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
@@ -425,7 +472,7 @@ public  class LocalModel {
         System.err.println("roundtrackobserver notificato");
     }
     
-    private void generateToolcardsWithEffects(){
+  /*  private void generateToolcardsWithEffects(){
         for (ClientToolCard toolCard : drawnToolCards){
             switch(toolCard.getTitle()){
                 case "Grozing Pliers":
@@ -468,7 +515,7 @@ public  class LocalModel {
                     System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
             }
         }
-    }
+    }*/
 
     public void notifyUsernameIsCorrect(){
         loginStageObserver.startLobby();

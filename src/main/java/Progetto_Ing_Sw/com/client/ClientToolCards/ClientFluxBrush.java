@@ -8,7 +8,7 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 import java.util.SplittableRandom;
 
-public class ClientFluxBrush extends ClientEffect{
+/*public class ClientFluxBrush extends ClientEffect{
 
     private Table table = Table.getOurInstance();
     private String toolcardTitle;
@@ -79,4 +79,4 @@ public class ClientFluxBrush extends ClientEffect{
     public String getTitle() {
         return toolcardTitle;
     }
-}
+}*/

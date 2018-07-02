@@ -1,15 +1,17 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
+import Progetto_Ing_Sw.com.client.ClientDice;
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.*;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 import java.util.SplittableRandom;
 
-public class ClientGlazingHammer extends ClientEffect{
+/*public class ClientGlazingHammer extends ClientEffect{
 
+    //TODO: rimuovere table
     private Table table = Table.getOurInstance();
 
     private boolean localFirstUsage;
@@ -42,7 +44,7 @@ public class ClientGlazingHammer extends ClientEffect{
                 if(table.getActivePlayer().getRoundNumber()==1)//controlla che effettivamente il giocatore sia nel secondo turno
                 {
                     for(int d=0;d<table.getDrawnDice().size();d++){
-                        Dice localDice = new Dice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
+                        ClientDice localDice = new ClientDice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
                         int newDiceValue =new SplittableRandom().nextInt(1,7);
                         localDice.setValue(newDiceValue);
                         table.getDrawnDice().get(d).setValue(localDice.getValue());
@@ -66,7 +68,7 @@ public class ClientGlazingHammer extends ClientEffect{
             if(table.getActivePlayer().getRoundNumber()==1)//controlla che effettivamente il giocatore sia nel secondo turno
             {
                 for(int d=0;d<table.getDrawnDice().size();d++){
-                    Dice localDice = new Dice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
+                    ClientDice localDice = new ClientDice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
                     int newDiceValue =new SplittableRandom().nextInt(1,7);
                     localDice.setValue(newDiceValue);
                     table.getDrawnDice().get(d).setValue(localDice.getValue());
@@ -84,7 +86,7 @@ public class ClientGlazingHammer extends ClientEffect{
     }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -93,3 +95,4 @@ public class ClientGlazingHammer extends ClientEffect{
         return toolCardTitle;
     }
 }
+*/

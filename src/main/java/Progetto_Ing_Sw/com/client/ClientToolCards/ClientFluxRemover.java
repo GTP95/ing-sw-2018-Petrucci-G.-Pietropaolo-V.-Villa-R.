@@ -1,13 +1,15 @@
 package Progetto_Ing_Sw.com.client.ClientToolCards;
 
 import Progetto_Ing_Sw.com.client.ClientToolCard;
-import Progetto_Ing_Sw.com.server.Model.*;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
+
+import Progetto_Ing_Sw.com.client.ClientWindowBoard;
+import Progetto_Ing_Sw.com.client.IllegalDiceException;
+import Progetto_Ing_Sw.com.client.PlaceDiceException;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-public class ClientFluxRemover extends ClientEffect{
+/*public class ClientFluxRemover extends ClientEffect{
 
         private boolean localFirstUsage;
         {try {
@@ -29,7 +31,8 @@ public class ClientFluxRemover extends ClientEffect{
         public boolean isFirstUsage() {return firstUsage;}
         public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
-        public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed) throws PlaceDiceException {
+        //TODO: cambiare se possibile DiceBag con dadi in LocalModel
+        public ClientWindowBoard applyEffect(ClientWindowBoard localBoard, ClientDice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed) throws PlaceDiceException {
 
             Dice localDice = new Dice(dice.getValue(),dice.getColor());
 
@@ -82,7 +85,7 @@ public class ClientFluxRemover extends ClientEffect{
         }
 
     @Override
-    public WindowBoard applyEffect() throws PlaceDiceException {
+    public ClientWindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
@@ -91,3 +94,4 @@ public class ClientFluxRemover extends ClientEffect{
         return toolCardTitle;
     }
 }
+*/
