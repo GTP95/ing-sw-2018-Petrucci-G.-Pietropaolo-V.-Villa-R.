@@ -865,8 +865,9 @@ public class TableGUI extends Stage{
     }
 
     public void updateTokens(){
-        Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  •\n")));
-
+        Platform.runLater(()->
+                Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  •\n")))
+        );
     }
 
 }
