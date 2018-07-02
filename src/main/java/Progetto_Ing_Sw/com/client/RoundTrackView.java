@@ -154,7 +154,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round4Array.add(Die);
             Round4Dice.getChildren().addAll(Die);
         }
@@ -167,7 +167,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round5Array.add(Die);
             Round5Dice.getChildren().addAll(Die);
         }
@@ -180,7 +180,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round6Array.add(Die);
             Round6Dice.getChildren().addAll(Die);
         }
@@ -193,7 +193,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round7Array.add(Die);
             Round7Dice.getChildren().addAll(Die);
         }
@@ -206,7 +206,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round8Array.add(Die);
             Round8Dice.getChildren().addAll(Die);
         }
@@ -219,7 +219,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round9Array.add(Die);
             Round9Dice.getChildren().addAll(Die);
         }
@@ -232,7 +232,7 @@ public class RoundTrackView extends Stage {
             Label Die = new Label();
             Die.setPrefSize(75,75);
             Die.setMaxSize(75,75);
-            Die.setVisible(false);
+            Die.setVisible(true);
             Round10Array.add(Die);
             Round10Dice.getChildren().addAll(Die);
         }
