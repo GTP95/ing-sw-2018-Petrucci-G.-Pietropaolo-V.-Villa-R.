@@ -45,7 +45,7 @@ public  class LocalModel {
     private ClientRoundTrack roundTrack;
     private int toolCardWithEffectIndex;
 
-    public boolean useGrozingPliers;
+    public boolean useGrozingPliers, useGrindingStone;
     private ClientDice diceToUseWithEffect;
     private String command;
 
@@ -546,4 +546,11 @@ public  class LocalModel {
     public String getCommand() {
         return command;
     }
+
+    public void useGrindingStone(ClientDice dice){
+        diceToUseWithEffect=dice;
+        useGrindingStone=true;
+        sendDataToServer=true;
+    }
+
 }

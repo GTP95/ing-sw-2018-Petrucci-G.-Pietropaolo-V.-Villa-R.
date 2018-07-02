@@ -268,6 +268,9 @@ public class SocketClientHandler implements Runnable {
             case "Use Grozing Pliers":
                 //comunica a table
                 break;
+            case "Use Grinding Stone":
+                //table
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }

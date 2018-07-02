@@ -293,6 +293,13 @@ public class SocketClient implements Runnable{
                 String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
                 String actionDescription="Use Grozing Pliers"+"&"+localModel.getCommand();
                 sendActionMessage(diceJSON, actionDescription);
+                localModel.useGrozingPliers=false;
+            }
+
+            if(localModel.useGrindingStone){
+                String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                sendActionMessage(diceJSON,"Use Grinding Stone");
+                localModel.useGrindingStone=false;
             }
 
             localModel.sendDataToServer=false;
