@@ -27,6 +27,7 @@ public  class LocalModel {
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
     private RoundTrackView roundTrackViewobserver;
+    private ToolCardDisplayer toolCardDisplayerObserver;
     private ClientPrivateObjectiveCard privateObjectiveCard;
     private boolean gameRunning;
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
@@ -242,6 +243,9 @@ public  class LocalModel {
             }
             if (currentObject instanceof RoundTrackView){
                 this.roundTrackViewobserver=(RoundTrackView)currentObject;
+            }
+            if(currentObject instanceof ToolCardDisplayer){
+                this.toolCardDisplayerObserver=(ToolCardDisplayer) currentObject;
             }
     }
 
@@ -553,4 +557,8 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    public void notifyUsedToolCard(){
+        toolCardDisplayerObserver.closeToolCardMenu();
+        tableGUIobserver.updateTokens();    //TODO aggiornare token
+    }
 }

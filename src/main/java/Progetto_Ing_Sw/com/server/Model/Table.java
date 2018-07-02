@@ -297,15 +297,54 @@ private void buildMirrorArray(){
         Table.players = players;
     }
 
-    public void useToolCardwithEffect(Effect effect, Player player) throws PlaceDiceException {
-        player.setChoosenWindowBoard(effect.applyEffect());
+
+
+    public Effect getToolCardWithEffectFromName(String title){
+        Effect toolCardwithEffect=null;
+        for(Effect card : toolCardsWithEffect){
+            if(card.getTitle().equals(title)){
+                toolCardwithEffect=card;
+                break;
+            }
+        }
+        return toolCardwithEffect;
     }
 
-/*private Effect getToolCardWithEffectFromTitle(String title){
-        for(Effect card : toolCardsWithEffect){
-            if()
+
+    public void useToolCard(String title, Player player)throws NotEnoughFavorTokensException {
+        Effect toolCardWithEffect=getToolCardWithEffectFromName(title);
+        player.useToolCard(toolCardWithEffect);   //decrementa il numero di favor tokens o lancia eccezione se non sono abbastanza
+    }
+
+
+
+    public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
+        Effect grozingPliers=getToolCardWithEffectFromName("Grozing Pliers");
+        Dice draftpoolDice=drawnDice.get(drawnDice.indexOf(dice));
+    if (command.equals("UP")) {
+        if (dice.getValue() == 6) {
+            grozingPliers.setFirstUsage(true);
+        } else {
+            draftpoolDice.setValue(dice.increaseValue(dice.getValue()));
+            grozingPliers.setFirstUsage(true);
         }
-}*/
+
+    } else if (command.equals("DOWN")) {
+        if (dice.getValue() == 1) {
+            grozingPliers.setFirstUsage(true);
+        } else {
+            draftpoolDice.setValue(dice.decreaseValue(dice.getValue()));
+            grozingPliers.setFirstUsage(true);
+        }
+    }
+
+
+    for(Player player : players){       //notifico i client della modifica alla draftpool
+        player.getSocketClientHandler().updateDice=true;
+        notifyAllSocketClientHandlers();
+    }
+}
+
 
 }
 

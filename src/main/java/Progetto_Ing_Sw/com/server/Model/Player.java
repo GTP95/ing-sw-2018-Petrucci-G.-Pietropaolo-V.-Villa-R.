@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class Player{
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {
         this.choosenGameBoard = choosenGameBoard;
         this.choosenWindowBoard=new WindowBoard(choosenGameBoard);
+        setFavorTokens();
     }
     public void setFavorTokens(){
         favorTokens=choosenGameBoard.getDifficulty();
@@ -87,8 +89,8 @@ public class Player{
         return socketClientHandler;
     }
 
-    public void useToolCard(ToolCard card) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore
-        if(!card.isFirstUsage() && favorTokens>=1) favorTokens--;
+    public void useToolCard(Effect toolCardWithEffect) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore
+        if(!toolCardWithEffect.isFirstUsage() && favorTokens>=1) favorTokens--;
         else if(favorTokens>=2) favorTokens-=2; //ramo else, si finisce qui se non è il primo utilizzo della carta. Dunque il costo della carta è di due segnalini favore e bisogna controllare che il giocatore ce li abbia
             else throw new NotEnoughFavorTokensException();
     }

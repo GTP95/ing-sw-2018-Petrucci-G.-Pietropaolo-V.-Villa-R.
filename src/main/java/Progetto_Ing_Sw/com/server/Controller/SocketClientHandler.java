@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -32,6 +32,7 @@ public class SocketClientHandler implements Runnable {
         isMyTurn=false;
         otherPlayersWindowBoardsSent=false;
         updateRoundTrack=false;
+        notifyUsedToolCard=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -103,9 +104,9 @@ public class SocketClientHandler implements Runnable {
             catch (IOException e){
                 e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
            }
-           /*catch (InterruptedException e) {
-                sendPlayerMessage();
-            }*/
+           catch (NotEnoughFavorTokensException e) {
+                sendControlMessage("Not enough favor tokens");
+            }
 
     }
 
@@ -222,7 +223,7 @@ public class SocketClientHandler implements Runnable {
 
     }
 
-    private void handleInsertDice(Dice dice, int row, int column) {
+ /*   private void handleInsertDice(Dice dice, int row, int column) {
         try {
             myPlayer.getChoosenWindowBoard().insertDice(row, column, dice);
         }
@@ -238,9 +239,9 @@ public class SocketClientHandler implements Runnable {
         } catch (NotEnoughFavorTokensException e) {
             sendControlMessage("You don't have enough favour tokens!");
         }
-    }
+    }*/
 
-    private void handleActionMessage(String messageContent) {
+    private void handleActionMessage(String messageContent)throws NotEnoughFavorTokensException {
         String[] fields = messageContent.split("&");
         switch (fields[1]) {
             case "Place dice":
@@ -266,7 +267,10 @@ public class SocketClientHandler implements Runnable {
                     sendControlMessage(e.getMessage());
                 }
             case "Use Grozing Pliers":
-                //comunica a table
+                Dice dice=JSONCreator.diceLoaderFromString(fields[0]);
+                String command=fields[1];
+                table.useToolCard("Grozing Pliers",myPlayer);
+                table.useGrozingPliers(dice, command,myPlayer);
                 break;
             case "Use Grinding Stone":
                 //table
@@ -278,7 +282,7 @@ public class SocketClientHandler implements Runnable {
 
     private void handleEndTurn(){}
 
-    private void receiveMessage(){
+    private void receiveMessage() throws NotEnoughFavorTokensException{
         try {
             if (in.ready()) {     //aspetta che il buffer sia prono ad essere letto
                 String message = in.readLine();
@@ -309,6 +313,7 @@ public class SocketClientHandler implements Runnable {
         sendRoundTrackUpdateIfNecessary();
         notifyIfIsYourTurn();
         notifyWhoIsTheCurrentPlayer();
+        notifyUsedToolCard();
     }
 
     private void notifyIfIsYourTurn(){
@@ -354,12 +359,7 @@ public class SocketClientHandler implements Runnable {
                sendControlMessage("Your turn just ended");
                isMyTurn=false;
                break;
-           case "useToolCard":
-               try {
-                   table.useToolCardwithEffect(JSONCreator.toolCardWithEffectLoaderFromString(messageFields[1]),myPlayer);
-               } catch (PlaceDiceException e) {
-                   sendControlMessage(e.getMessage());
-               }
+
            default:
                System.err.println("Can't understand the following control message: "+message);
        }
@@ -386,6 +386,12 @@ public class SocketClientHandler implements Runnable {
         if(updateRoundTrack){
             sendJSONmessage(JSONCreator.generateJSON(RoundTrack.getInstance()),"RoundTrack");
             updateRoundTrack=false;
+        }
+   }
+
+   private void notifyUsedToolCard(){
+        if(notifyUsedToolCard){
+            sendControlMessage("Tool card used correctly");
         }
    }
 

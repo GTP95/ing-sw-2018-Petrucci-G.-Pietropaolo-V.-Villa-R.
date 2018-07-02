@@ -28,6 +28,10 @@ public class CorkBackedStraightedge extends Effect{
     }
 
     public boolean isFirstUsage() {return firstUsage;}
+
+
+
+    @Override
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
