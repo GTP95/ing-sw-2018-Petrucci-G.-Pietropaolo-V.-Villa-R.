@@ -39,6 +39,7 @@ public  class LocalModel {
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
     private ClientRoundTrack roundTrack;
+    private int toolCardWithEffectIndex;
 
     private LocalModel(){
 
@@ -472,5 +473,8 @@ public  class LocalModel {
     public void notifyUsernameIsCorrect(){
         loginStageObserver.startLobby();
     }
-    
+
+    public void setToolCardWithEffectIndex(int toolCardWithEffectIndex) {
+        this.toolCardWithEffectIndex = toolCardWithEffectIndex;
+    }
 }

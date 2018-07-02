@@ -5,6 +5,12 @@ import Progetto_Ing_Sw.com.server.Model.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ *
+ *
+ *
+ */
+
 public class ClientPlayer{
    private String name;
    private int favorTokens;
