@@ -1,5 +1,7 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+import Progetto_Ing_Sw.com.server.Model.ToolCards.CopperFoilBurnisher;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.CorkBackedStraightedge;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.EglomiseBrush;
 import org.junit.Assert;
 import org.junit.Before;
@@ -432,7 +434,6 @@ public class WindowBoardTest {
 
     }
 
-    //Copertura dei test fatta fino a qui
     @Test
     public void insertDiceTestForGamePlay() throws PlaceDiceException {
 
@@ -461,27 +462,309 @@ public class WindowBoardTest {
 
         EglomiseBrush eglomiseBrush2 = new EglomiseBrush();//color breaker sfumatura
         windowBoard.insertDice(3,1,dice4Y);
-        eglomiseBrush2.applyEffect(windowBoard,dice4Y,3,1,2,1,1);
-        windowBoard.printMatrixArrayList();
+        eglomiseBrush2.applyEffect(windowBoard,dice4Y,3,1,2,1,1);;
         windowBoard.getUsedMatrix().get(1).get(0).setDiceContained(null);
         windowBoard.getUsedMatrix().get(1).get(0).setUsed(false);
 
-        //Complete fino a qui
-
-        EglomiseBrush eglomiseBrush3 = new EglomiseBrush();//number breaker sfumature qualsiasi
+        CopperFoilBurnisher copperFoilBurnisher1 = new CopperFoilBurnisher();//number breaker sfumature qualsiasi
         windowBoard.insertDice(1,2,dice4Y);
-        eglomiseBrush3.applyEffect(windowBoard,dice4Y,1,2,1,1,1);
+        copperFoilBurnisher1.applyEffect(windowBoard,dice4Y,1,2,2,5,1);
+        windowBoard.getUsedMatrix().get(1).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(4).setUsed(false);
+
+        CopperFoilBurnisher copperFoilBurnisher2 = new CopperFoilBurnisher();//number breaker colore
+        windowBoard.insertDice(1,2,dice4Y);
+        copperFoilBurnisher2.applyEffect(windowBoard,dice4Y,1,2,1,5,1);
+        windowBoard.getUsedMatrix().get(0).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(4).setUsed(false);
+
+        windowBoard.insertDice(1,2,dice4Y); //regole normali, sfumatura
+        windowBoard.getUsedMatrix().get(0).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(1).setUsed(false);
+
+        windowBoard.insertDice(1,5,dice4Y); //regole normali, colore
+        windowBoard.getUsedMatrix().get(0).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(4).setUsed(false);
+
+        //-------------------------------------TURNI SUCCESSIVI AL PRIMO--------------------------------------//
+
+        windowBoard.insertDice(3,1,dice4Y);//ajacency breaker, adiacenza
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        corkBackedStraightedge.applyEffect(windowBoard,dice4Y,4,5,1);
+        windowBoard.getUsedMatrix().get(3).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(4).setUsed(false);
+        windowBoard.getUsedMatrix().get(2).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(2).get(0).setUsed(false);
+
+        windowBoard.insertDice(2,1,dice4Y);//color breaker
+        windowBoard.insertDice(1,2,dice6Y);
+        EglomiseBrush eglomiseBrush3 = new EglomiseBrush();
+        eglomiseBrush3.applyEffect(windowBoard,dice4Y,2,1,1,1,1);
         windowBoard.getUsedMatrix().get(0).get(0).setDiceContained(null);
         windowBoard.getUsedMatrix().get(0).get(0).setUsed(false);
+        windowBoard.getUsedMatrix().get(0).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(1).setUsed(false);
 
-        EglomiseBrush eglomiseBrush4 = new EglomiseBrush();//number breaker colore
+        windowBoard.insertDice(4,2,dice5);//number breaker
+        windowBoard.insertDice(3,3,dice5r);
+        CopperFoilBurnisher copperFoilBurnisher3 = new CopperFoilBurnisher();
+        copperFoilBurnisher3.applyEffect(windowBoard,dice5r,3,3,4,3,1);
+        windowBoard.getUsedMatrix().get(3).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(1).setUsed(false);
+        windowBoard.getUsedMatrix().get(3).get(2).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(2).setUsed(false);
+
+        windowBoard.insertDice(4,1,dice5r);//regole normali cella bianca
+        windowBoard.insertDice(4,2,dice4Y);
+        windowBoard.getUsedMatrix().get(3).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(0).setUsed(false);
+        windowBoard.getUsedMatrix().get(3).get(1).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(1).setUsed(false);
+
+        windowBoard.insertDice(4,1,dice4Y);//adiacency breaker color & sfumatura
+        CorkBackedStraightedge corkBackedStraightedge2 = new CorkBackedStraightedge();
+        corkBackedStraightedge2.applyEffect(windowBoard,dice4Y,1,5,1);
+        windowBoard.getUsedMatrix().get(0).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(4).setUsed(false);
+        corkBackedStraightedge2.applyEffect(windowBoard,dice2,2,5,2);
+        windowBoard.getUsedMatrix().get(3).get(0).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(3).get(0).setUsed(false);
+        windowBoard.getUsedMatrix().get(1).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(4).setUsed(false);
+
+        windowBoard.insertDice(2,5,dice2);//regole normali cella non bianca
+        windowBoard.insertDice(1,5,dice4Y);
+        windowBoard.getUsedMatrix().get(1).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(1).get(4).setUsed(false);
+        windowBoard.getUsedMatrix().get(0).get(4).setDiceContained(null);
+        windowBoard.getUsedMatrix().get(0).get(4).setUsed(false);
+    }
+
+    //Copertura dei test fatta fino a qui
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionColorBreakerShade() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        EglomiseBrush eglomiseBrush2 = new EglomiseBrush();//color breaker sfumatura
         windowBoard.insertDice(3,1,dice4Y);
-        eglomiseBrush4.applyEffect(windowBoard,dice4Y,3,1,2,1,1);
-        windowBoard.printMatrixArrayList();
-        windowBoard.getUsedMatrix().get(1).get(0).setDiceContained(null);
-        windowBoard.getUsedMatrix().get(1).get(0).setUsed(false);
+        eglomiseBrush2.applyEffect(windowBoard,dice4Y,3,1,3,2,1);
+    }
 
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionNumberBreakerColor() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
 
+        CopperFoilBurnisher copperFoilBurnisher4 = new CopperFoilBurnisher();//number breaker colore
+        windowBoard.insertDice(1,2,dice4Y);
+        copperFoilBurnisher4.applyEffect(windowBoard,dice4Y,1,2,2,4,1);
+    }
+
+    //-------------------------------------TURNI SUCCESSIVI AL PRIMO--------------------------------------//
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionAdjacencyBreakerAdjacencyWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice4Y);//ajacency breaker, adiacenza
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        corkBackedStraightedge.applyEffect(windowBoard,dice4Y,4,1,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionColorBreakerWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(2,1,dice4Y);//color breaker
+        windowBoard.insertDice(1,2,dice4Y);
+        EglomiseBrush eglomiseBrush3 = new EglomiseBrush();
+        eglomiseBrush3.applyEffect(windowBoard,dice4Y,1,2,3,1,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionNumberBreakerWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(4,2,dice5r);//number breaker
+        windowBoard.insertDice(3,3,dice5r);
+        CopperFoilBurnisher copperFoilBurnisher3 = new CopperFoilBurnisher();
+        copperFoilBurnisher3.applyEffect(windowBoard,dice5r,3,3,4,1,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionNormalRulesWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(4,1,dice5r);//regole normali cella bianca
+        windowBoard.insertDice(4,2,dice4r);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionNumberBreakerNotWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(4,2,dice1);//number breaker
+        windowBoard.insertDice(3,3,dice1);
+        CopperFoilBurnisher copperFoilBurnisher3 = new CopperFoilBurnisher();
+        copperFoilBurnisher3.applyEffect(windowBoard,dice1,3,3,3,2,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionColorBreakerNotWhiteCell() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(2,1,dice4Y);//color breaker
+        windowBoard.insertDice(1,2,dice4Y);
+        EglomiseBrush eglomiseBrush3 = new EglomiseBrush();
+        eglomiseBrush3.applyEffect(windowBoard,dice4Y,1,2,2,2,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionAdjacencyBreakerAdjacencyNotWhiteCellColor() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice4Y);//ajacency breaker, adiacenza
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        corkBackedStraightedge.applyEffect(windowBoard,dice4Y,2,4,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionAdjacencyBreakerAdjacencyNotWhiteCellNumber() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice4Y);//ajacency breaker
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        corkBackedStraightedge.applyEffect(windowBoard,dice6Y,3,4,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void ExceptionAdjacencyBreakerAdjacencyNotWhiteCellNotNonAdjacent() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice4Y);//ajacency breaker
+        CorkBackedStraightedge corkBackedStraightedge = new CorkBackedStraightedge();
+        corkBackedStraightedge.applyEffect(windowBoard,dice6Y,3,2,1);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void NormalMoveNotWhiteShade() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(4,1,dice5r);//regole normali cella bianca
+        windowBoard.insertDice(3,2,dice4Y);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void NormalMoveNotWhiteColor() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice5r);//regole normali cella bianca
+        windowBoard.insertDice(2,2,dice4Y);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void CellOccupied() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,1,dice5r);//regole normali cella bianca
+        windowBoard.insertDice(3,1,dice4Y);
+    }
+
+    @Test(expected = PlaceDiceException.class)
+    public void NotOnBorder() throws PlaceDiceException {
+        WindowBoard windowBoard = new WindowBoard(rows, columns);
+        int[][] testMatrix = windowBoard.importFromFile(rows, columns,12);
+        windowBoard.importNameFromFile(12);
+        System.out.println(windowBoard.getTitle());
+        windowBoard.printMatrix(testMatrix,rows,columns);
+        windowBoard.setUsedMatrix(windowBoard.fromIntToArrayList(testMatrix, rows, columns));
+        windowBoard.setBorders();
+
+        windowBoard.insertDice(3,2,dice5r);//regole normali cella bianca
 
     }
 }
