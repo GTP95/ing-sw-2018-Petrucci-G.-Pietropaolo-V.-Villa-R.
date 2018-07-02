@@ -392,6 +392,7 @@ public class SocketClientHandler implements Runnable {
    private void notifyUsedToolCard(){
         if(notifyUsedToolCard){
             sendControlMessage("Tool card used correctly");
+            notifyUsedToolCard=false;
         }
    }
 

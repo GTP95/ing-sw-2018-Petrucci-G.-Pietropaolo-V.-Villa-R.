@@ -325,7 +325,7 @@ private void buildMirrorArray(){
         if (dice.getValue() == 6) {
             grozingPliers.setFirstUsage(true);
         } else {
-            draftpoolDice.setValue(dice.increaseValue(dice.getValue()));
+            draftpoolDice.setValue(draftpoolDice.increaseValue(dice.getValue()));
             grozingPliers.setFirstUsage(true);
         }
 
@@ -333,7 +333,7 @@ private void buildMirrorArray(){
         if (dice.getValue() == 1) {
             grozingPliers.setFirstUsage(true);
         } else {
-            draftpoolDice.setValue(dice.decreaseValue(dice.getValue()));
+            draftpoolDice.setValue(draftpoolDice.decreaseValue(dice.getValue()));
             grozingPliers.setFirstUsage(true);
         }
     }
@@ -341,8 +341,9 @@ private void buildMirrorArray(){
 
     for(Player player : players){       //notifico i client della modifica alla draftpool
         player.getSocketClientHandler().updateDice=true;
-        notifyAllSocketClientHandlers();
     }
+        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
+        notifyAllSocketClientHandlers();
 }
 
 
