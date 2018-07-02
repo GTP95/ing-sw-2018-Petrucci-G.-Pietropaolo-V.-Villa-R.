@@ -139,22 +139,22 @@ public class LoginStage extends Stage {
         //HostFrame.getChildren().addAll(HostField,PortField,ChooseHostText,AcceptBTN2,frame2);
 
         ServerScene = new Scene(HostFrame,420,590);
-
-
-
-
-
     }
 
     public void usernameException (){
         Platform.runLater(()-> {
             Alert UserNameExceptionAlert = new Alert(Alert.AlertType.ERROR);
+            UserNameExceptionAlert.initStyle(StageStyle.UNDECORATED);
             UserNameExceptionAlert.setTitle("Bad Username");
             UserNameExceptionAlert.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
             UserNameExceptionAlert.setContentText("Press OK and enter another Name");
             UserNameExceptionAlert.showAndWait();
         });
 
+    }
+
+    public void startLobby(){
+        close();
     }
 
     public void usernameCheck(){
