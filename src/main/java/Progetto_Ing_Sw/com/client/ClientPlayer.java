@@ -32,6 +32,10 @@ public class ClientPlayer{
         return name;
     }
 
+    public void setFavorTokens(int numOfTokens){
+        favorTokens=numOfTokens;
+        System.err.println("FavorTokens set to: "+numOfTokens);
+    }
 
     public int getFavorTokens() {
 
