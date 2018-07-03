@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
@@ -61,6 +61,7 @@ public  class LocalModel {
         sendDiceToServer=false;
         drawnToolCardsWithEffect=new ArrayList<>();
         useFluxBrush=false;
+        useGlazingHammers=false;
     }
 
 
@@ -160,7 +161,7 @@ public  class LocalModel {
     }
 
     /**
-     *
+     * Adds the given ClientPlayer object to the ArrayList of players of the current game
      * @param clientPlayer
      */
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {
@@ -572,6 +573,11 @@ public  class LocalModel {
     public void useFluxBrush(ClientDice dice){
         diceToUseWithEffect=dice;
         useFluxBrush=true;
+        sendDataToServer=true;
+    }
+
+    public void useGlazingHammers(){
+        useGlazingHammers=true;
         sendDataToServer=true;
     }
 

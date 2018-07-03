@@ -392,6 +392,16 @@ private ToolCard getToolCardFromTitle(String title){
         int index=drawnDice.indexOf(dice);
         SplittableRandom splittableRandom=new SplittableRandom();
         drawnDice.get(index).setValue(splittableRandom.nextInt(1,7));   //al solito il 7 è escluso dall'intervallo
+        getToolCardFromTitle("Flux Brush").setFirstUsage(true);
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
+
+    public void useGlazingHammer(Player playerRequestingAction){
+        SplittableRandom splittableRandom=new SplittableRandom();
+        for (Dice dice : drawnDice){
+            dice.setValue(splittableRandom.nextInt(1,7));   //il 7 è escluso
+        }
+        getToolCardFromTitle("Glazing Hammer").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
 

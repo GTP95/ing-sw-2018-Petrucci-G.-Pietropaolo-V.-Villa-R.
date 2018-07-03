@@ -287,6 +287,10 @@ public class SocketClientHandler implements Runnable {
                 table.useToolCard("Flux Brush",myPlayer);
                 table.useFluxBrush(dice,myPlayer);
                 break;
+            case "Use Glazing Hammer":
+                table.useToolCard("Glazing Hammer",myPlayer);
+                table.useGlazingHammer(myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
