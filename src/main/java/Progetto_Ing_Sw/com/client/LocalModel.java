@@ -564,6 +564,5 @@ public  class LocalModel {
     public void updateTokens(int numOfTokens){
         getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(numOfTokens);
         tableGUIobserver.updateTokens();
-        System.out.println("Token: "+numOfTokens);
     }
 }

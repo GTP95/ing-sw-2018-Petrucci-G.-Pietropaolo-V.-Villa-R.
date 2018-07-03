@@ -403,6 +403,7 @@ public class SocketClientHandler implements Runnable {
         if(updateTokens) {
             try {
                 sendControlMessage("Update your tokens&" + table.getPlayerFromName(myPlayerName).getFavorTokens());
+                updateTokens=false;
             }
             catch (InvalidUsernameException e){
                 System.err.println("This is not the player you're looking for!");
