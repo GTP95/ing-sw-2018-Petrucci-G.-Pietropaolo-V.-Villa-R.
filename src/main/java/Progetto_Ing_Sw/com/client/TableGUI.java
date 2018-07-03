@@ -858,6 +858,9 @@ public class TableGUI extends Stage{
         Move.setDisable(false);
         PassButton.setDisable(false);
         TimerEnteringAnimation.play();
+        ToolCard1BTN.setDisable(false);
+        ToolCard2BTN.setDisable(false);
+        ToolCard3BTN.setDisable(false);
         CurrentPlayer.setId("DefaultButtonActivated");
         for (Button button : OtherPlayersList){
             button.setId("DefaultButton");
@@ -937,6 +940,8 @@ public class TableGUI extends Stage{
         );
     }
 
+
+
     public void checkPane(){
         for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
             for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
@@ -945,4 +950,11 @@ public class TableGUI extends Stage{
             }
         }}
 
+    public void disableToolCards(){
+        Platform.runLater(()->{
+            ToolCard1BTN.setDisable(true);
+            ToolCard2BTN.setDisable(true);
+            ToolCard3BTN.setDisable(true);
+        });
+    }
 }
