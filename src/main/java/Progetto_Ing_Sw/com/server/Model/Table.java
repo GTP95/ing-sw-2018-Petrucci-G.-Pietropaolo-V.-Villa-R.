@@ -320,12 +320,16 @@ private void buildMirrorArray(){
 
     public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
         Effect grozingPliers=getToolCardWithEffectFromName("Grozing Pliers");
-        Dice draftpoolDice=drawnDice.get(drawnDice.indexOf(dice));
+        int index;
+        for(index=0;index<drawnDice.size();index++){
+            if(drawnDice.get(index).equals(dice)) break;
+        }
+       // Dice draftpoolDice=drawnDice.get(index);
     if (command.equals("UP")) {
         if (dice.getValue() == 6) {
             grozingPliers.setFirstUsage(true);
         } else {
-            draftpoolDice.setValue(draftpoolDice.increaseValue(dice.getValue()));
+            drawnDice.get(index).increaseValue();
             grozingPliers.setFirstUsage(true);
         }
 
@@ -333,7 +337,7 @@ private void buildMirrorArray(){
         if (dice.getValue() == 1) {
             grozingPliers.setFirstUsage(true);
         } else {
-            draftpoolDice.setValue(draftpoolDice.decreaseValue(dice.getValue()));
+            drawnDice.get(index).decreaseValue();
             grozingPliers.setFirstUsage(true);
         }
     }
