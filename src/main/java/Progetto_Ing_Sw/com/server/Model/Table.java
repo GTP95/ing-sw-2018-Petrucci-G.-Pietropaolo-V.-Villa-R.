@@ -328,26 +328,17 @@ private void buildMirrorArray(){
         System.err.println("usegrozingpliers debug output");
         System.out.println("Dado ricevuto dal client: color: "+dice.getColor()+" value: "+dice.getValue());
         System.out.println("Dado trovato nella draftpool: color: "+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
-    if (command.equals("UP")) {
-        if (dice.getValue() == 6) {
-            grozingPliers.setFirstUsage(true);
-        } else {
-            drawnDice.get(index).setValue(drawnDice.get(index).getValue()+1);
-            localDice.setValue(localDice.getValue()+1);
-            grozingPliers.setFirstUsage(true);
-        }
-
-    } else if (command.equals("DOWN")) {
-        if (dice.getValue() == 1) {
-            grozingPliers.setFirstUsage(true);
-        } else {
+    if (command.equals("UP") && dice.getValue()<6) {
+            System.out.println("Incremento di 1");
+            drawnDice.get(index).setValue(drawnDice.get(index).getValue() + 1);
+            localDice.setValue(localDice.getValue() + 1);
+    }
+    else if (command.equals("DOWN") && dice.getValue()>1) {
+            System.out.println("deceremento di 1");
             drawnDice.get(index).setValue(drawnDice.get(index).getValue()-1);
             localDice.setValue(localDice.getValue()-1);
-            grozingPliers.setFirstUsage(true);
-        }
-
     }
-
+        grozingPliers.setFirstUsage(true);
         System.out.println("Dado aggiornato nella draftpool: color:"+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
         System.out.println("Dado locale aggiornato: color: "+localDice.getColor()+" value: "+localDice.getValue());
     for(Player player : players){       //notifico i client della modifica alla draftpool
