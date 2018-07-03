@@ -418,7 +418,7 @@ private ToolCard getToolCardFromTitle(String title){
         return diceBag.diceDraw();
     }
 
-    public void substituteDice(Dice dice){
+    public void substituteDice(Dice dice, Player playerRequestingAction){
         for(Dice diceInDraftPool : drawnDice){
             if(diceInDraftPool.getColor()==0 && diceInDraftPool.getValue()==0){
                 diceInDraftPool.setColor(dice.getColor());
@@ -429,6 +429,7 @@ private ToolCard getToolCardFromTitle(String title){
         for (Player player : players){
             player.getSocketClientHandler().updateDice=true;
         }
+        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
         notifyAllSocketClientHandlers();
     }
 

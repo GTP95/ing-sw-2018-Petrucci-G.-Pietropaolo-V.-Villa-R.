@@ -298,7 +298,7 @@ public class SocketClientHandler implements Runnable {
                 sendControlMessage("The newly drawn dice is&"+JSONCreator.generateJSON(newDrawnDice));
                 break;
             case "Here is the new dice":
-                table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]));
+                table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]),myPlayer);
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
