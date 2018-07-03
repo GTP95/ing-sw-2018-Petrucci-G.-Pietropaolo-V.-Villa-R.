@@ -320,12 +320,11 @@ private void buildMirrorArray(){
 
     public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
         Effect grozingPliers=getToolCardWithEffectFromName("Grozing Pliers");
-        Dice localDice;
+        Dice localDice=new Dice(dice.getValue(),dice.getColor());
         int index;
         for(index=0;index<drawnDice.size();index++){
             if(drawnDice.get(index).equals(dice)) break;
         }
-        localDice=drawnDice.get(index);
         System.err.println("usegrozingpliers debug output");
         System.out.println("Dado ricevuto dal client: color: "+dice.getColor()+" value: "+dice.getValue());
         System.out.println("Dado trovato nella draftpool: color: "+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
