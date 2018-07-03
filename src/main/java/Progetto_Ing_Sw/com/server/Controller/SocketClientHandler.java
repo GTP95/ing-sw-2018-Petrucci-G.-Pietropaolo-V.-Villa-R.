@@ -282,6 +282,11 @@ public class SocketClientHandler implements Runnable {
                  table.useToolCard("Grinding Stone",myPlayer);
                  table.useGrindingStone(dice,myPlayer);
                 break;
+            case "Use Flux Brush":
+                dice=JSONCreator.diceLoaderFromString(fields[0]);
+                table.useToolCard("Flux Brush",myPlayer);
+                table.useFluxBrush(dice,myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }

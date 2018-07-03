@@ -327,6 +327,16 @@ private ToolCard getToolCardFromTitle(String title){
         return toolCard;
 }
 
+    private void notifyOfToolCardUsage(Player playerRequestingAction){
+        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
+        playerRequestingAction.getSocketClientHandler().updateTokens=true;
+        for(Player player : players){       //notifico i client della modifica alla draftpool
+            player.getSocketClientHandler().updateDice=true;
+            player.getSocketClientHandler().updateToolCards=true;
+        }
+        notifyAllSocketClientHandlers();
+    }
+
     public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
         ToolCard grozingPliers=getToolCardFromTitle("Grozing Pliers");
         Dice localDice=new Dice(dice.getValue(),dice.getColor());
@@ -376,6 +386,14 @@ private ToolCard getToolCardFromTitle(String title){
         notifyAllSocketClientHandlers();
     }
 
+
+
+    public void useFluxBrush(Dice dice, Player playerRequestingAction){
+        int index=drawnDice.indexOf(dice);
+        SplittableRandom splittableRandom=new SplittableRandom();
+        drawnDice.get(index).setValue(splittableRandom.nextInt(1,7));   //al solito il 7 è escluso dall'intervallo
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
 
 }
 

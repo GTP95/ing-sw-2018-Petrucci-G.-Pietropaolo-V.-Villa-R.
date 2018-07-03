@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
@@ -60,6 +60,7 @@ public  class LocalModel {
         firstWindowBoardsReceived=true;
         sendDiceToServer=false;
         drawnToolCardsWithEffect=new ArrayList<>();
+        useFluxBrush=false;
     }
 
 
@@ -557,6 +558,11 @@ public  class LocalModel {
         useGrindingStone=true;
         sendDataToServer=true;
     }
+    public void useFluxBrush(ClientDice dice){
+        diceToUseWithEffect=dice;
+        useFluxBrush=true;
+        sendDataToServer=true;
+    }
 
     public void notifyUsedToolCard(){   //notifica GUI
         toolCardDisplayerObserver.closeToolCardMenu();
@@ -572,5 +578,7 @@ public  class LocalModel {
         drawnToolCards.clear();
         immediatelyUpdateGUI=true;
     }
+
+
 
 }

@@ -309,10 +309,17 @@ public class SocketClient implements Runnable{
                 localModel.useGrindingStone=false;
             }
 
+            if(localModel.useFluxBrush){
+                String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                sendActionMessage(diceJSON,"Use Flux Brush");
+                localModel.useFluxBrush=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 
     }
+
 
     private void sendPlaceDiceActionMessage(String json, int row, int column){
         String actionDescription="Place dice&"+row+"&"+column;
