@@ -324,7 +324,9 @@ private void buildMirrorArray(){
         for(index=0;index<drawnDice.size();index++){
             if(drawnDice.get(index).equals(dice)) break;
         }
-       // Dice draftpoolDice=drawnDice.get(index);
+        System.err.println("usegrozingpliers debug output");
+        System.out.println("Dado ricevuto dal client: color: "+dice.getColor()+" value: "+dice.getValue());
+        System.out.println("Dado trovato nella draftpool: color: "+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
     if (command.equals("UP")) {
         if (dice.getValue() == 6) {
             grozingPliers.setFirstUsage(true);
@@ -340,8 +342,10 @@ private void buildMirrorArray(){
             drawnDice.get(index).decreaseValue();
             grozingPliers.setFirstUsage(true);
         }
+
     }
 
+        System.out.println("Dado aggiornato nella draftpool: color:"+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
 
     for(Player player : players){       //notifico i client della modifica alla draftpool
         player.getSocketClientHandler().updateDice=true;
