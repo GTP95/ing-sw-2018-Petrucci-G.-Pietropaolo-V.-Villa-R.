@@ -519,50 +519,6 @@ public  class LocalModel {
         System.err.println("roundtrackobserver notificato");
     }
     
-  /*  private void generateToolcardsWithEffects(){
-        for (ClientToolCard toolCard : drawnToolCards){
-            switch(toolCard.getTitle()){
-                case "Grozing Pliers":
-                    drawnToolCardsWithEffect.add(new ClientGrozingPliers(toolCard));
-                    break;
-                case "Copper Foil Burnisher":
-                    drawnToolCardsWithEffect.add(new ClientCopperFoilBurnisher(toolCard));
-                    break;
-                case "Cork-backed Straightedge":
-                    drawnToolCardsWithEffect.add(new ClientCorkBackedStraightedge(toolCard));
-                    break;
-                case "Eglomise Brush":
-                    drawnToolCardsWithEffect.add(new ClientEglomiseBrush(toolCard));
-                    break;
-                case "Flux Brusher":
-                    drawnToolCardsWithEffect.add(new ClientFluxBrush(toolCard));
-                    break;
-                case "Flux Remover":
-                    drawnToolCardsWithEffect.add(new ClientFluxRemover(toolCard));
-                    break;
-                case "Glazing Hammer":
-                    drawnToolCardsWithEffect.add(new ClientGlazingHammer(toolCard));
-                    break;
-                case "Grinding Stone":
-                    drawnToolCardsWithEffect.add(new ClientGrindingStone(toolCard));
-                    break;
-                case "Lathekin":
-                    drawnToolCardsWithEffect.add(new ClientLathekin(toolCard));
-                    break;
-                case "Lens Cutter":
-                    drawnToolCardsWithEffect.add(new ClientLensCutter(toolCard));
-                    break;
-                case "Running Pliers":
-                    drawnToolCardsWithEffect.add(new ClientRunningPliers(toolCard));
-                    break;
-                case "Tap Wheel":
-                    drawnToolCardsWithEffect.add(new ClientTapWheel(toolCard));
-                    break;
-                default:
-                    System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
-            }
-        }
-    }*/
 
     public void notifyUsernameIsCorrect(){
         loginStageObserver.startLobby();
@@ -615,6 +571,10 @@ public  class LocalModel {
         diceToUseWithEffect=diceToRemove;
         useFluxRemover=true;
         sendDataToServer=true;
+    }
+
+    public void notifyFluxRemoverDiceValueSet(){
+        
     }
 
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){
