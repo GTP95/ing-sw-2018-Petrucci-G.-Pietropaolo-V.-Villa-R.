@@ -160,7 +160,7 @@ public  class LocalModel {
     }
 
     /**
-     *
+     * Adds the given ClientPlayer object to the ArrayList of players of the current game
      * @param clientPlayer
      */
     public void addPlayerToPlayerArrayList(ClientPlayer clientPlayer) {

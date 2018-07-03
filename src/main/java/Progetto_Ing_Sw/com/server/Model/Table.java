@@ -392,6 +392,7 @@ private ToolCard getToolCardFromTitle(String title){
         int index=drawnDice.indexOf(dice);
         SplittableRandom splittableRandom=new SplittableRandom();
         drawnDice.get(index).setValue(splittableRandom.nextInt(1,7));   //al solito il 7 è escluso dall'intervallo
+        getToolCardFromTitle("Flux Brush").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
 
