@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers, useFluxRemover;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
@@ -62,6 +62,7 @@ public  class LocalModel {
         drawnToolCardsWithEffect=new ArrayList<>();
         useFluxBrush=false;
         useGlazingHammers=false;
+        useFluxRemover=false;
     }
 
 
@@ -194,11 +195,19 @@ public  class LocalModel {
         return drawnGameBoardCards;
     }
 
+    /**
+     * Returns a reference to the private objective assigned by the server to our player
+     * @return the player's private objective
+     */
     public ClientPrivateObjectiveCard getPrivateObjectiveCard() {
         System.out.println("L'obbiettivo privato è: "+privateObjectiveCard.getColor());
         return privateObjectiveCard;
     }
 
+    /**
+     *
+     * @return
+     */
     public ClientGameBoardCard getChoosenGameBoardCard() {
         return choosenGameBoardCard;
     }
@@ -581,6 +590,17 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    public void useFluxRemover(ClientDice diceToRemove){
+        diceToUseWithEffect=diceToRemove;
+        useFluxRemover=true;
+        sendDataToServer=true;
+    }
+
+    public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){
+        diceToUseWithEffect=newDrawnDice;
+        toolCardDisplayerObserver.fluxRemoverDie(); //notifica GUI
+    }
+
     public void notifyUsedToolCard(){   //notifica GUI
         toolCardDisplayerObserver.closeToolCardMenu();
         tableGUIobserver.disableToolCards();
@@ -595,7 +615,6 @@ public  class LocalModel {
         drawnToolCards.clear();
         immediatelyUpdateGUI=true;
     }
-
 
 
 }

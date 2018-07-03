@@ -405,5 +405,16 @@ private ToolCard getToolCardFromTitle(String title){
         notifyOfToolCardUsage(playerRequestingAction);
     }
 
+    public Dice useFluxRemover(Dice dice, Player playerRequestingAction){
+        try {
+            diceBag.reintroduceDice(dice);
+        } catch (IllegalDiceException e) {
+            System.err.println("Flux Brush is trying to insert in dice bag an illegal dice! dice value: "+dice.getValue()+" dice color: "+dice.getColor());
+        }
+        getToolCardFromTitle("Flux Remover").setFirstUsage(true);
+        notifyOfToolCardUsage(playerRequestingAction);
+        return diceBag.diceDraw();
+    }
+
 }
 
