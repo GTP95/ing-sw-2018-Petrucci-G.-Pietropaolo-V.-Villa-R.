@@ -279,6 +279,7 @@ public class SocketClientHandler implements Runnable {
                 break;
             case "Use Grinding Stone":
                  dice=JSONCreator.diceLoaderFromString(fields[0]);
+                 table.useToolCard("Grinding Stone",myPlayer);
                  table.useGrindingStone(dice,myPlayer);
                 break;
             default:
