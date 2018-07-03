@@ -332,6 +332,12 @@ public class SocketClient implements Runnable{
                 sendActionMessage(diceJSON,"Use Flux Remover");
                 localModel.useFluxRemover=false;
             }
+
+            if(localModel.sendFluxRemoverDiceWithSetValue){
+                String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                sendActionMessage(diceJSON,"Here is the new dice");
+                localModel.sendFluxRemoverDiceWithSetValue=false;
+            }
             localModel.sendDataToServer=false;
         }
 

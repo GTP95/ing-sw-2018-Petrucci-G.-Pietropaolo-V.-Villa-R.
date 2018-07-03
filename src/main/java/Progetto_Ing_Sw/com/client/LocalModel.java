@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers, useFluxRemover;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived;
     private LoginStage loginStageObserver;
@@ -63,6 +63,7 @@ public  class LocalModel {
         useFluxBrush=false;
         useGlazingHammers=false;
         useFluxRemover=false;
+        sendFluxRemoverDiceWithSetValue=false;
     }
 
 
@@ -574,7 +575,8 @@ public  class LocalModel {
     }
 
     public void notifyFluxRemoverDiceValueSet(){
-        
+        sendFluxRemoverDiceWithSetValue=true;
+        sendDataToServer=true;
     }
 
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){

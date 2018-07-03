@@ -419,5 +419,19 @@ private ToolCard getToolCardFromTitle(String title){
         return diceBag.diceDraw();
     }
 
+    public void substituteDice(Dice dice){
+        for(Dice diceInDraftPool : drawnDice){
+            if(diceInDraftPool.getColor()==0 && diceInDraftPool.getValue()==0){
+                diceInDraftPool.setColor(dice.getColor());
+                diceInDraftPool.setValue(dice.getValue());
+                break;
+            }
+        }
+        for (Player player : players){
+            player.getSocketClientHandler().updateDice=true;
+        }
+        notifyAllSocketClientHandlers();
+    }
+
 }
 
