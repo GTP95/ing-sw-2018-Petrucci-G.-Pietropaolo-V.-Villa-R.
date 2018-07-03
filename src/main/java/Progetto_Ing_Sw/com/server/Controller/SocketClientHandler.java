@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -316,6 +316,7 @@ public class SocketClientHandler implements Runnable {
         notifyIfIsYourTurn();
         notifyWhoIsTheCurrentPlayer();
         notifyUsedToolCard();
+        updateTokens();
     }
 
     private void notifyIfIsYourTurn(){
@@ -395,6 +396,17 @@ public class SocketClientHandler implements Runnable {
         if(notifyUsedToolCard){
             sendControlMessage("Tool card used correctly");
             notifyUsedToolCard=false;
+        }
+   }
+
+   private void updateTokens(){
+        if(updateTokens) {
+            try {
+                sendControlMessage("Update your tokens&" + table.getPlayerFromName(myPlayerName).getFavorTokens());
+            }
+            catch (InvalidUsernameException e){
+                System.err.println("This is not the player you're looking for!");
+            }
         }
    }
 

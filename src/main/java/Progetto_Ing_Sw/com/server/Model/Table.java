@@ -346,6 +346,7 @@ private void buildMirrorArray(){
     }
         System.out.println("Command received: "+command);
         playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
+        playerRequestingAction.getSocketClientHandler().updateTokens=true;
         notifyAllSocketClientHandlers();
 }
 
