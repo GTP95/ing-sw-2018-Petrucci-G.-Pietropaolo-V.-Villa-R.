@@ -36,7 +36,7 @@ public class GlazingHammer extends Effect{
             if (favorTokensUsed == 1)
             {
 
-                if(table.getActivePlayer().getRoundNumber()==1)//controlla che effettivamente il giocatore sia nel secondo turno
+                if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==1)//controlla che effettivamente il giocatore sia nel secondo turno
                 {
                     for(int d=0;d<table.getDrawnDice().size();d++){
                         Dice localDice = new Dice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
@@ -46,7 +46,7 @@ public class GlazingHammer extends Effect{
                         firstUsage=true;
                     }
 
-                }else if(table.getActivePlayer().getRoundNumber()==2){
+                }else if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==2){
                     System.out.println("NON PUOI USARE LA CARTA NEL PRIMO ROUND");
                     //TODO GUI EXCEPTION
                 }
@@ -60,7 +60,7 @@ public class GlazingHammer extends Effect{
         }
         if (favorTokensUsed == 2)
         {
-            if(table.getActivePlayer().getRoundNumber()==1)//controlla che effettivamente il giocatore sia nel secondo turno
+            if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==1)//controlla che effettivamente il giocatore sia nel secondo turno
             {
                 for(int d=0;d<table.getDrawnDice().size();d++){
                     Dice localDice = new Dice(table.getDrawnDice().get(d).getValue(),table.getDrawnDice().get(d).getColor());
@@ -69,7 +69,7 @@ public class GlazingHammer extends Effect{
                     table.getDrawnDice().get(d).setValue(localDice.getValue());
                 }
 
-            }else if(table.getActivePlayer().getRoundNumber()==2)
+            }else if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==2)
             {
                 System.out.println("NON PUOI USARE LA CARTA NEL PRIMO ROUND");
                 //TODO GUI EXCEPTION

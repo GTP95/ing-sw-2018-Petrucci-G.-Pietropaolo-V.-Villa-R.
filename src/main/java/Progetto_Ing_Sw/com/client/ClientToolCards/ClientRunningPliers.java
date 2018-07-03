@@ -41,9 +41,9 @@ import java.io.FileNotFoundException;
             {
                 localBoard.insertDice(row1,column1,localDice1);
                 localBoard.insertDice(row2,column2,localDice2);
-                if(table.getActivePlayer().getRoundNumber()==1)
+                if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==1)
                 {
-                    table.getActivePlayer().setRoundNumber(0);
+                    table.getActivePlayer().setNumOfTurnsToPlayInTheCurrentRound(0);
                 }
                 else{
                     //TODO eccezione di turno,
@@ -60,9 +60,9 @@ import java.io.FileNotFoundException;
             {
                 localBoard.insertDice(row1,column1,localDice1);
                 localBoard.insertDice(row2,column2,localDice2);
-                if(table.getActivePlayer().getRoundNumber()==1)
+                if(table.getActivePlayer().getNumOfTurnsToPlayInTheCurrentRound()==1)
                 {
-                    table.getActivePlayer().setRoundNumber(0);
+                    table.getActivePlayer().setNumOfTurnsToPlayInTheCurrentRound(0);
                 }
                 else{
                     //TODO eccezione di turno,

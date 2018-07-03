@@ -345,6 +345,10 @@ public  class LocalModel {
         multiplayerGUIobserver.StartGame();
     }
 
+    /**
+     *
+     * @param dice
+     */
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
         drawnDice.add(dice);
@@ -608,6 +612,7 @@ public  class LocalModel {
 
     public void notifyUsedToolCard(){   //notifica GUI
         if (!dontNotifyUsedToolCard){
+            System.err.println("chiamo closeToolCardMenu() e disableToolCards()");
             toolCardDisplayerObserver.closeToolCardMenu();
             tableGUIobserver.disableToolCards();
         }

@@ -1,14 +1,13 @@
 package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
-import Progetto_Ing_Sw.com.server.Model.ToolCards.Effect;
 
 import java.util.ArrayList;
 
 public class Player{
    private String name;
    private int favorTokens;
-   private int roundNumber;
+   private int numOfTurnsToPlayInTheCurrentRound;
    private PrivateObjectiveCard privateObjective;
    private int victoryPoints;
    private boolean isActive;
@@ -20,7 +19,7 @@ public class Player{
     public Player(String name,  SocketClientHandler socketClientHandler) {    //Non assegno subito alla creazione del player il privateObjective e le drawnGameBoardCard per evitare di esaurirle in caso di disconnessione se guita da connessione di altri giocatori (nella Lobby, non a gioco iniziato)
         this.name = name;
         this.favorTokens = favorTokens;
-        this.roundNumber=2;
+        this.numOfTurnsToPlayInTheCurrentRound =2;
         this.victoryPoints = 0;
         this.isActive=true;
         this.socketClientHandler=socketClientHandler;
@@ -50,8 +49,8 @@ public class Player{
         return privateObjective.getColor();
     }
 
-    public int getRoundNumber() {return roundNumber;}
-    public void setRoundNumber(int roundNumber) {this.roundNumber = roundNumber;}
+    public int getNumOfTurnsToPlayInTheCurrentRound() {return numOfTurnsToPlayInTheCurrentRound;}
+    public void setNumOfTurnsToPlayInTheCurrentRound(int numOfTurnsToPlayInTheCurrentRound) {this.numOfTurnsToPlayInTheCurrentRound = numOfTurnsToPlayInTheCurrentRound;}
 
     public int getFavorTokens() {
         return favorTokens;
@@ -95,12 +94,12 @@ public class Player{
             else throw new NotEnoughFavorTokensException();
     }
 
-    public void chooseAction(){
-
-}
-
     public void setChoosenWindowBoard(WindowBoard choosenWindowBoard) {
         this.choosenWindowBoard = choosenWindowBoard;
+    }
+
+    public void decreaseNumOfTurnsToPlayInTheCurrentRound(){
+      //  if
     }
 }
 
