@@ -205,25 +205,42 @@ public  class LocalModel {
     }
 
     /**
-     *
-     * @return
+     * Returns the game board card choosen by the player
+     * @see ClientGameBoardCard
+     * @return our player's game board card
      */
     public ClientGameBoardCard getChoosenGameBoardCard() {
         return choosenGameBoardCard;
     }
 
+    /**
+     * Returns the row in which the player wishes to place a dice
+     * @return int representing the row
+     */
     public int getRow() {
         return row;
     }
 
+    /**
+     * Returns the column in which the player wishes to place a dice
+     * @return int representing the column
+     */
     public int getColumn() {
         return column;
     }
 
+    /**
+     * Returns the time left for the player to make a move
+     * @return int representing the seconds left to move
+     */
     public int getTurnCountDownValue() {
         return turnCountDownValue;
     }
 
+    /**
+     * Returns the name of the player who is playing the current turn
+     * @return
+     */
     public String getCurrentPlayerName() {
         return currentPlayerName;
     }
@@ -568,6 +585,10 @@ public  class LocalModel {
 
     public ClientDice getDiceToUseWithEffect() {
         return diceToUseWithEffect;
+    }
+
+    public void setDiceToUseWithEffect(ClientDice diceToUseWithEffect) {
+        this.diceToUseWithEffect = diceToUseWithEffect;
     }
 
     public String getCommand() {
