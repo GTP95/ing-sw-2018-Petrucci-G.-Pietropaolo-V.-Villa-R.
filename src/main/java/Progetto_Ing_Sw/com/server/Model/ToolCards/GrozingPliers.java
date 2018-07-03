@@ -179,19 +179,15 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
                 }
             return methodBoard;
     }
-
+*/
     @Override
     public String getTitle() {
         return toolCardTitle;
-    }*/
+    }
 
     @Override
     public WindowBoard applyEffect() throws PlaceDiceException {
         return null;
     }
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
 }

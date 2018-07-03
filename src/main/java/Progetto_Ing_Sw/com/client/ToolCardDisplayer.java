@@ -271,7 +271,7 @@ public class ToolCardDisplayer extends Stage {
         DieChoosen = new Label();
         DieChoosen.setMaxSize(100, 100);
         DieChoosen.setStyle("-fx-background-size: 100 100;");
-        DieChoosen.setId("trasnparent");
+        DieChoosen.setId("trasparent");
         DieChoosen.setTranslateX(430);
 
 

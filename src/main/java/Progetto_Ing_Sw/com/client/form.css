@@ -523,6 +523,11 @@
     -fx-opacity: 0.45;
 }
 
+#DieBlockSelected{
+    -fx-border-color: white;
+    -fx-border-width:  4 4 4 4;
+    -fx-background-color: transparent;
+}
 
 
 #Shade1{

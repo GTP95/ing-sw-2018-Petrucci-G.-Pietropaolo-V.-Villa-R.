@@ -168,11 +168,17 @@ public class TableGUI extends Stage{
                 for (int c = 0; c < matrixTexture[r].length; c++) {
                     Pane block = new Pane();
                     block.setId("DieBlock");
+                    block.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
+                        checkPane();
+                        if (block.getId().equals("DieBlock")){block.setId("DieBlockSelected");}
+                    });
                     DieGrid.add(block,c,r);
                     PaneRow.add(c,block);
                 }
                 GridBlocks.add(PaneRow);
             }
+
+
 
 
 
@@ -802,7 +808,6 @@ public class TableGUI extends Stage{
      * This methods updates the GUI with the Dice extracted and sets their style using CSS;
      * it also sets the DieToInsert value according to the last Die selected by the player
      */
-
     public void updateDice(){
         System.err.println("--------------------------------------UPDATE DICE-----------------------------------------------------");
         Platform.runLater(()->{
@@ -931,5 +936,13 @@ public class TableGUI extends Stage{
                 Tokens.setText(String.join("", Collections.nCopies(LocalModel.getInstance().getPlayerFromName(ClientSettings.getInstance().getUsername()).getFavorTokens(), "  • \n")))
         );
     }
+
+    public void checkPane(){
+        for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
+            for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
+                Pane block = GridBlocks.get(r).get(c);
+                if (block.getId().equals("DieBlockSelected")){block.setId("DieBlock");}
+            }
+        }}
 
 }
