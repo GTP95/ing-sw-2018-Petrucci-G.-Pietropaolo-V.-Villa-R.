@@ -46,7 +46,7 @@ public class GrozingPliersTest {
         when(dice5.getValue()).thenReturn(5);
     }
 
-    @Test
+  /*  @Test
     public void testCard() throws PlaceDiceException {
 
         // dice3 = rosso,3
@@ -84,5 +84,5 @@ public class GrozingPliersTest {
         boardPlayerOne.printMatrixArrayList();
         System.out.println("***GROZING PLIERS usata correttamente***");
         System.out.println();
-    }
+    }*/
 }
