@@ -49,6 +49,7 @@ public class ToolCardDisplayer extends Stage {
     ArrayList<ToggleButton> DiceButtons;
     Random randomValue;
     Random randomColor;
+    TranslateTransition DiceOutOfBagTransition;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
 
@@ -413,15 +414,14 @@ public class ToolCardDisplayer extends Stage {
         DiceBag.setPrefSize(400,400);
         DiceBag.setId("DiceBag");
         DiceBag.setTranslateX(430);
-        DiceBag.setTranslateY(300);
-
-
+        DiceBag.setTranslateY(365);
 
 
         Button AcceptFluxRemover = new Button();
         AcceptFluxRemover.setId("NextBTN");
         AcceptFluxRemover.setMaxSize(150, 150);
         AcceptFluxRemover.setTranslateX(600);
+        AcceptFluxRemover.setVisible(false);
         AcceptFluxRemover.setOnAction(event -> {
             LocalModel.getInstance().getDiceToUseWithEffect().setValue(valoredado);
             LocalModel.getInstance().notifyFluxRemoverDiceValueSet();
@@ -439,15 +439,14 @@ public class ToolCardDisplayer extends Stage {
             if (valoredado==6){
                 IncreaseFluxRemover.setVisible(false);
             }
-            else {IncreaseFluxRemover.setVisible(true);}
-            AcceptFluxRemover.setVisible(true);
+            else if (valoredado<6){IncreaseFluxRemover.setVisible(true);}
         });
 
         Button DecreaseFluxRemover = new Button();
         DecreaseFluxRemover.setVisible(false);
         DecreaseFluxRemover.setMaxSize(200, 200);
-        DecreaseFluxRemover.setId("IncreaseBTN");
-        DecreaseFluxRemover.setTranslateY(-100);
+        DecreaseFluxRemover.setId("DecreaseBTN");
+        DecreaseFluxRemover.setTranslateY(100);
         DecreaseFluxRemover.setTranslateX(430);
         DecreaseFluxRemover.setOnAction(event -> {
             DieChoosen.setId(Integer.toString(valoredado--) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
@@ -455,8 +454,7 @@ public class ToolCardDisplayer extends Stage {
             if (valoredado==1){
                 DecreaseFluxRemover.setVisible(false);
             }
-            else {DecreaseFluxRemover.setVisible(true);}
-            AcceptFluxRemover.setVisible(true);
+            else if (valoredado>1){DecreaseFluxRemover.setVisible(true);}
         });
 
         Button AcceptBag = new Button();
@@ -464,17 +462,23 @@ public class ToolCardDisplayer extends Stage {
         AcceptBag.setMaxSize(150, 150);
         AcceptBag.setTranslateX(150);
         AcceptBag.setOnAction(event -> {
-            LocalModel.getInstance().useFluxRemover(DieToInsert);
-            fluxRemoverDie();
             AcceptBag.setDisable(true);
             TranslateTransition DiceBagTransition = new TranslateTransition(Duration.millis(500),DieChoosen);
-            DiceBagTransition.setFromY(720);
-            DieChoosen.setVisible(true);
-            DiceBagTransition.setToY(0);
+            DiceBagTransition.setFromY(0);
+            DiceBagTransition.setToY(720);
             DiceBagTransition.setAutoReverse(false);
             DiceBagTransition.play();
-            IncreaseFluxRemover.setVisible(true);
-            DecreaseFluxRemover.setVisible(true);
+            DiceBagTransition.setOnFinished(event1 ->LocalModel.getInstance().useFluxRemover(DieToInsert));
+            DiceOutOfBagTransition = new TranslateTransition(Duration.millis(500),DieChoosen);
+            DiceOutOfBagTransition.setFromY(720);
+            DiceOutOfBagTransition.setToY(0);
+            DiceOutOfBagTransition.setAutoReverse(false);
+            DiceOutOfBagTransition.setOnFinished(event1 -> {
+                AcceptFluxRemover.setVisible(true);
+                IncreaseFluxRemover.setVisible(true);
+                DecreaseFluxRemover.setVisible(true);
+            });
+
         });
 
         StackPane FluxRemover = new StackPane();
@@ -774,6 +778,7 @@ public class ToolCardDisplayer extends Stage {
         Platform.runLater(()-> {
             valoredado = LocalModel.getInstance().getDiceToUseWithEffect().getValue();
             DieChoosen.setId(Integer.toString(valoredado) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+            DiceOutOfBagTransition.play();
 
         });
     }
