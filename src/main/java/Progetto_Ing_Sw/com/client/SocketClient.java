@@ -159,6 +159,8 @@ public class SocketClient implements Runnable{
                 throw new IllegalDiceException("Color is not equal");
             case "This cell is occupied":
                 throw new IllegalDiceException("This cell is occupied");
+            case "Not enough favor tokens":
+           //     throw new
             case "It's your turn now":
                 localModel.notifyTurn();
                 break;
