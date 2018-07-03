@@ -56,10 +56,13 @@ public class SocketClient implements Runnable{
             catch (IllegalDiceException e){
                 localModel.addDiceException(e);
             }
+            catch (NotEnoughFavorTokensException e){
+                localModel.addFavorTokensException(e);
+            }
         }
     }
 
-    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException {
+    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException {
         try {
             if(!in.ready()) return;
             String message = in.readLine();
@@ -91,7 +94,7 @@ public class SocketClient implements Runnable{
         }
     }
 
-    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException {
+    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException {
         String messageFields[]=messageContent.split("&");
         switch (messageFields[0]) {
             case "Connected":
@@ -160,7 +163,7 @@ public class SocketClient implements Runnable{
             case "This cell is occupied":
                 throw new IllegalDiceException("This cell is occupied");
             case "Not enough favor tokens":
-           //     throw new
+                throw new NotEnoughFavorTokensException();
             case "It's your turn now":
                 localModel.notifyTurn();
                 break;

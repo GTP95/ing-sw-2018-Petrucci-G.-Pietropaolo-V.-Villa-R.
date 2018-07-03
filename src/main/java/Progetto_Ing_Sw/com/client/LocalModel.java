@@ -181,6 +181,12 @@ public  class LocalModel {
         }
     }
 
+    /**
+     * Returns the Game Board cards that are aviable to our player. If they weren't received by the server yet, it waits
+     * until all of them are received and then returns the complete ArrayList
+     * @return an ArrayList containing the Game Board cards avaiable to our player
+     * @see ClientGameBoardCard
+     */
     public ArrayList<ClientGameBoardCard> getDrawnGameBoardCards() {
         while(drawnGameBoardCards==null);   //aspetta che l'ArrayList venga creato
         while(drawnGameBoardCards.size()!=numOfGameBoardCards); //aspetta di ricevere tutte le GameBoardCards
@@ -382,6 +388,11 @@ public  class LocalModel {
 
         exceptions.add(e);
         tableGUIobserver.DiceExceptionThrower();
+    }
+
+    public void addFavorTokensException(Exception e){
+        exceptions.add(e);
+        toolCardDisplayerObserver.toolCardExceptionCatcher();
     }
 
    /* public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
