@@ -320,10 +320,12 @@ private void buildMirrorArray(){
 
     public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
         Effect grozingPliers=getToolCardWithEffectFromName("Grozing Pliers");
+        Dice localDice;
         int index;
         for(index=0;index<drawnDice.size();index++){
             if(drawnDice.get(index).equals(dice)) break;
         }
+        localDice=drawnDice.get(index);
         System.err.println("usegrozingpliers debug output");
         System.out.println("Dado ricevuto dal client: color: "+dice.getColor()+" value: "+dice.getValue());
         System.out.println("Dado trovato nella draftpool: color: "+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
@@ -332,6 +334,7 @@ private void buildMirrorArray(){
             grozingPliers.setFirstUsage(true);
         } else {
             drawnDice.get(index).increaseValue();
+            localDice.increaseValue();
             grozingPliers.setFirstUsage(true);
         }
 
@@ -340,13 +343,14 @@ private void buildMirrorArray(){
             grozingPliers.setFirstUsage(true);
         } else {
             drawnDice.get(index).decreaseValue();
+            localDice.decreaseValue();
             grozingPliers.setFirstUsage(true);
         }
 
     }
 
         System.out.println("Dado aggiornato nella draftpool: color:"+drawnDice.get(index).getColor()+" value: "+drawnDice.get(index).getValue());
-
+        System.out.println("Dado locale aggiornato: color: "+localDice.getColor()+" value: "+localDice.getValue());
     for(Player player : players){       //notifico i client della modifica alla draftpool
         player.getSocketClientHandler().updateDice=true;
     }

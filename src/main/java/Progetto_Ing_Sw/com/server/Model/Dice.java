@@ -36,10 +36,10 @@ public class Dice {
     public void setNumberBreaker(boolean numberBreaker) {this.numberBreaker = numberBreaker;}
 
 
-    public int increaseValue(){
+    public void increaseValue(){
 
         if(value<6) value++;
-        return value;
+        setValue(value);
     }
     public int decreaseValue(){
 
