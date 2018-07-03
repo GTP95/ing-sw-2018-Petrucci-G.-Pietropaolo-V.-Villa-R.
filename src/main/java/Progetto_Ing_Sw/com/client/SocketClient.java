@@ -319,6 +319,10 @@ public class SocketClient implements Runnable{
                 sendActionMessage(diceJSON,"Use Flux Brush");
                 localModel.useFluxBrush=false;
             }
+            if (localModel.useGlazingHammers){
+                sendActionMessage(null,"Use Glazing Hammer");  //JSON null perchè non bisogna inviare alcun oggetto
+                localModel.useGlazingHammers=false;
+            }
 
             localModel.sendDataToServer=false;
         }
