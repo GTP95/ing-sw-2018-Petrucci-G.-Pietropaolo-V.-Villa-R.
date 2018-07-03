@@ -483,14 +483,7 @@ public class ToolCardDisplayer extends Stage {
 
         VBox FluxBrushPool = getDraftPool();
 
-        Button FluxBrushAccept = new Button();
-        FluxBrushAccept.setTranslateX(600);
-        FluxBrushAccept.setMaxSize(150,150);
-        FluxBrushAccept.setVisible(false);
-        FluxBrushAccept.setId("NextBTN");
-        FluxBrushAccept.setOnAction(event ->
-            LocalModel.getInstance().useFluxBrush(DieToInsert)
-        );
+
 
         Button ReRollButton = new Button("Re-Roll");
         ReRollButton.setStyle("-fx-font: 25 'Castellar';");
@@ -498,9 +491,8 @@ public class ToolCardDisplayer extends Stage {
         ReRollButton.setTranslateY(100);
         ReRollButton.setVisible(true);
         ReRollButton.setOnAction(event -> {
-            //TODO random con roberto
-            FluxBrushAccept.setVisible(true);
             ReRollButton.setDisable(true);
+            LocalModel.getInstance().useFluxBrush(DieToInsert);
         });
 
 
@@ -521,6 +513,9 @@ public class ToolCardDisplayer extends Stage {
         GlazingHammerAccept.setId("NextBTN");
         GlazingHammerAccept.setMaxSize(150, 150);
         GlazingHammerAccept.setTranslateX(600);
+        GlazingHammerAccept.setOnAction(event ->
+            LocalModel.getInstance().useGlazingHammer();
+        );
 
 
         FlowPane GlazingHammerPool = new FlowPane();
@@ -721,7 +716,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(FluxRemover,ToolCardD1);
                 break;
             case ("Flux Brush"):
-                FluxBrush.getChildren().addAll(FluxBrushAccept,FluxBrushInfo,FluxBrushPool,ReRollButton,DieChoosen);
+                FluxBrush.getChildren().addAll(FluxBrushInfo,FluxBrushPool,ReRollButton,DieChoosen);
                 ToolCardDisplayerSecond.getChildren().addAll(FluxBrush,ToolCardD1);
                 break;
             case ("Glazing Hammer"):
