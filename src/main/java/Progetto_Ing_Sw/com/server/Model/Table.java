@@ -344,6 +344,7 @@ private void buildMirrorArray(){
     for(Player player : players){       //notifico i client della modifica alla draftpool
         player.getSocketClientHandler().updateDice=true;
     }
+        System.out.println("Command received: "+command);
         playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
         notifyAllSocketClientHandlers();
 }
