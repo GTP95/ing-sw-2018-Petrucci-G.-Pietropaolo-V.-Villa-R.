@@ -408,6 +408,9 @@ private ToolCard getToolCardFromTitle(String title){
     public Dice useFluxRemover(Dice dice, Player playerRequestingAction){
         try {
             diceBag.reintroduceDice(dice);
+            int index=drawnDice.indexOf(dice);
+            drawnDice.get(index).setValue(0);
+            drawnDice.get(index).setColor(0);
         } catch (IllegalDiceException e) {
             System.err.println("Flux Brush is trying to insert in dice bag an illegal dice! dice value: "+dice.getValue()+" dice color: "+dice.getColor());
         }
