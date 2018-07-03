@@ -415,9 +415,7 @@ public class ToolCardDisplayer extends Stage {
         DiceBag.setTranslateX(430);
         DiceBag.setTranslateY(300);
 
-
-
-
+        
         Button AcceptBag = new Button();
         AcceptBag.setId("NextBTN");
         AcceptBag.setMaxSize(150, 150);
@@ -509,13 +507,6 @@ public class ToolCardDisplayer extends Stage {
         GlazingHammerInfo.setTranslateX(380);
         GlazingHammerInfo.setTranslateY(-325);
 
-        Button GlazingHammerAccept = new Button();
-        GlazingHammerAccept.setId("NextBTN");
-        GlazingHammerAccept.setMaxSize(150, 150);
-        GlazingHammerAccept.setTranslateX(600);
-        GlazingHammerAccept.setOnAction(event ->
-            LocalModel.getInstance().useGlazingHammer();
-        );
 
 
         FlowPane GlazingHammerPool = new FlowPane();
@@ -564,9 +555,8 @@ public class ToolCardDisplayer extends Stage {
         GlazingHammerReRollButton.setTranslateY(150);
         GlazingHammerReRollButton.setVisible(true);
         GlazingHammerReRollButton.setOnAction(event -> {
-            //TODO random con roberto
-            GlazingHammerAccept.setVisible(true);
             GlazingHammerReRollButton.setDisable(true);
+            LocalModel.getInstance().useGlazingHammers();
         });
 
         StackPane GlazingHammer = new StackPane();
@@ -720,7 +710,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(FluxBrush,ToolCardD1);
                 break;
             case ("Glazing Hammer"):
-                GlazingHammer.getChildren().addAll(GlazingHammerInfo,GlazingHammerAccept,GlazingHammerPool,GlazingHammerReRollButton);
+                GlazingHammer.getChildren().addAll(GlazingHammerInfo,GlazingHammerPool,GlazingHammerReRollButton);
                 ToolCardDisplayerSecond.getChildren().addAll(GlazingHammer,ToolCardD1);
                 break;
             case ("Running Pliers"):
@@ -759,11 +749,13 @@ public class ToolCardDisplayer extends Stage {
      * This method creates a dialog to notify the Player that an exception was called.
      */
     public  void toolCardExceptionCatcher(){
-        Alert ToolCardException = new Alert(Alert.AlertType.WARNING);
-        ToolCardException.initStyle(StageStyle.UNDECORATED);
-        ToolCardException.setTitle("Tool Card Exception");
-        ToolCardException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
-        ToolCardException.setContentText("Press OK to continue");
-        ToolCardException.showAndWait();
+        Platform.runLater(()-> {
+            Alert ToolCardException = new Alert(Alert.AlertType.WARNING);
+            ToolCardException.initStyle(StageStyle.UNDECORATED);
+            ToolCardException.setTitle("Tool Card Exception");
+            ToolCardException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+            ToolCardException.setContentText("Press OK to continue");
+            ToolCardException.showAndWait();
+        });
     }
 }
