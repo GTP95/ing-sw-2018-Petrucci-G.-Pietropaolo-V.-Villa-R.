@@ -291,6 +291,12 @@ public class SocketClientHandler implements Runnable {
                 table.useToolCard("Glazing Hammer",myPlayer);
                 table.useGlazingHammer(myPlayer);
                 break;
+            case "Use Flux Remover":
+                dice=JSONCreator.diceLoaderFromString(fields[0]);
+                table.useToolCard("Flux Remover", myPlayer);
+                Dice newDrawnDice=table.useFluxRemover(dice,myPlayer);
+                sendControlMessage("The newly drawn dice is&"+JSONCreator.generateJSON(newDrawnDice));
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
