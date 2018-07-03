@@ -40,7 +40,7 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
     public boolean isLocalFirstUsage() {return localFirstUsage;}
 
-    public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
+/*    public WindowBoard applyEffect(WindowBoard localBoard, String command, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
         //System.out.println(">>> First usage value = "+isFirstUsage());
@@ -183,5 +183,15 @@ public class GrozingPliers extends Effect{ //prende un dado un entrata, lo incre
     @Override
     public String getTitle() {
         return toolCardTitle;
+    }*/
+
+    @Override
+    public WindowBoard applyEffect() throws PlaceDiceException {
+        return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }
