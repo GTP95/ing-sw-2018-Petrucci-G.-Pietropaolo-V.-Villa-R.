@@ -415,24 +415,17 @@ public class ToolCardDisplayer extends Stage {
         DiceBag.setTranslateX(430);
         DiceBag.setTranslateY(300);
 
-        
-        Button AcceptBag = new Button();
-        AcceptBag.setId("NextBTN");
-        AcceptBag.setMaxSize(150, 150);
-        AcceptBag.setTranslateX(150);
-        AcceptBag.setOnAction(event -> {
-            TranslateTransition DiceBagTransition = new TranslateTransition(Duration.millis(500),DieChoosen);
-            DiceBagTransition.setFromY(720);
-            DieChoosen.setVisible(true);
-            DiceBagTransition.setToY(0);
-            DiceBagTransition.setAutoReverse(false);
-            DiceBagTransition.play();
-        });
+
+
 
         Button AcceptFluxRemover = new Button();
         AcceptFluxRemover.setId("NextBTN");
         AcceptFluxRemover.setMaxSize(150, 150);
         AcceptFluxRemover.setTranslateX(600);
+        AcceptFluxRemover.setOnAction(event -> {
+            LocalModel.getInstance().getDiceToUseWithEffect().setValue(valoredado);
+            LocalModel.getInstance().notifyFluxRemoverDiceValueSet();
+        });
 
         Button IncreaseFluxRemover = new Button();
         IncreaseFluxRemover.setVisible(false);
@@ -441,7 +434,7 @@ public class ToolCardDisplayer extends Stage {
         IncreaseFluxRemover.setTranslateY(-100);
         IncreaseFluxRemover.setTranslateX(430);
         IncreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado++) + new ClientColor().IntToColor(DieToInsert.getColor()));
+            DieChoosen.setId(Integer.toString(valoredado++) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado++;
             if (valoredado==6){
                 IncreaseFluxRemover.setVisible(false);
@@ -457,13 +450,31 @@ public class ToolCardDisplayer extends Stage {
         DecreaseFluxRemover.setTranslateY(-100);
         DecreaseFluxRemover.setTranslateX(430);
         DecreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado--) + new ClientColor().IntToColor(DieToInsert.getColor()));
+            DieChoosen.setId(Integer.toString(valoredado--) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado--;
             if (valoredado==1){
                 DecreaseFluxRemover.setVisible(false);
             }
             else {DecreaseFluxRemover.setVisible(true);}
             AcceptFluxRemover.setVisible(true);
+        });
+
+        Button AcceptBag = new Button();
+        AcceptBag.setId("NextBTN");
+        AcceptBag.setMaxSize(150, 150);
+        AcceptBag.setTranslateX(150);
+        AcceptBag.setOnAction(event -> {
+            LocalModel.getInstance().useFluxRemover(DieToInsert);
+            fluxRemoverDie();
+            AcceptBag.setDisable(true);
+            TranslateTransition DiceBagTransition = new TranslateTransition(Duration.millis(500),DieChoosen);
+            DiceBagTransition.setFromY(720);
+            DieChoosen.setVisible(true);
+            DiceBagTransition.setToY(0);
+            DiceBagTransition.setAutoReverse(false);
+            DiceBagTransition.play();
+            IncreaseFluxRemover.setVisible(true);
+            DecreaseFluxRemover.setVisible(true);
         });
 
         StackPane FluxRemover = new StackPane();
@@ -756,6 +767,14 @@ public class ToolCardDisplayer extends Stage {
             ToolCardException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
             ToolCardException.setContentText("Press OK to continue");
             ToolCardException.showAndWait();
+        });
+    }
+
+    public void fluxRemoverDie(){
+        Platform.runLater(()-> {
+            valoredado = LocalModel.getInstance().getDiceToUseWithEffect().getValue();
+            DieChoosen.setId(Integer.toString(valoredado) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+
         });
     }
 }
