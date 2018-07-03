@@ -27,7 +27,7 @@ public class Table {
     private static CopyOnWriteArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
-    private int numOfSetWindowBoards, numOfTurnsPlayedInCurrentRound;
+    private int numOfSetWindowBoards;
     private CopyOnWriteArrayList<Player> mirrorArray;
 
 
@@ -83,7 +83,6 @@ public class Table {
 
         players = Lobby.getInstance().getConnctedPlayers();
         numOfSetWindowBoards = 0;
-        numOfTurnsPlayedInCurrentRound=0;
     }
 
     public static CopyOnWriteArrayList<Player> getPlayers() {

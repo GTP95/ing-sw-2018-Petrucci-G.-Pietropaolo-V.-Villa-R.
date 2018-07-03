@@ -597,12 +597,13 @@ public  class LocalModel {
         diceToUseWithEffect=diceToRemove;
         useFluxRemover=true;
         sendDataToServer=true;
+        dontNotifyUsedToolCard=true;
     }
 
     public void notifyFluxRemoverDiceValueSet(){
         sendFluxRemoverDiceWithSetValue=true;
         sendDataToServer=true;
-        dontNotifyUsedToolCard=true;
+       // dontNotifyUsedToolCard=true;
     }
 
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){

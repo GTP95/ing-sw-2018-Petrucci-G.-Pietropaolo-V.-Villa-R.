@@ -98,8 +98,11 @@ public class Player{
         this.choosenWindowBoard = choosenWindowBoard;
     }
 
-    public void decreaseNumOfTurnsToPlayInTheCurrentRound(){
-      //  if
+    public void decreaseNumOfTurnsToPlayInTheCurrentRound() throws IllegalNumOfTurnsToPlayInTheCurrentRoundException {
+        if(numOfTurnsToPlayInTheCurrentRound>0){
+            numOfTurnsToPlayInTheCurrentRound--;
+        }
+        else throw new IllegalNumOfTurnsToPlayInTheCurrentRoundException();
     }
 }
 
