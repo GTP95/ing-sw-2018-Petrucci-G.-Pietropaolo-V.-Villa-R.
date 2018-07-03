@@ -245,10 +245,11 @@ public class SocketClientHandler implements Runnable {
 
     private void handleActionMessage(String messageContent)throws NotEnoughFavorTokensException {
         String[] fields = messageContent.split("&");
+        Dice dice;
         switch (fields[1]) {
             case "Place dice":
                 try {
-                    Dice dice = JSONCreator.diceLoaderFromString(fields[0]);
+                    dice = JSONCreator.diceLoaderFromString(fields[0]);
                     System.err.println("Received the following dice color: "+dice.getColor()+" value: "+dice.getValue());
                     if (table.diceExists(dice)) {
                         myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), dice);
@@ -271,13 +272,14 @@ public class SocketClientHandler implements Runnable {
                 break;
             case "Use Grozing Pliers":
                 //System.err.println("Credo di dover usare Grozing Pliers percè ho ricevuto il seguente messaggio azione: "+messageContent);
-                Dice dice=JSONCreator.diceLoaderFromString(fields[0]);
+                dice=JSONCreator.diceLoaderFromString(fields[0]);
                 String command=fields[2];
                 table.useToolCard("Grozing Pliers",myPlayer);
                 table.useGrozingPliers(dice, command,myPlayer);
                 break;
             case "Use Grinding Stone":
-                //table
+                 dice=JSONCreator.diceLoaderFromString(fields[0]);
+                 table.useGrindingStone(dice,myPlayer);
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);

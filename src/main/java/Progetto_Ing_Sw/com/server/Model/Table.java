@@ -360,6 +360,18 @@ private ToolCard getToolCardFromTitle(String title){
         notifyAllSocketClientHandlers();
 }
 
+    public void useGrindingStone(Dice dice, Player playerRequestingAction){
+        int index=drawnDice.indexOf(dice);
+       /* for(index=0;index<drawnDice.size();index++){        //assegna ad index la posizione del dado nell'arrayList
+            if(drawnDice.get(index).equals(dice)) break;
+        }*/
+        drawnDice.get(index).setValue(7-dice.getValue());
+        getToolCardFromTitle("Grinding Stone").setFirstUsage(true);
+        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
+        playerRequestingAction.getSocketClientHandler().updateTokens=true;
+        notifyAllSocketClientHandlers();
+    }
+
 
 }
 
