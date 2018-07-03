@@ -312,8 +312,8 @@ private void buildMirrorArray(){
 
 
     public void useToolCard(String title, Player player)throws NotEnoughFavorTokensException {
-        Effect toolCardWithEffect=getToolCardWithEffectFromName(title);
-        player.useToolCard(toolCardWithEffect);   //decrementa il numero di favor tokens o lancia eccezione se non sono abbastanza
+        ToolCard toolCard=getToolCardFromTitle(title);
+        player.useToolCard(toolCard);   //decrementa il numero di favor tokens o lancia eccezione se non sono abbastanza
     }
 
 private ToolCard getToolCardFromTitle(String title){
