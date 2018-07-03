@@ -488,6 +488,9 @@ public class ToolCardDisplayer extends Stage {
         FluxBrushAccept.setMaxSize(150,150);
         FluxBrushAccept.setVisible(false);
         FluxBrushAccept.setId("NextBTN");
+        FluxBrushAccept.setOnAction(event ->
+            LocalModel.getInstance().useFluxBrush(DieToInsert)
+        );
 
         Button ReRollButton = new Button("Re-Roll");
         ReRollButton.setStyle("-fx-font: 25 'Castellar';");
@@ -717,7 +720,7 @@ public class ToolCardDisplayer extends Stage {
                 FluxRemover.getChildren().addAll(FluxRemoverInfo,FluxRemoverPool,AcceptFluxRemover,IncreaseFluxRemover,DecreaseFluxRemover,DieChoosen,DiceBag,AcceptBag);
                 ToolCardDisplayerSecond.getChildren().addAll(FluxRemover,ToolCardD1);
                 break;
-            case ("Flux Brusher"):
+            case ("Flux Brush"):
                 FluxBrush.getChildren().addAll(FluxBrushAccept,FluxBrushInfo,FluxBrushPool,ReRollButton,DieChoosen);
                 ToolCardDisplayerSecond.getChildren().addAll(FluxBrush,ToolCardD1);
                 break;
@@ -750,7 +753,22 @@ public class ToolCardDisplayer extends Stage {
 
     }
 
+    /**
+     * This method closes the Tool Card Displayer Dialog once a Tool Card is used.
+     */
     public void closeToolCardMenu(){
         Platform.runLater(()->close());
+    }
+
+    /**
+     * This method creates a dialog to notify the Player that an exception was called.
+     */
+    public  void toolCardExceptionCatcher(){
+        Alert ToolCardException = new Alert(Alert.AlertType.WARNING);
+        ToolCardException.initStyle(StageStyle.UNDECORATED);
+        ToolCardException.setTitle("Tool Card Exception");
+        ToolCardException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+        ToolCardException.setContentText("Press OK to continue");
+        ToolCardException.showAndWait();
     }
 }

@@ -875,7 +875,9 @@ public class TableGUI extends Stage{
 
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
-
+        ToolCard1BTN.setDisable(true);
+        ToolCard2BTN.setDisable(true);
+        ToolCard3BTN.setDisable(true);
         DiceCover.setVisible(true);
         Move.setDisable(true);
         PassButton.setDisable(true);
@@ -903,7 +905,7 @@ public class TableGUI extends Stage{
     }
 
     /**
-     * This method updates the GUI as the Round changes and notifies the player with a sound
+     * This method updates the GUI as the Round changes and notifies the player with a sound.
      */
     public void updateRound(){
         String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";
@@ -917,7 +919,7 @@ public class TableGUI extends Stage{
     }
 
     /**
-     * This method catches Die Placement Exceptions and show a pop up window to notify the player
+     * This method catches Die Placement Exceptions and show a pop up window to notify the player.
      */
     public void DiceExceptionThrower(){
         Platform.runLater(()-> {
@@ -932,7 +934,7 @@ public class TableGUI extends Stage{
     }
 
     /**
-     * This method updates the number of Favor Tokens available to the player and updates it as the player uses them
+     * This method updates the number of Favor Tokens available to the player and updates it as the player uses them.
      */
     public void updateTokens(){
         Platform.runLater(()->
@@ -941,7 +943,9 @@ public class TableGUI extends Stage{
     }
 
 
-
+    /**
+     * This method is used to show the Player that a block in the grid is selected.
+     */
     public void checkPane(){
         for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
             for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
@@ -950,6 +954,9 @@ public class TableGUI extends Stage{
             }
         }}
 
+    /**
+     * This method disables the Tool Cards once one is used in a Turn.
+    */
     public void disableToolCards(){
         Platform.runLater(()->{
             ToolCard1BTN.setDisable(true);
