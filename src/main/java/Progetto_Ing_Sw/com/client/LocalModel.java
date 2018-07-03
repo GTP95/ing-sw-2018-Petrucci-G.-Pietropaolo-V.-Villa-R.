@@ -36,7 +36,7 @@ public  class LocalModel {
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
-    private Boolean  firstWindowBoardsReceived;
+    private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
     /*sezione informazioni azioni*/
     private ClientDice diceToInsert;
@@ -64,6 +64,7 @@ public  class LocalModel {
         useGlazingHammers=false;
         useFluxRemover=false;
         sendFluxRemoverDiceWithSetValue=false;
+        dontNotifyUsedToolCard=false;
     }
 
 
@@ -240,12 +241,17 @@ public  class LocalModel {
 
     /**
      * Returns the name of the player who is playing the current turn
-     * @return
+     * @return name as String of the player who is playing the current turn
      */
     public String getCurrentPlayerName() {
         return currentPlayerName;
     }
 
+    /**
+     * Returns the window boards that are updated after a move
+     * @return all the player's window boards
+     * @see ClientWindowBoard
+     */
     public ArrayList<ClientWindowBoard> getUpdatedWindowBoards() {
         ArrayList<ClientWindowBoard> clientWindowBoardsToReturn=new ArrayList<>();
         for(ClientWindowBoard updatedWindowBoard : updatedWindowBoards)
@@ -254,10 +260,22 @@ public  class LocalModel {
         return updatedWindowBoards;
     }
 
+    /**
+     * When a round ends, the round track gets updated. This method returns the current state of the round track
+     * @return the current state of the round track
+     * @see ClientRoundTrack
+     */
     public ClientRoundTrack getRoundTrack() {
         return roundTrack;
     }
 
+    /**
+     * Used to register elements of the GUI as observers of this object (LocalModel).
+     * You can register the following types of object as observer: MultiplayerGUI, TableGUI, ChooseAWindow, LoginStage,
+     * RoundTrackView, ToolCardDisplayer. For each type only one observer is allowed, if more than one object of the
+     * same type tries to register as observer, only the last one is kept as an observer.
+     * @param currentObject
+     */
     public void registerAsObserver(Object currentObject){   //Serve per registrare come observer classi della view, l'utyilizzo di instanceof permette di avere un unico metodo per registrare tutte le classi necessarie.
             if(currentObject instanceof MultiplayerGUI) {
                 this.multiplayerGUIobserver = (MultiplayerGUI)currentObject;
@@ -306,19 +324,22 @@ public  class LocalModel {
 
     }
 
+    /**
+     * Sets the private objective of the player
+     * @param privateObjectiveCard
+     */
     public void setPrivateObjectiveCard(ClientPrivateObjectiveCard privateObjectiveCard) {
         this.privateObjectiveCard = privateObjectiveCard;
         while (chooseAWindowobserver==null);
         chooseAWindowobserver.updateChooseAWindow();
     }
 
-    public void requestAction(String description, Object... objects){   //Invocata dalla view per richiedere al server di eseguire azioni da parte del giocatore
-        switch(description){
-            case "ToolCard":
 
-        }
-    }
-
+    /**
+     * Changes the current state to reflect the status of the game (if the match is currently in progress or not) and
+     * notifies the GUI
+     * @param gameRunning boolean representing the status of the match
+     */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
         multiplayerGUIobserver.StartGame();
@@ -577,6 +598,7 @@ public  class LocalModel {
     public void notifyFluxRemoverDiceValueSet(){
         sendFluxRemoverDiceWithSetValue=true;
         sendDataToServer=true;
+        dontNotifyUsedToolCard=true;
     }
 
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){
@@ -585,8 +607,11 @@ public  class LocalModel {
     }
 
     public void notifyUsedToolCard(){   //notifica GUI
-        toolCardDisplayerObserver.closeToolCardMenu();
-        tableGUIobserver.disableToolCards();
+        if (!dontNotifyUsedToolCard){
+            toolCardDisplayerObserver.closeToolCardMenu();
+            tableGUIobserver.disableToolCards();
+        }
+        dontNotifyUsedToolCard=false;
     }
     public void updateTokens(int numOfTokens){
         getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(numOfTokens);
