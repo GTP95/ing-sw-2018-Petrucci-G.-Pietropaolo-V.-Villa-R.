@@ -369,6 +369,10 @@ private ToolCard getToolCardFromTitle(String title){
         getToolCardFromTitle("Grinding Stone").setFirstUsage(true);
         playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
         playerRequestingAction.getSocketClientHandler().updateTokens=true;
+        for(Player player : players){       //notifico i client della modifica alla draftpool
+            player.getSocketClientHandler().updateDice=true;
+            player.getSocketClientHandler().updateToolCards=true;
+        }
         notifyAllSocketClientHandlers();
     }
 
