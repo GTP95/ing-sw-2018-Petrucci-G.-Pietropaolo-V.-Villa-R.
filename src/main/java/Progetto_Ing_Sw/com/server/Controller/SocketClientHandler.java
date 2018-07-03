@@ -266,6 +266,7 @@ public class SocketClientHandler implements Runnable {
                 } catch (IllegalDiceException e) {
                     sendControlMessage(e.getMessage());
                 }
+                break;
             case "Use Grozing Pliers":
                 System.err.println("Credo di dover usare Grozing Pliers percè ho ricevuto il seguente messaggio azione: "+messageContent);
                 Dice dice=JSONCreator.diceLoaderFromString(fields[0]);
