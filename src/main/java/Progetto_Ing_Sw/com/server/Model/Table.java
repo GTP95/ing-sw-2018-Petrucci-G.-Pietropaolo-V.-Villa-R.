@@ -333,8 +333,8 @@ private void buildMirrorArray(){
         if (dice.getValue() == 6) {
             grozingPliers.setFirstUsage(true);
         } else {
-            drawnDice.get(index).increaseValue();
-            localDice.increaseValue();
+            drawnDice.get(index).setValue(drawnDice.get(index).getValue()+1);
+            localDice.setValue(localDice.getValue()+1);
             grozingPliers.setFirstUsage(true);
         }
 
@@ -342,8 +342,8 @@ private void buildMirrorArray(){
         if (dice.getValue() == 1) {
             grozingPliers.setFirstUsage(true);
         } else {
-            drawnDice.get(index).decreaseValue();
-            localDice.decreaseValue();
+            drawnDice.get(index).setValue(drawnDice.get(index).getValue()-1);
+            localDice.setValue(localDice.getValue()-1);
             grozingPliers.setFirstUsage(true);
         }
 

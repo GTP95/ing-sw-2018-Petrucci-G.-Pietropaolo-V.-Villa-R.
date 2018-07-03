@@ -36,16 +36,7 @@ public class Dice {
     public void setNumberBreaker(boolean numberBreaker) {this.numberBreaker = numberBreaker;}
 
 
-    public void increaseValue(){
-
-        if(value<6) value++;
-        setValue(value);
-    }
-    public int decreaseValue(){
-
-        if(value>1) value--;
-        return value;
-    }
+    //fottiti java!
 
     @Override
     public boolean equals(Object o) {       //usata per i test
