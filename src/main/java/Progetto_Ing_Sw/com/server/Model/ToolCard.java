@@ -24,4 +24,8 @@ public class ToolCard extends Card {
     public int getID() {return ID;}
     public boolean isFirstUsage() {return firstUsage;}
     public String getColor() {return color;}
+
+    public void setFirstUsage(boolean firstUsage) {
+        this.firstUsage = firstUsage;
+    }
 }

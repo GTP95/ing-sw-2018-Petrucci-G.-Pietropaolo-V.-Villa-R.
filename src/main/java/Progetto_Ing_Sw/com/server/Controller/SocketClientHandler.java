@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -33,6 +33,8 @@ public class SocketClientHandler implements Runnable {
         otherPlayersWindowBoardsSent=false;
         updateRoundTrack=false;
         notifyUsedToolCard=false;
+        updateTokens=false;
+        updateToolCards=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -317,6 +319,7 @@ public class SocketClientHandler implements Runnable {
         notifyWhoIsTheCurrentPlayer();
         notifyUsedToolCard();
         updateTokens();
+        updateToolCards();
     }
 
     private void notifyIfIsYourTurn(){
@@ -408,6 +411,16 @@ public class SocketClientHandler implements Runnable {
             catch (InvalidUsernameException e){
                 System.err.println("This is not the player you're looking for!");
             }
+        }
+   }
+
+   private void updateToolCards(){
+        if(updateToolCards) {
+            sendControlMessage("Sending ToolCards&" + table.getDrawnToolCards().size());
+            for (ToolCard toolCard : table.getDrawnToolCards()) {
+                sendJSONmessage(JSONCreator.generateJSON(toolCard), "ToolCard");
+            }
+            updateToolCards=false;
         }
    }
 

@@ -428,6 +428,7 @@ public  class LocalModel {
         drawnDice.clear();
         immediatelyUpdateGUI=true;
     }
+
     public void notifyTurn(){
         while (tableGUIobserver==null) {
             try {
@@ -557,12 +558,19 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
-    public void notifyUsedToolCard(){
+    public void notifyUsedToolCard(){   //notifica GUI
         toolCardDisplayerObserver.closeToolCardMenu();
-        //
+        tableGUIobserver.disableToolCards();
     }
     public void updateTokens(int numOfTokens){
         getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(numOfTokens);
         tableGUIobserver.updateTokens();
     }
+
+    public void resetToolCardArrayIfNecessary(){
+        if(drawnToolCards==null) return;
+        drawnToolCards.clear();
+        immediatelyUpdateGUI=true;
+    }
+
 }

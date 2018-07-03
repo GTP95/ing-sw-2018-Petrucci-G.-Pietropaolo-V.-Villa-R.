@@ -316,10 +316,19 @@ private void buildMirrorArray(){
         player.useToolCard(toolCardWithEffect);   //decrementa il numero di favor tokens o lancia eccezione se non sono abbastanza
     }
 
-
+private ToolCard getToolCardFromTitle(String title){
+        ToolCard toolCard=null;
+        for(ToolCard card:drawnToolCards){
+            if(card.getTitle().equals(title)){
+                toolCard=card;
+                break;
+            }
+        }
+        return toolCard;
+}
 
     public void useGrozingPliers(Dice dice, String command, Player playerRequestingAction){
-        Effect grozingPliers=getToolCardWithEffectFromName("Grozing Pliers");
+        ToolCard grozingPliers=getToolCardFromTitle("Grozing Pliers");
         Dice localDice=new Dice(dice.getValue(),dice.getColor());
         int index;
         for(index=0;index<drawnDice.size();index++){
@@ -343,6 +352,7 @@ private void buildMirrorArray(){
         System.out.println("Dado locale aggiornato: color: "+localDice.getColor()+" value: "+localDice.getValue());
     for(Player player : players){       //notifico i client della modifica alla draftpool
         player.getSocketClientHandler().updateDice=true;
+        player.getSocketClientHandler().updateToolCards=true;
     }
         System.out.println("Command received: "+command);
         playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;

@@ -117,6 +117,7 @@ public class SocketClient implements Runnable{
                 break;
             case "Sending ToolCards":
                 localModel.setNumOfToolCards(Integer.parseInt(messageFields[1]));
+                localModel.resetToolCardArrayIfNecessary();
                 break;
             case "Sending publicObjectiveCards":
                 localModel.setNumOfPublicObjectiveCards(Integer.parseInt(messageFields[1]));
