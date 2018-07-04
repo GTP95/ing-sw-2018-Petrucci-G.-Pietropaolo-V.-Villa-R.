@@ -138,7 +138,7 @@ public class SocketClientHandler implements Runnable {
         System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
     }
 
-    private void sendActionMessage(String json, String actionDescription){   //TODO: stabilire formato actionDescription
+    private void sendActionMessage(String json, String actionDescription){
         String messageToSend="Action%"+json+"%"+actionDescription;
         out.println(messageToSend);
     }
@@ -150,16 +150,6 @@ public class SocketClientHandler implements Runnable {
             out.println(messageToSend);
         }
     }
-
-
-
-    public void getNotificationNewPlayerConnected(String playerName){
-            System.out.println("Sending newly connected player name to player");
-            String messageToSend = "Player%" + playerName;
-            out.println(messageToSend);
-
-    }
-
 
 
     private void sendGameInitializationData(){
@@ -326,7 +316,6 @@ public class SocketClientHandler implements Runnable {
                 newColumn2=Integer.parseInt(fields[9]);
                 table.useToolCard("Lathekin",myPlayer);
                 table.useLathekin(oldRow,oldColumn,newRow,newColumn,oldRow2,oldColumn2,newRow2,newColumn2, myPlayer);
-                System.err.println("Messaggio ricevuto: "+messageContent);  //TODO: rimuovere
                 break;
             case "Use Lens Cutter":
                 Dice roundtrackDice=JSONCreator.diceLoaderFromString(fields[0]);
