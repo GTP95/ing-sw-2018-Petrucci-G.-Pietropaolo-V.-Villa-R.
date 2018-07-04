@@ -304,6 +304,7 @@ public  class LocalModel {
 
 
 
+
     public void setDrawnDice(ArrayList<ClientDice> drawnDice) {
         this.drawnDice=drawnDice;
 
@@ -346,8 +347,9 @@ public  class LocalModel {
     }
 
     /**
-     *
-     * @param dice
+     * Adds the given dice to the ArrayList of dice avaiable
+     * @param dice dice to insert
+     * @see ClientDice
      */
     public void addDrawnDice(ClientDice dice){
         if(drawnDice==null) drawnDice=new ArrayList<ClientDice>();
@@ -355,72 +357,114 @@ public  class LocalModel {
         if(immediatelyUpdateGUI) tableGUIobserver.updateDice();
     }
 
+    /**
+     * Adds the given tool card to the ArrayList of tool cards avaiable
+     * @param toolCard tool card to insert
+     * @see ClientToolCard
+     */
     public void addDrawnToolCard(ClientToolCard toolCard){
         if(drawnToolCards==null) drawnToolCards=new ArrayList<>();
         drawnToolCards.add(toolCard);
     }
 
+    /**
+     * Adds the given game board card to the ArrayList of drawn game board cards which is used by the player to choose
+     * his/her own game board card
+     * @param gameBoardCard game board card to insert
+     */
     public void addDrawnGameBoardCard(ClientGameBoardCard gameBoardCard){
         if(drawnGameBoardCards==null) drawnGameBoardCards=new ArrayList<>();
         drawnGameBoardCards.add(gameBoardCard);
     }
 
+    /**
+     * Adds the given public objective card to the ArrayList of drawn public objective cards
+     * @param publicObjectiveCard public objective card to insert
+     */
     public void addDrawnPublicObjectiveCard(ClientPublicObjectiveCard publicObjectiveCard){
         if(drawnPublicObjectiveCards==null) drawnPublicObjectiveCards=new ArrayList<>();
         drawnPublicObjectiveCards.add(publicObjectiveCard);
-        /*if(drawnPublicObjectiveCards.size()==numOfPublicObjectiveCards){
-            System.err.print("ASPETTO CHE TABLEGUI SI REGISTRI COME OBSERVER");
-            while(tableGUIobserver==null) {
-                System.err.println("Waiting for table");
-                try {
-                    Thread.sleep(100);  //In questo caso il while vuoto non funziona!
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            tableGUIobserver.updateTable();
-            System.err.println("NOTIFICA INVIATA A TABLEGUI");
-        }*/
     }
 
+    /**
+     * Sets the number of dice that the client should expect to receive from the server in the following messages
+     * @see SocketClient
+     * @see ClientDice
+     * @param numOfDice number of dice being sent by the server
+     */
     public void setNumOfDice(int numOfDice) {
         this.numOfDice = numOfDice;
     }
 
+    /**
+     * Sets the number of tool cards that the client should expect to receive from the server in the following messages
+     * @see SocketClient
+     * @see ClientToolCard
+     * @param numOfToolCards number of tool cards being sent by the server
+     */
     public void setNumOfToolCards(int numOfToolCards) {
         this.numOfToolCards = numOfToolCards;
     }
 
+    /**
+     * Sets the number of public objective cards that the client should expect to receive from the server in the following messages
+     * @see SocketClient
+     * @see ClientPublicObjectiveCard
+     * @param numOfPublicObjectiveCards number of public objective cards being sent by the server
+     */
     public void setNumOfPublicObjectiveCards(int numOfPublicObjectiveCards) {
         this.numOfPublicObjectiveCards = numOfPublicObjectiveCards;
     }
 
+    /**
+     * Sets the number of game board cards that the client should expect to receive from the server in the following messages
+     * @see SocketClient
+     * @see ClientGameBoardCard
+     * @param numOfGameBoardCards number of game board cards being sent by the server
+     */
     public void setNumOfGameBoardCards(int numOfGameBoardCards) {
         this.numOfGameBoardCards = numOfGameBoardCards;
     }
 
+    /**
+     * Sets the number of window boards that the client should expect to receive from the server in the following messages
+     * @see SocketClient
+     * @see ClientWindowBoard
+     * @param numOfWindowBoards number of window boards being sent by the server
+     */
     public void setNumOfWindowBoards(int numOfWindowBoards) {
         this.numOfWindowBoards = numOfWindowBoards;
         System.err.println("numofwindowboards settaato a "+numOfWindowBoards);
     }
 
+    /**
+     * Sets the game board card choosen by the player and notifies SocketClient that it has to send it to the server
+     * @param choosenGameBoardCard the game board card choosen by the player
+     */
     public void setChoosenGameBoardCard(ClientGameBoardCard choosenGameBoardCard) {
-        System.err.println("chiamato metodo setChoosenGameBoardCard");
         this.choosenGameBoardCard = choosenGameBoardCard;
         this.windowBoard=new ClientWindowBoard(choosenGameBoardCard);
         this.sendWindowBoard=true;
         this.sendDataToServer=true;
-        System.err.println("Settate tutte le variabili per l'invio della gameBoardCard");
     }
 
+    /**
+     * Sets the number of seconds left for the player to play it's turn
+     * @param countdownValue time in seconds left for the player to play it's turn
+     */
     public void setCountdownValue(int countdownValue) {
         this.countdownValue = countdownValue;
         while(multiplayerGUIobserver==null);
         multiplayerGUIobserver.updateTimer();
     }
 
+    /**
+     * Used to place a dice in the window board. Notifies SocketClient that it has to tell the server the player's move
+     * @param dice dice the player wishes to place
+     * @param row row in which the player wishes to place the dice
+     * @param column column in which the player wishes to place the dice
+     */
     public void insertDice(ClientDice dice, int row, int column){
-      //  System.err.println("ATTENZIONE: AL MOMENTO IL METODO insertDice() NON È ANCORA COMPLETO!");
         this.diceToInsert=dice;
         this.row=row;
         this.column=column;
@@ -428,6 +472,11 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Since SocketClient runs inside a thread and the run method can't throw checked exceptions, all checked exceptions
+     *
+     * @return
+     */
     public Exception returnTrownException(){    //restituisce l'eccezione in testa alla coda
         return exceptions.poll();
     }
