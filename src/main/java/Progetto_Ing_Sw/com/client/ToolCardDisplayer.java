@@ -168,14 +168,26 @@ public class ToolCardDisplayer extends Stage {
     }
 
     public GridPane getWindowBoardDiceBoard () {
-        GridPane DieGrid = new GridPane();
-        GridBlocks = new ArrayList<>();
+        int rows = 4;
+        int columns = 5;
+        GridPane Board = new GridPane();
+        Board.setTranslateY(-20);
+        Board.setAlignment(Pos.CENTER);
+        Board.setId("TheGrid");
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints column = new ColumnConstraints(75);
+            Board.getColumnConstraints().add(column);
+        }
 
+        for (int i = 0; i < rows; i++) {
+            RowConstraints row = new RowConstraints(75);
+            Board.getRowConstraints().add(row);
+        }
+        GridBlocks = new ArrayList<>();
         for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
-            ArrayList<Pane> PaneRow = new ArrayList<>();
+            //ArrayList<Pane> PaneRow = new ArrayList<>();
             for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
                 Pane block = new Pane();
-
                 if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
                     block.setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
                             + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
@@ -183,19 +195,10 @@ public class ToolCardDisplayer extends Stage {
                 } else {
                     block.setId("DieBlock");
                 }
-                /*if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
-                    GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
-                            + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
-                    GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
-                    System.err.println("Siamo nel for per la creazione dei dadi alle coordinate" + r + "," + c);
-                    System.err.println("Dado Presente: " + LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue() + "," + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
-                }*/
-                DieGrid.add(block, c, r);
-                PaneRow.add(c, block);
+                Board.add(block, c, r);
             }
-            GridBlocks.add(PaneRow);
         }
-            return DieGrid;
+            return Board;
     }
 
     /*public void populateWindowGrid(){
@@ -563,6 +566,94 @@ public class ToolCardDisplayer extends Stage {
         CopperFoilBurnisher.setPrefSize(1280,720);
 
         //----------------------------------------------------------------------------------FINE COPPER FOIL BURNISHER----------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------INIZIO LATHEKIN----------------------------------------------------------------------------------//
+        Text LathekinInfo = new Text("Choose 2 Dice and two places to move them to");
+        LathekinInfo.setStyle("-fx-fill: white;");
+        LathekinInfo.setTranslateX(350);
+        LathekinInfo.setTranslateY(-325);
+
+
+        GridPane LathekinGrid = CreateAGrid(LocalModel.getInstance().getChoosenGameBoardCard());
+        LathekinGrid.setTranslateX(350);
+
+        GridPane LathekinDieGrid = getWindowBoardDiceBoard();
+        LathekinDieGrid.setTranslateX(350);
+
+        Text fromRowLathekin = new Text("From\nRow");
+        fromRowLathekin.setTranslateY(175);
+        fromRowLathekin.setTranslateX(100);
+        fromRowLathekin.setStyle("-fx-fill: white;");
+        TextField FromRow1Lathekin = new TextField();
+        FromRow1Lathekin.setMaxSize(100,50);
+        FromRow1Lathekin.setTranslateX(100);
+        FromRow1Lathekin.setTranslateY(280);
+        TextField FromRow2Lathekin = new TextField();
+        FromRow2Lathekin.setMaxSize(100,50);
+        FromRow2Lathekin.setTranslateX(100);
+        FromRow2Lathekin.setTranslateY(340);
+
+
+        Text fromColumnLathekin = new Text("From\nColumn");
+        fromColumnLathekin.setTranslateY(175);
+        fromColumnLathekin.setTranslateX(220);
+        fromColumnLathekin.setStyle("-fx-fill: white;");
+        TextField FromColumn1Lathekin = new TextField();
+        FromColumn1Lathekin.setMaxSize(100,50);
+        FromColumn1Lathekin.setTranslateX(220);
+        FromColumn1Lathekin.setTranslateY(280);
+        TextField FromColumn2Lathekin = new TextField();
+        FromColumn2Lathekin.setMaxSize(100,50);
+        FromColumn2Lathekin.setTranslateX(220);
+        FromColumn2Lathekin.setTranslateY(340);
+
+        Text toRowLathekin = new Text("To\nRow");
+        toRowLathekin.setTranslateY(175);
+        toRowLathekin.setTranslateX(340);
+        toRowLathekin.setStyle("-fx-fill: white;");
+        TextField ToRow1Lathekin = new TextField();
+        ToRow1Lathekin.setMaxSize(100,50);
+        ToRow1Lathekin.setTranslateX(340);
+        ToRow1Lathekin.setTranslateY(280);
+        TextField ToRow2Lathekin = new TextField();
+        ToRow2Lathekin.setMaxSize(100,50);
+        ToRow2Lathekin.setTranslateX(340);
+        ToRow2Lathekin.setTranslateY(340);
+
+        Text toColumnLathekin = new Text("To\nColumn");
+        toColumnLathekin.setTranslateY(175);
+        toColumnLathekin.setTranslateX(460);
+        toColumnEglomise.setStyle("-fx-fill: white;");
+        TextField ToColumn1Lathekin = new TextField();
+        ToColumn1Lathekin.setMaxSize(100,50);
+        ToColumn1Lathekin.setTranslateX(460);
+        ToColumn1Lathekin.setTranslateY(280);
+        TextField ToColumn2Lathekin = new TextField();
+        ToColumn2Lathekin.setMaxSize(100,50);
+        ToColumn2Lathekin.setTranslateX(460);
+        ToColumn2Lathekin.setTranslateY(340);
+
+
+        Button AcceptLathekin = new Button();
+        AcceptLathekin.setId("NextBTN");
+        AcceptLathekin.setMaxSize(150, 150);
+        AcceptLathekin.setTranslateX(600);
+        AcceptLathekin.setOnAction(event ->
+                LocalModel.getInstance().useLathekin(
+                        Integer.parseInt(FromRow1Lathekin.getText()),
+                        Integer.parseInt(FromColumn1Lathekin.getText()),
+                        Integer.parseInt(ToRow1Lathekin.getText()),
+                        Integer.parseInt(ToColumn1Lathekin.getText()),
+                        Integer.parseInt(FromRow2Lathekin.getText()),
+                        Integer.parseInt(FromColumn2Lathekin.getText()),
+                        Integer.parseInt(ToRow2Lathekin.getText()),
+                        Integer.parseInt(ToColumn2Lathekin.getText())
+                )
+        );
+
+
+
+        StackPane Lathekin = new StackPane();
+        Lathekin.setPrefSize(1280,720);
 
         //----------------------------------------------------------------------------------INIZIO GRINDING STONE----------------------------------------------------------------------------------//
         Text GrindingStoneInfo = new Text("Choose a Die to Flip");
@@ -1023,7 +1114,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
             case ("Eglomise Brush"):
-                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,fromColumnEglomise,FromRowBrush,fromColumnEglomise,toColumnEglomise,ToColumnBrush,toRowEglomise,ToRowBrush);
+                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,fromColumnEglomise,fromRowEglomise,FromRowBrush,toColumnEglomise,ToColumnBrush,toRowEglomise,ToRowBrush);
                 ToolCardDisplayerSecond.getChildren().addAll(EglomiseBrush,ToolCardD1);
                 break;
             case ("Copper Foil Burnisher"):
@@ -1031,8 +1122,12 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(CopperFoilBurnisher,ToolCardD1);
                 break;
             case ("Cork-backed Straightedge"):
-                CopperFoilBurnisher.getChildren().addAll(CorkBackedStraightedgeInfo,CorkBackedStraightedgeGrid,CorkBackedStraightedgeDieGrid,CorkBackedDraftPool,toColumnCorkBacked,ToColumnCorkBacked,toRowCorkBacked,ToRowCorkBacked,AcceptCorkBackedStraightedge);
+                CorkBackedStraightedge.getChildren().addAll(CorkBackedStraightedgeInfo,CorkBackedStraightedgeGrid,CorkBackedStraightedgeDieGrid,CorkBackedDraftPool,toColumnCorkBacked,ToColumnCorkBacked,toRowCorkBacked,ToRowCorkBacked,AcceptCorkBackedStraightedge);
                 ToolCardDisplayerSecond.getChildren().addAll(CorkBackedStraightedge,ToolCardD1);
+                break;
+            case("Lathekin"):
+                Lathekin.getChildren().addAll(LathekinInfo,LathekinGrid,LathekinDieGrid,fromColumnLathekin,fromRowLathekin,toColumnLathekin,toRowLathekin,FromRow1Lathekin,FromColumn1Lathekin,ToRow1Lathekin,ToColumn1Lathekin,FromRow2Lathekin,FromColumn2Lathekin,ToRow2Lathekin,ToColumn2Lathekin,AcceptLathekin);
+                ToolCardDisplayerSecond.getChildren().addAll(Lathekin,ToolCardD1);
                 break;
 
         }

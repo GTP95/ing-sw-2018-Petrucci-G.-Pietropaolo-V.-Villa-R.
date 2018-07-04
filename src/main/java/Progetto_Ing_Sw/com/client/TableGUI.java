@@ -242,7 +242,6 @@ public class TableGUI extends Stage{
 
             //Player Stats
             Tokens = new Label("•");
-            //Tokens.setText(String.join("", Collections.nCopies(gameBoardCard.getDifficulty(), "  •\n")));
             Tokens.setId("Tokens");
             Tokens.setTranslateX(-220);
             Tokens.setMinWidth(70);
