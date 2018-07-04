@@ -761,7 +761,7 @@ public class ToolCardDisplayer extends Stage {
         AcceptCorkBackedStraightedge.setMaxSize(150, 150);
         AcceptCorkBackedStraightedge.setTranslateX(600);
         AcceptCorkBackedStraightedge.setOnAction(event ->
-                LocalModel.getInstance().usecorkBackedStraightEdge(
+                LocalModel.getInstance().useCorkBackedStraightEdge(
                         DieToInsert,
                         Integer.parseInt(ToRowCorkBacked.getText()),
                         Integer.parseInt(ToColumnCorkBacked.getText())
