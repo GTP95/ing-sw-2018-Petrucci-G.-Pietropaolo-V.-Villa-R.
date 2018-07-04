@@ -87,10 +87,10 @@ public class MultiplayerGUI extends Stage {
 
 
         //Labels con i nomi dei giocatori
-        Player1Label = new Label("Player 1"); Player1Label.setId("TextField");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(200);
-        Player2Label = new Label("Player 2"); Player2Label.setId("TextField");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(200);
-        Player3Label = new Label("Player 3"); Player3Label.setId("TextField");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(200);
-        Player4Label = new Label("Player 4"); Player4Label.setId("TextField");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(200);
+        Player1Label = new Label("Waiting..."); Player1Label.setId("TextField");Player1Label.setPrefWidth(240);Player1Label.setTranslateY(200);
+        Player2Label = new Label("Waiting..."); Player2Label.setId("TextField");Player2Label.setPrefWidth(240);Player2Label.setTranslateY(200);
+        Player3Label = new Label("Waiting..."); Player3Label.setId("TextField");Player3Label.setPrefWidth(240);Player3Label.setTranslateY(200);
+        Player4Label = new Label("Waiting..."); Player4Label.setId("TextField");Player4Label.setPrefWidth(240);Player4Label.setTranslateY(200);
 
 
 
