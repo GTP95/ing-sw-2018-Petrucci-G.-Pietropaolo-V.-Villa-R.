@@ -327,13 +327,13 @@ private ToolCard getToolCardFromTitle(String title){
 }
 
     public void notifyOfToolCardUsage(Player playerRequestingAction){
-        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
-        playerRequestingAction.getSocketClientHandler().updateTokens=true;
         for(Player player : players){       //notifico i client della modifica alla draftpool
             player.getSocketClientHandler().updateDice=true;
             player.getSocketClientHandler().updateToolCards=true;
             player.getSocketClientHandler().updateWindowBoards=true;
         }
+        playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
+        playerRequestingAction.getSocketClientHandler().updateTokens=true;
         notifyAllSocketClientHandlers();
     }
 
