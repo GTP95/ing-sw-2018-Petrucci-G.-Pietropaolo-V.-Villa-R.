@@ -620,6 +620,11 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    public String getCoordinatesAsString(){
+        String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
+        return message;
+    }
+
     public void notifyUsedToolCard(){   //notifica GUI
         if (!dontNotifyUsedToolCard){
             System.err.println("chiamo closeToolCardMenu() e disableToolCards()");
