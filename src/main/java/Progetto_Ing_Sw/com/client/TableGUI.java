@@ -837,6 +837,7 @@ public class TableGUI extends Stage{
      */
     public void insertion(){
         Platform.runLater(()-> {
+            System.err.println("---------------------------------------------------------------INSERTION-------------------------------------------------------------");
             for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
                 for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
                     if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
