@@ -308,6 +308,7 @@ public class SocketClientHandler implements Runnable {
                 int newRow=Integer.parseInt(fields[4]);
                 int newColumn=Integer.parseInt(fields[5]);
                 System.err.println("Debug: messaggio ricevuto: "+messageContent);
+                table.useToolCard("Eglomise Brush", myPlayer);
                 table.useEglomiseBrush(oldRow,oldColumn,newRow,newColumn,myPlayer);
                 break;
             default:

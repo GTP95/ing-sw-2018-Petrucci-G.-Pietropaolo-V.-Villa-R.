@@ -474,7 +474,7 @@ public  class LocalModel {
 
     /**
      * Since SocketClient runs inside a thread and the run method can't throw checked exceptions, all checked exceptions
-     * 
+     *
      * @return
      */
     public Exception returnTrownException(){    //restituisce l'eccezione in testa alla coda
