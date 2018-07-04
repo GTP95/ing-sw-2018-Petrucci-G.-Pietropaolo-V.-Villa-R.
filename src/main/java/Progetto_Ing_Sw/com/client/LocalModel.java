@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -44,9 +44,9 @@ public  class LocalModel {
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
     private ClientRoundTrack roundTrack;
-    private int toolCardWithEffectIndex, oldRow, oldColumn, newRow, newColumn;
+    private int toolCardWithEffectIndex, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2;
 
-    private ClientDice diceToUseWithEffect;
+    private ClientDice diceToUseWithEffect, diceToUseWithEffect2;
     private String command;
 
     private LocalModel(){
@@ -66,6 +66,7 @@ public  class LocalModel {
         dontNotifyUsedToolCard=false;
         useEglomiseBrush=false;
         useCorkBackedStraightEdge=false;
+        useLathekin=false;
     }
 
 
@@ -533,7 +534,6 @@ public  class LocalModel {
             System.err.println("Ricevute tutte le gameboardcard");
             for(int index=0;index<clientPlayerArrayList.size();index++) clientPlayerArrayList.get(index).updateWindowBoard(updatedWindowBoards.get(index));
             if(firstWindowBoardsReceived){
-//                generateToolcardsWithEffects();   //TODO: decommentare!
                 getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(updatedWindowBoards.get(clientPlayerArrayList.indexOf(getPlayerFromName(ClientSettings.getInstance().getUsername()))).getDifficulty());
                 System.err.println("Sto per chiamare starttable");
                 chooseAWindowobserver.StartTable();
@@ -700,6 +700,23 @@ public  class LocalModel {
         diceToUseWithEffect=dice;
         useCorkBackedStraightEdge=true;
         sendDataToServer=true;
+    }
+
+    public void useLathekin(ClientDice dice1, int oldRow1, int oldColumn1, int newRow1, int newColumn1, ClientDice dice2, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
+        diceToUseWithEffect=dice1;
+        diceToUseWithEffect2=dice2;
+
+        this.oldRow=oldRow1;
+        this.oldColumn=oldColumn1;
+        this.newRow=newRow1;
+        this.newColumn=newColumn1;
+
+        this.oldRow2=oldRow2;
+        this.oldColumn2=oldColumn2;
+        this.newRow2=newRow2;
+        this.newColumn2=newColumn2;
+
+        useLathekin=true;
     }
 
     public String getCoordinatesAsString(){

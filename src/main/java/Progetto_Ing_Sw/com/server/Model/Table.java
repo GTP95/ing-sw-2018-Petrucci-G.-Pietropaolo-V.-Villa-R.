@@ -453,7 +453,7 @@ private ToolCard getToolCardFromTitle(String title){
         playerWindowBoard.getUsedMatrix().get(oldRow-1).get(oldColumn-1).setUsed(false);    //indico che la cella ora è libera
         diceToMove.setNumberBreaker(true);   //indico che il dado può violare le limitazioni sul valore
         playerWindowBoard.insertDice(newRow,newColumn,diceToMove);
-        getToolCardFromTitle("Eglomise Brush").setFirstUsage(true);
+        getToolCardFromTitle("Copper Foil Burnisher").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
 

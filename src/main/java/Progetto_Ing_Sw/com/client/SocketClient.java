@@ -358,6 +358,10 @@ public class SocketClient implements Runnable{
                 localModel.useCorkBackedStraightEdge=false;
             }
 
+            if(localModel.useLathekin){
+
+            }
+
             localModel.sendDataToServer=false;
         }
 
