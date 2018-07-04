@@ -383,7 +383,7 @@ public class ToolCardDisplayer extends Stage {
         //----------------------------------------------------------------------------------INIZIO GROZING PLIERS----------------------------------------------------------------------------------//
         Text TitleInfo = new Text("Choose a Die to Increase or Decrease");
         TitleInfo.setStyle("-fx-fill: white;");
-        TitleInfo.setTranslateX(380);
+        TitleInfo.setTranslateX(350);
         TitleInfo.setTranslateY(-325);
 
         VBox GrozingPool = getDraftPool();
@@ -431,7 +431,7 @@ public class ToolCardDisplayer extends Stage {
         //----------------------------------------------------------------------------------INIZIO EGLOMISE BRUSH----------------------------------------------------------------------------------//
         Text EglomiseBrushInfo = new Text("Choose a Die and a position to move it to");
         EglomiseBrushInfo.setStyle("-fx-fill: white;");
-        EglomiseBrushInfo.setTranslateX(380);
+        EglomiseBrushInfo.setTranslateX(350);
         EglomiseBrushInfo.setTranslateY(-325);
 
 
@@ -441,22 +441,38 @@ public class ToolCardDisplayer extends Stage {
         GridPane EglomiseBrushDieGrid = getWindowBoardDiceBoard();
         EglomiseBrushDieGrid.setTranslateX(350);
 
-        TextField FromRowBrush = new TextField("From Row");
+        Text fromRowEglomise = new Text("From\nRow");
+        fromRowEglomise.setTranslateY(275);
+        fromRowEglomise.setTranslateX(100);
+        fromRowEglomise.setStyle("-fx-fill: white;");
+        TextField FromRowBrush = new TextField();
         FromRowBrush.setMaxSize(100,50);
         FromRowBrush.setTranslateX(100);
         FromRowBrush.setTranslateY(340);
 
-        TextField FromColumnBrush = new TextField("From Column");
+        Text fromColumnEglomise = new Text("From\nColumn");
+        fromColumnEglomise.setTranslateY(275);
+        fromColumnEglomise.setTranslateX(220);
+        fromColumnEglomise.setStyle("-fx-fill: white;");
+        TextField FromColumnBrush = new TextField();
         FromColumnBrush.setMaxSize(100,50);
         FromColumnBrush.setTranslateX(220);
         FromColumnBrush.setTranslateY(340);
 
-        TextField ToRowBrush = new TextField("To Row");
+        Text toRowEglomise = new Text("To\nRow");
+        toRowEglomise.setTranslateY(275);
+        toRowEglomise.setTranslateX(340);
+        toRowEglomise.setStyle("-fx-fill: white;");
+        TextField ToRowBrush = new TextField();
         ToRowBrush.setMaxSize(100,50);
         ToRowBrush.setTranslateX(340);
         ToRowBrush.setTranslateY(340);
 
-        TextField ToColumnBrush = new TextField("To Column");
+        Text toColumnEglomise = new Text("To\nColumn");
+        toColumnEglomise.setTranslateY(275);
+        toColumnEglomise.setTranslateX(460);
+        toColumnEglomise.setStyle("-fx-fill: white;");
+        TextField ToColumnBrush = new TextField();
         ToColumnBrush.setMaxSize(100,50);
         ToColumnBrush.setTranslateX(460);
         ToColumnBrush.setTranslateY(340);
@@ -493,6 +509,55 @@ public class ToolCardDisplayer extends Stage {
 
         GridPane CopperFoilBurnisherDieGrid = getWindowBoardDiceBoard();
         CopperFoilBurnisherDieGrid.setTranslateX(350);
+
+        Text fromRowCopperFoil = new Text("From\nRow");
+        fromRowCopperFoil.setTranslateY(275);
+        fromRowCopperFoil.setTranslateX(100);
+        fromRowCopperFoil.setStyle("-fx-fill: white;");
+        TextField FromRowBurnisher = new TextField();
+        FromRowBurnisher.setMaxSize(100,50);
+        FromRowBurnisher.setTranslateX(100);
+        FromRowBurnisher.setTranslateY(340);
+
+        Text fromColumnCopperFoil = new Text("From\nColumn");
+        fromColumnCopperFoil.setTranslateY(275);
+        fromColumnCopperFoil.setTranslateX(220);
+        fromColumnCopperFoil.setStyle("-fx-fill: white;");
+        TextField FromColumnBurnisher = new TextField();
+        FromColumnBurnisher.setMaxSize(100,50);
+        FromColumnBurnisher.setTranslateX(220);
+        FromColumnBurnisher.setTranslateY(340);
+
+        Text toRowCopperFoil = new Text("To\nRow");
+        toRowCopperFoil.setTranslateY(275);
+        toRowCopperFoil.setTranslateX(340);
+        toRowCopperFoil.setStyle("-fx-fill: white;");
+        TextField ToRowBurnisher = new TextField();
+        ToRowBurnisher.setMaxSize(100,50);
+        ToRowBurnisher.setTranslateX(340);
+        ToRowBurnisher.setTranslateY(340);
+
+        Text toColumnCopperFoil = new Text("To\nColumn");
+        toColumnCopperFoil.setTranslateY(275);
+        toColumnCopperFoil.setTranslateX(460);
+        toColumnCopperFoil.setStyle("-fx-fill: white;");
+        TextField ToColumnBurnisher = new TextField();
+        ToColumnBurnisher.setMaxSize(100,50);
+        ToColumnBurnisher.setTranslateX(460);
+        ToColumnBurnisher.setTranslateY(340);
+
+        Button AcceptCopperFoilBurnisher = new Button();
+        AcceptCopperFoilBurnisher.setId("NextBTN");
+        AcceptCopperFoilBurnisher.setMaxSize(150, 150);
+        AcceptCopperFoilBurnisher.setTranslateX(600);
+        AcceptCopperFoilBurnisher.setOnAction(event ->
+                LocalModel.getInstance().useCopperFoilBurnisher(
+                        Integer.parseInt(FromRowBurnisher.getText()),
+                        Integer.parseInt(FromColumnBurnisher.getText()),
+                        Integer.parseInt(ToRowBurnisher.getText()),
+                        Integer.parseInt(ToColumnBurnisher.getText())
+                )
+        );
 
         StackPane CopperFoilBurnisher = new StackPane();
         CopperFoilBurnisher.setPrefSize(1280,720);
@@ -657,6 +722,56 @@ public class ToolCardDisplayer extends Stage {
 
 
         //----------------------------------------------------------------------------------FINE FLUX REMOVER----------------------------------------------------------------------------------//
+
+        //----------------------------------------------------------------------------------INIZIO CORK-BACKED STRAIGHTEDGE----------------------------------------------------------------------------------//
+        Text CorkBackedStraightedgeInfo = new Text("Choose a Die and a position to move it to");
+        CorkBackedStraightedgeInfo.setStyle("-fx-fill: white;");
+        CorkBackedStraightedgeInfo.setTranslateX(350);
+        CorkBackedStraightedgeInfo.setTranslateY(-325);
+
+
+        GridPane CorkBackedStraightedgeGrid = CreateAGrid(LocalModel.getInstance().getChoosenGameBoardCard());
+        CorkBackedStraightedgeGrid.setTranslateX(350);
+
+        GridPane CorkBackedStraightedgeDieGrid = getWindowBoardDiceBoard();
+        CorkBackedStraightedgeDieGrid.setTranslateX(350);
+
+        VBox CorkBackedDraftPool = getDraftPool();
+
+        Text toRowCorkBacked = new Text("To\nRow");
+        toRowCorkBacked.setTranslateY(275);
+        toRowCorkBacked.setTranslateX(340);
+        toRowCorkBacked.setStyle("-fx-fill: white;");
+        TextField ToRowCorkBacked = new TextField();
+        ToRowCorkBacked.setMaxSize(100,50);
+        ToRowCorkBacked.setTranslateX(340);
+        ToRowCorkBacked.setTranslateY(340);
+
+        Text toColumnCorkBacked = new Text("To\nColumn");
+        toColumnCorkBacked.setTranslateY(275);
+        toColumnCorkBacked.setTranslateX(460);
+        toColumnCorkBacked.setStyle("-fx-fill: white;");
+        TextField ToColumnCorkBacked = new TextField();
+        ToColumnCorkBacked.setMaxSize(100,50);
+        ToColumnCorkBacked.setTranslateX(460);
+        ToColumnCorkBacked.setTranslateY(340);
+
+        Button AcceptCorkBackedStraightedge = new Button();
+        AcceptCorkBackedStraightedge.setId("NextBTN");
+        AcceptCorkBackedStraightedge.setMaxSize(150, 150);
+        AcceptCorkBackedStraightedge.setTranslateX(600);
+        AcceptCorkBackedStraightedge.setOnAction(event ->
+                LocalModel.getInstance().usecorkBackedStraightEdge(
+                        DieToInsert,
+                        Integer.parseInt(ToRowCorkBacked.getText()),
+                        Integer.parseInt(ToColumnCorkBacked.getText())
+                )
+        );
+
+
+        StackPane CorkBackedStraightedge = new StackPane();
+        CorkBackedStraightedge.setPrefSize(1280,720);
+        //----------------------------------------------------------------------------------FINE CORK-BACKED STRAIGHTEDGE----------------------------------------------------------------------------------//
 
         //----------------------------------------------------------------------------------INIZIO FLUX BRUSH----------------------------------------------------------------------------------//
 
@@ -908,12 +1023,16 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
             case ("Eglomise Brush"):
-                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,FromRowBrush,ToColumnBrush,ToRowBrush);
+                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,fromColumnEglomise,FromRowBrush,fromColumnEglomise,toColumnEglomise,ToColumnBrush,toRowEglomise,ToRowBrush);
                 ToolCardDisplayerSecond.getChildren().addAll(EglomiseBrush,ToolCardD1);
                 break;
             case ("Copper Foil Burnisher"):
-                CopperFoilBurnisher.getChildren().addAll(CopperFoilBurnisherInfo,CopperFoilBurnisherGrid,CopperFoilBurnisherDieGrid);
+                CopperFoilBurnisher.getChildren().addAll(CopperFoilBurnisherInfo,CopperFoilBurnisherGrid,CopperFoilBurnisherDieGrid,fromColumnCopperFoil,FromColumnBurnisher,fromRowCopperFoil,FromRowBurnisher,toColumnCopperFoil,ToColumnBurnisher,toRowCopperFoil,ToRowBurnisher,AcceptCopperFoilBurnisher);
                 ToolCardDisplayerSecond.getChildren().addAll(CopperFoilBurnisher,ToolCardD1);
+                break;
+            case ("Cork-backed Straightedge"):
+                CopperFoilBurnisher.getChildren().addAll(CorkBackedStraightedgeInfo,CorkBackedStraightedgeGrid,CorkBackedStraightedgeDieGrid,CorkBackedDraftPool,toColumnCorkBacked,ToColumnCorkBacked,toRowCorkBacked,ToRowCorkBacked,AcceptCorkBackedStraightedge);
+                ToolCardDisplayerSecond.getChildren().addAll(CorkBackedStraightedge,ToolCardD1);
                 break;
 
         }
