@@ -13,9 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -47,6 +45,7 @@ public class ToolCardDisplayer extends Stage {
     String GrozingCommand;
     Label DieChoosen;
     ArrayList<ToggleButton> DiceButtons;
+    ArrayList<ArrayList<Pane>> GridBlocks;
     Random randomValue;
     Random randomColor;
     TranslateTransition DiceOutOfBagTransition;
@@ -99,6 +98,111 @@ public class ToolCardDisplayer extends Stage {
 
         return GrozingPool;
     }
+
+    public GridPane CreateAGrid (ClientGameBoardCard gameBoardCard){
+        int rows = 4;
+        int columns = 5;
+
+        GridPane Board = new GridPane();
+        Board.setTranslateY(-20);
+        Board.setAlignment(Pos.CENTER);
+        Board.setId("TheGrid");
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints column = new ColumnConstraints(75);
+            Board.getColumnConstraints().add(column);
+        }
+
+        for (int i = 0; i < rows; i++) {
+            RowConstraints row = new RowConstraints(75);
+            Board.getRowConstraints().add(row);
+        }
+
+        int [][] matrixTexture = gameBoardCard.getMatrixScheme();
+
+        for (int r = 0; r < matrixTexture.length; r++) {
+            for (int c = 0; c < matrixTexture[r].length; c++) {
+                Pane block = new Pane();
+                block.setId("Block");
+                switch (matrixTexture[r][c]) {
+                    case (0):
+                        break;
+                    case (1):
+                        block.setStyle("-fx-background-color: red;");
+                        break;
+                    case (2):
+                        block.setStyle("-fx-background-color: #46ddff;");
+                        break;
+                    case (3):
+                        block.setStyle("-fx-background-color: #a800a8;");
+                        break;
+                    case (4):
+                        block.setStyle("-fx-background-color: Yellow;");
+                        break;
+                    case (5):
+                        block.setStyle("-fx-background-color: #009d1d;");
+                        break;
+                    case (6):
+                        block.setId("Shade1");
+                        break;
+                    case (7):
+                        block.setId("Shade2");
+                        break;
+                    case (8):
+                        block.setId("Shade3");
+                        break;
+                    case (9):
+                        block.setId("Shade4");
+                        break;
+                    case (10):
+                        block.setId("Shade5");
+                        break;
+                    case (11):
+                        block.setId("Shade6");
+                        break;
+                }
+                Board.add(block, c, r);
+
+            }
+        }
+        return Board;
+    }
+
+    public GridPane getWindowBoardDiceBoard () {
+        GridPane DieGrid = new GridPane();
+        GridBlocks = new ArrayList<>();
+
+        for (int r = 0; r < LocalModel.getInstance().getWindowBoard().getUsedMatrix().size(); r++) {
+            ArrayList<Pane> PaneRow = new ArrayList<>();
+            for (int c = 0; c < LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).size(); c++) {
+                Pane block = new Pane();
+
+                if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
+                    block.setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                            + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                    block.setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
+                } else {
+                    block.setId("DieBlock");
+                }
+                /*if (LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).isUsed()) {
+                    GridBlocks.get(r).get(c).setId(Integer.toString(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                            + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                    GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
+                    System.err.println("Siamo nel for per la creazione dei dadi alle coordinate" + r + "," + c);
+                    System.err.println("Dado Presente: " + LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getValue() + "," + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                }*/
+                DieGrid.add(block, c, r);
+                PaneRow.add(c, block);
+            }
+            GridBlocks.add(PaneRow);
+        }
+            return DieGrid;
+    }
+
+    /*public void populateWindowGrid(){
+        Platform.runLater(()->{
+
+        });
+    }*/
 
     /**
      * This stage needs the following parameters to build th right Tool Card
@@ -324,11 +428,76 @@ public class ToolCardDisplayer extends Stage {
 
         //----------------------------------------------------------------------------------FINE GROZING PLIERS----------------------------------------------------------------------------------//
 
-        //----------------------------------------------------------------------------------INIZIO ENGLOMISE BRUSH----------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------INIZIO EGLOMISE BRUSH----------------------------------------------------------------------------------//
+        Text EglomiseBrushInfo = new Text("Choose a Die and a position to move it to");
+        EglomiseBrushInfo.setStyle("-fx-fill: white;");
+        EglomiseBrushInfo.setTranslateX(380);
+        EglomiseBrushInfo.setTranslateY(-325);
+
+
+        GridPane EglomiseBrushGrid = CreateAGrid(LocalModel.getInstance().getChoosenGameBoardCard());
+        EglomiseBrushGrid.setTranslateX(350);
+
+        GridPane EglomiseBrushDieGrid = getWindowBoardDiceBoard();
+        EglomiseBrushDieGrid.setTranslateX(350);
+
+        TextField FromRowBrush = new TextField("From Row");
+        FromRowBrush.setMaxSize(100,50);
+        FromRowBrush.setTranslateX(100);
+        FromRowBrush.setTranslateY(340);
+
+        TextField ToRowBrush = new TextField("To Row");
+        ToRowBrush.setMaxSize(100,50);
+        ToRowBrush.setTranslateX(220);
+        ToRowBrush.setTranslateY(340);
+
+        TextField FromColumnBrush = new TextField("From Column");
+        FromColumnBrush.setMaxSize(100,50);
+        FromColumnBrush.setTranslateX(320);
+        FromColumnBrush.setTranslateY(340);
+
+        TextField ToColumnBrush = new TextField("To Column");
+        ToColumnBrush.setMaxSize(100,50);
+        ToColumnBrush.setTranslateX(420);
+        ToColumnBrush.setTranslateY(340);
+
+        Button AcceptEglomiseBrush = new Button();
+        AcceptEglomiseBrush.setId("NextBTN");
+        AcceptEglomiseBrush.setMaxSize(150, 150);
+        AcceptEglomiseBrush.setTranslateX(600);
+        AcceptEglomiseBrush.setOnAction(event ->
+                LocalModel.getInstance().useEglomiseBrush(
+                        Integer.parseInt(FromRowBrush.getText()),
+                        Integer.parseInt(FromColumnBrush.getText()),
+                        Integer.parseInt(ToRowBrush.getText()),
+                        Integer.parseInt(ToColumnBrush.getText())
+                )
+        );
 
 
 
-        //----------------------------------------------------------------------------------FINE ENGLOMISE BRUSH----------------------------------------------------------------------------------//
+        StackPane EglomiseBrush = new StackPane();
+        EglomiseBrush.setPrefSize(1280,720);
+
+        //----------------------------------------------------------------------------------FINE EGLOMISE BRUSH----------------------------------------------------------------------------------//
+
+        //----------------------------------------------------------------------------------INIZIO COPPER FOIL BURNISHER----------------------------------------------------------------------------------//
+        Text CopperFoilBurnisherInfo = new Text("Choose a Die and a position to move it to");
+        CopperFoilBurnisherInfo.setStyle("-fx-fill: white;");
+        CopperFoilBurnisherInfo.setTranslateX(380);
+        CopperFoilBurnisherInfo.setTranslateY(-325);
+
+
+        GridPane CopperFoilBurnisherGrid = CreateAGrid(LocalModel.getInstance().getChoosenGameBoardCard());
+        CopperFoilBurnisherGrid.setTranslateX(350);
+
+        GridPane CopperFoilBurnisherDieGrid = getWindowBoardDiceBoard();
+        CopperFoilBurnisherDieGrid.setTranslateX(350);
+
+        StackPane CopperFoilBurnisher = new StackPane();
+        CopperFoilBurnisher.setPrefSize(1280,720);
+
+        //----------------------------------------------------------------------------------FINE COPPER FOIL BURNISHER----------------------------------------------------------------------------------//
 
         //----------------------------------------------------------------------------------INIZIO GRINDING STONE----------------------------------------------------------------------------------//
         Text GrindingStoneInfo = new Text("Choose a Die to Flip");
@@ -440,6 +609,7 @@ public class ToolCardDisplayer extends Stage {
                 IncreaseFluxRemover.setVisible(false);
             }
             else if (valoredado<6){IncreaseFluxRemover.setVisible(true);}
+
         });
 
         Button DecreaseFluxRemover = new Button();
@@ -455,6 +625,7 @@ public class ToolCardDisplayer extends Stage {
                 DecreaseFluxRemover.setVisible(false);
             }
             else if (valoredado>1){DecreaseFluxRemover.setVisible(true);}
+
         });
 
         Button AcceptBag = new Button();
@@ -736,6 +907,15 @@ public class ToolCardDisplayer extends Stage {
                 LensCutter.getChildren().addAll(LensCutterAccept,LensCutterInfo,LensCutterPool,LensCutterRoundTrack,LensCutterSwap);
                 ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
+            case ("Eglomise Brush"):
+                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,FromRowBrush,ToColumnBrush,ToRowBrush);
+                ToolCardDisplayerSecond.getChildren().addAll(EglomiseBrush,ToolCardD1);
+                break;
+            case ("Copper Foil Burnisher"):
+                CopperFoilBurnisher.getChildren().addAll(CopperFoilBurnisherInfo,CopperFoilBurnisherGrid,CopperFoilBurnisherDieGrid);
+                ToolCardDisplayerSecond.getChildren().addAll(CopperFoilBurnisher,ToolCardD1);
+                break;
+
         }
 
 
