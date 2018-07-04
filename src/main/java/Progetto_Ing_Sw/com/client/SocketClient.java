@@ -338,6 +338,12 @@ public class SocketClient implements Runnable{
                 sendActionMessage(diceJSON,"Here is the new dice");
                 localModel.sendFluxRemoverDiceWithSetValue=false;
             }
+
+            if(localModel.useEglomiseBrush){
+                sendActionMessage(null, "Use Eglomise Brush"+"&"+localModel.getCoordinatesAsString());
+                localModel.useEglomiseBrush=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 

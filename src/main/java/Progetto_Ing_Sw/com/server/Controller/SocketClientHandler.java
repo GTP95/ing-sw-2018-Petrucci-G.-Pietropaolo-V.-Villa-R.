@@ -109,6 +109,9 @@ public class SocketClientHandler implements Runnable {
            catch (NotEnoughFavorTokensException e) {
                 sendControlMessage("Not enough favor tokens");
             }
+            catch (PlaceDiceException e){
+                sendControlMessage(e.getMessage());
+            }
 
     }
 
@@ -243,7 +246,7 @@ public class SocketClientHandler implements Runnable {
         }
     }*/
 
-    private void handleActionMessage(String messageContent)throws NotEnoughFavorTokensException {
+    private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException {
         String[] fields = messageContent.split("&");
         Dice dice;
         switch (fields[1]) {
@@ -271,7 +274,6 @@ public class SocketClientHandler implements Runnable {
                 }
                 break;
             case "Use Grozing Pliers":
-                //System.err.println("Credo di dover usare Grozing Pliers percè ho ricevuto il seguente messaggio azione: "+messageContent);
                 dice=JSONCreator.diceLoaderFromString(fields[0]);
                 String command=fields[2];
                 table.useToolCard("Grozing Pliers",myPlayer);
@@ -300,6 +302,14 @@ public class SocketClientHandler implements Runnable {
             case "Here is the new dice":
                 table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]),myPlayer);
                 break;
+            case "Use Eglomise Brush":
+                int oldRow=Integer.parseInt(fields[2]);
+                int oldColumn=Integer.parseInt(fields[3]);
+                int newRow=Integer.parseInt(fields[4]);
+                int newColumn=Integer.parseInt(fields[5]);
+                System.err.println("Debug: messaggio ricevuto: "+messageContent);
+                table.useEglomiseBrush(oldRow,oldColumn,newRow,newColumn,myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
@@ -307,7 +317,7 @@ public class SocketClientHandler implements Runnable {
 
     private void handleEndTurn(){}
 
-    private void receiveMessage() throws NotEnoughFavorTokensException{
+    private void receiveMessage() throws NotEnoughFavorTokensException, PlaceDiceException {
         try {
             if (in.ready()) {     //aspetta che il buffer sia prono ad essere letto
                 String message = in.readLine();

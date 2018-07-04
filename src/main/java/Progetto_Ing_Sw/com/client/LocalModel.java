@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -44,9 +44,8 @@ public  class LocalModel {
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
     private ClientRoundTrack roundTrack;
-    private int toolCardWithEffectIndex;
+    private int toolCardWithEffectIndex, oldRow, oldColumn, newRow, newColumn;
 
-    public boolean useGrozingPliers, useGrindingStone;
     private ClientDice diceToUseWithEffect;
     private String command;
 
@@ -65,6 +64,7 @@ public  class LocalModel {
         useFluxRemover=false;
         sendFluxRemoverDiceWithSetValue=false;
         dontNotifyUsedToolCard=false;
+        useEglomiseBrush=false;
     }
 
 
@@ -611,6 +611,20 @@ public  class LocalModel {
         toolCardDisplayerObserver.fluxRemoverDie(); //notifica GUI
     }
 
+    public void useEglomiseBrush(int oldRow, int oldColumn, int newRow, int newColumn){
+        this.oldRow=oldRow;
+        this.oldColumn=oldColumn;
+        this.newRow=newRow;
+        this.newColumn=newColumn;
+        useEglomiseBrush=true;
+        sendDataToServer=true;
+    }
+
+    public String getCoordinatesAsString(){
+        String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
+        return message;
+    }
+
     public void notifyUsedToolCard(){   //notifica GUI
         if (!dontNotifyUsedToolCard){
             System.err.println("chiamo closeToolCardMenu() e disableToolCards()");
@@ -629,6 +643,7 @@ public  class LocalModel {
         drawnToolCards.clear();
         immediatelyUpdateGUI=true;
     }
+
 
 
 }
