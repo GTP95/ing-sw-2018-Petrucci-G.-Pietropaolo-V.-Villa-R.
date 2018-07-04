@@ -132,9 +132,10 @@ public class Table {
     }
     
     public ArrayList<Dice> getDrawnDice(){
-    	ArrayList<Dice> clone=new ArrayList();
+    	/*ArrayList<Dice> clone=new ArrayList();
     	for(Dice dice : drawnDice) clone.add(dice);
-    	return clone;
+    	return clone;*/
+    	return drawnDice;
     }
 
     public Boolean removeDice(Dice dice){

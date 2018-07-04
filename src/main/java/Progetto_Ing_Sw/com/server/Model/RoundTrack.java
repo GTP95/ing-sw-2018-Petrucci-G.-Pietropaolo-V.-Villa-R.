@@ -43,7 +43,7 @@ public class RoundTrack {   //Implementata come singleton
     public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard
         Boolean diceToPlaceExists=false;
         for (Dice dice : Table.getOurInstance().getDrawnDice()){    //controlla che il dado che si vuole piazzare sulla roundTrack sia tra quelli pescati
-            if(dice.getColor()==diceToPlace.getColor() && dice.getValue()==diceToPlace.getValue()){
+            if(dice.equals(diceToPlace)){
                 diceToPlaceExists=true;
                 System.err.println("dado trovato");
                 break;
