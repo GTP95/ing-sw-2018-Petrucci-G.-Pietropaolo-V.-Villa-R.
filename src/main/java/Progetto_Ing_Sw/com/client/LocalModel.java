@@ -578,7 +578,7 @@ public  class LocalModel {
 
     /**
      * Sets the time left for the player to play it's turn and notifies the GUI
-     * @param turnCountDownValue
+     * @param turnCountDownValue seconds left until the turn ends
      */
     public void setTurnCountDownValue(int turnCountDownValue) {
         if(turnCountDownValue==-1){         //-1 significa che il turno è finito
@@ -608,39 +608,46 @@ public  class LocalModel {
     }
 
     /**
-     *
-     * @param roundNumber
+     * Sets the current round number (starting from 0) and notifies the GUI
+     * @param roundNumber current round number
      */
     public void updateRound(int roundNumber){
         this.roundNumber=roundNumber;
         tableGUIobserver.updateRound(); //qui table si è sicuramente già registrato come observer, nessun bisogno di aspettare
     }
 
+    /**
+     * Returns the current round number (notice it starts from 0, add 1 to display it on the GUI)
+     * @return the current round number
+     */
     public int getRoundNumber() {
         return roundNumber;
     }
 
+    /**
+     * Sets the current state of the round track and notifies the GUI
+     * @param roundTrack The current round track
+     */
     public void setRoundTrack(ClientRoundTrack roundTrack) {
         this.roundTrack = roundTrack;
-        System.err.println("Aspetto che la roundtrack si registri come observer");
         while(roundTrackViewobserver==null);    //aspetto che si registri come observer
         roundTrackViewobserver.updateRoundTrack();
-        System.err.println("roundtrackobserver notificato");
     }
-    
 
+
+    /**
+     * Notifies the GUI if the server accepted the entered username
+     */
     public void notifyUsernameIsCorrect(){
         loginStageObserver.startLobby();
     }
 
-    public void setToolCardWithEffectIndex(int toolCardWithEffectIndex) {
-        this.toolCardWithEffectIndex = toolCardWithEffectIndex;
-    }
 
-    public ArrayList<ClientEffect> getDrawnToolCardsWithEffect() {
-        return drawnToolCardsWithEffect;
-    }
-
+    /**
+     * Implements tool card "Grozing Pliers"
+     * @param diceToModify dice to apply toolcard's effect
+     * @param command "UP" or "DOWN" depending on the fact you wish to increment or decrement the dice's value
+     */
     public void useGrozingPliers(ClientDice diceToModify, String command){
         diceToUseWithEffect=diceToModify;
         this.command=command;
@@ -648,18 +655,27 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Returns a dice selected to be used with a tool card
+     * @return dice selected to apply an effect
+     */
     public ClientDice getDiceToUseWithEffect() {
         return diceToUseWithEffect;
     }
 
+    /**
+     * Returns a dice selected to be used with a tool card
+     * @return dice selected to apply an effect
+     */
     public ClientDice getDiceToUseWithEffect2() {
         return diceToUseWithEffect2;
     }
 
-    public void setDiceToUseWithEffect(ClientDice diceToUseWithEffect) {
-        this.diceToUseWithEffect = diceToUseWithEffect;
-    }
 
+    /**
+     * Returns a command to use a tool card. Currently used with Grozing Pliers
+     * @return
+     */
     public String getCommand() {
         return command;
     }

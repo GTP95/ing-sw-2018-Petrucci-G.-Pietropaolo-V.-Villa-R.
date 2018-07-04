@@ -333,6 +333,7 @@ private ToolCard getToolCardFromTitle(String title){
             player.getSocketClientHandler().updateDice=true;
             player.getSocketClientHandler().updateToolCards=true;
             player.getSocketClientHandler().updateWindowBoards=true;
+            player.getSocketClientHandler().updateRoundTrack=true;
         }
         notifyAllSocketClientHandlers();
     }
