@@ -322,6 +322,7 @@ public class SocketClientHandler implements Runnable {
                 Dice draftpoolDice=JSONCreator.diceLoaderFromString(fields[2]);
                 table.useToolCard("Lens Cutter",myPlayer);
                 table.useLensCutter(roundtrackDice, draftpoolDice, myPlayer);
+                System.err.println("Lens Cutter messaggio ricevuto: "+messageContent);
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);

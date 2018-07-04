@@ -644,7 +644,7 @@ public  class LocalModel {
 
 
     /**
-     * Implements tool card "Grozing Pliers"
+     * Gets data to use  tool card "Grozing Pliers" and notifies SocketClientHandler
      * @param diceToModify dice to apply toolcard's effect
      * @param command "UP" or "DOWN" depending on the fact you wish to increment or decrement the dice's value
      */
@@ -681,7 +681,7 @@ public  class LocalModel {
     }
 
     /**
-     * Implements tool card Grinding Stone
+     * Gets data to use  tool card Grinding Stone and notifies SocketClientHandler
      * @param dice dice to use with Grinding Stone
      */
     public void useGrindingStone(ClientDice dice){
@@ -691,7 +691,7 @@ public  class LocalModel {
     }
 
     /**
-     * Implements tool card Flux brush
+     * Gets data to use  tool card "Flux Brush" and notifies SocketClientHandler
      * @param dice dice to use with Flux brush
      */
     public void useFluxBrush(ClientDice dice){
@@ -701,7 +701,7 @@ public  class LocalModel {
     }
 
     /**
-     * Implements tool card Glazing Hammers
+     * Notifies SocketClientHandler that the player wishes to use tool card "Glazing Hammers"
      */
     public void useGlazingHammers(){
         useGlazingHammers=true;
@@ -709,7 +709,7 @@ public  class LocalModel {
     }
 
     /**
-     * Implements tool
+     * Gets data to use  tool card "Flux Remover" and notifies SocketClientHandler
      * @param diceToRemove
      */
     public void useFluxRemover(ClientDice diceToRemove){
@@ -719,12 +719,19 @@ public  class LocalModel {
         dontNotifyUsedToolCard=true;
     }
 
+    /**
+     * Used to get the notification from the GUI that the user has set the value of the dice to use with tool card
+     * "Flux Remover"
+     */
     public void notifyFluxRemoverDiceValueSet(){
         sendFluxRemoverDiceWithSetValue=true;
         sendDataToServer=true;
-       // dontNotifyUsedToolCard=true;
     }
 
+    /**
+     * Sets the dice obtained using tool card "Flux
+     * @param newDrawnDice
+     */
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){
         diceToUseWithEffect=newDrawnDice;
         toolCardDisplayerObserver.fluxRemoverDie(); //notifica GUI
