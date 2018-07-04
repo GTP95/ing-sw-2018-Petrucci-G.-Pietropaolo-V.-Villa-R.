@@ -332,6 +332,7 @@ private ToolCard getToolCardFromTitle(String title){
         for(Player player : players){       //notifico i client della modifica alla draftpool
             player.getSocketClientHandler().updateDice=true;
             player.getSocketClientHandler().updateToolCards=true;
+            player.getSocketClientHandler().updateWindowBoards=true;
         }
         notifyAllSocketClientHandlers();
     }
@@ -442,6 +443,7 @@ private ToolCard getToolCardFromTitle(String title){
         playerWindowBoard.insertDice(newRow,newColumn,diceToMove);
         getToolCardFromTitle("Eglomise Brush").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
+        System.err.println("useEglomiseBrush eseguita con i segenti valori oldrow:"+oldRow+" oldColumn: "+oldColumn+" newRow: "+newRow+" newColumn: "+newColumn);
     }
 
 }

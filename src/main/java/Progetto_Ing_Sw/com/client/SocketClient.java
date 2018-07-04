@@ -13,7 +13,6 @@ public class SocketClient implements Runnable{
     PrintWriter out;
     BufferedReader in;
     LocalModel localModel;
-    Exception trownException;
 
     public SocketClient() throws UnknownHostException, ConnectException {
         username=null;
