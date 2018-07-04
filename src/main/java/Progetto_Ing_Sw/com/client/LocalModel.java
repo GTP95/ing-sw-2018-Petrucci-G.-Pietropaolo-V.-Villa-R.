@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -67,6 +67,7 @@ public  class LocalModel {
         useEglomiseBrush=false;
         useCorkBackedStraightEdge=false;
         useLathekin=false;
+        useLensCutter=false;
     }
 
 
@@ -550,8 +551,8 @@ public  class LocalModel {
 
 
     /**
-     * Used to update the ArrayList containig the avaible dice. It clears the ArrayList if it already contains dice to
-     *
+     * Used to update the ArrayList containing the avaible dice. It clears the ArrayList if it already contains dice to
+     * be able to simply overwrite them
      */
     public void resetDiceArrayIfNecessary(){
         if(drawnDice==null) return;
@@ -559,11 +560,13 @@ public  class LocalModel {
         immediatelyUpdateGUI=true;
     }
 
+    /**
+     * Notifies the GUI when the player's turn starts
+     */
     public void notifyTurn(){
         while (tableGUIobserver==null) {
             try {
                 Thread.sleep(1000);
-                System.err.println("time elapsed");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -573,6 +576,10 @@ public  class LocalModel {
         tableGUIobserver.isYourTurn();
     }
 
+    /**
+     * Sets the time left for the player to play it's turn and notifies the GUI
+     * @param turnCountDownValue
+     */
     public void setTurnCountDownValue(int turnCountDownValue) {
         if(turnCountDownValue==-1){         //-1 significa che il turno è finito
             this.turnCountDownValue=-1;
@@ -583,16 +590,27 @@ public  class LocalModel {
         tableGUIobserver.updateTimer();
     }
 
+    /**
+     * Sets the name of the player who is playing the current turn and notifies the GUI
+     * @param currentPlayerName the name of the current player
+     */
     public void setCurrentPlayerName(String currentPlayerName) {
         this.currentPlayerName = currentPlayerName;
         tableGUIobserver.isNotYourTurn();   //notifica la GUI
     }
 
+    /**
+     * Ends the player's turn
+     */
     public void skipTurn(){
         skipTurn=true;
         sendDataToServer=true;
     }
 
+    /**
+     *
+     * @param roundNumber
+     */
     public void updateRound(int roundNumber){
         this.roundNumber=roundNumber;
         tableGUIobserver.updateRound(); //qui table si è sicuramente già registrato come observer, nessun bisogno di aspettare
@@ -719,6 +737,14 @@ public  class LocalModel {
         this.newColumn2=newColumn2;
 
         useLathekin=true;
+        sendDataToServer=true;
+    }
+
+    public void useLensCutter(ClientDice roundTrackDice, ClientDice draftpoolDice){
+        diceToUseWithEffect=roundTrackDice;
+        diceToUseWithEffect2=draftpoolDice;
+        useLensCutter=true;
+        sendDataToServer=true;
     }
 
     public String getCoordinatesAsString(){
@@ -750,29 +776,6 @@ public  class LocalModel {
         immediatelyUpdateGUI=true;
     }
 
-    public int getOldRow() {
-        return oldRow;
-    }
-
-    public int getOldColumn() {
-        return oldColumn;
-    }
-
-    public int getOldRow2() {
-        return oldRow2;
-    }
-
-    public int getOldColumn2() {
-        return oldColumn2;
-    }
-
-    public int getNewRow2() {
-        return newRow2;
-    }
-
-    public int getNewColumn2() {
-        return newColumn2;
-    }
 
     public int getNewRow() {
         return newRow;
