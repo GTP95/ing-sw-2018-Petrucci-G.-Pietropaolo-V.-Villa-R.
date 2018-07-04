@@ -331,6 +331,7 @@ public class SocketClientHandler implements Runnable {
             case "Use Lens Cutter":
                 Dice roundtrackDice=JSONCreator.diceLoaderFromString(fields[0]);
                 Dice draftpoolDice=JSONCreator.diceLoaderFromString(fields[2]);
+                table.useToolCard("Lens Cutter",myPlayer);
                 table.useLensCutter(roundtrackDice, draftpoolDice, myPlayer);
                 break;
             default:
