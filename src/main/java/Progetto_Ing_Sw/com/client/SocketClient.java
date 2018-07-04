@@ -352,7 +352,7 @@ public class SocketClient implements Runnable{
 
             if(localModel.useCorkBackedStraightEdge){
                 String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
-                int row=localModel.getRow();
+                int row=localModel.getNewRow();
                 int column=localModel.getNewColumn();
                 sendActionMessage(diceJSON, "Use Cork-backed Straightedge"+"&"+row+"&"+column);
                 localModel.useCorkBackedStraightEdge=false;
