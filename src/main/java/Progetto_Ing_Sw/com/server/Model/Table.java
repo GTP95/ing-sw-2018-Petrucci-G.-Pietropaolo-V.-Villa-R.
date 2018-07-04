@@ -326,7 +326,7 @@ private ToolCard getToolCardFromTitle(String title){
         return toolCard;
 }
 
-    private void notifyOfToolCardUsage(Player playerRequestingAction){
+    public void notifyOfToolCardUsage(Player playerRequestingAction){
         playerRequestingAction.getSocketClientHandler().notifyUsedToolCard=true;
         playerRequestingAction.getSocketClientHandler().updateTokens=true;
         for(Player player : players){       //notifico i client della modifica alla draftpool
@@ -442,7 +442,7 @@ private ToolCard getToolCardFromTitle(String title){
         diceToMove.setColorBreaker(true);   //indico che il dado può violare le limitazioni sul colore
         playerWindowBoard.insertDice(newRow,newColumn,diceToMove);
         getToolCardFromTitle("Eglomise Brush").setFirstUsage(true);
-        notifyOfToolCardUsage(playerRequestingAction);
+       // notifyOfToolCardUsage(playerRequestingAction);
         System.err.println("useEglomiseBrush eseguita con i segenti valori oldrow:"+oldRow+" oldColumn: "+oldColumn+" newRow: "+newRow+" newColumn: "+newColumn);
     }
 
