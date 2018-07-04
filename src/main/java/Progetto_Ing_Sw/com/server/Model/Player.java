@@ -15,6 +15,7 @@ public class Player{
    private ArrayList<GameBoardCard> drawnGameBoardCard;
    private SocketClientHandler socketClientHandler;
    private WindowBoard choosenWindowBoard;
+   private int token;
 
     public Player(String name,  SocketClientHandler socketClientHandler) {    //Non assegno subito alla creazione del player il privateObjective e le drawnGameBoardCard per evitare di esaurirle in caso di disconnessione se guita da connessione di altri giocatori (nella Lobby, non a gioco iniziato)
         this.name = name;
@@ -103,6 +104,14 @@ public class Player{
             numOfTurnsToPlayInTheCurrentRound--;
         }
         else throw new IllegalNumOfTurnsToPlayInTheCurrentRoundException();
+    }
+
+    public void setToken(int token) {
+        this.token = token;
+    }
+
+    public int getToken() {
+        return token;
     }
 }
 

@@ -19,6 +19,7 @@ public class SocketClient implements Runnable{
         localModel =LocalModel.getInstance();
         String host= ClientSettings.getInstance().getHostname();
         int port= ClientSettings.getInstance().getSocketPort();
+
         try{
             socket=new Socket(host, port);
             System.out.println("Connected to "+host+":"+port);
@@ -39,11 +40,11 @@ public class SocketClient implements Runnable{
 
     @Override
     public void run() {
-        String serverResponse="";
         while (username==null || username.equals("")) {    //In questo caso essendo il metodo getUsername synchronized, non solo non è necessario utilizzare wait() all'interno del while, ma addirittura causerebbe una IllegalMonitorStateException
             username= ClientSettings.getInstance().getUsername();
         }
-        out.println(username);
+        int token=ClientSettings.getInstance().getToken();
+        out.println(username+"%"+token);
         System.out.println("Inviato "+username+" come username");
         while (true) {      //TODO:ricevere notifica chiusura GUI ed usarla come condizione
             try {
@@ -98,6 +99,7 @@ public class SocketClient implements Runnable{
         switch (messageFields[0]) {
             case "Connected":
                 localModel.notifyUsernameIsCorrect();
+                ClientSettings.getInstance().setToken(Integer.parseInt(messageFields[1]));
                 System.out.println("Connected");
                 break;
             case "Username already in use":

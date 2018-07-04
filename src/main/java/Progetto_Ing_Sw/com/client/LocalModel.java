@@ -730,13 +730,20 @@ public  class LocalModel {
 
     /**
      * Sets the dice obtained using tool card "Flux Remover"
-     * @param newDrawnDice
+     * @param newDrawnDice dice obtained using tool card "Flux Remover"
      */
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){
         diceToUseWithEffect=newDrawnDice;
         toolCardDisplayerObserver.fluxRemoverDie(); //notifica GUI
     }
 
+    /**
+     * Gets data to use  tool card "Flux Brush" and notifies SocketClientHandler
+     * @param oldRow
+     * @param oldColumn
+     * @param newRow
+     * @param newColumn
+     */
     public void useEglomiseBrush(int oldRow, int oldColumn, int newRow, int newColumn){
         this.oldRow=oldRow;
         this.oldColumn=oldColumn;

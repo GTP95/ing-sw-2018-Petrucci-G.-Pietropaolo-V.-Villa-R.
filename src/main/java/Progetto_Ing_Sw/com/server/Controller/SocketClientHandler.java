@@ -54,12 +54,14 @@ public class SocketClientHandler implements Runnable {
     public void run(){
 
             try {
-                    myPlayerName=in.readLine();          //nome del giocatore gestito da questo thread
+                    String messageFromClient=in.readLine();
+                    String[] messageFields=messageFromClient.split("%");
+                    myPlayerName=messageFields[0];          //nome del giocatore gestito da questo thread. In questa fase ignoro il token mandato dal client perchè si sta connettendo alla lobby
                     ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
                     System.err.println(ourThread.getName());
                     ourThread.setName(myPlayerName+"'s SocketClientHandler");
-                    Lobby.getInstance().addPlayer(myPlayerName, this);
-                    sendControlMessage("Connected");
+                    int token=Lobby.getInstance().addPlayer(myPlayerName, this);
+                    sendControlMessage("Connected&"+token);
 
                 countdown.scheduleAtFixedRate(new TimerTask() {
                     @Override

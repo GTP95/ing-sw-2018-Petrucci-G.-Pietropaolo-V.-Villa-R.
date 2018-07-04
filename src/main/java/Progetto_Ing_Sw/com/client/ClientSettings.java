@@ -13,6 +13,7 @@ public class ClientSettings {
     private String hostname;
     private int socketPort;
     private int rmiRegistryPort;
+    private int token;
 
     public static ClientSettings getInstance() {
         return ourInstance;
@@ -25,6 +26,7 @@ public class ClientSettings {
             socketPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","socketPort");
             username=JSONCreator.parseStringFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json", "username");
             rmiRegistryPort =JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","rmiRegistryPort");
+            token=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json","token");
         }
         catch (FileNotFoundException e){
             System.err.println("File ClientSettings.json not found, falling back to defaults");
@@ -32,6 +34,7 @@ public class ClientSettings {
             socketPort =1024;
             username="";
             rmiRegistryPort =1099;
+            token=0;
         }
     }
 
@@ -59,6 +62,10 @@ public class ClientSettings {
 
     public int getRmiRegistryPort() { return rmiRegistryPort; }
 
+    public int getToken() {
+        return token;
+    }
+
     public void setHostname(String hostname) {
         this.hostname = hostname;
         System.out.println("Hostmane set to "+hostname);
@@ -74,11 +81,15 @@ public class ClientSettings {
         System.out.println("rmiRegistryPort set to "+rmiRegistryPort);
     }
 
+    public void setToken(int token) {
+        this.token = token;
+    }
+
     public void writeSettingsToJSON(){          //Salva i valori correnti nel file ServerSettings.json
         try {
             FileWriter fileWriter = new FileWriter("src/main/java/Progetto_Ing_Sw/com/client/Settings/ClientSettings.json");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"socketPort\"" + ":" + socketPort + "," + "\"username\"" + ":\"" + username+"\""+","+"\"rmiRegistryPort\""+":"+ rmiRegistryPort +"}");
+            bufferedWriter.write("{\"host\""+":\"" + hostname + "\""+ "," + "\"socketPort\"" + ":" + socketPort + "," + "\"username\"" + ":\"" + username+"\""+","+"\"rmiRegistryPort\""+":"+ rmiRegistryPort +","+"\"token\""+":"+token+"}");
             bufferedWriter.flush();
             System.out.println("Current settings saved to ClientSettings.json");
         }
