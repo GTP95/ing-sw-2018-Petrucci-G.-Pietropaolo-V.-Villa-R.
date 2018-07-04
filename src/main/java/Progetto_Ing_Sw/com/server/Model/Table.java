@@ -332,6 +332,7 @@ private ToolCard getToolCardFromTitle(String title){
         for(Player player : players){       //notifico i client della modifica alla draftpool
             player.getSocketClientHandler().updateDice=true;
             player.getSocketClientHandler().updateToolCards=true;
+            player.getSocketClientHandler().updateWindowBoards=true;
         }
         notifyAllSocketClientHandlers();
     }
