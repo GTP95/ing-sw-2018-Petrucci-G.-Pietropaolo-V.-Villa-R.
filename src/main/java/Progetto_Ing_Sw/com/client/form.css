@@ -239,10 +239,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-    #9d4024,
-    #9d4024,
-    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, rgba(210, 210, 210, 0.01) 0%, #4c4747 100%),
+    rgba(100, 100, 100, 0.04),
+    rgba(100, 100, 100, 0),
+    radial-gradient(center 50% 50%, radius 100%, #cdcdcd, rgba(88, 88, 88, 0));
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -256,10 +256,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
-    #3f9500,
-    #3f9500,
-    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #1f9016 0%, #1e7b00 100%),
+    #339033,
+    #2cde00,
+    radial-gradient(center 50% 50%, radius 50%, #175a10, #247506);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -273,10 +273,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-    #9d4024,
-    #9d4024,
-    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, rgba(210, 210, 210, 0.01) 0%, #4c4747 100%),
+    rgba(100, 100, 100, 0.04),
+    rgba(100, 100, 100, 0),
+    radial-gradient(center 50% 50%, radius 100%, #cdcdcd, rgba(88, 88, 88, 0));
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -290,10 +290,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
-    #3f9500,
-    #3f9500,
-    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #924dde 0%, #95267f 100%),
+    #852795,
+    #733895,
+    radial-gradient(center 50% 50%, radius 100%, #8c1595, #de145f);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -307,10 +307,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-    #9d4024,
-    #9d4024,
-    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, rgba(210, 210, 210, 0.01) 0%, #4c4747 100%),
+    rgba(100, 100, 100, 0.04),
+    rgba(100, 100, 100, 0),
+    radial-gradient(center 50% 50%, radius 100%, #cdcdcd, rgba(88, 88, 88, 0));
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -324,10 +324,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
-    #3f9500,
-    #3f9500,
-    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #de4314 0%, #950006 100%),
+    #950024,
+    #953027,
+    radial-gradient(center 50% 50%, radius 100%, #950004, #de6f17);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -341,10 +341,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-    #9d4024,
-    #9d4024,
-    radial-gradient(center 50% 50%, radius 100%, #9d4024, #c54e2c);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, rgba(210, 210, 210, 0.01) 0%, #4c4747 100%),
+    rgba(100, 100, 100, 0.04),
+    rgba(100, 100, 100, 0),
+    radial-gradient(center 50% 50%, radius 100%, #cdcdcd, rgba(88, 88, 88, 0));
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
@@ -358,10 +358,10 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #2bde00 0%, #3f9500 100%),
-    #3f9500,
-    #3f9500,
-    radial-gradient(center 50% 50%, radius 100%, #3f9500, #2bde00);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #387cde 0%, #0a1f95 100%),
+    #314d95,
+    #334695,
+    radial-gradient(center 50% 50%, radius 100%, #1d3d95, #3bbbde);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 

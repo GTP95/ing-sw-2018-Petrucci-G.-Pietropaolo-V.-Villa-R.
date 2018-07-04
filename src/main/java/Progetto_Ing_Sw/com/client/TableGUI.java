@@ -703,7 +703,9 @@ public class TableGUI extends Stage{
             LocalModel.getInstance().skipTurn();
         });
 
-
+        Button Update = new Button("Update");
+        Update.setTranslateX(600);
+        Update.setOnAction(event -> insertion());
 
         //BorderPane per contenere tutti gli altri
         StackPane GameplayArea = new StackPane();
@@ -721,7 +723,7 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack,Update);
 
 
 
