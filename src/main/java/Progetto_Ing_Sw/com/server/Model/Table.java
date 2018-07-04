@@ -488,8 +488,9 @@ private ToolCard getToolCardFromTitle(String title){
     }
 
     public void useLensCutter(Dice roundTrackDice, Dice draftpoolDice, Player playerRequestingAction) throws IllegalDiceException {
-        RoundTrack.getInstance().swapDice(draftpoolDice,roundTrackDice);
+      Dice dice=RoundTrack.getInstance().swapDice(draftpoolDice,roundTrackDice);
         drawnDice.remove(draftpoolDice);
+        drawnDice.add(dice);
         getToolCardFromTitle("Lens Cutter").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
