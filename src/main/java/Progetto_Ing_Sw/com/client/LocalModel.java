@@ -729,7 +729,7 @@ public  class LocalModel {
     }
 
     /**
-     * Sets the dice obtained using tool card "Flux
+     * Sets the dice obtained using tool card "Flux Remover"
      * @param newDrawnDice
      */
     public void setFluxRemoverNewlyDrawnDice(ClientDice newDrawnDice){

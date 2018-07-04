@@ -491,6 +491,7 @@ private ToolCard getToolCardFromTitle(String title){
       Dice dice=RoundTrack.getInstance().swapDice(draftpoolDice,roundTrackDice);
         drawnDice.remove(draftpoolDice);
         drawnDice.add(dice);
+        RoundTrack.getInstance().addRemainedDice(RoundTrack.getInstance().getRoundNumber(),draftpoolDice);
         getToolCardFromTitle("Lens Cutter").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
