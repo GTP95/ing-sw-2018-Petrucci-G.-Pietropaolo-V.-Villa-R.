@@ -293,6 +293,7 @@ public class SocketClientHandler implements Runnable {
                 System.err.println("Debug: messaggio ricevuto: "+messageContent);
                 table.useToolCard("Eglomise Brush", myPlayer);
                 table.useEglomiseBrush(oldRow,oldColumn,newRow,newColumn,myPlayer);
+                table.notifyOfToolCardUsage(myPlayer);
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
