@@ -457,5 +457,16 @@ private ToolCard getToolCardFromTitle(String title){
         notifyOfToolCardUsage(playerRequestingAction);
     }
 
+    public void useCorkBackedStraightEdge(Dice dice, int row, int column, Player playerRequestingAction) throws IllegalDiceException, PlaceDiceException {
+        if (removeDice(dice)) {
+            WindowBoard playerWindowBoard = playerRequestingAction.getChoosenWindowBoard();
+            dice.setAdjacencyBreaker(true);   //indico che il dado può violare le limitazioni sulla diagonale
+            playerWindowBoard.insertDice(row, column, dice);
+            getToolCardFromTitle("Cork-backed Straightedge").setFirstUsage(true);
+            notifyOfToolCardUsage(playerRequestingAction);
+        }
+        else throw new IllegalDiceException();
+    }
+
 }
 
