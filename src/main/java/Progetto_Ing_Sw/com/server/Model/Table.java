@@ -442,6 +442,7 @@ private ToolCard getToolCardFromTitle(String title){
         playerWindowBoard.insertDice(newRow,newColumn,diceToMove);
         getToolCardFromTitle("Eglomise Brush").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
+        System.err.println("useEglomiseBrush eseguita con i segenti valori oldrow:"+oldRow+" oldColumn: "+oldColumn+" newRow: "+newRow+" newColumn: "+newColumn);
     }
 
 }
