@@ -380,7 +380,6 @@ public class SocketClientHandler implements Runnable {
             for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
-         //   previousDiceArrayList=currentDiceArrayList;
             updateDice=false;
         }
     }

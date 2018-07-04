@@ -680,6 +680,10 @@ public  class LocalModel {
         return command;
     }
 
+    /**
+     * Implements tool card Grinding Stone
+     * @param dice
+     */
     public void useGrindingStone(ClientDice dice){
         diceToUseWithEffect=dice;
         useGrindingStone=true;

@@ -48,7 +48,10 @@ public class RoundTrack {   //Implementata come singleton
                 break;
             }
         }
-        if(!diceToPlaceExists) throw new IllegalDiceException();
+        if(!diceToPlaceExists){
+            System.err.println("Il dado scelto non esiste nella draftpool!");
+            throw new IllegalDiceException();
+        }
 
         for(int index=0;index<getRoundNumber();index++){    //controlla che il dado che si vuole togliere dalla roundTrack sia effettivamente presente sulla roundTrack
             for(Dice dice : diceRemained.get(index)){
@@ -58,6 +61,7 @@ public class RoundTrack {   //Implementata come singleton
                 }
             }
         }
+        System.err.println("Il dado scelto non esiste sulla round track");
         throw new IllegalDiceException();
     }
 }
