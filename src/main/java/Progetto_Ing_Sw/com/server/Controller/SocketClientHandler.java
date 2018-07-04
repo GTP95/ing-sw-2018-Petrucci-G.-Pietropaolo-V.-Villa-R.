@@ -236,7 +236,7 @@ public class SocketClientHandler implements Runnable {
     private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException, IllegalDiceException {
         String[] fields = messageContent.split("&");
         Dice dice;
-        int oldRow, oldColumn, newRow, newColumn;
+        int oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2;
         switch (fields[1]) {
             case "Place dice":
                 try {
@@ -313,6 +313,20 @@ public class SocketClientHandler implements Runnable {
                 newColumn=Integer.parseInt(fields[3]);
                 table.useToolCard("Cork-backed Straightedge", myPlayer);
                 table.useCorkBackedStraightEdge(dice,newRow,newColumn,myPlayer);
+                break;
+            case "Use Lathekin":
+                oldRow=Integer.parseInt(fields[2]);
+                oldColumn=Integer.parseInt(fields[3]);
+                newRow=Integer.parseInt(fields[4]);
+                newColumn=Integer.parseInt(fields[5]);
+
+                oldRow2=Integer.parseInt(fields[6]);
+                oldColumn2=Integer.parseInt(fields[7]);
+                newRow2=Integer.parseInt(fields[8]);
+                newColumn2=Integer.parseInt(fields[9]);
+                table.useToolCard("Lathekin",myPlayer);
+                table.useLathekin(oldRow,oldColumn,newRow,newColumn,oldRow2,oldColumn2,newRow2,newColumn2, myPlayer);
+                System.err.println("Messaggio ricevuto: "+messageContent);  //TODO: rimuovere
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
