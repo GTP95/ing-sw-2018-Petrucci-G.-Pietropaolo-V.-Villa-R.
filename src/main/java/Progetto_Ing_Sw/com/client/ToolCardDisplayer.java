@@ -442,16 +442,36 @@ public class ToolCardDisplayer extends Stage {
         EglomiseBrushDieGrid.setTranslateX(350);
 
         TextField FromRowBrush = new TextField("From Row");
+        FromRowBrush.setMaxSize(100,50);
+        FromRowBrush.setTranslateX(100);
+        FromRowBrush.setTranslateY(340);
+
         TextField ToRowBrush = new TextField("To Row");
+        ToRowBrush.setMaxSize(100,50);
+        ToRowBrush.setTranslateX(220);
+        ToRowBrush.setTranslateY(340);
+
         TextField FromColumnBrush = new TextField("From Column");
+        FromColumnBrush.setMaxSize(100,50);
+        FromColumnBrush.setTranslateX(320);
+        FromColumnBrush.setTranslateY(340);
+
         TextField ToColumnBrush = new TextField("To Column");
+        ToColumnBrush.setMaxSize(100,50);
+        ToColumnBrush.setTranslateX(420);
+        ToColumnBrush.setTranslateY(340);
 
         Button AcceptEglomiseBrush = new Button();
         AcceptEglomiseBrush.setId("NextBTN");
         AcceptEglomiseBrush.setMaxSize(150, 150);
         AcceptEglomiseBrush.setTranslateX(600);
         AcceptEglomiseBrush.setOnAction(event ->
-                LocalModel.getInstance().useGrindingStone(DieToInsert)
+                LocalModel.getInstance().useEglomiseBrush(
+                        Integer.parseInt(FromRowBrush.getText()),
+                        Integer.parseInt(FromColumnBrush.getText()),
+                        Integer.parseInt(ToRowBrush.getText()),
+                        Integer.parseInt(ToColumnBrush.getText())
+                )
         );
 
 
@@ -888,7 +908,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
             case ("Eglomise Brush"):
-                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid);
+                EglomiseBrush.getChildren().addAll(EglomiseBrushInfo,EglomiseBrushGrid,EglomiseBrushDieGrid,AcceptEglomiseBrush,FromColumnBrush,FromRowBrush,ToColumnBrush,ToRowBrush);
                 ToolCardDisplayerSecond.getChildren().addAll(EglomiseBrush,ToolCardD1);
                 break;
             case ("Copper Foil Burnisher"):
