@@ -701,13 +701,17 @@ public  class LocalModel {
     }
 
     /**
-     * Implements
+     * Implements tool card Glazing Hammers
      */
     public void useGlazingHammers(){
         useGlazingHammers=true;
         sendDataToServer=true;
     }
 
+    /**
+     * Implements tool
+     * @param diceToRemove
+     */
     public void useFluxRemover(ClientDice diceToRemove){
         diceToUseWithEffect=diceToRemove;
         useFluxRemover=true;
