@@ -474,39 +474,48 @@ public  class LocalModel {
 
     /**
      * Since SocketClient runs inside a thread and the run method can't throw checked exceptions, all checked exceptions
-     *
-     * @return
+     * are put in a queue and the GUI is notified, which in turn has to call this method to get the head of the queue.
+     * The exception that is returned is automatically removed from the queue.
+     * @return the head of the exception's queue
      */
     public Exception returnTrownException(){    //restituisce l'eccezione in testa alla coda
         return exceptions.poll();
     }
 
+    /**
+     * Adds a InvalidUserNameException or a TooManyPlayersException to the queue and notifies the GUI
+     * @param e the exception to add to the exception's queue
+     */
     public void addUsernameException(Exception e){
         exceptions.add(e);
         loginStageObserver.usernameException();
     }
 
+    /**
+     * Adds a IllegalDiceException or a PlaceDiceException to the queue and notifies the GUI
+     * @param e the exception to add to the exception's queue
+     */
     public void addDiceException(Exception e){  //aggiunge un'eccezione alla coda delle eccezioni lanciate dal server
 
         exceptions.add(e);
         tableGUIobserver.DiceExceptionThrower();
     }
 
+    /**
+     * Adds a NotEnoughFavorTokensException to the queue and notifies the GUI
+     * @param e the exception to add to the exception's queue
+     */
     public void addFavorTokensException(Exception e){
         exceptions.add(e);
         toolCardDisplayerObserver.toolCardExceptionCatcher();
     }
 
-   /* public boolean exceptionTrown(){    //ritorna true se è stata lanciata un'eccezione dal server, false altrimenti
-        if(exceptions.size()==0) return false;
-        return true;
-    }*/
-
-
-
+    /**
+     * Sets the player's choosen window board and notifies the GUI
+     * @param windowBoard the player's choosen window board
+     */
     public void setWindowBoard(ClientWindowBoard windowBoard) {
         this.windowBoard = windowBoard;
-        System.err.println("aspetto tableGui (setWindowBoard)");
         while(tableGUIobserver==null);
         tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
