@@ -603,7 +603,7 @@ public class ToolCardDisplayer extends Stage {
         IncreaseFluxRemover.setTranslateY(-100);
         IncreaseFluxRemover.setTranslateX(430);
         IncreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado+1) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+            DieChoosen.setId(Integer.toString(valoredado++) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado++;
             if (valoredado==6){
                 IncreaseFluxRemover.setVisible(false);
@@ -619,7 +619,7 @@ public class ToolCardDisplayer extends Stage {
         DecreaseFluxRemover.setTranslateY(100);
         DecreaseFluxRemover.setTranslateX(430);
         DecreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado-1) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+            DieChoosen.setId(Integer.toString(valoredado--) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado--;
             if (valoredado==1){
                 DecreaseFluxRemover.setVisible(false);
