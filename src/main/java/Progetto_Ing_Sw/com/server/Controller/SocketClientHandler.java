@@ -113,6 +113,10 @@ public class SocketClientHandler implements Runnable {
                 sendControlMessage(e.getMessage());
             }
 
+            catch (IllegalDiceException e){
+                sendControlMessage(e.getMessage());
+            }
+
     }
 
 
@@ -229,7 +233,7 @@ public class SocketClientHandler implements Runnable {
     }
 
 
-    private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException {
+    private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException, IllegalDiceException {
         String[] fields = messageContent.split("&");
         Dice dice;
         int oldRow, oldColumn, newRow, newColumn;
@@ -303,6 +307,13 @@ public class SocketClientHandler implements Runnable {
                 table.useToolCard("Copper Foil Burnisher",myPlayer);
                 table.useCopperFoilBurnisher(oldRow,oldColumn,newRow,newColumn,myPlayer);
                 break;
+            case "Use Cork-backed Straightedge":
+                dice=JSONCreator.diceLoaderFromString(fields[0]);
+                newRow=Integer.parseInt(fields[2]);
+                newColumn=Integer.parseInt(fields[3]);
+                table.useToolCard("Cork-backed Straightedge", myPlayer);
+                table.useCorkBackedStraightEdge(dice,newRow,newColumn,myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
@@ -310,7 +321,7 @@ public class SocketClientHandler implements Runnable {
 
     private void handleEndTurn(){}
 
-    private void receiveMessage() throws NotEnoughFavorTokensException, PlaceDiceException {
+    private void receiveMessage() throws NotEnoughFavorTokensException, PlaceDiceException, IllegalDiceException {
         try {
             if (in.ready()) {     //aspetta che il buffer sia prono ad essere letto
                 String message = in.readLine();

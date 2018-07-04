@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -65,6 +65,7 @@ public  class LocalModel {
         sendFluxRemoverDiceWithSetValue=false;
         dontNotifyUsedToolCard=false;
         useEglomiseBrush=false;
+        useCorkBackedStraightEdge=false;
     }
 
 
@@ -521,8 +522,9 @@ public  class LocalModel {
     }
 
     /**
-     * 
-     * @param windowBoard
+     * Used to update the window boards. Adds the given window board to the window board's ArrayList in place of the old one
+     * and notifies the GUI when it has finished adding all the window boards.
+     * @param windowBoard window board to add to the ArrayList
      */
     public void addUpdatedWindowBoard(ClientWindowBoard windowBoard){
         if(updatedWindowBoards==null) updatedWindowBoards=new ArrayList<>();
@@ -546,10 +548,11 @@ public  class LocalModel {
         }
     }
 
-    public void updateGenericPlayerWindowBoard(String playerName, ClientWindowBoard windowBoard){
-        getPlayerFromName(playerName).updateWindowBoard(windowBoard);
-    }
 
+    /**
+     * Used to update the ArrayList containig the avaible dice. It clears the ArrayList if it already contains dice to
+     *
+     */
     public void resetDiceArrayIfNecessary(){
         if(drawnDice==null) return;
         drawnDice.clear();
@@ -691,6 +694,14 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    public void useCorkBackedStraightEdge(ClientDice dice, int row, int column){
+        this.newRow=row;
+        this.newColumn=column;
+        diceToUseWithEffect=dice;
+        useCorkBackedStraightEdge=true;
+        sendDataToServer=true;
+    }
+
     public String getCoordinatesAsString(){
         String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
         return message;
@@ -715,6 +726,11 @@ public  class LocalModel {
         immediatelyUpdateGUI=true;
     }
 
+    public int getNewRow() {
+        return newRow;
+    }
 
-
+    public int getNewColumn() {
+        return newColumn;
+    }
 }

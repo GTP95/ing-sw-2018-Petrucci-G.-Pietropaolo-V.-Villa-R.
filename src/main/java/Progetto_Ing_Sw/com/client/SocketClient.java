@@ -140,7 +140,9 @@ public class SocketClient implements Runnable{
                 System.out.println("Dice placed successfully");
                 break;
             case "Selected dice doesn't exists!":
-                throw new IllegalDiceException("Selected dice doesn't exists!");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+                throw new IllegalDiceException("Selected dice doesn't exists!");
+            case "Selected dice is not available":
+                throw new IllegalDiceException();
             case "Shade is different":
                 throw new IllegalDiceException("Shade is different");
             case "Color is different":
@@ -346,6 +348,14 @@ public class SocketClient implements Runnable{
             if(localModel.useCopperFoilBurnisher){
                 sendActionMessage(null, "Use Copper Foil Burnisher"+"&"+localModel.getCoordinatesAsString());
                 localModel.useCopperFoilBurnisher=false;
+            }
+
+            if(localModel.useCorkBackedStraightEdge){
+                String diceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                int row=localModel.getRow();
+                int column=localModel.getNewColumn();
+                sendActionMessage(diceJSON, "Use Cork-backed Straightedge"+"&"+row+"&"+column);
+                localModel.useCorkBackedStraightEdge=false;
             }
 
             localModel.sendDataToServer=false;
