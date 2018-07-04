@@ -833,7 +833,7 @@ public class TableGUI extends Stage{
     }
 
     /**
-     * This Methods updates the GUI with the Dice placed by the player
+     * This Methods updates the GUI with the Dice placed by the Player.
      */
     public void insertion(){
         Platform.runLater(()-> {
@@ -844,6 +844,7 @@ public class TableGUI extends Stage{
                                     + new ClientColor().IntToColor(LocalModel.getInstance().getWindowBoard().getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
                         GridBlocks.get(r).get(c).setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
                     }
+                    else GridBlocks.get(r).get(c).setId("DieBlock");
                 }
             }
         });

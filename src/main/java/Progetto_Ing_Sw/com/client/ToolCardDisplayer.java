@@ -446,19 +446,19 @@ public class ToolCardDisplayer extends Stage {
         FromRowBrush.setTranslateX(100);
         FromRowBrush.setTranslateY(340);
 
-        TextField ToRowBrush = new TextField("To Row");
-        ToRowBrush.setMaxSize(100,50);
-        ToRowBrush.setTranslateX(220);
-        ToRowBrush.setTranslateY(340);
-
         TextField FromColumnBrush = new TextField("From Column");
         FromColumnBrush.setMaxSize(100,50);
-        FromColumnBrush.setTranslateX(320);
+        FromColumnBrush.setTranslateX(220);
         FromColumnBrush.setTranslateY(340);
+
+        TextField ToRowBrush = new TextField("To Row");
+        ToRowBrush.setMaxSize(100,50);
+        ToRowBrush.setTranslateX(340);
+        ToRowBrush.setTranslateY(340);
 
         TextField ToColumnBrush = new TextField("To Column");
         ToColumnBrush.setMaxSize(100,50);
-        ToColumnBrush.setTranslateX(420);
+        ToColumnBrush.setTranslateX(460);
         ToColumnBrush.setTranslateY(340);
 
         Button AcceptEglomiseBrush = new Button();
@@ -603,7 +603,7 @@ public class ToolCardDisplayer extends Stage {
         IncreaseFluxRemover.setTranslateY(-100);
         IncreaseFluxRemover.setTranslateX(430);
         IncreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado++) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+            DieChoosen.setId(Integer.toString(valoredado+1) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado++;
             if (valoredado==6){
                 IncreaseFluxRemover.setVisible(false);
@@ -619,7 +619,7 @@ public class ToolCardDisplayer extends Stage {
         DecreaseFluxRemover.setTranslateY(100);
         DecreaseFluxRemover.setTranslateX(430);
         DecreaseFluxRemover.setOnAction(event -> {
-            DieChoosen.setId(Integer.toString(valoredado--) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
+            DieChoosen.setId(Integer.toString(valoredado-1) + new ClientColor().IntToColor(LocalModel.getInstance().getDiceToUseWithEffect().getColor()));
             valoredado= valoredado--;
             if (valoredado==1){
                 DecreaseFluxRemover.setVisible(false);
