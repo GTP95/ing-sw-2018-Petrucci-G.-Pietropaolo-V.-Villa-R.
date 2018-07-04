@@ -446,5 +446,16 @@ private ToolCard getToolCardFromTitle(String title){
         System.err.println("useEglomiseBrush eseguita con i segenti valori oldrow:"+oldRow+" oldColumn: "+oldColumn+" newRow: "+newRow+" newColumn: "+newColumn);
     }
 
+    public void useCopperFoilBurnisher(int oldRow, int oldColumn, int newRow, int newColumn, Player playerRequestingAction) throws PlaceDiceException{
+        WindowBoard playerWindowBoard=playerRequestingAction.getChoosenWindowBoard();
+        Dice diceToMove=playerWindowBoard.getUsedMatrix().get(oldRow-1).get(oldColumn-1).getDiceContained();
+        playerWindowBoard.getUsedMatrix().get(oldRow-1).get(oldColumn-1).setDiceContained(null);    //rimuovo il dado dalla vecchia posizione
+        playerWindowBoard.getUsedMatrix().get(oldRow-1).get(oldColumn-1).setUsed(false);    //indico che la cella ora è libera
+        diceToMove.setNumberBreaker(true);   //indico che il dado può violare le limitazioni sul valore
+        playerWindowBoard.insertDice(newRow,newColumn,diceToMove);
+        getToolCardFromTitle("Eglomise Brush").setFirstUsage(true);
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
+
 }
 

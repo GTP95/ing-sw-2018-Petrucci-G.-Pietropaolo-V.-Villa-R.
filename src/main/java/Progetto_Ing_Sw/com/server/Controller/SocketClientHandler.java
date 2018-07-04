@@ -232,6 +232,7 @@ public class SocketClientHandler implements Runnable {
     private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException {
         String[] fields = messageContent.split("&");
         Dice dice;
+        int oldRow, oldColumn, newRow, newColumn;
         switch (fields[1]) {
             case "Place dice":
                 try {
@@ -286,13 +287,21 @@ public class SocketClientHandler implements Runnable {
                 table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]),myPlayer);
                 break;
             case "Use Eglomise Brush":
-                int oldRow=Integer.parseInt(fields[2]);
-                int oldColumn=Integer.parseInt(fields[3]);
-                int newRow=Integer.parseInt(fields[4]);
-                int newColumn=Integer.parseInt(fields[5]);
+                oldRow=Integer.parseInt(fields[2]);
+                oldColumn=Integer.parseInt(fields[3]);
+                newRow=Integer.parseInt(fields[4]);
+                newColumn=Integer.parseInt(fields[5]);
                 System.err.println("Debug: messaggio ricevuto: "+messageContent);
                 table.useToolCard("Eglomise Brush", myPlayer);
                 table.useEglomiseBrush(oldRow,oldColumn,newRow,newColumn,myPlayer);
+                break;
+            case "Use Copper Foil Burnisher":
+                oldRow=Integer.parseInt(fields[2]);
+                oldColumn=Integer.parseInt(fields[3]);
+                newRow=Integer.parseInt(fields[4]);
+                newColumn=Integer.parseInt(fields[5]);
+                table.useToolCard("Copper Foil Burnisher",myPlayer);
+                table.useCopperFoilBurnisher(oldRow,oldColumn,newRow,newColumn,myPlayer);
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);

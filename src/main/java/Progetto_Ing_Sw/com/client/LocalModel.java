@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -520,6 +520,10 @@ public  class LocalModel {
         tableGUIobserver.insertion();   //notifica a tablegui dell'aggiornamento della windowboard
     }
 
+    /**
+     * 
+     * @param windowBoard
+     */
     public void addUpdatedWindowBoard(ClientWindowBoard windowBoard){
         if(updatedWindowBoards==null) updatedWindowBoards=new ArrayList<>();
         updatedWindowBoards.add(windowBoard);
@@ -675,6 +679,15 @@ public  class LocalModel {
         this.newRow=newRow;
         this.newColumn=newColumn;
         useEglomiseBrush=true;
+        sendDataToServer=true;
+    }
+
+    public void useCopperFoilBurnisher(int oldRow, int oldColumn, int newRow, int newColumn){
+        this.oldRow=oldRow;
+        this.oldColumn=oldColumn;
+        this.newRow=newRow;
+        this.newColumn=newColumn;
+        useCopperFoilBurnisher=true;
         sendDataToServer=true;
     }
 

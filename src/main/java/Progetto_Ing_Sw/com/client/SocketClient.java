@@ -343,6 +343,11 @@ public class SocketClient implements Runnable{
                 localModel.useEglomiseBrush=false;
             }
 
+            if(localModel.useCopperFoilBurnisher){
+                sendActionMessage(null, "Use Copper Foil Burnisher"+"&"+localModel.getCoordinatesAsString());
+                localModel.useCopperFoilBurnisher=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 
