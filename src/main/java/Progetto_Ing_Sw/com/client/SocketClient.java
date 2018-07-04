@@ -363,6 +363,13 @@ public class SocketClient implements Runnable{
                 localModel.useLathekin=false;
             }
 
+            if(localModel.useLensCutter){
+                String roundTrackDiceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect());
+                String draftpoolDiceJSON=JSONCreator.generateJSON(localModel.getDiceToUseWithEffect2());
+                sendActionMessage(roundTrackDiceJSON,"Use Lens Cutter&"+draftpoolDiceJSON);
+                localModel.useLensCutter=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 

@@ -328,6 +328,11 @@ public class SocketClientHandler implements Runnable {
                 table.useLathekin(oldRow,oldColumn,newRow,newColumn,oldRow2,oldColumn2,newRow2,newColumn2, myPlayer);
                 System.err.println("Messaggio ricevuto: "+messageContent);  //TODO: rimuovere
                 break;
+            case "Use Lens Cutter":
+                Dice roundtrackDice=JSONCreator.diceLoaderFromString(fields[0]);
+                Dice draftpoolDice=JSONCreator.diceLoaderFromString(fields[2]);
+                table.useLensCutter(roundtrackDice, draftpoolDice, myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }

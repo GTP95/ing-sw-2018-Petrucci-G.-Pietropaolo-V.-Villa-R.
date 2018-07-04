@@ -485,5 +485,12 @@ private ToolCard getToolCardFromTitle(String title){
         getToolCardFromTitle("Lathekin").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
+
+    public void useLensCutter(Dice roundTrackDice, Dice draftpoolDice, Player playerRequestingAction) throws IllegalDiceException {
+        drawnDice.remove(draftpoolDice);
+        RoundTrack.getInstance().swapDice(draftpoolDice,roundTrackDice);
+        getToolCardFromTitle("Lens Cutter").setFirstUsage(true);
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
 }
 
