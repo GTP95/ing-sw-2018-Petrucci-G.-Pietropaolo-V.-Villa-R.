@@ -39,7 +39,7 @@ import java.util.Random;
 public class ToolCardDisplayer extends Stage {
     Scene ToolCardDisplay;
     Scene ToolCarddisplayerScene2;
-    ClientDice DieToInsert;
+    ClientDice DieToInsert,DieToInsert2;
     int valoredado =0;
     int Row, Column;
     String GrozingCommand;
@@ -981,20 +981,15 @@ public class ToolCardDisplayer extends Stage {
         //----------------------------------------------------------------------------------INIZIO LENS CUTTER----------------------------------------------------------------------------------//
         Text LensCutterInfo = new Text("Choose what Dice you want to swap with the Round Track");
         LensCutterInfo.setStyle("-fx-fill: white;");
-        LensCutterInfo.setTranslateX(380);
+        LensCutterInfo.setTranslateX(350);
         LensCutterInfo.setTranslateY(-325);
 
-        Button LensCutterAccept = new Button();
-        LensCutterAccept.setId("NextBTN");
-        LensCutterAccept.setMaxSize(150,150);
-        LensCutterAccept.setTranslateX(600);
-        LensCutterAccept.setVisible(false);
 
         Button LensCutterSwap = new Button();
         LensCutterSwap.setId("SwapBTN");
         LensCutterSwap.setMaxSize(150,150);
         LensCutterSwap.setTranslateX(250);
-        //TODO ACTION SWAP DICE
+        LensCutterSwap.setOnAction(event -> LocalModel.getInstance().useLensCutter(DieToInsert,DieToInsert2));
 
         FlowPane LensCutterPool = new FlowPane();
         LensCutterPool.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
@@ -1048,34 +1043,20 @@ public class ToolCardDisplayer extends Stage {
 
         ToggleGroup  Dicegroup3 = new ToggleGroup();
         ArrayList<ToggleButton>RoundTrackDiceButtons = new ArrayList<>();
-        for (ClientDice dice : LocalModel.getInstance().getDrawnDice()) {
-            ToggleButton Die = new ToggleButton();
-            Die.setPrefSize(75, 75);
-            Die.setMaxSize(75, 75);
-            Die.setId("Die");
-            Die.setText("DiePresente");
-            Die.setToggleGroup(Dicegroup3);
-            LensCutterRoundTrack.getChildren().addAll(Die);
-            RoundTrackDiceButtons.add(Die);
-        }
-        for (int i = 0; i < RoundTrackDiceButtons.size(); i++) {
-            int LocalValue = LocalModel.getInstance().getDrawnDice().get(i).getValue();//TODO PRENDI I DADI DALLA ROUND TRACK
-            int LocalColor = LocalModel.getInstance().getDrawnDice().get(i).getColor();
-            if (LocalValue == 0) {
-                RoundTrackDiceButtons.get(i).setVisible(false);
-            } else {
-                RoundTrackDiceButtons.get(i).setText("");
-                RoundTrackDiceButtons.get(i).setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
-                RoundTrackDiceButtons.get(i).setOnAction(event -> {
-                            DieToInsert = new ClientDice(LocalValue, LocalColor);
-                            valoredado = DieToInsert.getValue();
-                            DieChoosen.setId(Integer.toString(DieToInsert.getValue()) + new ClientColor().IntToColor(DieToInsert.getColor()));
-                            System.out.println("Die choosen: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
-                        }
-                );
+        for (int i=0;i<LocalModel.getInstance().getRoundNumber();i++) {
+            for (int j=0;j<LocalModel.getInstance().getRoundTrack().getDiceRemained(i).size();j++) {
+                int LocalValue = LocalModel.getInstance().getRoundTrack().getDiceRemained(i).get(j).getValue();
+                int LocalColor = LocalModel.getInstance().getRoundTrack().getDiceRemained(i).get(j).getColor();
+                ToggleButton Die = new ToggleButton();
+                Die.setPrefSize(75, 75);
+                Die.setMaxSize(75, 75);
+                Die.setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
+                if (LocalValue == 0) {LensCutterDiceButtons.get(i).setVisible(false);}
+                Die.setOnAction(event -> DieToInsert2 = new ClientDice(LocalValue, LocalColor));
+                Die.setToggleGroup(Dicegroup3);
+                LensCutterRoundTrack.getChildren().addAll(Die);
+                RoundTrackDiceButtons.add(Die);
             }
-            Tooltip t = new Tooltip(("Color: " + new ClientColor().IntToColor(LocalColor) + "\n" + "Value: " + Integer.toString(LocalValue)));
-            Tooltip.install(RoundTrackDiceButtons.get(i), t);
         }
 
         StackPane LensCutter = new StackPane();
@@ -1110,7 +1091,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(RunningPliers,ToolCardD1);
                 break;
             case("Lens Cutter"):
-                LensCutter.getChildren().addAll(LensCutterAccept,LensCutterInfo,LensCutterPool,LensCutterRoundTrack,LensCutterSwap);
+                LensCutter.getChildren().addAll(LensCutterInfo,LensCutterPool,LensCutterRoundTrack,LensCutterSwap);
                 ToolCardDisplayerSecond.getChildren().addAll(LensCutter,ToolCardD1);
                 break;
             case ("Eglomise Brush"):
