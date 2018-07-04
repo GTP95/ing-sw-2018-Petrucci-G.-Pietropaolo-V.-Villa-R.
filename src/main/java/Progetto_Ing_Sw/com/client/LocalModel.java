@@ -688,6 +688,7 @@ public  class LocalModel {
             System.err.println("chiamo closeToolCardMenu() e disableToolCards()");
             toolCardDisplayerObserver.closeToolCardMenu();
             tableGUIobserver.disableToolCards();
+            tableGUIobserver.insertion();
         }
         dontNotifyUsedToolCard=false;
     }

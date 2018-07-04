@@ -228,23 +228,6 @@ public class SocketClientHandler implements Runnable {
 
     }
 
- /*   private void handleInsertDice(Dice dice, int row, int column) {
-        try {
-            myPlayer.getChoosenWindowBoard().insertDice(row, column, dice);
-        }
-        catch (PlaceDiceException e){
-            sendControlMessage(e.getMessage());
-        }
-    }
-
-    private void handleUseToolCard(ToolCard toolCard){
-        try {
-            myPlayer.useToolCard(toolCard);
-            sendControlMessage("OK");
-        } catch (NotEnoughFavorTokensException e) {
-            sendControlMessage("You don't have enough favour tokens!");
-        }
-    }*/
 
     private void handleActionMessage(String messageContent) throws NotEnoughFavorTokensException, PlaceDiceException {
         String[] fields = messageContent.split("&");
