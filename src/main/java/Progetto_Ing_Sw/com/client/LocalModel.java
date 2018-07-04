@@ -634,6 +634,10 @@ public  class LocalModel {
         return diceToUseWithEffect;
     }
 
+    public ClientDice getDiceToUseWithEffect2() {
+        return diceToUseWithEffect2;
+    }
+
     public void setDiceToUseWithEffect(ClientDice diceToUseWithEffect) {
         this.diceToUseWithEffect = diceToUseWithEffect;
     }
@@ -702,9 +706,7 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
-    public void useLathekin(ClientDice dice1, int oldRow1, int oldColumn1, int newRow1, int newColumn1, ClientDice dice2, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
-        diceToUseWithEffect=dice1;
-        diceToUseWithEffect2=dice2;
+    public void useLathekin(int oldRow1, int oldColumn1, int newRow1, int newColumn1, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
 
         this.oldRow=oldRow1;
         this.oldColumn=oldColumn1;
@@ -721,6 +723,11 @@ public  class LocalModel {
 
     public String getCoordinatesAsString(){
         String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
+        return message;
+    }
+
+    public String getCoordinates2AsString(){
+        String message= oldRow2+"&"+oldColumn2+"&"+newRow2+"&"+newColumn2;
         return message;
     }
 
@@ -741,6 +748,30 @@ public  class LocalModel {
         if(drawnToolCards==null) return;
         drawnToolCards.clear();
         immediatelyUpdateGUI=true;
+    }
+
+    public int getOldRow() {
+        return oldRow;
+    }
+
+    public int getOldColumn() {
+        return oldColumn;
+    }
+
+    public int getOldRow2() {
+        return oldRow2;
+    }
+
+    public int getOldColumn2() {
+        return oldColumn2;
+    }
+
+    public int getNewRow2() {
+        return newRow2;
+    }
+
+    public int getNewColumn2() {
+        return newColumn2;
     }
 
     public int getNewRow() {

@@ -359,7 +359,8 @@ public class SocketClient implements Runnable{
             }
 
             if(localModel.useLathekin){
-
+                sendActionMessage(null, "Use Lathekin&"+localModel.getCoordinatesAsString()+"&"+localModel.getCoordinates2AsString());
+                localModel.useLathekin=false;
             }
 
             localModel.sendDataToServer=false;
