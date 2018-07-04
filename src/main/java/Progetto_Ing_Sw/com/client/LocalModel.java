@@ -682,19 +682,27 @@ public  class LocalModel {
 
     /**
      * Implements tool card Grinding Stone
-     * @param dice
+     * @param dice dice to use with Grinding Stone
      */
     public void useGrindingStone(ClientDice dice){
         diceToUseWithEffect=dice;
         useGrindingStone=true;
         sendDataToServer=true;
     }
+
+    /**
+     * Implements tool card Flux brush
+     * @param dice dice to use with Flux brush
+     */
     public void useFluxBrush(ClientDice dice){
         diceToUseWithEffect=dice;
         useFluxBrush=true;
         sendDataToServer=true;
     }
 
+    /**
+     * Implements
+     */
     public void useGlazingHammers(){
         useGlazingHammers=true;
         sendDataToServer=true;

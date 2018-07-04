@@ -36,10 +36,9 @@ public class Dice {
     public void setNumberBreaker(boolean numberBreaker) {this.numberBreaker = numberBreaker;}
 
 
-    //fottiti java!
 
     @Override
-    public boolean equals(Object o) {       //usata per i test
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dice dice = (Dice) o;
