@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.client;
 
 
 import Progetto_Ing_Sw.com.server.Model.ToolCards.GlazingHammer;
+import Progetto_Ing_Sw.com.server.Model.ToolCards.TapWheel;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -41,7 +42,7 @@ public class ToolCardDisplayer extends Stage {
     Scene ToolCarddisplayerScene2;
     ClientDice DieToInsert,DieToInsert2;
     int valoredado =0;
-    int Row, Column;
+    int ColorChosen;
     String GrozingCommand;
     Label DieChoosen;
     ArrayList<ToggleButton> DiceButtons;
@@ -622,7 +623,7 @@ public class ToolCardDisplayer extends Stage {
         Text toColumnLathekin = new Text("To\nColumn");
         toColumnLathekin.setTranslateY(175);
         toColumnLathekin.setTranslateX(460);
-        toColumnEglomise.setStyle("-fx-fill: white;");
+        toColumnLathekin.setStyle("-fx-fill: white;");
         TextField ToColumn1Lathekin = new TextField();
         ToColumn1Lathekin.setMaxSize(100,50);
         ToColumn1Lathekin.setTranslateX(460);
@@ -989,7 +990,7 @@ public class ToolCardDisplayer extends Stage {
         LensCutterSwap.setId("SwapBTN");
         LensCutterSwap.setMaxSize(150,150);
         LensCutterSwap.setTranslateX(250);
-        LensCutterSwap.setOnAction(event -> LocalModel.getInstance().useLensCutter(DieToInsert,DieToInsert2));
+        LensCutterSwap.setOnAction(event -> LocalModel.getInstance().useLensCutter(DieToInsert2,DieToInsert));
 
         FlowPane LensCutterPool = new FlowPane();
         LensCutterPool.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
@@ -998,7 +999,7 @@ public class ToolCardDisplayer extends Stage {
         LensCutterPool.setHgap(5);
         LensCutterPool.setPadding(new Insets(4, 4, 4, 4));
         LensCutterPool.setAlignment(Pos.CENTER);
-        LensCutterPool.setMaxSize(200,200);
+        LensCutterPool.setMaxSize(200,400);
 
         ToggleGroup  Dicegroup2 = new ToggleGroup();
         ArrayList<ToggleButton> LensCutterDiceButtons = new ArrayList<>();
@@ -1039,7 +1040,7 @@ public class ToolCardDisplayer extends Stage {
         LensCutterRoundTrack.setHgap(5);
         LensCutterRoundTrack.setPadding(new Insets(4, 4, 4, 4));
         LensCutterRoundTrack.setAlignment(Pos.CENTER);
-        LensCutterRoundTrack.setMaxSize(200,200);
+        LensCutterRoundTrack.setMaxSize(200,400);
 
         ToggleGroup  Dicegroup3 = new ToggleGroup();
         ArrayList<ToggleButton>RoundTrackDiceButtons = new ArrayList<>();
@@ -1051,11 +1052,19 @@ public class ToolCardDisplayer extends Stage {
                 Die.setPrefSize(75, 75);
                 Die.setMaxSize(75, 75);
                 Die.setId(Integer.toString(LocalValue) + new ClientColor().IntToColor(LocalColor));
-                if (LocalValue == 0) {LensCutterDiceButtons.get(i).setVisible(false);}
-                Die.setOnAction(event -> DieToInsert2 = new ClientDice(LocalValue, LocalColor));
-                Die.setToggleGroup(Dicegroup3);
-                LensCutterRoundTrack.getChildren().addAll(Die);
-                RoundTrackDiceButtons.add(Die);
+                Die.setOnAction(event -> {
+                    DieToInsert2 = new ClientDice(LocalValue, LocalColor);
+                    System.out.println("Die Chosen Round Track: " + Integer.toString(LocalValue) + "," + Integer.toString(LocalColor));
+                });
+                if (LocalValue == 0) {
+                    continue;
+                    //Die.setVisible(false);
+                }
+                else {
+                    Die.setToggleGroup(Dicegroup3);
+                    LensCutterRoundTrack.getChildren().addAll(Die);
+                    RoundTrackDiceButtons.add(Die);
+                }
             }
         }
 
@@ -1063,6 +1072,152 @@ public class ToolCardDisplayer extends Stage {
         LensCutter.setPrefSize(1280,720);
 
         //----------------------------------------------------------------------------------FINE LENS CUTTER----------------------------------------------------------------------------------//
+
+        //----------------------------------------------------------------------------------INIZIO TAP WHEEL----------------------------------------------------------------------------------//
+
+        Text TapWheelInfo = new Text("Choose a Color and 2 Dice you want to Move");
+        TapWheelInfo.setStyle("-fx-fill: white;");
+        TapWheelInfo.setTranslateX(350);
+        TapWheelInfo.setTranslateY(-325);
+
+        GridPane TapWheelGrid = CreateAGrid(LocalModel.getInstance().getChoosenGameBoardCard());
+        TapWheelGrid.setTranslateX(350);
+
+        GridPane TapWheelDieGrid = getWindowBoardDiceBoard();
+        TapWheelDieGrid.setTranslateX(350);
+
+        Text fromRowTapWheel = new Text("From\nRow");
+        fromRowTapWheel.setTranslateY(175);
+        fromRowTapWheel.setTranslateX(100);
+        fromRowTapWheel.setStyle("-fx-fill: white;");
+        TextField FromRow1TapWheel = new TextField();
+        FromRow1TapWheel.setMaxSize(100,50);
+        FromRow1TapWheel.setTranslateX(100);
+        FromRow1TapWheel.setTranslateY(280);
+        TextField FromRow2TapWheel = new TextField();
+        FromRow2TapWheel.setMaxSize(100,50);
+        FromRow2TapWheel.setTranslateX(100);
+        FromRow2TapWheel.setTranslateY(340);
+
+
+        Text fromColumnTapWheel = new Text("From\nColumn");
+        fromColumnTapWheel.setTranslateY(175);
+        fromColumnTapWheel.setTranslateX(220);
+        fromColumnTapWheel.setStyle("-fx-fill: white;");
+        TextField FromColumn1TapWheel = new TextField();
+        FromColumn1TapWheel.setMaxSize(100,50);
+        FromColumn1TapWheel.setTranslateX(220);
+        FromColumn1TapWheel.setTranslateY(280);
+        TextField FromColumn2TapWheel = new TextField();
+        FromColumn2TapWheel.setMaxSize(100,50);
+        FromColumn2TapWheel.setTranslateX(220);
+        FromColumn2TapWheel.setTranslateY(340);
+
+        Text toRowTapWheel = new Text("To\nRow");
+        toRowTapWheel.setTranslateY(175);
+        toRowTapWheel.setTranslateX(340);
+        toRowTapWheel.setStyle("-fx-fill: white;");
+        TextField ToRow1TapWheel = new TextField();
+        ToRow1TapWheel.setMaxSize(100,50);
+        ToRow1TapWheel.setTranslateX(340);
+        ToRow1TapWheel.setTranslateY(280);
+        TextField ToRow2TapWheel = new TextField();
+        ToRow2TapWheel.setMaxSize(100,50);
+        ToRow2TapWheel.setTranslateX(340);
+        ToRow2TapWheel.setTranslateY(340);
+
+        Text toColumnTapWheel = new Text("To\nColumn");
+        toColumnTapWheel.setTranslateY(175);
+        toColumnTapWheel.setTranslateX(460);
+        toColumnTapWheel.setStyle("-fx-fill: white;");
+        TextField ToColumn1TapWheel = new TextField();
+        ToColumn1TapWheel.setMaxSize(100,50);
+        ToColumn1TapWheel.setTranslateX(460);
+        ToColumn1TapWheel.setTranslateY(280);
+        TextField ToColumn2TapWheel = new TextField();
+        ToColumn2TapWheel.setMaxSize(100,50);
+        ToColumn2TapWheel.setTranslateX(460);
+        ToColumn2TapWheel.setTranslateY(340);
+
+        Button AcceptTapWheel = new Button();
+        AcceptTapWheel.setId("NextBTN");
+        AcceptTapWheel.setMaxSize(150,150);
+        AcceptTapWheel.setTranslateX(600);
+        AcceptTapWheel.setOnAction(event -> LocalModel.getInstance().useTapWheel(
+                ColorChosen,
+                Integer.parseInt(FromRow1TapWheel.getText()),
+                Integer.parseInt(FromColumn1TapWheel.getText()),
+                Integer.parseInt(ToRow1TapWheel.getText()),
+                Integer.parseInt(ToColumn1TapWheel.getText()),
+                Integer.parseInt(FromRow2TapWheel.getText()),
+                Integer.parseInt(FromColumn2TapWheel.getText()),
+                Integer.parseInt(ToRow2TapWheel.getText()),
+                Integer.parseInt(ToColumn2TapWheel.getText())
+        )
+        );
+
+        FlowPane TapWheelRoundTrack = new FlowPane();
+        TapWheelRoundTrack.setStyle("-fx-border-radius: 5 5 5 5;"+"-fx-border-color: white;"+"-fx-border-width: 4 4 4 4");
+        TapWheelRoundTrack.setVgap(5);
+        TapWheelRoundTrack.setHgap(5);
+        TapWheelRoundTrack.setPadding(new Insets(4, 4, 4, 4));
+        TapWheelRoundTrack.setAlignment(Pos.CENTER);
+        TapWheelRoundTrack.setMaxSize(75,200);
+
+        int red = 0;
+        int blue = 0;
+        int purple = 0;
+        int yellow = 0;
+        int green = 0;
+        for (int i=0;i<LocalModel.getInstance().getRoundNumber();i++) {
+            for (int j = 0; j < LocalModel.getInstance().getRoundTrack().getDiceRemained(i).size(); j++) {
+                int LocalColor = LocalModel.getInstance().getRoundTrack().getDiceRemained(i).get(j).getColor();
+                switch (LocalColor) {
+                    case (ClientColor.RED):
+                        red++;
+                        break;
+                    case (ClientColor.BLUE):
+                        blue++;
+                        break;
+                    case (ClientColor.PURPLE):
+                        purple++;
+                        break;
+                    case (ClientColor.YELLOW):
+                        yellow++;
+                        break;
+                    case (ClientColor.GREEN):
+                        green++;
+                        break;
+                }
+            }
+        }
+        ArrayList<Integer>ColorsArray= new ArrayList<>();
+        if (red>0){ColorsArray.add(ClientColor.RED);}
+        if (blue>0){ColorsArray.add(ClientColor.BLUE);}
+        if (purple>0){ColorsArray.add(ClientColor.PURPLE);}
+        if (yellow>0){ColorsArray.add(ClientColor.YELLOW);}
+        if (green>0){ColorsArray.add(ClientColor.GREEN);}
+
+        ToggleGroup  DicegroupTapWheel = new ToggleGroup();
+        for(int i=0;i<ColorsArray.size();i++) {
+            int ColorIndicator = ColorsArray.get(i);
+            ToggleButton ColorButton = new ToggleButton();
+            ColorButton.setPrefSize(75, 75);
+            ColorButton.setMaxSize(75, 75);
+            ColorButton.setId(new ClientColor().IntToColor(ColorIndicator));
+            ColorButton.setOnAction(event -> {
+                ColorChosen = ColorIndicator;
+                System.out.println("Color Chosen Round Track: " + Integer.toString(ColorIndicator));
+            });
+            ColorButton.setToggleGroup(DicegroupTapWheel);
+            TapWheelRoundTrack.getChildren().addAll(ColorButton);
+
+        }
+
+        StackPane TapWheel = new StackPane();
+        TapWheel.setPrefSize(1280,720);
+
+        //----------------------------------------------------------------------------------FINE TAP WHEEL----------------------------------------------------------------------------------//
 
         //ToolCardDisplayerSecond.getChildren().addAll(ToolCardD1);
         switch (Title){
@@ -1110,6 +1265,12 @@ public class ToolCardDisplayer extends Stage {
                 Lathekin.getChildren().addAll(LathekinInfo,LathekinGrid,LathekinDieGrid,fromColumnLathekin,fromRowLathekin,toColumnLathekin,toRowLathekin,FromRow1Lathekin,FromColumn1Lathekin,ToRow1Lathekin,ToColumn1Lathekin,FromRow2Lathekin,FromColumn2Lathekin,ToRow2Lathekin,ToColumn2Lathekin,AcceptLathekin);
                 ToolCardDisplayerSecond.getChildren().addAll(Lathekin,ToolCardD1);
                 break;
+            case("Tap Wheel"):
+                TapWheel.getChildren().addAll(TapWheelInfo,TapWheelGrid,TapWheelDieGrid,FromColumn1TapWheel,FromColumn2TapWheel,fromColumnTapWheel,FromRow1TapWheel,FromRow2TapWheel,fromRowTapWheel,ToColumn1TapWheel,ToColumn2TapWheel,toColumnTapWheel,ToRow1TapWheel,ToRow2TapWheel,toRowTapWheel,TapWheelRoundTrack,AcceptTapWheel);
+                ToolCardDisplayerSecond.getChildren().addAll(TapWheel,ToolCardD1);
+                break;
+
+
 
         }
 
