@@ -35,7 +35,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter, useTapWheel;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter, useTapWheel, useRunningPliers;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -70,6 +70,7 @@ public  class LocalModel {
         useLathekin=false;
         useLensCutter=false;
         useTapWheel=false;
+        useRunningPliers=false;
     }
 
 
@@ -851,6 +852,14 @@ public  class LocalModel {
         this.newColumn2=newColumn2;
 
         useTapWheel=true;
+        sendDataToServer=true;
+    }
+
+    /**
+     * Notifies SocketClient that the player whishes to use the tool card "Running Pliers"
+     */
+    public void useRunningPliers(){
+        useRunningPliers=true;
         sendDataToServer=true;
     }
 

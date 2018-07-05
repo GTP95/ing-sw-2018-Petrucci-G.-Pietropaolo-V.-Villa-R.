@@ -518,8 +518,20 @@ private ToolCard getToolCardFromTitle(String title){
 
     }
 
-    private void removePlayerFromMirrorArrayList(Player player){    //fa saltare il turno successivo al giocatore
-        mirrorArray.removeAll(Collections.singleton(player));
+    public void useRunningPliers(Player playerRequestingAction){
+        getToolCardFromTitle("Running Pliers").setFirstUsage(true);
+        fixMirrorArrayBecauseOfRunningPliers(playerRequestingAction);
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
+
+    private void fixMirrorArrayBecauseOfRunningPliers(Player playerRequestingAction){
+        int index=currentPlayer++;
+        mirrorArray.add(index, playerRequestingAction);
+        index++;    //controllo a partire dalla posizione successiva dell'array
+        for(;index<mirrorArray.size();index++){
+            if(mirrorArray.get(index).equals(playerRequestingAction)) mirrorArray.set(index, null);
+        }
+        mirrorArray.removeAll(Collections.singleton(null));
     }
 }
 

@@ -382,6 +382,11 @@ public class SocketClient implements Runnable{
                 localModel.useTapWheel=false;
             }
 
+            if(localModel.useRunningPliers){
+                sendActionMessage(null, "Use Running Pliers");
+                localModel.useRunningPliers=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 
