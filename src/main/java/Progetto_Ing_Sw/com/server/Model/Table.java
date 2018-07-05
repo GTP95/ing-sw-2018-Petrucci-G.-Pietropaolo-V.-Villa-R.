@@ -254,7 +254,10 @@ private void prepareForNextRound() {     //Cambia l'ordine di gioco dei giocator
     currentPlayer = 0;
     for (Dice dice : drawnDice)
         RoundTrack.getInstance().addRemainedDice(RoundTrack.getInstance().getRoundNumber(), dice);   //aggiunge i dadi avanzati alla roundtrack
-    RoundTrack.getInstance().incrementRound();
+    if(RoundTrack.getInstance().incrementRound()>10){
+        endGame();
+        return;
+    }
     drawnDice=diceBag.diceDraw(2*players.size()+1);
     for (Player player : players) {
         player.getSocketClientHandler().changedRound = true;  //non c'è bisogno di chiamare la notifyAllSocketClientHandlers perchè viene chiamata dopo alla fine della changeCurrentPlayer()
@@ -385,7 +388,7 @@ private ToolCard getToolCardFromTitle(String title){
     public void useGlazingHammer(Player playerRequestingAction){
         SplittableRandom splittableRandom=new SplittableRandom();
         for (Dice dice : drawnDice){
-            dice.setValue(splittableRandom.nextInt(1,7));   //il 7 è escluso
+            if(dice.getValue()!=0) dice.setValue(splittableRandom.nextInt(1,7));   //il 7 è escluso
         }
         getToolCardFromTitle("Glazing Hammer").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
