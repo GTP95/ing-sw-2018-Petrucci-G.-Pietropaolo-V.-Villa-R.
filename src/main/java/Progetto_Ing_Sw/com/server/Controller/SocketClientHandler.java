@@ -9,6 +9,10 @@ import java.util.TimerTask;
 import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
+/**
+ * @author Giacomo Tommaso Petrucci
+ * This class is in charge
+ */
 public class SocketClientHandler implements Runnable {
     private Socket clientSocket;
     private PrintWriter out;
@@ -23,6 +27,7 @@ public class SocketClientHandler implements Runnable {
     private Player myPlayer;
     private Timer countdown, timerTurn, inactivityTimer; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
     private boolean otherPlayersWindowBoardsSent, isWinner;
+
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client

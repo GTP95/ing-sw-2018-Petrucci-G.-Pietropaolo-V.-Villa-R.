@@ -7,6 +7,9 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * This class is in charge of communicating with the server and update the Local Model
+ */
 public class SocketClient implements Runnable{
     private Socket socket;
     private String username;

@@ -580,7 +580,7 @@ private ToolCard getToolCardFromTitle(String title){
 
         }
 
-        players.get(findWinner()).getSocketClientHandler();
+        players.get(findWinner()).getSocketClientHandler().setIsWinner();
         for(Player player : players){
             player.getSocketClientHandler().sendVictoryPoints=true;
         }
@@ -609,7 +609,6 @@ private ToolCard getToolCardFromTitle(String title){
     }
 
     private int findWinner(){
-        int indexOfwinner;
         ArrayList<Integer> totalPoints=new ArrayList<>();
         int tempTotal=0;
         for(Player player:players){
@@ -618,8 +617,17 @@ private ToolCard getToolCardFromTitle(String title){
             }
             totalPoints.add(tempTotal);
         }
-        indexOfwinner=totalPoints.indexOf(Collections.max(totalPoints));
-        return indexOfwinner;
+        //indexOfwinner=totalPoints.indexOf(Collections.max(totalPoints));
+        int maxPoints=0;
+        int resultIndex=0;
+        for(int index=0;index<totalPoints.size();index++){
+            if(totalPoints.get(index)>maxPoints){
+                maxPoints=totalPoints.get(index);
+                resultIndex=index;
+            }
+        }
+
+        return resultIndex;
     }
 }
 
