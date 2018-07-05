@@ -14,23 +14,8 @@ import java.io.FileNotFoundException;
  */
 public class ColorDiagonals {
 
-    //questa versione funziona solo con matrici 4X%
-    //-------import del costo di primo uso
-    private int localVictoryPoints;
-    {try {
-        localVictoryPoints = JSONCreator.parseIntFieldFromFile("Resources/Cards/PublicObjectiveCards/ColorVariety.json","victoryPoints" );
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();}
-    }
-    //-----------------
 
-    private int victoryPoints;
-    public ColorDiagonals() {
-        this.victoryPoints = localVictoryPoints;
-    }
-
-    public int getVictoryPoints() {return victoryPoints;}
-
+    public ColorDiagonals() {}
     /**
      * This method counts how much consecutive colors there are in the input-object Diagonal (that is an integer array)
      * @param diagonal this parameter represents the diagonal that has to be analyzed
