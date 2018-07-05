@@ -950,7 +950,7 @@ public class TableGUI extends Stage{
      * This method updates the GUI as the Round changes and notifies the player with a sound.
      */
     public void updateRound(){
-        String musicFile = getClass().getResource("GUI/Sagrada.mp3").toExternalForm();;
+        String musicFile = getClass().getResource("GUI/RoundChange.mp3").toExternalForm();;
 
         Media sound = new Media(musicFile);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
