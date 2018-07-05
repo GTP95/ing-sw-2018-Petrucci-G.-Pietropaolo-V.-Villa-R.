@@ -1,5 +1,8 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+/**
+ * this class implements the PublicObjectiveCards
+ */
 public class PublicObjectiveCard extends Card {
 
     private String title;

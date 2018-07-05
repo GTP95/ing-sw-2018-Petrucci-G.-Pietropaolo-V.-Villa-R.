@@ -1,5 +1,9 @@
 package Progetto_Ing_Sw.com.server.Model;
 
+/**
+ * this class implements the ToolCards
+ */
+
 public class ToolCard extends Card {
 
     private String title;
@@ -25,6 +29,12 @@ public class ToolCard extends Card {
     public boolean isFirstUsage() {return firstUsage;}
     public String getColor() {return color;}
 
+    /**
+     * this method sets the usage of a toolCard;
+     * firstUsage=false means that the card has never been used
+     * firstUsage=true means that the card has already been used
+     * @param firstUsage the state of the card
+     */
     public void setFirstUsage(boolean firstUsage) {
         this.firstUsage = firstUsage;
     }

@@ -7,7 +7,9 @@ import java.util.SplittableRandom;
 
 import static Progetto_Ing_Sw.com.tools.JSONCreator.privateObjectiveCardLoaderFromFile;
 
-
+/**
+ * this class implements a deck of PrivateObjectiveCards
+ */
 public class PrivateObjectiveCardDeck extends Deck{
 
     ArrayList<PrivateObjectiveCard> privateObjectiveCards;
@@ -19,6 +21,10 @@ public class PrivateObjectiveCardDeck extends Deck{
         return ourInstance;
     }
 
+    /**
+     * this method creates a PrivateObjectiveCardDeck from JSON files, following a path from a folder
+     * @param folder it's the folder where there are the paths
+     */
     private PrivateObjectiveCardDeck(File folder) {
         ArrayList<PrivateObjectiveCard> cards=new ArrayList<>();
         for(File file : folder.listFiles()){
@@ -33,6 +39,10 @@ public class PrivateObjectiveCardDeck extends Deck{
         splittableRandom=new SplittableRandom();
     }
 
+    /**
+     * This method overrides the "draw method" of the Abstract Class, Card
+     * @return it returns a single card drawn
+     */
     @Override
     public PrivateObjectiveCard draw(){
         PrivateObjectiveCard card=null;
