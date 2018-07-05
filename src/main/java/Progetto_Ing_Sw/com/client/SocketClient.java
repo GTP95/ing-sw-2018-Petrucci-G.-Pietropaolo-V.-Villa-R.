@@ -59,10 +59,13 @@ public class SocketClient implements Runnable{
             catch (NotEnoughFavorTokensException e){
                 localModel.addFavorTokensException(e);
             }
+            catch(InactivityException e){
+                localModel.addInactivityException(e);
+            }
         }
     }
 
-    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException {
+    private void receiveMessage() throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException, InactivityException {
         try {
             if(!in.ready()) return;
             String message = in.readLine();
@@ -94,7 +97,7 @@ public class SocketClient implements Runnable{
         }
     }
 
-    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException {
+    private void handleControlMessage(String messageContent) throws TooManyPlayersException, Progetto_Ing_Sw.com.client.InvalidUsernameException, IllegalDiceException, NotEnoughFavorTokensException, InactivityException {
         String messageFields[]=messageContent.split("&");
         switch (messageFields[0]) {
             case "Connected":
@@ -113,8 +116,7 @@ public class SocketClient implements Runnable{
             case "Invalid username: empty username not allowed":
                 throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Inactivity notification":
-               // throw new
-                break;
+                throw new InactivityException(messageFields[1]);
             case "Game started!":
                 localModel.setGameRunning(true);
                 break;

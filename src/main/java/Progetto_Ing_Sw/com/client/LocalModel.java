@@ -958,4 +958,9 @@ public  class LocalModel {
     public boolean isActive(String playerName){
         return getPlayerFromName(playerName).isActive();
     }
+
+    public void addInactivityException(InactivityException e) {
+        exceptions.add(e);
+        tableGUIobserver.DisconnectedPlayerException();
+    }
 }
