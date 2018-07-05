@@ -33,7 +33,7 @@ public class LobbyTest {    //TODO: chiedere come testare i singleton! È diffic
         lobby.addPlayer("");
    } */
 
-   @Test
+  /* @Test
     public void getNumOfPlayersTest(){
        try {
            lobby.addPlayer("ReadyPlayerOne", new SocketClientHandler(new Socket()));    //socketClientHandler impostato a null perchè tanto non viene usato per il test
@@ -48,6 +48,6 @@ public class LobbyTest {    //TODO: chiedere come testare i singleton! È diffic
        catch(InvalidUsernameException e){
            Assert.fail(e.getMessage());
        }
-   }
+   }*/
 
 }

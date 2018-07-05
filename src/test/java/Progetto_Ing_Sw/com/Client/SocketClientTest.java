@@ -9,8 +9,8 @@ import org.junit.Test;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 
-public class SocketClientTest {
-    @Test
+public class SocketClientTest { //Only for integration testing, requires a running server!
+  /*  @Test
     public void socketClientTester(){
         LocalModel localModel =LocalModel.getInstance();
         try{
@@ -28,5 +28,5 @@ public class SocketClientTest {
         }
         catch (UnknownHostException | ConnectException e){Assert.fail(e.getMessage());}
 
-    }
+    }*/
 }
