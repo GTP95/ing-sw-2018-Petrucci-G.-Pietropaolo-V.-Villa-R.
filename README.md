@@ -26,5 +26,6 @@ Scelte di Design
 Limitazioni
 - Le Tool Card che portano ad un cambiamento di posizione di dadi già piazzati non aggiornano istantaneamente la grafica di gioco nonostante l'uso sia registrato correttamente sia dal Client che dal Server;
 - In caso un giocatore perda la connessione e si riconnetta successivamente l'aggiornamento della sua view potrebbe non essere immediata, tuttavia non gli è comunque permesso fare mosse non valide
+- Il javadoc è stato caricato a parte nel seguente archivio: https://mega.nz/#!A1kSxKzS!LlGtp0Z2AoFKuPulxRiH-N9gqQPoVTccvHQHPHIYCv8
 
 Per motivi di dimensioni (il file Jar pesa 70MB e github permette solo file da 25MB) il jar è reperibile a questo indirizzo: https://mega.nz/#!o8UhHCyJ!NzeC60KcKJv9HoV_OwPrqHOfEhEw6b7X9DWU_T5wMv4
