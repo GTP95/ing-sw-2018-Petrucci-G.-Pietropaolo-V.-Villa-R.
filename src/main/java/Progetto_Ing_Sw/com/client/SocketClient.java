@@ -140,6 +140,12 @@ public class SocketClient implements Runnable{
             case "Victory Points":
                 localModel.addVictoryPoints(Integer.parseInt(messageFields[1]));
                 break;
+            case "Victory":
+                if(Integer.parseInt(messageFields[1])==1){
+                    localModel.setWinner(true);
+                }
+                else localModel.setWinner(false);
+                break;
             case "CountdownValue":
                 localModel.setCountdownValue(Integer.parseInt(messageFields[1]));
                 break;

@@ -22,7 +22,7 @@ public class SocketClientHandler implements Runnable {
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn, inactivityTimer; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
-    private boolean otherPlayersWindowBoardsSent;
+    private boolean otherPlayersWindowBoardsSent, isWinner;
 
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
@@ -37,6 +37,7 @@ public class SocketClientHandler implements Runnable {
         updateToolCards=false;
         notifyPlayerInactivity=false;
         sendVictoryPoints=false;
+        isWinner=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -104,6 +105,8 @@ public class SocketClientHandler implements Runnable {
                  for(Integer integer : myPlayer.getVictoryPoints()){
                      sendControlMessage("Victory Points&"+integer);
                  }
+                 if(isWinner) sendControlMessage("Victory&1");
+                 else sendControlMessage("Victory&");
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -543,6 +546,10 @@ public class SocketClientHandler implements Runnable {
             }
             notifyPlayerInactivity=false;
         }
+   }
+
+   public void setIsWinner(){
+        isWinner=true;
    }
 
 }

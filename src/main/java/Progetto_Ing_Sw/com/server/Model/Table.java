@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.SplittableRandom;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static java.util.Collections.max;
+
 /**
  * This is the main class of the game, it holds and uses references to all model's and controller's classes
  * From a logic perspective, this class represents the table on which you are playing the game, and as such it has
@@ -577,6 +579,8 @@ private ToolCard getToolCardFromTitle(String title){
             player.addVictoryPoints(player.getChoosenWindowBoard().calculatePointsFromEmptySpaces()*-1);   //punti persi per spazi vuoti
 
         }
+
+        players.get(findWinner()).getSocketClientHandler();
         for(Player player : players){
             player.getSocketClientHandler().sendVictoryPoints=true;
         }
@@ -604,15 +608,18 @@ private ToolCard getToolCardFromTitle(String title){
         }
     }
 
-   /* private void findWinner{
+    private int findWinner(){
+        int indexOfwinner;
         ArrayList<Integer> totalPoints=new ArrayList<>();
-        ArrayList<Integer> tempArray;
-        Integer tempTotal=
+        int tempTotal=0;
         for(Player player:players){
             for (Integer integer : player.getVictoryPoints()){
-
+                tempTotal+=integer;
             }
+            totalPoints.add(tempTotal);
         }
-    }*/
+        indexOfwinner=totalPoints.indexOf(Collections.max(totalPoints));
+        return indexOfwinner;
+    }
 }
 

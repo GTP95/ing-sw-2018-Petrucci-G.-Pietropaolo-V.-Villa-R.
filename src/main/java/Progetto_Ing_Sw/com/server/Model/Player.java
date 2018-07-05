@@ -4,6 +4,9 @@ import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Player{
    private String name;
    private int favorTokens;

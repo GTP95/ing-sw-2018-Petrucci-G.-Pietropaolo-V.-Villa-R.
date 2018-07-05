@@ -48,6 +48,7 @@ public  class LocalModel {
     private ClientDice diceToUseWithEffect, diceToUseWithEffect2;
     private String command;
     private ArrayList<Integer> victoryPoints;
+    private boolean winner;
 
     private LocalModel(){
 
@@ -71,6 +72,7 @@ public  class LocalModel {
         useRunningPliers=false;
         victoryPoints=new ArrayList<>();
         numOfVictoryPoints=0;
+        winner=false;
     }
 
 
@@ -969,9 +971,7 @@ public  class LocalModel {
 
     public void addVictoryPoints(Integer points){
         victoryPoints.add(points);
-        if(victoryPoints.size()== numOfVictoryPoints){
-            endGame();
-        }
+
     }
 
     public void setNumOfVictoryPoints(int numOfVictoryPoints) {
@@ -980,5 +980,14 @@ public  class LocalModel {
 
     public ArrayList<Integer> getVictoryPoints() {
         return victoryPoints;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
+        endGame();
     }
 }
