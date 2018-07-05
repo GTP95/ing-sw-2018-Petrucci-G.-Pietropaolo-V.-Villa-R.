@@ -22,7 +22,7 @@ import java.io.File;
  */
 public class StartMenuGUI extends Application {
     Scene TitleScreen, SelectGameMode, SinglePlayer;  //Specifico prima tutte le scene di cui avrò bisogno
-
+    MediaPlayer mediaPlayer;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
     /**
@@ -35,7 +35,7 @@ public class StartMenuGUI extends Application {
         String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/Sagrada.mp3";
 
         Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
@@ -88,11 +88,38 @@ public class StartMenuGUI extends Application {
             }
         });
 
+        //MUTE AND VOLUME BUTTONS
+        Button MuteBTN = new Button();
+        MuteBTN.setId("MuteBTN");
+        MuteBTN.setVisible(false);
+        MuteBTN.setMinSize(100,100);
+        Button VolumeBTN = new Button();
+        VolumeBTN.setId("VolumeBTN");
+        VolumeBTN.setMinSize(100,100);
+        VolumeBTN.setOnAction(event -> {
+            mediaPlayer.setMute(true);
+            VolumeBTN.setVisible(false);
+            MuteBTN.setVisible(true);
+
+        });
+        MuteBTN.setOnAction(event -> {
+            mediaPlayer.setMute(false);
+            MuteBTN.setVisible(false);
+            VolumeBTN.setVisible(true);
+
+        });
+
+        StackPane MusicButton = new StackPane();
+        MusicButton.setTranslateY(300);
+        MusicButton.setTranslateX(200);
+        MusicButton.setPrefSize(200,200);
+        MusicButton.getChildren().addAll(MuteBTN,VolumeBTN);
+
         // HBox per la selezione della modalità
         HBox gamemode= new HBox(80);                                 // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
         gamemode.setPrefSize(1280,720);
         gamemode.setAlignment(Pos.CENTER);                                //posiziono il punto di partenza della HBox al centro
-        gamemode.getChildren().addAll(singlePlayer,multiPlayer);         //assegno i bottoni creati alla HBox gamemode
+        gamemode.getChildren().addAll(singlePlayer,multiPlayer,MusicButton);         //assegno i bottoni creati alla HBox gamemode
 
         //Tasto goBack per tornare alla schermata principale
         Button goBack = new Button();
@@ -100,29 +127,13 @@ public class StartMenuGUI extends Application {
         goBack.setPrefSize(125,80);
         goBack.setOnAction(event -> primaryStage.setScene(TitleScreen)); //azione su click che permette di passare alla scene TitleScreen
 
-        Button MuteBTN = new Button();
-        if (mediaPlayer.isMute()){MuteBTN.setVisible(false);}
-        MuteBTN.setId("MuteBTN");
-        MuteBTN.setOnAction(event -> {
-            mediaPlayer.setMute(true);
-        });
 
-        Button VolumeBTN = new Button();
-        if (!mediaPlayer.isMute()){VolumeBTN.setVisible(false);}
-        VolumeBTN.setId("VolumeBTN");
-        VolumeBTN.setOnAction(event ->
-                mediaPlayer.setMute(false)
-        );
-
-        StackPane MusicButton = new StackPane();
-        MusicButton.getChildren().addAll(MuteBTN,VolumeBTN);
 
         //BorderPane che contiene tutto
         BorderPane SelectionScreenPane= new BorderPane();
         SelectionScreenPane.setId("GamemodeSelectionScreen");
         SelectionScreenPane.setCenter(gamemode);
         SelectionScreenPane.setRight(goBack);
-        SelectionScreenPane.setBottom(MusicButton);
         SelectionScreenPane.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());    //importo le impostazioni di stile dal file CSS
 
 

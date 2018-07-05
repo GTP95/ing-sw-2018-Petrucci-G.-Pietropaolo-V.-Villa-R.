@@ -707,11 +707,19 @@ public class TableGUI extends Stage{
             LocalModel.getInstance().skipTurn();
         });
 
-        Button Update = new Button("Update");
-        Update.setTranslateX(600);
-        Update.setOnAction(event -> {
-            ScoreBoardView scoreBoardView = new ScoreBoardView();
-            scoreBoardView.showAndWait();
+        Button MuteBTN = new Button();
+        MuteBTN.setId("MuteBTN");
+        MuteBTN.setVisible(true);
+        MuteBTN.setOnAction(event -> {
+
+            //if (mediaPlayer.isMute()){MuteBTN.setVisible(false);}
+        });
+
+        Button VolumeBTN = new Button();
+        VolumeBTN.setId("VolumeBTN");
+        VolumeBTN.setOnAction(event -> {
+
+            // if (!mediaPlayer.isMute()){VolumeBTN.setVisible(false);}
         });
 
         //BorderPane per contenere tutti gli altri
@@ -721,16 +729,17 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(Tokens,Pos.CENTER);
         GameplayArea.setAlignment(TimerLabel,Pos.CENTER);
         GameplayArea.setAlignment(Move,Pos.CENTER);
+        GameplayArea.setAlignment(PassButton,Pos.CENTER);
         GameplayArea.setAlignment(PrivateObjectiveColor,Pos.CENTER);
         GameplayArea.setAlignment(OtherPlayerBox,Pos.BOTTOM_CENTER);
         GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
-        GameplayArea.setAlignment(PassButton,Pos.CENTER);
+        GameplayArea.setAlignment(MuteBTN,Pos.CENTER_RIGHT);
         GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack,Update);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack,MuteBTN);
 
 
 
