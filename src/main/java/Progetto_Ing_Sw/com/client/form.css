@@ -1624,3 +1624,16 @@
     -fx-background-size: 400 400;
 }
 
+#MuteBTN{
+    -fx-background-image: url("GUI/MuteBTN.png");
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 200 200;
+}
+
+#VolumeBTN{
+    -fx-background-image: url("GUI/MuteBTN.png");
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 200 200;
+}
