@@ -3,6 +3,9 @@ package Progetto_Ing_Sw.com.server.Model;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+/**
+ * this class implements the diceBag, a bag that contains all the dice of the match, that are 90
+ */
 public class DiceBag {  //può essere una classe statica a meno che non si voglia implementare un server che gestisce più partite
                         //oppure si può usare pattern singleton
     private int numDiceRed;
@@ -14,6 +17,9 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
     private static DiceBag diceBag=new DiceBag();
 
 
+    /**
+     * this method adds the correct number of dice at the diceBag
+     */
     public DiceBag(){
         numDiceRed=18;
         numDiceBlue=18;
@@ -28,6 +34,10 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
     }*/
 
 
+    /**
+     * this method draws a single dice from the dice bag, checking that the color/value of dice remained is going to be respectful of the original rules
+     * @return
+     */
     public Dice diceDraw(){
         int color;
         while(true) {
@@ -57,7 +67,12 @@ public class DiceBag {  //può essere una classe statica a meno che non si vogli
         return new Dice(splittableRandom.nextInt(1,7), color);  //nextInt(x,y) ritorna valori interi n nell'intervallo x<=n<y, serve per avere il valore numerico del dado
     }
 
-public ArrayList<Dice> diceDraw(int numDiceToDraw){
+    /**
+     * this method draw an input-number of dice
+     * @param numDiceToDraw this is the number of dice that are going to be drafted
+     * @return a list of dice
+     */
+    public ArrayList<Dice> diceDraw(int numDiceToDraw){
         ArrayList<Dice> drawnDice=new ArrayList<>();
         for(;numDiceToDraw>0;numDiceToDraw--){
             drawnDice.add(diceDraw());
@@ -65,7 +80,12 @@ public ArrayList<Dice> diceDraw(int numDiceToDraw){
         return drawnDice;
 }
 
-public void reintroduceDice(Dice dice) throws IllegalDiceException{      //"Restituisce" il dado specificato nel senso che viene reinserito nel sacchetto
+    /**
+     * this method reintroduce a dice in the diceBag
+     * @param dice is the dice that is chosen to be reintroduced in the diceBag
+     * @throws IllegalDiceException it throws an exception if the dice is not existent
+     */
+    public void reintroduceDice(Dice dice) throws IllegalDiceException{      //"Restituisce" il dado specificato nel senso che viene reinserito nel sacchetto
         switch(dice.getColor()){
             case Color.RED:
                 if(numDiceRed<18) numDiceRed++; //Controllo il numero di dadi prima del reinserimento per evitare inconsistenze
