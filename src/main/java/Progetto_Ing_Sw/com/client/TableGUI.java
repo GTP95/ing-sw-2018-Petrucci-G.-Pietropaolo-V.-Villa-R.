@@ -67,6 +67,7 @@ public class TableGUI extends Stage{
     ClientDice DieToInsert;
     int Xindex=0, Yindex=0,NumPlayers;
     GridPane griglia, DieGrid;
+    MediaPlayer musicPlayer;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
 
@@ -74,7 +75,7 @@ public class TableGUI extends Stage{
      * This is where all the elements are built according to the GameBoard Card choosen in the @param
      * @param gameBoardCard
      */
-    TableGUI(ClientGameBoardCard gameBoardCard) {
+    TableGUI(ClientGameBoardCard gameBoardCard,MediaPlayer mediaPlayer) {
         this.setTitle("Sagrada Game");
         this.setWidth(1280);
         this.setHeight(720);
@@ -84,6 +85,7 @@ public class TableGUI extends Stage{
 
         ChoosenGameBoardCard = gameBoardCard;
 
+        musicPlayer=mediaPlayer;
 
         //INIZIO Gameplay Scene
         int rows = 4;
@@ -707,22 +709,42 @@ public class TableGUI extends Stage{
             LocalModel.getInstance().skipTurn();
         });
 
-        Button MuteBTN = new Button();
-        MuteBTN.setId("MuteBTN");
-        MuteBTN.setVisible(true);
-        MuteBTN.setOnAction(event -> {
+        //MUTE AND VOLUME BUTTONS
+        Button MuteBTN2 = new Button();
+        MuteBTN2.setId("MuteBTN");
+        MuteBTN2.setVisible(false);
+        MuteBTN2.setMinSize(100,100);
+        Button VolumeBTN2 = new Button();
+        VolumeBTN2.setId("VolumeBTN");
+        VolumeBTN2.setMinSize(100,100);
+        VolumeBTN2.setOnAction(event -> {
+            musicPlayer.setMute(true);
+            VolumeBTN2.setVisible(false);
+            MuteBTN2.setVisible(true);
 
-            //if (mediaPlayer.isMute()){MuteBTN.setVisible(false);}
         });
+        MuteBTN2.setOnAction(event -> {
+            musicPlayer.setMute(false);
+            MuteBTN2.setVisible(false);
+            VolumeBTN2.setVisible(true);
 
-        Button VolumeBTN = new Button();
-        VolumeBTN.setId("VolumeBTN");
-        VolumeBTN.setOnAction(event -> {
-
-            // if (!mediaPlayer.isMute()){VolumeBTN.setVisible(false);}
         });
+        if (musicPlayer.isMute()){
+            MuteBTN2.setVisible(true);
+            VolumeBTN2.setVisible(false);
+        }
+        else{
+            MuteBTN2.setVisible(false);
+            VolumeBTN2.setVisible(true);
+        }
 
-        //BorderPane per contenere tutti gli altri
+        StackPane MusicButton2 = new StackPane();
+        MusicButton2.setTranslateX(550);
+        MusicButton2.setPrefSize(100,100);
+        MusicButton2.getChildren().addAll(MuteBTN2,VolumeBTN2);
+
+
+        //StackPane che contiene tutto
         StackPane GameplayArea = new StackPane();
         GameplayArea.setId("GamemodeSelectionScreen");
         GameplayArea.setAlignment(WindowBoard,Pos.CENTER);;
@@ -735,11 +757,11 @@ public class TableGUI extends Stage{
         GameplayArea.setAlignment(RoundTrack,Pos.BOTTOM_LEFT);
         GameplayArea.setAlignment(ToolCardMenu,Pos.BOTTOM_RIGHT);
         GameplayArea.setAlignment(DraftPool,Pos.TOP_LEFT);
-        GameplayArea.setAlignment(MuteBTN,Pos.CENTER_RIGHT);
+        GameplayArea.setAlignment(MusicButton2,Pos.CENTER_RIGHT);
         GameplayArea.setAlignment(DiceCover,Pos.TOP_LEFT);
         GameplayArea.setAlignment(PublicObjectiveCardMenu,Pos.TOP_RIGHT);
         GameplayArea.setAlignment(CurrentPlayer,Pos.TOP_CENTER);
-        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack,MuteBTN);
+        GameplayArea.getChildren().addAll(OtherPlayerBox,CurrentPlayer,Tokens,Move,TimerLabel,PassButton,WindowBoard,PrivateObjectiveColor,PublicObjectiveCardMenu,ToolCardMenu,DraftPool,DiceCover,RoundTrack,MusicButton2);
 
 
 

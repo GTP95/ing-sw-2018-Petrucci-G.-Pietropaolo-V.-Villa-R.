@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
@@ -50,6 +51,7 @@ public class ChooseAWindow extends Stage {
     ClientGameBoardCard ChoosenGameboardCard;
     int ChoosenGrid;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
+    MediaPlayer musicplayer;
 
     /**
      * This method creates a GridPane given a GameBoard Card
@@ -126,7 +128,7 @@ public class ChooseAWindow extends Stage {
 
 
 
-    ChooseAWindow(){
+    ChooseAWindow(MediaPlayer mediaPlayer){
         this.setTitle("Choose a Window");
         //this.setMaxHeight(500);
         //this.setMaxWidth(500);
@@ -136,6 +138,7 @@ public class ChooseAWindow extends Stage {
         this.getIcons().add(windowIcon);
 
         ChoosenGrid=0;
+        musicplayer = mediaPlayer;
 
         LocalModel.getInstance().registerAsObserver(this);
 
@@ -408,7 +411,7 @@ public class ChooseAWindow extends Stage {
         Platform.runLater(()->{
             System.err.println("---------------------------------------------------------Start Table chiamata----------------------------------------------------------------------");
             close();
-            TableGUI tableGUI = new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard());
+            TableGUI tableGUI = new TableGUI(LocalModel.getInstance().getChoosenGameBoardCard(),musicplayer);
             tableGUI.updateTable();
             tableGUI.isNotYourTurn();
             LocalModel.getInstance().registerAsObserver(tableGUI);
