@@ -2,5 +2,5 @@
   "port":1025,
   "timerValue":10000,
   "timeout":30000,
-  "timerTurn":20
+  "timerTurn":60
 }
