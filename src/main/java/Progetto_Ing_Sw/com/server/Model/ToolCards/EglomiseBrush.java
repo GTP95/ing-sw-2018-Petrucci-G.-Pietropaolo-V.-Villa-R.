@@ -5,12 +5,9 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-/*
-Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di COLORE
-Devi rispettare tutte le altre restrizioni di piazzamento
-*/
-
-//TESTING fatto direttamente sulla classe GamePlayTest
+/**
+ * this class implements the Eglomise Brush toolCard
+ */
 public class EglomiseBrush extends Effect{
 
     private boolean localFirstUsage;
@@ -34,6 +31,18 @@ public class EglomiseBrush extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in thge game, is used to test the effect
+     * @param localBoard
+     * @param dice
+     * @param rowBefore
+     * @param columnBefore
+     * @param rowAfter
+     * @param columnAfter
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited after applying the effect
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());

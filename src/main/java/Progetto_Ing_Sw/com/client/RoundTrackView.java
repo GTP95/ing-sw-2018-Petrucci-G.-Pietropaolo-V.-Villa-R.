@@ -39,7 +39,6 @@ public class RoundTrackView extends Stage {
      * @param round
      */
     public void LabelToDiceCSS(ArrayList<Label> arrayListLabel,int round){
-        System.err.println("General Kenobi!");
             for (int i=0; i<arrayListLabel.size(); i++ ){
                 int LocalValue = LocalModel.getInstance().getRoundTrack().getDiceRemained(round-1).get(i).getValue();
                 int LocalColor = LocalModel.getInstance().getRoundTrack().getDiceRemained(round-1).get(i).getColor();
@@ -309,7 +308,6 @@ public class RoundTrackView extends Stage {
      */
     public void updateRoundTrack (){
         Platform.runLater(()-> {
-            System.err.println("Hello There!");
             for (int i = 1; i <= LocalModel.getInstance().getRoundNumber(); i++) {
                 switch (i) {
                     //case (10): LabelToDiceCSS(Round10Array,10);
@@ -330,7 +328,6 @@ public class RoundTrackView extends Stage {
                     case (2):
                         LabelToDiceCSS(Round2Array, 2);
                     case (1):
-                        System.err.println("You are a bold one!");
                         LabelToDiceCSS(Round1Array, 1);
                 }
             }

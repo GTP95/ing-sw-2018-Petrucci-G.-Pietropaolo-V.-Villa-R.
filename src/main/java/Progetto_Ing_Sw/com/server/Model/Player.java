@@ -5,7 +5,7 @@ import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
 import java.util.ArrayList;
 
 /**
- *
+ * this class implements the player that is going to play at Sagrada
  */
 public class Player{
    private String name;
@@ -74,6 +74,11 @@ public class Player{
         return drawnGameBoardCard;
     }
 
+    /**
+     * this method returns a GameBoardCard from the title
+     * @param title the title of the card chosen
+     * @return it returns the gameBoardCard
+     */
     public GameBoardCard getGameBoardCardFromTitle(String title){
         for(int counter=0; counter<drawnGameBoardCard.size();counter++){
             if(drawnGameBoardCard.get(counter).getTitle().equals(title)) return drawnGameBoardCard.get(counter);
@@ -90,6 +95,11 @@ public class Player{
         return socketClientHandler;
     }
 
+    /**
+     * this method is used to apply the use of a tool card; it decrements the favorTokens
+     * @param toolCard it returns the toolCard
+     * @throws NotEnoughFavorTokensException
+     */
     public void useToolCard(ToolCard toolCard) throws NotEnoughFavorTokensException { //per ora si limita a decrementare il numero di segnalini favore
         if(!toolCard.isFirstUsage() && favorTokens>=1) favorTokens--;
         else if(favorTokens>=2) favorTokens-=2; //ramo else, si finisce qui se non è il primo utilizzo della carta. Dunque il costo della carta è di due segnalini favore e bisogna controllare che il giocatore ce li abbia

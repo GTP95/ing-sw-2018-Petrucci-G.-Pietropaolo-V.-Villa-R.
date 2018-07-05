@@ -4,8 +4,11 @@ import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
-
-//TESTATA direttamente in GamePlayTest
+/**
+ * <h1>CorkBackedStraightedge</h1>
+ *  The class CorkBackedStraightedge implements the ToolCard CorkBackedStraightedge
+ *  @author Roberto Villa
+ */
 public class CorkBackedStraightedge extends Effect{
 
     private WindowBoard helpBoard;
@@ -34,6 +37,16 @@ public class CorkBackedStraightedge extends Effect{
     @Override
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in the game, only for testing
+     * @param localBoard
+     * @param dice
+     * @param row
+     * @param column
+     * @param favorTokensUsed
+     * @return it returns a windowboard edited
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());

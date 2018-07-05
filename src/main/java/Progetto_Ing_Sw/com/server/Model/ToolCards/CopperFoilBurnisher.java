@@ -39,15 +39,15 @@ public class CopperFoilBurnisher extends Effect{
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
     /**
-     * This method apply CopperFoilBurnisher's effect at the input-WindowBoard
-     * @param localBoard this parameter represents the input-WindowBoard where i have to apply the effect
-     * @param dice this parameter represents
-     * @param rowBefore this parameter represents
-     * @param columnBefore this parameter represents
-     * @param rowAfter this parameter represents
-     * @param columnAfter this parameter represents
-     * @param favorTokensUsed this parameter represents
-     * @return
+     * this method is not used in the game, only for testing
+     * @param localBoard
+     * @param dice
+     * @param rowBefore
+     * @param columnBefore
+     * @param rowAfter
+     * @param columnAfter
+     * @param favorTokensUsed
+     * @return it returns a windowboard edited by the effect
      * @throws PlaceDiceException
      */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int rowBefore, int columnBefore, int rowAfter, int columnAfter, int favorTokensUsed) throws PlaceDiceException {
