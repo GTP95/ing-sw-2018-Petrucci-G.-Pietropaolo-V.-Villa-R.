@@ -530,18 +530,25 @@ private ToolCard getToolCardFromTitle(String title){
 
     public void useRunningPliers(Player playerRequestingAction){
         getToolCardFromTitle("Running Pliers").setFirstUsage(true);
-        fixMirrorArrayBecauseOfRunningPliers(playerRequestingAction);
-        notifyOfToolCardUsage(playerRequestingAction);
+        if(currentPlayer<(mirrorArray.size()/2)){
+            fixMirrorArrayBecauseOfRunningPliers(playerRequestingAction);
+            notifyOfToolCardUsage(playerRequestingAction);
+        }
     }
 
     private void fixMirrorArrayBecauseOfRunningPliers(Player playerRequestingAction){
-        int index=currentPlayer++;
-        mirrorArray.add(index, playerRequestingAction);
-        index++;    //controllo a partire dalla posizione successiva dell'array
-        for(;index<mirrorArray.size();index++){
-            if(mirrorArray.get(index).equals(playerRequestingAction)) mirrorArray.set(index, null);
+        Player RunningPlayer=playerRequestingAction;
+        Player RunnedPlayer=mirrorArray.get(currentPlayer+1);
+
+        mirrorArray.remove(currentPlayer+1);
+        mirrorArray.add(currentPlayer+1, RunningPlayer);
+
+        for(int i=currentPlayer+2;i<mirrorArray.size();i++){
+            if(mirrorArray.get(i).equals(RunningPlayer)){
+                mirrorArray.remove(i);
+                mirrorArray.add(i, RunnedPlayer);
+            }
         }
-        mirrorArray.removeAll(Collections.singleton(null));
-    }
+}
 }
 
