@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,15 +32,51 @@ import java.util.ArrayList;
 public class MultiplayerGUI extends Stage {
     Scene ChooseConnectionScene,LobbyScene;
     Label Player1Label,Player2Label,Player3Label,Player4Label,TimerLabel,Player1BTN, Player2BTN, Player3BTN,Player4BTN;
+    MediaPlayer musicPlayer;
 
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
 
 
-    MultiplayerGUI(){
+    MultiplayerGUI(MediaPlayer mediaPlayer){
         this.setTitle("Sagrada - Multiplayer");
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
         this.getIcons().add(windowIcon);
+
+        musicPlayer = mediaPlayer;
+        //MUTE AND VOLUME BUTTONS
+        Button MuteBTN = new Button();
+        MuteBTN.setId("MuteBTN");
+        MuteBTN.setMinSize(100,100);
+        Button VolumeBTN = new Button();
+        VolumeBTN.setId("VolumeBTN");
+        VolumeBTN.setMinSize(100,100);
+        VolumeBTN.setOnAction(event -> {
+            musicPlayer.setMute(true);
+            VolumeBTN.setVisible(false);
+            MuteBTN.setVisible(true);
+        });
+        MuteBTN.setOnAction(event -> {
+            musicPlayer.setMute(false);
+            MuteBTN.setVisible(false);
+            VolumeBTN.setVisible(true);
+        });
+
+        if (musicPlayer.isMute()){
+            MuteBTN.setVisible(true);
+            VolumeBTN.setVisible(false);
+        }
+        else{
+            MuteBTN.setVisible(false);
+            VolumeBTN.setVisible(true);
+        }
+
+        StackPane MusicButton = new StackPane();
+        MusicButton.setTranslateY(300);
+        MusicButton.setTranslateX(200);
+        MusicButton.setPrefSize(100,100);
+        MusicButton.getChildren().addAll(MuteBTN,VolumeBTN);
+
 
         LocalModel.getInstance().registerAsObserver(this);
 
@@ -66,7 +103,7 @@ public class MultiplayerGUI extends Stage {
 
 
 
-        RMISocket.getChildren().addAll(socketBTN,RMIBTN);
+        RMISocket.getChildren().addAll(socketBTN,RMIBTN,MusicButton);
 
 
 
@@ -139,13 +176,47 @@ public class MultiplayerGUI extends Stage {
         LobbyLabel.setPrefSize(200,100);
         LobbyLabel.setTranslateY(-330);
 
+        //MUTE AND VOLUME BUTTONS
+        Button MuteBTN2 = new Button();
+        MuteBTN2.setId("MuteBTN");
+        MuteBTN2.setVisible(false);
+        MuteBTN2.setMinSize(100,100);
+        Button VolumeBTN2 = new Button();
+        VolumeBTN2.setId("VolumeBTN");
+        VolumeBTN2.setMinSize(100,100);
+        VolumeBTN2.setOnAction(event -> {
+            mediaPlayer.setMute(true);
+            VolumeBTN2.setVisible(false);
+            MuteBTN2.setVisible(true);
+
+        });
+        MuteBTN2.setOnAction(event -> {
+            mediaPlayer.setMute(false);
+            MuteBTN2.setVisible(false);
+            VolumeBTN2.setVisible(true);
+
+        });
+        if (musicPlayer.isMute()){
+            MuteBTN2.setVisible(true);
+            VolumeBTN2.setVisible(false);
+        }
+        else{
+            MuteBTN2.setVisible(false);
+            VolumeBTN2.setVisible(true);
+        }
+
+        StackPane MusicButton2 = new StackPane();
+        MusicButton2.setTranslateY(300);
+        MusicButton2.setTranslateX(550);
+        MusicButton2.setPrefSize(100,100);
+        MusicButton2.getChildren().addAll(MuteBTN2,VolumeBTN2);
 
 
 
         //StackPane che contiene tutti i nodi
         StackPane LobbyPane = new StackPane();
         LobbyPane.setId("GamemodeSelectionScreen");
-        LobbyPane.getChildren().addAll(Players,TimerLabel,LobbyLabel);
+        LobbyPane.getChildren().addAll(Players,TimerLabel,LobbyLabel,MusicButton2);
         LobbyPane.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
 
         LobbyScene= new Scene(LobbyPane,1280,720);
@@ -168,7 +239,7 @@ public class MultiplayerGUI extends Stage {
     public void StartGame(){
         Platform.runLater(() ->{
             close();
-            new ChooseAWindow();
+            new ChooseAWindow(musicPlayer);
         });
     }
 
