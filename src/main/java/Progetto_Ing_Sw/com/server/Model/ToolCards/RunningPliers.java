@@ -5,6 +5,10 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * this class implements the RunningPliers toolCard
+ */
+
 public class RunningPliers extends Effect{
 
     private Table table = Table.getOurInstance();
@@ -29,6 +33,19 @@ public class RunningPliers extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is used only for testing
+     * @param localBoard
+     * @param dice1
+     * @param dice2
+     * @param row1
+     * @param column1
+     * @param row2
+     * @param column2
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited by the effect
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice1, Dice dice2, int row1, int column1, int row2, int column2, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice1 = new Dice(dice1.getValue(),dice1.getColor());

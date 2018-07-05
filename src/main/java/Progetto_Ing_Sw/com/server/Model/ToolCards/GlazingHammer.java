@@ -5,6 +5,10 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 import java.io.FileNotFoundException;
 import java.util.SplittableRandom;
 
+/**
+ * this class implements the GlazingHammer toolCard
+ */
+
 public class GlazingHammer extends Effect{
 
     private Table table = Table.getOurInstance();
@@ -29,6 +33,10 @@ public class GlazingHammer extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is used only for testing, not in the game
+     * @param favorTokensUsed
+     */
     public void applyEffect(int favorTokensUsed){
 
         if(firstUsage==false){

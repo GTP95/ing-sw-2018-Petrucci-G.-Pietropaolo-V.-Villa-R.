@@ -4,9 +4,9 @@ import Progetto_Ing_Sw.com.server.Model.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
-
-//TODO FARE TEST DI QUESTA CARTA
-
+/**
+ * this class implements the LensCutter toolCard
+ */
 public class LensCutter extends Effect{
 
     private RoundTrack roundTrack = RoundTrack.getInstance();
@@ -31,6 +31,17 @@ public class LensCutter extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * thi method is used only for testing, not in the game
+     * @param localBoard
+     * @param dice
+     * @param roundTrackDice
+     * @param row
+     * @param column
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited by the effect
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, Dice roundTrackDice, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());
