@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class SocketClient implements Runnable{
-    private Socket socket;  //TODO: rendere final se decido di non interrompere la connessione in caso di username non valido, lasciare così altrimenti
+    private Socket socket;
     private String username;
     PrintWriter out;
     BufferedReader in;
@@ -46,7 +46,7 @@ public class SocketClient implements Runnable{
         int token=ClientSettings.getInstance().getToken();
         out.println(username+"%"+token);
         System.out.println("Inviato "+username+" come username");
-        while (true) {      //TODO:ricevere notifica chiusura GUI ed usarla come condizione
+        while (true) {
             try {
                 receiveMessage();
                 tryToSendMessage();
@@ -107,14 +107,14 @@ public class SocketClient implements Runnable{
                 break;
             case "Username already in use":
                // localModel.setUsernameIsCorrect(false);
-                throw new InvalidUsernameException("Username already in use");  //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+                throw new InvalidUsernameException("Username already in use");
             case "Max number of players exceeded":
-                throw new TooManyPlayersException();    //TODO: GUI
+                throw new TooManyPlayersException();
                 //Non solo non serve mettere un break ma viene addirittura segnalato come errore perchè viene lanciata un'eccezione dunque il break non verrebbe mai eseguito
             case "Invalid username: username cannot be null":
-                throw new InvalidUsernameException("Invalid username: username cannot be null");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+                throw new InvalidUsernameException("Invalid username: username cannot be null");
             case "Invalid username: empty username not allowed":
-                throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+                throw new InvalidUsernameException("Invalid username: empty username not allowed");
             case "Inactivity notification":
                 throw new InactivityException(messageFields[1]);
             case "Game started!":

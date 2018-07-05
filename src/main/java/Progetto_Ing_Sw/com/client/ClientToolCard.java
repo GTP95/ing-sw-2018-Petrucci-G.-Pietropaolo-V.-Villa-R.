@@ -11,7 +11,7 @@ public class ClientToolCard extends Card {
     private boolean firstUsage;
     private String color; //Single Player Only
     private String Image;
-    //TODO EFFECT
+
 
     public ClientToolCard(String title, String description, String info, int ID, boolean firstUsage, String color) {
         this.title = title;
