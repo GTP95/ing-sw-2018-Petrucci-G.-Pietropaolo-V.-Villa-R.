@@ -1,6 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
-import Progetto_Ing_Sw.com.client.ClientToolCards.*;
+
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -22,7 +22,6 @@ public  class LocalModel {
     private MultiplayerGUI multiplayerGUIobserver;
     private ArrayList<ClientDice> drawnDice;
     private ArrayList<ClientToolCard> drawnToolCards;
-    private ArrayList<ClientEffect> drawnToolCardsWithEffect;
     private ArrayList<ClientPublicObjectiveCard> drawnPublicObjectiveCards;
     private TableGUI tableGUIobserver;
     private ChooseAWindow chooseAWindowobserver;
@@ -53,13 +52,12 @@ public  class LocalModel {
     private LocalModel(){
 
         sendDataToServer=false;
-        exceptions=new ArrayBlockingQueue<>(10); //TODO La coda conterrà al massimo 3 elementi. Probabilmente sarebbe bastato 1, ma così si evitano errori se arriva un'altra eccezione prima che la GUI abbia consumato quella presente nella coda. Il numero 3 è basato sul tipico numero di azioni in un turno.
+        exceptions=new ArrayBlockingQueue<>(10);
         windowBoard=null;
         immediatelyUpdateGUI=false;
         currentPlayerName="NotAValidPlayerName";    //valore di default per comodità della GUI
         firstWindowBoardsReceived=true;
         sendDiceToServer=false;
-        drawnToolCardsWithEffect=new ArrayList<>();
         useFluxBrush=false;
         useGlazingHammers=false;
         useFluxRemover=false;
