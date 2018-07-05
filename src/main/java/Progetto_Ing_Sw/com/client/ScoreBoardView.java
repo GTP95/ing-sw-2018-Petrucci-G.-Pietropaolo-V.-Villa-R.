@@ -105,10 +105,10 @@ public class ScoreBoardView extends Stage {
         ScoreBoardVBox.setTranslateX(360);
 
         if (winner){
-            ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouLose);
+            ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouWin);
         }
 
-        else {ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouWin);}
+        else {ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouLose);}
 
         ScoreBoard = new Scene(ScoreBoardVBox,1280,720);
         ScoreBoard.setFill(Color.rgb(0, 0, 0, 0.75));
