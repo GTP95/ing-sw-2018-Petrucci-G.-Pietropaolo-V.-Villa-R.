@@ -17,7 +17,6 @@ public class ColorDiagonals {
     //questa versione funziona solo con matrici 4X%
     //-------import del costo di primo uso
     private int localVictoryPoints;
-    private int [] diagA1;
     {try {
         localVictoryPoints = JSONCreator.parseIntFieldFromFile("Resources/Cards/PublicObjectiveCards/ColorVariety.json","victoryPoints" );
     } catch (FileNotFoundException e) {

@@ -21,7 +21,7 @@ public class SocketClientHandler implements Runnable {
     public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
-    private Timer countdown; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
+    private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
     private boolean otherPlayersWindowBoardsSent;
 
     public SocketClientHandler(Socket clientSocket){
@@ -95,8 +95,8 @@ public class SocketClientHandler implements Runnable {
                     if(ourThread.isInterrupted()) updateTable();
 
                  }
-
-                 System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
+                 sendControlMessage("Game ended");
+                 System.err.println("SE LEGGI QUI IL GIOCO È FINITO "+ourThread.getName());
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -392,6 +392,24 @@ public class SocketClientHandler implements Runnable {
         if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
             isMyTurn=true;
             sendControlMessage("It's your turn now");
+            timerTurn=new Timer();
+            timerTurn.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    /*int countdownValue=Lobby.getInstance().countdownValue;
+                    if(countdownValue>=0) sendControlMessage("CountdownValue&"+countdownValue);
+                    else countdown.cancel();*/
+                    int turnCountDownValue=table.getTurnCountDown();
+                    if (turnCountDownValue>0){
+                        sendControlMessage("Your turn will end in&"+turnCountDownValue);
+                    }
+                    else{
+                        table.changeCurrentPlayer();
+                        sendControlMessage("Your turn just ended");
+                        isMyTurn=false;
+                    }
+                }
+            },1000,1000);   //invia ogni secondo il countdown di fine turno;
         }
     }
 
