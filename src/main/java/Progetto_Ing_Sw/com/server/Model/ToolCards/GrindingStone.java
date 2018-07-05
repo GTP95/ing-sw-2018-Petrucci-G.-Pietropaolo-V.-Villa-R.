@@ -5,7 +5,9 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
-//TESTATA direttamente su GamePlayTest
+/**
+ * this class implements the GrindingStone toolCard
+ */
 public class GrindingStone extends Effect{
 
     private boolean localFirstUsage;
@@ -27,6 +29,16 @@ public class GrindingStone extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in the game, only for testing
+     * @param localBoard
+     * @param dice
+     * @param row
+     * @param column
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, int row, int column, int favorTokensUsed)throws PlaceDiceException {
 
         Dice localDice = new Dice(dice.getValue(),dice.getColor());

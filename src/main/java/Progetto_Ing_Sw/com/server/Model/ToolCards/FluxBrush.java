@@ -7,6 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+/**
+ * this class implements the FluxBrush toolCard
+ */
+
 public class FluxBrush extends Effect{
 
     private Table table = Table.getOurInstance();
@@ -29,6 +33,16 @@ public class FluxBrush extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in the game, but it's used for testing
+     * @param localBoard
+     * @param diceDrawn
+     * @param row
+     * @param column
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited after applying the effect
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, Dice diceDrawn, int row, int column, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localdice = new Dice(diceDrawn.getValue(),diceDrawn.getColor());

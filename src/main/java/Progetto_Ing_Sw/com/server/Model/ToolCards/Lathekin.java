@@ -5,6 +5,10 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * this class implements the Lathekin toolCard
+ */
+
 //TESTING fatto direttamente sulla classe GamePlayTest
 public class Lathekin extends Effect{
 
@@ -27,6 +31,23 @@ public class Lathekin extends Effect{
     public boolean isFirstUsage() {return firstUsage;}
     public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in game, only for testing
+     * @param localBoard
+     * @param rowBefore1
+     * @param columnBefore1
+     * @param rowBefore2
+     * @param columnBefore2
+     * @param rowAfter1
+     * @param columnAfter1
+     * @param rowAfter2
+     * @param columnAfter2
+     * @param dice1
+     * @param dice2
+     * @param favorTokensUsed
+     * @return it returns the windowBoard deited by the effect
+     * @throws PlaceDiceException
+     */
     public WindowBoard applyEffect(WindowBoard localBoard, int rowBefore1, int columnBefore1, int rowBefore2, int columnBefore2, int rowAfter1, int columnAfter1, int rowAfter2, int columnAfter2, Dice dice1, Dice dice2, int favorTokensUsed) throws PlaceDiceException {
 
         Dice localdice1 = new Dice(dice1.getValue(),dice1.getColor());

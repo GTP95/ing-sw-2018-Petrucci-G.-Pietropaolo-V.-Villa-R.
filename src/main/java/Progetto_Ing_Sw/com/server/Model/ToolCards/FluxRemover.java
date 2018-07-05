@@ -5,6 +5,10 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * this class implements the FluxRemover toolCard
+ */
+
 public class FluxRemover extends Effect{
 
         private boolean localFirstUsage;
@@ -27,6 +31,18 @@ public class FluxRemover extends Effect{
         public boolean isFirstUsage() {return firstUsage;}
         public void setFirstUsage(boolean firstUsage) {this.firstUsage = firstUsage;}
 
+    /**
+     * this method is not used in the game, only for testing
+     * @param localBoard
+     * @param dice
+     * @param diceBag
+     * @param row
+     * @param column
+     * @param valueRequested
+     * @param favorTokensUsed
+     * @return it returns the windowBoard edited after using the toolCard
+     * @throws PlaceDiceException
+     */
         public WindowBoard applyEffect(WindowBoard localBoard, Dice dice, DiceBag diceBag, int row, int column, int valueRequested, int favorTokensUsed) throws PlaceDiceException {
 
             Dice localDice = new Dice(dice.getValue(),dice.getColor());
