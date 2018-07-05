@@ -1,6 +1,7 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.client.ClientToolCards.*;
+import Progetto_Ing_Sw.com.server.Model.Player;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -645,7 +646,7 @@ public  class LocalModel {
 
 
     /**
-     * Gets data to use  tool card "Grozing Pliers" and notifies SocketClientHandler
+     * sets data to use  tool card "Grozing Pliers" and notifies SocketClientHandler
      * @param diceToModify dice to apply toolcard's effect
      * @param command "UP" or "DOWN" depending on the fact you wish to increment or decrement the dice's value
      */
@@ -682,7 +683,7 @@ public  class LocalModel {
     }
 
     /**
-     * Gets data to use  tool card Grinding Stone and notifies SocketClientHandler
+     * Sets data to use  tool card Grinding Stone and notifies SocketClientHandler
      * @param dice dice to use with Grinding Stone
      */
     public void useGrindingStone(ClientDice dice){
@@ -692,7 +693,7 @@ public  class LocalModel {
     }
 
     /**
-     * Gets data to use  tool card "Flux Brush" and notifies SocketClientHandler
+     * Sets data to use  tool card "Flux Brush" and notifies SocketClientHandler
      * @param dice dice to use with Flux brush
      */
     public void useFluxBrush(ClientDice dice){
@@ -710,7 +711,7 @@ public  class LocalModel {
     }
 
     /**
-     * Gets data to use  tool card "Flux Remover" and notifies SocketClientHandler
+     * Sets data to use  tool card "Flux Remover" and notifies SocketClientHandler
      * @param diceToRemove
      */
     public void useFluxRemover(ClientDice diceToRemove){
@@ -739,7 +740,7 @@ public  class LocalModel {
     }
 
     /**
-     * Gets data to use  tool card "Flux Brush" and notifies SocketClientHandler
+     * Sets data to use  tool card "Flux Brush" and notifies SocketClientHandler
      * @param oldRow
      * @param oldColumn
      * @param newRow
@@ -754,6 +755,13 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Sets data to use  tool card "Copper Foil Burnisher" and notifies SocketClientHandler
+     * @param oldRow the row number in which the dice is located
+     * @param oldColumn the column number in which the dice is located
+     * @param newRow the row number in which the dice will be moved
+     * @param newColumn the column number in which the dice will be moved
+     */
     public void useCopperFoilBurnisher(int oldRow, int oldColumn, int newRow, int newColumn){
         this.oldRow=oldRow;
         this.oldColumn=oldColumn;
@@ -763,6 +771,12 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Sets data to use  tool card "Cork Backed Straight Edge" and notifies SocketClientHandler
+     * @param dice the dice to place
+     * @param row row number where to place the dice
+     * @param column column number where to place the dice
+     */
     public void useCorkBackedStraightEdge(ClientDice dice, int row, int column){
         this.newRow=row;
         this.newColumn=column;
@@ -771,6 +785,17 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Sets data to use  tool card "Lathekin" and notifies SocketClientHandler
+     * @param oldRow1 the row number in which the first dice is located
+     * @param oldColumn1 the column number in which the first dice is located
+     * @param newRow1 the row number in which the first dice will be located
+     * @param newColumn1 the column number in which the first dice will be located
+     * @param oldRow2 the row number in which the second dice is located
+     * @param oldColumn2 the column number in which the second dice is located
+     * @param newRow2 the row number in which the second dice will be located
+     * @param newColumn2 the column number in which the second dice will be located
+     */
     public void useLathekin(int oldRow1, int oldColumn1, int newRow1, int newColumn1, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
 
         this.oldRow=oldRow1;
@@ -787,6 +812,11 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     *
+     * @param roundTrackDice
+     * @param draftpoolDice
+     */
     public void useLensCutter(ClientDice roundTrackDice, ClientDice draftpoolDice){
         diceToUseWithEffect=roundTrackDice;
         diceToUseWithEffect2=draftpoolDice;
@@ -851,5 +881,12 @@ public  class LocalModel {
 
     public int getColorToUseWithEffect(){
         return color;
+    }
+
+    public int getPlayerIndexFromName(String name){
+        for (ClientPlayer player:clientPlayerArrayList){
+            if (player.getName().equals(name)) return clientPlayerArrayList.indexOf(player);
+        }
+        return -1;
     }
 }
