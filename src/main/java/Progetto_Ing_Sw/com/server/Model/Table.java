@@ -12,6 +12,12 @@ import java.util.Collections;
 import java.util.SplittableRandom;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This is the main class of the game, it holds and uses references to all model's and controller's classes
+ * From a logic perspective, this class represents the table on which you are playing the game, and as such it has
+ * references to all the cards, the dice, the players and the socketClientHandlers communicating with the players
+ * @author Giacomo Tommaso Petrucci
+ */
 public class Table {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
@@ -85,6 +91,10 @@ public class Table {
         numOfSetWindowBoards = 0;
     }
 
+    /**
+     * 
+     * @return
+     */
     public static CopyOnWriteArrayList<Player> getPlayers() {
         /*ArrayList<Player> playersToReturn;
         playersToReturn=(ArrayList<Player>) players.clone();*/
@@ -518,8 +528,20 @@ private ToolCard getToolCardFromTitle(String title){
 
     }
 
-    private void removePlayerFromMirrorArrayList(Player player){    //fa saltare il turno successivo al giocatore
-        mirrorArray.removeAll(Collections.singleton(player));
+    public void useRunningPliers(Player playerRequestingAction){
+        getToolCardFromTitle("Running Pliers").setFirstUsage(true);
+        fixMirrorArrayBecauseOfRunningPliers(playerRequestingAction);
+        notifyOfToolCardUsage(playerRequestingAction);
+    }
+
+    private void fixMirrorArrayBecauseOfRunningPliers(Player playerRequestingAction){
+        int index=currentPlayer++;
+        mirrorArray.add(index, playerRequestingAction);
+        index++;    //controllo a partire dalla posizione successiva dell'array
+        for(;index<mirrorArray.size();index++){
+            if(mirrorArray.get(index).equals(playerRequestingAction)) mirrorArray.set(index, null);
+        }
+        mirrorArray.removeAll(Collections.singleton(null));
     }
 }
 

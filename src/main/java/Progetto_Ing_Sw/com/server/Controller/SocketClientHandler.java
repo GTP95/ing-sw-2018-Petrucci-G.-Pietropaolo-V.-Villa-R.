@@ -341,6 +341,10 @@ public class SocketClientHandler implements Runnable {
                 table.useToolCard("Tap Wheel", myPlayer);
                 table.useTapWheel(color, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2, myPlayer);
                 break;
+            case "Use Running Pliers":
+                table.useToolCard("Running Pliers", myPlayer);
+                table.useRunningPliers(myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
