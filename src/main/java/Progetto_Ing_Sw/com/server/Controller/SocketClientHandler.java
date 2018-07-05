@@ -11,7 +11,8 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 /**
  * @author Giacomo Tommaso Petrucci
- * This class is in charge
+ * This class is in charge of communicating with the clients, a different object is created for each client by
+ * LaunchServer
  */
 public class SocketClientHandler implements Runnable {
     private Socket clientSocket;
@@ -29,6 +30,10 @@ public class SocketClientHandler implements Runnable {
     private boolean otherPlayersWindowBoardsSent, isWinner;
 
 
+    /**
+     *
+     * @param clientSocket reference to the Socket of the client
+     */
     public SocketClientHandler(Socket clientSocket){
         this.clientSocket=clientSocket; //socket su cui è in ascolto il client
         countdown=new Timer();
