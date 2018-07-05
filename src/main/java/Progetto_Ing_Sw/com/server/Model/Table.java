@@ -254,7 +254,7 @@ private void prepareForNextRound() {     //Cambia l'ordine di gioco dei giocator
     currentPlayer = 0;
     for (Dice dice : drawnDice)
         RoundTrack.getInstance().addRemainedDice(RoundTrack.getInstance().getRoundNumber(), dice);   //aggiunge i dadi avanzati alla roundtrack
-    if(RoundTrack.getInstance().incrementRound()>10){
+    if(RoundTrack.getInstance().incrementRound()==10){
         endGame();
         return;
     }
@@ -603,5 +603,16 @@ private ToolCard getToolCardFromTitle(String title){
             notifyAllSocketClientHandlers();
         }
     }
+
+   /* private void findWinner{
+        ArrayList<Integer> totalPoints=new ArrayList<>();
+        ArrayList<Integer> tempArray;
+        Integer tempTotal=
+        for(Player player:players){
+            for (Integer integer : player.getVictoryPoints()){
+
+            }
+        }
+    }*/
 }
 

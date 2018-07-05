@@ -58,7 +58,7 @@ public class RoundTrack {   //Implementata come singleton
      * this method increments the number of round; if is > 10, this method end the game
      */
     public int incrementRound(){
-        if(roundNumber<10) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
+        if(roundNumber<11) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
         return roundNumber;
     }
 
