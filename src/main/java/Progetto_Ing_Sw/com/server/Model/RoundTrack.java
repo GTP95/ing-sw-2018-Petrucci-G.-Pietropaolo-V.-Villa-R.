@@ -38,6 +38,7 @@ public class RoundTrack {   //Implementata come singleton
 
     public void incrementRound(){
         if(roundNumber<10) roundNumber++;   //Ci sono al massimo 10 round, mitiga l'effetto di eventuali bug
+        else Table.getOurInstance().endGame();
     }
 
     public Dice swapDice(Dice diceToPlace, Dice diceToGet) throws IllegalDiceException {    //Scambia uno dei dadi pescati con uno presente sulla roundTrack, usato per implementare una toolCard

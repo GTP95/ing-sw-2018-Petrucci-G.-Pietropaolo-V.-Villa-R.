@@ -954,4 +954,8 @@ public  class LocalModel {
     public void endGame(){
 
     }
+
+    public boolean isActive(String playerName){
+        return getPlayerFromName(playerName).isActive();
+    }
 }

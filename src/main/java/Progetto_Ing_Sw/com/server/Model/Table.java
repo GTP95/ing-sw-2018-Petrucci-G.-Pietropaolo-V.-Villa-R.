@@ -56,7 +56,7 @@ public class Table {
 
     /**
      * 
-     * @return
+     * @return the CopyOnWriteArrayList containig the players
      */
     public static CopyOnWriteArrayList<Player> getPlayers() {
         /*ArrayList<Player> playersToReturn;
@@ -64,6 +64,12 @@ public class Table {
         return players;
     }
 
+    /**
+     * Returns a Player object given it's name
+     * @param name the name of the player to return
+     * @return player with given name
+     * @throws InvalidUsernameException
+     */
     public Player getPlayerFromName(String name) throws InvalidUsernameException {
         for(Player player : players){
             if(player.getName().equals(name)){
@@ -73,6 +79,10 @@ public class Table {
         throw new InvalidUsernameException("The player you're looking for doesn't exists!");
     }
 
+    /**
+     * Returns the player playing the current turn
+     * @return Player object representing who is playing this turn
+     */
     public Player getActivePlayer(){
        /* ArrayList<Player> clonePlayers=getPlayers();
         Player selectedPlayer = clonePlayers.get(currentPlayer);

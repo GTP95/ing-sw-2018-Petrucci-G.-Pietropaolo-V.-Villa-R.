@@ -113,5 +113,13 @@ public class Player{
     public int getToken() {
         return token;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
 

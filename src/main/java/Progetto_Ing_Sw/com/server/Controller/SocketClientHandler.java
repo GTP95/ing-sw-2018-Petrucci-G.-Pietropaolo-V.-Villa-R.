@@ -407,6 +407,7 @@ public class SocketClientHandler implements Runnable {
                         table.changeCurrentPlayer();
                         sendControlMessage("Your turn just ended");
                         isMyTurn=false;
+                        timerTurn.cancel();
                     }
                 }
             },1000,1000);   //invia ogni secondo il countdown di fine turno;
@@ -444,6 +445,7 @@ public class SocketClientHandler implements Runnable {
         String[] messageFields=message.split("&");
        switch(messageFields[0]){
            case "End my turn":
+               timerTurn.cancel();
                table.changeCurrentPlayer();
                sendControlMessage("Your turn just ended");
                isMyTurn=false;
