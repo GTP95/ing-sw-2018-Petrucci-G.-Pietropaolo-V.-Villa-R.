@@ -517,5 +517,9 @@ private ToolCard getToolCardFromTitle(String title){
         else throw new IllegalDiceException("The two dice must have the same color choosen from the round track!");
 
     }
+
+    private void removePlayerFromMirrorArrayList(Player player){    //fa saltare il turno successivo al giocatore
+        mirrorArray.removeAll(Collections.singleton(player));
+    }
 }
 
