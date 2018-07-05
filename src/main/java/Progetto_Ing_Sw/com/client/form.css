@@ -480,6 +480,22 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
 }
 
+#DefaultButtonDisconneted{
+    -fx-text-fill: grey;
+    -fx-font: 25 "Castellar";
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 250 250;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0, 0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #de0e00 0%, #950024 100%),
+    #950024,
+    #950500,
+    radial-gradient(center 50% 50%, radius 100%, #950024, #de0e00);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 4, 0, 0, 1);
+}
+
 
 #DefaultButtonBlack{
     -fx-text-fill: white;
@@ -899,6 +915,16 @@
 }
 
 #Round10{
+    -fx-background-image: url("GUI/RoundTrack/TrackBoard10.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 150 150;
+    -fx-border-insets: -7 -7 -7 -7;
+    -fx-border-width:  7 7 7 7;
+    -fx-border-radius: 10 10 10 10;
+    -fx-border-color: black;
+}
+
+#Round11{
     -fx-background-image: url("GUI/RoundTrack/TrackBoard10.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 150 150;

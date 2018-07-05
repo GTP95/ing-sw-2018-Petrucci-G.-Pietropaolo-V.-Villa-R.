@@ -739,8 +739,9 @@ public class TableGUI extends Stage{
         }
 
         StackPane MusicButton2 = new StackPane();
-        MusicButton2.setTranslateX(550);
-        MusicButton2.setPrefSize(100,100);
+        MusicButton2.setTranslateX(0);
+        MusicButton2.setMaxSize(100,100);
+        MusicButton2.setMinSize(100,100);
         MusicButton2.getChildren().addAll(MuteBTN2,VolumeBTN2);
 
 
@@ -914,7 +915,6 @@ public class TableGUI extends Stage{
      * This method updates the GUI when it is NOT the turn of the player to prevent him from clicking on any Dice,
      * move, pass, or accessing the tool cards
      */
-
     public void isNotYourTurn(){
         System.err.println("------------------------------------------NON E' IL TUO TURNO----------------------------------------------------------");
         ToolCard1BTN.setDisable(true);
@@ -930,8 +930,8 @@ public class TableGUI extends Stage{
         for(Button button : OtherPlayersList){
             if (button.getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
                 button.setId("DefaultButtonActivated");}
-                else{
-                    button.setId("DefaultButton");
+            else{
+                button.setId("DefaultButton");
             }
         }
         System.err.println("----------------------------------------------------------------FINITO IS NOT YOUR TURN-----------------------------------------------------------------------");

@@ -73,8 +73,8 @@ public class MultiplayerGUI extends Stage {
 
         StackPane MusicButton = new StackPane();
         MusicButton.setTranslateY(300);
-        MusicButton.setTranslateX(200);
-        MusicButton.setPrefSize(100,100);
+        MusicButton.setMaxSize(100,100);
+        MusicButton.setMinSize(100,100);
         MusicButton.getChildren().addAll(MuteBTN,VolumeBTN);
 
 
@@ -84,7 +84,6 @@ public class MultiplayerGUI extends Stage {
         HBox RMISocket = new HBox(80);
         RMISocket.setId("GamemodeSelectionScreen");
         RMISocket.setPrefSize(1280,720);
-        RMISocket.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         RMISocket.setAlignment(Pos.CENTER);
 
         Button socketBTN = new Button("SOCKET");socketBTN.setId("SocketBTN");socketBTN.setPrefSize(250,250);
@@ -99,16 +98,21 @@ public class MultiplayerGUI extends Stage {
         Button RMIBTN = new Button("RMI");
         RMIBTN.setId("RMIBTN");
         RMIBTN.setPrefSize(250,250);
-        //TODO: Configurare la parte RMI all'attivazione
-
-
-
-        RMISocket.getChildren().addAll(socketBTN,RMIBTN,MusicButton);
 
 
 
 
-        ChooseConnectionScene= new Scene(RMISocket, 1280,720);
+        RMISocket.getChildren().addAll(socketBTN,RMIBTN);
+
+        StackPane Connection = new StackPane();
+        Connection.setAlignment(MusicButton,Pos.CENTER_RIGHT);
+        Connection.getChildren().addAll(RMISocket,MusicButton);
+
+
+
+
+        ChooseConnectionScene= new Scene(Connection, 1280,720);
+        ChooseConnectionScene.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());
         //FINE Choose Connection Scene
 
 
@@ -208,7 +212,8 @@ public class MultiplayerGUI extends Stage {
         StackPane MusicButton2 = new StackPane();
         MusicButton2.setTranslateY(300);
         MusicButton2.setTranslateX(550);
-        MusicButton2.setPrefSize(100,100);
+        MusicButton2.setMaxSize(100,100);
+        MusicButton2.setMinSize(100,100);
         MusicButton2.getChildren().addAll(MuteBTN2,VolumeBTN2);
 
 
