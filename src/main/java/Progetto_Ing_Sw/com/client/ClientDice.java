@@ -60,7 +60,7 @@ public class ClientDice {
     }
 
     @Override
-    public int hashCode() {     //generata automaticamente da inetllij TODO: chiedere se è da togliere
+    public int hashCode() {     //generata automaticamente da inetllij
 
         return Objects.hash(value, color);
     }

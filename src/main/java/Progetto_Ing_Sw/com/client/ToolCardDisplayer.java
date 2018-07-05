@@ -281,7 +281,6 @@ public class ToolCardDisplayer extends Stage {
             Pay1Icon.setVisible(false);
             Pay2Icon.setVisible(true);
             Pay2Icon.setOnAction(event -> {
-                //TODO CONTROLLO RISORSE
                 Pay2Icon.setVisible(false);
                 GoBack.setVisible(false);
                 SceneTransition.play();
@@ -295,7 +294,7 @@ public class ToolCardDisplayer extends Stage {
             Pay1Icon.setVisible(true);
             Pay2Icon.setVisible(false);
             Pay1Icon.setOnAction(event -> {
-                //TODO CONTROLLO RISORSE
+
                 Pay1Icon.setVisible(false);
                 GoBack.setVisible(false);
                 SceneTransition.play();
