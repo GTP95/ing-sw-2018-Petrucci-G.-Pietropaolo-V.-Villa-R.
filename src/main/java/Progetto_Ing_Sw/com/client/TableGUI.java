@@ -709,7 +709,10 @@ public class TableGUI extends Stage{
 
         Button Update = new Button("Update");
         Update.setTranslateX(600);
-        Update.setOnAction(event -> insertion());
+        Update.setOnAction(event -> {
+            ScoreBoardView scoreBoardView = new ScoreBoardView();
+            scoreBoardView.showAndWait();
+        });
 
         //BorderPane per contenere tutti gli altri
         StackPane GameplayArea = new StackPane();

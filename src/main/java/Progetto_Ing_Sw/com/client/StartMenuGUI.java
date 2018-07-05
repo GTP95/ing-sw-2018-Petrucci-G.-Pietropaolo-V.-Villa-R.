@@ -79,10 +79,10 @@ public class StartMenuGUI extends Application {
         });
 
         // HBox per la selezione della modalità
-        HBox gamemode= new HBox(80);                                                                   // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
+        HBox gamemode= new HBox(80);                                 // imposto la scena come una HBox poichè voglio che i due tasti stiano uno di fianco all'altro
         gamemode.setPrefSize(1280,720);
-        gamemode.setAlignment(Pos.CENTER);                                                                  //posiziono il punto di partenza della HBox al centro
-        gamemode.getChildren().addAll(singlePlayer,multiPlayer); //assegno i bottoni creati alla HBox gamemode
+        gamemode.setAlignment(Pos.CENTER);                                //posiziono il punto di partenza della HBox al centro
+        gamemode.getChildren().addAll(singlePlayer,multiPlayer);         //assegno i bottoni creati alla HBox gamemode
 
         //Tasto goBack per tornare alla schermata principale
         Button goBack = new Button();
