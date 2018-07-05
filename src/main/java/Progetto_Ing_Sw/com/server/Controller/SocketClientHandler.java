@@ -18,139 +18,127 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards, notifyPlayerInactivity, sendVictoryPoints; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice, isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards, notifyPlayerInactivity, sendVictoryPoints, sendEverything; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn, inactivityTimer; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
     private boolean otherPlayersWindowBoardsSent;
 
-    public SocketClientHandler(Socket clientSocket){
-        this.clientSocket=clientSocket; //socket su cui è in ascolto il client
-        countdown=new Timer();
-        updateWindowBoards=false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
-        updateDice=false;           //Idem come sopra
-        isMyTurn=false;
-        otherPlayersWindowBoardsSent=false;
-        updateRoundTrack=false;
-        notifyUsedToolCard=false;
-        updateTokens=false;
-        updateToolCards=false;
-        notifyPlayerInactivity=false;
-        sendVictoryPoints=false;
+    public SocketClientHandler(Socket clientSocket) {
+        this.clientSocket = clientSocket; //socket su cui è in ascolto il client
+        countdown = new Timer();
+        updateWindowBoards = false;   //serve per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+        updateDice = false;           //Idem come sopra
+        isMyTurn = false;
+        otherPlayersWindowBoardsSent = false;
+        updateRoundTrack = false;
+        notifyUsedToolCard = false;
+        updateTokens = false;
+        updateToolCards = false;
+        notifyPlayerInactivity = false;
+        sendVictoryPoints = false;
+        sendEverything = false;
+        this.table = Table.getOurInstance();
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timeout");
-          //  clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
-        }
-        catch (FileNotFoundException e){
+            timeout = JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json", "timeout");
+            //  clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
+        } catch (FileNotFoundException e) {
             System.out.println("File ServerSettings not found, falling back to 30 seconds of timeout and 60 seconds of turn duration");
-            timeout=30000;  //timeout in millisecopndi
-        }
-        catch (IOException e){
+            timeout = 30000;  //timeout in millisecopndi
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void run(){
+    public void run() {
 
-            try {
-                    String messageFromClient=in.readLine();
-                    String[] messageFields=messageFromClient.split("%");
-                    myPlayerName=messageFields[0];          //nome del giocatore gestito da questo thread. In questa fase ignoro il token mandato dal client perchè si sta connettendo alla lobby
-                    ourThread=Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
-                    System.err.println(ourThread.getName());
-                    ourThread.setName(myPlayerName+"'s SocketClientHandler");
-                    int token=Lobby.getInstance().addPlayer(myPlayerName, this);
-                    sendControlMessage("Connected&"+token);
+        try {
+            String messageFromClient = in.readLine();
+            String[] messageFields = messageFromClient.split("%");
+            myPlayerName = messageFields[0];          //nome del giocatore gestito da questo thread. In questa fase ignoro il token mandato dal client perchè si sta connettendo alla lobby
+            ourThread = Thread.currentThread();   //riferimento al thread che sta eseguendo questo codice
+            System.err.println(ourThread.getName());
+            ourThread.setName(myPlayerName + "'s SocketClientHandler");
+            int token = Lobby.getInstance().addPlayer(myPlayerName, this);
+                   /* if(existsPlayerWithToken(token)){
 
-                countdown.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        int countdownValue=Lobby.getInstance().countdownValue;
-                        if(countdownValue>=0) sendControlMessage("CountdownValue&"+countdownValue);
-                        else countdown.cancel();
-                    }
-                },1000,1000);   //invia ogni secondo countdownValue;
 
-                        while(Lobby.isRunning) {
-                            if(ourThread.interrupted()){
-                                sendPlayerMessage();
-                            }
-                        }
-                        //arrivati qui il gioco è cominciato
-                sendPlayerMessage();
-                sendControlMessage("Game started!");
-                this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
-                previousDiceArrayList=table.getDrawnDice();
-                sendGameInitializationData();
-                receiveChoosenGameBoardCard();
-                System.out.println(ourThread.getName()+": waiting for windowboards");
-                sendOtherPlayersWindowBoards();
-              //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
-                notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
-                System.err.println("STO PER ENTRARE NEL WHILE "+ourThread.getName());
+                    }*/
+            sendControlMessage("Connected&" + token);
 
-                while(Table.gameRunning){
-                    receiveMessage();
-                    if(ourThread.isInterrupted()) updateTable();
+            countdown.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    int countdownValue = Lobby.getInstance().countdownValue;
+                    if (countdownValue >= 0) sendControlMessage("CountdownValue&" + countdownValue);
+                    else countdown.cancel();
+                }
+            }, 1000, 1000);   //invia ogni secondo countdownValue;
 
-                 }
-                 sendControlMessage("Game ended");
-                 System.err.println("SE LEGGI QUI IL GIOCO È FINITO "+ourThread.getName());
-                 sendControlMessage("Sending Victory Points&"+myPlayer.getVictoryPoints().size());
-                 while(sendVictoryPoints==false);
-                 for(Integer integer : myPlayer.getVictoryPoints()){
-                     sendControlMessage("Victory Points&"+integer);
-                 }
+            while (Lobby.isRunning) {
+                if (ourThread.interrupted()) {
+                    sendPlayerMessage();
+                }
             }
-            catch(TooManyPlayersException e){
-                sendControlMessage("Max number of players exceeded");
-            }
-            catch(InvalidUsernameException e){
-                sendControlMessage(e.getMessage());
-                myPlayerName=null;  //resetto il nome perchè non valido
-            }
-            catch (IOException e){
-                e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
-           }
-           catch (NotEnoughFavorTokensException e) {
-                sendControlMessage("Not enough favor tokens");
-            }
-            catch (PlaceDiceException e){
-                sendControlMessage(e.getMessage());
-            }
+            //arrivati qui il gioco è cominciato
+            sendPlayerMessage();
+            sendControlMessage("Game started!");
+            //  this.table=Table.getOurInstance();  //La lobby è terminata, è tempo di lavorare sul tavolo
+            previousDiceArrayList = table.getDrawnDice();
+            sendGameInitializationData();
+            receiveChoosenGameBoardCard();
+            System.out.println(ourThread.getName() + ": waiting for windowboards");
+            sendOtherPlayersWindowBoards();
+            //  sendControlMessage("Your turn just ended"); //all'inizio non è il turno di nessuno, fatto per xomodità della GUI
+            notifyIfIsYourTurn();   //Invia la notifica di inizio turno solo al primo giocatore
+            System.err.println("STO PER ENTRARE NEL WHILE " + ourThread.getName());
 
-            catch (IllegalDiceException e){
-                sendControlMessage(e.getMessage());
+            while (Table.gameRunning) {
+                receiveMessage();
+                if (ourThread.isInterrupted()) updateTable();
+
             }
+            sendControlMessage("Game ended");
+            System.err.println("SE LEGGI QUI IL GIOCO È FINITO " + ourThread.getName());
+            sendControlMessage("Sending Victory Points&" + myPlayer.getVictoryPoints().size());
+            while (sendVictoryPoints == false) ;
+            for (Integer integer : myPlayer.getVictoryPoints()) {
+                sendControlMessage("Victory Points&" + integer);
+            }
+        } catch (TooManyPlayersException e) {
+            sendControlMessage("Max number of players exceeded");
+        } catch (InvalidUsernameException e) {
+            sendControlMessage(e.getMessage());
+            myPlayerName = null;  //resetto il nome perchè non valido
+        } catch (IOException e) {
+            e.printStackTrace();    //non ha senso mettere qui il timeout, deve solo inviare il nome
+        } catch (NotEnoughFavorTokensException e) {
+            sendControlMessage("Not enough favor tokens");
+        } catch (PlaceDiceException e) {
+            sendControlMessage(e.getMessage());
+        } catch (IllegalDiceException e) {
+            sendControlMessage(e.getMessage());
+        }
 
     }
 
 
-    @Deprecated
-    private void sendCard(Card card){
-        String json=JSONCreator.generateJSON(card);
-        out.println(json);
-    }
-
-    private void sendControlMessage(String message){    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
-        String messageToSend="Control%"+message;
+    private void sendControlMessage(String message) {    //Nei messaggi uso % come separatore dei campi per semplificare il parsing in ricezione ed evitare confilitti con il formato JSON
+        String messageToSend = "Control%" + message;
         out.println(messageToSend);
-        System.out.println(ourThread.getName()+": sent control message "+messageToSend);
+        System.out.println(ourThread.getName() + ": sent control message " + messageToSend);
     }
 
-    private void sendJSONmessage(String json, String nameOfClass){
-        String messageToSend="JSON%"+json+"%"+nameOfClass;
+    private void sendJSONmessage(String json, String nameOfClass) {
+        String messageToSend = "JSON%" + json + "%" + nameOfClass;
         out.println(messageToSend);
-        System.out.println(ourThread.getName()+": JSON message sent "+nameOfClass);
+        System.out.println(ourThread.getName() + ": JSON message sent " + nameOfClass);
     }
 
-    private void sendActionMessage(String json, String actionDescription){
-        String messageToSend="Action%"+json+"%"+actionDescription;
-        out.println(messageToSend);
-    }
+
 
     private void sendPlayerMessage() {
         System.err.println("Sending players");
@@ -161,74 +149,71 @@ public class SocketClientHandler implements Runnable {
     }
 
 
-    private void sendGameInitializationData(){
+    private void sendGameInitializationData() {
         try {
-            ArrayList<GameBoardCard> drawnGameBoardCard=null;
-            while(drawnGameBoardCard==null){
-                myPlayer=table.getPlayerFromName(myPlayerName);
-                drawnGameBoardCard=myPlayer.getDrawnGameBoardCard();
+            ArrayList<GameBoardCard> drawnGameBoardCard = null;
+            while (drawnGameBoardCard == null) {
+                myPlayer = table.getPlayerFromName(myPlayerName);
+                drawnGameBoardCard = myPlayer.getDrawnGameBoardCard();
             }
-            sendControlMessage("Sending GameBoardcards&"+myPlayer.getDrawnGameBoardCard().size());
-            for(GameBoardCard gameBoardCard : myPlayer.getDrawnGameBoardCard()){
-                sendJSONmessage(JSONCreator.generateJSON(gameBoardCard),"GameBoardCard");
+            sendControlMessage("Sending GameBoardcards&" + myPlayer.getDrawnGameBoardCard().size());
+            for (GameBoardCard gameBoardCard : myPlayer.getDrawnGameBoardCard()) {
+                sendJSONmessage(JSONCreator.generateJSON(gameBoardCard), "GameBoardCard");
             }
-            sendJSONmessage(JSONCreator.generateJSON(myPlayer.getPrivateObjective()),"PrivateObjectiveCard");
+            sendJSONmessage(JSONCreator.generateJSON(myPlayer.getPrivateObjective()), "PrivateObjectiveCard");
+        } catch (InvalidUsernameException e) {
+            System.err.println(e.getMessage());
         }
-        catch(InvalidUsernameException e){System.err.println(e.getMessage());}
 
         receiveControlMessage();
 
-        sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
-        for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+        sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+        for (Dice dice : table.getDrawnDice()) {  //Purtroppo è necessario inviare le carte una per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
             sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
         }
 
-        sendControlMessage("Sending ToolCards&"+table.getDrawnToolCards().size());
-        for(ToolCard toolCard : table.getDrawnToolCards()){
-            sendJSONmessage(JSONCreator.generateJSON(toolCard),"ToolCard");
+        sendControlMessage("Sending ToolCards&" + table.getDrawnToolCards().size());
+        for (ToolCard toolCard : table.getDrawnToolCards()) {
+            sendJSONmessage(JSONCreator.generateJSON(toolCard), "ToolCard");
         }
 
-        sendControlMessage("Sending publicObjectiveCards&"+table.getDrawnPublicObjectiveCards().size());
-        for (PublicObjectiveCard publicObjectiveCard : table.getDrawnPublicObjectiveCards()){
-            sendJSONmessage(JSONCreator.generateJSON(publicObjectiveCard),"PublicObjectiveCard");
+        sendControlMessage("Sending publicObjectiveCards&" + table.getDrawnPublicObjectiveCards().size());
+        for (PublicObjectiveCard publicObjectiveCard : table.getDrawnPublicObjectiveCards()) {
+            sendJSONmessage(JSONCreator.generateJSON(publicObjectiveCard), "PublicObjectiveCard");
         }
     }
 
-    private void receiveControlMessage(){   //È bloccante!
-        try{
-        while(!in.ready()); //aspetta che il buffer sia pronto ad essere letto
+    private void receiveControlMessage() {   //È bloccante!
+        try {
+            while (!in.ready()) ; //aspetta che il buffer sia pronto ad essere letto
 
-            String message=in.readLine();
-            String messageFields[]=message.split("%");
-            switch(messageFields[0]){
+            String message = in.readLine();
+            String messageFields[] = message.split("%");
+            switch (messageFields[0]) {
                 case "Data received, go ahead":
                     //niente, va avanti
                     break;
-                case "OK":
-                    inactivityTimer.cancel();
-                    break;
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-
     }
 
-    private void receiveChoosenGameBoardCard(){
+    private void receiveChoosenGameBoardCard() {
         try {
-            System.err.println("ASPETTO LA GAMEBOARDCARD "+ourThread.getName());
+            System.err.println("ASPETTO LA GAMEBOARDCARD " + ourThread.getName());
             while (!in.ready()) ; //aspetta che il buffer sia pronto per essere letto
-            System.err.println("Sto per leggere il buffer "+ourThread.getName());
+            System.err.println("Sto per leggere il buffer " + ourThread.getName());
             String message = in.readLine();
             String messageFields[] = message.split("%");
-            System.err.println("receiveGameBoardCard: ricevuta "+messageFields[2]+" "+ourThread.getName());
+            System.err.println("receiveGameBoardCard: ricevuta " + messageFields[2] + " " + ourThread.getName());
             table.setChoosenGameBoardCard(myPlayerName, messageFields[2]);
-           // myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
+            // myPlayer.setChoosenGameBoard(myPlayer.getGameBoardCardFromTitle(messageFields[2]));
             System.err.println();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -243,7 +228,7 @@ public class SocketClientHandler implements Runnable {
             case "Place dice":
                 try {
                     dice = JSONCreator.diceLoaderFromString(fields[0]);
-                    System.err.println("Received the following dice color: "+dice.getColor()+" value: "+dice.getValue());
+                    System.err.println("Received the following dice color: " + dice.getColor() + " value: " + dice.getValue());
                     if (table.diceExists(dice)) {
                         myPlayer.getChoosenWindowBoard().insertDice(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), dice);
                         if (table.removeDice(dice)) System.out.println("Dice removed");
@@ -264,90 +249,90 @@ public class SocketClientHandler implements Runnable {
                 }
                 break;
             case "Use Grozing Pliers":
-                dice=JSONCreator.diceLoaderFromString(fields[0]);
-                String command=fields[2];
-                table.useToolCard("Grozing Pliers",myPlayer);
-                table.useGrozingPliers(dice, command,myPlayer);
+                dice = JSONCreator.diceLoaderFromString(fields[0]);
+                String command = fields[2];
+                table.useToolCard("Grozing Pliers", myPlayer);
+                table.useGrozingPliers(dice, command, myPlayer);
                 break;
             case "Use Grinding Stone":
-                 dice=JSONCreator.diceLoaderFromString(fields[0]);
-                 table.useToolCard("Grinding Stone",myPlayer);
-                 table.useGrindingStone(dice,myPlayer);
+                dice = JSONCreator.diceLoaderFromString(fields[0]);
+                table.useToolCard("Grinding Stone", myPlayer);
+                table.useGrindingStone(dice, myPlayer);
                 break;
             case "Use Flux Brush":
-                dice=JSONCreator.diceLoaderFromString(fields[0]);
-                table.useToolCard("Flux Brush",myPlayer);
-                table.useFluxBrush(dice,myPlayer);
+                dice = JSONCreator.diceLoaderFromString(fields[0]);
+                table.useToolCard("Flux Brush", myPlayer);
+                table.useFluxBrush(dice, myPlayer);
                 break;
             case "Use Glazing Hammer":
-                table.useToolCard("Glazing Hammer",myPlayer);
+                table.useToolCard("Glazing Hammer", myPlayer);
                 table.useGlazingHammer(myPlayer);
                 break;
             case "Use Flux Remover":
-                dice=JSONCreator.diceLoaderFromString(fields[0]);
+                dice = JSONCreator.diceLoaderFromString(fields[0]);
                 table.useToolCard("Flux Remover", myPlayer);
-                Dice newDrawnDice=table.useFluxRemover(dice,myPlayer);
-                sendControlMessage("The newly drawn dice is&"+JSONCreator.generateJSON(newDrawnDice));
+                Dice newDrawnDice = table.useFluxRemover(dice, myPlayer);
+                sendControlMessage("The newly drawn dice is&" + JSONCreator.generateJSON(newDrawnDice));
                 break;
             case "Here is the new dice":
-                table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]),myPlayer);
+                table.substituteDice(JSONCreator.diceLoaderFromString(fields[0]), myPlayer);
                 break;
             case "Use Eglomise Brush":
-                oldRow=Integer.parseInt(fields[2]);
-                oldColumn=Integer.parseInt(fields[3]);
-                newRow=Integer.parseInt(fields[4]);
-                newColumn=Integer.parseInt(fields[5]);
-                System.err.println("Debug: messaggio ricevuto: "+messageContent);
+                oldRow = Integer.parseInt(fields[2]);
+                oldColumn = Integer.parseInt(fields[3]);
+                newRow = Integer.parseInt(fields[4]);
+                newColumn = Integer.parseInt(fields[5]);
+                System.err.println("Debug: messaggio ricevuto: " + messageContent);
                 table.useToolCard("Eglomise Brush", myPlayer);
-                table.useEglomiseBrush(oldRow,oldColumn,newRow,newColumn,myPlayer);
+                table.useEglomiseBrush(oldRow, oldColumn, newRow, newColumn, myPlayer);
                 break;
             case "Use Copper Foil Burnisher":
-                oldRow=Integer.parseInt(fields[2]);
-                oldColumn=Integer.parseInt(fields[3]);
-                newRow=Integer.parseInt(fields[4]);
-                newColumn=Integer.parseInt(fields[5]);
-                table.useToolCard("Copper Foil Burnisher",myPlayer);
-                table.useCopperFoilBurnisher(oldRow,oldColumn,newRow,newColumn,myPlayer);
+                oldRow = Integer.parseInt(fields[2]);
+                oldColumn = Integer.parseInt(fields[3]);
+                newRow = Integer.parseInt(fields[4]);
+                newColumn = Integer.parseInt(fields[5]);
+                table.useToolCard("Copper Foil Burnisher", myPlayer);
+                table.useCopperFoilBurnisher(oldRow, oldColumn, newRow, newColumn, myPlayer);
                 break;
             case "Use Cork-backed Straightedge":
-                dice=JSONCreator.diceLoaderFromString(fields[0]);
-                newRow=Integer.parseInt(fields[2]);
-                newColumn=Integer.parseInt(fields[3]);
+                dice = JSONCreator.diceLoaderFromString(fields[0]);
+                newRow = Integer.parseInt(fields[2]);
+                newColumn = Integer.parseInt(fields[3]);
                 table.useToolCard("Cork-backed Straightedge", myPlayer);
-                table.useCorkBackedStraightEdge(dice,newRow,newColumn,myPlayer);
+                table.useCorkBackedStraightEdge(dice, newRow, newColumn, myPlayer);
                 break;
             case "Use Lathekin":
-                oldRow=Integer.parseInt(fields[2]);
-                oldColumn=Integer.parseInt(fields[3]);
-                newRow=Integer.parseInt(fields[4]);
-                newColumn=Integer.parseInt(fields[5]);
+                oldRow = Integer.parseInt(fields[2]);
+                oldColumn = Integer.parseInt(fields[3]);
+                newRow = Integer.parseInt(fields[4]);
+                newColumn = Integer.parseInt(fields[5]);
 
-                oldRow2=Integer.parseInt(fields[6]);
-                oldColumn2=Integer.parseInt(fields[7]);
-                newRow2=Integer.parseInt(fields[8]);
-                newColumn2=Integer.parseInt(fields[9]);
-                table.useToolCard("Lathekin",myPlayer);
-                table.useLathekin(oldRow,oldColumn,newRow,newColumn,oldRow2,oldColumn2,newRow2,newColumn2, myPlayer);
+                oldRow2 = Integer.parseInt(fields[6]);
+                oldColumn2 = Integer.parseInt(fields[7]);
+                newRow2 = Integer.parseInt(fields[8]);
+                newColumn2 = Integer.parseInt(fields[9]);
+                table.useToolCard("Lathekin", myPlayer);
+                table.useLathekin(oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2, myPlayer);
                 break;
             case "Use Lens Cutter":
-                Dice roundtrackDice=JSONCreator.diceLoaderFromString(fields[0]);
-                Dice draftpoolDice=JSONCreator.diceLoaderFromString(fields[2]);
-                table.useToolCard("Lens Cutter",myPlayer);
+                Dice roundtrackDice = JSONCreator.diceLoaderFromString(fields[0]);
+                Dice draftpoolDice = JSONCreator.diceLoaderFromString(fields[2]);
+                table.useToolCard("Lens Cutter", myPlayer);
                 table.useLensCutter(roundtrackDice, draftpoolDice, myPlayer);
-                System.err.println("Lens Cutter messaggio ricevuto: "+messageContent);
+                System.err.println("Lens Cutter messaggio ricevuto: " + messageContent);
                 break;
             case "Use Tap Wheel":
-                int color=Integer.parseInt(fields[2]);
+                int color = Integer.parseInt(fields[2]);
 
-                oldRow=Integer.parseInt(fields[3]);
-                oldColumn=Integer.parseInt(fields[4]);
-                newRow=Integer.parseInt(fields[5]);
-                newColumn=Integer.parseInt(fields[6]);
+                oldRow = Integer.parseInt(fields[3]);
+                oldColumn = Integer.parseInt(fields[4]);
+                newRow = Integer.parseInt(fields[5]);
+                newColumn = Integer.parseInt(fields[6]);
 
-                oldRow2=Integer.parseInt(fields[7]);
-                oldColumn2=Integer.parseInt(fields[8]);
-                newRow2=Integer.parseInt(fields[9]);
-                newColumn2=Integer.parseInt(fields[10]);
+                oldRow2 = Integer.parseInt(fields[7]);
+                oldColumn2 = Integer.parseInt(fields[8]);
+                newRow2 = Integer.parseInt(fields[9]);
+                newColumn2 = Integer.parseInt(fields[10]);
                 table.useToolCard("Tap Wheel", myPlayer);
                 table.useTapWheel(color, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2, myPlayer);
                 break;
@@ -357,14 +342,15 @@ public class SocketClientHandler implements Runnable {
                 timerTurn.cancel();
                 table.changeCurrentPlayer();
                 sendControlMessage("Your turn just ended");
-                isMyTurn=false;
+                isMyTurn = false;
                 break;
             default:
-                System.err.println("Can't understand the following action message: "+messageContent);
+                System.err.println("Can't understand the following action message: " + messageContent);
         }
     }
 
-    private void handleEndTurn(){}
+    private void handleEndTurn() {
+    }
 
     private void receiveMessage() throws NotEnoughFavorTokensException, PlaceDiceException, IllegalDiceException {
         try {
@@ -381,16 +367,15 @@ public class SocketClientHandler implements Runnable {
                         handleControlMessage(messageFields[1]);
                         break;
                     default:
-                        System.err.println("Can't understand the following message's category: "+message);
+                        System.err.println("Can't understand the following message's category: " + message);
                 }
             }
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void updateTable(){
+    private void updateTable() {
         updateDrawnDiceIfNecessary();
         updatePlayersWindowBoardsIfNecessary();
         notifyRoundChange();
@@ -403,146 +388,183 @@ public class SocketClientHandler implements Runnable {
         notifyPlayerInactivity();
     }
 
-    private void notifyIfIsYourTurn(){
-        if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
-            isMyTurn=true;
+    private void notifyIfIsYourTurn() {
+        if (table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn) {
+            isMyTurn = true;
             sendControlMessage("It's your turn now");
-            timerTurn=new Timer();
-            inactivityTimer=new Timer();
+            timerTurn = new Timer();
+            inactivityTimer = new Timer();
             timerTurn.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     /*int countdownValue=Lobby.getInstance().countdownValue;
                     if(countdownValue>=0) sendControlMessage("CountdownValue&"+countdownValue);
                     else countdown.cancel();*/
-                    int turnCountDownValue=table.getTurnCountDown();
-                    if (turnCountDownValue>0){
-                        sendControlMessage("Your turn will end in&"+turnCountDownValue);
-                    }
-                    else{
+                    int turnCountDownValue = table.getTurnCountDown();
+                    if (turnCountDownValue > 0) {
+                        sendControlMessage("Your turn will end in&" + turnCountDownValue);
+                    } else {
                         table.changeCurrentPlayer();
                         sendControlMessage("Your turn just ended");
-                        isMyTurn=false;
+                        isMyTurn = false;
                         timerTurn.cancel();
                     }
                 }
-            },1000,1000);   //invia ogni secondo il countdown di fine turno;
+            }, 1000, 1000);   //invia ogni secondo il countdown di fine turno;
 
             inactivityTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                  myPlayer.setActive(false);
-
-                    System.err.println("Player "+myPlayerName+" is inactive!!!!");
+                    myPlayer.setActive(false);
+                    sendEverything = true;
+                    System.err.println("Player " + myPlayerName + " is inactive!!!!");
                 }
-            },timeout);   //invia ogni secondo il countdown di fine turno;
+            }, timeout);
         }
     }
 
-    private void updateDrawnDiceIfNecessary(){
-        if(updateDice){
+    private void updateDrawnDiceIfNecessary() {
+        if (updateDice) {
             System.err.println("INVIO AGGIORNAMENTO DADI");
-            sendControlMessage("Sending Dice&"+table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
-            for(Dice dice : table.getDrawnDice()){  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+            sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+            for (Dice dice : table.getDrawnDice()) {  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
                 sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
             }
-            updateDice=false;
+            updateDice = false;
         }
     }
-    private void updatePlayersWindowBoardsIfNecessary(){
-        if(updateWindowBoards) {
+
+    private void updatePlayersWindowBoardsIfNecessary() {
+        if (updateWindowBoards) {
             sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
             for (Player player : table.getPlayers()) {
-                    sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
+                sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
             }
-            updateWindowBoards=false;
+            updateWindowBoards = false;
         }
     }
-   private void notifyWhoIsTheCurrentPlayer(){
-        if(!isMyTurn && changedTurn){
-            sendControlMessage("Current player is&"+table.getActivePlayer().getName());
-            changedTurn=false;
+
+    private void notifyWhoIsTheCurrentPlayer() {
+        if (!isMyTurn && changedTurn) {
+            sendControlMessage("Current player is&" + table.getActivePlayer().getName());
+            changedTurn = false;
         }
 
-   }
+    }
 
-   private void handleControlMessage(String message){
-        String[] messageFields=message.split("&");
-       switch(messageFields[0]){
-           case "End my turn":
-               timerTurn.cancel();
-               table.changeCurrentPlayer();
-               sendControlMessage("Your turn just ended");
-               isMyTurn=false;
-               break;
+    private void handleControlMessage(String message) {
+        String[] messageFields = message.split("&");
+        switch (messageFields[0]) {
+            case "End my turn":
+                timerTurn.cancel();
+                table.changeCurrentPlayer();
+                sendControlMessage("Your turn just ended");
+                isMyTurn = false;
+                break;
+            case "OK":
+                inactivityTimer.cancel();
+                if (sendEverything){
+                    sendEverything();
+                    sendEverything=false;
+                }
+                break;
 
-           default:
-               System.err.println("Can't understand the following control message: "+message);
-       }
-
-   }
-
-   private void sendOtherPlayersWindowBoards(){
-        while(!updateWindowBoards); //aspetta che il server riceva le WindowBoards di tutti i giocatori
-       sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
-       for (Player player : table.getPlayers()) {
-           sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
-       }
-       updateWindowBoards=false;
-   }
-
-   private void  notifyRoundChange(){
-        if (changedRound){
-            sendControlMessage("Changed round&"+RoundTrack.getInstance().getRoundNumber());
-            changedRound=false;
+            default:
+                System.err.println("Can't understand the following control message: " + message);
         }
-   }
 
-   private void sendRoundTrackUpdateIfNecessary(){
-        if(updateRoundTrack){
-            sendJSONmessage(JSONCreator.generateJSON(RoundTrack.getInstance()),"RoundTrack");
-            updateRoundTrack=false;
+    }
+
+    private void sendOtherPlayersWindowBoards() {
+        while (!updateWindowBoards) ; //aspetta che il server riceva le WindowBoards di tutti i giocatori
+        sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
+        for (Player player : table.getPlayers()) {
+            sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
         }
-   }
+        updateWindowBoards = false;
+    }
 
-   private void notifyUsedToolCard(){
-        if(notifyUsedToolCard){
+    private void notifyRoundChange() {
+        if (changedRound) {
+            sendControlMessage("Changed round&" + RoundTrack.getInstance().getRoundNumber());
+            changedRound = false;
+        }
+    }
+
+    private void sendRoundTrackUpdateIfNecessary() {
+        if (updateRoundTrack) {
+            sendJSONmessage(JSONCreator.generateJSON(RoundTrack.getInstance()), "RoundTrack");
+            updateRoundTrack = false;
+        }
+    }
+
+    private void notifyUsedToolCard() {
+        if (notifyUsedToolCard) {
             sendControlMessage("Tool card used correctly");
-            notifyUsedToolCard=false;
+            notifyUsedToolCard = false;
         }
-   }
+    }
 
-   private void updateTokens(){
-        if(updateTokens) {
+    private void updateTokens() {
+        if (updateTokens) {
             try {
                 sendControlMessage("Update your tokens&" + table.getPlayerFromName(myPlayerName).getFavorTokens());
-                updateTokens=false;
-            }
-            catch (InvalidUsernameException e){
+                updateTokens = false;
+            } catch (InvalidUsernameException e) {
                 System.err.println("This is not the player you're looking for!");
             }
         }
-   }
+    }
 
-   private void updateToolCards(){
-        if(updateToolCards) {
+    private void updateToolCards() {
+        if (updateToolCards) {
             sendControlMessage("Sending ToolCards&" + table.getDrawnToolCards().size());
             for (ToolCard toolCard : table.getDrawnToolCards()) {
                 sendJSONmessage(JSONCreator.generateJSON(toolCard), "ToolCard");
             }
-            updateToolCards=false;
+            updateToolCards = false;
         }
-   }
+    }
 
-   private void notifyPlayerInactivity(){
-        if(notifyPlayerInactivity){
-            for(Player player : table.getPlayers()){
-                if (!player.isActive()){
-                    sendControlMessage("Inactivity notification&Player "+player.getName()+" is disconnected");
+    private void notifyPlayerInactivity() {
+        if (notifyPlayerInactivity) {
+            for (Player player : table.getPlayers()) {
+                if (!player.isActive()) {
+                    sendControlMessage("Inactivity notification&Player " + player.getName() + " is disconnected");
                 }
             }
-            notifyPlayerInactivity=false;
+            notifyPlayerInactivity = false;
         }
-   }
+    }
 
+    private boolean existsPlayerWithToken(int token) {
+        for (Player player : table.getPlayers()) {
+            if (player.getToken() == token) return true;
+        }
+        return false;
+    }
+
+    private void sendEverything() {
+        if (sendEverything) {
+            System.err.println("INVIO AGGIORNAMENTO DADI");
+            sendControlMessage("Sending Dice&" + table.getDrawnDice().size());    //Comunico al client quanti dadi sto per inviare
+            for (Dice dice : table.getDrawnDice()) {  //Purtroppo è necessario inviare i dadi uno per volta: se si invia il JSON dell'intero ArrayList il client riceve solo i primi due...
+                sendJSONmessage(JSONCreator.generateJSON(dice), "Dice");
+            }
+
+            sendControlMessage("Sending WindowBoards update&" + table.getPlayers().size());
+            for (Player player : table.getPlayers()) {
+                sendJSONmessage(JSONCreator.generateJSON(player.getChoosenWindowBoard()), "WindowBoardUpdate");
+            }
+
+            sendControlMessage("Changed round&" + RoundTrack.getInstance().getRoundNumber());
+            sendJSONmessage(JSONCreator.generateJSON(RoundTrack.getInstance()), "RoundTrack");
+
+            sendControlMessage("Sending ToolCards&" + table.getDrawnToolCards().size());
+            for (ToolCard toolCard : table.getDrawnToolCards()) {
+                sendJSONmessage(JSONCreator.generateJSON(toolCard), "ToolCard");
+            }
+        }
+        sendEverything=false;
+    }
 }
