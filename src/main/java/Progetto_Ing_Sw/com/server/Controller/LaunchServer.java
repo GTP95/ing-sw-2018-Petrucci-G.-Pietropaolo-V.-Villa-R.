@@ -7,6 +7,10 @@ import java.net.Socket;
 
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
+/**
+ * @author Giacomo Tommaso Petrucci
+ * This class is the entry point for the server
+ */
 public class LaunchServer {
     static int portNumber;
     public static void main(String[] args) {
