@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ScoreBoardView extends Stage {
-    Text PublicObjectiveCards, PublicObjectiveCard1Title, PublicObjectiveCard2Title,PublicObjectiveCard3Title,PublicObjectiveCard1Score,PublicObjectiveCard2Score,PublicObjectiveCard3Score, PrivateObjectiveText,PrivateObjectiveScore, FavorTokensLeft, FavorTokensScore, OpenSpacesText,OpenSpacesScore, TotalText, TotalScoreText;
+    Text PublicObjectiveCard1Title, PublicObjectiveCard2Title,PublicObjectiveCard3Title,PublicObjectiveCard1Score,PublicObjectiveCard2Score,PublicObjectiveCard3Score, PrivateObjectiveText,PrivateObjectiveScore, FavorTokensLeft, FavorTokensScore, OpenSpacesText,OpenSpacesScore, TotalText, TotalScoreText;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
     Scene ScoreBoard;
 
 
-    ScoreBoardView(int ScorePub1,int ScorePub2,int ScorePub3,int ScorePrivate, int ScoreTokens, int ScoreOpenSpace){
+    ScoreBoardView(int ScorePub1,int ScorePub2,int ScorePub3,int ScorePrivate, int ScoreTokens, int ScoreOpenSpace, boolean winner){
         this.setTitle("Final Score");
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
@@ -86,7 +86,7 @@ public class ScoreBoardView extends Stage {
 
         //TOTAL POINTS SCORED
         TotalText = new Text("Total: ");
-        TotalText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Centaur';");
+        TotalText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         TotalScoreText = new Text(Integer.toString(ScorePub1 + ScorePub2 + ScorePub3 + ScorePrivate + ScoreTokens + ScoreOpenSpace));
         TotalScoreText.setStyle("-fx-fill: white;" +"-fx-font: 40 'Centaur';");
@@ -94,11 +94,21 @@ public class ScoreBoardView extends Stage {
         HBox Total = new HBox(10);
         Total.getChildren().addAll(TotalText,TotalScoreText);
 
+        Text YouWin = new Text("YOU WIN!");
+        YouWin.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
+
+        Text YouLose = new Text("YOU LOSE");
+        YouLose.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         VBox ScoreBoardVBox = new VBox(30);
         ScoreBoardVBox.setPrefSize(720,720);
         ScoreBoardVBox.setTranslateX(360);
-        ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total);
+
+        if (winner){
+            ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouWin);
+        }
+
+        else {ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total,YouLose);}
 
         ScoreBoard = new Scene(ScoreBoardVBox,1280,720);
         ScoreBoard.setFill(Color.rgb(0, 0, 0, 0.75));
