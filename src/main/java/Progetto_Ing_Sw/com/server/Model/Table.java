@@ -538,5 +538,12 @@ private ToolCard getToolCardFromTitle(String title){
             turnCountDown=30;
         }
     }
+
+    public void notifyPlayerInactivity(){
+        for(Player player : players){
+            player.getSocketClientHandler().notifyPlayerInactivity=true;
+            notifyAllSocketClientHandlers();
+        }
+    }
 }
 

@@ -112,6 +112,9 @@ public class SocketClient implements Runnable{
                 throw new InvalidUsernameException("Invalid username: username cannot be null");    //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
             case "Invalid username: empty username not allowed":
                 throw new InvalidUsernameException("Invalid username: empty username not allowed"); //TODO: GUI il metodo getMessage() restituisce il motivo dell'eccezione
+            case "Inactivity notification":
+               // throw new
+                break;
             case "Game started!":
                 localModel.setGameRunning(true);
                 break;
@@ -171,6 +174,7 @@ public class SocketClient implements Runnable{
                 throw new IllegalDiceException("The two dice must have the same color choosen from the round track!");
             case "It's your turn now":
                 localModel.notifyTurn();
+                sendControlMessage("OK");
                 break;
             case "Current player is":
                 localModel.setCurrentPlayerName(messageFields[1]);

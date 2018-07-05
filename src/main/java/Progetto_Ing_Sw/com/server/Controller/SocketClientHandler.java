@@ -18,10 +18,10 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards, notifyPlayerInactivity; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
-    private Timer countdown, timerTurn; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
+    private Timer countdown, timerTurn, inactivityTimer; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
     private boolean otherPlayersWindowBoardsSent;
 
     public SocketClientHandler(Socket clientSocket){
@@ -35,19 +35,20 @@ public class SocketClientHandler implements Runnable {
         notifyUsedToolCard=false;
         updateTokens=false;
         updateToolCards=false;
+        notifyPlayerInactivity=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             timeout=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timeout");
-            clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
+          //  clientSocket.setSoTimeout(timeout); //timeout inattività giocatore impostato direttamante sulla socket del giocatore
         }
         catch (FileNotFoundException e){
             System.out.println("File ServerSettings not found, falling back to 30 seconds of timeout and 60 seconds of turn duration");
             timeout=30000;  //timeout in millisecopndi
         }
         catch (IOException e){
-            e.printStackTrace();    //TODO: timeout?
+            e.printStackTrace();
         }
     }
 
@@ -197,6 +198,9 @@ public class SocketClientHandler implements Runnable {
                 case "Data received, go ahead":
                     //niente, va avanti
                     break;
+                case "OK":
+                    inactivityTimer.cancel();
+                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -344,6 +348,10 @@ public class SocketClientHandler implements Runnable {
             case "Use Running Pliers":
                 table.useToolCard("Running Pliers", myPlayer);
                 table.useRunningPliers(myPlayer);
+                timerTurn.cancel();
+                table.changeCurrentPlayer();
+                sendControlMessage("Your turn just ended");
+                isMyTurn=false;
                 break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
@@ -386,6 +394,7 @@ public class SocketClientHandler implements Runnable {
         notifyUsedToolCard();
         updateTokens();
         updateToolCards();
+        notifyPlayerInactivity();
     }
 
     private void notifyIfIsYourTurn(){
@@ -393,6 +402,7 @@ public class SocketClientHandler implements Runnable {
             isMyTurn=true;
             sendControlMessage("It's your turn now");
             timerTurn=new Timer();
+            inactivityTimer=new Timer();
             timerTurn.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
@@ -411,6 +421,15 @@ public class SocketClientHandler implements Runnable {
                     }
                 }
             },1000,1000);   //invia ogni secondo il countdown di fine turno;
+
+            inactivityTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                  myPlayer.setActive(false);
+
+                    System.err.println("Player "+myPlayerName+" is inactive!!!!");
+                }
+            },timeout);   //invia ogni secondo il countdown di fine turno;
         }
     }
 
@@ -506,6 +525,17 @@ public class SocketClientHandler implements Runnable {
                 sendJSONmessage(JSONCreator.generateJSON(toolCard), "ToolCard");
             }
             updateToolCards=false;
+        }
+   }
+
+   private void notifyPlayerInactivity(){
+        if(notifyPlayerInactivity){
+            for(Player player : table.getPlayers()){
+                if (!player.isActive()){
+                    sendControlMessage("Inactivity notification&Player "+player.getName()+" is disconnected");
+                }
+            }
+            notifyPlayerInactivity=false;
         }
    }
 
