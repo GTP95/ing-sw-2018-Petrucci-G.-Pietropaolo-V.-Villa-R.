@@ -1026,6 +1026,7 @@ public class TableGUI extends Stage{
      * This method shows the scoreboard at the end of the game
      */
     public void endGame(){
+        System.err.println("---------------------------------------END GAME---------------------------------------------------------------------");
         Platform.runLater(()->{
             ScoreBoardView scoreBoardView = new ScoreBoardView(
                     LocalModel.getInstance().getVictoryPoints().get(0),
@@ -1033,7 +1034,8 @@ public class TableGUI extends Stage{
                     LocalModel.getInstance().getVictoryPoints().get(2),
                     LocalModel.getInstance().getVictoryPoints().get(3),
                     LocalModel.getInstance().getVictoryPoints().get(4),
-                    LocalModel.getInstance().getVictoryPoints().get(5)
+                    LocalModel.getInstance().getVictoryPoints().get(5),
+                    
             );
             scoreBoardView.showAndWait();
         });
