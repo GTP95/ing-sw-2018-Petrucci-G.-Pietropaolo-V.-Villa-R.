@@ -5,6 +5,12 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * <h1>LightShades</h1>
+ *  The class LightShades implements the PublicObjectiveCard LightShades
+ *  @author Roberto Villa
+ */
+
 public class LightShades {
     //-------import del costo di primo uso
     private int localVictoryPoints;
@@ -22,6 +28,11 @@ public class LightShades {
 
     public int getVictoryPoints() {return victoryPoints;}
 
+    /**
+     * this methods calculates points (on the windowBoard) following the card
+     * @param localBoard is the board where i calculate the points
+     * @return it returns the number of points calculated
+     */
     public int calculatePoints(WindowBoard localBoard) {
 
         int points=0;

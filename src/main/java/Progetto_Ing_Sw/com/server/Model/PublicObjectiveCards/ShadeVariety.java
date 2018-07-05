@@ -5,6 +5,12 @@ import Progetto_Ing_Sw.com.tools.JSONCreator;
 
 import java.io.FileNotFoundException;
 
+/**
+ * <h1>ShadeVariety</h1>
+ *  The class ShadeVariety implements the PublicObjectiveCard ShadeVariety
+ *  @author Roberto Villa
+ */
+
 public class ShadeVariety {
 
     //-------import del costo di primo uso
@@ -23,6 +29,11 @@ public class ShadeVariety {
 
     public int getVictoryPoints() {return victoryPoints;}
 
+    /**
+     * this methods calculates points (on the windowBoard) following the card
+     * @param localBoard is the board where i calculate the points
+     * @return it returns the number of points calculated
+     */
     public int calculatePoints(WindowBoard localBoard) {
 
         int points=0;
