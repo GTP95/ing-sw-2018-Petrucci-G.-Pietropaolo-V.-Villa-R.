@@ -813,9 +813,9 @@ public  class LocalModel {
     }
 
     /**
-     *
-     * @param roundTrackDice
-     * @param draftpoolDice
+     * Sets data to use  tool card "Lens Cutter" and notifies SocketClientHandler
+     * @param roundTrackDice the dice to take from the round track
+     * @param draftpoolDice the dice to remove from the draftpool
      */
     public void useLensCutter(ClientDice roundTrackDice, ClientDice draftpoolDice){
         diceToUseWithEffect=roundTrackDice;
@@ -824,6 +824,19 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Sets data to use  tool card "Tap Wheel" and notifies SocketClientHandler
+     * @param color int representing the choosen color
+     * @param oldRow1 the row number in which the first dice is located
+     * @param oldColumn1 the column number in which the first dice is located
+     * @param newRow1 the row number in which the first dice will be located
+     * @param newColumn1 the column number in which the first dice will be located
+     * @param oldRow2 the row number in which the second dice is located
+     * @param oldColumn2 the column number in which the second dice is located
+     * @param newRow2 the row number in which the second dice will be located
+     * @param newColumn2 the column number in which the second dice will be located
+     * @see ClientColor
+     */
     public void useTapWheel(int color, int oldRow1, int oldColumn1, int newRow1, int newColumn1, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
         this.color=color;
 
@@ -841,16 +854,29 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    /**
+     * Returns a message (as String) representing the moving of a dice in the following format:
+     * old_row&old_column&new_row&new_column
+     * @return a String representation of the moving of a dice
+     */
     public String getCoordinatesAsString(){
         String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
         return message;
     }
 
+    /**
+     * Returns a message (as String) representing the moving of a dice in the following format:
+     * old_row&old_column&new_row&new_column
+     * @return a String representation of the moving of a dice
+     */
     public String getCoordinates2AsString(){
         String message= oldRow2+"&"+oldColumn2+"&"+newRow2+"&"+newColumn2;
         return message;
     }
 
+    /**
+     * Notifies the GUI that a tool card has been successfully used
+     */
     public void notifyUsedToolCard(){   //notifica GUI
         if (!dontNotifyUsedToolCard){
             System.err.println("chiamo closeToolCardMenu() e disableToolCards()");
@@ -859,11 +885,19 @@ public  class LocalModel {
         }
         dontNotifyUsedToolCard=false;
     }
+
+    /**
+     * Updates the number of our player's favor tokens and notifies the GUI
+     * @param numOfTokens the current number of favor tokens
+     */
     public void updateTokens(int numOfTokens){
         getPlayerFromName(ClientSettings.getInstance().getUsername()).setFavorTokens(numOfTokens);
         tableGUIobserver.updateTokens();
     }
 
+    /**
+     * Resets (clear) the ArrayList of tool cards
+     */
     public void resetToolCardArrayIfNecessary(){
         if(drawnToolCards==null) return;
         drawnToolCards.clear();
@@ -871,18 +905,36 @@ public  class LocalModel {
     }
 
 
+    /**
+     * Getter for attribute newRow used for tool cards
+     * @return number of the destination row of a dice
+     */
     public int getNewRow() {
         return newRow;
     }
 
+    /**
+     * Getter for attribute newColumn used for tool cards
+     * @return number of the destination column of a dice
+     */
     public int getNewColumn() {
         return newColumn;
     }
 
+    /**
+     * Getter of attribute color used for tool cards
+     * @return int representing color choosen to use a tool card
+     */
     public int getColorToUseWithEffect(){
         return color;
     }
 
+    /**
+     * Returns an index of clientPlayerArrayList containing the ClientPlayer with the specified name. If no player
+     * exists with that name, -1 is returned instead.
+     * @param name the name of the player whose index will be returned
+     * @return index of player with the given name or -1 if not found
+     */
     public int getPlayerIndexFromName(String name){
         for (ClientPlayer player:clientPlayerArrayList){
             if (player.getName().equals(name)) return clientPlayerArrayList.indexOf(player);
