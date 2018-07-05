@@ -106,7 +106,7 @@ public class SocketClientHandler implements Runnable {
                      sendControlMessage("Victory Points&"+integer);
                  }
                  if(isWinner) sendControlMessage("Victory&1");
-                 else sendControlMessage("Victory&");
+                 else sendControlMessage("Victory&0");
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
