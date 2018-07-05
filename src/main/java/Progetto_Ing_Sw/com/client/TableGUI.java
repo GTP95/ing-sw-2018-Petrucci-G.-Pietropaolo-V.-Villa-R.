@@ -950,7 +950,7 @@ public class TableGUI extends Stage{
      * This method updates the GUI as the Round changes and notifies the player with a sound.
      */
     public void updateRound(){
-        String musicFile = getClass().getResource("GUI/Sagrada.mp3").toExternalForm();;
+        String musicFile = getClass().getResource("GUI/RoundChange.mp3").toExternalForm();;
 
         Media sound = new Media(musicFile);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
@@ -976,6 +976,9 @@ public class TableGUI extends Stage{
         });
     }
 
+    /**
+     * This method catches Disconnected Player Exceptions and show a pop up window to notify the player.
+     */
     public void DisconnectedPlayerException(){
         Platform.runLater(()-> {
             Alert MoveException = new Alert(Alert.AlertType.WARNING);
@@ -1019,9 +1022,19 @@ public class TableGUI extends Stage{
         });
     }
 
+    /**
+     * This method shows the scoreboard at the end of the game
+     */
     public void endGame(){
         Platform.runLater(()->{
-            ScoreBoardView scoreBoardView = new ScoreBoardView();
+            ScoreBoardView scoreBoardView = new ScoreBoardView(
+                    LocalModel.getInstance().getVictoryPoints().get(0),
+                    LocalModel.getInstance().getVictoryPoints().get(1),
+                    LocalModel.getInstance().getVictoryPoints().get(2),
+                    LocalModel.getInstance().getVictoryPoints().get(3),
+                    LocalModel.getInstance().getVictoryPoints().get(4),
+                    LocalModel.getInstance().getVictoryPoints().get(5)
+            );
             scoreBoardView.showAndWait();
         });
     }

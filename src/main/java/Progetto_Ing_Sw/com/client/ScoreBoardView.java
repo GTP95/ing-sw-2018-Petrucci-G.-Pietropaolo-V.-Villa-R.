@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ScoreBoardView extends Stage {
-    Text PublicObjectiveCards, PublicObjectiveCard1Title, PublicObjectiveCard2Title,PublicObjectiveCard3Title,PublicObjectiveCard1Score,PublicObjectiveCard2Score,PublicObjectiveCard3Score, PrivateObjectiveText,PrivateObjectiveScore, FavorTokensLeft, FavorTokensScore, OpenSpacesText,OpenSpacesScore, TotalText, TotalScore;
+    Text PublicObjectiveCards, PublicObjectiveCard1Title, PublicObjectiveCard2Title,PublicObjectiveCard3Title,PublicObjectiveCard1Score,PublicObjectiveCard2Score,PublicObjectiveCard3Score, PrivateObjectiveText,PrivateObjectiveScore, FavorTokensLeft, FavorTokensScore, OpenSpacesText,OpenSpacesScore, TotalText, TotalScoreText;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
     Scene ScoreBoard;
 
 
-    ScoreBoardView(){
+    ScoreBoardView(int ScorePub1,int ScorePub2,int ScorePub3,int ScorePrivate, int ScoreTokens, int ScoreOpenSpace){
         this.setTitle("Final Score");
         this.setResizable(false);
         this.initStyle(StageStyle.UNDECORATED);
@@ -27,28 +27,28 @@ public class ScoreBoardView extends Stage {
 
 
 
-        PublicObjectiveCard1Title = new Text("Public Objective Card 1: ");
+        PublicObjectiveCard1Title = new Text(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(0).getTitle()+": ");
         PublicObjectiveCard1Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        PublicObjectiveCard1Score = new Text("0");
+        PublicObjectiveCard1Score = new Text(Integer.toString(ScorePub1));
         PublicObjectiveCard1Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard1 = new HBox(10);
         PublicObjectiveCard1.getChildren().addAll(PublicObjectiveCard1Title,PublicObjectiveCard1Score);
 
-        PublicObjectiveCard2Title = new Text("Public Objective Card 2: ");
+        PublicObjectiveCard2Title = new Text(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(1).getTitle()+": ");
         PublicObjectiveCard2Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        PublicObjectiveCard2Score = new Text("0");
+        PublicObjectiveCard2Score = new Text(Integer.toString(ScorePub2));
         PublicObjectiveCard2Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard2 = new HBox(10);
         PublicObjectiveCard2.getChildren().addAll(PublicObjectiveCard2Title,PublicObjectiveCard2Score);
 
-        PublicObjectiveCard3Title = new Text("Public Objective Card 3: ");
+        PublicObjectiveCard3Title = new Text(LocalModel.getInstance().getDrawnPublicObjectiveCards().get(2).getTitle()+": ");
         PublicObjectiveCard3Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        PublicObjectiveCard3Score = new Text("0");
+        PublicObjectiveCard3Score = new Text(Integer.toString(ScorePub3));
         PublicObjectiveCard3Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard3 = new HBox(10);
@@ -58,7 +58,7 @@ public class ScoreBoardView extends Stage {
         PrivateObjectiveText = new Text("Private Objective: ");
         PrivateObjectiveText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        PrivateObjectiveScore = new Text("0");
+        PrivateObjectiveScore = new Text(Integer.toString(ScorePrivate));
         PrivateObjectiveScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PrivateObjective = new HBox(10);
@@ -68,7 +68,7 @@ public class ScoreBoardView extends Stage {
         FavorTokensLeft = new Text("Favor Tokens Left: ");
         FavorTokensLeft.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        FavorTokensScore = new Text("0");
+        FavorTokensScore = new Text(Integer.toString(ScoreTokens));
         FavorTokensScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox FavorTokens = new HBox(10);
@@ -78,7 +78,7 @@ public class ScoreBoardView extends Stage {
         OpenSpacesText = new Text("Open Spaces: ");
         OpenSpacesText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
-        OpenSpacesScore = new Text("0");
+        OpenSpacesScore = new Text(Integer.toString(ScoreOpenSpace));
         OpenSpacesScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox OpenSpaces = new HBox(10);
@@ -88,11 +88,11 @@ public class ScoreBoardView extends Stage {
         TotalText = new Text("Total: ");
         TotalText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Centaur';");
 
-        TotalScore = new Text("0");
-        TotalScore.setStyle("-fx-fill: white;" +"-fx-font: 40 'Centaur';");
+        TotalScoreText = new Text(Integer.toString(ScorePub1 + ScorePub2 + ScorePub3 + ScorePrivate + ScoreTokens + ScoreOpenSpace));
+        TotalScoreText.setStyle("-fx-fill: white;" +"-fx-font: 40 'Centaur';");
 
         HBox Total = new HBox(10);
-        Total.getChildren().addAll(TotalText,TotalScore);
+        Total.getChildren().addAll(TotalText,TotalScoreText);
 
 
         VBox ScoreBoardVBox = new VBox(30);
@@ -107,53 +107,4 @@ public class ScoreBoardView extends Stage {
         this.setScene(ScoreBoard);
     }
 
-    /**
-     * This method updates the value of the Public Objective Score on the GUI
-     */
-    public void updatePublicObjectiveScore(){
-        Platform.runLater(()->{
-            PublicObjectiveCard1Title.setText("X");
-            PublicObjectiveCard1Score.setText("0");//TODO PRENDERSI I PUNTEGGI
-            PublicObjectiveCard2Title.setText("X");
-            PublicObjectiveCard2Score.setText("0");
-            PublicObjectiveCard3Title.setText("X");
-            PublicObjectiveCard3Score.setText("0");
-        });
-    }
-
-    /**
-     * This method updates the value of the Private Objective Score on the GUI
-     */
-    public void updatePrivateObjectiveScore(){
-        Platform.runLater(()->{
-            PrivateObjectiveScore.setText("0");
-        });
-    }
-
-    /**
-     * This method updates the value of the Favor Tokens Score on the GUI
-     */
-    public void updateFavorTokensScore(){
-        Platform.runLater(()->{
-            FavorTokensScore.setText("0");
-        });
-    }
-
-    /**
-     * This method updates the value of the Open Spaces Score on the GUI
-     */
-    public void updateOpenSpacesScore(){
-        Platform.runLater(()->{
-            OpenSpacesScore.setText("0");
-        });
-    }
-
-    /**
-     * This method updates the value of the Total Score on the GUI
-     */
-    public void updateTotalScore(){
-        Platform.runLater(()->{
-            TotalScore.setText("0");
-        });
-    }
 }
