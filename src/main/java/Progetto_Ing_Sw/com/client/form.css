@@ -1628,12 +1628,12 @@
     -fx-background-image: url("GUI/MuteBTN.png");
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 200 200;
+    -fx-background-size: 100 100;
 }
 
 #VolumeBTN{
-    -fx-background-image: url("GUI/MuteBTN.png");
+    -fx-background-image: url("GUI/VolumeBTN.png");
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 200 200;
+    -fx-background-size: 100 100;
 }
