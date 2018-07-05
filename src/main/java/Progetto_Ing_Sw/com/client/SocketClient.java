@@ -372,6 +372,14 @@ public class SocketClient implements Runnable{
                 localModel.useLensCutter=false;
             }
 
+            if(localModel.useTapWheel){
+                String coordinatesDice1=localModel.getCoordinatesAsString();
+                String coordinatesDice2=localModel.getCoordinates2AsString();
+                int color=localModel.getColorToUseWithEffect();
+                sendActionMessage(null,"Use Tap Wheel&"+color+"&"+coordinatesDice1+"&"+coordinatesDice2);
+                localModel.useTapWheel=false;
+            }
+
             localModel.sendDataToServer=false;
         }
 

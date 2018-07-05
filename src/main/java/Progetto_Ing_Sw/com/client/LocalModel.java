@@ -34,7 +34,7 @@ public  class LocalModel {
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
     private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
-    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter;
+    public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter, useTapWheel;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
     private LoginStage loginStageObserver;
@@ -44,7 +44,7 @@ public  class LocalModel {
     private ArrayList<ClientWindowBoard> updatedWindowBoards;
     private String currentPlayerName;   //Stringa che,se non è il turno di questo giocatore, contiene il nome del giocatore che stà giocando il turno
     private ClientRoundTrack roundTrack;
-    private int toolCardWithEffectIndex, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2;
+    private int toolCardWithEffectIndex, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2, color;
 
     private ClientDice diceToUseWithEffect, diceToUseWithEffect2;
     private String command;
@@ -68,6 +68,7 @@ public  class LocalModel {
         useCorkBackedStraightEdge=false;
         useLathekin=false;
         useLensCutter=false;
+        useTapWheel=false;
     }
 
 
@@ -793,6 +794,23 @@ public  class LocalModel {
         sendDataToServer=true;
     }
 
+    public void useTapWheel(int color, int oldRow1, int oldColumn1, int newRow1, int newColumn1, int oldRow2, int oldColumn2, int newRow2, int newColumn2){
+        this.color=color;
+
+        this.oldRow=oldRow1;
+        this.oldColumn=oldColumn1;
+        this.newRow=newRow1;
+        this.newColumn=newColumn1;
+
+        this.oldRow2=oldRow2;
+        this.oldColumn2=oldColumn2;
+        this.newRow2=newRow2;
+        this.newColumn2=newColumn2;
+
+        useTapWheel=true;
+        sendDataToServer=true;
+    }
+
     public String getCoordinatesAsString(){
         String message=oldRow+"&"+oldColumn+"&"+newRow+"&"+newColumn;
         return message;
@@ -829,5 +847,9 @@ public  class LocalModel {
 
     public int getNewColumn() {
         return newColumn;
+    }
+
+    public int getColorToUseWithEffect(){
+        return color;
     }
 }

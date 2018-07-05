@@ -63,6 +63,9 @@ public class Lobby {
             }
             Player player = new Player(playerName, socketClientHandler);   //se vengono passati tutti i controlli, viene generato il nuovo utente ed inserito nell'arraylist
             token = splittableRandom.nextInt();
+            while(duplicateToken(token)){    //Il token viene rigenerato finche non è diverso da tutti i token già assegnati
+                token=splittableRandom.nextInt();
+            }
             player.setToken(token);
             connectedPlayers.add(player);
             System.out.println("Player " + player.getName() + " joined the game!");
@@ -112,4 +115,11 @@ public class Lobby {
     }
 
     public void startTimer(){};
+
+    private boolean duplicateToken(int token){
+        for (Player player : connectedPlayers){
+            if(player.getToken()==token) return true;
+        }
+        return false;
+    }
 }

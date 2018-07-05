@@ -495,5 +495,27 @@ private ToolCard getToolCardFromTitle(String title){
         getToolCardFromTitle("Lens Cutter").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
     }
+
+    public void useTapWheel(int color, int oldRow1, int oldColumn1, int newRow1, int newColumn1, int oldRow2, int oldColumn2, int newRow2, int newColumn2, Player playerRequestingAction) throws PlaceDiceException, IllegalDiceException {
+        WindowBoard playerWindowBoard = playerRequestingAction.getChoosenWindowBoard();
+
+        Dice diceToMove1=playerWindowBoard.getUsedMatrix().get(oldRow1-1).get(oldColumn1-1).getDiceContained();
+        Dice diceToMove2=playerWindowBoard.getUsedMatrix().get(oldRow2-1).get(oldColumn2-1).getDiceContained();
+
+        if(color==diceToMove1.getColor() && diceToMove1.getColor()==diceToMove2.getColor()){
+            playerWindowBoard.getUsedMatrix().get(oldRow1-1).get(oldColumn1-1).setDiceContained(null);    //rimuovo il dado dalla vecchia posizione
+            playerWindowBoard.getUsedMatrix().get(oldRow1-1).get(oldColumn1-1).setUsed(false);    //indico che la cella ora è libera
+            playerWindowBoard.getUsedMatrix().get(oldRow2-1).get(oldColumn2-1).setDiceContained(null);    //rimuovo il dado dalla vecchia posizione
+            playerWindowBoard.getUsedMatrix().get(oldRow2-1).get(oldColumn2-1).setUsed(false);    //indico che la cella ora è libera
+
+            playerWindowBoard.insertDice(newRow1, newColumn1, diceToMove1); //Inserisco i due dadi
+            playerWindowBoard.insertDice(newRow2, newColumn2, diceToMove2);
+
+            getToolCardFromTitle("Lathekin").setFirstUsage(true);
+            notifyOfToolCardUsage(playerRequestingAction);
+        }
+        else throw new IllegalDiceException("The two dice must have the same color choosen from the round track!");
+
+    }
 }
 

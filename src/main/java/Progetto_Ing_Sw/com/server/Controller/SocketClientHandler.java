@@ -326,6 +326,21 @@ public class SocketClientHandler implements Runnable {
                 table.useLensCutter(roundtrackDice, draftpoolDice, myPlayer);
                 System.err.println("Lens Cutter messaggio ricevuto: "+messageContent);
                 break;
+            case "Use Tap Wheel":
+                int color=Integer.parseInt(fields[2]);
+
+                oldRow=Integer.parseInt(fields[3]);
+                oldColumn=Integer.parseInt(fields[4]);
+                newRow=Integer.parseInt(fields[5]);
+                newColumn=Integer.parseInt(fields[6]);
+
+                oldRow2=Integer.parseInt(fields[7]);
+                oldColumn2=Integer.parseInt(fields[8]);
+                newRow2=Integer.parseInt(fields[9]);
+                newColumn2=Integer.parseInt(fields[10]);
+                table.useToolCard("Tap Wheel", myPlayer);
+                table.useTapWheel(color, oldRow, oldColumn, newRow, newColumn, oldRow2, oldColumn2, newRow2, newColumn2, myPlayer);
+                break;
             default:
                 System.err.println("Can't understand the following action message: "+messageContent);
         }
