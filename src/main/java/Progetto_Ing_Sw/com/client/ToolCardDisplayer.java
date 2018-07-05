@@ -954,21 +954,18 @@ public class ToolCardDisplayer extends Stage {
 
         //----------------------------------------------------------------------------------INIZIO RUNNING PLIERS----------------------------------------------------------------------------------//
 
-        Text RunningPliersInfo = new Text("Choose Your Extra Move");
+        Text RunningPliersInfo = new Text("Press continue to get an Extra Turn");
         RunningPliersInfo.setStyle("-fx-fill: white;");
         RunningPliersInfo.setTranslateX(380);
         RunningPliersInfo.setTranslateY(-325);
-
-        VBox RunningPliersPool = getDraftPool();
 
 
         Button RunningPliersAccept = new Button();
         RunningPliersAccept.setId("NextBTN");
         RunningPliersAccept.setMaxSize(150, 150);
-        RunningPliersAccept.setTranslateX(600);
-        RunningPliersAccept.setVisible(false);
+        RunningPliersAccept.setTranslateX(300);
+        RunningPliersAccept.setOnAction(event -> LocalModel.getInstance().useRunningPliers());
 
-        if (!DieChoosen.getId().equals("transparent")){RunningPliersAccept.setVisible(true);}
 
         StackPane RunningPliers = new StackPane();
         RunningPliers.setPrefSize(1280,720);
@@ -1237,7 +1234,7 @@ public class ToolCardDisplayer extends Stage {
                 ToolCardDisplayerSecond.getChildren().addAll(GlazingHammer,ToolCardD1);
                 break;
             case ("Running Pliers"):
-                RunningPliers.getChildren().addAll(RunningPliersAccept,RunningPliersInfo,RunningPliersPool,DieChoosen);
+                RunningPliers.getChildren().addAll(RunningPliersAccept,RunningPliersInfo);
                 ToolCardDisplayerSecond.getChildren().addAll(RunningPliers,ToolCardD1);
                 break;
             case("Lens Cutter"):

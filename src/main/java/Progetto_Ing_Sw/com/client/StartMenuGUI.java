@@ -8,9 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
 
 /**
  * This Class that extends Application is the first GUI Stage of the Game it contains Buttons used to access the game,
@@ -27,6 +31,12 @@ public class StartMenuGUI extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+
+        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/Sagrada.mp3";
+
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
 
         primaryStage.setTitle("Sagrada"); //Il testo che compare come titolo della finestra
         primaryStage.setResizable(false);
@@ -90,12 +100,29 @@ public class StartMenuGUI extends Application {
         goBack.setPrefSize(125,80);
         goBack.setOnAction(event -> primaryStage.setScene(TitleScreen)); //azione su click che permette di passare alla scene TitleScreen
 
+        Button MuteBTN = new Button();
+        if (mediaPlayer.isMute()){MuteBTN.setVisible(false);}
+        MuteBTN.setId("MuteBTN");
+        MuteBTN.setOnAction(event -> {
+            mediaPlayer.setMute(true);
+        });
+
+        Button VolumeBTN = new Button();
+        if (!mediaPlayer.isMute()){VolumeBTN.setVisible(false);}
+        VolumeBTN.setId("VolumeBTN");
+        VolumeBTN.setOnAction(event ->
+                mediaPlayer.setMute(false)
+        );
+
+        StackPane MusicButton = new StackPane();
+        MusicButton.getChildren().addAll(MuteBTN,VolumeBTN);
 
         //BorderPane che contiene tutto
         BorderPane SelectionScreenPane= new BorderPane();
         SelectionScreenPane.setId("GamemodeSelectionScreen");
         SelectionScreenPane.setCenter(gamemode);
         SelectionScreenPane.setRight(goBack);
+        SelectionScreenPane.setBottom(MusicButton);
         SelectionScreenPane.getStylesheets().addAll(this.getClass().getResource("form.css").toExternalForm());    //importo le impostazioni di stile dal file CSS
 
 

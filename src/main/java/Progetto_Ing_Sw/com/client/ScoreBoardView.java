@@ -28,58 +28,58 @@ public class ScoreBoardView extends Stage {
 
 
         PublicObjectiveCard1Title = new Text("Public Objective Card 1: ");
-        PublicObjectiveCard1Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        PublicObjectiveCard1Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         PublicObjectiveCard1Score = new Text("0");
-        PublicObjectiveCard1Score.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        PublicObjectiveCard1Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard1 = new HBox(10);
         PublicObjectiveCard1.getChildren().addAll(PublicObjectiveCard1Title,PublicObjectiveCard1Score);
 
-        PublicObjectiveCard2Title = new Text("Public Objective Card 1: ");
-        PublicObjectiveCard2Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        PublicObjectiveCard2Title = new Text("Public Objective Card 2: ");
+        PublicObjectiveCard2Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         PublicObjectiveCard2Score = new Text("0");
-        PublicObjectiveCard2Score.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        PublicObjectiveCard2Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard2 = new HBox(10);
         PublicObjectiveCard2.getChildren().addAll(PublicObjectiveCard2Title,PublicObjectiveCard2Score);
 
-        PublicObjectiveCard3Title = new Text("Public Objective Card 1: ");
-        PublicObjectiveCard3Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        PublicObjectiveCard3Title = new Text("Public Objective Card 3: ");
+        PublicObjectiveCard3Title.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         PublicObjectiveCard3Score = new Text("0");
-        PublicObjectiveCard3Score.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        PublicObjectiveCard3Score.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PublicObjectiveCard3 = new HBox(10);
         PublicObjectiveCard3.getChildren().addAll(PublicObjectiveCard3Title,PublicObjectiveCard3Score);
 
         //PRIVATE OBJECTIVE POINTS
         PrivateObjectiveText = new Text("Private Objective: ");
-        PrivateObjectiveText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        PrivateObjectiveText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         PrivateObjectiveScore = new Text("0");
-        PrivateObjectiveScore.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        PrivateObjectiveScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox PrivateObjective = new HBox(10);
         PrivateObjective.getChildren().addAll(PrivateObjectiveText,PrivateObjectiveScore);
 
         //FAVOR TOKENS POINTS
         FavorTokensLeft = new Text("Favor Tokens Left: ");
-        FavorTokensLeft.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        FavorTokensLeft.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         FavorTokensScore = new Text("0");
-        FavorTokensScore.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        FavorTokensScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox FavorTokens = new HBox(10);
         FavorTokens.getChildren().addAll(FavorTokensLeft,FavorTokensScore);
 
         //-1 POINTS FOR OPENS SPACES
         OpenSpacesText = new Text("Open Spaces: ");
-        OpenSpacesText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 22 'Centaur';");
+        OpenSpacesText.setStyle("-fx-fill: white;" +"-fx-font-weight: bold;" +"-fx-font: 30 'Castellar';");
 
         OpenSpacesScore = new Text("0");
-        OpenSpacesScore.setStyle("-fx-fill: white;" +"-fx-font: 30 'Centaur';");
+        OpenSpacesScore.setStyle("-fx-fill: white;" +"-fx-font: 50 'Centaur';");
 
         HBox OpenSpaces = new HBox(10);
         OpenSpaces.getChildren().addAll(OpenSpacesText,OpenSpacesScore);
@@ -95,9 +95,9 @@ public class ScoreBoardView extends Stage {
         Total.getChildren().addAll(TotalText,TotalScore);
 
 
-        VBox ScoreBoardVBox = new VBox(50);
-        ScoreBoardVBox.setPrefSize(1280,720);
-        ScoreBoardVBox.setAlignment(Pos.CENTER);
+        VBox ScoreBoardVBox = new VBox(30);
+        ScoreBoardVBox.setPrefSize(720,720);
+        ScoreBoardVBox.setTranslateX(360);
         ScoreBoardVBox.getChildren().addAll(PublicObjectiveCard1,PublicObjectiveCard2,PublicObjectiveCard3,PrivateObjective,FavorTokens,OpenSpaces,Total);
 
         ScoreBoard = new Scene(ScoreBoardVBox,1280,720);
