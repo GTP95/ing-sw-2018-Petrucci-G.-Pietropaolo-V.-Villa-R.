@@ -930,9 +930,6 @@ public class TableGUI extends Stage{
         for(Button button : OtherPlayersList){
             if (button.getText().equals(LocalModel.getInstance().getCurrentPlayerName())){
                 button.setId("DefaultButtonActivated");}
-            if (!LocalModel.getInstance().isActive(button.getText())){
-                button.setId("DefaultButtonDisconnected");
-            }
             else{
                 button.setId("DefaultButton");
             }
