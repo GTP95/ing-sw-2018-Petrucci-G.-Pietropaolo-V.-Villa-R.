@@ -12,6 +12,12 @@ import java.util.Collections;
 import java.util.SplittableRandom;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This is the main class of the game, it holds and uses references to all model's and controller's classes
+ * From a logic perspective, this class represents the table on which you are playing the game, and as such it has
+ * references to all the cards, the dice, the players and the socketClientHandlers communicating with the players
+ * @author Giacomo Tommaso Petrucci
+ */
 public class Table {
 
     private ArrayList<PublicObjectiveCard> drawnPublicObjectiveCards;
@@ -85,6 +91,10 @@ public class Table {
         numOfSetWindowBoards = 0;
     }
 
+    /**
+     * 
+     * @return
+     */
     public static CopyOnWriteArrayList<Player> getPlayers() {
         /*ArrayList<Player> playersToReturn;
         playersToReturn=(ArrayList<Player>) players.clone();*/
