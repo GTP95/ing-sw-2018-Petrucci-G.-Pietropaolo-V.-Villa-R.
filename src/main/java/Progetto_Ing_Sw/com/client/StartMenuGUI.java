@@ -32,9 +32,9 @@ public class StartMenuGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/Sagrada.mp3";
+        String musicFile = getClass().getResource("GUI/Sagrada.mp3").toExternalForm();
 
-        Media sound = new Media(new File(musicFile).toURI().toString());
+        Media sound = new Media(musicFile);
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 

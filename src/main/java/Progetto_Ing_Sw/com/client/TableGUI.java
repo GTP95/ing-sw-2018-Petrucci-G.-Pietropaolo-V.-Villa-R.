@@ -950,9 +950,9 @@ public class TableGUI extends Stage{
      * This method updates the GUI as the Round changes and notifies the player with a sound.
      */
     public void updateRound(){
-        String musicFile = "src/main/java/Progetto_Ing_Sw/com/client/GUI/RoundChange.mp3";
+        String musicFile = getClass().getResource("GUI/Sagrada.mp3").toExternalForm();;
 
-        Media sound = new Media(new File(musicFile).toURI().toString());
+        Media sound = new Media(musicFile);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
@@ -973,6 +973,17 @@ public class TableGUI extends Stage{
             MoveException.showAndWait();
             DiceCover.setVisible(false);
             Move.setDisable(false);
+        });
+    }
+
+    public void DisconnectedPlayerException(){
+        Platform.runLater(()-> {
+            Alert MoveException = new Alert(Alert.AlertType.WARNING);
+            MoveException.initStyle(StageStyle.UNDECORATED);
+            MoveException.setTitle("Player Disconnected");
+            MoveException.setHeaderText(LocalModel.getInstance().returnTrownException().getMessage());
+            MoveException.setContentText("Press OK to continue playing");
+            MoveException.showAndWait();
         });
     }
 
@@ -1007,4 +1018,12 @@ public class TableGUI extends Stage{
             ToolCard3BTN.setDisable(true);
         });
     }
+
+    public void endGame(){
+        Platform.runLater(()->{
+            ScoreBoardView scoreBoardView = new ScoreBoardView();
+            scoreBoardView.showAndWait();
+        });
+    }
+
 }
