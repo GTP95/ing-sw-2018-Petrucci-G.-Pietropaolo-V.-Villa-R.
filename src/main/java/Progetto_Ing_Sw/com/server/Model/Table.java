@@ -2,6 +2,7 @@ package Progetto_Ing_Sw.com.server.Model;
 
 import Progetto_Ing_Sw.com.server.Controller.Lobby;
 import Progetto_Ing_Sw.com.server.Controller.SocketClientHandler;
+import Progetto_Ing_Sw.com.server.Model.PublicObjectiveCards.*;
 import Progetto_Ing_Sw.com.server.Model.ToolCards.*;
 import Progetto_Ing_Sw.com.tools.JSONCreator;
 
@@ -522,6 +523,55 @@ private ToolCard getToolCardFromTitle(String title){
 
     public void endGame(){
         gameRunning=false;
+        for(Player player:players){ //calcola punteggio PublicObjectiveCards
+            for(PublicObjectiveCard card:drawnPublicObjectiveCards){
+                switch(card.getTitle()){
+                    case "Color Diagonals":
+                        ColorDiagonals colorDiagonals=new ColorDiagonals();
+                        player.addVictoryPoints(colorDiagonals.calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Color Variety":
+                        player.addVictoryPoints(new ColorVariety().calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Column Color Variety":
+                        player.addVictoryPoints(new ColumnColorVariety().calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Column Shade Variety":
+                        player.addVictoryPoints(new ColumnShadeVariety().calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Shade Variety":
+                        ShadeVariety shadeVariety=new ShadeVariety();
+                        player.addVictoryPoints(shadeVariety.calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+
+                    case "Row Shade Variety":
+                        RowShadeVariety rowShadeVariety=new RowShadeVariety();
+                        player.addVictoryPoints(rowShadeVariety.calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Row Color Variety":
+                        RowColorVariety rowColorVariety=new RowColorVariety();
+                        player.addVictoryPoints(rowColorVariety.calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Deep Shades":
+                            player.addVictoryPoints(new DeepShades().calculatePoints(player.getChoosenWindowBoard()));
+                            break;
+                    case "Medium Shades":
+                        player.addVictoryPoints(new MediumShades().calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+                    case "Light Shades":
+                        player.addVictoryPoints(new LightShades().calculatePoints(player.getChoosenWindowBoard()));
+                        break;
+
+                }
+            }
+            player.addVictoryPoints(player.getChoosenWindowBoard().calculatePointsFromPrivateObjective(player.getPrivateObjective().getColor()));   //calcola punti obbiettivo privato
+            player.addVictoryPoints(player.getFavorTokens());   //punti per favor tokens inutilizzati
+            player.addVictoryPoints(player.getChoosenWindowBoard().calculatePointsFromEmptySpaces()*-1);   //punti persi per spazi vuoti
+
+        }
+        for(Player player : players){
+            player.getSocketClientHandler().sendVictoryPoints=true;
+        }
     }
 
     public int getTurnCountDown() {

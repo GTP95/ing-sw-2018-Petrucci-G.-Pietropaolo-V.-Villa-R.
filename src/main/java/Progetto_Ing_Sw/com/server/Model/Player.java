@@ -9,7 +9,7 @@ public class Player{
    private int favorTokens;
    private int numOfTurnsToPlayInTheCurrentRound;
    private PrivateObjectiveCard privateObjective;
-   private int victoryPoints;
+   private ArrayList<Integer> victoryPoints;
    private boolean isActive;
    private GameBoardCard choosenGameBoard;
    private ArrayList<GameBoardCard> drawnGameBoardCard;
@@ -21,9 +21,9 @@ public class Player{
         this.name = name;
         this.favorTokens = favorTokens;
         this.numOfTurnsToPlayInTheCurrentRound =2;
-        this.victoryPoints = 0;
         this.isActive=true;
         this.socketClientHandler=socketClientHandler;
+        this.victoryPoints=new ArrayList<>();
     }
 
     public void setChoosenGameBoard(GameBoardCard choosenGameBoard) {
@@ -61,9 +61,7 @@ public class Player{
         return privateObjective;
     }
 
-    public int getVictoryPoints() {
-        return victoryPoints;
-    }
+
 
     public GameBoardCard getChoosenGameBoard() {
         return choosenGameBoard;
@@ -120,6 +118,14 @@ public class Player{
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public void addVictoryPoints(Integer points){
+        victoryPoints.add(points);
+    }
+
+    public ArrayList<Integer> getVictoryPoints() {
+        return victoryPoints;
     }
 }
 

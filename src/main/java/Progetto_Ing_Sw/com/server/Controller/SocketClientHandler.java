@@ -18,7 +18,7 @@ public class SocketClientHandler implements Runnable {
     private Table table;
     private ArrayList<Player> currentPlayerArrayList, previousPlayerArrayList;
     private ArrayList<Dice> currentDiceArrayList, previousDiceArrayList;
-    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards, notifyPlayerInactivity; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
+    public volatile boolean updateWindowBoards, updateDice,isMyTurn, changedTurn, timerStarted, changedRound, updateRoundTrack, notifyUsedToolCard, updateTokens, updateToolCards, notifyPlayerInactivity, sendVictoryPoints; //servono per gestire gli interrupt ricevuti da Table per aggiornare i dati, analogo al pattern observer ma fatto usando gli interrupt al posto di un metodo "notify()"
     private String myPlayerName;
     private Player myPlayer;
     private Timer countdown, timerTurn, inactivityTimer; //Countdown invia il conto alla rovescia della Lobby, timerTurn invece gestisce la durata del turno di gioco
@@ -36,6 +36,7 @@ public class SocketClientHandler implements Runnable {
         updateTokens=false;
         updateToolCards=false;
         notifyPlayerInactivity=false;
+        sendVictoryPoints=false;
 
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -98,6 +99,11 @@ public class SocketClientHandler implements Runnable {
                  }
                  sendControlMessage("Game ended");
                  System.err.println("SE LEGGI QUI IL GIOCO È FINITO "+ourThread.getName());
+                 sendControlMessage("Sending Victory Points&"+myPlayer.getVictoryPoints().size());
+                 while(sendVictoryPoints==false);
+                 for(Integer integer : myPlayer.getVictoryPoints()){
+                     sendControlMessage("Victory Points&"+integer);
+                 }
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
