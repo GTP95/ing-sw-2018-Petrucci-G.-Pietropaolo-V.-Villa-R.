@@ -521,7 +521,7 @@ private ToolCard getToolCardFromTitle(String title){
             playerWindowBoard.insertDice(newRow1, newColumn1, diceToMove1); //Inserisco i due dadi
             playerWindowBoard.insertDice(newRow2, newColumn2, diceToMove2);
 
-            getToolCardFromTitle("Lathekin").setFirstUsage(true);
+            getToolCardFromTitle("Tap Wheel").setFirstUsage(true);
             notifyOfToolCardUsage(playerRequestingAction);
         }
         else throw new IllegalDiceException("The two dice must have the same color choosen from the round track!");

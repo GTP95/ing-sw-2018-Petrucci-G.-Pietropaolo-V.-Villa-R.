@@ -26,7 +26,17 @@
     -fx-background-color: red;
 }
 
+#red:selected{
+    -fx-border-color: white;
+    -fx-background-color: red;
+}
+
 #purple{
+    -fx-background-color: #d600d6;
+}
+
+#purple:selected{
+    -fx-border-color: white;
     -fx-background-color: #d600d6;
 }
 
@@ -34,11 +44,26 @@
     -fx-background-color: #46ddff;
 }
 
+#blue:selected{
+    -fx-border-color: white;
+    -fx-background-color: #46ddff;
+}
+
 #green{
     -fx-background-color: #23b800;
 }
 
+#green:selected{
+    -fx-border-color: white;
+    -fx-background-color: #23b800;
+}
+
 #yellow{
+    -fx-background-color: #ffef10;
+}
+
+#yellow:selected{
+    -fx-border-color: white;
     -fx-background-color: #ffef10;
 }
 

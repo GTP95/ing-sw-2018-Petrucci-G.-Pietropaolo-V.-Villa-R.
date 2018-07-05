@@ -94,8 +94,6 @@ public class MultiplayerGUI extends Stage {
 
 
 
-        //LocalModel.getInstance().registerAsObserver(this);
-
 
 
         //StackPane Player1

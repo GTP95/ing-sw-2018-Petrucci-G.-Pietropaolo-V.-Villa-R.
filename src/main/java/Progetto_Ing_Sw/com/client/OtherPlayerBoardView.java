@@ -20,6 +20,40 @@ public class OtherPlayerBoardView extends Stage {
     GridPane griglia, DieGrid;
     ArrayList<ArrayList<MatrixCell>> OtherPlayerBoard;
     static final Image windowIcon = new Image("Progetto_Ing_Sw/com/client/GUI/GameIcon.png");
+    ArrayList<ArrayList<Pane>> GridBlocks;
+
+    public GridPane getWindowBoardDiceBoard (ClientWindowBoard clientWindowBoard) {
+        int rows = 4;
+        int columns = 5;
+        GridPane Board = new GridPane();
+        Board.setTranslateY(-20);
+        Board.setAlignment(Pos.CENTER);
+        Board.setId("TheGrid");
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints column = new ColumnConstraints(75);
+            Board.getColumnConstraints().add(column);
+        }
+
+        for (int i = 0; i < rows; i++) {
+            RowConstraints row = new RowConstraints(75);
+            Board.getRowConstraints().add(row);
+        }
+        GridBlocks = new ArrayList<>();
+        for (int r = 0; r < clientWindowBoard.getUsedMatrix().size(); r++) {
+            for (int c = 0; c < clientWindowBoard.getUsedMatrix().get(r).size(); c++) {
+                Pane block = new Pane();
+                if (clientWindowBoard.getUsedMatrix().get(r).get(c).isUsed()) {
+                    block.setId(Integer.toString(clientWindowBoard.getUsedMatrix().get(r).get(c).getDiceContained().getValue())
+                            + new ClientColor().IntToColor(clientWindowBoard.getUsedMatrix().get(r).get(c).getDiceContained().getColor()));
+                    block.setStyle("-fx-opacity: 0.90;" + "-fx-background-size: 60 60");
+                } else {
+                    block.setId("DieBlock");
+                }
+                Board.add(block, c, r);
+            }
+        }
+        return Board;
+    }
 
     OtherPlayerBoardView(ClientWindowBoard windowBoard){
         this.setResizable(false);
@@ -105,18 +139,11 @@ public class OtherPlayerBoardView extends Stage {
 
         griglia.setAlignment(Pos.CENTER);
 
-        //HBox che contiene le informazioni sulla carta
-        HBox WindowInfo= new HBox(60);WindowInfo.setId("WindowInfo");WindowInfo.setMaxHeight(45);
-        Text WindowTitle = new Text("Titolo");WindowTitle.setFill(Paint.valueOf("white"));
-        WindowInfo.setTranslateY(150);WindowInfo.setAlignment(Pos.CENTER);
-        WindowInfo.getChildren().addAll(WindowTitle);
+        GridPane Dice = getWindowBoardDiceBoard(windowBoard);
 
-        //StackPane che fa da cornice alla griglia
-        StackPane WindowBoard = new StackPane();WindowBoard.setId("WindowBoard");WindowBoard.setMaxSize(400,360);
-        WindowBoard.getChildren().addAll(griglia,WindowInfo);
 
         StackPane OtherBoardStack = new StackPane();
-        OtherBoardStack.getChildren().addAll(WindowBoard,goback);
+        OtherBoardStack.getChildren().addAll(griglia,Dice,goback);
 
         OtherPlayerBoardScene = new Scene(OtherBoardStack,1280,720);
         OtherPlayerBoardScene.setFill(Color.rgb(0, 0, 0, 0.75));

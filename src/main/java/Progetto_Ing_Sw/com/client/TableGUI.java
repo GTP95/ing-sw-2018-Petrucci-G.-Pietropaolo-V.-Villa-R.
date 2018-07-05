@@ -627,7 +627,6 @@ public class TableGUI extends Stage{
         FlowPane OtherPlayerBox = new FlowPane();
         OtherPlayerBox.setTranslateY(10);
         OtherPlayerBox.setHgap(10);
-        //OtherPlayerBox.setStyle("-fx-background-color: black;");
         OtherPlayerBox.setMaxSize(600,50);
 
         //Bottoni altri giocatori
@@ -638,11 +637,16 @@ public class TableGUI extends Stage{
                 break;
             }
         }
-
         OtherPlayersList = new ArrayList<>();
-        for (int i = 0; i < (NumPlayers - 1); i++) {
-            Button OtherPlayer = new Button(OtherPlayersNames.get(i).getName());
+        for (int p = 0; p < OtherPlayersNames.size(); p++) {
+            String OtherPlayerName = OtherPlayersNames.get(p).getName();
+            Button OtherPlayer = new Button(OtherPlayerName);
             OtherPlayer.setId("DefaultButton");
+            int playerindex = LocalModel.getInstance().getPlayerIndexFromName(OtherPlayerName);
+            OtherPlayer.setOnAction(event -> {
+                OtherPlayerBoardView otherPlayerBoardView = new OtherPlayerBoardView(LocalModel.getInstance().getUpdatedWindowBoards().get(playerindex));
+                otherPlayerBoardView.showAndWait();
+            });
 
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
@@ -666,6 +670,7 @@ public class TableGUI extends Stage{
         Move.setOnAction(event -> {
             LocalModel.getInstance().insertDice(DieToInsert,Yindex,Xindex);
             DiceCover.setVisible(true);
+            Move.setDisable(true);
         });
 
 
@@ -933,6 +938,7 @@ public class TableGUI extends Stage{
             MoveException.setContentText("Press OK to try another move");
             MoveException.showAndWait();
             DiceCover.setVisible(false);
+            Move.setDisable(false);
         });
     }
 
