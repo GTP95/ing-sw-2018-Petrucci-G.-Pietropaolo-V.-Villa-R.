@@ -202,11 +202,7 @@ public class ToolCardDisplayer extends Stage {
             return Board;
     }
 
-    /*public void populateWindowGrid(){
-        Platform.runLater(()->{
 
-        });
-    }*/
 
     /**
      * This stage needs the following parameters to build th right Tool Card

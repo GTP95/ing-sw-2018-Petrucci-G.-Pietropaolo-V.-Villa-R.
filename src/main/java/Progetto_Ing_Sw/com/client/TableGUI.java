@@ -639,9 +639,14 @@ public class TableGUI extends Stage{
         }
         OtherPlayersList = new ArrayList<>();
         for (int p = 0; p < OtherPlayersNames.size(); p++) {
-            Button OtherPlayer = new Button(OtherPlayersNames.get(p).getName());
+            String OtherPlayerName = OtherPlayersNames.get(p).getName();
+            Button OtherPlayer = new Button(OtherPlayerName);
             OtherPlayer.setId("DefaultButton");
-            OtherPlayer.setOnAction(event -> OtherPlayerBoardView(LocalModel.getInstance().getUpdatedWindowBoards().get()));
+            int playerindex = LocalModel.getInstance().getPlayerIndexFromName(OtherPlayerName);
+            OtherPlayer.setOnAction(event -> {
+                OtherPlayerBoardView otherPlayerBoardView = new OtherPlayerBoardView(LocalModel.getInstance().getUpdatedWindowBoards().get(playerindex));
+                otherPlayerBoardView.showAndWait();
+            });
 
             OtherPlayerBox.getChildren().addAll(OtherPlayer);
             OtherPlayersList.add(OtherPlayer);
