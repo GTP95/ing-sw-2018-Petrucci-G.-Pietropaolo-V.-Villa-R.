@@ -190,6 +190,9 @@ public class SocketClient implements Runnable{
             case "The newly drawn dice is":
                 localModel.setFluxRemoverNewlyDrawnDice(JSONCreator.clientDiceLoaderFromString(messageFields[1]));
                 break;
+            case "Game ended":
+                localModel.endGame();
+                break;
             default: System.err.println("can't understand the following control message: "+messageContent);
         }
         if(messageContent.startsWith("Invalid username: ")) throw new Progetto_Ing_Sw.com.client.InvalidUsernameException(messageContent.substring(18));

@@ -950,4 +950,8 @@ public  class LocalModel {
         }
         return -1;
     }
+
+    public void endGame(){
+
+    }
 }

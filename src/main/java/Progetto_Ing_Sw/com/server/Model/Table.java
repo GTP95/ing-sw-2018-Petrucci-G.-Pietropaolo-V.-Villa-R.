@@ -541,7 +541,13 @@ private ToolCard getToolCardFromTitle(String title){
         for(;index<mirrorArray.size();index++){
             if(mirrorArray.get(index).equals(playerRequestingAction)) mirrorArray.set(index, null);
         }
-        mirrorArray.removeAll(Collections.singleton(null));
+        mirrorArray.removeAll(null);
+
+
+    }
+
+    public void endGame(){
+        gameRunning=false;
     }
 }
 

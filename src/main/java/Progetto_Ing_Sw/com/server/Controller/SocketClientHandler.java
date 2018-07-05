@@ -95,8 +95,8 @@ public class SocketClientHandler implements Runnable {
                     if(ourThread.isInterrupted()) updateTable();
 
                  }
-
-                 System.err.println("SE LEGGI QUI SEI NEI GUAI "+ourThread.getName());
+                 sendControlMessage("Game ended");
+                 System.err.println("SE LEGGI QUI IL GIOCO È FINITO "+ourThread.getName());
             }
             catch(TooManyPlayersException e){
                 sendControlMessage("Max number of players exceeded");
@@ -392,6 +392,7 @@ public class SocketClientHandler implements Runnable {
         if(table.getActivePlayer().getName().equals(myPlayerName) && !isMyTurn){
             isMyTurn=true;
             sendControlMessage("It's your turn now");
+
         }
     }
 
