@@ -167,6 +167,8 @@ public class SocketClient implements Runnable{
                 throw new IllegalDiceException("This cell is occupied");
             case "Not enough favor tokens":
                 throw new NotEnoughFavorTokensException();
+            case "The two dice must have the same color choosen from the round track!":
+                throw new IllegalDiceException("The two dice must have the same color choosen from the round track!");
             case "It's your turn now":
                 localModel.notifyTurn();
                 break;
