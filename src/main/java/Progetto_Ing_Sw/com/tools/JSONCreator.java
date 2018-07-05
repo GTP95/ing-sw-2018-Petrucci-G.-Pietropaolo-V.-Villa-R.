@@ -9,7 +9,10 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
+/**
+ * @author Giacomo Tommaso Petrucci
+ * This is an helper class for the gson library
+ */
 public final class JSONCreator {
     private static final Gson gson=new GsonBuilder().create();
     private static final Type arrayListOfPlayers=new TypeToken<ArrayList<ClientPlayer>>(){}.getType();
@@ -19,6 +22,7 @@ public final class JSONCreator {
     private static final Type arrayListOfGameBoardCards=new TypeToken<ArrayList<ClientGameBoardCard>>(){}.getType();
 
     private JSONCreator() {};
+
 
     public static String generateJSON(Object object){
         String JSON=gson.toJson(object);
