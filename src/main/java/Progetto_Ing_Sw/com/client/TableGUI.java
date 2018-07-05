@@ -1035,7 +1035,7 @@ public class TableGUI extends Stage{
                     LocalModel.getInstance().getVictoryPoints().get(3),
                     LocalModel.getInstance().getVictoryPoints().get(4),
                     LocalModel.getInstance().getVictoryPoints().get(5),
-                    
+                    LocalModel.getInstance().isWinner()
             );
             scoreBoardView.showAndWait();
         });
