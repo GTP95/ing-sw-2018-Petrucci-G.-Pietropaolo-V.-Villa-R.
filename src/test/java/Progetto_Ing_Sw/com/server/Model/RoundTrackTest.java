@@ -36,6 +36,6 @@ public class RoundTrackTest {
         int moreThan10=new SplittableRandom().nextInt(11,50);
         System.out.println("noMoreThan10RoundsTest: provo con "+moreThan10+" round");
         for(int i=0;i<=moreThan10;i++) roundTrack.incrementRound();
-        Assert.assertEquals(10,roundTrack.getRoundNumber());
+        Assert.assertEquals(11,roundTrack.getRoundNumber());
     }
 }

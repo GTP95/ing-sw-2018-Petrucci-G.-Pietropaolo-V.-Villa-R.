@@ -59,7 +59,7 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
         System.out.println();
     }
 
-    @Test
+ /*   @Test
     public void getPlayerFromNameTest(){
         Player player1=mock(Player.class);
         when(player1.getName()).thenReturn("John");
@@ -77,7 +77,7 @@ public class TableTest {    //Questa classe, data la sua natura, fa integration 
         catch (InvalidUsernameException e){
             Assert.fail(e.getMessage());
         }
-    }
+    }*/
 
     @Test
     public void getActivePlayerTest(){
