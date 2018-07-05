@@ -32,6 +32,7 @@ public class Table {
     private static final Table ourInstance=new Table();
     private static CopyOnWriteArrayList<Player> players;
     private int currentPlayer;//indice del giocatore che sta giocando
+    private int turnCountDown;
     public static volatile boolean gameRunning=false;   //è volatile per via dell'accesso concorrente da parte di più thread che potrebberio leggerne il valore proprio mentre sta cambiando
     private int numOfSetWindowBoards;
     private CopyOnWriteArrayList<Player> mirrorArray;
@@ -42,53 +43,15 @@ public class Table {
         drawnDice = diceBag.diceDraw(2 * numPlayers + 1);
         drawnPublicObjectiveCards = publicObjectiveCardDeck.drawPublicObjectiveCards(3);
         drawnToolCards = toolCardDeck.drawToolCards(3);
-
-        for (ToolCard toolCard : drawnToolCards){
-            switch(toolCard.getTitle()){
-                case "Grozing Pliers":
-                    toolCardsWithEffect.add(new GrozingPliers(toolCard));
-                    System.out.println("Creata Grozing Pliers");
-                    break;
-                case "Copper Foil Burnisher":
-                    toolCardsWithEffect.add(new CopperFoilBurnisher(toolCard));
-                    break;
-                case "Cork-backed Straightedge":
-                    toolCardsWithEffect.add(new CorkBackedStraightedge(toolCard));
-                    break;
-                case "Eglomise Brush":
-                    toolCardsWithEffect.add(new EglomiseBrush(toolCard));
-                    break;
-                case "Flux Brusher":
-                    toolCardsWithEffect.add(new FluxBrush(toolCard));
-                    break;
-                case "Flux Remover":
-                    toolCardsWithEffect.add(new FluxRemover(toolCard));
-                    break;
-                case "Glazing Hammer":
-                    toolCardsWithEffect.add(new GlazingHammer(toolCard));
-                    break;
-                case "Grinding Stone":
-                    toolCardsWithEffect.add(new GrindingStone(toolCard));
-                    break;
-                case "Lathekin":
-                    toolCardsWithEffect.add(new Lathekin(toolCard));
-                    break;
-                case "Lens Cutter":
-                    toolCardsWithEffect.add(new LensCutter(toolCard));
-                    break;
-                case "Running Pliers":
-                    toolCardsWithEffect.add(new RunningPliers(toolCard));
-                    break;
-                case "Tap Wheel":
-                    toolCardsWithEffect.add(new TapWheel(toolCard));
-                    break;
-                default:
-                    System.err.println("Can't decorate the following toolcard: "+toolCard.getTitle());
-            }
-        }
-
         players = Lobby.getInstance().getConnctedPlayers();
         numOfSetWindowBoards = 0;
+        try{
+            turnCountDown=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timerTurn");
+        }
+        catch (FileNotFoundException e){
+            System.err.println("File ServerSettings.json not found, falling back to default turn duration of 30 seconds");
+            turnCountDown=30;
+        }
     }
 
     /**
@@ -229,6 +192,7 @@ public class Table {
     }
 
     public void changeCurrentPlayer() {//Imposta il valore currentplayer all'indice dell'arraylist che contiene il giocatore del turno che sta per cominciare
+        resetTurnCountDown();
         if(currentPlayer<2*players.size()-1) currentPlayer++;
         else prepareForNextRound();
         System.out.println("indexOfCurrentPlayer: "+currentPlayer);
@@ -548,6 +512,21 @@ private ToolCard getToolCardFromTitle(String title){
 
     public void endGame(){
         gameRunning=false;
+    }
+
+    public int getTurnCountDown() {
+        int currentCountDownValue=turnCountDown;
+        turnCountDown--;
+        return currentCountDownValue;
+    }
+
+    public void resetTurnCountDown(){
+        try{
+            turnCountDown=JSONCreator.parseIntFieldFromFile("src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json","timerTurn");
+        }
+        catch (FileNotFoundException e){
+            turnCountDown=30;
+        }
     }
 }
 
