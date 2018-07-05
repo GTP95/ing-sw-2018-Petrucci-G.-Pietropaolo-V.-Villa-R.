@@ -979,4 +979,8 @@ public  class LocalModel {
     public void setNumOfVictoryPoints(int numOfVictoryPoints) {
         this.numOfVictoryPoints = numOfVictoryPoints;
     }
+
+    public ArrayList<Integer> getVictoryPoints() {
+        return victoryPoints;
+    }
 }
