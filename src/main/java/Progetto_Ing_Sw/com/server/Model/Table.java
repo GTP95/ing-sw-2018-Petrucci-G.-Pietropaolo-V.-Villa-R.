@@ -385,7 +385,7 @@ private ToolCard getToolCardFromTitle(String title){
     public void useGlazingHammer(Player playerRequestingAction){
         SplittableRandom splittableRandom=new SplittableRandom();
         for (Dice dice : drawnDice){
-            dice.setValue(splittableRandom.nextInt(1,7));   //il 7 è escluso
+            if(dice.getValue()!=0) dice.setValue(splittableRandom.nextInt(1,7));   //il 7 è escluso
         }
         getToolCardFromTitle("Glazing Hammer").setFirstUsage(true);
         notifyOfToolCardUsage(playerRequestingAction);
