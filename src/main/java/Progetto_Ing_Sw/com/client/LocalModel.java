@@ -1,7 +1,6 @@
 package Progetto_Ing_Sw.com.client;
 
 import Progetto_Ing_Sw.com.client.ClientToolCards.*;
-import Progetto_Ing_Sw.com.server.Model.Player;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -34,7 +33,7 @@ public  class LocalModel {
     private ArrayList<ClientGameBoardCard> drawnGameBoardCards;
     private ClientGameBoardCard choosenGameBoardCard;
     private ClientWindowBoard windowBoard;
-    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue;
+    private int numOfDice, numOfToolCards, numOfPublicObjectiveCards, numOfGameBoardCards, numOfWindowBoards, countdownValue,turnCountDownValue, numOfVictoryPoints;
     public volatile boolean sendDataToServer, sendWindowBoard, immediatelyUpdateGUI, skipTurn, sendDiceToServer,useGrozingPliers, useGrindingStone, useFluxBrush, useGlazingHammers, useFluxRemover, sendFluxRemoverDiceWithSetValue, useEglomiseBrush, useCopperFoilBurnisher,useCorkBackedStraightEdge, useLathekin, useLensCutter, useTapWheel, useRunningPliers;
     private ArrayBlockingQueue<Exception> exceptions;   //contiene le eccezioni lanciate dal server
     private Boolean  firstWindowBoardsReceived, dontNotifyUsedToolCard;
@@ -49,6 +48,7 @@ public  class LocalModel {
 
     private ClientDice diceToUseWithEffect, diceToUseWithEffect2;
     private String command;
+    private ArrayList<Integer> victoryPoints;
 
     private LocalModel(){
 
@@ -71,6 +71,8 @@ public  class LocalModel {
         useLensCutter=false;
         useTapWheel=false;
         useRunningPliers=false;
+        victoryPoints=new ArrayList<>();
+        numOfVictoryPoints=0;
     }
 
 
@@ -951,8 +953,11 @@ public  class LocalModel {
         return -1;
     }
 
+    /**
+     * Notifies the GUI about the end of the game
+     */
     public void endGame(){
-
+        tableGUIobserver.endGame();
     }
 
     public boolean isActive(String playerName){
@@ -962,5 +967,16 @@ public  class LocalModel {
     public void addInactivityException(InactivityException e) {
         exceptions.add(e);
         tableGUIobserver.DisconnectedPlayerException();
+    }
+
+    public void addVictoryPoints(Integer points){
+        victoryPoints.add(points);
+        if(victoryPoints.size()== numOfVictoryPoints){
+            endGame();
+        }
+    }
+
+    public void setNumOfVictoryPoints(int numOfVictoryPoints) {
+        this.numOfVictoryPoints = numOfVictoryPoints;
     }
 }

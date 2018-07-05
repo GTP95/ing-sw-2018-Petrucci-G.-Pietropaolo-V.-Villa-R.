@@ -134,6 +134,12 @@ public class SocketClient implements Runnable{
             case "Sending GameBoardcards":
                 localModel.setNumOfGameBoardCards(Integer.parseInt(messageFields[1]));
                 break;
+            case "Sending Victory Points":
+                localModel.setNumOfVictoryPoints(Integer.parseInt(messageFields[1]));
+                break;
+            case "Victory Points":
+                localModel.addVictoryPoints(Integer.parseInt(messageFields[1]));
+                break;
             case "CountdownValue":
                 localModel.setCountdownValue(Integer.parseInt(messageFields[1]));
                 break;
