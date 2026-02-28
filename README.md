@@ -1,31 +1,55 @@
-# ing-sw-2018-Petrucci-G.-Pietropaolo-V.-Villa-R.
-Progetto Ingegneria del Software 2018 - Sviluppo del videogioco Sagrada a cura di Giacomo Tommaso Petrucci, Vincenzo Pietropaolo e Roberto Villa
+# Sagrada Board Game Implementation
 
-Membri del Gruppo							Numero Matricola						Cod. Persona
-Giacomo Tommaso Petrucci 			828781											10487523
-Vincenzo Pietropaolo                      828345											10467327
-Roberto Villa										826432											10486135
+## Implemented Features
 
-Funzionalità Implementate
-Sono state implementate le seguenti funzionalità: 
-- Connessione tramite Socket;
-- Regole di gioco complete (incluse tutte le Tool Cards e le Public Objective Cards);
-- GUI completa del Client con effetti sonori;
-- Caricamento da file JSON di Tool Cards, Public Objective Cards, Griglie di gioco, impostazioni per Client e Server;
-- Salvataggio su file delle impostazioni del Client;
-- Grafica vettoriale per il rendering della griglia da gioco, delle Tool Card e Public Objective Cards;
+The following features have been implemented:
+- **Socket Connection**: Communication between client and server via sockets.
+- **Complete Game Rules**: Full implementation of Sagrada rules, including all Tool Cards and Public Objective Cards.
+- **Full GUI Client**: A graphical user interface with sound effects.
+- **JSON Loading**: Configuration and game data (Tool Cards, Public Objective Cards, Game Boards, Client/Server settings) are loaded from JSON files.
+- **Client Settings Persistence**: Ability to save client settings to a file.
+- **Vector Graphics**: Use of vector graphics for rendering the game board, Tool Cards, and Public Objective Cards.
 
-Scelte di Design
-- Per rendere più facile e diretto l'uso di alcune Tool Cards attraverso la GUI alcuni espedienti sono stati utilizzati, come ad esempio la scelta di immettere la riga e la colonna scelta in apposite caselle di testo;
-- Per la comunicazione tra Client e Server si è optato per messaggi sottoforma di stringa, questo ha permesso di mandare oggetti sotto forma di JSON insieme a ulteriori informazioni sul loro utilizzo, a questo scopo è stato stabiliti tre formati per i messaggi: Action Message, JSON Message e Control Message con un unumero di campi variabili a seconda dell'informazione da inviare;
-- Un brano musicale e altri suoni sono stati implementati, i suoni sono usati per notificare il giocatore di alcuni cambiamenti nel gioco (come il cambiamento di Round);
-- Le fasi di gioco secondo come riportate nel manuale di istruzioni sono state divise in vari Stage per la creazione della GUI;
-- Nell'UML lato Client tutte le classi collegate strettamente alla GUI non sono state descitte nei metodi e negli attributi al fine di garantire una maggior chiarezza e legibilità;
-- Si è optato di lasciare nel codice delle print al fine di notificare tutti i passaggi che vengono compiuti da Client e da Server sia a scopo di debug sia a scopo informativo per l'utente;
+## Design Choices
 
-Limitazioni
-- Le Tool Card che portano ad un cambiamento di posizione di dadi già piazzati non aggiornano istantaneamente la grafica di gioco nonostante l'uso sia registrato correttamente sia dal Client che dal Server;
-- In caso un giocatore perda la connessione e si riconnetta successivamente l'aggiornamento della sua view potrebbe non essere immediata, tuttavia non gli è comunque permesso fare mosse non valide
-- Il javadoc è stato caricato a parte nel seguente archivio: https://mega.nz/#!A1kSxKzS!LlGtp0Z2AoFKuPulxRiH-N9gqQPoVTccvHQHPHIYCv8
+- **GUI Tool Cards**: To make the use of certain Tool Cards more intuitive in the GUI, some specific inputs (like row and column) are entered via dedicated text fields.
+- **Communication Protocol**: Communication between Client and Server uses string-based messages. This allows sending objects as JSON along with additional metadata. Three message formats were established: `Action Message`, `JSON Message`, and `Control Message`.
+- **Audio**: Background music and sound effects were added to notify players of game changes (e.g., a new round starting).
+- **GUI Stages**: Game phases from the official manual were divided into different "Stages" for the GUI implementation.
+- **UML Diagrams**: In the Client-side UML, classes strictly related to the GUI do not detail all methods and attributes to maintain clarity and readability.
+- **Logging**: Console prints were kept in the code to notify all steps performed by the Client and Server, both for debugging and user information.
 
-Per motivi di dimensioni (il file Jar pesa 70MB e github permette solo file da 25MB) il jar è reperibile a questo indirizzo: https://mega.nz/#!o8UhHCyJ!NzeC60KcKJv9HoV_OwPrqHOfEhEw6b7X9DWU_T5wMv4
+## Limitations
+
+- **GUI Updates**: Tool Cards that move already placed dice may not update the game graphics instantly, although the move is correctly registered on both the Client and Server.
+- **Reconnection**: If a player loses connection and reconnects, their view might not update immediately, though invalid moves are still prevented.
+- **Javadoc**: The Javadoc was uploaded separately and can be found at: [Mega link (Javadoc)](https://mega.nz/#!A1kSxKzS!LlGtp0Z2AoFKuPulxRiH-N9gqQPoVTccvHQHPHIYCv8)
+
+## Build and Run Instructions
+
+### Prerequisites
+- Java 8 (JDK 1.8)
+- Maven
+
+### Build
+To build the project and generate the JAR file, run the following command in the project root:
+```bash
+mvn clean package
+```
+The generated JAR file will be located in the `target` directory.
+
+### Running the Server
+To start the server, you can use the following command:
+```bash
+java -cp target/VideogiocoSagrada-1.0-SNAPSHOT.jar Progetto_Ing_Sw.com.server.Controller.LaunchServer [port]
+```
+If no port is specified, it defaults to the one in `src/main/java/Progetto_Ing_Sw/com/server/Settings/ServerSettings.json` (or 1024 if the file is missing).
+
+### Running the Client
+To start the client (GUI), use:
+```bash
+java -cp target/VideogiocoSagrada-1.0-SNAPSHOT.jar Progetto_Ing_Sw.com.client.Sagrada
+```
+
+---
+*Note: Due to size constraints (the full JAR is ~70MB and GitHub's limit is 25MB), the pre-built JAR can be found here: [Mega link (JAR)](https://mega.nz/#!o8UhHCyJ!NzeC60KcKJv9HoV_OwPrqHOfEhEw6b7X9DWU_T5wMv4)*
