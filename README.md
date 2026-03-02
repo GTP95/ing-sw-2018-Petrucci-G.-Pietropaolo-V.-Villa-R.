@@ -1,4 +1,5 @@
 # Sagrada Board Game Implementation
+![Sagrada](src/main/java/Progetto_Ing_Sw/com/client/GUI/LobbyPlayer1.png)![Sagrada](src/main/java/Progetto_Ing_Sw/com/client/GUI/LobbyPlayer2.png)![Sagrada](src/main/java/Progetto_Ing_Sw/com/client/GUI/LobbyPlayer3.png)![Sagrada](src/main/java/Progetto_Ing_Sw/com/client/GUI/LobbyPlayer4.png)
 
 ## Implemented Features
 
